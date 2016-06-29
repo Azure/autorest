@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class C(Model):
-    """C
+    """C.
 
     :param http_code:
     :type http_code: str

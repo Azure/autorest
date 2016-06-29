@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Pet(Model):
-    """Pet
+    """Pet.
 
     :param id:
     :type id: int

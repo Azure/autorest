@@ -25,75 +25,65 @@ module Petstore
       # @return [Boolean]
       attr_accessor :complete
 
-      #
-      # Validate the object. Throws ValidationError if validation fails.
-      #
-      def validate
-      end
 
       #
-      # Serializes given Model object into Ruby Hash.
-      # @param object Model object to serialize.
-      # @return [Hash] Serialized object in form of Ruby Hash.
+      # Mapper for Order class as Ruby Hash.
+      # This will be used for serialization/deserialization.
       #
-      def self.serialize_object(object)
-        object.validate
-        output_object = {}
-
-        serialized_property = object.id
-        output_object['id'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.pet_id
-        output_object['petId'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.quantity
-        output_object['quantity'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.ship_date
-        serialized_property = serialized_property.new_offset(0).strftime('%FT%TZ')
-        output_object['shipDate'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.status
-        output_object['status'] = serialized_property unless serialized_property.nil?
-
-        serialized_property = object.complete
-        output_object['complete'] = serialized_property unless serialized_property.nil?
-
-        output_object
-      end
-
-      #
-      # Deserializes given Ruby Hash into Model object.
-      # @param object [Hash] Ruby Hash object to deserialize.
-      # @return [Order] Deserialized object.
-      #
-      def self.deserialize_object(object)
-        return if object.nil?
-        output_object = Order.new
-
-        deserialized_property = object['id']
-        deserialized_property = Integer(deserialized_property) unless deserialized_property.to_s.empty?
-        output_object.id = deserialized_property
-
-        deserialized_property = object['petId']
-        deserialized_property = Integer(deserialized_property) unless deserialized_property.to_s.empty?
-        output_object.pet_id = deserialized_property
-
-        deserialized_property = object['quantity']
-        deserialized_property = Integer(deserialized_property) unless deserialized_property.to_s.empty?
-        output_object.quantity = deserialized_property
-
-        deserialized_property = object['shipDate']
-        deserialized_property = DateTime.parse(deserialized_property) unless deserialized_property.to_s.empty?
-        output_object.ship_date = deserialized_property
-
-        deserialized_property = object['status']
-        output_object.status = deserialized_property
-
-        deserialized_property = object['complete']
-        output_object.complete = deserialized_property
-
-        output_object
+      def self.mapper()
+        {
+          required: false,
+          serialized_name: 'Order',
+          type: {
+            name: 'Composite',
+            class_name: 'Order',
+            model_properties: {
+              id: {
+                required: false,
+                read_only: true,
+                serialized_name: 'id',
+                type: {
+                  name: 'Number'
+                }
+              },
+              pet_id: {
+                required: false,
+                serialized_name: 'petId',
+                type: {
+                  name: 'Number'
+                }
+              },
+              quantity: {
+                required: false,
+                serialized_name: 'quantity',
+                type: {
+                  name: 'Number'
+                }
+              },
+              ship_date: {
+                required: false,
+                serialized_name: 'shipDate',
+                type: {
+                  name: 'DateTime'
+                }
+              },
+              status: {
+                required: false,
+                serialized_name: 'status',
+                type: {
+                  name: 'String'
+                }
+              },
+              complete: {
+                required: false,
+                serialized_name: 'complete',
+                type: {
+                  name: 'Boolean'
+                }
+              }
+            }
+          }
+        }
       end
     end
   end

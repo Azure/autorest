@@ -2,13 +2,15 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Rest.Generator.ClientModel;
+using System.Globalization;
 using System.Linq;
+using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 {
-    using Utilities;
     using System.Collections.Generic;
+    using System.Reflection;
+    using Utilities;
 
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
@@ -263,224 +265,6 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         }
 
         /// <summary>
-        /// Generates Ruby code in form of string for deserializing object of given type.
-        /// </summary>
-        /// <param name="type">Type of object needs to be deserialized.</param>
-        /// <param name="scope">Current scope.</param>
-        /// <param name="valueReference">Reference to object which needs to be deserialized.</param>
-        /// <returns>Generated Ruby code in form of string.</returns>
-        public static string DeserializeType(
-            this IType type,
-            IScopeProvider scope,
-            string valueReference)
-        {
-            var composite = type as CompositeType;
-            var sequence = type as SequenceType;
-            var dictionary = type as DictionaryType;
-            var primary = type as PrimaryType;
-            var enumType = type as EnumType;
-
-            var builder = new IndentedStringBuilder("  ");
-
-            if (primary != null)
-            {
-                if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
-                {
-                    return builder.AppendLine("{0} = Integer({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.Double)
-                {
-                    return builder.AppendLine("{0} = Float({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.ByteArray)
-                {
-                    return builder.AppendLine("{0} = Base64.strict_decode64({0}).unpack('C*') unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.Date)
-                {
-                    return builder.AppendLine("{0} = MsRest::Serialization.deserialize_date({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.DateTime)
-                {
-                    return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return builder.AppendLine("{0} = DateTime.parse({0}) unless {0}.to_s.empty?", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.UnixTime)
-                {
-                    return builder.AppendLine("{0} = DateTime.strptime({0}.to_s, '%s') unless {0}.to_s.empty?", valueReference).ToString();
-                }
-            }
-            else if (enumType != null && !string.IsNullOrEmpty(enumType.Name))
-            {
-                return builder
-                    .AppendLine("if (!{0}.nil? && !{0}.empty?)", valueReference)
-                    .AppendLine(
-                        "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
-                        enumType.Name, valueReference)
-                    .AppendLine(
-                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.Name, valueReference)
-                    .AppendLine("end")
-                    .ToString();
-            }
-            else if (sequence != null)
-            {
-                var elementVar = scope.GetUniqueName("element");
-                var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
-
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    return
-                        builder
-                            .AppendLine("unless {0}.nil?", valueReference)
-                                .Indent()
-                                    .AppendLine("deserialized_{0} = []", sequence.Name.ToLower())
-                                    .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
-                                    .Indent()
-                                        .AppendLine(innerSerialization)
-                                        .AppendLine("deserialized_{0}.push({1})", sequence.Name.ToLower(), elementVar)
-                                    .Outdent()
-                                    .AppendLine("end")
-                                    .AppendLine("{0} = deserialized_{1}", valueReference, sequence.Name.ToLower())
-                                .Outdent()
-                            .AppendLine("end")
-                            .ToString();
-                }
-            }
-            else if (dictionary != null)
-            {
-                var valueVar = scope.GetUniqueName("valueElement");
-                var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    return builder.AppendLine("unless {0}.nil?", valueReference)
-                            .Indent()
-                              .AppendLine("{0}.each do |key, {1}|", valueReference, valueVar)
-                                .Indent()
-                                  .AppendLine(innerSerialization)
-                                  .AppendLine("{0}[key] = {1}", valueReference, valueVar)
-                               .Outdent()
-                             .AppendLine("end")
-                           .Outdent()
-                         .AppendLine("end").ToString();
-                }
-            }
-            else if (composite != null)
-            {
-                return builder.AppendLine("unless {0}.nil?", valueReference)
-                    .Indent()
-                        .AppendLine("{0} = {1}.deserialize_object({0})", valueReference, composite.Name)
-                    .Outdent()
-                    .AppendLine("end").ToString();
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Generates Ruby code in form of string for serializing object of given type.
-        /// </summary>
-        /// <param name="type">Type of object needs to be serialized.</param>
-        /// <param name="scope">Current scope.</param>
-        /// <param name="valueReference">Reference to object which needs to serialized.</param>
-        /// <returns>Generated Ruby code in form of string.</returns>
-        public static string SerializeType(
-            this IType type,
-            IScopeProvider scope,
-            string valueReference)
-        {
-            var composite = type as CompositeType;
-            var sequence = type as SequenceType;
-            var dictionary = type as DictionaryType;
-            var primary = type as PrimaryType;
-
-            var builder = new IndentedStringBuilder("  ");
-
-            if (primary != null)
-            {
-                if (primary.Type == KnownPrimaryType.ByteArray)
-                {
-                    return builder.AppendLine("{0} = Base64.strict_encode64({0}.pack('c*'))", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.DateTime)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%FT%TZ')", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%a, %d %b %Y %H:%M:%S GMT')", valueReference).ToString();
-                }
-
-                if (primary.Type == KnownPrimaryType.UnixTime)
-                {
-                    return builder.AppendLine("{0} = {0}.new_offset(0).strftime('%s')", valueReference).ToString();
-                }
-            }
-            else if (sequence != null)
-            {
-                var elementVar = scope.GetUniqueName("element");
-                var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
-
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    return
-                        builder
-                            .AppendLine("unless {0}.nil?", valueReference)
-                                .Indent()
-                                    .AppendLine("serialized{0} = []", sequence.Name)
-                                    .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
-                                    .Indent()
-                                        .AppendLine(innerSerialization)
-                                        .AppendLine("serialized{0}.push({1})", sequence.Name.ToPascalCase(), elementVar)
-                                    .Outdent()
-                                    .AppendLine("end")
-                                    .AppendLine("{0} = serialized{1}", valueReference, sequence.Name.ToPascalCase())
-                                .Outdent()
-                            .AppendLine("end")
-                            .ToString();
-                }
-            }
-            else if (dictionary != null)
-            {
-                var valueVar = scope.GetUniqueName("valueElement");
-                var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
-                if (!string.IsNullOrEmpty(innerSerialization))
-                {
-                    return builder.AppendLine("unless {0}.nil?", valueReference)
-                            .Indent()
-                              .AppendLine("{0}.each {{ |key, {1}|", valueReference, valueVar)
-                                .Indent()
-                                  .AppendLine(innerSerialization)
-                                  .AppendLine("{0}[key] = {1}", valueReference, valueVar)
-                               .Outdent()
-                             .AppendLine("}")
-                           .Outdent()
-                         .AppendLine("end").ToString();
-                }
-            }
-            else if (composite != null)
-            {
-                return builder.AppendLine("unless {0}.nil?", valueReference)
-                    .Indent()
-                        .AppendLine("{0} = {1}.serialize_object({0})", valueReference, composite.Name)
-                    .Outdent()
-                    .AppendLine("end").ToString();
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
         /// Determines whether one composite type derives directly or indirectly from another.
         /// </summary>
         /// <param name="type">Type to test.</param>
@@ -492,6 +276,474 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                 type.BaseModelType != null &&
                 (type.BaseModelType.Equals(possibleAncestorType) ||
                  type.BaseModelType.DerivesFrom(possibleAncestorType));
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">Type for which mapper being generated.</param>
+        /// <param name="serializedName">Serialized name to be used.</param>
+        /// <param name="parameter">Parameter of the composite type to construct the parameter constraints.</param>
+        /// <param name="expandComposite">Expand composite type if <c>true</c> otherwise specify class_name in the mapper.</param>
+        /// <returns>Mapper for the <paramref name="type"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// One of the example of the mapper is 
+        /// {
+        ///   required: false,
+        ///   serialized_name: 'Fish',
+        ///   type: {
+        ///     name: 'Composite',
+        ///     polymorphic_discriminator: 'fishtype',
+        ///     uber_parent: 'Fish',
+        ///     class_name: 'Fish',
+        ///     model_properties: {
+        ///       species: {
+        ///         required: false,
+        ///         serialized_name: 'species',
+        ///         type: {
+        ///           name: 'String'
+        ///         }
+        ///       },
+        ///       length: {
+        ///         required: true,
+        ///         serialized_name: 'length',
+        ///         type: {
+        ///           name: 'Double'
+        ///         }
+        ///       },
+        ///       siblings: {
+        ///         required: false,
+        ///         serialized_name: 'siblings',
+        ///         type: {
+        ///           name: 'Sequence',
+        ///           element: {
+        ///               required: false,
+        ///               serialized_name: 'FishElementType',
+        ///               type: {
+        ///                 name: 'Composite',
+        ///                 polymorphic_discriminator: 'fishtype',
+        ///                 uber_parent: 'Fish',
+        ///                 class_name: 'Fish'
+        ///               }
+        ///           }
+        ///         }
+        ///       }
+        ///     }
+        ///   }
+        /// }
+        /// </example>
+        public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool expandComposite)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            if (enumType != null && enumType.ModelAsString)
+            {
+                primary = new PrimaryType(KnownPrimaryType.String);
+            }
+            builder.AppendLine("").Indent();
+
+            builder.AppendLine(type.AddMetaData(serializedName, parameter));
+
+            if (primary != null)
+            {
+                builder.AppendLine(primary.ContructMapperForPrimaryType());
+            }
+            else if (enumType != null && enumType.Name != null)
+            {
+                builder.AppendLine(enumType.ContructMapperForEnumType());
+            }
+            else if (sequence != null)
+            {
+                builder.AppendLine(sequence.ContructMapperForSequenceType());
+            }
+            else if (dictionary != null)
+            {
+                builder.AppendLine(dictionary.ContructMapperForDictionaryType());
+            }
+            else if (composite != null)
+            {
+                builder.AppendLine(composite.ContructMapperForCompositeType(expandComposite));
+            }
+            else
+            {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported Type.", type));
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Adds metadata to the given <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">Type for which metadata being generated.</param>
+        /// <param name="serializedName">Serialized name to be used.</param>
+        /// <param name="parameter">Parameter of the composite type to construct the parameter constraints.</param>
+        /// <returns>Metadata as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for IParameter for IType.
+        /// required: true | false,                         -- whether this property is required or not
+        /// read_only: true | false,                        -- whether this property is read only or not. Default is false
+        /// is_constant: true | false,                      -- whether this property is constant or not. Default is false
+        /// serialized_name: 'name'                         -- serialized name of the property if provided
+        /// default_value: 'value'                          -- default value of the property if provided
+        /// constraints: {                                  -- constraints of the property
+        ///   key: value,                                   -- constraint name and value if any
+        ///   ***: *****
+        /// }
+        /// </example>
+        private static string AddMetaData(this IType type, string serializedName, IParameter parameter)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            Dictionary<Constraint, string> constraints = null;
+            string defaultValue = null;
+            bool isRequired = false;
+            bool isConstant = false;
+            bool isReadOnly = false;
+            var property = parameter as Property;
+            if (property != null)
+            {
+                isReadOnly = property.IsReadOnly;
+            }
+            if (parameter != null)
+            {
+                defaultValue = parameter.DefaultValue;
+                isRequired = parameter.IsRequired;
+                isConstant = parameter.IsConstant;
+                constraints = parameter.Constraints;
+            }
+
+            CompositeType composite = type as CompositeType;
+            if (composite != null && composite.ContainsConstantProperties && isRequired)
+            {
+                defaultValue = "{}";
+            }
+
+            if (isRequired)
+            {
+                builder.AppendLine("required: true,");
+            }
+            else
+            {
+                builder.AppendLine("required: false,");
+            }
+            if (isReadOnly)
+            {
+                builder.AppendLine("read_only: true,");
+            }
+            if (isConstant)
+            {
+                builder.AppendLine("is_constant: true,");
+            }
+            if (serializedName != null)
+            {
+                builder.AppendLine("serialized_name: '{0}',", serializedName);
+            }
+            if (defaultValue != null)
+            {
+                builder.AppendLine("default_value: {0},", defaultValue);
+            }
+
+            if (constraints != null && constraints.Count > 0)
+            {
+                builder.AppendLine("constraints: {").Indent();
+                var keys = constraints.Keys.ToList<Constraint>();
+                for (int j = 0; j < keys.Count; j++)
+                {
+                    var constraintValue = constraints[keys[j]];
+                    if (keys[j] == Constraint.Pattern)
+                    {
+                        constraintValue = string.Format(CultureInfo.InvariantCulture, "'{0}'", constraintValue);
+                    }
+                    if (j != keys.Count - 1)
+                    {
+                        builder.AppendLine("{0}: {1},", keys[j], constraintValue);
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}: {1}", keys[j], constraintValue);
+                    }
+                }
+                builder.Outdent()
+                    .AppendLine("},");
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="primary"/>.
+        /// </summary>
+        /// <param name="primary">PrimaryType for which mapper being generated.</param>
+        /// <returns>Mapper for the <paramref name="primary"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for PrimaryType.
+        /// type: {
+        ///   name: 'Boolean'                               -- This value should be one of the KnownPrimaryType
+        /// }
+        /// </example>
+        private static string ContructMapperForPrimaryType(this PrimaryType primary)
+        {
+            if (primary == null)
+            {
+                throw new ArgumentNullException(nameof(primary));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            if (primary.Type == KnownPrimaryType.Boolean)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Double)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Double'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long ||
+                primary.Type == KnownPrimaryType.Decimal)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.String || primary.Type == KnownPrimaryType.Uuid)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.ByteArray)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Base64Url)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Base64Url'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Date)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.DateTime)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.TimeSpan)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.UnixTime)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'UnixTime'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Object)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
+            }
+            else if (primary.Type == KnownPrimaryType.Stream)
+            {
+                builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
+            }
+            else
+            {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} is not a supported primary Type for {1}.", primary.Type, primary.SerializedName));
+            }
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="enumeration"/>.
+        /// </summary>
+        /// <param name="enumeration">EnumType for which mapper being generated.</param>
+        /// <returns>Mapper for the <paramref name="enumeration"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for EnumType.
+        /// type: {
+        ///   name: 'Enum',
+        ///   module: 'module_name'                         -- name of the module to be looked for enum values
+        /// }
+        /// </example>
+        private static string ContructMapperForEnumType(this EnumType enumeration)
+        {
+            if (enumeration == null)
+            {
+                throw new ArgumentNullException(nameof(enumeration));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            builder.AppendLine("type: {").Indent()
+                .AppendLine("name: 'Enum',")
+                .AppendLine("module: '{0}'", enumeration.Name).Outdent()
+                .AppendLine("}");
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="sequence"/>.
+        /// </summary>
+        /// <param name="sequence">SequenceType for which mapper being generated.</param>
+        /// <returns>Mapper for the <paramref name="sequence"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for SequenceType.
+        /// type: {
+        ///   name: 'Sequence',
+        ///   element: {
+        ///     ***                                         -- mapper of the IType from the sequence element
+        ///   }
+        /// }
+        /// </example>
+        private static string ContructMapperForSequenceType(this SequenceType sequence)
+        {
+            if (sequence == null)
+            {
+                throw new ArgumentNullException(nameof(sequence));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            builder.AppendLine("type: {").Indent()
+                     .AppendLine("name: 'Sequence',")
+                     .AppendLine("element: {").Indent()
+                     .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType", null, false)).Outdent()
+                     .AppendLine("}").Outdent()
+                     .AppendLine("}");
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="dictionary"/>.
+        /// </summary>
+        /// <param name="dictionary">DictionaryType for which mapper being generated.</param>
+        /// <returns>Mapper for the <paramref name="dictionary"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for DictionaryType.
+        /// type: {
+        ///   name: 'Dictionary',
+        ///   value: {
+        ///     ***                                         -- mapper of the IType from the value type of dictionary
+        ///   }
+        /// }
+        /// </example>
+        private static string ContructMapperForDictionaryType(this DictionaryType dictionary)
+        {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            builder.AppendLine("type: {").Indent()
+                .AppendLine("name: 'Dictionary',")
+                .AppendLine("value: {").Indent()
+                .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType", null, false)).Outdent()
+                .AppendLine("}").Outdent()
+                .AppendLine("}");
+
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Constructs blueprint of the given <paramref name="composite"/>.
+        /// </summary>
+        /// <param name="composite">CompositeType for which mapper being generated.</param>
+        /// <param name="expandComposite">Expand composite type if <c>true</c> otherwise specify class_name in the mapper.</param>
+        /// <returns>Mapper for the <paramref name="composite"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        /// <example>
+        /// The below example shows possible mapper string for CompositeType.
+        /// type: {
+        ///   name: 'Composite',
+        ///   polymorphic_discriminator: 'property_name',   -- name of the property for polymorphic discriminator
+        ///                                                      Used only when x-ms-discriminator-value applied
+        ///   uber_parent: 'parent_class_name',             -- name of the topmost level class on inheritance hierarchy
+        ///                                                      Used only when x-ms-discriminator-value applied
+        ///   class_name: 'class_name',                     -- name of the modeled class
+        ///                                                      Used when <paramref name="expandComposite"/> is false
+        ///   model_properties: {                           -- expanded properties of the model
+        ///                                                      Used when <paramref name="expandComposite"/> is true
+        ///     property_name : {                           -- name of the property of this composite type
+        ///         ***                                     -- mapper of the IType from the type of the property
+        ///     }
+        ///   }
+        /// }
+        /// </example>
+        private static string ContructMapperForCompositeType(this CompositeType composite, bool expandComposite)
+        {
+            if (composite == null)
+            {
+                throw new ArgumentNullException(nameof(composite));
+            }
+
+            IndentedStringBuilder builder = new IndentedStringBuilder("  ");
+
+            builder.AppendLine("type: {").Indent()
+                .AppendLine("name: 'Composite',");
+
+            if (composite.PolymorphicDiscriminator != null)
+            {
+                builder.AppendLine("polymorphic_discriminator: '{0}',", composite.PolymorphicDiscriminator);
+                var polymorphicType = composite;
+                while (polymorphicType.BaseModelType != null)
+                {
+                    polymorphicType = polymorphicType.BaseModelType;
+                }
+                builder.AppendLine("uber_parent: '{0}',", polymorphicType.Name);
+            }
+            if (!expandComposite)
+            {
+                builder.AppendLine("class_name: '{0}'", composite.Name).Outdent().AppendLine("}");
+            }
+            else
+            {
+                builder.AppendLine("class_name: '{0}',", composite.Name)
+                       .AppendLine("model_properties: {").Indent();
+                var composedPropertyList = new List<Property>(composite.ComposedProperties);
+                for (var i = 0; i < composedPropertyList.Count; i++)
+                {
+                    var prop = composedPropertyList[i];
+                    var serializedPropertyName = prop.SerializedName;
+
+                    if (i != composedPropertyList.Count - 1)
+                    {
+                        builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false));
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false));
+                    }
+                }
+                // end of modelProperties and type
+                builder.Outdent().
+                    AppendLine("}").Outdent().
+                    AppendLine("}");
+            }
+
+            return builder.ToString();
         }
     }
 }

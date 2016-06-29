@@ -12,6 +12,7 @@ var util = require('util');
  * Initializes a new instance of the StorageAccountUpdateParameters class.
  * @constructor
  * The parameters to update on the account.
+ *
  * @member {object} [tags] Resource tags
  * 
  * @member {object} [properties]

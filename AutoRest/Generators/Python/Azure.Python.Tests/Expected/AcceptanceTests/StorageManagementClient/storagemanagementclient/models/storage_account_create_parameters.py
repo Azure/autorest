@@ -13,8 +13,7 @@ from .resource import Resource
 
 
 class StorageAccountCreateParameters(Resource):
-    """
-    The parameters to provide for the account.
+    """The parameters to provide for the account.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
@@ -33,7 +32,7 @@ class StorageAccountCreateParameters(Resource):
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <storagemanagementclient.models.AccountType>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.AccountType>`
     """ 
 
     _validation = {

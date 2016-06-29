@@ -33,8 +33,7 @@ class HttpRetry(object):
 
     def head408(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 408 status code, then 200 after retry
+        """Return 408 status code, then 200 after retry.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -70,8 +69,7 @@ class HttpRetry(object):
 
     def put500(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 500 status code, then 200 after retry
+        """Return 500 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -116,8 +114,7 @@ class HttpRetry(object):
 
     def patch500(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 500 status code, then 200 after retry
+        """Return 500 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -162,8 +159,7 @@ class HttpRetry(object):
 
     def get502(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 502 status code, then 200 after retry
+        """Return 502 status code, then 200 after retry.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -199,8 +195,7 @@ class HttpRetry(object):
 
     def post503(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 503 status code, then 200 after retry
+        """Return 503 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -245,8 +240,7 @@ class HttpRetry(object):
 
     def delete503(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 503 status code, then 200 after retry
+        """Return 503 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -291,8 +285,7 @@ class HttpRetry(object):
 
     def put504(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 504 status code, then 200 after retry
+        """Return 504 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -337,8 +330,7 @@ class HttpRetry(object):
 
     def patch504(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 504 status code, then 200 after retry
+        """Return 504 status code, then 200 after retry.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool

@@ -58,4 +58,22 @@ public interface HttpFailures {
      */
     ServiceCall getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
+    /**
+     * Get empty response from server.
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<Boolean> getNoModelEmpty() throws ServiceException, IOException;
+
+    /**
+     * Get empty response from server.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+
 }

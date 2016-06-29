@@ -31,6 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsPutAsyncNoRetrycanceledHeaders class.
         /// </summary>
+        /// <param name="azureAsyncOperation">Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200</param>
+        /// <param name="location">Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200</param>
         public LROsPutAsyncNoRetrycanceledHeaders(string azureAsyncOperation = default(string), string location = default(string))
         {
             AzureAsyncOperation = azureAsyncOperation;

@@ -13,8 +13,7 @@ from .resource import Resource
 
 
 class StorageAccountUpdateParameters(Resource):
-    """
-    The parameters to update on the account.
+    """The parameters to update on the account.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
@@ -35,7 +34,7 @@ class StorageAccountUpdateParameters(Resource):
      Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <storagemanagementclient.models.AccountType>`
+     <fixtures.acceptancetestsstoragemanagementclient.models.AccountType>`
     :param custom_domain: User domain assigned to the storage account. Name
      is the CNAME source. Only one custom domain is supported per storage
      account at this time. To clear the existing custom domain, use an empty

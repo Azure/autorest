@@ -33,8 +33,6 @@ namespace Microsoft.Rest.Generator.Cli
                     else
                     {
                         AutoRest.Generate(settings);
-                        var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-                        Console.WriteLine(codeGenerator.UsageInstructions);
                     }
                 }
                 catch (CodeGenerationException)
@@ -75,16 +73,20 @@ namespace Microsoft.Rest.Generator.Cli
                         }
                     }
 
-                    Logger.WriteErrors(Console.Error,
-                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                    Logger.WriteWarnings(Console.Out);
-
+                    Console.ResetColor();
                     // Include LogEntrySeverity.Infos for verbose logging.
                     if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
                     {
+                        Console.ForegroundColor = ConsoleColor.White;
                         Logger.WriteInfos(Console.Out);
                     }
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Logger.WriteWarnings(Console.Out);
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Logger.WriteErrors(Console.Error,
+                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
 
                     Console.ResetColor();
                 }

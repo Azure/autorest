@@ -199,7 +199,7 @@
     <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\net45" Condition="$(DelaySign)" />
     <ItemGroup>
       <AfterSignedAssembliesToValidate Include="binaries\net45\*.dll;binaries\net45\*.exe"
-        Exclude="binaries\net45\Newtonsoft.*.dll" />
+        Exclude="binaries\net45\Newtonsoft.*.dll;binaries\net45\YamlDotNet.dll" />
     </ItemGroup>
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"

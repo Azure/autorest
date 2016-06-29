@@ -144,7 +144,9 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {
-                    this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key].ToString();
+                    //Don't overwrite settings that come in from the command line
+                    if (!this.Settings.CustomSettings.ContainsKey(key))
+                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
                 }
                 Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
             }

@@ -78,6 +78,9 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public RecursiveTypesAPI(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -99,6 +102,9 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public RecursiveTypesAPI(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -148,10 +154,12 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <summary>
         /// Products
         /// </summary>
+        /// <remarks>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
+        /// </remarks>
         /// <param name='subscriptionId'>
         /// Subscription Id.
         /// </param>
@@ -170,6 +178,15 @@ namespace Fixtures.MirrorRecursiveTypes
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>

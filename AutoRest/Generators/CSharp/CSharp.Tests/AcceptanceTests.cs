@@ -1807,6 +1807,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             var ex2 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelError());
             Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
 
+            var ex3 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelEmpty());
+            Assert.Equal(string.Empty, ex3.Response.Content);
+
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
             client.HttpSuccess.Put200(true);
@@ -2262,6 +2265,22 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void SyncMethodsValidation()
+        {
+            Type petstoreWithAllSyncMethods = typeof(Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPet"));
+            Assert.NotNull(petstoreWithAllSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithNoSyncMethods = typeof(Fixtures.PetstoreV2NoSync.SwaggerPetstoreV2Extensions);
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithNoSyncMethods.GetMethod("AddPetWithHttpMessages"));
+
+            Type petstoreWithEssentialSyncMethods = typeof(Fixtures.PetstoreV2.SwaggerPetstoreV2Extensions);
+            Assert.NotNull(petstoreWithEssentialSyncMethods.GetMethod("AddPet"));
+            Assert.Null(petstoreWithEssentialSyncMethods.GetMethod("AddPetWithHttpMessages"));
+        }
+
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(
@@ -2310,8 +2329,27 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
         private static void EnsureStatusCode<THeader>(HttpStatusCode expectedStatusCode, Func<Task<HttpOperationHeaderResponse<THeader>>> operation)
         {
-            var response = operation().GetAwaiter().GetResult();
-            Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+            // Adding retry because of flakiness of TestServer on Travis runs
+            HttpRequestException ex = null;
+            for (int i = 0; i < 3; i++)
+            {
+                HttpOperationHeaderResponse<THeader> response;
+                try
+                {
+                    response = operation().GetAwaiter().GetResult();
+                }
+                catch(HttpRequestException x)
+                {
+                    System.Threading.Thread.Sleep(10);
+                    ex = x;
+                    continue;
+                }
+                Assert.Equal(response.Response.StatusCode, expectedStatusCode);
+                return;
+            }
+            Assert.True(
+                false, 
+                string.Format("EnsureStatusCode for '{0}' failed 3 times in a row. Last failure message: {1}", expectedStatusCode, ex));
         }
 
         private static void EnsureThrowsWithStatusCode(HttpStatusCode expectedStatusCode,

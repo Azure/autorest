@@ -14,8 +14,7 @@ from msrest.serialization import Model
 
 
 class Product(Model):
-    """
-    The product documentation.
+    """The product documentation.
 
     Variables are only populated by the server, and will be ignored when
     sending a request.
@@ -40,7 +39,7 @@ class Product(Model):
     :param const_string_as_enum: Constant string as Enum. Possible values
      include: 'constant_string_as_enum'
     :type const_string_as_enum: str or :class:`EnumConst
-     <autorestvalidationtest.models.EnumConst>`
+     <fixtures.acceptancetestsvalidation.models.EnumConst>`
     """ 
 
     _validation = {

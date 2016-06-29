@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class Basic(Model):
-    """Basic
+    """Basic.
 
     :param id:
     :type id: int
@@ -22,7 +22,7 @@ class Basic(Model):
     :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
     :type color: str or :class:`CMYKColors
-     <autorestcomplextestservice.models.CMYKColors>`
+     <fixtures.acceptancetestsbodycomplex.models.CMYKColors>`
     """ 
 
     _attribute_map = {

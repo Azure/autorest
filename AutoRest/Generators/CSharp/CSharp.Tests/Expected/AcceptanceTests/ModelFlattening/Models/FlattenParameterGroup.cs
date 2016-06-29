@@ -29,6 +29,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
         /// </summary>
+        /// <param name="name">Product name with value 'groupproduct'</param>
+        /// <param name="productId">Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.</param>
+        /// <param name="maxProductDisplayName">Display name of product.</param>
+        /// <param name="description">Description of product.</param>
+        /// <param name="genericValue">Generic URL value.</param>
+        /// <param name="odatavalue">URL value.</param>
         public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
         {
             Name = name;
@@ -79,8 +85,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string Odatavalue { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Name == null)

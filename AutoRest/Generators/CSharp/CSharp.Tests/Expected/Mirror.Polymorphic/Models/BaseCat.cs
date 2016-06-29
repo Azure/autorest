@@ -25,6 +25,9 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the BaseCat class.
         /// </summary>
+        /// <param name="id">Id.</param>
+        /// <param name="description">Description of a Animal.</param>
+        /// <param name="color">cat color</param>
         public BaseCat(string id = default(string), string description = default(string), string color = default(string))
             : base(id, description)
         {

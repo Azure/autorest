@@ -11,41 +11,24 @@ module MsRestAzure
     # @return [String] the id of the subresource.
     attr_accessor :id
 
-    #
-    # Serializes given subresource object into hash.
-    # @param object [SubResource] subresource object to serialize.
-    #
-    # @return [Hash] hash representation of subresource.
-    def self.serialize_object(object)
-      object.validate
-      output_object = {}
-
-      serialized_property = object.id
-      output_object['id'] = serialized_property unless serialized_property.nil?
-
-      output_object
-    end
-
-    #
-    # Deserializes given hash object into subresource.
-    # @param object [Hash] subresource in hash representation to deserialize.
-    #
-    # @return [SubResource] deserialized subresource.
-    def self.deserialize_object(object)
-      return if object.nil?
-      output_object = SubResource.new
-
-      deserialized_property = object['id']
-      output_object.id = deserialized_property
-
-      output_object.validate
-      output_object
-    end
-
-    #
-    # Validates the subresource. Throws error if there is any property is incorrect.
-    #
-    def validate
+    def self.mapper
+      {
+        required: false,
+        serialized_name: 'SubResource',
+        type: {
+          name: 'Composite',
+          class_name: 'SubResource',
+          model_properties: {
+            id: {
+              required: false,
+              serialized_name: 'id',
+              type: {
+                name: 'String'
+              }
+            }
+          }
+        }
+      }
     end
   end
 end

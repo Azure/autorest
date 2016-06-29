@@ -78,6 +78,9 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public PolymorphicAnimalStore(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -99,6 +102,9 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public PolymorphicAnimalStore(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -150,10 +156,12 @@ namespace Fixtures.MirrorPolymorphic
         /// <summary>
         /// Product Types
         /// </summary>
+        /// <remarks>
         /// The Products endpoint returns information about the Uber products offered
         /// at a given location. The response includes the display name and other
         /// details about each product, and lists the products in the proper display
         /// order.
+        /// </remarks>
         /// <param name='animalCreateOrUpdateParameter'>
         /// An Animal
         /// </param>
@@ -163,6 +171,12 @@ namespace Fixtures.MirrorPolymorphic
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="Error2Exception">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>

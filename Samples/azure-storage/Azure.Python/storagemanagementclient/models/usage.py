@@ -6,13 +6,12 @@ from msrest.serialization import Model
 
 
 class Usage(Model):
-    """
-    Describes Storage Resource Usage.
+    """Describes Storage Resource Usage.
 
     :param unit: Gets the unit of measurement. Possible values include:
      'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
      'BytesPerSecond'
-    :type unit: str
+    :type unit: str or :class:`UsageUnit <petstore.models.UsageUnit>`
     :param current_value: Gets the current count of the allocated resources
      in the subscription.
     :type current_value: int

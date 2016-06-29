@@ -29,6 +29,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.
         /// </summary>
+        /// <param name="productId">Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.</param>
+        /// <param name="maxProductDisplayName">Display name of product.</param>
+        /// <param name="description">Description of product.</param>
+        /// <param name="genericValue">Generic URL value.</param>
+        /// <param name="odatavalue">URL value.</param>
         public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
             : base(productId, description)
         {
@@ -69,8 +74,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public static string Capacity { get; private set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public override void Validate()
         {
             base.Validate();

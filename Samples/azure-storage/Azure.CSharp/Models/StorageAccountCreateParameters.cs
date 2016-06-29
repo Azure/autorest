@@ -24,6 +24,8 @@ namespace Petstore.Models
         /// Initializes a new instance of the StorageAccountCreateParameters
         /// class.
         /// </summary>
+        /// <param name="location">Resource location</param>
+        /// <param name="tags">Resource tags</param>
         public StorageAccountCreateParameters(string location, IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
         {
             Location = location;
@@ -49,8 +51,11 @@ namespace Petstore.Models
         public StorageAccountPropertiesCreateParameters Properties { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Location == null)

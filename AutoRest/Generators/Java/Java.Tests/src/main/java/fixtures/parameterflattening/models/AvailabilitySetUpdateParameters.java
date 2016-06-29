@@ -18,7 +18,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AvailabilitySetUpdateParameters {
     /**
-     * The tags property.
+     * A set of tags.
+     * A description about the set of tags.
      */
     @JsonProperty(required = true)
     private Map<String, String> tags;

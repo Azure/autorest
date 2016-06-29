@@ -30,6 +30,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the
         /// HeaderResponseDatetimeRfc1123Headers class.
         /// </summary>
+        /// <param name="value">response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"</param>
         public HeaderResponseDatetimeRfc1123Headers(DateTime? value = default(DateTime?))
         {
             Value = value;

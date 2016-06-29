@@ -25,6 +25,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Animal class.
         /// </summary>
+        /// <param name="id">Id.</param>
+        /// <param name="description">Description of a Animal.</param>
         public Animal(string id = default(string), string description = default(string))
         {
             Id = id;

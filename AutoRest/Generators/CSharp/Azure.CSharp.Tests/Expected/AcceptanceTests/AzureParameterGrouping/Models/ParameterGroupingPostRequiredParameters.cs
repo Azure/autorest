@@ -31,6 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the
         /// ParameterGroupingPostRequiredParameters class.
         /// </summary>
+        /// <param name="path">Path parameter</param>
+        /// <param name="query">Query parameter with default</param>
         public ParameterGroupingPostRequiredParameters(int body, string path, string customHeader = default(string), int? query = default(int?))
         {
             Body = body;
@@ -62,8 +64,11 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         public string Path { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Path == null)

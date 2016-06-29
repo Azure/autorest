@@ -33,8 +33,7 @@ class Number(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null Number value
+        """Get null Number value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class Number(object):
 
     def get_invalid_float(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid float Number value
+        """Get invalid float Number value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class Number(object):
 
     def get_invalid_double(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid double Number value
+        """Get invalid double Number value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -165,8 +162,7 @@ class Number(object):
 
     def get_invalid_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid decimal Number value
+        """Get invalid decimal Number value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -199,7 +195,7 @@ class Number(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -209,8 +205,7 @@ class Number(object):
 
     def put_big_float(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big float value 3.402823e+20
+        """Put big float value 3.402823e+20.
 
         :param number_body:
         :type number_body: float
@@ -252,8 +247,7 @@ class Number(object):
 
     def get_big_float(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big float value 3.402823e+20
+        """Get big float value 3.402823e+20.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -296,8 +290,7 @@ class Number(object):
 
     def put_big_double(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big double value 2.5976931e+101
+        """Put big double value 2.5976931e+101.
 
         :param number_body:
         :type number_body: float
@@ -339,8 +332,7 @@ class Number(object):
 
     def get_big_double(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big double value 2.5976931e+101
+        """Get big double value 2.5976931e+101.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -383,8 +375,7 @@ class Number(object):
 
     def put_big_double_positive_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big double value 99999999.99
+        """Put big double value 99999999.99.
 
         :param number_body:
         :type number_body: float
@@ -426,8 +417,7 @@ class Number(object):
 
     def get_big_double_positive_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big double value 99999999.99
+        """Get big double value 99999999.99.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -470,8 +460,7 @@ class Number(object):
 
     def put_big_double_negative_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big double value -99999999.99
+        """Put big double value -99999999.99.
 
         :param number_body:
         :type number_body: float
@@ -513,8 +502,7 @@ class Number(object):
 
     def get_big_double_negative_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big double value -99999999.99
+        """Get big double value -99999999.99.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -557,8 +545,7 @@ class Number(object):
 
     def put_big_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big decimal value 2.5976931e+101
+        """Put big decimal value 2.5976931e+101.
 
         :param number_body:
         :type number_body: decimal
@@ -584,7 +571,7 @@ class Number(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -600,8 +587,7 @@ class Number(object):
 
     def get_big_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big decimal value 2.5976931e+101
+        """Get big decimal value 2.5976931e+101.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -634,7 +620,7 @@ class Number(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -644,8 +630,7 @@ class Number(object):
 
     def put_big_decimal_positive_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big decimal value 99999999.99
+        """Put big decimal value 99999999.99.
 
         :param number_body:
         :type number_body: decimal
@@ -671,7 +656,7 @@ class Number(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -687,8 +672,7 @@ class Number(object):
 
     def get_big_decimal_positive_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big decimal value 99999999.99
+        """Get big decimal value 99999999.99.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -721,7 +705,7 @@ class Number(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -731,8 +715,7 @@ class Number(object):
 
     def put_big_decimal_negative_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put big decimal value -99999999.99
+        """Put big decimal value -99999999.99.
 
         :param number_body:
         :type number_body: decimal
@@ -758,7 +741,7 @@ class Number(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -774,8 +757,7 @@ class Number(object):
 
     def get_big_decimal_negative_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big decimal value -99999999.99
+        """Get big decimal value -99999999.99.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -808,7 +790,7 @@ class Number(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -818,8 +800,7 @@ class Number(object):
 
     def put_small_float(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put small float value 3.402823e-20
+        """Put small float value 3.402823e-20.
 
         :param number_body:
         :type number_body: float
@@ -861,8 +842,7 @@ class Number(object):
 
     def get_small_float(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big double value 3.402823e-20
+        """Get big double value 3.402823e-20.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -905,8 +885,7 @@ class Number(object):
 
     def put_small_double(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put small double value 2.5976931e-101
+        """Put small double value 2.5976931e-101.
 
         :param number_body:
         :type number_body: float
@@ -948,8 +927,7 @@ class Number(object):
 
     def get_small_double(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get big double value 2.5976931e-101
+        """Get big double value 2.5976931e-101.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -992,8 +970,7 @@ class Number(object):
 
     def put_small_decimal(
             self, number_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put small decimal value 2.5976931e-101
+        """Put small decimal value 2.5976931e-101.
 
         :param number_body:
         :type number_body: decimal
@@ -1019,7 +996,7 @@ class Number(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(number_body, 'Decimal')
+        body_content = self._serialize.body(number_body, 'decimal')
 
         # Construct and send request
         request = self._client.put(url, query_parameters)
@@ -1035,8 +1012,7 @@ class Number(object):
 
     def get_small_decimal(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get small decimal value 2.5976931e-101
+        """Get small decimal value 2.5976931e-101.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1069,7 +1045,7 @@ class Number(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = self._deserialize('Decimal', response)
+            deserialized = self._deserialize('decimal', response)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

@@ -58,7 +58,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             if (Settings.CustomSettings.ContainsKey("Name"))
             {
-                this.sdkName = Settings.CustomSettings["Name"];
+                this.sdkName = Settings.CustomSettings["Name"].ToString();
             }
 
             if (sdkName == null)
@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            Extensions.ProcessParameterizedHost(serviceClient, Settings);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             PopulateAdditionalProperties(serviceClient);
             CodeNamer.NormalizeClientModel(serviceClient);
             CodeNamer.ResolveNameCollisions(serviceClient, Settings.Namespace,

@@ -31,6 +31,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
+        /// <param name="displayNames">Non required array of unique items from 0 to 6 elements.</param>
+        /// <param name="capacity">Non required int betwen 0 and 100 exclusive.</param>
+        /// <param name="image">Image URL representing the product.</param>
+        /// <param name="constStringAsEnum">Constant string as Enum. Possible values include: 'constant_string_as_enum'</param>
         public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
             Child = new ChildProduct();
@@ -99,8 +103,11 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public static string ConstString { get; private set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Child == null)

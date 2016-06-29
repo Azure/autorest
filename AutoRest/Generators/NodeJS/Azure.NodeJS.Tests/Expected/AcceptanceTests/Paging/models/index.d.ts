@@ -57,11 +57,13 @@ export interface OperationResult {
  * Initializes a new instance of the PagingGetMultiplePagesOptions class.
  * @constructor
  * Additional parameters for the Paging_getMultiplePages operation.
+ *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
  * @member {number} [timeout] Sets the maximum time that the server can spend
- * processing the request, in seconds. The default is 30 seconds.
+ * processing the request, in seconds. The default is 30 seconds. Default
+ * value: 30 .
  * 
  */
 export interface PagingGetMultiplePagesOptions {
@@ -71,16 +73,37 @@ export interface PagingGetMultiplePagesOptions {
 
 /**
  * @class
+ * Initializes a new instance of the PagingGetOdataMultiplePagesOptions class.
+ * @constructor
+ * Additional parameters for the Paging_getOdataMultiplePages operation.
+ *
+ * @member {number} [maxresults] Sets the maximum number of items to return in
+ * the response.
+ * 
+ * @member {number} [timeout] Sets the maximum time that the server can spend
+ * processing the request, in seconds. The default is 30 seconds. Default
+ * value: 30 .
+ * 
+ */
+export interface PagingGetOdataMultiplePagesOptions {
+    maxresults?: number;
+    timeout?: number;
+}
+
+/**
+ * @class
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
  * Additional parameters for the Paging_getMultiplePagesWithOffset operation.
+ *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
  * @member {number} offset Offset of return value
  * 
  * @member {number} [timeout] Sets the maximum time that the server can spend
- * processing the request, in seconds. The default is 30 seconds.
+ * processing the request, in seconds. The default is 30 seconds. Default
+ * value: 30 .
  * 
  */
 export interface PagingGetMultiplePagesWithOffsetOptions {
@@ -94,11 +117,13 @@ export interface PagingGetMultiplePagesWithOffsetOptions {
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetNextOptions class.
  * @constructor
  * Additional parameters for the getMultiplePagesWithOffsetNext operation.
+ *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
  * @member {number} [timeout] Sets the maximum time that the server can spend
- * processing the request, in seconds. The default is 30 seconds.
+ * processing the request, in seconds. The default is 30 seconds. Default
+ * value: 30 .
  * 
  */
 export interface PagingGetMultiplePagesWithOffsetNextOptions {

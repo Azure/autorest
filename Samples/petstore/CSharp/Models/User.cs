@@ -18,6 +18,7 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the User class.
         /// </summary>
+        /// <param name="userStatus">User Status</param>
         public User(long? id = default(long?), string username = default(string), string firstName = default(string), string lastName = default(string), string email = default(string), string password = default(string), string phone = default(string), int? userStatus = default(int?))
         {
             Id = id;

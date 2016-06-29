@@ -19,6 +19,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         private AzureJavaCodeNamer _namer;
         private AzureResponseModel _returnTypeModel;
         private Dictionary<HttpStatusCode, ResponseModel> _responseModels;
+        private string pageClassName;
 
         public AzureMethodTemplateModel(Method source, ServiceClient serviceClient)
             : base(source, serviceClient)
@@ -34,6 +35,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
             _returnTypeModel = new AzureResponseModel(ReturnType, this);
             _responseModels = new Dictionary<HttpStatusCode, ResponseModel>();
             Responses.ForEach(r => _responseModels.Add(r.Key, new AzureResponseModel(r.Value, this)));
+
+            if (this.IsPagingOperation || this.IsPagingNextOperation)
+            {
+                var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                pageClassName = (string)ext["className"] ?? "PageImpl";
+            }
         }
 
         public string ClientRequestIdString { get; private set; }
@@ -589,7 +596,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Remove("java.util.List");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = "PageImpl" }.ImportSafe());
+                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;
             }

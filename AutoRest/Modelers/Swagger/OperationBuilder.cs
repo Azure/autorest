@@ -70,27 +70,15 @@ namespace Microsoft.Rest.Modeler.Swagger
                 // Enable UTF-8 charset
                 method.RequestContentType += "; charset=utf-8";
             }
+
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;
+            method.ExternalDocsUrl = _operation.ExternalDocs?.Url;
 
             // Service parameters
             if (_operation.Parameters != null)
             {
-                foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
-                {
-                    var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(_swaggerModeler)).Build();
-                    method.Parameters.Add(parameter);
-
-                    StringBuilder parameterName = new StringBuilder(parameter.Name);
-                    parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
-                        parameterName);
-
-                    if (swaggerParameter.In == ParameterLocation.Header)
-                    {
-                        method.RequestHeaders[swaggerParameter.Name] =
-                            string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameterName);
-                    }
-                }
+                BuildMethodParameters(method);
             }
 
             // Build header object
@@ -99,7 +87,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 if (response.Headers != null)
                 {
-                    response.Headers.ForEach( h => responseHeaders[h.Key] = h.Value);
+                    response.Headers.ForEach(h => responseHeaders[h.Key] = h.Value);
                 }
             }
 
@@ -129,30 +117,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Response format
-            var typesList = new List<Stack<IType>>();
-            foreach (var response in _operation.Responses)
-            {
-                if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
-                {
-                    TryBuildDefaultResponse(methodName, response.Value, method, headerType);
-                }
-                else
-                {
-                    if (
-                        !(TryBuildResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                            typesList, headerType) ||
-                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList, headerType) ||
-                          TryBuildEmptyResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
-                              typesList, headerType)))
-                    {
-                        throw new InvalidOperationException(
-                            string.Format(CultureInfo.InvariantCulture,
-                            Resources.UnsupportedMimeTypeForResponseBody,
-                            methodName,
-                            response.Key));
-                    }
-                }
-            }
+            List<Stack<IType>> typesList = BuildResponses(method, headerType);
 
             method.ReturnType = BuildMethodReturnType(typesList, headerType);
             if (method.Responses.Count == 0)
@@ -206,6 +171,56 @@ namespace Microsoft.Rest.Modeler.Swagger
             var typeStack = new Stack<IType>();
             typeStack.Push(type);
             types.Add(typeStack);
+        }
+
+        private void BuildMethodParameters(Method method)
+        {
+            foreach (var swaggerParameter in DeduplicateParameters(_operation.Parameters))
+            {
+                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(_swaggerModeler)).Build();
+                method.Parameters.Add(parameter);
+
+                StringBuilder parameterName = new StringBuilder(parameter.Name);
+                parameterName = CollectionFormatBuilder.OnBuildMethodParameter(method, swaggerParameter,
+                    parameterName);
+
+                if (swaggerParameter.In == ParameterLocation.Header)
+                {
+                    method.RequestHeaders[swaggerParameter.Name] =
+                        string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameterName);
+                }
+            }
+        }
+
+        private List<Stack<IType>> BuildResponses(Method method, CompositeType headerType)
+        {
+            string methodName = method.Name;
+            var typesList = new List<Stack<IType>>();
+            foreach (var response in _operation.Responses)
+            {
+                if (string.Equals(response.Key, "default", StringComparison.OrdinalIgnoreCase))
+                {
+                    TryBuildDefaultResponse(methodName, response.Value, method, headerType);
+                }
+                else
+                {
+                    if (
+                        !(TryBuildResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
+                            typesList, headerType) ||
+                          TryBuildStreamResponse(response.Key.ToHttpStatusCode(), response.Value, method, typesList, headerType) ||
+                          TryBuildEmptyResponse(methodName, response.Key.ToHttpStatusCode(), response.Value, method,
+                              typesList, headerType)))
+                    {
+                        throw new InvalidOperationException(
+                            string.Format(CultureInfo.InvariantCulture,
+                            Resources.UnsupportedMimeTypeForResponseBody,
+                            methodName,
+                            response.Key));
+                    }
+                }
+            }
+
+            return typesList;
         }
 
         private Response BuildMethodReturnType(List<Stack<IType>> types, IType headerType)

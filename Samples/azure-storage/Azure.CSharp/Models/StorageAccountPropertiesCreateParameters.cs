@@ -21,6 +21,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountPropertiesCreateParameters class.
         /// </summary>
+        /// <param name="accountType">Gets or sets the account type. Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'</param>
         public StorageAccountPropertiesCreateParameters(AccountType accountType)
         {
             AccountType = accountType;
@@ -35,8 +36,11 @@ namespace Petstore.Models
         public AccountType AccountType { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
         }

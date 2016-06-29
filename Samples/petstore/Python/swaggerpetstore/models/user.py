@@ -6,7 +6,7 @@ from msrest.serialization import Model
 
 
 class User(Model):
-    """User
+    """User.
 
     :param id:
     :type id: long

@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent
 
             // This extension from general extensions must be run prior to Azure specific extensions.
             AzureExtensions.ProcessParameterizedHost(serviceClient, Settings);
-
+            AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.FlattenModels(serviceClient);
             AzureExtensions.FlattenMethodParameters(serviceClient, Settings);

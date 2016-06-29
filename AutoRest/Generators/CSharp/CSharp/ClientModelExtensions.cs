@@ -137,30 +137,31 @@ namespace Microsoft.Rest.Generator.CSharp
         /// </summary>
         /// <param name="property">The given property documentation to format</param>
         /// <returns>A reference to the property documentation</returns>
-        public static string GetFormattedPropertyDocumentation(this Property property)
+        public static string GetFormattedPropertySummary(this Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
 
-            if (string.IsNullOrEmpty(property.Documentation))
+            if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
             {
-                return property.Documentation.EscapeXmlComment();
+                return null;
             }
 
             string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
+            string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
 
-            string firstWord = property.Documentation.TrimStart().Split(' ').First();
+            string firstWord = summary.TrimStart().Split(' ').First();
             if (firstWord.Length <= 1)
             {
-                documentation += char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
+                documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
             }
             else
             {
                 documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
-                    ? property.Documentation
-                    : char.ToLower(property.Documentation[0], CultureInfo.InvariantCulture) + property.Documentation.Substring(1);
+                    ? summary
+                    : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
             }
 
             return documentation.EscapeXmlComment();

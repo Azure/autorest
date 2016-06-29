@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Extensibility
         /// <returns>Modeler specified in Settings.Modeler</returns>
         public static Modeler GetModeler(Settings settings)
         {
-            Logger.LogInfo(Resources.ModelerInitialized);
+            Logger.LogInfo(Resources.InitializingModeler);
             if (settings == null)
             {
                 throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");

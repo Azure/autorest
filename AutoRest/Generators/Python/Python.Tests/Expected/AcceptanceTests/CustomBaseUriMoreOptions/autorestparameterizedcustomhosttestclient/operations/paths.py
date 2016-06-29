@@ -33,8 +33,7 @@ class Paths(object):
 
     def get_empty(
             self, vault, secret, key_name, key_version="v1", custom_headers=None, raw=False, **operation_config):
-        """
-        Get a 200 to test a valid base uri
+        """Get a 200 to test a valid base uri.
 
         :param vault: The vault name, e.g. https://myvault
         :type vault: str

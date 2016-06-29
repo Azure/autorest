@@ -34,8 +34,7 @@ class ParameterGroupingOperations(object):
 
     def post_required(
             self, parameter_grouping_post_required_parameters, custom_headers=None, raw=False, **operation_config):
-        """
-        Post a bunch of required parameters grouped
+        """Post a bunch of required parameters grouped.
 
         :param parameter_grouping_post_required_parameters: Additional
          parameters for the operation
@@ -105,8 +104,7 @@ class ParameterGroupingOperations(object):
 
     def post_optional(
             self, parameter_grouping_post_optional_parameters=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post a bunch of optional parameters grouped
+        """Post a bunch of optional parameters grouped.
 
         :param parameter_grouping_post_optional_parameters: Additional
          parameters for the operation
@@ -162,8 +160,7 @@ class ParameterGroupingOperations(object):
 
     def post_multi_param_groups(
             self, first_parameter_group=None, parameter_grouping_post_multi_param_groups_second_param_group=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post parameters from multiple different parameter groups
+        """Post parameters from multiple different parameter groups.
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup
@@ -232,8 +229,7 @@ class ParameterGroupingOperations(object):
 
     def post_shared_parameter_group_object(
             self, first_parameter_group=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Post parameters with a shared parameter group object
+        """Post parameters with a shared parameter group object.
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup

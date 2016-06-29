@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // AzureMethodTemplateModel
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == methodGroupName)
-                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
+                .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
         }
 
         /// <summary>

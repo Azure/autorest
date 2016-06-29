@@ -25,6 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Basic class.
         /// </summary>
+        /// <param name="color">Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'</param>
         public Basic(int? id = default(int?), string name = default(string), string color = default(string))
         {
             Id = id;

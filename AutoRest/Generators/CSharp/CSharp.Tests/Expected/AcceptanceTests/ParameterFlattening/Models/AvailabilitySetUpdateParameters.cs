@@ -33,13 +33,20 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         }
 
         /// <summary>
+        /// Gets or sets a set of tags.
         /// </summary>
+        /// <remarks>
+        /// A description about the set of tags.
+        /// </remarks>
         [JsonProperty(PropertyName = "tags")]
         public IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (Tags == null)

@@ -16,7 +16,7 @@ var modelFlatten = function (coverage) {
           properties: {
             provisioningState: 'Succeeded',
             provisioningStateValues: 'OK',
-            pname: 'Product1',
+            'p.name': 'Product1',
             type: 'Flat'
           },
           tags: { tag1: 'value1', tag2: 'value3' },
@@ -43,7 +43,7 @@ var modelFlatten = function (coverage) {
           properties: {
             provisioningState: 'Succeeded',
             provisioningStateValues: 'OK',
-            pname: 'Product1',
+            'p.name': 'Product1',
             type: 'Flat'
           },
           tags: { tag1: 'value1', tag2: 'value3' },
@@ -71,7 +71,7 @@ var modelFlatten = function (coverage) {
             properties: {
               provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product1',
+              'p.name': 'Product1',
               type: 'Flat'
             },
             tags: { tag1: 'value1', tag2: 'value3' },
@@ -95,7 +95,7 @@ var modelFlatten = function (coverage) {
             properties: {
               provisioningState: 'Succeeded',
               provisioningStateValues: 'OK',
-              pname: 'Product4',
+              'p.name': 'Product4',
               type: 'Flat'
             },
             tags: { tag1: 'value1', tag2: 'value3' },
@@ -125,14 +125,14 @@ var modelFlatten = function (coverage) {
 
   var arrayBody = '[{"location":"West US","tags":{"tag1":"value1","tag2":"value3"}},{"location":"Building 44"}]';
 
-  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"pname":"Product1","type":"Flat"}},' +
-                        '"Resource2":{"location":"Building 44", "properties":{"pname":"Product2","type":"Flat"}}}';
+  var dictionaryBody = '{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"p.name":"Product1","type":"Flat"}},' +
+                        '"Resource2":{"location":"Building 44", "properties":{"p.name":"Product2","type":"Flat"}}}';
 
   var resourceCollectionBody = '{"arrayofresources":[' +
-                            '{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"pname":"Product1","type":"Flat"}},' +
-                            '{"location":"East US", "properties":{"pname":"Product2","type":"Flat"}}],' +
+                            '{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "properties":{"p.name":"Product1","type":"Flat"}},' +
+                            '{"location":"East US", "properties":{"p.name":"Product2","type":"Flat"}}],' +
                             '"dictionaryofresources":' + dictionaryBody + ',' +
-                            '"productresource":{"location":"India", "properties":{"pname":"Azure","type":"Flat"}}}';
+                            '"productresource":{"location":"India", "properties":{"p.name":"Azure","type":"Flat"}}}';
 
   var customFlattenBody = {
     base_product_id: "123",

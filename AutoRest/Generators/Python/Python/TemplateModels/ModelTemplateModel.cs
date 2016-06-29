@@ -219,6 +219,16 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public string BuildSummaryAndDescriptionString()
+        {
+            string summaryString = string.IsNullOrWhiteSpace(this.Summary) &&
+                                   string.IsNullOrWhiteSpace(this.Documentation)
+                ? this.Name
+                : this.Summary;
+
+            return PythonCodeGenerator.BuildSummaryAndDescriptionString(summaryString, this.Documentation);
+        }
+
         /// <summary>
         /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
@@ -236,7 +246,13 @@ namespace Microsoft.Rest.Generator.Python
             {
                 docString = string.Format(CultureInfo.InvariantCulture, ":ivar {0}:", property.Name);
             }
-            
+
+            string summary = property.Summary;
+            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+            {
+                summary += ".";
+            }
+
             string documentation = property.Documentation;
             if (property.DefaultValue != PythonConstants.None)
             {
@@ -245,6 +261,11 @@ namespace Microsoft.Rest.Generator.Python
                     documentation += ".";
                 }
                 documentation += " Default value: " + property.DefaultValue + " .";
+            }
+
+            if (!string.IsNullOrWhiteSpace(summary))
+            {
+                docString += " " + summary;
             }
 
             if (!string.IsNullOrWhiteSpace(documentation))
@@ -466,6 +487,9 @@ namespace Microsoft.Rest.Generator.Python
 
             string result = "object";
             var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            if (!ServiceClient.Namespace.IsNullOrEmpty())
+                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+
             var listType = type as SequenceType;
             if (type is PrimaryType)
             {
@@ -485,8 +509,6 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is CompositeType)
             {
-                if (!ServiceClient.Namespace.IsNullOrEmpty())
-                    modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
                 result = string.Format(CultureInfo.InvariantCulture, ":class:`{0} <{1}.models.{0}>`", type.Name, modelNamespace);
             }
 

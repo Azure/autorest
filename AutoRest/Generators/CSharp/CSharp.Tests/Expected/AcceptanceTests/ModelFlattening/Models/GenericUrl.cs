@@ -28,6 +28,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the GenericUrl class.
         /// </summary>
+        /// <param name="genericValue">Generic URL value.</param>
         public GenericUrl(string genericValue = default(string))
         {
             GenericValue = genericValue;

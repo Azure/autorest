@@ -77,5 +77,33 @@ namespace Fixtures.AcceptanceTestsHttp
                 }
             }
 
+            /// <summary>
+            /// Get empty response from server
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static bool? GetNoModelEmpty(this IHttpFailure operations)
+            {
+                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get empty response from server
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<bool?> GetNoModelEmptyAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNoModelEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

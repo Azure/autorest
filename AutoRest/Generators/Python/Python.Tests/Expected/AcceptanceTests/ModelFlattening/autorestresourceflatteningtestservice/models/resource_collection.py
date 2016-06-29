@@ -13,7 +13,7 @@ from msrest.serialization import Model
 
 
 class ResourceCollection(Model):
-    """ResourceCollection
+    """ResourceCollection.
 
     :param productresource:
     :type productresource: :class:`FlattenedProduct

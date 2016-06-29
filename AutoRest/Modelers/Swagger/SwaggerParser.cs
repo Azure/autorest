@@ -29,6 +29,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             try
             {
+                swaggerDocument = swaggerDocument.EnsureYamlIsJson();
                 var settings = new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.None,

@@ -28,6 +28,10 @@ namespace Microsoft.Rest.Generator.Ruby
             this.LoadFrom(source);
             ParameterTemplateModels = new List<ParameterTemplateModel>();
             source.Parameters.ForEach(p => ParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+
+            LogicalParameterTemplateModels = new List<ParameterTemplateModel>();
+            source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
+
             ServiceClient = serviceClient;
         }
 
@@ -122,8 +126,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> EncodingPathParams
         {
-            get { return AllPathParams.Where(p => !(p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
-                    String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase))); }
+            get
+            {
+                return AllPathParams.Where(p => !(p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
+                  String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase)));
+            }
         }
 
         /// <summary>
@@ -133,7 +140,7 @@ namespace Microsoft.Rest.Generator.Ruby
         {
             get
             {
-                return AllPathParams.Where(p => 
+                return AllPathParams.Where(p =>
                     (p.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension) &&
                     String.Equals(p.Extensions[Generator.Extensions.SkipUrlEncodingExtension].ToString(), "true", StringComparison.OrdinalIgnoreCase) &&
                     !p.Extensions.ContainsKey("hostParameter")));
@@ -145,7 +152,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> AllPathParams
         {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
+            get { return LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path); }
         }
 
         /// <summary>
@@ -169,7 +176,10 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public virtual IEnumerable<ParameterTemplateModel> AllQueryParams
         {
-            get { return ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query); }
+            get
+            {
+                return LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query);
+            }
         }
 
         /// <summary>
@@ -207,7 +217,12 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Gets the list of method paramater templates.
         /// </summary>
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-        
+
+        /// <summary>
+        /// Gets the list of logical method paramater templates.
+        /// </summary>
+        private List<ParameterTemplateModel> LogicalParameterTemplateModels { get; set; }
+
         /// <summary>
         /// Gets the list of parameter which need to be included into HTTP header.
         /// </summary>
@@ -271,7 +286,7 @@ namespace Microsoft.Rest.Generator.Ruby
                             PrimaryType type = parameter.Type as PrimaryType;
                             if (type != null)
                             {
-                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double || 
+                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double ||
                                     type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long || type.Type == KnownPrimaryType.String)
                                 {
                                     format = "{0} = " + parameter.DefaultValue;
@@ -323,7 +338,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public ParameterTemplateModel RequestBody
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
+            get { return LogicalParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.Body); }
         }
 
         /// <summary>
@@ -369,32 +384,12 @@ namespace Microsoft.Rest.Generator.Ruby
             builder.AppendLine("{0} = {1}.to_s.empty? ? nil : JSON.load({1})", tempVariable, inputVariable);
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
-            // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable);
+            // and overwrite temporary variable value.
+            string deserializationLogic = GetDeserializationString(type, outputVariable, tempVariable);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
-            return builder.AppendLine("{0} = {1}", outputVariable, tempVariable).ToString();
-        }
-
-        /// <summary>
-        /// Creates a code in form of string which serializes given input variable of given type.
-        /// </summary>
-        /// <param name="inputVariable">The input variable.</param>
-        /// <param name="type">The type of input variable.</param>
-        /// <param name="outputVariable">The output variable.</param>
-        /// <returns>The serialization code.</returns>
-        public virtual string CreateSerializationString(string inputVariable, IType type, string outputVariable)
-        {
-            var builder = new IndentedStringBuilder("  ");
-
-            // Firstly recursively serialize each component of the object.
-            string serializationLogic = type.SerializeType(this.Scope, inputVariable);
-
-            builder.AppendLine(serializationLogic);
-
-            // After that - generate JSON object after serializing each component.
-            return builder.AppendLine("{0} = {1} != nil ? JSON.generate({1}, quirks_mode: true) : nil", outputVariable, inputVariable).ToString();
+            return builder.ToString();
         }
 
         /// <summary>
@@ -449,6 +444,58 @@ namespace Microsoft.Rest.Generator.Ruby
             var builder = new IndentedStringBuilder("  ");
             BuildPathParameters(variableName, builder);
 
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Build parameter mapping from parameter grouping transformation.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputParameterMappings()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            if (InputParameterTransformation.Count > 0)
+            {
+                builder.Indent();
+                foreach (var transformation in InputParameterTransformation)
+                {
+                    if (transformation.OutputParameter.Type is CompositeType &&
+                        transformation.OutputParameter.IsRequired)
+                    {
+                        builder.AppendLine("{0} = {1}.new",
+                            transformation.OutputParameter.Name,
+                            transformation.OutputParameter.Type.Name);
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0} = nil", transformation.OutputParameter.Name);
+                    }
+                }
+                foreach (var transformation in InputParameterTransformation)
+                {
+                    builder.AppendLine("unless {0}", BuildNullCheckExpression(transformation))
+                           .AppendLine().Indent();
+                    var outputParameter = transformation.OutputParameter;
+                    if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                        transformation.OutputParameter.Type is CompositeType)
+                    {
+                        //required outputParameter is initialized at the time of declaration
+                        if (!transformation.OutputParameter.IsRequired)
+                        {
+                            builder.AppendLine("{0} = {1}.new",
+                                transformation.OutputParameter.Name,
+                                transformation.OutputParameter.Type.Name);
+                        }
+                    }
+
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        builder.AppendLine("{0}{1}", transformation.OutputParameter.Name, mapping);
+                    }
+
+                    builder.Outdent().AppendLine("end");
+                }
+            }
             return builder.ToString();
         }
 
@@ -516,6 +563,87 @@ namespace Microsoft.Rest.Generator.Ruby
                 urlPathParamName += m.Groups[1].Value;
             }
             return urlPathParamName;
+        }
+
+        /// <summary>
+        /// Constructs mapper for the request body.
+        /// </summary>
+        /// <param name="outputVariable">Name of the output variable.</param>
+        /// <returns>Mapper for the request body as string.</returns>
+        public string ConstructRequestBodyMapper(string outputVariable = "request_mapper")
+        {
+            var builder = new IndentedStringBuilder("  ");
+            if (RequestBody.Type is CompositeType)
+            {
+                builder.AppendLine("{0} = {1}.mapper()", outputVariable, RequestBody.Type.Name);
+            }
+            else
+            {
+                builder.AppendLine("{0} = {{{1}}}", outputVariable,
+                    RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody, false));
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Creates deserialization logic for the given <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">Type for which deserialization logic being constructed.</param>
+        /// <param name="valueReference">Reference variable name.</param>
+        /// <param name="responseVariable">Response variable name.</param>
+        /// <returns>Deserialization logic for the given <paramref name="type"/> as string.</returns>
+        /// <exception cref="ArgumentNullException">Thrown when a required parameter is null.</exception>
+        public string GetDeserializationString(IType type, string valueReference = "result", string responseVariable = "parsed_response")
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var builder = new IndentedStringBuilder("  ");
+            if (type is CompositeType)
+            {
+                builder.AppendLine("result_mapper = {0}.mapper()", type.Name);
+            }
+            else
+            {
+                builder.AppendLine("result_mapper = {{{0}}}", type.ConstructMapper(responseVariable, null, false));
+            }
+            if (Group == null)
+            {
+                builder.AppendLine("{1} = self.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+            }
+            else
+            {
+                builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
+            }
+             
+            return builder.ToString();
+        }
+
+        /// <summary>
+        /// Builds null check expression for the given <paramref name="transformation"/>.
+        /// </summary>
+        /// <param name="transformation">ParameterTransformation for which to build null check expression.</param>
+        /// <returns></returns>
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+            if (transformation.ParameterMappings.Count == 1)
+            {
+                return string.Format(CultureInfo.InvariantCulture,
+                    "{0}.nil?",transformation.ParameterMappings[0].InputParameter.Name);
+            }
+            else
+            {
+                return string.Join(" && ",
+                transformation.ParameterMappings.Select(m =>
+                    string.Format(CultureInfo.InvariantCulture,
+                    "{0}.nil?", m.InputParameter.Name)));
+            }
         }
     }
 }

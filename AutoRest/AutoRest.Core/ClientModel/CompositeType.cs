@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Microsoft.Rest.Generator.ClientModel
@@ -57,9 +58,21 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string PolymorphicDiscriminator { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the CompositeType documentation.
         /// </summary>
         public string Documentation { get; set; }
+
+        /// <summary>
+        /// Gets or sets a URL pointing to related external documentation.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
+            Justification = "May not parse as a valid URI.")]
+        public string ExternalDocsUrl { get; set; }
 
         /// <summary>
         /// Returns true if any of the properties is a Constant or is 

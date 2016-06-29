@@ -33,8 +33,7 @@ class Dictionary(object):
 
     def get_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null dictionary value
+        """Get null dictionary value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -77,8 +76,7 @@ class Dictionary(object):
 
     def get_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty dictionary value {}
+        """Get empty dictionary value {}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -121,8 +119,7 @@ class Dictionary(object):
 
     def put_empty(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value empty {}
+        """Set dictionary value empty {}.
 
         :param array_body:
         :type array_body: dict
@@ -164,8 +161,7 @@ class Dictionary(object):
 
     def get_null_value(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get Dictionary with null value
+        """Get Dictionary with null value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -208,8 +204,7 @@ class Dictionary(object):
 
     def get_null_key(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get Dictionary with null key
+        """Get Dictionary with null key.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -252,8 +247,7 @@ class Dictionary(object):
 
     def get_empty_string_key(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get Dictionary with key as empty string
+        """Get Dictionary with key as empty string.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -296,8 +290,7 @@ class Dictionary(object):
 
     def get_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get invalid Dictionary value
+        """Get invalid Dictionary value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -340,9 +333,8 @@ class Dictionary(object):
 
     def get_boolean_tfft(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
-        true }
+        """Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
+        true }.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -385,9 +377,8 @@ class Dictionary(object):
 
     def put_boolean_tfft(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value empty {"0": true, "1": false, "2": false, "3":
-        true }
+        """Set dictionary value empty {"0": true, "1": false, "2": false, "3":
+        true }.
 
         :param array_body:
         :type array_body: dict
@@ -429,8 +420,7 @@ class Dictionary(object):
 
     def get_boolean_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get boolean dictionary value {"0": true, "1": null, "2": false }
+        """Get boolean dictionary value {"0": true, "1": null, "2": false }.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -473,8 +463,7 @@ class Dictionary(object):
 
     def get_boolean_invalid_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
+        """Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -517,8 +506,7 @@ class Dictionary(object):
 
     def get_integer_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        """Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -561,8 +549,7 @@ class Dictionary(object):
 
     def put_integer_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        """Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
 
         :param array_body:
         :type array_body: dict
@@ -604,8 +591,7 @@ class Dictionary(object):
 
     def get_int_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get integer dictionary value {"0": 1, "1": null, "2": 0}
+        """Get integer dictionary value {"0": 1, "1": null, "2": 0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -648,8 +634,7 @@ class Dictionary(object):
 
     def get_int_invalid_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
+        """Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -692,8 +677,7 @@ class Dictionary(object):
 
     def get_long_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
+        """Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -736,8 +720,7 @@ class Dictionary(object):
 
     def put_long_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
+        """Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
 
         :param array_body:
         :type array_body: dict
@@ -779,8 +762,7 @@ class Dictionary(object):
 
     def get_long_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get long dictionary value {"0": 1, "1": null, "2": 0}
+        """Get long dictionary value {"0": 1, "1": null, "2": 0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -823,8 +805,7 @@ class Dictionary(object):
 
     def get_long_invalid_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get long dictionary value {"0": 1, "1": "integer", "2": 0}
+        """Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -867,8 +848,7 @@ class Dictionary(object):
 
     def get_float_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        """Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -911,8 +891,7 @@ class Dictionary(object):
 
     def put_float_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        """Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
 
         :param array_body:
         :type array_body: dict
@@ -954,8 +933,7 @@ class Dictionary(object):
 
     def get_float_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        """Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -998,8 +976,7 @@ class Dictionary(object):
 
     def get_float_invalid_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        """Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1042,8 +1019,7 @@ class Dictionary(object):
 
     def get_double_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        """Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1086,8 +1062,7 @@ class Dictionary(object):
 
     def put_double_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
+        """Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
 
         :param array_body:
         :type array_body: dict
@@ -1129,8 +1104,7 @@ class Dictionary(object):
 
     def get_double_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
+        """Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1173,8 +1147,7 @@ class Dictionary(object):
 
     def get_double_invalid_string(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
+        """Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1217,8 +1190,7 @@ class Dictionary(object):
 
     def get_string_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        """Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1261,8 +1233,7 @@ class Dictionary(object):
 
     def put_string_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
+        """Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
 
         :param array_body:
         :type array_body: dict
@@ -1304,8 +1275,7 @@ class Dictionary(object):
 
     def get_string_with_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
+        """Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1348,8 +1318,7 @@ class Dictionary(object):
 
     def get_string_with_invalid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
+        """Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1392,9 +1361,8 @@ class Dictionary(object):
 
     def get_date_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
-        "2": "1492-10-12"}
+        """Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
+        "2": "1492-10-12"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1437,9 +1405,8 @@ class Dictionary(object):
 
     def put_date_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
-        "1492-10-12"}
+        """Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
+        "1492-10-12"}.
 
         :param array_body:
         :type array_body: dict
@@ -1481,9 +1448,8 @@ class Dictionary(object):
 
     def get_date_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date dictionary value {"0": "2012-01-01", "1": null, "2":
-        "1776-07-04"}
+        """Get date dictionary value {"0": "2012-01-01", "1": null, "2":
+        "1776-07-04"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1526,8 +1492,7 @@ class Dictionary(object):
 
     def get_date_invalid_chars(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date dictionary value {"0": "2011-03-22", "1": "date"}
+        """Get date dictionary value {"0": "2011-03-22", "1": "date"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1570,9 +1535,8 @@ class Dictionary(object):
 
     def get_date_time_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
-        "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+        """Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
+        "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1615,9 +1579,8 @@ class Dictionary(object):
 
     def put_date_time_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
-        "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
+        """Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
+        "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
 
         :param array_body:
         :type array_body: dict
@@ -1659,8 +1622,7 @@ class Dictionary(object):
 
     def get_date_time_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
+        """Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1703,9 +1665,8 @@ class Dictionary(object):
 
     def get_date_time_invalid_chars(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
-        "date-time"}
+        """Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
+        "date-time"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1748,10 +1709,9 @@ class Dictionary(object):
 
     def get_date_time_rfc1123_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000
+        """Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000
         00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12
-        Oct 1492 10:15:01 GMT"}
+        Oct 1492 10:15:01 GMT"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1794,9 +1754,9 @@ class Dictionary(object):
 
     def put_date_time_rfc1123_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
-        "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
+        """Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
+        "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01
+        GMT"}.
 
         :param array_body:
         :type array_body: dict
@@ -1838,9 +1798,8 @@ class Dictionary(object):
 
     def get_duration_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
-        "P5DT1H0M0S"}
+        """Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
+        "P5DT1H0M0S"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1883,8 +1842,7 @@ class Dictionary(object):
 
     def put_duration_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
+        """Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
 
         :param array_body:
         :type array_body: dict
@@ -1926,9 +1884,8 @@ class Dictionary(object):
 
     def get_byte_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-        "2": hex (25, 29, 43)} with each item encoded in base64
+        """Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+        "2": hex (25, 29, 43)} with each item encoded in base64.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -1971,9 +1928,8 @@ class Dictionary(object):
 
     def put_byte_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
-        "2": hex (25, 29, 43)} with each elementencoded in base 64
+        """Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
+        "2": hex (25, 29, 43)} with each elementencoded in base 64.
 
         :param array_body:
         :type array_body: dict
@@ -2015,9 +1971,8 @@ class Dictionary(object):
 
     def get_byte_invalid_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
-        first item base64 encoded
+        """Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
+        first item base64 encoded.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2060,9 +2015,8 @@ class Dictionary(object):
 
     def get_base64_url(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get base64url dictionary value {"0": "a string that gets encoded with
-        base64url", "1": "test string", "2": "Lorem ipsum"}
+        """Get base64url dictionary value {"0": "a string that gets encoded with
+        base64url", "1": "test string", "2": "Lorem ipsum"}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2105,8 +2059,7 @@ class Dictionary(object):
 
     def get_complex_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get dictionary of complex type null value
+        """Get dictionary of complex type null value.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2149,8 +2102,7 @@ class Dictionary(object):
 
     def get_complex_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get empty dictionary of complex type {}
+        """Get empty dictionary of complex type {}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2193,9 +2145,8 @@ class Dictionary(object):
 
     def get_complex_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get dictionary of complex type with null item {"0": {"integer": 1,
-        "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
+        """Get dictionary of complex type with null item {"0": {"integer": 1,
+        "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2238,9 +2189,8 @@ class Dictionary(object):
 
     def get_complex_item_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get dictionary of complex type with empty item {"0": {"integer": 1,
-        "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
+        """Get dictionary of complex type with empty item {"0": {"integer": 1,
+        "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2283,10 +2233,9 @@ class Dictionary(object):
 
     def get_complex_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get dictionary of complex type with {"0": {"integer": 1, "string":
+        """Get dictionary of complex type with {"0": {"integer": 1, "string":
         "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
-        "string": "6"}}
+        "string": "6"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2329,10 +2278,9 @@ class Dictionary(object):
 
     def put_complex_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put an dictionary of complex type with values {"0": {"integer": 1,
+        """Put an dictionary of complex type with values {"0": {"integer": 1,
         "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
-        5, "string": "6"}}
+        5, "string": "6"}}.
 
         :param array_body:
         :type array_body: dict
@@ -2374,8 +2322,7 @@ class Dictionary(object):
 
     def get_array_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a null array
+        """Get a null array.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2418,8 +2365,7 @@ class Dictionary(object):
 
     def get_array_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an empty dictionary {}
+        """Get an empty dictionary {}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2462,9 +2408,8 @@ class Dictionary(object):
 
     def get_array_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionary of array of strings {"0": ["1", "2", "3"], "1":
-        null, "2": ["7", "8", "9"]}
+        """Get an dictionary of array of strings {"0": ["1", "2", "3"], "1":
+        null, "2": ["7", "8", "9"]}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2507,9 +2452,8 @@ class Dictionary(object):
 
     def get_array_item_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
-        ["7", "8", "9"]}
+        """Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
+        ["7", "8", "9"]}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2552,9 +2496,8 @@ class Dictionary(object):
 
     def get_array_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4",
-        "5", "6"], "2": ["7", "8", "9"]}
+        """Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4",
+        "5", "6"], "2": ["7", "8", "9"]}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2597,9 +2540,8 @@ class Dictionary(object):
 
     def put_array_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4",
-        "5", "6"], "2": ["7", "8", "9"]}
+        """Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4",
+        "5", "6"], "2": ["7", "8", "9"]}.
 
         :param array_body:
         :type array_body: dict
@@ -2641,8 +2583,7 @@ class Dictionary(object):
 
     def get_dictionary_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries with value null
+        """Get an dictionaries of dictionaries with value null.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2685,9 +2626,8 @@ class Dictionary(object):
 
     def get_dictionary_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries of type <string, string> with
-        value {}
+        """Get an dictionaries of dictionaries of type <string, string> with
+        value {}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2730,10 +2670,9 @@ class Dictionary(object):
 
     def get_dictionary_item_null(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries of type <string, string> with
+        """Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
-        {"7": "seven", "8": "eight", "9": "nine"}}
+        {"7": "seven", "8": "eight", "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2776,10 +2715,9 @@ class Dictionary(object):
 
     def get_dictionary_item_empty(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries of type <string, string> with
+        """Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
-        {"7": "seven", "8": "eight", "9": "nine"}}
+        {"7": "seven", "8": "eight", "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2822,11 +2760,10 @@ class Dictionary(object):
 
     def get_dictionary_valid(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries of type <string, string> with
+        """Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":
         "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-        "9": "nine"}}
+        "9": "nine"}}.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -2869,11 +2806,10 @@ class Dictionary(object):
 
     def put_dictionary_valid(
             self, array_body, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an dictionaries of dictionaries of type <string, string> with
+        """Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":
         "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight",
-        "9": "nine"}}
+        "9": "nine"}}.
 
         :param array_body:
         :type array_body: dict

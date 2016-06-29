@@ -33,8 +33,7 @@ class Queries(object):
 
     def get_boolean_true(
             self, bool_query=False, custom_headers=None, raw=False, **operation_config):
-        """
-        Get true Boolean value on path
+        """Get true Boolean value on path.
 
         :param bool_query: true boolean value
         :type bool_query: bool
@@ -73,8 +72,7 @@ class Queries(object):
 
     def get_boolean_false(
             self, bool_query=False, custom_headers=None, raw=False, **operation_config):
-        """
-        Get false Boolean value on path
+        """Get false Boolean value on path.
 
         :param bool_query: false boolean value
         :type bool_query: bool
@@ -113,8 +111,7 @@ class Queries(object):
 
     def get_boolean_null(
             self, bool_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null Boolean value on query (query string should be absent)
+        """Get null Boolean value on query (query string should be absent).
 
         :param bool_query: null boolean value
         :type bool_query: bool
@@ -154,8 +151,7 @@ class Queries(object):
 
     def get_int_one_million(
             self, int_query=1000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '1000000' integer value
+        """Get '1000000' integer value.
 
         :param int_query: '1000000' integer value
         :type int_query: int
@@ -194,8 +190,7 @@ class Queries(object):
 
     def get_int_negative_one_million(
             self, int_query=-1000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-1000000' integer value
+        """Get '-1000000' integer value.
 
         :param int_query: '-1000000' integer value
         :type int_query: int
@@ -234,8 +229,7 @@ class Queries(object):
 
     def get_int_null(
             self, int_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null integer value (no query parameter)
+        """Get null integer value (no query parameter).
 
         :param int_query: null integer value
         :type int_query: int
@@ -275,8 +269,7 @@ class Queries(object):
 
     def get_ten_billion(
             self, long_query=10000000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '10000000000' 64 bit integer value
+        """Get '10000000000' 64 bit integer value.
 
         :param long_query: '10000000000' 64 bit integer value
         :type long_query: long
@@ -315,8 +308,7 @@ class Queries(object):
 
     def get_negative_ten_billion(
             self, long_query=-10000000000, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-10000000000' 64 bit integer value
+        """Get '-10000000000' 64 bit integer value.
 
         :param long_query: '-10000000000' 64 bit integer value
         :type long_query: long
@@ -355,8 +347,7 @@ class Queries(object):
 
     def get_long_null(
             self, long_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get 'null 64 bit integer value (no query param in uri)
+        """Get 'null 64 bit integer value (no query param in uri).
 
         :param long_query: null 64 bit integer value
         :type long_query: long
@@ -396,8 +387,7 @@ class Queries(object):
 
     def float_scientific_positive(
             self, float_query=1.034E+20, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '1.034E+20' numeric value
+        """Get '1.034E+20' numeric value.
 
         :param float_query: '1.034E+20'numeric value
         :type float_query: float
@@ -436,8 +426,7 @@ class Queries(object):
 
     def float_scientific_negative(
             self, float_query=-1.034E-20, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-1.034E-20' numeric value
+        """Get '-1.034E-20' numeric value.
 
         :param float_query: '-1.034E-20'numeric value
         :type float_query: float
@@ -476,8 +465,7 @@ class Queries(object):
 
     def float_null(
             self, float_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null numeric value (no query parameter)
+        """Get null numeric value (no query parameter).
 
         :param float_query: null numeric value
         :type float_query: float
@@ -517,8 +505,7 @@ class Queries(object):
 
     def double_decimal_positive(
             self, double_query=9999999.999, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '9999999.999' numeric value
+        """Get '9999999.999' numeric value.
 
         :param double_query: '9999999.999'numeric value
         :type double_query: float
@@ -557,8 +544,7 @@ class Queries(object):
 
     def double_decimal_negative(
             self, double_query=-9999999.999, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '-9999999.999' numeric value
+        """Get '-9999999.999' numeric value.
 
         :param double_query: '-9999999.999'numeric value
         :type double_query: float
@@ -597,8 +583,7 @@ class Queries(object):
 
     def double_null(
             self, double_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null numeric value (no query parameter)
+        """Get null numeric value (no query parameter).
 
         :param double_query: null numeric value
         :type double_query: float
@@ -638,8 +623,7 @@ class Queries(object):
 
     def string_unicode(
             self, string_query="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
-        """
-        Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
+        """Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
 
         :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
         :type string_query: str
@@ -678,8 +662,7 @@ class Queries(object):
 
     def string_url_encoded(
             self, string_query="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
-        """
-        Get 'begin!*'();:@ &=+$,/?#[]end
+        """Get 'begin!*'();:@ &=+$,/?#[]end.
 
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
          value
@@ -719,8 +702,7 @@ class Queries(object):
 
     def string_empty(
             self, string_query="", custom_headers=None, raw=False, **operation_config):
-        """
-        Get ''
+        """Get ''.
 
         :param string_query: '' string value
         :type string_query: str
@@ -759,8 +741,7 @@ class Queries(object):
 
     def string_null(
             self, string_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null (no query parameter in url)
+        """Get null (no query parameter in url).
 
         :param string_query: null string value
         :type string_query: str
@@ -800,13 +781,12 @@ class Queries(object):
 
     def enum_valid(
             self, enum_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get using uri with query parameter 'green color'
+        """Get using uri with query parameter 'green color'.
 
         :param enum_query: 'green color' enum value. Possible values include:
          'red color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -843,13 +823,12 @@ class Queries(object):
 
     def enum_null(
             self, enum_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null (no query parameter in url)
+        """Get null (no query parameter in url).
 
         :param enum_query: null string value. Possible values include: 'red
          color', 'green color', 'blue color'
         :type enum_query: str or :class:`UriColor
-         <autoresturltestservice.models.UriColor>`
+         <fixtures.acceptancetestsurl.models.UriColor>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -886,8 +865,7 @@ class Queries(object):
 
     def byte_multi_byte(
             self, byte_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+        """Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
 
         :param byte_query: '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
          array
@@ -928,8 +906,7 @@ class Queries(object):
 
     def byte_empty(
             self, byte_query=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
-        """
-        Get '' as byte array
+        """Get '' as byte array.
 
         :param byte_query: '' as byte array
         :type byte_query: bytearray
@@ -968,8 +945,7 @@ class Queries(object):
 
     def byte_null(
             self, byte_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as byte array (no query parameters in uri)
+        """Get null as byte array (no query parameters in uri).
 
         :param byte_query: null as byte array (no query parameters in uri)
         :type byte_query: bytearray
@@ -1009,8 +985,7 @@ class Queries(object):
 
     def date_valid(
             self, date_query, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '2012-01-01' as date
+        """Get '2012-01-01' as date.
 
         :param date_query: '2012-01-01' as date
         :type date_query: date
@@ -1049,8 +1024,7 @@ class Queries(object):
 
     def date_null(
             self, date_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as date - this should result in no query parameters in uri
+        """Get null as date - this should result in no query parameters in uri.
 
         :param date_query: null as date (no query parameters in uri)
         :type date_query: date
@@ -1090,8 +1064,7 @@ class Queries(object):
 
     def date_time_valid(
             self, date_time_query, custom_headers=None, raw=False, **operation_config):
-        """
-        Get '2012-01-01T01:01:01Z' as date-time
+        """Get '2012-01-01T01:01:01Z' as date-time.
 
         :param date_time_query: '2012-01-01T01:01:01Z' as date-time
         :type date_time_query: datetime
@@ -1130,8 +1103,7 @@ class Queries(object):
 
     def date_time_null(
             self, date_time_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get null as date-time, should result in no query parameters in uri
+        """Get null as date-time, should result in no query parameters in uri.
 
         :param date_time_query: null as date-time (no query parameters)
         :type date_time_query: datetime
@@ -1171,9 +1143,8 @@ class Queries(object):
 
     def array_string_csv_valid(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        null, ''] using the csv-array format
+        """Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+        null, ''] using the csv-array format.
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
          &=+$,/?#[]end' , null, ''] using the csv-array format
@@ -1214,8 +1185,7 @@ class Queries(object):
 
     def array_string_csv_null(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get a null array of string using the csv-array format
+        """Get a null array of string using the csv-array format.
 
         :param array_query: a null array of string using the csv-array format
         :type array_query: list of str
@@ -1255,8 +1225,7 @@ class Queries(object):
 
     def array_string_csv_empty(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an empty array [] of string using the csv-array format
+        """Get an empty array [] of string using the csv-array format.
 
         :param array_query: an empty array [] of string using the csv-array
          format
@@ -1297,9 +1266,8 @@ class Queries(object):
 
     def array_string_ssv_valid(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        null, ''] using the ssv-array format
+        """Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+        null, ''] using the ssv-array format.
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
          &=+$,/?#[]end' , null, ''] using the ssv-array format
@@ -1340,9 +1308,8 @@ class Queries(object):
 
     def array_string_tsv_valid(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        null, ''] using the tsv-array format
+        """Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+        null, ''] using the tsv-array format.
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
          &=+$,/?#[]end' , null, ''] using the tsv-array format
@@ -1383,9 +1350,8 @@ class Queries(object):
 
     def array_string_pipes_valid(
             self, array_query=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
-        null, ''] using the pipes-array format
+        """Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' ,
+        null, ''] using the pipes-array format.
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
          &=+$,/?#[]end' , null, ''] using the pipes-array format

@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// Gets Azure subscription credentials.
+        /// Credentials needed for the client to connect to Azure.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -101,6 +101,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         protected AutoRestResourceFlatteningTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -122,6 +125,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         protected AutoRestResourceFlatteningTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -135,11 +141,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
@@ -157,7 +166,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -165,6 +174,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AutoRestResourceFlatteningTestService(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
@@ -185,11 +197,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
@@ -215,7 +230,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. Gets Azure subscription credentials.
+        /// Required. Credentials needed for the client to connect to Azure.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -223,6 +238,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
         public AutoRestResourceFlatteningTestService(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
@@ -241,6 +259,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             }
         }
 
+        /// <summary>
+        /// An optional partial-method to perform custom initialization.
+        /// </summary>
+        partial void CustomInitialize();
         /// <summary>
         /// Initializes client properties.
         /// </summary>
@@ -276,11 +298,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                         new Iso8601TimeSpanConverter()
                     }
             };
+            CustomInitialize();
             DeserializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
         /// <summary>
         /// Put External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceArray'>
         /// External Resource as an Array to put
@@ -291,6 +315,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -419,6 +446,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as an Array
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -426,6 +454,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -565,6 +599,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceDictionary'>
         /// External Resource as a Dictionary to put
@@ -575,6 +610,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -703,6 +741,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a Dictionary
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -710,6 +749,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -849,6 +894,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Put External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceComplexObject'>
         /// External Resource as a ResourceCollection to put
@@ -859,6 +905,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
@@ -987,6 +1036,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
         /// <summary>
         /// Get External Resource as a ResourceCollection
+        /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -994,6 +1044,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>

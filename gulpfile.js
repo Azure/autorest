@@ -87,6 +87,8 @@ var rubyMappings = {
   'required_optional':['../../../TestServer/swagger/required-optional.json','RequiredOptionalModule'],
   'report':['../../../TestServer/swagger/report.json','ReportModule'],
   'model_flattening':['../../../TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
+  'parameter_flattening':['../../../TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
+  'parameter_grouping':['../../../TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
 };
 
 var defaultAzureMappings = {
@@ -313,7 +315,7 @@ gulp.task('regenerate:expected:java', function(cb){
   }, cb);
 })
 
-gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'], function (cb) {
+gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite','regenerate:expected:csazureallsync', 'regenerate:expected:csazurenosync'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
   }, defaultAzureMappings);
@@ -329,13 +331,14 @@ gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite'], function (cb) {
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite', 'regenerate:expected:csallsync', 'regenerate:expected:csnosync'], function (cb) {
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
     'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
+    'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
     'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json'
   }, defaultMappings);
 
@@ -365,6 +368,78 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'PetstoreV2AllSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csnosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2NoSync': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazureallsync', function(cb){    
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationAllSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'all'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazurenosync', function(cb){  
+  mappings = mergeOptions(
+  {
+    'AcceptanceTests/AzureBodyDurationNoSync': '../../../TestServer/swagger/body-duration.json'
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'syncMethods': 'none'
   }, cb);
 });
 
@@ -444,7 +519,7 @@ var msbuildDefaults = {
   stdout: process.stdout,
   stderr: process.stderr,
   maxBuffer: MAX_BUFFER,
-  verbosity: 'minimal',
+  verbosity: 'normal',
   errorOnFail: true,
   toolsVersion: msBuildToolsVersion
 };
@@ -515,7 +590,9 @@ gulp.task('build', function(cb) {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['build'],
-    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
+    stdout: true,
+    errorOnFail: true
   })));
 });
 
@@ -568,7 +645,9 @@ gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Py
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
   'AutoRest/Modelers/Swagger.Tests/bin/Net45-Debug/AutoRest.Modeler.Swagger.Tests.dll',
-  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll'
+  'AutoRest/Generators/Azure.Common/Azure.Common.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Common.Tests.dll',
+  'AutoRest/Generators/Extensions/Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Extensions.Tests.dll',
+  'AutoRest/Generators/Extensions/Azure.Extensions.Tests/bin/Net45-Debug/AutoRest.Generator.Azure.Extensions.Tests.dll'
 ];
 
 var xunitNetCoreXproj = [

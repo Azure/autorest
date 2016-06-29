@@ -79,6 +79,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not load CodeGenSettings file &apos;{0}&apos;. Exception: &apos;{1}&apos;..
+        /// </summary>
+        internal static string CodeGenSettingsFileInvalid {
+            get {
+                return ResourceManager.GetString("CodeGenSettingsFileInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \\\\.
         /// </summary>
         internal static string CommentString {
@@ -178,6 +187,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing modeler..
+        /// </summary>
+        internal static string InitializingModeler {
+            get {
+                return ResourceManager.GetString("InitializingModeler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property name {0} cannot be used as an Identifier, as it contains only invalid characters..
         /// </summary>
         internal static string InvalidIdentifierName {
@@ -196,7 +214,7 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Initializing modeler..
+        ///   Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
         /// </summary>
         internal static string ModelerInitialized {
             get {

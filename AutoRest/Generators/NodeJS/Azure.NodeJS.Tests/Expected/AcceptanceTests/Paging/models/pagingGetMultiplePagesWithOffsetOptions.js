@@ -15,6 +15,7 @@
  * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
  * Additional parameters for the Paging_getMultiplePagesWithOffset operation.
+ *
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 

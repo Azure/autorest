@@ -32,6 +32,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Initializes a new instance of the
         /// PagingGetMultiplePagesWithOffsetOptions class.
         /// </summary>
+        /// <param name="offset">Offset of return value</param>
+        /// <param name="maxresults">Sets the maximum number of items to return in the response.</param>
+        /// <param name="timeout">Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</param>
         public PagingGetMultiplePagesWithOffsetOptions(int offset, int? maxresults = default(int?), int? timeout = default(int?))
         {
             Maxresults = maxresults;
@@ -60,8 +63,11 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         public int? Timeout { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             //Nothing to validate

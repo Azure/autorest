@@ -28,6 +28,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the BaseProduct class.
         /// </summary>
+        /// <param name="productId">Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.</param>
+        /// <param name="description">Description of product.</param>
         public BaseProduct(string productId, string description = default(string))
         {
             ProductId = productId;
@@ -50,8 +52,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// Validate the object. Throws ValidationException if validation fails.
+        /// Validate the object.
         /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
         public virtual void Validate()
         {
             if (ProductId == null)

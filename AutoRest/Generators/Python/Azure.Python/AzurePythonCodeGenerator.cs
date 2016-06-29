@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.Python;
 using Microsoft.Rest.Generator.Python.Templates;
 using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,15 +20,17 @@ namespace Microsoft.Rest.Generator.Azure.Python
 {
     public class AzurePythonCodeGenerator : PythonCodeGenerator
     {
-        private const string ClientRuntimePackage = "msrestazure version 0.3.0";
+        private const string ClientRuntimePackage = "msrestazure version 0.4.0";
 
         // page extensions class dictionary.
         private IList<PageTemplateModel> pageModels;
+        private IDictionary<string, IDictionary<int, string>> pageClasses;
 
         public AzurePythonCodeGenerator(Settings settings)
             : base(settings)
         {
             pageModels = new List<PageTemplateModel>();
+            pageClasses = new Dictionary<string, IDictionary<int, string>>();
             Namer = new AzurePythonCodeNamer();
         }
 
@@ -59,6 +62,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             // Don't add pagable/longrunning method since we already handle ourself.
             Settings.AddCredentials = true;
+            AzureExtensions.ProcessClientRequestIdExtension(serviceClient);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             Extensions.FlattenModels(serviceClient);
@@ -83,18 +87,65 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
-        private string GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "nextLink")]
+        private string GetPagingSetting(CompositeType body, Dictionary<string, object> extensions, string valueTypeName, IDictionary<int, string> typePageClasses)
         {
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
 
+            bool ignoreNextLink = false;
+            if (ext["nextLinkName"] != null && ext["nextLinkName"].Type == Newtonsoft.Json.Linq.JTokenType.Null)
+            {
+                ignoreNextLink = true;
+            }
             string nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
             string itemName = (string)ext["itemName"] ?? "value";
-            string className = (string)ext["className"];
-            if (string.IsNullOrEmpty(className))
+
+            nextLinkName = nextLinkName.Replace(".", "\\\\.");
+            itemName = itemName.Replace(".", "\\\\.");
+            bool findNextLink = false;
+            bool findItem = false;
+            foreach (var property in body.ComposedProperties)
             {
-                className = valueTypeName + "Paged";
-                ext["className"] = className;
+                if (property.SerializedName == nextLinkName)
+                {
+                    findNextLink = true;
+                }
+                else if (property.SerializedName == itemName)
+                {
+                    findItem = true;
+                }
             }
+
+            if (!ignoreNextLink && !findNextLink)
+            {
+                throw new KeyNotFoundException("Couldn't find the nextLink property specified by extension");
+            }
+            if (!findItem)
+            {
+                throw new KeyNotFoundException("Couldn't find the item property specified by extension");
+            }
+
+            string className;
+            var hash = (nextLinkName + "#" + itemName).GetHashCode();
+            if (!typePageClasses.ContainsKey(hash))
+            {
+                className = (string)ext["className"];
+                if (string.IsNullOrEmpty(className))
+                {
+                    if (typePageClasses.Count > 0)
+                    {
+                        className = valueTypeName + String.Format(CultureInfo.InvariantCulture, "Paged{0}", typePageClasses.Count);
+                    }
+                    else
+                    {
+                        className = valueTypeName + "Paged";
+                    }
+                }
+                typePageClasses.Add(hash, className);
+            }
+
+            className = typePageClasses[hash];
+            ext["className"] = className;
 
             var pageModel = new PageTemplateModel(className, nextLinkName, itemName, valueTypeName);
             if (!pageModels.Contains(pageModel))
@@ -128,7 +179,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        string pagableTypeName = GetPagingSetting(method.Extensions, sequenceType.ElementType.Name);
+                        string valueType = sequenceType.ElementType.Name;
+                        if (!pageClasses.ContainsKey(valueType))
+                        {
+                            pageClasses.Add(valueType, new Dictionary<int, string>());
+                        }
+                        string pagableTypeName = GetPagingSetting(compositType, method.Extensions, valueType, pageClasses[valueType]);
 
                         CompositeType pagedResult = new CompositeType
                         {
@@ -186,9 +242,9 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
 
-            if (!string.IsNullOrWhiteSpace(Version))
+            if (!string.IsNullOrWhiteSpace(this.PackageVersion))
             {
-                serviceClientTemplateModel.Version = Version;
+                serviceClientTemplateModel.Version = this.PackageVersion;
             }
 
             // Service client

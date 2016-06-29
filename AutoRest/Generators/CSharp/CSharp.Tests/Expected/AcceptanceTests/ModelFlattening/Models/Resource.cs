@@ -25,6 +25,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the Resource class.
         /// </summary>
+        /// <param name="id">Resource Id</param>
+        /// <param name="type">Resource Type</param>
+        /// <param name="location">Resource Location</param>
+        /// <param name="name">Resource Name</param>
         public Resource(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string))
         {
             Id = id;

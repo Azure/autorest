@@ -6,8 +6,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountUpdateParameters(Model):
-    """
-    The parameters to update on the account.
+    """The parameters to update on the account.
 
     :param tags: Resource tags
     :type tags: dict

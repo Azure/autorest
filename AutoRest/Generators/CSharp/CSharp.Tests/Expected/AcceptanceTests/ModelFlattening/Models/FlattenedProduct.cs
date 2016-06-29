@@ -15,6 +15,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
+    /// <summary>
+    /// Flattened product.
+    /// <see href="http://tempuri.org" />
+    /// </summary>
     [JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
@@ -26,6 +30,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
         /// </summary>
+        /// <param name="id">Resource Id</param>
+        /// <param name="type">Resource Type</param>
+        /// <param name="location">Resource Location</param>
+        /// <param name="name">Resource Name</param>
+        /// <param name="provisioningStateValues">Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'</param>
         public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {
@@ -37,7 +46,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.pname")]
+        [JsonProperty(PropertyName = "properties.p\\.name")]
         public string Pname { get; set; }
 
         /// <summary>

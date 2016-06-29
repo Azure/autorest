@@ -33,9 +33,8 @@ class HttpClientFailure(object):
 
     def head400(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -71,9 +70,8 @@ class HttpClientFailure(object):
 
     def get400(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -109,9 +107,8 @@ class HttpClientFailure(object):
 
     def put400(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -156,9 +153,8 @@ class HttpClientFailure(object):
 
     def patch400(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -203,9 +199,8 @@ class HttpClientFailure(object):
 
     def post400(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -250,9 +245,8 @@ class HttpClientFailure(object):
 
     def delete400(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 400 status code - should be represented in the client as an
-        error
+        """Return 400 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -297,9 +291,8 @@ class HttpClientFailure(object):
 
     def head401(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 401 status code - should be represented in the client as an
-        error
+        """Return 401 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -335,9 +328,8 @@ class HttpClientFailure(object):
 
     def get402(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 402 status code - should be represented in the client as an
-        error
+        """Return 402 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -373,9 +365,8 @@ class HttpClientFailure(object):
 
     def get403(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 403 status code - should be represented in the client as an
-        error
+        """Return 403 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -411,9 +402,8 @@ class HttpClientFailure(object):
 
     def put404(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 404 status code - should be represented in the client as an
-        error
+        """Return 404 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -458,9 +448,8 @@ class HttpClientFailure(object):
 
     def patch405(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 405 status code - should be represented in the client as an
-        error
+        """Return 405 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -505,9 +494,8 @@ class HttpClientFailure(object):
 
     def post406(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 406 status code - should be represented in the client as an
-        error
+        """Return 406 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -552,9 +540,8 @@ class HttpClientFailure(object):
 
     def delete407(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 407 status code - should be represented in the client as an
-        error
+        """Return 407 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -599,9 +586,8 @@ class HttpClientFailure(object):
 
     def put409(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 409 status code - should be represented in the client as an
-        error
+        """Return 409 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -646,9 +632,8 @@ class HttpClientFailure(object):
 
     def head410(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 410 status code - should be represented in the client as an
-        error
+        """Return 410 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -684,9 +669,8 @@ class HttpClientFailure(object):
 
     def get411(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 411 status code - should be represented in the client as an
-        error
+        """Return 411 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -722,9 +706,8 @@ class HttpClientFailure(object):
 
     def get412(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 412 status code - should be represented in the client as an
-        error
+        """Return 412 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -760,9 +743,8 @@ class HttpClientFailure(object):
 
     def put413(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 413 status code - should be represented in the client as an
-        error
+        """Return 413 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -807,9 +789,8 @@ class HttpClientFailure(object):
 
     def patch414(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 414 status code - should be represented in the client as an
-        error
+        """Return 414 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -854,9 +835,8 @@ class HttpClientFailure(object):
 
     def post415(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 415 status code - should be represented in the client as an
-        error
+        """Return 415 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -901,9 +881,8 @@ class HttpClientFailure(object):
 
     def get416(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 416 status code - should be represented in the client as an
-        error
+        """Return 416 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
@@ -939,9 +918,8 @@ class HttpClientFailure(object):
 
     def delete417(
             self, boolean_value=None, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 417 status code - should be represented in the client as an
-        error
+        """Return 417 status code - should be represented in the client as an
+        error.
 
         :param boolean_value: Simple boolean value true
         :type boolean_value: bool
@@ -986,9 +964,8 @@ class HttpClientFailure(object):
 
     def head429(
             self, custom_headers=None, raw=False, **operation_config):
-        """
-        Return 429 status code - should be represented in the client as an
-        error
+        """Return 429 status code - should be represented in the client as an
+        error.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
