@@ -55,9 +55,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     foreach (var prop in entity.GetType().GetProperties(BindingFlags.FlattenHierarchy
                         | BindingFlags.Public
                         | BindingFlags.Instance
-                        ).Where(prop => !Attribute.IsDefined(prop, JsonExtensionDataType)))
+                        ).Where(prop => !Attribute.IsDefined(prop, JsonExtensionDataType)).Where(prop => prop.PropertyType != typeof(object)))
                     {
-                        // TODO: figure out way to iterate through lists and dictionaries and apply rules. Or pass rules to the next nested iteration of validation
                         var value = prop.GetValue(entity);
                         var rules = prop.GetCustomAttributes(RuleAttributeType, true) as RuleAttribute[];
                         foreach (var rule in rules)
@@ -97,7 +96,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                 else if (isDictionary)
                 {
                     var dict = ((IDictionary)entity).Cast<dynamic>().ToDictionary(entry => (string)entry.Key, entry => entry.Value);
-                    if (dict != null)
+                    var dictType = entity.GetType();
+                    // TODO: figure out way to stop processing more rules if it's an object property
+                    if (dict != null && dictType.IsGenericType && dictType.GenericTypeArguments.Count() >=2 && dictType.GenericTypeArguments[1] != typeof(object))
                     {
                         foreach (var pair in dict)
                         {
