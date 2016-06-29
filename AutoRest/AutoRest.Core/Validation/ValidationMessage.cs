@@ -19,10 +19,6 @@ namespace Microsoft.Rest.Generator
         public IList<string> Path
         {
             get { return this._path; }
-            protected set
-            {
-                this._path = value.ToList();
-            }
         }
 
 
