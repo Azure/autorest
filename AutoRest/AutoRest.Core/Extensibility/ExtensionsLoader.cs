@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.Extensibility
 
             if (string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
             {
-                codeGenerator = new NoopCodeGenerator(settings);
+                codeGenerator = new NoOpCodeGenerator(settings);
             }
             else
             {

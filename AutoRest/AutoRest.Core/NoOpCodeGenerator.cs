@@ -6,9 +6,9 @@ using Microsoft.Rest.Generator.ClientModel;
 
 namespace Microsoft.Rest.Generator
 {
-    public class NoopCodeGenerator: CodeGenerator
+    public class NoOpCodeGenerator: CodeGenerator
     {
-        public NoopCodeGenerator(Settings settings) : base(settings)
+        public NoOpCodeGenerator(Settings settings) : base(settings)
         {
         }
 
