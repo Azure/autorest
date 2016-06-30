@@ -143,6 +143,9 @@
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <RemoveDir Directories="$(BinariesFolder)" />
     <RemoveDir Directories="$(TestResultsFolder)" />
+    <MakeDir Directories="$(BinariesFolder)" />
+    <MakeDir Directories="$(TestResultsFolder)" />
+
   </Target>
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
@@ -152,10 +155,10 @@
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />-->
-    <MSBuild Projects="$(CodeGeneratorSolution)"
+    <!-- <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" /> -->
   </Target>
 
   <!-- Run tests. -->

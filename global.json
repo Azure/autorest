@@ -2,5 +2,8 @@
   "projects": [
     "src/client",
     "src/generator"
-  ]
+  ],
+   "sdk": {
+    "version": "1.0.0-preview2-003121"
+  }
 }
