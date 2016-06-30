@@ -14,8 +14,7 @@
     "application/json"
   ],
   "consumes": [
-    "application/json",
-    "application/xml"
+    "application/json"
   ],
   "parameters": {
     "test": {

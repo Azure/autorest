@@ -455,5 +455,14 @@ namespace Microsoft.Rest.Generator.Properties {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path &apos;{0}&apos; in x-ms-paths does not overload a normal path in the paths section..
+        /// </summary>
+        internal static string XMSPathBaseNotInPaths {
+            get {
+                return ResourceManager.GetString("XMSPathBaseNotInPaths", resourceCulture);
+            }
+        }
     }
 }

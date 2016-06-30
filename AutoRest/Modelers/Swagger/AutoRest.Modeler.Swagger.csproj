@@ -75,6 +75,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\TransferProtocolScheme.cs" />
     <Compile Include="ValidationRules\AnonymousTypes.cs" />
+    <Compile Include="ValidationRules\XmsPathsInPath.cs" />
     <Compile Include="ValidationRules\OperationIdSingleUnderscore.cs" />
     <Compile Include="ValidationRules\DefaultResponseRequired.cs" />
     <Compile Include="ValidationRules\ValidFormats.cs" />

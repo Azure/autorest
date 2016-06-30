@@ -174,5 +174,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "operations-no-default-response.json"));
             messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultResponseRequired);
         }
+
+        [Fact]
+        public void XMSPathNotInPathsValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "xms-path-not-in-paths.json"));
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.XMSPathsMustOverloadPaths);
+        }
     }
 }

@@ -20,5 +20,6 @@
         AnonymousTypesDiscouraged,
         OnlyOneUnderscoreInOperationId,
         DefaultResponseRequired,
+        XMSPathsMustOverloadPaths,
     }
 }
