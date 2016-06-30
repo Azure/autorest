@@ -179,7 +179,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         public void XMSPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validator", "xms-path-not-in-paths.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.XMSPathsMustOverloadPaths);
+            messages.AssertOnlyValidationMessage(ValidationExceptionName.XmsPathsMustOverloadPaths);
         }
     }
 }

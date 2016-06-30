@@ -4,23 +4,27 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Xms")]
     public class XmsPathsInPath : TypeRule<ServiceDefinition>
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(ServiceDefinition entity)
         {
-            foreach(var customPath in entity.CustomPaths.Keys)
+            if (entity != null && entity.CustomPaths != null)
             {
-                var basePath = GetBasePath(customPath);
-                if (!entity.Paths.ContainsKey(basePath))
+                foreach (var customPath in entity.CustomPaths.Keys)
                 {
-                    yield return CreateException(null, Exception, customPath);
+                    var basePath = GetBasePath(customPath);
+                    if (!entity.Paths.ContainsKey(basePath))
+                    {
+                        yield return CreateException(null, Exception, customPath);
+                    }
                 }
             }
 
             yield break;
         }
 
-        private string GetBasePath(string customPath)
+        private static string GetBasePath(string customPath)
         {
             var index = customPath.IndexOf('?');
             return customPath.Substring(0, index);
@@ -30,7 +34,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             get
             {
-                return ValidationExceptionName.XMSPathsMustOverloadPaths;
+                return ValidationExceptionName.XmsPathsMustOverloadPaths;
             }
         }
     }

@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Generator
                 { ValidationExceptionName.RefsMustNotHaveSiblings, Resources.ConflictingRef },
                 { ValidationExceptionName.FormatMustExist, Resources.InvalidTypeFormatCombination },
                 { ValidationExceptionName.DefaultResponseRequired, Resources.NoDefaultResponse },
-                { ValidationExceptionName.XMSPathsMustOverloadPaths, Resources.NoDefaultResponse },
+                { ValidationExceptionName.XmsPathsMustOverloadPaths, Resources.NoDefaultResponse },
             };
         }
 
