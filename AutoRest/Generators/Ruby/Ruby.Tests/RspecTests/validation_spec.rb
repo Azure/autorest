@@ -3,7 +3,7 @@
 $: << 'RspecTests/Generated/validation'
 
 require 'rspec'
-require 'validation'
+require 'generated/validation'
 
 describe 'Validation Module' do
 

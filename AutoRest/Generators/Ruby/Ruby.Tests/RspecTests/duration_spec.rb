@@ -3,7 +3,7 @@
 $: << 'RspecTests'
 $: << 'RspecTests/Generated/duration'
 
-require 'body_duration'
+require 'generated/body_duration'
 
 module DurationModule
 
