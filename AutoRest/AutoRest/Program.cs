@@ -88,22 +88,23 @@ namespace Microsoft.Rest.Generator.Cli
                         }
                     }
 
+                    // Write all messages to Console
                     Console.ResetColor();
-                    // Include LogEntrySeverity.Infos for verbose logging.
-                    if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
+                    foreach (var severity in (LogEntrySeverity[])Enum.GetValues(typeof(LogEntrySeverity)))
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Logger.WriteInfos(Console.Out);
+                        // Set the color if the severity level has a set console color
+                        Console.ForegroundColor = severity.GetColorForSeverity();
+                        // Determine if this severity of messages should be treated as errors
+                        bool isErrorMessage = severity >= settings.ValidationLevel;
+                        // Set the output stream based on if the severity should be an error or not
+                        var outputStream = isErrorMessage ? Console.Error : Console.Out;
+                        // If it's an error level severity or we want to see all output, write to console
+                        if (isErrorMessage || settings.Verbose)
+                        {
+                            Logger.WriteMessages(outputStream, severity, settings.Verbose);
+                        }
+                        Console.ResetColor();
                     }
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Logger.WriteWarnings(Console.Out);
-
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Logger.WriteErrors(Console.Error,
-                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                    Console.ResetColor();
                 }
             }
             catch (Exception exception)

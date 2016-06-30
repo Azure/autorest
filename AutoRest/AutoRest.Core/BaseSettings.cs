@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator
             FileSystem = new FileSystem();
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
-            ValidationLevel = LogEntrySeverity.Fatal;
+            ValidationLevel = LogEntrySeverity.Error;
         }
 
         /// <summary>
