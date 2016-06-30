@@ -1,19 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.Templates;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Java.Azure.Templates;
-using System.Collections.Generic;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.Azure.Fluent.TemplateModels;
+using AutoRest.Java.Azure.Templates;
+using AutoRest.Java.TemplateModels;
+using AutoRest.Java.Templates;
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent
+namespace AutoRest.Java.Azure.Fluent
 {
     public class AzureJavaFluentCodeGenerator : AzureJavaCodeGenerator
     {

@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Known primary model types.

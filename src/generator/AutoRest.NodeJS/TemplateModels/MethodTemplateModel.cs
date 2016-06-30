@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
-using System.Collections;
 using System.Text;
 using System.Text.RegularExpressions;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.NodeJS
+namespace AutoRest.NodeJS.TemplateModels
 {
     public class MethodTemplateModel : Method
     {

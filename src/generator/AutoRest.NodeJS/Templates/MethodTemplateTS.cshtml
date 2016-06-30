@@ -1,11 +1,8 @@
 ﻿@using System;
 @using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Utilities
-@using Microsoft.Rest.Generator.NodeJS
-@using Microsoft.Rest.Generator.NodeJS.TemplateModels
-@using Microsoft.Rest.Generator.NodeJS.Templates
-@inherits Microsoft.Rest.Generator.Template<MethodTemplateModel>
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
 
 /**
 @if (!String.IsNullOrEmpty(Model.Summary)) {

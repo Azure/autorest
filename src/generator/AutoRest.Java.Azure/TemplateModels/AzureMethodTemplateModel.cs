@@ -5,15 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.Azure.Properties;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
 using System.Net;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.Azure.TypeModels;
+using AutoRest.Java.TemplateModels;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace AutoRest.Java.Azure.TemplateModels
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {

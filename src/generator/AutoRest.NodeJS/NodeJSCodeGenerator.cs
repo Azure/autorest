@@ -1,19 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.Properties;
-using Microsoft.Rest.Generator.NodeJS.Templates;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Utilities;
-using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using AutoRest.NodeJS.Properties;
+using AutoRest.NodeJS.TemplateModels;
+using AutoRest.NodeJS.Templates;
 
-namespace Microsoft.Rest.Generator.NodeJS
+namespace AutoRest.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {

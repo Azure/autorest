@@ -1,8 +1,6 @@
 ﻿@using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.NodeJS
-@using Microsoft.Rest.Generator.NodeJS.TemplateModels
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.NodeJS.MethodTemplateModel>
+@using AutoRest.NodeJS.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
 // Send Request
 return client.pipeline(httpRequest, function (err, response, responseBody) {
   if (err) {

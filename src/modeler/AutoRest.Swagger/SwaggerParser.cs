@@ -3,15 +3,15 @@
 
 using System;
 using System.Globalization;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.JsonConverters;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using Microsoft.Rest.Modeler.Swagger.Properties;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger.JsonConverters;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     public static class SwaggerParser
     {

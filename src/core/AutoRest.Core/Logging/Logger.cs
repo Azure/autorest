@@ -7,7 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace Microsoft.Rest.Generator.Logging
+namespace AutoRest.Core.Logging
 {
     /// <summary>
     /// Aggregator for error, warning, and trace messages.

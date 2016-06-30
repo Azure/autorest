@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
 using System.Globalization;
+using System.Linq;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Java.Azure.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent
+namespace AutoRest.Java.Azure.Fluent.TemplateModels
 {
     public class AzureFluentMethodGroupTemplateModel : AzureMethodGroupTemplateModel
     {

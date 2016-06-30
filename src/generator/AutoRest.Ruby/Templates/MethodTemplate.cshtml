@@ -1,8 +1,8 @@
 ﻿@using System
 @using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Ruby.TemplateModels
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Ruby.MethodTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Ruby
+@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodTemplateModel>
 
 #
 @if (!String.IsNullOrEmpty(Model.Summary))

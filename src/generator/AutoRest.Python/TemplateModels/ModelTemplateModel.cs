@@ -5,13 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Python.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Python
+namespace AutoRest.Python.TemplateModels
 {
     public class ModelTemplateModel : CompositeType
     {

@@ -7,14 +7,15 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Properties;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger;
-using Microsoft.Rest.Modeler.Swagger.Model;
+using AutoRest.Swagger;
+using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ParameterLocation = AutoRest.Core.ClientModel.ParameterLocation;
 
 namespace AutoRest.Extensions
 {
@@ -355,7 +356,7 @@ namespace AutoRest.Extensions
             foreach (var method in serviceClient.Methods)
             {
                 var bodyParameter = method.Parameters.FirstOrDefault(
-                    p => p.Location == Microsoft.Rest.Generator.ClientModel.ParameterLocation.Body);
+                    p => p.Location == ParameterLocation.Body);
 
                 if (bodyParameter != null)
                 {

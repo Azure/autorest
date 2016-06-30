@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Python
+namespace AutoRest.Python
 {
     public abstract class PythonTemplate<T> : Template<T>
     {

@@ -4,11 +4,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core;
+using AutoRest.Core.Utilities;
 using Xunit;
 
-namespace Microsoft.Rest.Modeler.Swagger.Tests
+namespace AutoRest.Swagger.Tests
 {
     public static class SwaggerSpecHelper
     {
@@ -62,7 +62,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
-            AutoRest.Generate(settings);
+            AutoRest.Core.AutoRest.Generate(settings);
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Class that represents Swagger 2.0 schema

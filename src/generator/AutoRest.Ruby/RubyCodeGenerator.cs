@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby.Templates;
+using AutoRest.Ruby.TemplateModels;
+using AutoRest.Ruby.Templates;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby
 {
     /// <summary>
     /// A class with main code generation logic for Ruby.

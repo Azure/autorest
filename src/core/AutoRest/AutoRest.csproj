@@ -8,7 +8,7 @@
     <ProjectGuid>{F589D8B7-1B0F-4182-842B-09866A4A2CEB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Generator.Cli</RootNamespace>
+    <RootNamespace>AutoRest</RootNamespace>
     <AssemblyName>AutoRest</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>

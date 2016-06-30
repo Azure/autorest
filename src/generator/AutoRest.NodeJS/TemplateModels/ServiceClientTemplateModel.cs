@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
 using System.Text;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
-using System;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 
-namespace Microsoft.Rest.Generator.NodeJS
+namespace AutoRest.NodeJS.TemplateModels
 {
     public class ServiceClientTemplateModel : ServiceClient
     {

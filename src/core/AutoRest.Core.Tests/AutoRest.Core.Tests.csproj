@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{31E6BAA3-C606-4D44-B0D7-46BE7AFAC656}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Microsoft.Rest.Generator.Test</RootNamespace>
+    <RootNamespace>AutoRest.Core.Tests</RootNamespace>
     <AssemblyName>AutoRest.Core.Tests</AssemblyName>
     <RestorePackages>true</RestorePackages>
     <AutoRestTest>true</AutoRestTest>
@@ -67,13 +67,13 @@
       <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
       <Name>AutoRest.CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\generator\AutoRest.NodeJS.Azure\AutoRest.Generator.Azure.NodeJS.csproj">
+    <ProjectReference Include="..\..\generator\AutoRest.NodeJS.Azure\AutoRest.NodeJS.Azure.csproj">
       <Project>{909bf4ef-4eca-4ac4-8e21-cdcf05393161}</Project>
-      <Name>AutoRest.Generator.Azure.NodeJS</Name>
+      <Name>AutoRest.NodeJS.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Modeler.Swagger.csproj">
+    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj">
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
-      <Name>AutoRest.Modeler.Swagger</Name>
+      <Name>AutoRest.Swagger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

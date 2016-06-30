@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.Python
+namespace AutoRest.Python
 {
     public class ScopeProvider
     {

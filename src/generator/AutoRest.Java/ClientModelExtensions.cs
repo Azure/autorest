@@ -4,12 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
 using System.Text;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.TemplateModels
+namespace AutoRest.Java
 {
     public static class ClientModelExtensions
     {

@@ -7,10 +7,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.Rest.Generator.Extensibility;
+using AutoRest.Core;
+using AutoRest.Core.Extensibility;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Generator.Cli
+namespace AutoRest
 {
     /// <summary>
     /// Helper class for dynamically generating CLI help from Settings.
@@ -180,7 +181,7 @@ namespace Microsoft.Rest.Generator.Cli
 
             // Process template replacing all major sections.
             template = template.
-                Replace("$version$", AutoRest.Version).
+                Replace("$version$", Core.AutoRest.Version).
                 Replace("$syntax$", syntaxSection.ToString());
 
             template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);

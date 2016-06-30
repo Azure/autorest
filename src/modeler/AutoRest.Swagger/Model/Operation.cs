@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Describes a single API operation on a path.

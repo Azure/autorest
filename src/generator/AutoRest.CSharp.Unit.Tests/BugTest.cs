@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.Unit.Tests
 {

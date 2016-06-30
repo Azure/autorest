@@ -5,11 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby.TemplateModels
 {
     /// <summary>
     /// A model for the model template.

@@ -42,11 +42,11 @@ javadoc {
 
 test {
     reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../../../TestResults/JavaAzureFluentCodeGen")
+    reports.html.destination = file("$rootDir/TestResults/JavaAzureFluentCodeGen")
 }
 
 task buildRuntime(type: Exec) {
-    workingDir "${projectDir}/../../../../ClientRuntimes/Java"
+    workingDir "$rootDir/src/client/Java"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'gradle', 'uploadArchives'
     } else {
@@ -55,7 +55,7 @@ task buildRuntime(type: Exec) {
 }
 
 task npmrestore(type: Exec) {
-    workingDir "${projectDir}/../../../TestServer/server"
+    workingDir "$rootDir/src/dev/TestServer/server"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'npm', 'install'
     } else {
@@ -72,7 +72,7 @@ task installforever(type: Exec, dependsOn: 'npmrestore') {
 }
 
 task runserver(type: Exec, dependsOn: 'installforever') {
-    workingDir "${projectDir}/../../../TestServer/server"
+    workingDir "$rootDir/src/dev/TestServer/server"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'forever', 'start', 'startup/www.js'
     } else {
@@ -86,7 +86,7 @@ task testcoverage(type: JavaExec, dependsOn: 'runserver') {
 }
 
 task stopserver(type: Exec, dependsOn: 'testcoverage') {
-    workingDir "${projectDir}/../../../TestServer/server"
+    workingDir "$rootDir/src/dev/TestServer/server"
     if (System.getProperty('os.name').toLowerCase().contains('windows')) {
         commandLine 'cmd', '/c', 'forever', 'stop', 'startup/www.js'
     } else {

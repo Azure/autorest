@@ -4,9 +4,9 @@
 using System;
 using System.IO;
 using System.Linq;
+using AutoRest.Core;
 using AutoRest.CSharp.Azure;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Modeler.Swagger;
+using AutoRest.Swagger;
 using Xunit;
 
 namespace AutoRest.Extensions.Azure.Tests

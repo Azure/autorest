@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     public class FileSystem : IFileSystem
     {

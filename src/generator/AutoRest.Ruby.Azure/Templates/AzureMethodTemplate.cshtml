@@ -1,9 +1,9 @@
 @using System
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Ruby
-@using Microsoft.Rest.Generator.Ruby.TemplateModels
-@using Microsoft.Rest.Generator.Ruby.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Ruby.AzureMethodTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Ruby
+@using AutoRest.Ruby.TemplateModels
+@using AutoRest.Ruby.Templates
+@inherits AutoRest.Core.Template<AutoRest.Ruby.Azure.TemplateModels.AzureMethodTemplateModel>
 
 @if (!Model.IsLongRunningOperation)
 {

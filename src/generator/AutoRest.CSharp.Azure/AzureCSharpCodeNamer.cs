@@ -5,9 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
 
 namespace AutoRest.CSharp.Azure
 {
@@ -203,7 +204,7 @@ namespace AutoRest.CSharp.Azure
                 }
             }
 
-            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
     }
 }

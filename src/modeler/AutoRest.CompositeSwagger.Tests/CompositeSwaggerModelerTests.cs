@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Logging;
+using AutoRest.Core;
+using AutoRest.Core.Logging;
 using Xunit;
 
-namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
+namespace AutoRest.CompositeSwagger.Tests
 {
     [Collection("AutoRest Tests")]
     public class CompositeSwaggerModelerTests
@@ -17,7 +13,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeSwaggerWithTwoModels()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-good1.json")
@@ -34,7 +30,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeSwaggerWithOneModel()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-good2.json")
@@ -50,7 +46,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeSwaggerWithSameModels()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-good3.json")
@@ -66,7 +62,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeModelWithConflictInGlobalParam()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-conflict-in-global-param.json")
@@ -78,7 +74,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeModelWithConflictInModel()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-conflict-in-model.json")
@@ -90,7 +86,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeModelWithConflictInSettings()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-conflict-in-settings.json")
@@ -102,7 +98,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeModelWithEmptyDocuments()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-empty.json")
@@ -114,7 +110,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         public void CompositeModelWithEmptyInfo()
         {
 
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
+            Modeler modeler = new CompositeSwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "composite-swagger-empty2.json")

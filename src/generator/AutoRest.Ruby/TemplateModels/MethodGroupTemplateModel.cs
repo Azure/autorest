@@ -3,11 +3,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby.TemplateModels
 {
     /// <summary>
     /// The model for method group template.

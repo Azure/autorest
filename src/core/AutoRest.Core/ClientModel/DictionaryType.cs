@@ -3,7 +3,7 @@
 
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines a key-value dictionary type with string key data type.

@@ -6,10 +6,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 using AutoRest.CSharp.TemplateModels;
 using AutoRest.CSharp.Templates;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Extensions;
+using AutoRest = AutoRest.Core.AutoRest;
 
 namespace AutoRest.CSharp
 {
@@ -53,7 +55,7 @@ namespace AutoRest.CSharp
         {
             get {
                 return string.Format(CultureInfo.InvariantCulture,
-                    Microsoft.Rest.Generator.Properties.Resources.UsageInformation, ClientRuntimePackage);
+                    Properties.Resources.UsageInformation, ClientRuntimePackage);
             }
         }
 
@@ -75,7 +77,7 @@ namespace AutoRest.CSharp
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
-            Extensions.NormalizeClientModel(serviceClient, Settings);
+            SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

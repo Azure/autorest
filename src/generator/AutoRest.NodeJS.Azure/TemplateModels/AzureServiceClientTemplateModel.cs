@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace AutoRest.NodeJS.Azure.TemplateModels
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {

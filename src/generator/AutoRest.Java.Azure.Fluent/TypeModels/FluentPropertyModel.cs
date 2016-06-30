@@ -1,14 +1,11 @@
-﻿using Microsoft.Rest.Generator.ClientModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent
+namespace AutoRest.Java.Azure.Fluent.TypeModels
 {
     public class FluentPropertyModel : PropertyModel
     {

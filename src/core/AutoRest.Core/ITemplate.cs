@@ -4,7 +4,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     /// <summary>
     /// Defines methods to manipulate templates.

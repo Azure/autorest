@@ -76,11 +76,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)\AutoRest\AutoRest\AutoRest.json">
+    <None Include="$(SolutionDir)\src\core\AutoRest\AutoRest.json">
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\TestServer\swagger\storage.json">
+    <None Include="$(SolutionDir)src\dev\TestServer\swagger\storage.json">
       <Link>Swagger\storage.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

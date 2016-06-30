@@ -2,16 +2,17 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.NodeJS.Properties;
-namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
+using AutoRest.NodeJS.Properties;
+
+namespace AutoRest.NodeJS
 {
-    using System.Collections.Generic;
-    using System.Reflection;
     public static class ClientModelExtensions
     {
         public static string GetHttpMethod(this HttpMethod method)

@@ -3,13 +3,12 @@
 
 using System;
 using System.Globalization;
-using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using Microsoft.Rest.Modeler.Swagger.Properties;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Properties;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     /// <summary>
     /// The builder for building swagger schema into client model parameters, 

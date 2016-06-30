@@ -8,12 +8,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Generator.Extensibility
+namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {

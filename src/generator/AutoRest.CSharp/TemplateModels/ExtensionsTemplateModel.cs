@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.TemplateModels
 {

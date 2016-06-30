@@ -2,19 +2,19 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Test
+namespace AutoRest.Core.Tests
 {
     public class FakeCodeNamer : CodeNamer
     {
-        public override ClientModel.IType NormalizeTypeReference(ClientModel.IType type)
+        public override IType NormalizeTypeReference(IType type)
         {
             throw new System.NotImplementedException();
         }
 
-        public override ClientModel.IType NormalizeTypeDeclaration(ClientModel.IType type)
+        public override IType NormalizeTypeDeclaration(IType type)
         {
             throw new System.NotImplementedException();
         }

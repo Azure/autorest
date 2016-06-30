@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Modeler.Swagger;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Swagger;
 using Xunit;
 
 namespace AutoRest.Extensions.Azure.Tests

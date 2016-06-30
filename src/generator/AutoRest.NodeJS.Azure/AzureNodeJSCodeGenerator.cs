@@ -2,20 +2,21 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
-using Microsoft.Rest.Generator.Azure.NodeJS.Templates;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.NodeJS.Templates;
-using Microsoft.Rest.Generator.Utilities;
-using System.Collections.Generic;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
+using AutoRest.NodeJS.Azure.Properties;
+using AutoRest.NodeJS.Azure.TemplateModels;
+using AutoRest.NodeJS.Azure.Templates;
+using AutoRest.NodeJS.Templates;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace AutoRest.NodeJS.Azure
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
@@ -148,7 +149,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         {
             var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
             // Service client
-            var serviceClientTemplate = new Microsoft.Rest.Generator.Azure.NodeJS.Templates.AzureServiceClientTemplate
+            var serviceClientTemplate = new AzureServiceClientTemplate
             {
                 Model = serviceClientTemplateModel
             };

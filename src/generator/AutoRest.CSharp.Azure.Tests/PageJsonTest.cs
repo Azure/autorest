@@ -2,6 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using Fixtures.Azure.AcceptanceTestsPaging.Models;
+using Xunit;
+using Newtonsoft.Json;
+using Microsoft.Rest.Serialization;
+using Microsoft.Rest.Azure;
+using System.Linq;
 
 namespace AutoRest.CSharp.Azure.Tests
 {

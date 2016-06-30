@@ -5,11 +5,11 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     /// <summary>
     /// Provides useful extension methods to simplify common coding tasks.

@@ -3,15 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using Microsoft.Rest.Generator;
-using System.Diagnostics;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Model;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     /// <summary>
     /// The builder for building a generic swagger object into parameters, 

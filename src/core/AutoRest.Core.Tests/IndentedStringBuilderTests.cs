@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.Utilities;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Test
+namespace AutoRest.Core.Tests
 {
     [Collection("AutoRest Tests")]
     public class IndentedStringBuilderTests

@@ -8,12 +8,12 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     public abstract class CodeNamer
     {

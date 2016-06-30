@@ -5,12 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.NodeJS
+namespace AutoRest.NodeJS
 {
     public class NodeJsCodeNamer : CodeNamer
     {

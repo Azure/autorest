@@ -5,15 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby
 {
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// A class which keeps all naming related functionality.
     /// </summary>

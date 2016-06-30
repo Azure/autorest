@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using Microsoft.Rest.Generator.ClientModel;
 using System.Globalization;
-using System.Linq;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby.Templates
+namespace AutoRest.Ruby.Azure
 {
-    using Utilities;
-    using System.Collections.Generic;
-
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
     /// </summary>

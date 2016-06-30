@@ -4,12 +4,12 @@
 using System;
 using System.Linq;
 using System.Net;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace AutoRest.NodeJS.Azure.TemplateModels
 {
     public class AzureMethodTemplateModel : MethodTemplateModel
     {

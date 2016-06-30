@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.NodeJS
+namespace AutoRest.NodeJS.TemplateModels
 {
     public class ModelTemplateModel : CompositeType
     {

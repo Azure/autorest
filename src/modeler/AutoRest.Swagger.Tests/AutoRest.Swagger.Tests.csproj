@@ -26,7 +26,7 @@
     <DocumentationFile>bin\Net45-Debug\AutoRest.Swagger.Tests.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(SolutionDir)\AutoRest\AutoRest\AutoRest.json">
+    <None Include="$(SolutionDir)\src\core\AutoRest\AutoRest.json">
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

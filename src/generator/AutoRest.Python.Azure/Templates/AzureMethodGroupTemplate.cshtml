@@ -1,8 +1,9 @@
-﻿@using Microsoft.Rest.Generator.Python
-@using Microsoft.Rest.Generator.Python.Templates
-@using Microsoft.Rest.Generator.Python.TemplateModels
+﻿@using AutoRest.Python.Templates
 @using System.Linq;
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodGroupTemplateModel>
+@using AutoRest.Python
+@using AutoRest.Python.Azure.TemplateModels
+@using AutoRest.Python.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.Python.Azure.TemplateModels.AzureMethodGroupTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()

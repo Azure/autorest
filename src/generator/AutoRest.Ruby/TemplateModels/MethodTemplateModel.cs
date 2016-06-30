@@ -7,12 +7,11 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby.TemplateModels
 {
     /// <summary>
     /// The model object for regular Ruby methods.

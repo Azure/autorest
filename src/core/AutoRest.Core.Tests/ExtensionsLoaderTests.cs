@@ -3,14 +3,14 @@
 
 using System;
 using System.IO;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Extensibility;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Test.Resource;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Extensibility;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Tests.Resource;
+using AutoRest.Core.Utilities;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Test
+namespace AutoRest.Core.Tests
 {
     [Collection("AutoRest Tests")]
     public class ExtensionsLoaderTests

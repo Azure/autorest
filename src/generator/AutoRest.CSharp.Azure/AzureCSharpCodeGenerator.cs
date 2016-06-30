@@ -6,12 +6,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 using AutoRest.CSharp.Azure.TemplateModels;
+using AutoRest.CSharp.Azure.Templates;
 using AutoRest.CSharp.TemplateModels;
 using AutoRest.CSharp.Templates;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
 
 namespace AutoRest.CSharp.Azure
 {
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Azure
             get
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    Microsoft.Rest.Generator.CSharp.Properties.Resources.UsageInformation, ClientRuntimePackage);
+                    Properties.Resources.UsageInformation, ClientRuntimePackage);
             }
         }
 

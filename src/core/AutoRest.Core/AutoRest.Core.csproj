@@ -9,7 +9,7 @@
     <ProjectGuid>{C876085F-9DC3-41F0-B7B4-17022CD84684}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Rest.Generator</RootNamespace>
+    <RootNamespace>AutoRest.Core</RootNamespace>
     <AssemblyName>AutoRest.Core</AssemblyName>
     <Configuration Condition=" '$(Configuration)' == '' ">Net45-Debug</Configuration>
   </PropertyGroup>

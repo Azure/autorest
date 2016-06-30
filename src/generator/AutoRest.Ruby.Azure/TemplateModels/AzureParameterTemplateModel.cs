@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby;
+using AutoRest.Core.ClientModel;
+using AutoRest.Ruby.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby
+namespace AutoRest.Ruby.Azure.TemplateModels
 {
     /// <summary>
     /// The model for the Azure method parameter template.

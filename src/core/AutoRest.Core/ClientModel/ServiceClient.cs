@@ -3,11 +3,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines the client model for every service.

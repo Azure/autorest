@@ -15,13 +15,13 @@
   },
   "modelers": {
     "Swagger": {
-      "type": "SwaggerServiceModelBuilder, Microsoft.Rest.Modeler.Swagger.Model",
+      "type": "SwaggerServiceModelBuilder, AutoRest.Swagger",
       "settings": {
         "requireOperationId": "false"
       }
     },
     "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.Modeler.CompositeSwagger"
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
     }
   }
 }

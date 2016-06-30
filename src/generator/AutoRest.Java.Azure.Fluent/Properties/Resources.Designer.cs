@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent.Properties {
+namespace AutoRest.Java.Azure.Fluent.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Java.Azure.Fluent.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Generator.Java.Azure.Fluent.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoRest.Java.Azure.Fluent.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

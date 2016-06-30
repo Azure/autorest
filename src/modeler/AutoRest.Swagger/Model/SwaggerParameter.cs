@@ -4,7 +4,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Describes a single operation parameter.

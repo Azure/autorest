@@ -4,14 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Java.TemplateModels;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java
 {
     public class JavaCodeNamer : CodeNamer
     {

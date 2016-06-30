@@ -3,7 +3,7 @@
 
 
 using System;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 
 namespace AutoRest.Extensions
 {

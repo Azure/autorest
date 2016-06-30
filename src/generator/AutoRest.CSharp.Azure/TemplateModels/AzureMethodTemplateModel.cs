@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.CSharp.Azure.Properties;
 using AutoRest.CSharp.TemplateModels;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
+using IndentedStringBuilder = AutoRest.Core.Utilities.IndentedStringBuilder;
 
 namespace AutoRest.CSharp.Azure.TemplateModels
 {

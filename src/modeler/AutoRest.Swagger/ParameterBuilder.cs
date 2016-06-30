@@ -3,13 +3,11 @@
 
 using System;
 using System.Linq;
-using System.Globalization;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
+using AutoRest.Core.ClientModel;
+using AutoRest.Swagger.Model;
+using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     /// <summary>
     /// The builder for building swagger parameters into client model parameters, 
@@ -51,9 +49,9 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = unwrappedParameter.Name,
                 SerializedName = unwrappedParameter.Name,
                 Type = parameterType,
-                Location = (Generator.ClientModel.ParameterLocation)Enum.Parse(typeof(Generator.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
+                Location = (Core.ClientModel.ParameterLocation)Enum.Parse(typeof(Core.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
             };
-            parameter.IsRequired = parameter.IsRequired || parameter.Location == Generator.ClientModel.ParameterLocation.Path;
+            parameter.IsRequired = parameter.IsRequired || parameter.Location == Core.ClientModel.ParameterLocation.Path;
             PopulateParameter(parameter, unwrappedParameter);
 
             if (_swaggerParameter.Reference != null)

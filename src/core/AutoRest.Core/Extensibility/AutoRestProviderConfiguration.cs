@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Generator.Extensibility
+namespace AutoRest.Core.Extensibility
 {
     /// <summary>
     /// In-memory representation of provider configuration in AutoRest.json file.

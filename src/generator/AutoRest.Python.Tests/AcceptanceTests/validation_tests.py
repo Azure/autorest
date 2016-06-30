@@ -36,7 +36,7 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
-sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
+sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 10))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))

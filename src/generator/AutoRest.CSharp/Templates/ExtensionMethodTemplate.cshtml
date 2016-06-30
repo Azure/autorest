@@ -1,9 +1,9 @@
 @using System.Text
 @using System
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
 @using AutoRest.CSharp
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<AutoRest.CSharp.TemplateModels.MethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.MethodTemplateModel>
 @{
 if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
 {

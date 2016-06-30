@@ -4,9 +4,9 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.Properties;
+using AutoRest.Core.Properties;
 
-namespace Microsoft.Rest.Generator.Logging
+namespace AutoRest.Core.Logging
 {
     /// <summary>
     /// Error manager for code generator.

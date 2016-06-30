@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace AutoRest.NodeJS.Azure.TemplateModels
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {

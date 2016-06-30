@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
+using AutoRest.Core;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger;
+using AutoRest.Swagger;
 using Xunit;
 
 namespace AutoRest.Extensions.Tests

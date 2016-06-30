@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines a model type for enumerations.

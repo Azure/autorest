@@ -6,17 +6,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
-using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Properties;
+using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Generator.Modeler
+    public class SwaggerModeler : Modeler
     {
         private const string BaseUriParameterName = "BaseUri";
 

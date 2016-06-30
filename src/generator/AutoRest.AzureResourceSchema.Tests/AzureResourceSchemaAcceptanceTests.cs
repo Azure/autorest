@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
-using Microsoft.Rest.Modeler.Swagger.Tests;
+using AutoRest.Swagger.Tests;
 using Xunit;
 
 namespace AutoRest.AzureResourceSchema.Tests

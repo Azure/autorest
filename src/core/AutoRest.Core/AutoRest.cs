@@ -3,12 +3,12 @@
 
 using System;
 using System.Diagnostics;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Extensibility;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Extensibility;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     /// <summary>
     /// Entry point for invoking code generation.

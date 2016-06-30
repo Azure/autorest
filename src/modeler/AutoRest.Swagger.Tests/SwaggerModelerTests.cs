@@ -5,15 +5,15 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Extensibility;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Extensibility;
-using Microsoft.Rest.Generator.Utilities;
-using Xunit;
 using Newtonsoft.Json.Linq;
+using Xunit;
 
-namespace Microsoft.Rest.Modeler.Swagger.Tests
+namespace AutoRest.Swagger.Tests
 {
     [Collection("AutoRest Tests")]
     public class SwaggerModelerTests
@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestClientModelFromSimpleSwagger()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-simple-spec.json")
@@ -78,7 +78,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestExternalReferences()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
@@ -92,7 +92,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestExternalReferencesWithAllOf()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-external-ref.json")
@@ -108,7 +108,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestExternalReferencesWithReferencesInProperties()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-external-ref.json")
@@ -124,7 +124,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestExternalReferencesWithExtension()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
@@ -627,7 +627,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestYamlParsing()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-simple-spec.yaml")
@@ -640,7 +640,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
         [Fact]
         public void TestAdditionalProperties()
         {
-            Generator.Modeler modeler = new SwaggerModeler(new Settings
+            Modeler modeler = new SwaggerModeler(new Settings
             {
                 Namespace = "Test",
                 Input = Path.Combine("Swagger", "swagger-additional-properties.yaml")

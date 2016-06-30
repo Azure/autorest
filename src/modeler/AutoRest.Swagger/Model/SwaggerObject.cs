@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Modeler.Swagger.Properties;
+using AutoRest.Core.ClientModel;
+using AutoRest.Swagger.Properties;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Describes a single operation determining with this object is mandatory.

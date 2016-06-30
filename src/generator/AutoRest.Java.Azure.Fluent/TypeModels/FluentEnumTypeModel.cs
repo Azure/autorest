@@ -1,14 +1,9 @@
-﻿using Microsoft.Rest.Generator.ClientModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using AutoRest.Core.ClientModel;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java.Azure.Fluent.TypeModels
 {
     public class FluentEnumTypeModel : EnumTypeModel
     {

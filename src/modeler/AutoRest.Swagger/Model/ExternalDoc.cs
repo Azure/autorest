@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Allows referencing an external resource for extended documentation.

@@ -3,9 +3,9 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json.Linq;
 using Xunit;
 

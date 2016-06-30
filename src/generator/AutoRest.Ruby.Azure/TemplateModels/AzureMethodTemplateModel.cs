@@ -6,14 +6,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby;
-using Microsoft.Rest.Generator.Ruby.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Ruby.Azure.Properties;
+using AutoRest.Ruby.TemplateModels;
+using IndentedStringBuilder = AutoRest.Core.Utilities.IndentedStringBuilder;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby
+namespace AutoRest.Ruby.Azure.TemplateModels
 {
     /// <summary>
     /// The model object for Azure methods.

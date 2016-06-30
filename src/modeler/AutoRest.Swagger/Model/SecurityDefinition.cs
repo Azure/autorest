@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// Security Scheme Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#security-scheme-object-

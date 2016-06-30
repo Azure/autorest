@@ -3,7 +3,7 @@
 
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.CSharp.Tests;
+using AutoRest.CSharp.Tests;
 using Xunit;
 
 namespace AutoRest.CSharp.Tests

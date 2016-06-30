@@ -41,9 +41,9 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Modeler.Swagger.csproj">
+    <ProjectReference Include="..\..\modeler\AutoRest.Swagger\AutoRest.Swagger.csproj">
       <Project>{9517265e-5127-460c-9dde-fe017d73121c}</Project>
-      <Name>AutoRest.Modeler.Swagger</Name>
+      <Name>AutoRest.Swagger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

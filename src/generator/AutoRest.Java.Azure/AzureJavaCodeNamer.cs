@@ -3,14 +3,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.TemplateModels;
 using System.Globalization;
+using System.Linq;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.Azure.TypeModels;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace AutoRest.Java.Azure
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {

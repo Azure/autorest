@@ -34,8 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -248,9 +248,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\modeler\AutoRest.Swagger.Tests\AutoRest.Modeler.Swagger.Tests.csproj">
+    <ProjectReference Include="..\..\modeler\AutoRest.Swagger.Tests\AutoRest.Swagger.Tests.csproj">
       <Project>{c6c4e139-d7af-486c-95ba-2b879f58f18d}</Project>
-      <Name>AutoRest.Modeler.Swagger.Tests</Name>
+      <Name>AutoRest.Swagger.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\AutoRest.AzureResourceSchema\AutoRest.AzureResourceSchema.csproj">
       <Project>{654344a5-0556-49c7-bfb3-59676d7440d3}</Project>

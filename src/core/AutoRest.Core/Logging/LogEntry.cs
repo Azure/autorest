@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator.Logging
+namespace AutoRest.Core.Logging
 {
     /// <summary>
     /// Represents a log entry in tracing output.

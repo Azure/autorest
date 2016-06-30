@@ -3,9 +3,13 @@
 
 using System.IO;
 using System.Linq;
+using AutoRest.Core;
 using AutoRest.CSharp;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Modeler.Swagger;
+using AutoRest.Java;
+using AutoRest.NodeJS;
+using AutoRest.Python;
+using AutoRest.Ruby;
+using AutoRest.Swagger;
 using Xunit;
 
 namespace AutoRest.Extensions.Tests
@@ -194,7 +198,7 @@ namespace AutoRest.Extensions.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             SwaggerExtensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.Java.JavaCodeNamer(setting.Namespace);
+            var namer = new JavaCodeNamer(setting.Namespace);
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);
@@ -234,7 +238,7 @@ namespace AutoRest.Extensions.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             SwaggerExtensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.NodeJS.NodeJsCodeNamer();
+            var namer = new NodeJsCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);
@@ -274,7 +278,7 @@ namespace AutoRest.Extensions.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             SwaggerExtensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.Python.PythonCodeNamer();
+            var namer = new PythonCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);
@@ -314,7 +318,7 @@ namespace AutoRest.Extensions.Tests
             var modeler = new SwaggerModeler(setting);
             var clientModel = modeler.Build();
             SwaggerExtensions.NormalizeClientModel(clientModel, setting);
-            var namer = new Microsoft.Rest.Generator.Ruby.RubyCodeNamer();
+            var namer = new RubyCodeNamer();
             namer.NormalizeClientModel(clientModel);
 
             Assert.NotNull(clientModel);

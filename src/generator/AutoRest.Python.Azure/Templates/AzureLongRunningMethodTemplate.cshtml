@@ -1,11 +1,11 @@
 @using System;
 @using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Utilities
-@using Microsoft.Rest.Generator.Python
-@using Microsoft.Rest.Generator.Python.TemplateModels
-@using Microsoft.Rest.Generator.Python.Templates
-@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@using AutoRest.Python
+@using AutoRest.Python.TemplateModels
+@using AutoRest.Python.Templates
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.Azure.TemplateModels.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
         """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))

@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace Microsoft.Rest.Generator.ClientModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
+namespace AutoRest.Core.ClientModel
+{
     /// <summary>
     /// Defines a parameter transformation.
     /// </summary>

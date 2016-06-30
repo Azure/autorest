@@ -16,9 +16,9 @@ version = '1.0.0-SNAPSHOT'
 
 checkstyle {
     toolVersion = "6.18"
-    configFile = new File("$rootDir/ClientRuntimes/Java/build-tools/src/main/resources/checkstyle.xml")
-    configProperties = [samedir: "$rootDir/ClientRuntimes/Java/build-tools/src/main/resources"]
-    reportsDir = new File("$rootDir/ClientRuntimes/Java/build-tools/reports")
+    configFile = new File("$rootDir/src/client/Java/build-tools/src/main/resources/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/src/client/Java/build-tools/src/main/resources"]
+    reportsDir = new File("$rootDir/src/client/Java/build-tools/reports")
 }
 
 dependencies {
@@ -99,7 +99,7 @@ artifacts {
 
 test {
     reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../../TestResults/JavaRuntime")
+    reports.html.destination = file("$rootDir/TestResults/JavaRuntime")
 }
 
 tasks.compileJava.dependsOn 'clean'

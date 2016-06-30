@@ -8,5 +8,5 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureCodeNamingFrameworkTests.#ConvertsPageResultsToPageTypeTest()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "AutoRest.CSharp.Azure.Tests.CSharpAzureCodeNamingFrameworkTests.#ConvertsPageResultsToPageTypeTest()")]
 

@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines a method for the client model.

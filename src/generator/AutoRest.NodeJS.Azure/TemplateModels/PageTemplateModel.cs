@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Azure;
-using Microsoft.Rest.Generator.NodeJS;
-using Microsoft.Rest.Generator.NodeJS.TemplateModels;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.NodeJS.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.NodeJS
+namespace AutoRest.NodeJS.Azure.TemplateModels
 {
     public class PageTemplateModel : ModelTemplateModel
     {

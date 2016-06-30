@@ -1,18 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
 using System.IO;
-using System.Collections.Generic;
-using Microsoft.Rest.Generator.Python;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger.Tests;
-using System.Linq;
+using AutoRest.Swagger.Tests;
 using Xunit;
-using Xunit.Abstractions;
 
-namespace Microsoft.Rest.Generator.Python.Tests
+namespace AutoRest.Python.Tests
 {
     [Collection("AutoRest Python Tests")]
     public static class AcceptanceTests

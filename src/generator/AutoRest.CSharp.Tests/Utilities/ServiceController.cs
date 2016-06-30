@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Tests.Utilities
             get
             {
                 var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH") ??
-                    @"..\..\..\..\AutoRest\TestServer";
+                    @"..\..\..\dev\TestServer";
                 return Path.Combine(serverPath, "server");
             }
         }

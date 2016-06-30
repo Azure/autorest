@@ -16,7 +16,7 @@
     "moment": "*"
   },
   "scripts": {
-    "pretest": "npm install --prefix ../TestServer/server && npm install",
+    "pretest": "npm install --prefix ../src/dev/TestServer/server && npm install",
     "test": "node unit.js testlist.txt"
   }
 }

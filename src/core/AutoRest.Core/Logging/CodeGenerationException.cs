@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Microsoft.Rest.Generator.Logging
+namespace AutoRest.Core.Logging
 {
     /// <summary>
     /// Code generation aggregate exception.

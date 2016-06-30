@@ -1,17 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.Properties;
-using Microsoft.Rest.Generator.Java.Templates;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Java.Properties;
+using AutoRest.Java.TemplateModels;
+using AutoRest.Java.Templates;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java
 {
     public class JavaCodeGenerator : CodeGenerator
     {

@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines enumeration values.

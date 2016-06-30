@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     /// <summary>
     /// Attribute used for extending parameters with aliases.

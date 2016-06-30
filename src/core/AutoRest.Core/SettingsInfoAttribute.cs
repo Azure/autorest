@@ -3,12 +3,12 @@
 
 using System;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     /// <summary>
     /// Helper attribute used for documentation generation in AutoRest command line interface.
     /// </summary>
-    [AttributeUsageAttribute(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property)]
     public sealed class SettingsInfoAttribute : Attribute
     {
         private string _documentation;

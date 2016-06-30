@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 using Xunit;
 
 namespace AutoRest.AzureResourceSchema.Tests

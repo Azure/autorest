@@ -5,12 +5,12 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Modeler.Swagger.Model;
-using Microsoft.Rest.Modeler.Swagger.Properties;
-using ParameterLocation = Microsoft.Rest.Modeler.Swagger.Model.ParameterLocation;
+using AutoRest.Core.ClientModel;
+using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Properties;
+using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     public static class CollectionFormatBuilder
     {

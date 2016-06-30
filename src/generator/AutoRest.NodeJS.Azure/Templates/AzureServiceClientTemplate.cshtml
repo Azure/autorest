@@ -1,11 +1,9 @@
-﻿@using Microsoft.Rest.Generator.NodeJS
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Azure.NodeJS
-@using Microsoft.Rest.Generator.NodeJS.Templates
-@using Microsoft.Rest.Generator.Azure.NodeJS.Templates
-@using Microsoft.Rest.Generator.Utilities
-@using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.NodeJS.AzureServiceClientTemplateModel>
+﻿@using System.Linq
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.Azure.TemplateModels
+@using AutoRest.NodeJS.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureServiceClientTemplateModel>
 /*
 @Header(" * ")
  */

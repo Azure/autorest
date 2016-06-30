@@ -1,9 +1,7 @@
 ﻿@using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Java
-@using Microsoft.Rest.Generator.Java.TemplateModels
-@using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.ServiceClientTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
 /**
  * The interface defining all the services for @Model.Name to be
  * used by Retrofit to perform actually REST calls.
@@ -19,7 +17,7 @@ else
 {
 @:    @@Headers("Content-Type: @method.RequestContentType")
 }
-if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
+if (method.HttpMethod == HttpMethod.Delete)
 {
 @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
 }

@@ -1,13 +1,9 @@
 @using System
-@using Microsoft.Rest.Generator.NodeJS
-@using Microsoft.Rest.Generator.NodeJS.Templates
-@using Microsoft.Rest.Generator.NodeJS.TemplateModels
-@using Microsoft.Rest.Generator.Azure.NodeJS
-@using Microsoft.Rest.Generator.Azure.NodeJS.Templates
-@using Microsoft.Rest.Generator.Utilities
-@using Microsoft.Rest.Generator.ClientModel
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.NodeJS.AzureMethodTemplateModel>
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.TemplateModels
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodTemplateModel>
 
 @if (!Model.IsLongRunningOperation)
 {

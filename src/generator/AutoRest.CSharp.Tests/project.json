@@ -1,17 +1,17 @@
 {
-  "version": "2.0.0",
+  "version": "2.0.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
     "summary": "Generator.CSharp Tests.",
     "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
     "projectUrl": "https://github.com/Azure/AutoRest",
-    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
   },
   
   "buildOptions": {
     "compile": {
-     "exclude": [ "CSharpCodeNamingFrameworkTests.*" ],
+     "exclude": [ "CSharpCodeNamingFrameworkTests.*" ]
     }
   },
 
@@ -25,10 +25,10 @@
   "dependencies": {
     "Microsoft.NETCore.App": {
       "type": "platform",
-      "version": "1.0.0"
+      "version": "1.0.0-*"
     }, 
     "Microsoft.NETCore.Platforms": "1.0.1",
-    "Microsoft.Rest.ClientRuntime": "[2.3.1,3.0)",
+    "Microsoft.Rest.ClientRuntime":{ "target": "project"},
     "Microsoft.Extensions.Logging": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Filter": "1.0.0",

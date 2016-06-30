@@ -48,15 +48,17 @@ using Fixtures.AcceptanceTestsUrl.Models;
 using Fixtures.AcceptanceTestsValidation;
 using Fixtures.PetstoreV2;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest.Generator.CSharp.Tests;
+using AutoRest.CSharp.Tests;
 using Newtonsoft.Json;
 using Xunit;
+using Microsoft.Rest;
+using Microsoft.Rest.Serialization;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 
 namespace AutoRest.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
-    [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
+    [TestCaseOrderer("AutoRest.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>, IDisposable
     {

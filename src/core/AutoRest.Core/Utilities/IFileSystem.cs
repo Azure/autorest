@@ -3,7 +3,7 @@
 
 using System.IO;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     public interface IFileSystem
     {

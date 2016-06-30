@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Microsoft.Rest.Generator.Extensibility
+namespace AutoRest.Core.Extensibility
 {
     /// <summary>
     /// In-memory representation of AutoRest.json configuration.

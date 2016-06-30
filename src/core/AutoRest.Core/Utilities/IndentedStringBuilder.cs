@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     /// <summary>
     /// Custom string builder with indentation support.

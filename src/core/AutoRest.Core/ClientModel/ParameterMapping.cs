@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-namespace Microsoft.Rest.Generator.ClientModel
+using System;
+using System.Globalization;
+
+namespace AutoRest.Core.ClientModel
 {
-    using System;
-    using System.Globalization;
-    using Utilities;
     /// <summary>
     /// Defines a parameter mapping.
     /// </summary>

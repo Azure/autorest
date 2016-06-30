@@ -5,8 +5,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
 using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
 using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
@@ -20,11 +23,19 @@ using Fixtures.Azure.AcceptanceTestsLro;
 using Fixtures.Azure.AcceptanceTestsLro.Models;
 using Fixtures.Azure.AcceptanceTestsPaging;
 using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
+using Xunit;
+using AutoRest.CSharp.Tests.Utilities;
+using AutoRest.CSharp.Tests;
+using Microsoft.Rest;
+using Microsoft.Rest.Azure;
+using Microsoft.Rest.Azure.OData;
+using System.Linq;
+using ValidationException = Microsoft.Rest.ValidationException;
 
 namespace AutoRest.CSharp.Azure.Tests
 {
     [Collection("AutoRest Tests")]
-    [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
+    [TestCaseOrderer("AutoRest.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {

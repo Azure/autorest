@@ -3,7 +3,7 @@
 
 using System.Globalization;
 
-namespace Microsoft.Rest.Generator.ClientModel
+namespace AutoRest.Core.ClientModel
 {
     /// <summary>
     /// Defines a collection data type.

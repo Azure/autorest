@@ -4,11 +4,11 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.Cli.Properties;
-using Microsoft.Rest.Generator.Extensibility;
-using Microsoft.Rest.Generator.Logging;
+using AutoRest.Core;
+using AutoRest.Core.Logging;
+using AutoRest.Properties;
 
-namespace Microsoft.Rest.Generator.Cli
+namespace AutoRest
 {
     internal class Program
     {
@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Cli
                     }
                     else
                     {
-                        AutoRest.Generate(settings);
+                        Core.AutoRest.Generate(settings);
                     }
                 }
                 catch (CodeGenerationException)

@@ -1,13 +1,7 @@
-﻿using Microsoft.Rest.Generator.ClientModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+﻿using System.Collections.Generic;
+using AutoRest.Core.ClientModel;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java.TypeModels
 {
     public interface ITypeModel : IType
     {

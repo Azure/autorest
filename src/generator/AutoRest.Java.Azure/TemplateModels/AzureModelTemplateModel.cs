@@ -4,12 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Java.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace AutoRest.Java.Azure.TemplateModels
 {
     public class AzureModelTemplateModel : ModelTemplateModel
     {

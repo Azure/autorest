@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.Azure.Ruby.Templates;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby;
-using Microsoft.Rest.Generator.Ruby.Templates;
+using AutoRest.Ruby.Azure.TemplateModels;
+using AutoRest.Ruby.Azure.Templates;
+using AutoRest.Ruby.TemplateModels;
+using AutoRest.Ruby.Templates;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby
+namespace AutoRest.Ruby.Azure
 {
     /// <summary>
     /// A class with main code generation logic for Azure.Ruby.

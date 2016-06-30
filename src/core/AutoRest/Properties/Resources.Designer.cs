@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Rest.Generator.Cli.Properties {
+namespace AutoRest.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Cli.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microsoft.Rest.Generator.Cli.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutoRest.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -110,6 +110,12 @@ namespace Microsoft.Rest.Generator.Cli.Properties {
         ///
         ///$parameters-end$
         ///
+        ///##Code Generators
+        ///$generators-start$
+        ///**-$generator$** $generator-desc$
+        ///
+        ///$generators-end$
+        ///
         ///##Examples
         ///$examples-start$
         ///- $example-desc$
@@ -135,6 +141,11 @@ namespace Microsoft.Rest.Generator.Cli.Properties {
         ///$parameters-start$
         ///  -$parameter$: $parameter-desc$
         ///$parameters-end$
+        ///
+        ///Code Generators:
+        ///$generators-start$
+        ///  -$generator$: $generator-desc$
+        ///$generators-end$
         ///
         ///Examples:
         ///$examples-start$

@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Extensions;
 
 namespace AutoRest.CSharp
 {
@@ -24,8 +25,8 @@ namespace AutoRest.CSharp
                 return false;
             }
 
-            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
-                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+            return parameter.Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[SwaggerExtensions.SkipUrlEncodingExtension];
         }
 
         /// <summary>

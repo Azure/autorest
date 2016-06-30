@@ -2,23 +2,21 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Globalization;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Modeler.CompositeSwagger.Properties;
+using System.Linq;
+using AutoRest.CompositeSwagger.Model;
+using AutoRest.CompositeSwagger.Properties;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Microsoft.Rest.Modeler.Swagger;
-using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Converters;
-using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Modeler.CompositeSwagger
+namespace AutoRest.CompositeSwagger
 {
-    public class CompositeSwaggerModeler : Generator.Modeler
+    public class CompositeSwaggerModeler : Modeler
     {
         public CompositeSwaggerModeler(Settings settings) : base(settings)
         {

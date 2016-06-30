@@ -3,11 +3,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Python.TemplateModels;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator.Python
+namespace AutoRest.Python.TemplateModels
 {
     public class MethodGroupTemplateModel : ServiceClient
     {

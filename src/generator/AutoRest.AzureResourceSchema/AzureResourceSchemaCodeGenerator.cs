@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 
 namespace AutoRest.AzureResourceSchema
 {

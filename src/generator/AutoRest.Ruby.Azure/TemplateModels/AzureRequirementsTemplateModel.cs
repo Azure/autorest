@@ -2,12 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
+using AutoRest.Core.ClientModel;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby;
+using AutoRest.Ruby.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby
+namespace AutoRest.Ruby.Azure.TemplateModels
 {
     /// <summary>
     /// Model class which represents data for the rendering sdk_requirements file.

@@ -4,7 +4,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.Swagger.Model
 {
     /// <summary>
     /// The object provides metadata about the API. 

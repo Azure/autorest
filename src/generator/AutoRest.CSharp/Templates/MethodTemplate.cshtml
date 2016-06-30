@@ -1,11 +1,11 @@
 ﻿@using System.Globalization
 @using System.Linq;
 @using System
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
 @using AutoRest.CSharp
 @using AutoRest.CSharp.TemplateModels
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<AutoRest.CSharp.TemplateModels.MethodTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.MethodTemplateModel>
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
 {

@@ -3,10 +3,10 @@
 
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Test.Templates;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Tests.Templates;
 
-namespace Microsoft.Rest.Generator.Test.Resource
+namespace AutoRest.Core.Tests.Resource
 {
     public class SampleCodeGenerator : CodeGenerator
     {

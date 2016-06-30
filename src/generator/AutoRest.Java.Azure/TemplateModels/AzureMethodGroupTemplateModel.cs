@@ -1,15 +1,12 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Java.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure
+namespace AutoRest.Java.Azure.TemplateModels
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {

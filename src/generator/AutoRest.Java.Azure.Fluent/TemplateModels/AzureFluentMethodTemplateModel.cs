@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.Azure.Properties;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
-using System.Net;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Java.Azure.Fluent.TypeModels;
+using AutoRest.Java.Azure.TemplateModels;
+using AutoRest.Java.Azure.TypeModels;
+using AutoRest.Java.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent
+namespace AutoRest.Java.Azure.Fluent.TemplateModels
 {
     public class AzureFluentMethodTemplateModel : AzureMethodTemplateModel
     {

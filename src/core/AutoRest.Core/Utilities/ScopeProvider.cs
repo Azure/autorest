@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     /// <summary>
     /// Provides scope for variable names.

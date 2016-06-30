@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Extensions
@@ -189,7 +189,7 @@ namespace AutoRest.Extensions
                     {
                         Name = parameterGroup.Name,
                         IsRequired = isGroupParameterRequired,
-                        Location = Microsoft.Rest.Generator.ClientModel.ParameterLocation.None,
+                        Location = ParameterLocation.None,
                         SerializedName = string.Empty,
                         Type = parameterGroupType,
                         Documentation = "Additional parameters for the operation"

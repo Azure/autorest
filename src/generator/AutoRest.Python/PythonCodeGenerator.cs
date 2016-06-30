@@ -1,20 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Python.Properties;
-using Microsoft.Rest.Generator.Python.Templates;
-using Microsoft.Rest.Generator.Python.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
+using AutoRest.Python.Properties;
+using AutoRest.Python.TemplateModels;
+using AutoRest.Python.Templates;
 
-namespace Microsoft.Rest.Generator.Python
+namespace AutoRest.Python
 {
     public class PythonCodeGenerator : CodeGenerator
     {

@@ -1,11 +1,10 @@
-﻿using Microsoft.Rest.Generator.ClientModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Rest.Generator.Utilities;
+﻿using System;
 using System.Globalization;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Java.Azure.TypeModels;
 
-namespace Microsoft.Rest.Generator.Java.Azure.Fluent
+namespace AutoRest.Java.Azure.Fluent.TypeModels
 {
     public class FluentCompositeTypeModel : AzureCompositeTypeModel
     {

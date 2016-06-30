@@ -6,13 +6,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure.Model;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Modeler.Swagger;
+using AutoRest.Extensions.Azure.Properties;
+using AutoRest.Swagger;
+using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
+using ParameterLocation = AutoRest.Core.ClientModel.ParameterLocation;
 
 namespace AutoRest.Extensions.Azure
 {
@@ -371,9 +374,9 @@ namespace AutoRest.Extensions.Azure
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
                             nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
-                                new Microsoft.Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                                new Operation { OperationId = pageableExtension.OperationName }));
                             nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
-                                new Microsoft.Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                                new Operation { OperationId = pageableExtension.OperationName }));
                         }
                         else
                         {

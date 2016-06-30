@@ -2,10 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Python;
+using AutoRest.Core.ClientModel;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace AutoRest.Python.Azure
 {
     public class AzurePythonCodeNamer : PythonCodeNamer
     {

@@ -3,11 +3,11 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Ruby;
-using Microsoft.Rest.Generator.Utilities;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
+using AutoRest.Ruby.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.Ruby
+namespace AutoRest.Ruby.Azure.TemplateModels
 {
     /// <summary>
     /// The model for the Azure service client.

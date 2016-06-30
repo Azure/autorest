@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core;
+using AutoRest.Core.ClientModel;
 
 namespace AutoRest.Extensions.Azure.Tests
 {

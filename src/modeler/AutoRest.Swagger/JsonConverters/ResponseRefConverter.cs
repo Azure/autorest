@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using Microsoft.Rest.Modeler.Swagger.Model;
+using System;
+using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 
-namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
+namespace AutoRest.Swagger.JsonConverters
 {
     public class ResponseRefConverter : SwaggerJsonConverter
     {

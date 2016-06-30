@@ -4,14 +4,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using System.Text;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.Python.TemplateModels;
-using Microsoft.Rest.Generator.Python;
+using AutoRest.Python.TemplateModels;
 
-namespace Microsoft.Rest.Generator.Azure.Python
+namespace AutoRest.Python.Azure.TemplateModels
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {

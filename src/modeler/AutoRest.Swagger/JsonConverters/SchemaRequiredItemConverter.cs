@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Rest.Modeler.Swagger.Model;
+using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
+namespace AutoRest.Swagger.JsonConverters
 {
     public class SchemaRequiredItemConverter : SwaggerJsonConverter
     {

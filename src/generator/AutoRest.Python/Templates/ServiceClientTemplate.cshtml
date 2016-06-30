@@ -1,10 +1,10 @@
-﻿@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Python
-@using Microsoft.Rest.Generator.Python.Templates
-@using Microsoft.Rest.Generator.Python.TemplateModels
-@using Microsoft.Rest.Generator.Utilities
+﻿@using AutoRest.Python.Templates
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@using AutoRest.Python
+@using AutoRest.Python.TemplateModels
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()

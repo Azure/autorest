@@ -3,17 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
-using Microsoft.Rest.Generator.Utilities;
-using System.Globalization;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     public class Settings
     {

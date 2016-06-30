@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Rest.Generator.Logging;
+using AutoRest.Core.Logging;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.Test
+namespace AutoRest.Core.Tests
 {
     [Collection("AutoRest Tests")]
     public class AutoRestSettingsTests

@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
+using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
-namespace Microsoft.Rest.Generator.Ruby
+namespace AutoRest.Ruby.TemplateModels
 {
     /// <summary>
     /// The model for the service client template.

@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java
 {
     public class ScopeProvider : IScopeProvider
     {

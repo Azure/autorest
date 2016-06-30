@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 
 namespace AutoRest.AzureResourceSchema
 {

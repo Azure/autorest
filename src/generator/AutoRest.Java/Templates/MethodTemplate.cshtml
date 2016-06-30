@@ -1,9 +1,9 @@
 ﻿@using System.Linq;
-@using Microsoft.Rest.Generator.ClientModel
-@using Microsoft.Rest.Generator.Java
-@using Microsoft.Rest.Generator.Java.TemplateModels
-@using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.MethodTemplateModel>
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@using AutoRest.Java.TypeModels
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.MethodTemplateModel>
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>

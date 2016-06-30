@@ -9,9 +9,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Microsoft.Rest.Generator.ClientModel;
+using AutoRest.Core.ClientModel;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     /// <summary>
     /// Provides useful extension methods to simplify common coding tasks.

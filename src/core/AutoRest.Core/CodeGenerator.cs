@@ -6,12 +6,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
-using Microsoft.Rest.Generator.Logging;
-using Microsoft.Rest.Generator.Properties;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 
-namespace Microsoft.Rest.Generator
+namespace AutoRest.Core
 {
     public abstract class CodeGenerator
     {

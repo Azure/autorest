@@ -36,13 +36,13 @@ from os.path import dirname, pardir, join, realpath
 
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
-sys.path.append(join(root, "ClientRuntimes", "Python", "msrest"))
-sys.path.append(join(root, "ClientRuntimes", "Python", "msrestazure"))
+sys.path.append(join(root, "src","client", "Python", "msrest"))
+sys.path.append(join(root, "src","client", "Python", "msrestazure"))
 
 
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():
-    cmd = "node ../../../../AutoRest/TestServer/server/startup/www.js"
+    cmd = "node ../../../dev/TestServer/server/startup/www.js"
     if os.name == 'nt': #On windows, subprocess creation works without being in the shell
         return subprocess.Popen(cmd)
     

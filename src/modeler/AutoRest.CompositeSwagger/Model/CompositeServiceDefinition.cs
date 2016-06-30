@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using AutoRest.Swagger.Model;
 
-namespace Microsoft.Rest.Modeler.Swagger.Model
+namespace AutoRest.CompositeSwagger.Model
 {
     /// <summary>
     /// Class that represents a Composite Swagger schema

@@ -5,7 +5,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
+namespace AutoRest.Swagger.JsonConverters
 {
     public abstract class SwaggerJsonConverter : JsonConverter
     {

@@ -4,12 +4,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Java.TemplateModels;
-using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.Java
+namespace AutoRest.Java.TemplateModels
 {
     public class ServiceClientTemplateModel : ServiceClient
     {

@@ -18,7 +18,7 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "file:../../../../ClientRuntimes/NodeJS/ms-rest",
+    "ms-rest": "file:../../client/NodeJS/ms-rest",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
@@ -39,7 +39,7 @@
     "url": "http://github.com/Azure/AutoRest/issues"
   },
   "scripts": {
-    "pretest": "npm install --prefix ../../../TestServer/server && npm install",
+    "pretest": "npm install --prefix ../../dev/TestServer/server && npm install",
     "build": "tsc",
     "test": "npm -s run-script build && npm -s run-script unit",
     "unit": "node unit.js testlist.txt list",

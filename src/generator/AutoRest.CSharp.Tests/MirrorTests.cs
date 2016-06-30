@@ -13,7 +13,7 @@ using Fixtures.MirrorPrimitives;
 using Fixtures.MirrorRecursiveTypes;
 using Fixtures.MirrorSequences;
 using Fixtures.MirrorSequences.Models;
-using Microsoft.Rest.Generator.CSharp.Tests;
+using AutoRest.CSharp.Tests;
 using Xunit;
 
 namespace AutoRest.CSharp.Tests

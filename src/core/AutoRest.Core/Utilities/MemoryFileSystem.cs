@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable

@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.IO;
-using Microsoft.Rest.Generator;
+using AutoRest.Core;
 using Xunit;
 
-namespace Microsoft.Rest.Modeler.Swagger.Tests
+namespace AutoRest.Swagger.Tests
 {
     [Collection("AutoRest Tests")]
     public class VendorExtensionInPath

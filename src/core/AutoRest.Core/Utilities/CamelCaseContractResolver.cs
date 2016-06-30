@@ -7,7 +7,7 @@ using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.Rest.Generator.Utilities
+namespace AutoRest.Core.Utilities
 {
     /// <summary>
     /// Used by Newtonsoft.Json.JsonSerializer to resolve a 

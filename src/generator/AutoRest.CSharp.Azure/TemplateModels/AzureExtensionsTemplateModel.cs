@@ -3,10 +3,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.CSharp.TemplateModels;
 using AutoRest.Extensions.Azure;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
 
 namespace AutoRest.CSharp.Azure.TemplateModels
 {

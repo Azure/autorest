@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Modeler.Swagger.Model;
+using AutoRest.Swagger.Model;
 
-namespace Microsoft.Rest.Modeler.Swagger
+namespace AutoRest.Swagger
 {
     /// <summary>
     /// Methods for normalizing and evaluating swagger schemas in their context in a swagger spec

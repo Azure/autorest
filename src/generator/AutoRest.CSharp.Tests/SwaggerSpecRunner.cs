@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 
-namespace Microsoft.Rest.Generator.CSharp.Tests
+namespace AutoRest.CSharp.Tests
 {
     public static class SwaggerSpecRunner
     {
