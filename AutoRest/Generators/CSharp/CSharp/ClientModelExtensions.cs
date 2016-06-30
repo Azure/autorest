@@ -151,19 +151,24 @@ namespace Microsoft.Rest.Generator.CSharp
 
             string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
             string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
-
-            string firstWord = summary.TrimStart().Split(' ').First();
-            if (firstWord.Length <= 1)
+            if (!summary.TrimStart().StartsWith("Gets ", true, CultureInfo.InvariantCulture))
             {
-                documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                string firstWord = summary.TrimStart().Split(' ').First();
+                if (firstWord.Length <= 1)
+                {
+                    documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                }
+                else
+                {
+                    documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
+                        ? summary
+                        : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                }
             }
             else
             {
-                documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
-                    ? summary
-                    : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                documentation = summary;
             }
-
             return documentation.EscapeXmlComment();
         }
 
