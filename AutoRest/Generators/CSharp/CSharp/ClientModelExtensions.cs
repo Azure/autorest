@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
             string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
-            if (!summary.TrimStart().StartsWith("Gets ", true, CultureInfo.InvariantCulture))
+            if (!summary.TrimStart().StartsWith("Gets ", StringComparison.OrdinalIgnoreCase))
             {
                 string firstWord = summary.TrimStart().Split(' ').First();
                 if (firstWord.Length <= 1)
