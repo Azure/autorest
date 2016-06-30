@@ -20,7 +20,7 @@ public class StorageAccountRegenerateKeyParameters {
      *
      * @return the keyName value
      */
-    public String getKeyName() {
+    public String keyName() {
         return this.keyName;
     }
 
@@ -28,9 +28,11 @@ public class StorageAccountRegenerateKeyParameters {
      * Set the keyName value.
      *
      * @param keyName the keyName value to set
+     * @return the StorageAccountRegenerateKeyParameters object itself.
      */
-    public void setKeyName(String keyName) {
+    public StorageAccountRegenerateKeyParameters withKeyName(String keyName) {
         this.keyName = keyName;
+        return this;
     }
 
 }

@@ -32,7 +32,7 @@ public class CheckNameAvailabilityResult {
      *
      * @return the nameAvailable value
      */
-    public Boolean getNameAvailable() {
+    public Boolean nameAvailable() {
         return this.nameAvailable;
     }
 
@@ -40,9 +40,11 @@ public class CheckNameAvailabilityResult {
      * Set the nameAvailable value.
      *
      * @param nameAvailable the nameAvailable value to set
+     * @return the CheckNameAvailabilityResult object itself.
      */
-    public void setNameAvailable(Boolean nameAvailable) {
+    public CheckNameAvailabilityResult withNameAvailable(Boolean nameAvailable) {
         this.nameAvailable = nameAvailable;
+        return this;
     }
 
     /**
@@ -50,7 +52,7 @@ public class CheckNameAvailabilityResult {
      *
      * @return the reason value
      */
-    public Reason getReason() {
+    public Reason reason() {
         return this.reason;
     }
 
@@ -58,9 +60,11 @@ public class CheckNameAvailabilityResult {
      * Set the reason value.
      *
      * @param reason the reason value to set
+     * @return the CheckNameAvailabilityResult object itself.
      */
-    public void setReason(Reason reason) {
+    public CheckNameAvailabilityResult withReason(Reason reason) {
         this.reason = reason;
+        return this;
     }
 
     /**
@@ -68,7 +72,7 @@ public class CheckNameAvailabilityResult {
      *
      * @return the message value
      */
-    public String getMessage() {
+    public String message() {
         return this.message;
     }
 
@@ -76,9 +80,11 @@ public class CheckNameAvailabilityResult {
      * Set the message value.
      *
      * @param message the message value to set
+     * @return the CheckNameAvailabilityResult object itself.
      */
-    public void setMessage(String message) {
+    public CheckNameAvailabilityResult withMessage(String message) {
         this.message = message;
+        return this;
     }
 
 }

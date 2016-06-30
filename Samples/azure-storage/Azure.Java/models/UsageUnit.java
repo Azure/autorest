@@ -23,10 +23,10 @@ public enum UsageUnit {
     PERCENT("Percent"),
 
     /** Enum value CountsPerSecond. */
-    COUNTSPERSECOND("CountsPerSecond"),
+    COUNTS_PER_SECOND("CountsPerSecond"),
 
     /** Enum value BytesPerSecond. */
-    BYTESPERSECOND("BytesPerSecond");
+    BYTES_PER_SECOND("BytesPerSecond");
 
     /** The actual serialized value for a UsageUnit instance. */
     private String value;
@@ -36,34 +36,25 @@ public enum UsageUnit {
     }
 
     /**
-     * Gets the serialized value for a UsageUnit instance.
-     *
-     * @return the serialized value.
-     */
-    @JsonValue
-    public String toValue() {
-        return this.value;
-    }
-
-    /**
      * Parses a serialized value to a UsageUnit instance.
      *
      * @param value the serialized value to parse.
      * @return the parsed UsageUnit object, or null if unable to parse.
      */
     @JsonCreator
-    public static UsageUnit fromValue(String value) {
+    public static UsageUnit fromString(String value) {
         UsageUnit[] items = UsageUnit.values();
         for (UsageUnit item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
 
+    @JsonValue
     @Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }
