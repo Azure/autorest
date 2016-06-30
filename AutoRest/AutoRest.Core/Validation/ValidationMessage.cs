@@ -7,7 +7,7 @@ namespace Microsoft.Rest.Generator
 {
     public class ValidationMessage
     {
-        private IList<string> _path = new List<string>();
+        private IList<string> _location = new List<string>();
 
         public ValidationExceptionName ValidationException { get; set; }
 
@@ -17,14 +17,14 @@ namespace Microsoft.Rest.Generator
 
         public LogEntrySeverity Severity { get; set; }
 
-        public IList<string> Path
+        public IList<string> Location
         {
-            get { return this._path; }
+            get { return this._location; }
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}: {1}\n    Location: Path: {2}", ValidationException, Message, string.Join("->", Path.Reverse()));
+            return string.Format(CultureInfo.InvariantCulture, "{0}: {1}\n    Location: {2}", ValidationException, Message, string.Join("->", Location.Reverse()));
         }
     }
 }

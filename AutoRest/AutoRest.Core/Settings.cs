@@ -278,7 +278,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 {
                     PropertyInfo property = entityToPopulate.GetType().GetProperties()
                         .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
-                                             p.GetCustomAttributes<SettingsAliasAttribute>()
+                                             CustomAttributeExtensions.GetCustomAttributes<SettingsAliasAttribute>(p)
                                                 .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
 
                     if (property != null)
@@ -336,7 +336,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
             {
                 // If property value is not set - throw exception.
-                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
+                var doc = CustomAttributeExtensions.GetCustomAttributes<SettingsInfoAttribute>(property).FirstOrDefault();
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
                     Logger.LogError(new ArgumentException(property.Name),

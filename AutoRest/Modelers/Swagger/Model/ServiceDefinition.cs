@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
-        [IterableRule(typeof(AnonymousTypes))]
+        [InheritableRule(typeof(AnonymousTypes))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>

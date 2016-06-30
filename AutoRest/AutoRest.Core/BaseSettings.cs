@@ -150,7 +150,7 @@ namespace Microsoft.Rest.Generator
                 {
                     PropertyInfo property = entityToPopulate.GetType().GetProperties()
                         .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
-                                             p.GetCustomAttributes<SettingsAliasAttribute>()
+                                             CustomAttributeExtensions.GetCustomAttributes<SettingsAliasAttribute>(p)
                                                 .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
 
                     if (property != null)

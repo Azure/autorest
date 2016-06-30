@@ -88,7 +88,7 @@ namespace Microsoft.Rest.Generator.Cli
             var parameters = new List<Tuple<string, SettingsInfoAttribute>>();
             foreach (PropertyInfo property in typeof(Settings).GetProperties())
             {
-                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
+                var doc = CustomAttributeExtensions.GetCustomAttributes<SettingsInfoAttribute>(property).FirstOrDefault();
 
                 if (doc != null)
                 {
@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.Cli
                 {
                     string documentation = doc.Documentation;
                     string aliases = string.Join(", ",
-                        property.GetCustomAttributes<SettingsAliasAttribute>().Select(a => "-" + a.Alias));
+                        CustomAttributeExtensions.GetCustomAttributes<SettingsAliasAttribute>(property).Select(a => "-" + a.Alias));
                     if (!string.IsNullOrWhiteSpace(aliases))
                     {
                         documentation += " Aliases: " + aliases;
