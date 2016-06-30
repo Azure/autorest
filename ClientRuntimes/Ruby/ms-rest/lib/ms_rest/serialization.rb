@@ -206,6 +206,13 @@ module MsRest
       def serialize(mapper, object, object_name)
         object_name = mapper[:serialized_name] unless object_name.nil?
 
+        # Set defaults
+        unless mapper[:default_value].nil?
+          object = mapper[:default_value] if object.nil?
+        end
+        object = mapper[:default_value] if mapper[:is_constant]
+
+        # Throw if required & non-constant object is nil
         if mapper[:required] && object.nil? && !mapper[:is_constant]
           fail ValidationError, "#{object_name} is required and cannot be nil"
         end
@@ -213,12 +220,6 @@ module MsRest
         if !mapper[:required] && object.nil?
           return object
         end
-
-        # Set defaults
-        unless mapper[:default_value].nil?
-          object = mapper[:default_value] if object.nil?
-        end
-        object = mapper[:default_value] if mapper[:is_constant]
 
         payload = Hash.new
         mapper_type = mapper[:type][:name]
@@ -319,10 +320,15 @@ module MsRest
               instance_variable.validate
             end
 
+            # Read only properties should not be sent on wire
+            if !model_props[key][:read_only].nil? && model_props[key][:read_only]
+              next
+            end
+
             sub_payload = serialize(value, instance_variable, object_name)
 
             unless value[:serialized_name].to_s.include? '.'
-              payload[value[:serialized_name].to_s] = sub_payload unless instance_variable.nil?
+              payload[value[:serialized_name].to_s] = sub_payload unless sub_payload.nil?
             else
               # Flattened properties will be discovered at higher levels in model class but must be serialized to deeper level in payload
               levels = split_serialized_name(value[:serialized_name].to_s)

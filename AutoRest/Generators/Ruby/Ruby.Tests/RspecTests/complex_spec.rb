@@ -462,6 +462,38 @@ describe 'Complex' do
     result = @client.primitive.put_byte_async(@byte_wrapper).value!
     expect(result.response.status).to eq(200)
   end
+
+  it 'should get complex primitive string type' do
+    result = @client.primitive.get_string_async().value!
+    expect(result.response.status).to eq(200)
+
+    string_wrapper = result.body
+    expect(string_wrapper).to be_instance_of(StringWrapper)
+    expect(string_wrapper.field).to eq('goodrequest')
+    expect(string_wrapper.empty).to eq('')
+  end
+
+  it 'should put complex primitive string type' do
+    string_wrapper = StringWrapper.new
+    string_wrapper.field = 'goodrequest'
+    string_wrapper.empty = ''
+
+    result = @client.primitive.put_string_async(string_wrapper).value!
+    expect(result.response.status).to eq(200)
+  end
+
+  it 'should get & put complex readonly property valid' do
+    result = @client.readonlyproperty.get_valid_async().value!
+    expect(result.response.status).to eq(200)
+
+    readonly_obj = result.body
+    expect(readonly_obj).to be_instance_of(ReadonlyObj)
+    expect(readonly_obj.id).to eq('1234')
+    expect(readonly_obj.size).to eq(2)
+
+    result = @client.readonlyproperty.put_valid_async(readonly_obj).value!
+    expect(result.response.status).to eq(200)
+  end
 end
 
 end

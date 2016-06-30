@@ -72,4 +72,13 @@ describe String do
   it 'should correctly handle invalid values for enum' do
     expect { @enum_client.put_not_expandable_async('orange color').value! }.to raise_error(MsRest::ValidationError)
   end
+  it 'should get non-expandable enum' do
+    result = @enum_client.get_not_expandable_async().value!
+    expect(result.response.status).to eq(200)
+    expect(result.body).to eq(StringModule::Models::Colors::Redcolor)
+  end
+  it 'should put non-expandable enum' do
+    result = @enum_client.put_not_expandable_async(StringModule::Models::Colors::Redcolor).value!
+    expect(result.response.status).to eq(200)
+  end
 end
