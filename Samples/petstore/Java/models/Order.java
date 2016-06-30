@@ -47,7 +47,7 @@ public class Order {
      *
      * @return the id value
      */
-    public Long getId() {
+    public Long id() {
         return this.id;
     }
 
@@ -56,7 +56,7 @@ public class Order {
      *
      * @return the petId value
      */
-    public Long getPetId() {
+    public Long petId() {
         return this.petId;
     }
 
@@ -64,9 +64,11 @@ public class Order {
      * Set the petId value.
      *
      * @param petId the petId value to set
+     * @return the Order object itself.
      */
-    public void setPetId(Long petId) {
+    public Order withPetId(Long petId) {
         this.petId = petId;
+        return this;
     }
 
     /**
@@ -74,7 +76,7 @@ public class Order {
      *
      * @return the quantity value
      */
-    public Integer getQuantity() {
+    public Integer quantity() {
         return this.quantity;
     }
 
@@ -82,9 +84,11 @@ public class Order {
      * Set the quantity value.
      *
      * @param quantity the quantity value to set
+     * @return the Order object itself.
      */
-    public void setQuantity(Integer quantity) {
+    public Order withQuantity(Integer quantity) {
         this.quantity = quantity;
+        return this;
     }
 
     /**
@@ -92,7 +96,7 @@ public class Order {
      *
      * @return the shipDate value
      */
-    public DateTime getShipDate() {
+    public DateTime shipDate() {
         return this.shipDate;
     }
 
@@ -100,9 +104,11 @@ public class Order {
      * Set the shipDate value.
      *
      * @param shipDate the shipDate value to set
+     * @return the Order object itself.
      */
-    public void setShipDate(DateTime shipDate) {
+    public Order withShipDate(DateTime shipDate) {
         this.shipDate = shipDate;
+        return this;
     }
 
     /**
@@ -110,7 +116,7 @@ public class Order {
      *
      * @return the status value
      */
-    public String getStatus() {
+    public String status() {
         return this.status;
     }
 
@@ -118,9 +124,11 @@ public class Order {
      * Set the status value.
      *
      * @param status the status value to set
+     * @return the Order object itself.
      */
-    public void setStatus(String status) {
+    public Order withStatus(String status) {
         this.status = status;
+        return this;
     }
 
     /**
@@ -128,7 +136,7 @@ public class Order {
      *
      * @return the complete value
      */
-    public Boolean getComplete() {
+    public Boolean complete() {
         return this.complete;
     }
 
@@ -136,9 +144,11 @@ public class Order {
      * Set the complete value.
      *
      * @param complete the complete value to set
+     * @return the Order object itself.
      */
-    public void setComplete(Boolean complete) {
+    public Order withComplete(Boolean complete) {
         this.complete = complete;
+        return this;
     }
 
 }

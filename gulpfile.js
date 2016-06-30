@@ -88,7 +88,9 @@ var rubyMappings = {
   'report':['../../dev/TestServer/swagger/report.json','ReportModule'],
   'model_flattening':['../../dev/TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
   'parameter_flattening':['../../dev/TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
-  'parameter_grouping':['../../dev/TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule'],
+  'validation':['../../dev/TestServer/swagger/validation.json', 'ValidationModule'],
+  'custom_base_uri':['../../devTestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
+  'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
 };
 
 var defaultAzureMappings = {
@@ -121,7 +123,7 @@ var nodeMappings = {
 };
 
 var rubyAzureMappings = {
-  'head':['../../dev/TestServer/swagger/head.json', 'HeadModule'],
+'head':['../../dev/TestServer/swagger/head.json', 'HeadModule'],
   'head_exceptions':['../../dev/TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
   'paging':['../../dev/TestServer/swagger/paging.json', 'PagingModule'],
   'azure_resource':['../../dev/TestServer/swagger/azure-resource.json', 'AzureResourceModule'],
@@ -129,8 +131,7 @@ var rubyAzureMappings = {
   'azure_url':['../../dev/TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../dev/TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
   'azure_report':['../../dev/TestServer/swagger/azure-report.json', 'AzureReportModule'],
-  'custom_base_uri':['../../dev/TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
-  'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule'],
+  'parameter_grouping':['../../dev/TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule']
 };
 
 gulp.task('regenerate:expected', function(cb){
@@ -749,11 +750,11 @@ gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task(
 gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
-//      'test:xunit',
-//      'test:clientruntime',
+      'test:xunit',
+      'test:clientruntime',
 // DISABLE      'test:nugetPackages:xunit',
-//      'test:node',
-//      'test:node:azure',
+      'test:node',
+      'test:node:azure',
 // DISABLE     'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',

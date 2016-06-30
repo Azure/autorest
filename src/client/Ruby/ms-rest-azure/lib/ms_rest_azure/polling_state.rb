@@ -35,7 +35,7 @@ module MsRestAzure
       update_response(azure_response.response)
       @resource = azure_response.body
 
-      if (!@resource.nil? && @resource.respond_to?(:provisioning_state) && !@resource.provisioning_state.nil?)
+      if !@resource.nil? && @resource.respond_to?(:provisioning_state) && !@resource.provisioning_state.nil?
         @status = @resource.provisioning_state
       else
         case @response.status
@@ -56,7 +56,7 @@ module MsRestAzure
     def get_delay
       return @retry_timeout unless @retry_timeout.nil?
 
-      if (!response.nil? && !response.headers['Retry-After'].nil?)
+      if !response.nil? && !response.headers['Retry-After'].nil?
         return response.headers['Retry-After'].to_i
       end
 
@@ -69,7 +69,7 @@ module MsRestAzure
     def update_response(response)
       @response = response
 
-      if (!response.nil?)
+      unless response.nil?
         @azure_async_operation_header_link = response.headers['Azure-AsyncOperation'] unless response.headers['Azure-AsyncOperation'].nil?
         @location_header_link = response.headers['Location'] unless response.headers['Location'].nil?
       end
@@ -94,6 +94,7 @@ module MsRestAzure
     
     def get_request(options = {})
       link = @azure_async_operation_header_link || @location_header_link
+      options[:connection] = create_connection(options[:base_uri])
       MsRest::HttpOperationRequest.new(nil, link, :get, options)
     end
 
@@ -101,6 +102,20 @@ module MsRestAzure
 
     # @return [Integer] retry timeout.
     attr_accessor :retry_timeout
+
+    attr_accessor :connection
+
+    def create_connection(base_url)
+      @connection ||= Faraday.new(:url => base_url) do |faraday|
+        [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]].each{ |args| faraday.use(*args) }
+        faraday.adapter Faraday.default_adapter
+        faraday.headers = request.headers
+        logging = ENV['AZURE_HTTP_LOGGING'] || request.log
+        if logging
+          faraday.response :logger, nil, { :bodies => logging == 'full' }
+        end
+      end
+    end
   end
 
 end

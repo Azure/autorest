@@ -23,7 +23,7 @@ public class Category {
      *
      * @return the id value
      */
-    public Long getId() {
+    public Long id() {
         return this.id;
     }
 
@@ -31,9 +31,11 @@ public class Category {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the Category object itself.
      */
-    public void setId(Long id) {
+    public Category withId(Long id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -41,7 +43,7 @@ public class Category {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -49,9 +51,11 @@ public class Category {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Category object itself.
      */
-    public void setName(String name) {
+    public Category withName(String name) {
         this.name = name;
+        return this;
     }
 
 }

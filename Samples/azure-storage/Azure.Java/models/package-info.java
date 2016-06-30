@@ -1,6 +1,6 @@
 
 /**
- * This package contains the model classes for StorageManagementClient.
+ * This package contains the models classes for StorageManagementClient.
  * The Storage Management Client.
  */
 package petstore.models;

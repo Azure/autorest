@@ -172,6 +172,11 @@ module HeaderModule
       expect(result.response.status).to eq(200)
     end
 
+    it 'should post empty param string' do
+      result = @header_client.param_string_async('empty', '').value!
+      expect(result.response.status).to eq(200)
+    end
+
     it 'should get valid response string' do
       result = @header_client.response_string_async("valid").value!
       expect(result.response.status).to eq(200)
@@ -207,41 +212,31 @@ module HeaderModule
     end
 
     it 'should get response min date' do
-      pending('proper working with datetime isnt implemented yet')
-      fail
-      # result = @header_client.response_date_async("min").value!
-      # expect(result.response.status).to eq(200)
-      # expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01'))
+      result = @header_client.response_date_async("min").value!
+      expect(result.response.status).to eq(200)
+      expect(Date.parse(result.response.headers['value'])).to eq(Date.parse('0001-01-01'))
     end
 
     it 'should post valid param dateTime' do
-      pending('proper working with datetime isnt implemented yet')
-      fail
-      # result = @header_client.param_datetime_async("valid", DateTime.new(2010, 1, 1, 12, 34, 56)).value!
-      # expect(result.response.status).to eq(200)
+      result = @header_client.param_datetime_async("valid", DateTime.new(2010, 1, 1, 12, 34, 56)).value!
+      expect(result.response.status).to eq(200)
     end
 
     it 'should post min param dateTime' do
-      pending('proper working with datetime isnt implemented yet')
-      fail
-      # result = @header_client.param_datetime_async("min", DateTime.new(1, 1, 1, 0, 0, 0)).value!
-      # expect(result.response.status).to eq(200)
+      result = @header_client.param_datetime_async("min", DateTime.new(1, 1, 1, 0, 0, 0)).value!
+      expect(result.response.status).to eq(200)
     end
 
     it 'should get response valid dateTime' do
-      pending('proper working with datetime isnt implemented yet')
-      fail
-      # result = @header_client.response_datetime_async("valid").value!
-      # expect(result.response.status).to eq(200)
-      # expect(Date.parse(result.response['value'])).to eq(Date.parse('2010-01-01T12:34:56Z'))
+      result = @header_client.response_datetime_async("valid").value!
+      expect(result.response.status).to eq(200)
+      expect(Date.parse(result.response.headers['value'])).to eq(Date.parse('2010-01-01T12:34:56Z'))
     end
 
     it 'should get response min dateTime' do
-      pending('proper working with datetime isnt implemented yet')
-      fail
-      # result = @header_client.response_datetime_async("min").value!
-      # expect(result.response.status).to eq(200)
-      # expect(Date.parse(result.response['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
+      result = @header_client.response_datetime_async("min").value!
+      expect(result.response.status).to eq(200)
+      expect(Date.parse(result.response.headers['value'])).to eq(Date.parse('0001-01-01T00:00:00Z'))
     end
 
     it 'should post valid param dateTimeRfc1123' do
@@ -280,6 +275,23 @@ module HeaderModule
       # result = @header_client.response_byte_async("valid").value!
       # expect(result.response.status).to eq(200)
       # expect(Base64.strict_decode64(result.response['value']).unpack('C*')).to eq("啊齄丂狛狜隣郎隣兀﨩".bytes.pack('U*'))
+    end
+
+    it 'should post valid enum' do
+      result = @header_client.param_enum_async('valid', GreyscaleColors::GREY).value!
+      expect(result.response.status).to eq(200)
+    end
+
+    it 'should get valid enum' do
+      result = @header_client.response_enum_async('valid').value!
+      expect(result.response.status).to eq(200)
+      expect(result.response.headers['value']).to eq(GreyscaleColors::GREY)
+    end
+
+    it 'should get null enum' do
+      result = @header_client.response_enum_async('null').value!
+      expect(result.response.status).to eq(200)
+      expect(result.response.headers['value']).to eq('')
     end
   end
 

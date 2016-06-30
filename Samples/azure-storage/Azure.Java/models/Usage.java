@@ -40,7 +40,7 @@ public class Usage {
      *
      * @return the unit value
      */
-    public UsageUnit getUnit() {
+    public UsageUnit unit() {
         return this.unit;
     }
 
@@ -48,9 +48,11 @@ public class Usage {
      * Set the unit value.
      *
      * @param unit the unit value to set
+     * @return the Usage object itself.
      */
-    public void setUnit(UsageUnit unit) {
+    public Usage withUnit(UsageUnit unit) {
         this.unit = unit;
+        return this;
     }
 
     /**
@@ -58,7 +60,7 @@ public class Usage {
      *
      * @return the currentValue value
      */
-    public int getCurrentValue() {
+    public int currentValue() {
         return this.currentValue;
     }
 
@@ -66,9 +68,11 @@ public class Usage {
      * Set the currentValue value.
      *
      * @param currentValue the currentValue value to set
+     * @return the Usage object itself.
      */
-    public void setCurrentValue(int currentValue) {
+    public Usage withCurrentValue(int currentValue) {
         this.currentValue = currentValue;
+        return this;
     }
 
     /**
@@ -76,7 +80,7 @@ public class Usage {
      *
      * @return the limit value
      */
-    public int getLimit() {
+    public int limit() {
         return this.limit;
     }
 
@@ -84,9 +88,11 @@ public class Usage {
      * Set the limit value.
      *
      * @param limit the limit value to set
+     * @return the Usage object itself.
      */
-    public void setLimit(int limit) {
+    public Usage withLimit(int limit) {
         this.limit = limit;
+        return this;
     }
 
     /**
@@ -94,7 +100,7 @@ public class Usage {
      *
      * @return the name value
      */
-    public UsageName getName() {
+    public UsageName name() {
         return this.name;
     }
 
@@ -102,9 +108,11 @@ public class Usage {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Usage object itself.
      */
-    public void setName(UsageName name) {
+    public Usage withName(UsageName name) {
         this.name = name;
+        return this;
     }
 
 }

@@ -26,6 +26,6 @@ describe AutoRestReportService do
       end
     end
     puts "Test Coverage is #{count_of_calls}/#{count_of_methods}"
-    expect(count_of_calls/count_of_methods.to_f > 0.5).to be_truthy
+    expect(count_of_calls/count_of_methods.to_f > 0.90).to be_truthy
   end
 end

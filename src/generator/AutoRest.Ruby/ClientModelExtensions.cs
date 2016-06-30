@@ -10,6 +10,8 @@ using AutoRest.Core.Utilities;
 
 namespace AutoRest.Ruby
 {
+    using System.Collections.Generic;
+    using System.Reflection;
     /// <summary>
     /// Keeps a few aux method used across all templates/models.
     /// </summary>
@@ -37,9 +39,13 @@ namespace AutoRest.Ruby
             string result = string.Format("{0}.to_s", reference);
             if (known != null)
             {
-                if (known.Type == KnownPrimaryType.String || known.Type == KnownPrimaryType.DateTime)
+                if (known.Type == KnownPrimaryType.String)
                 {
                     result = reference;
+                }
+                else if (known.Type == KnownPrimaryType.DateTime)
+                {
+                    result = string.Format("{0}.new_offset(0).strftime('%FT%TZ')", reference);
                 }
                 else if (known.Type == KnownPrimaryType.DateTimeRfc1123)
                 {
@@ -197,7 +203,7 @@ namespace AutoRest.Ruby
                                   "non-string array parameter {0}", parameter));
             }
 
-            return string.Format("{0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
+            return string.Format("{0}.nil? ? nil : {0}.join('{1}')", parameter.Name, parameter.CollectionFormat.GetSeparator());
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ module MsRestAzure
             elsif !polling_state.location_header_link.nil?
               update_state_from_location_header(polling_state.get_request(headers: request.headers, base_uri: request.base_uri), polling_state, custom_deserialization_block)
             elsif http_method === :put
-              get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, query_params: request.query_params)
+              get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, {query_params: request.query_params, headers: request.headers})
               update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
             else
               task.shutdown
@@ -64,7 +64,7 @@ module MsRestAzure
       end
 
       if (http_method === :put || http_method === :patch) && AsyncOperationStatus.is_successful_status(polling_state.status) && polling_state.resource.nil?
-        get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, query_params: request.query_params)
+        get_request = MsRest::HttpOperationRequest.new(request.base_uri, request.build_path.to_s, :get, {query_params: request.query_params, headers: request.headers})
         update_state_from_get_resource_operation(get_request, polling_state, custom_deserialization_block)
       end
 
@@ -181,6 +181,8 @@ module MsRestAzure
       polling_state.response = result.response
       polling_state.request = result.request
       polling_state.resource = nil
+
+      polling_state
     end
 
     #
@@ -212,6 +214,7 @@ module MsRestAzure
       result = get_async_common(request)
 
       result.body = AsyncOperationStatus.deserialize_object(result.body)
+
       result
     end
 
@@ -224,7 +227,8 @@ module MsRestAzure
       fail ValidationError, 'Request cannot be nil' if request.nil?
 
       request.middlewares = [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]]
-      request.headers.merge!({'x-ms-client-request-id' => SecureRandom.uuid, 'Content-Type' => 'application/json'})
+      request.headers.merge!({'x-ms-client-request-id' => SecureRandom.uuid}) unless request.headers.key?('x-ms-client-request-id')
+      request.headers.merge!({'Content-Type' => 'application/json'}) unless request.headers.key?('Content-Type')
 
       # Send Request
       http_response = request.run_promise do |req|

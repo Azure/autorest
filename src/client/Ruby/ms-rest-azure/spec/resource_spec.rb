@@ -31,8 +31,6 @@ module MsRestAzure
 
       expect(res).to be_a(Hash)
       expect(res['id']).to eq('id')
-      expect(res['name']).to eq('name')
-      expect(res['type']).to eq('type')
       expect(res['location']).to eq('location')
       expect(res['tags']).to eq({ 'tag1' => 'tag1_value', 'tag2' => 'tag2_value' })
     end
