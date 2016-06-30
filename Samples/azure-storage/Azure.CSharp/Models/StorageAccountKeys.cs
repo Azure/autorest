@@ -31,13 +31,13 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets or sets gets the value of key 1.
+        /// Gets the value of key 1.
         /// </summary>
         [JsonProperty(PropertyName = "key1")]
         public string Key1 { get; set; }
 
         /// <summary>
-        /// Gets or sets gets the value of key 2.
+        /// Gets the value of key 2.
         /// </summary>
         [JsonProperty(PropertyName = "key2")]
         public string Key2 { get; set; }
