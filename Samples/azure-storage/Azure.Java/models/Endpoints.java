@@ -34,7 +34,7 @@ public class Endpoints {
      *
      * @return the blob value
      */
-    public String getBlob() {
+    public String blob() {
         return this.blob;
     }
 
@@ -42,9 +42,11 @@ public class Endpoints {
      * Set the blob value.
      *
      * @param blob the blob value to set
+     * @return the Endpoints object itself.
      */
-    public void setBlob(String blob) {
+    public Endpoints withBlob(String blob) {
         this.blob = blob;
+        return this;
     }
 
     /**
@@ -52,7 +54,7 @@ public class Endpoints {
      *
      * @return the queue value
      */
-    public String getQueue() {
+    public String queue() {
         return this.queue;
     }
 
@@ -60,9 +62,11 @@ public class Endpoints {
      * Set the queue value.
      *
      * @param queue the queue value to set
+     * @return the Endpoints object itself.
      */
-    public void setQueue(String queue) {
+    public Endpoints withQueue(String queue) {
         this.queue = queue;
+        return this;
     }
 
     /**
@@ -70,7 +74,7 @@ public class Endpoints {
      *
      * @return the table value
      */
-    public String getTable() {
+    public String table() {
         return this.table;
     }
 
@@ -78,9 +82,11 @@ public class Endpoints {
      * Set the table value.
      *
      * @param table the table value to set
+     * @return the Endpoints object itself.
      */
-    public void setTable(String table) {
+    public Endpoints withTable(String table) {
         this.table = table;
+        return this;
     }
 
     /**
@@ -88,7 +94,7 @@ public class Endpoints {
      *
      * @return the file value
      */
-    public String getFile() {
+    public String file() {
         return this.file;
     }
 
@@ -96,9 +102,11 @@ public class Endpoints {
      * Set the file value.
      *
      * @param file the file value to set
+     * @return the Endpoints object itself.
      */
-    public void setFile(String file) {
+    public Endpoints withFile(String file) {
         this.file = file;
+        return this;
     }
 
 }

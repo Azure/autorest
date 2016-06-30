@@ -1,0 +1,47 @@
+# encoding: utf-8
+
+require 'uri'
+require 'cgi'
+require 'date'
+require 'json'
+require 'base64'
+require 'erb'
+require 'securerandom'
+require 'time'
+require 'timeliness'
+require 'faraday'
+require 'faraday-cookie_jar'
+require 'concurrent'
+require 'ms_rest'
+require 'generated/azure_storage/module_definition'
+require 'ms_rest_azure'
+
+module Petstore
+  autoload :StorageAccounts,                                    'generated/azure_storage/storage_accounts.rb'
+  autoload :UsageOperations,                                    'generated/azure_storage/usage_operations.rb'
+  autoload :StorageManagementClient,                            'generated/azure_storage/storage_management_client.rb'
+
+  module Models
+    autoload :StorageAccountCheckNameAvailabilityParameters,      'generated/azure_storage/models/storage_account_check_name_availability_parameters.rb'
+    autoload :CheckNameAvailabilityResult,                        'generated/azure_storage/models/check_name_availability_result.rb'
+    autoload :StorageAccountPropertiesCreateParameters,           'generated/azure_storage/models/storage_account_properties_create_parameters.rb'
+    autoload :StorageAccountCreateParameters,                     'generated/azure_storage/models/storage_account_create_parameters.rb'
+    autoload :Endpoints,                                          'generated/azure_storage/models/endpoints.rb'
+    autoload :CustomDomain,                                       'generated/azure_storage/models/custom_domain.rb'
+    autoload :StorageAccountProperties,                           'generated/azure_storage/models/storage_account_properties.rb'
+    autoload :StorageAccountKeys,                                 'generated/azure_storage/models/storage_account_keys.rb'
+    autoload :StorageAccountListResult,                           'generated/azure_storage/models/storage_account_list_result.rb'
+    autoload :StorageAccountPropertiesUpdateParameters,           'generated/azure_storage/models/storage_account_properties_update_parameters.rb'
+    autoload :StorageAccountUpdateParameters,                     'generated/azure_storage/models/storage_account_update_parameters.rb'
+    autoload :StorageAccountRegenerateKeyParameters,              'generated/azure_storage/models/storage_account_regenerate_key_parameters.rb'
+    autoload :UsageName,                                          'generated/azure_storage/models/usage_name.rb'
+    autoload :Usage,                                              'generated/azure_storage/models/usage.rb'
+    autoload :UsageListResult,                                    'generated/azure_storage/models/usage_list_result.rb'
+    autoload :StorageAccount,                                     'generated/azure_storage/models/storage_account.rb'
+    autoload :Reason,                                             'generated/azure_storage/models/reason.rb'
+    autoload :AccountType,                                        'generated/azure_storage/models/account_type.rb'
+    autoload :ProvisioningState,                                  'generated/azure_storage/models/provisioning_state.rb'
+    autoload :AccountStatus,                                      'generated/azure_storage/models/account_status.rb'
+    autoload :UsageUnit,                                          'generated/azure_storage/models/usage_unit.rb'
+  end
+end

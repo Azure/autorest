@@ -330,7 +330,7 @@ module Petstore
       path_template = '/pet/findByStatus'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'status' => status.join(',')},
+          query_params: {'status' => status.nil? ? nil : status.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
 
@@ -434,7 +434,7 @@ module Petstore
       path_template = '/pet/findByTags'
       options = {
           middlewares: [[MsRest::RetryPolicyMiddleware, times: 3, retry: 0.02], [:cookie_jar]],
-          query_params: {'tags' => tags.join(',')},
+          query_params: {'tags' => tags.nil? ? nil : tags.join(',')},
           headers: request_headers.merge(custom_headers || {})
       }
 
