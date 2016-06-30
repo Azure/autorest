@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -55,7 +55,7 @@ from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 
 class CustomBaseUriTests(unittest.TestCase):
-    
+
     def test_custom_base_uri_positive(self):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         client = AutoRestParameterizedHostTestClient(cred, host="host:3000")
@@ -76,6 +76,6 @@ class CustomBaseUriTests(unittest.TestCase):
             client.paths.get_empty("local")
 
 if __name__ == '__main__':
-    
-    
+
+
     unittest.main()

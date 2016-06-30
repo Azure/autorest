@@ -35,7 +35,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -168,6 +168,6 @@ class HeaderTests(unittest.TestCase):
         raw = client.header.custom_request_id(custom_headers, raw=True)
         self.assertEqual(raw.response.status_code, 200)
 
-        
+
 if __name__ == '__main__':
     unittest.main()

@@ -749,12 +749,12 @@ gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task(
 gulp.task('test', function(cb){
   if (isWindows) {
     runSequence(
-      'test:xunit',
-      'test:clientruntime',
-//      'test:nugetPackages:xunit',
-      'test:node',
-      'test:node:azure',
-//      'test:nugetPackages:npm',
+//      'test:xunit',
+//      'test:clientruntime',
+// DISABLE      'test:nugetPackages:xunit',
+//      'test:node',
+//      'test:node:azure',
+// DISABLE     'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
       'test:java',

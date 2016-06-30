@@ -35,7 +35,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -50,7 +50,7 @@ from autoresthttpinfrastructuretestservice.models import (
 
 
 class HttpTests(unittest.TestCase):
-    
+
     def setUp(self):
         self.client = AutoRestHttpInfrastructureTestService(base_url="http://localhost:3000")
         self.client.config.retry_policy.retries = 3
@@ -104,7 +104,7 @@ class HttpTests(unittest.TestCase):
         except HttpOperationError as err:
             self.assertEqual(err.response.status_code, code)
             self.assertTrue(msg in err.response.content.decode("utf-8"))
-            
+
     def test_response_modeling(self):
 
         r = self.client.multiple_responses.get200_model204_no_model_default_error200_valid()
@@ -181,7 +181,7 @@ class HttpTests(unittest.TestCase):
 
         self.assertRaisesWithStatus(400,
             self.client.multiple_responses.get_default_none400_none)
-        
+
         self.assertIsNone(self.client.multiple_responses.get200_model_a200_none())
 
         self.assertStatus(200, self.client.multiple_responses.get200_model_a200_valid)
@@ -337,7 +337,7 @@ class HttpTests(unittest.TestCase):
         self.assertRaisesWithMessage("Operation returned an invalid status code 'Bad Request'",
             self.client.http_failure.get_empty_error)
         self.assertRaisesWithStatusAndResponseContains(requests.codes.bad_request, "NoErrorModel",
-            self.client.http_failure.get_no_model_error); 
+            self.client.http_failure.get_no_model_error);
         self.client.http_success.head200()
         self.assertTrue(self.client.http_success.get200())
         self.client.http_success.put200(True)

@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -51,7 +51,7 @@ from msrest.exceptions import DeserializationError
 
 from autorestparametergroupingtestservice import AutoRestParameterGroupingTestService
 from microsoftazuretesturl import MicrosoftAzureTestUrl
-from autorestdurationtestservice import AutoRestDurationTestService 
+from autorestdurationtestservice import AutoRestDurationTestService
 from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient
 
 from autorestparameterizedhosttestclient.exceptions import ValidationError
@@ -63,7 +63,7 @@ from autorestparametergroupingtestservice.models import (
 
 from msrest.authentication import BasicTokenAuthentication
 
-    
+
 
 class ParameterTests(unittest.TestCase):
 

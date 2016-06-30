@@ -35,7 +35,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -222,7 +222,7 @@ class ModelFlatteningTests(unittest.TestCase):
 
         result = self.client.put_simple_product(simple_prduct)
         self.assertEqual(result, simple_prduct)
-        
+
     def test_model_flattening_with_parameter_flattening(self):
 
         simple_product = SimpleProduct(

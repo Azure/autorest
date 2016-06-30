@@ -33,7 +33,7 @@ from datetime import date, datetime, timedelta
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -62,7 +62,7 @@ class DictionaryTests(unittest.TestCase):
 
         invalid_null_dict = {"0":True, "1":None, "2":False}
         self.assertEqual(invalid_null_dict, self.client.dictionary.get_boolean_invalid_null())
-        
+
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_boolean_invalid_string()
 
@@ -73,10 +73,10 @@ class DictionaryTests(unittest.TestCase):
 
         int_null_dict = {"0":1, "1":None, "2":0}
         self.assertEqual(int_null_dict, self.client.dictionary.get_int_invalid_null())
-        
+
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_int_invalid_string()
-        
+
         long_valid = {"0":1, "1":-1, "2":3, "3":300}
         self.assertEqual(long_valid, self.client.dictionary.get_long_valid())
 
@@ -103,23 +103,23 @@ class DictionaryTests(unittest.TestCase):
         self.assertEqual(double_valid, self.client.dictionary.get_double_valid())
 
         self.client.dictionary.put_double_valid(double_valid)
-        
+
         double_null_dict = {"0":0.0, "1":None, "2":-1.2e20}
         self.assertEqual(double_null_dict, self.client.dictionary.get_double_invalid_null())
 
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_double_invalid_string()
-        
+
         string_valid = {"0":"foo1", "1":"foo2", "2":"foo3"}
         self.assertEqual(string_valid, self.client.dictionary.get_string_valid())
 
         self.client.dictionary.put_string_valid(string_valid)
-        
+
         string_null_dict = {"0":"foo", "1":None, "2":"foo2"}
         string_invalid_dict = {"0":"foo", "1":"123", "2":"foo2"}
         self.assertEqual(string_null_dict, self.client.dictionary.get_string_with_null())
         self.assertEqual(string_invalid_dict, self.client.dictionary.get_string_with_invalid())
-        
+
         date1 = isodate.parse_date("2000-12-01T00:00:00Z")
         date2 = isodate.parse_date("1980-01-02T00:00:00Z")
         date3 = isodate.parse_date("1492-10-12T00:00:00Z")
@@ -128,21 +128,21 @@ class DictionaryTests(unittest.TestCase):
         datetime3 = isodate.parse_datetime("1492-10-12T10:15:01-08:00")
         rfc_datetime1 = isodate.parse_datetime("2000-12-01T00:00:01Z")
         rfc_datetime2 = isodate.parse_datetime("1980-01-02T00:11:35Z")
-        rfc_datetime3 = isodate.parse_datetime("1492-10-12T10:15:01Z")        
+        rfc_datetime3 = isodate.parse_datetime("1492-10-12T10:15:01Z")
         duration1 = timedelta(days=123, hours=22, minutes=14, seconds=12, milliseconds=11)
         duration2 = timedelta(days=5, hours=1)
-       
+
         valid_date_dict = {"0":date1, "1":date2, "2":date3}
         date_dictionary = self.client.dictionary.get_date_valid()
         self.assertEqual(date_dictionary, valid_date_dict)
-        
+
         self.client.dictionary.put_date_valid(valid_date_dict)
 
         date_null_dict = {"0":isodate.parse_date("2012-01-01"),
                           "1":None,
                           "2":isodate.parse_date("1776-07-04")}
         self.assertEqual(date_null_dict, self.client.dictionary.get_date_invalid_null())
-        
+
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_date_invalid_chars()
 
@@ -177,7 +177,7 @@ class DictionaryTests(unittest.TestCase):
 
         bytes_result = self.client.dictionary.get_byte_valid()
         self.assertEqual(bytes_valid, bytes_result)
-        
+
         bytes_null = {"0":bytes4, "1":None}
         bytes_result = self.client.dictionary.get_byte_invalid_null()
         self.assertEqual(bytes_null, bytes_result)
@@ -190,19 +190,19 @@ class DictionaryTests(unittest.TestCase):
     def test_basic_dictionary_parsing(self):
 
         self.assertEqual({}, self.client.dictionary.get_empty())
-        
+
         self.client.dictionary.put_empty({})
-       
+
         self.assertIsNone(self.client.dictionary.get_null())
-        
+
         with self.assertRaises(DeserializationError):
             self.client.dictionary.get_invalid()
 
         # {null:"val1"} is not standard JSON format (JSON require key as string. Should we skip this case
         #self.assertEqual({"None":"val1"}, self.client.dictionary.get_null_key())
         self.assertEqual({"key1":None}, self.client.dictionary.get_null_value())
-        self.assertEqual({"":"val1"}, self.client.dictionary.get_empty_string_key())    
-        
+        self.assertEqual({"":"val1"}, self.client.dictionary.get_empty_string_key())
+
     def test_dictionary_composed_types(self):
 
         test_product1 = Widget(integer=1, string="2")
@@ -212,14 +212,14 @@ class DictionaryTests(unittest.TestCase):
 
         self.assertIsNone(self.client.dictionary.get_complex_null())
         self.assertEqual({}, self.client.dictionary.get_complex_empty())
-        
+
         self.client.dictionary.put_complex_valid(test_dict)
         complex_result = self.client.dictionary.get_complex_valid()
         self.assertEqual(test_dict, complex_result)
-        
+
         list_dict = {"0":["1","2","3"], "1":["4","5","6"], "2":["7","8","9"]}
         self.client.dictionary.put_array_valid(list_dict)
-        
+
         array_result = self.client.dictionary.get_array_valid()
         self.assertEqual(list_dict, array_result)
 
@@ -227,7 +227,7 @@ class DictionaryTests(unittest.TestCase):
                      "1":{"4":"four","5":"five","6":"six"},
                      "2":{"7":"seven","8":"eight","9":"nine"}}
         self.client.dictionary.put_dictionary_valid(dict_dict)
-        
+
         dict_result = self.client.dictionary.get_dictionary_valid()
         self.assertEqual(dict_dict, dict_result)
 
@@ -244,7 +244,7 @@ class DictionaryTests(unittest.TestCase):
 
         self.assertIsNone(self.client.dictionary.get_array_null())
         self.assertEqual({}, self.client.dictionary.get_array_empty())
-        
+
         list_dict = {"0":["1","2","3"], "1":None, "2":["7","8","9"]}
         array_result = self.client.dictionary.get_array_item_null()
         self.assertEqual(list_dict, array_result)
@@ -255,7 +255,7 @@ class DictionaryTests(unittest.TestCase):
 
         self.assertIsNone(self.client.dictionary.get_dictionary_null())
         self.assertEqual({}, self.client.dictionary.get_dictionary_empty())
-        
+
         dict_dict = {"0":{"1":"one","2":"two","3":"three"},
                      "1":None,
                      "2":{"7":"seven","8":"eight","9":"nine"}}

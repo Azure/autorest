@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -50,7 +50,7 @@ from msrestazure.azure_exceptions import CloudError
 from msrest.authentication import BasicTokenAuthentication
 
 from autorestpagingtestservice import AutoRestPagingTestService
-from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions 
+from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions
 
 class PagingTests(unittest.TestCase):
 
@@ -136,7 +136,7 @@ class PagingTests(unittest.TestCase):
         pages = self.client.paging.get_single_pages_failure()
         with self.assertRaises(CloudError):
             items = [i for i in pages]
-        
+
         pages = self.client.paging.get_multiple_pages_failure()
         self.assertIsNotNone(pages.next_link)
 
@@ -151,7 +151,7 @@ class PagingTests(unittest.TestCase):
         pages = self.client.paging.get_single_pages_failure(raw=True)
         with self.assertRaises(CloudError):
             items = [i for i in pages]
-        
+
         pages = self.client.paging.get_multiple_pages_failure(raw=True)
         self.assertIsNotNone(pages.next_link)
 
@@ -162,7 +162,7 @@ class PagingTests(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             items = [i for i in pages]
-        
+
 
 if __name__ == '__main__':
     unittest.main()

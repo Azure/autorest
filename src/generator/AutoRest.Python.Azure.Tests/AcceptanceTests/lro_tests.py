@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -207,7 +207,7 @@ class LroTests(unittest.TestCase):
         self.assertIsNone(self.client.lro_retrys.post_async_relative_retry_succeeded(product).result())
 
         custom_headers = {"x-ms-client-request-id": '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'}
-        
+
         process = self.client.lr_os_custom_header.put_async_retry_succeeded(product, custom_headers)
         self.assertIsNotNone(process.result())
 

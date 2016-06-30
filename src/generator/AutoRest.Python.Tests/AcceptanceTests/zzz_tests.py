@@ -33,7 +33,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -79,7 +79,7 @@ class AcceptanceTests(unittest.TestCase):
 
         totalTests = len(report)
         print ("The test coverage is {0}/{1}.".format(totalTests - len(failed), totalTests))
-        
+
         self.assertEqual(0, len(failed))
 
 if __name__ == '__main__':

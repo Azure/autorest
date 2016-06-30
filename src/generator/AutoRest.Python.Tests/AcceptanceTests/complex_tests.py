@@ -35,7 +35,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -48,15 +48,15 @@ from msrest.exceptions import DeserializationError, SerializationError, Validati
 from autorestcomplextestservice import AutoRestComplexTestService
 from autorestcomplextestservice.models import *
 
-class UTC(tzinfo): 
-    def utcoffset(self,dt): 
-        return timedelta(hours=0,minutes=0) 
+class UTC(tzinfo):
+    def utcoffset(self,dt):
+        return timedelta(hours=0,minutes=0)
 
-    def tzname(self,dt): 
-        return "Z" 
+    def tzname(self,dt):
+        return "Z"
 
-    def dst(self,dt): 
-        return timedelta(0) 
+    def dst(self,dt):
+        return timedelta(0)
 
 
 class ComplexTests(unittest.TestCase):
@@ -128,7 +128,7 @@ class ComplexTests(unittest.TestCase):
         doubleResult = client.primitive.get_double()
         self.assertEqual(3e-100, doubleResult.field1)
         self.assertEqual(-5e-57, doubleResult.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose)
-        
+
         # PUT primitive/double
         doubleRequest = {'field1':3e-100}
         doubleRequest['field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose'] = -5e-57
@@ -159,7 +159,7 @@ class ComplexTests(unittest.TestCase):
         self.assertEqual(isodate.parse_date("2016-02-29"), dateResult.leap)
 
         dateRequest = DateWrapper(
-            field=isodate.parse_date('0001-01-01'), 
+            field=isodate.parse_date('0001-01-01'),
             leap=isodate.parse_date('2016-02-29'))
         client.primitive.put_date(dateRequest)
 
@@ -168,12 +168,12 @@ class ComplexTests(unittest.TestCase):
         min_date = datetime.min
         min_date = min_date.replace(tzinfo=UTC())
         self.assertEqual(min_date, datetimeResult.field)
-        
+
         datetime_request = DatetimeWrapper(
             field=isodate.parse_datetime("0001-01-01T00:00:00Z"),
             now=isodate.parse_datetime("2015-05-18T18:38:00Z"))
         client.primitive.put_date_time(datetime_request)
-        
+
         # GET primitive/datetimerfc1123
         datetimeRfc1123Result = client.primitive.get_date_time_rfc1123()
         self.assertEqual(min_date, datetimeRfc1123Result.field)
@@ -223,7 +223,7 @@ class ComplexTests(unittest.TestCase):
 
         # PUT array/valid
         client.array.put_valid(array_value)
-       
+
         # GET array/empty
         array_result = client.array.get_empty()
         self.assertEqual(0, len(array_result.array))

@@ -27,7 +27,7 @@
 """
 This file needs to be modified everytime other tests are updated. This is
 because unittest:TestLoader:discover() loads file in the order of last
-modified timestamp. We need a better way of sorting the test files. 
+modified timestamp. We need a better way of sorting the test files.
 """
 import unittest
 import sys
@@ -37,7 +37,7 @@ from uuid import uuid4
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))

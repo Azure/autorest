@@ -34,7 +34,7 @@ import tempfile
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -152,7 +152,7 @@ class FormDataTests(unittest.TestCase):
 
         client = AutoRestSwaggerBATFormDataService(base_url="http://localhost:3000")
         client.config.connection.data_block_size = 2
-        
+
         result = io.BytesIO()
         with io.BytesIO(test_bytes) as stream_data:
             resp = client.formdata.upload_file_via_body(stream_data, callback=test_callback)

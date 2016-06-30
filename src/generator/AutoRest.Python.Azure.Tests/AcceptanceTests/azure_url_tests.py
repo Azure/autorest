@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -58,7 +58,7 @@ class AzureUrlTests(unittest.TestCase):
 
         sub_id = str(uuid4())
         client_id = str(uuid4())
-        
+
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         client = MicrosoftAzureTestUrl(cred, sub_id, base_url="http://localhost:3000")
 

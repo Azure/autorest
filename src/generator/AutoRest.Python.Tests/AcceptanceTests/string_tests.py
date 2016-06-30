@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -58,7 +58,7 @@ class StringTests(unittest.TestCase):
         client.string.put_null(None)
         self.assertEqual("", client.string.get_empty())
         client.string.put_empty("")
-        
+
         try:
             test_str = (
                 "\xe5\x95\x8a\xe9\xbd\x84\xe4\xb8\x82\xe7\x8b\x9b\xe7\x8b"
@@ -99,7 +99,7 @@ class StringTests(unittest.TestCase):
         test_str = "    Now is the time for all good men to come to the aid of their country    "
         self.assertEqual(test_str, client.string.get_whitespace())
         client.string.put_whitespace(test_str)
-        
+
         self.assertIsNone(client.string.get_not_provided())
         self.assertEqual(Colors.redcolor, client.enum.get_not_expandable())
         client.enum.put_not_expandable('red color')

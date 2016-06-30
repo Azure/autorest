@@ -42,7 +42,7 @@ sys.path.append(join(root, "src","client", "Python", "msrestazure"))
 
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():
-    cmd = "node ../../../dev/TestServer/server/startup/www.js"
+    cmd = "node ../../dev/TestServer/server/startup/www.js"
     if os.name == 'nt': #On windows, subprocess creation works without being in the shell
         return subprocess.Popen(cmd)
     

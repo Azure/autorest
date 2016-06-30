@@ -36,7 +36,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 sys.path.append(join(root, "src" , "client" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
@@ -81,7 +81,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
 
         response = client.header.custom_named_request_id(expectedRequestId, raw=True)
         self.assertEqual("123", response.response.headers.get("foo-request-id"))
-        
+
     def test_custom_named_request_id_param_grouping(self):
 
         validSubscription = '1234-5678-9012-3456'
@@ -89,7 +89,7 @@ class XmsRequestClientIdTests(unittest.TestCase):
 
         cred = BasicTokenAuthentication({"access_token":123})
         client = AutoRestAzureSpecialParametersTestClient(cred, validSubscription, base_url="http://localhost:3000")
-        
+
         group = models.HeaderCustomNamedRequestIdParamGroupingParameters(foo_client_request_id=expectedRequestId)
         response = client.header.custom_named_request_id_param_grouping(group, raw=True)
         self.assertEqual("123", response.response.headers.get("foo-request-id"))

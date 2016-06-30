@@ -35,7 +35,7 @@ import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
-root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
+root = realpath(join(cwd , pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "src" , "client" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
@@ -74,8 +74,8 @@ class FileTests(unittest.TestCase):
             self.assertNotEqual(file_length, 0)
 
             sample_file = realpath(
-                join(cwd, pardir, pardir, pardir, "NodeJS",
-                     "NodeJS.Tests", "AcceptanceTests", "sample.png"))
+                join(cwd, pardir, pardir, 
+                     "AutoRest.NodeJS.Tests", "AcceptanceTests", "sample.png"))
 
             with open(sample_file, 'rb') as data:
                 sample_data = hash(data.read())
@@ -128,8 +128,8 @@ class FileTests(unittest.TestCase):
             self.assertNotEqual(file_length, 0)
 
             sample_file = realpath(
-                join(cwd, pardir, pardir, pardir, "NodeJS",
-                     "NodeJS.Tests", "AcceptanceTests", "sample.png"))
+                join(cwd, pardir, pardir, 
+                     "AutoRest.NodeJS.Tests", "AcceptanceTests", "sample.png"))
 
             with open(sample_file, 'rb') as data:
                 sample_data = hash(data.read())
