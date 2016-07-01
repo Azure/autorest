@@ -167,6 +167,17 @@ class TestClientRequest(unittest.TestCase):
         self.assertEqual(request.data, json.dumps(data))
         self.assertEqual(request.headers.get('Content-Length'), 17)
 
+    def test_request_url_with_params(self):
+
+        request = ClientRequest()
+        request.url = "a/b/c?t=y"
+        request.format_parameters({'g': 'h'})
+
+        self.assertIn(request.url, [
+            'a/b/c?g=h&t=y',
+            'a/b/c?t=y&g=h'
+        ])
+
 class TestClientResponse(unittest.TestCase):
 
     class Colors(Enum):

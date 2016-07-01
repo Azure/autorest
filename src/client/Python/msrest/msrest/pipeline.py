@@ -27,6 +27,10 @@
 import functools
 import json
 import logging
+try:
+    from urlparse import urlparse
+except ImportError:
+    from urllib.parse import urlparse
 
 import requests
 from requests.packages.urllib3 import Retry
@@ -195,6 +199,14 @@ class ClientRequest(requests.Request):
 
         :param dict params: A dictionary of parameters.
         """
+        query = urlparse(self.url).query
+        if query:
+            self.url = self.url.partition('?')[0]
+            existing_params = {
+                p[0]: p[-1]
+                for p in [p.partition('=') for p in query.split('&')]
+            }
+            params.update(existing_params)
         query_params = ["{}={}".format(k, v) for k, v in params.items()]
         query = '?' + '&'.join(query_params)
         self.url = self.url + query

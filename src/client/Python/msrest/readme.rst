@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-xx-xx Version xxxxx
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Allow url of ClientRequest to have parameters (https://github.com/Azure/autorest/issues/1217)
+
 2016-05-25 Version 0.4.0
 ++++++++++++++++++++++++
 
