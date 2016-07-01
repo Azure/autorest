@@ -89,7 +89,7 @@ var rubyMappings = {
   'model_flattening':['../../dev/TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
   'parameter_flattening':['../../dev/TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
   'validation':['../../dev/TestServer/swagger/validation.json', 'ValidationModule'],
-  'custom_base_uri':['../../devTestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
+  'custom_base_uri':['../../dev/TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
   'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
 };
 
