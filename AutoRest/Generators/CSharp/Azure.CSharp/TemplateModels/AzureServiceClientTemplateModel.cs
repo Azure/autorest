@@ -12,8 +12,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {
-        public AzureServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors)
-            : base(serviceClient, internalConstructors)
+        public AzureServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors, IEnumerable<string> additionalNamespaces)
+            : base(serviceClient, internalConstructors, additionalNamespaces)
         {
             // TODO: Initialized in the base constructor. Why Clear it?
             MethodTemplateModels.Clear();
@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         {
             get
             {
-                return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg));
+                return MethodGroups.Select(mg => new AzureMethodGroupTemplateModel(this, mg, AdditionalNamespaces));
             }
         }
 
@@ -50,6 +50,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     yield return "Models";
                 }
+                foreach (var ns in AdditionalNamespaces)
+                    yield return ns;
             }
         }
     }

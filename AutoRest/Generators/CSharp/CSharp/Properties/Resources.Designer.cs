@@ -61,6 +61,24 @@ namespace Microsoft.Rest.Generator.CSharp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Found multiple types that match the model name {0} in assemblies: {1}.
+        /// </summary>
+        internal static string ConflictingTypesError {
+            get {
+                return ResourceManager.GetString("ConflictingTypesError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not load assembly {0}..
+        /// </summary>
+        internal static string ReferenceAssemblyFailure {
+            get {
+                return ResourceManager.GetString("ReferenceAssemblyFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The {0} nuget package is required to compile the generated code..
         /// </summary>
         internal static string UsageInformation {

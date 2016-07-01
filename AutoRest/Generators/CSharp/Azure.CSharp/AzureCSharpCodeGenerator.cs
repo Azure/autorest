@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors, ReferencedNamespaces),
             };
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
@@ -99,7 +99,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             {
                 var extensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, null, SyncMethods),
+                    Model = new AzureExtensionsTemplateModel(serviceClient, null, SyncMethods, ReferencedNamespaces),
                 };
                 await Write(extensionsTemplate, serviceClient.Name + "Extensions.cs");
             }
@@ -107,7 +107,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors, ReferencedNamespaces),
             };
             await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
 
@@ -117,21 +117,21 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate
                 {
-                    Model = new AzureMethodGroupTemplateModel(serviceClient, group),
+                    Model = new AzureMethodGroupTemplateModel(serviceClient, group, ReferencedNamespaces),
                 };
                 await Write(operationsTemplate, operationsTemplate.Model.MethodGroupType + ".cs");
 
                 // Service client extensions
                 var operationExtensionsTemplate = new ExtensionsTemplate
                 {
-                    Model = new AzureExtensionsTemplateModel(serviceClient, group, SyncMethods),
+                    Model = new AzureExtensionsTemplateModel(serviceClient, group, SyncMethods, ReferencedNamespaces),
                 };
                 await Write(operationExtensionsTemplate, operationExtensionsTemplate.Model.ExtensionName + "Extensions.cs");
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate
                 {
-                    Model = new AzureMethodGroupTemplateModel(serviceClient, group),
+                    Model = new AzureMethodGroupTemplateModel(serviceClient, group, ReferencedNamespaces),
                 };
                 await Write(operationsInterfaceTemplate, "I" + operationsInterfaceTemplate.Model.MethodGroupType + ".cs");
             }

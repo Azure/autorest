@@ -12,8 +12,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureExtensionsTemplateModel : ExtensionsTemplateModel
     {
-        public AzureExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncMethodsGenerationMode syncWrappers)
-            : base(serviceClient, operationName, syncWrappers)
+        public AzureExtensionsTemplateModel(ServiceClient serviceClient, string operationName, SyncMethodsGenerationMode syncWrappers, IEnumerable<string> additionalNamespaces)
+            : base(serviceClient, operationName, syncWrappers, additionalNamespaces)
         {
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == operationName)

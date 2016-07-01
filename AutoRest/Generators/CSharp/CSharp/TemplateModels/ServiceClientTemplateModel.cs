@@ -11,7 +11,7 @@ namespace Microsoft.Rest.Generator.CSharp
 {
     public class ServiceClientTemplateModel : ServiceClient
     {
-        public ServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors)
+        public ServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors, IEnumerable<string> additionalNamespaces)
         {
             this.LoadFrom(serviceClient);
             MethodTemplateModels = new List<MethodTemplateModel>();
@@ -19,6 +19,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient, SyncMethodsGenerationMode.None)));
             ConstructorVisibility = internalConstructors ? "internal" : "public";
             this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
+            AdditionalNamespaces = new HashSet<string>(additionalNamespaces);
         }
 
         public bool IsCustomBaseUri { get; private set; }
@@ -29,10 +30,12 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg));
+                return MethodGroups.Select(mg => new MethodGroupTemplateModel(this, mg, AdditionalNamespaces));
             }
         }
 
+        protected HashSet<string> AdditionalNamespaces { get; private set; }
+         
         public virtual IEnumerable<string> Usings
         {
             get
@@ -41,6 +44,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     yield return "Models";
                 }
+                foreach (var ns in AdditionalNamespaces)
+                    yield return ns;
             }
         }
 

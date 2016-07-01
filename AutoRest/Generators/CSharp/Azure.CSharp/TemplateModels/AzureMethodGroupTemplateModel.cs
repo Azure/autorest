@@ -12,8 +12,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureMethodGroupTemplateModel : MethodGroupTemplateModel
     {
-        public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
-            : base(serviceClient, methodGroupName)
+        public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName, IEnumerable<string> additionalNamespaces)
+            : base(serviceClient, methodGroupName, additionalNamespaces)
         {
             MethodGroupType = MethodGroupName + "Operations";
             // Clear base initialized MethodTemplateModels and re-populate with
@@ -41,6 +41,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
                 {
                     yield return "Models";
                 }
+                foreach (var ns in AdditionalNamespaces)
+                    yield return ns;
             }
         }
     }

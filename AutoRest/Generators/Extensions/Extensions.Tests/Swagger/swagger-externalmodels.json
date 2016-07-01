@@ -1,0 +1,181 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "SwaggerExternalModelClient",
+        "description": "A sample API that tests datetimeoffset usage for date-time",
+        "termsOfService": "n/a",
+        "license": {
+            "name": "MIT",
+            "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+        },
+        "x-ms-code-generation-settings": {
+            "modelAssemblies": [ "AutoRest.Generator.Extensions.Tests.dll" ]
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "schemes": [ "http" ],
+    "consumes": [ "application/json" ],
+    "produces": [ "application/json" ],
+    "paths": {
+        "/testmodel": {
+            "post": {
+                "operationId": "postTestModel",
+                "summary": "Post an externally defined model",
+                "parameters": [
+                    {
+                        "name": "model",
+                        "in": "body",
+                        "description": "The model",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalTestModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The model we created",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalTestModel"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/testmodel/{id}": {
+            "get": {
+                "operationId": "getTestModel",
+                "summary": "Gets a model defined by an external DLL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "header",
+                        "type": "string",
+                        "description": "The desired id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The product we are creating",
+                        "schema": {
+                            "$ref": "#/definitions/ExternalTestModel"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/store/order": {
+            "post": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "Place an order for a pet",
+                "description": "",
+                "operationId": "placeOrder",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "order placed for purchasing the pet",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Order"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Order": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "petId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "shipDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Order Status",
+                    "enum": [
+                        "placed",
+                        "approved",
+                        "delivered"
+                    ]
+                },
+                "complete": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "xml": {
+                "name": "Order"
+            }
+        },
+        "ExternalTestModel": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "dateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

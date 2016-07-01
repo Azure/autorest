@@ -30,6 +30,7 @@
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Compile Include="ExternalTestModel.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MappingTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
@@ -37,6 +38,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Swagger\swagger-externalmodels.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Swagger\swagger-x-ms-client-name.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
