@@ -242,8 +242,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="dotnet restore %(NetCoreLibraries.FullPath)" ContinueOnError="false"/>
-    <Exec Command="dotnet restore %(NetCoreTestLibraries.FullPath)" ContinueOnError="false"/>
+    <Exec Command="dotnet restore $(MSBuildThisFileDirectory)" ContinueOnError="false"/>
+    
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>
