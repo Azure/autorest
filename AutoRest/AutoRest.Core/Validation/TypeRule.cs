@@ -2,9 +2,13 @@
 
 namespace Microsoft.Rest.Generator
 {
-    public abstract class TypeRule<T> : Rule where T : class
+    /// <summary>
+    /// A rule that validates objects of type <paramref name="T"/>
+    /// </summary>
+    /// <typeparam name="T">The type of the object to validate</typeparam>
+    public abstract class TypedRule<T> : Rule where T : class
     {
-        protected TypeRule()
+        protected TypedRule()
         {
         }
 

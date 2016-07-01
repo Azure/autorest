@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class DefaultResponseRequired : TypeRule<IDictionary<string, OperationResponse>>
+    public class DefaultResponseRequired : TypedRule<IDictionary<string, OperationResponse>>
     {
         public override bool IsValid(IDictionary<string, OperationResponse> entity)
         {

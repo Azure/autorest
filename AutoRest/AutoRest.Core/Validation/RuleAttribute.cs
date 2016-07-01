@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator
 {
+    /// <summary>
+    /// An attribute that describes a rule to apply to the property or class that it decorates
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        public Type RuleType { get; }
-
         private Rule Rule;
 
         public RuleAttribute(Type ruleType)

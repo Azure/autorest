@@ -4,7 +4,7 @@ using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class DescriptionRequired : TypeRule<SwaggerObject>
+    public class DescriptionRequired : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

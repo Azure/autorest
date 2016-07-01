@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class AnonymousTypes : TypeRule<SwaggerObject>
+    public class AnonymousTypes : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

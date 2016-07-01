@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class RequiredPropertiesMustExist : TypeRule<Schema>
+    public class RequiredPropertiesMustExist : TypedRule<Schema>
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(Schema entity)
         {

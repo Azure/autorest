@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator
                 }
 
                 // Recursively validate the value of the property (passing any rules to inherit)
-                var inheritableRules = prop.GetCustomAttributes<InheritableRuleAttribute>(true);
+                var inheritableRules = prop.GetCustomAttributes<CollectionRuleAttribute>(true);
                 foreach (var exception in RecursiveValidate(value, inheritableRules))
                 {
                     exception.Location.Add(prop.Name);

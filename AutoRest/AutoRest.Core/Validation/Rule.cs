@@ -6,11 +6,13 @@ using System.Globalization;
 
 namespace Microsoft.Rest.Generator
 {
+    /// <summary>
+    /// Defines validation logic for an object
+    /// </summary>
     public abstract class Rule
     {
         protected Rule()
         {
-
         }
 
         public abstract IEnumerable<ValidationMessage> GetValidationMessages(object entity);
@@ -27,7 +29,7 @@ namespace Microsoft.Rest.Generator
         protected static ValidationMessage CreateException(SourceContext source, ValidationExceptionName exceptionId, params object[] messageValues)
         {
             ValidationMessage validationMessage;
-            ValidationExceptionName[] ignore = new ValidationExceptionName[] {};
+            ValidationExceptionName[] ignore = new ValidationExceptionName[] { };
             if (ignore.Any(id => id == exceptionId))
             {
                 validationMessage = new ValidationMessage()

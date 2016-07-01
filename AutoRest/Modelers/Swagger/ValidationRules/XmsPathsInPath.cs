@@ -5,7 +5,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Xms")]
-    public class XmsPathsInPath : TypeRule<ServiceDefinition>
+    public class XmsPathsInPath : TypedRule<ServiceDefinition>
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(ServiceDefinition entity)
         {

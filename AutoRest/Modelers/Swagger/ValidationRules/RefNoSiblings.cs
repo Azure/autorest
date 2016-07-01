@@ -4,7 +4,7 @@ using Microsoft.Rest.Modeler.Swagger.Model;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class RefNoSiblings : TypeRule<SwaggerObject>
+    public class RefNoSiblings : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

@@ -2,12 +2,14 @@
 
 namespace Microsoft.Rest.Generator
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Iterable")]
+    /// <summary>
+    /// A rule attribute that should be applied to all members of the collection that is annotated
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-    public class InheritableRuleAttribute : RuleAttribute
+    public class CollectionRuleAttribute : RuleAttribute
     {
-        public InheritableRuleAttribute(Type ruleType) : base(ruleType)
+        public CollectionRuleAttribute(Type ruleType) : base(ruleType)
         {
         }
     }
