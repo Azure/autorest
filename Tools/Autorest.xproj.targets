@@ -4,6 +4,7 @@
   
   <PropertyGroup>
     <!-- Overridable properties -->
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MsBuildThisFileDirectory)..</SolutionDir>
     <DotnetFrameworkName Condition="'$(DotnetFrameworkName)' == ''">net451</DotnetFrameworkName>
     <DotnetRuntimeName Condition="'$(DotnetRuntimeName)' == ''">win7-x64</DotnetRuntimeName>
     <DotnetOutputPath Condition="'$(DotnetOutputPath)' == ''">$(OutputPath)\$(Configuration)\$(DotnetFrameworkName)\$(DotnetRuntimeName)</DotnetOutputPath>
