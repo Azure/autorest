@@ -8,7 +8,7 @@ require 'ms_rest_azure'
 module MsRestAzure
 
   describe PollingState do
-    it 'should initialize status from response header' do
+    it 'should initialize status from flattened response body' do
       response_body = double('response_body', :provisioning_state => 'InProgress')
       response = double('response',
                         :request => nil,
@@ -18,6 +18,19 @@ module MsRestAzure
       polling_state = PollingState.new response, 0
 
       expect(polling_state.status).to eq('InProgress')
+    end
+
+    it 'should initialize status from non-flattened response body' do
+      provisioning_state = double('provisioning_state', :provisioning_state => 'Succeeded')
+      response_body = double('response_body', :properties => provisioning_state)
+      response = double('response',
+                        :request => nil,
+                        :response => nil,
+                        :body => response_body)
+
+      polling_state = PollingState.new response, 0
+
+      expect(polling_state.status).to eq('Succeeded')
     end
 
     it 'should initialize status from response status' do
