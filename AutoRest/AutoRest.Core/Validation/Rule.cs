@@ -15,51 +15,58 @@ namespace Microsoft.Rest.Generator
         {
         }
 
-        public abstract IEnumerable<ValidationMessage> GetValidationMessages(object entity);
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity, out object[] formatParameters)
-        {
-            formatParameters = new object[0];
-            return GetValidationMessages(entity);
-        }
-
+        /// <summary>
+        /// The name of the exception that describes this rule
+        /// </summary>
         public abstract ValidationExceptionName Exception { get; }
 
-        protected static ValidationMessage CreateException(SourceContext source, ValidationExceptionName exceptionId, params object[] messageValues)
+        /// <summary>
+        /// Returns the validation messages resulting from validating this object
+        /// </summary>
+        /// <param name="entity">The object to validate</param>
+        /// <returns></returns>
+        public abstract IEnumerable<ValidationMessage> GetValidationMessages(object entity);
+
+        /// <summary>
+        /// Creates an exception for the given <paramref name="exceptionName"/>, using the <paramref name="messageValues"/> format parameters
+        /// </summary>
+        /// <param name="exceptionName"></param>
+        /// <param name="messageValues"></param>
+        /// <returns></returns>
+        protected static ValidationMessage CreateException(ValidationExceptionName exceptionName, params object[] messageValues)
         {
             ValidationMessage validationMessage;
             ValidationExceptionName[] ignore = new ValidationExceptionName[] { };
-            if (ignore.Any(id => id == exceptionId))
+            if (ignore.Any(id => id == exceptionName))
             {
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Info,
-                    Message = ""
+                    Message = string.Empty
                 };
             }
-            else if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionId))
+            else if (ValidationExceptionConstants.Info.Messages.ContainsKey(exceptionName))
             {
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Info,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Info.Messages[exceptionId], messageValues)
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Info.Messages[exceptionName], messageValues)
                 };
             }
-            else if (ValidationExceptionConstants.Warnings.Messages.ContainsKey(exceptionId))
+            else if (ValidationExceptionConstants.Warnings.Messages.ContainsKey(exceptionName))
             {
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionId], messageValues)
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Warnings.Messages[exceptionName], messageValues)
                 };
             }
-            else if (ValidationExceptionConstants.Errors.Messages.ContainsKey(exceptionId))
+            else if (ValidationExceptionConstants.Errors.Messages.ContainsKey(exceptionName))
             {
                 validationMessage = new ValidationMessage()
                 {
                     Severity = LogEntrySeverity.Error,
-                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Errors.Messages[exceptionId], messageValues)
+                    Message = string.Format(CultureInfo.InvariantCulture, ValidationExceptionConstants.Errors.Messages[exceptionName], messageValues)
                 };
             }
             else
@@ -67,10 +74,8 @@ namespace Microsoft.Rest.Generator
                 throw new NotImplementedException();
             }
 
-            validationMessage.Source = source;
-            validationMessage.ValidationException = exceptionId;
+            validationMessage.ValidationException = exceptionName;
             return validationMessage;
         }
-
     }
 }

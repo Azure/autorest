@@ -11,8 +11,6 @@ namespace Microsoft.Rest.Generator
 
         public ValidationExceptionName ValidationException { get; set; }
 
-        public SourceContext Source { get; set; }
-
         public string Message { get; set; }
 
         public LogEntrySeverity Severity { get; set; }

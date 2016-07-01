@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     var basePath = GetBasePath(customPath);
                     if (!entity.Paths.ContainsKey(basePath))
                     {
-                        yield return CreateException(null, Exception, customPath);
+                        yield return CreateException(Exception, customPath);
                     }
                 }
             }
