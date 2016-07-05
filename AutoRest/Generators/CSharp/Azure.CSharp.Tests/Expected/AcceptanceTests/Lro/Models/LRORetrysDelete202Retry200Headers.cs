@@ -31,8 +31,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LRORetrysDelete202Retry200Headers class.
         /// </summary>
-        /// <param name="location">Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200</param>
-        /// <param name="retryAfter">Number of milliseconds until the next poll should be sent, will be set to zero</param>
+        /// <param name="location">Location to poll for result status: will be
+        /// set to /lro/retryerror/delete/202/retry/200</param>
+        /// <param name="retryAfter">Number of milliseconds until the next
+        /// poll should be sent, will be set to zero</param>
         public LRORetrysDelete202Retry200Headers(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;

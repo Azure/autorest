@@ -26,7 +26,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
         /// </summary>
-        /// <param name="status">The status of the request. Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'</param>
+        /// <param name="status">The status of the request. Possible values
+        /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+        /// 'Creating', 'Created', 'Updating', 'Updated', 'Deleting',
+        /// 'Deleted', 'OK'</param>
         public OperationResult(string status = default(string))
         {
             Status = status;

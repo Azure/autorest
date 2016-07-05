@@ -27,6 +27,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// Initializes a new instance of the AvailabilitySetUpdateParameters
         /// class.
         /// </summary>
+        /// <param name="tags">A set of tags.</param>
         public AvailabilitySetUpdateParameters(IDictionary<string, string> tags)
         {
             Tags = tags;

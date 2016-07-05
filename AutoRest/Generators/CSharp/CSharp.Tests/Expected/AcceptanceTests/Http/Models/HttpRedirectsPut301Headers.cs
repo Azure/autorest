@@ -28,7 +28,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsPut301Headers class.
         /// </summary>
-        /// <param name="location">The redirect location for this request</param>
+        /// <param name="location">The redirect location for this
+        /// request</param>
         public HttpRedirectsPut301Headers(string location = default(string))
         {
             Location = location;

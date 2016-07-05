@@ -34,7 +34,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <param name="type">Resource Type</param>
         /// <param name="location">Resource Location</param>
         /// <param name="name">Resource Name</param>
-        /// <param name="provisioningStateValues">Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'</param>
+        /// <param name="provisioningStateValues">Possible values include:
+        /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
+        /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
+        /// 'OK'</param>
         public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {

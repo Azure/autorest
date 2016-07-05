@@ -30,7 +30,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseStringHeaders
         /// class.
         /// </summary>
-        /// <param name="value">response with header values "The quick brown fox jumps over the lazy dog" or null or ""</param>
+        /// <param name="value">response with header values "The quick brown
+        /// fox jumps over the lazy dog" or null or ""</param>
         public HeaderResponseStringHeaders(string value = default(string))
         {
             Value = value;
