@@ -31,7 +31,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROsDeleteNoHeaderInRetryHeaders
         /// class.
         /// </summary>
-        /// <param name="location">Location to poll for result status: will be set to /lro/put/noheader/202/204/operationresults</param>
+        /// <param name="location">Location to poll for result status: will be
+        /// set to /lro/put/noheader/202/204/operationresults</param>
         public LROsDeleteNoHeaderInRetryHeaders(string location = default(string))
         {
             Location = location;
