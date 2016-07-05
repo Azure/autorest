@@ -1,12 +1,11 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Ruby;
-using Microsoft.Rest.Generator.Azure.Ruby.Templates;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -48,9 +47,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
         public Parameter BuildNextLinkParameter()
         {
+            RubyCodeNamer rubyCodeNamer = new RubyCodeNamer();
             Parameter param = new Parameter
             {
-                Name = RubyCodeNamer.RemoveInvalidCharacters(RubyCodeNamer.UnderscoreCase(NextLinkName)),
+                Name = rubyCodeNamer.GetPropertyName(NextLinkName),
                 SerializedName = NextLinkName,
                 Type = new PrimaryType(KnownPrimaryType.String),
                 Documentation = "The NextLink from the previous successful call to List operation.",
@@ -84,18 +84,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Constructs mapper for the model class.
-        /// </summary>
-        /// <returns>Mapper as string for this model class.</returns>
-        public override string ConstructModelMapper()
-        {
-            var modelMapper = Generator.Ruby.TemplateModels.ClientModelExtensions.ConstructMapper(this, SerializedName, null, true);
-            var builder = new IndentedStringBuilder("  ");
-            builder.AppendLine("{{{0}}}", modelMapper);
-            return builder.ToString();
-        }
-
-        /// <summary>
         /// Gets the list of modules/classes which need to be included.
         /// </summary>
         public override List<string> Includes
@@ -121,4 +109,3 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
     }
 }
-

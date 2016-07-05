@@ -23,7 +23,7 @@
 #
 @if (Model.ReturnType.Body != null)
 {
-@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.ReturnType.Body.Name))@:
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
 }
 #
 

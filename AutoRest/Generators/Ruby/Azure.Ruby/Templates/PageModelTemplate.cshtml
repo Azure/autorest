@@ -50,29 +50,33 @@ module @(Settings.Namespace)
         @EmptyLine
 
     #
-    # Get all items
+    # Gets the rest of the items for the request, enabling auto-pagination 
+    #
+    @WrapComment("# ", string.Format("@return [Array<{0}>] operation results.", Model.ItemType))
     #
     def get_all_items
-        items = @@@Model.ItemName
-        page = self
-        while page.@(Model.NextLinkParameter.Name) != nil do
-          page = page.get_next_page
-          items.concat(page.@Model.ItemName)
-        end
-        items
+      items = @@@Model.ItemName
+      page = self
+      while page.@(Model.NextLinkParameter.Name) != nil do
+        page = page.get_next_page
+        items.concat(page.@Model.ItemName)
+      end
+      items
     end
 
     #
-    # Get next page
+    # Gets the next page of results
+    #
+    @WrapComment("# ", string.Format("@return [{0}] with next page content.", Model.Name))
     #
     def get_next_page
     @{
-        @:response = @@next_method.call(@@@(Model.NextLinkParameter.Name)).value! unless @@next_method.nil?
-        @:unless response.nil?
-            @:@@@(Model.NextLinkParameter.Name) = response.body.@(Model.NextLinkParameter.Name)
-            @:@@@(Model.ItemName) = response.body.@(Model.ItemName)
-            @:self
-        @:end
+      @:response = @@next_method.call(@@@(Model.NextLinkParameter.Name)).value! unless @@next_method.nil?
+      @:unless response.nil?
+        @:@@@(Model.NextLinkParameter.Name) = response.body.@(Model.NextLinkParameter.Name)
+        @:@@@(Model.ItemName) = response.body.@(Model.ItemName)
+        @:self
+      @:end
     }
     end
 

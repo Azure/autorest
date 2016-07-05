@@ -29,16 +29,15 @@ else if (!Model.IsLongRunningOperation && Model.IsPageable)
 #
 @WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.ReturnType))
 #
-
 def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
-    response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
-    unless response.nil?
-        page = response.body
-        page.next_method = Proc.new do |next_link|
-          @(Model.InvokeNextMethodAsync())
-        end
-    page
+  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+  unless response.nil?
+    page = response.body
+    page.next_method = Proc.new do |next_link|
+      @(Model.InvokeNextMethodAsync())
     end
+    page
+  end
 end
 </text>
 }

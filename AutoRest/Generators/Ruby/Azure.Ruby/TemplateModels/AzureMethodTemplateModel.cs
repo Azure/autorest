@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text;
 using Microsoft.Rest.Generator.Azure.NodeJS.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
@@ -60,12 +61,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Returns invocation string for next method async
+        /// Returns invocation string for next method async.
         /// </summary>
         public string InvokeNextMethodAsync()
         {
             RubyCodeNamer cn = new RubyCodeNamer();
-            var builder = new IndentedStringBuilder();
+            var builder = new StringBuilder();
             string nextMethodName =cn.GetMethodName((string)(Extensions["nextMethodName"]));
             var nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
 
@@ -79,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
                         string argumentName = param.Name.Replace(cn.GetMethodName((string)Extensions["nextMethodName"]), Name);
-                        builder.AppendLine("{0} = {1}", param.Name, argumentName);
+                        builder.AppendLine(string.Format("{0} = {1}", param.Name, argumentName));
                     }
                 }
             }
@@ -88,12 +89,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             headerParams.Add("custom_headers");
             string nextMethodParamaterInvocation = string.Join(", ",headerParams);
 
-            builder.AppendLine("{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation);
+            builder.AppendLine(string.Format("{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation));
             return builder.ToString();
         }
 
         /// <summary>
-        /// Returns generated response or body of the auto-paginated method
+        /// Returns generated response or body of the auto-paginated method.
         /// </summary>
         public override string ResponseGeneration()
         {
@@ -107,8 +108,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                     { 
                         bool isNextLinkMethod = this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"];
-                        var isPageable = compositeType.Extensions[AzureExtensions.PageableExtension];
-                        if (isPageable is bool && (bool)isPageable &&!isNextLinkMethod)
+                        var isPageable = (bool)compositeType.Extensions[AzureExtensions.PageableExtension];
+                        if (isPageable &&!isNextLinkMethod)
                         {
                             builder.AppendLine("first_page = {0}_as_lazy({1})", Name, MethodParameterInvocation);
                             builder.AppendLine("first_page.get_all_items");
@@ -248,6 +249,21 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 }
 
                 return base.OperationExceptionTypeString;
+            }
+        }
+
+        /// <summary>
+        /// Gets the type for operation result.
+        /// </summary>
+        public override string OperationReturnTypeString
+        {
+            get
+            {
+                if (Extensions.ContainsKey("nextMethodName") && !Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    return "Array";
+                }
+                return base.OperationReturnTypeString;
             }
         }
     }

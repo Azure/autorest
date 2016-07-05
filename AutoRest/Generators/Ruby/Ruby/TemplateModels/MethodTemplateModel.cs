@@ -369,6 +369,17 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
+        /// Gets the type for operation result.
+        /// </summary>
+        public virtual string OperationReturnTypeString
+        {
+            get
+            {
+                return ReturnType.Body.Name.ToString();
+            }
+        }
+
+        /// <summary>
         /// Creates a code in form of string which deserializes given input variable of given type.
         /// </summary>
         /// <param name="inputVariable">The input variable.</param>
@@ -508,7 +519,7 @@ namespace Microsoft.Rest.Generator.Ruby
             builder.AppendLine("response = {0}_async({1}).value!", Name, MethodParameterInvocation);
             if (ReturnType.Body != null)
             {
-                builder.AppendLine("response.body unless response.nil?"); ;
+                builder.AppendLine("response.body unless response.nil?");
             }
             else
             {

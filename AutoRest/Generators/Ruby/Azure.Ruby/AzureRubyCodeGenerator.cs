@@ -72,14 +72,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Adds method to use for autopagination
+        /// Adds method to use for autopagination.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
         private void AddRubyPageableMethod(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             for (int i = 0; i < serviceClient.Methods.Count; i++)
@@ -88,10 +88,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
                     var pageableExtension = JsonConvert.DeserializeObject<Model.PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
-                    if (!method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName)) 
+                    if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
                         serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = CodeNamer.GetMethodName(method.Name);
                         i++;
                     }
                     serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
@@ -102,12 +101,12 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>
-        /// <param name="serviceClient"></param>
+        /// <param name="serviceClient">The service client.</param>
         private void ApplyPagination(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
-                throw new ArgumentNullException("serviceClient");
+                throw new ArgumentNullException(nameof(serviceClient));
             }
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
@@ -118,7 +117,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     continue;
                 }
-                
                 nextLinkName = (string)ext["nextLinkName"];
                 string itemName = (string)ext["itemName"] ?? "value";
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
@@ -161,13 +159,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         }
 
         /// <summary>
-        /// Generates C# code for service client.
+        /// Generates Ruby code for Azure service client.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
         /// <returns>Async tasks which generates SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient, pageModels);
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
@@ -187,36 +185,29 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
 
             // Models
+            foreach (var model in serviceClientTemplateModel.ModelTemplateModels)
+            {
+                if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+                    (bool)model.Extensions[AzureExtensions.ExternalExtension])
+                    || model.Name == "Resource" || model.Name == "SubResource")
+                {
+                    continue;
+                }
 
+                var modelTemplate = new ModelTemplate
+                {
+                    Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),
+                };
+                await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+            }
             // Paged Models
             foreach (var pageModel in pageModels)
             {
-                //Add the PageTemplateModel to AzureServiceClientTemplateModel
-                if (!serviceClientTemplateModel.PageTemplateModels.Contains(pageModel))
-                {
-                    serviceClientTemplateModel.PageTemplateModels.Add(pageModel);
-                }
                 var pageTemplate = new PageModelTemplate
                 {
                     Model = pageModel
                 };
                 await Write(pageTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(pageModel.Name) + ImplementationFileExtension));
-            }
-            foreach (var model in serviceClientTemplateModel.ModelTemplateModels)
-            {
-                if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
-                    (bool) model.Extensions[AzureExtensions.ExternalExtension])
-                    || model.Name == "Resource" || model.Name == "SubResource")
-                {
-                    continue;
-                }
-                
-                var modelTemplate = new ModelTemplate
-                {
-                    Model = new AzureModelTemplateModel(model, serviceClient.ModelTypes),
-                };
-
-                await Write(modelTemplate, Path.Combine(modelsPath, RubyCodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -235,25 +226,25 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
-                
-                // Version File
-            if(this.packageVersion != null)
+
+            // Version File
+            if (this.packageVersion != null)
             {
                 var versionTemplate = new VersionTemplate
                 {
                     Model = new VersionTemplateModel(packageVersion),
                 };
-                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));
             }
-            
+
             // Module Definition File
-            if(Settings.Namespace != null)
+            if (Settings.Namespace != null)
             {
                 var modTemplate = new ModuleDefinitionTemplate
                 {
                     Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
                 };
-                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));
             }
         }
     }
