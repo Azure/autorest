@@ -12,6 +12,8 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Ruby;
 using Microsoft.Rest.Generator.Ruby.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
+using Newtonsoft.Json;
+using Microsoft.Rest.Generator.Azure.Model;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
@@ -67,8 +69,21 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         {
             RubyCodeNamer cn = new RubyCodeNamer();
             var builder = new StringBuilder();
-            string nextMethodName =cn.GetMethodName((string)(Extensions["nextMethodName"]));
-            var nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
+            string nextMethodName;
+            var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+
+            Method nextMethod = null;
+            if (pageableExtension != null && !string.IsNullOrEmpty(pageableExtension.OperationName))
+            {
+                nextMethod = ServiceClient.Methods.FirstOrDefault(m =>
+                    pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                nextMethodName = nextMethod.Name;
+            }
+            else 
+            {
+                nextMethodName = cn.GetMethodName((string)(Extensions["nextMethodName"]));
+                nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
+            }
 
             var origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
             if (origMethodGroupedParameters.Count() > 0)
@@ -79,7 +94,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                     if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
-                        string argumentName = param.Name.Replace(cn.GetMethodName((string)Extensions["nextMethodName"]), Name);
+                        string argumentName = param.Name.Replace(nextMethodName, Name);
                         builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
