@@ -13,17 +13,17 @@ gulp.task('syncDependencies:runtime:cs', function () {
   var name = 'Microsoft.Rest.ClientRuntime';
   var version = pkgJsonConfig.version;
 
-  var codeGeneratorPath = './AutoRest/Generators/CSharp/CSharp/CSharpCodeGenerator.cs';
+  var codeGeneratorPath = './src/generator/AutoRest.CSharp/CSharpCodeGenerator.cs';
   gulp.src(codeGeneratorPath, { base: './' })
     .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
     .pipe(gulp.dest('.'));
 
-  var pkgTestConfig = './AutoRest/NugetPackageTest/packages.config';
+  var pkgTestConfig = './PackageTest/NugetPackageTest/packages.config';
   gulp.src(pkgTestConfig, { base: './' })
     .pipe(replace(/<package id="Microsoft.Rest.ClientRuntime" version="([\.\d]+)"/, '<package id="Microsoft.Rest.ClientRuntime" version="' + version + '"'))
     .pipe(gulp.dest('.'));
 
-  var pkgTestCsproj = './AutoRest/NugetPackageTest/NugetPackageCSharpTest.csproj';
+  var pkgTestCsproj = './PackageTest/NugetPackageTest/NugetPackageCSharpTest.csproj';
   gulp.src(pkgTestCsproj, { base: './' })
     .pipe(replace(/Microsoft.Rest.ClientRuntime.([\.\d]+)/, 'Microsoft.Rest.ClientRuntime.' + version + ''))
     .pipe(gulp.dest('.'));
@@ -36,7 +36,7 @@ gulp.task('syncDependencies:runtime:csazure', function () {
   var name = 'Microsoft.Rest.ClientRuntime.Azure';
   var version = pkgJsonConfig.version;
 
-  var codeGeneratorPath = './AutoRest/Generators/CSharp/Azure.CSharp/AzureCSharpCodeGenerator.cs';
+  var codeGeneratorPath = './src/generator/AutoRest.CSharp.Azure/AzureCSharpCodeGenerator.cs';
   gulp.src(codeGeneratorPath, { base: './' })
     .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
     .pipe(gulp.dest('.'));
@@ -50,7 +50,7 @@ gulp.task('syncDependencies:runtime:node', function () {
   var name = pkgConfig['name'];
   var version = pkgConfig['version'];
 
-  var codeGeneratorPath = './AutoRest/Generators/NodeJS/NodeJS/NodeJSCodeGenerator.cs';
+  var codeGeneratorPath = './src/generator/AutoRest.NodeJS/NodeJSCodeGenerator.cs';
   gulp.src(codeGeneratorPath, { base: './' })
     .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + ' version ' + version + '"'))
     .pipe(gulp.dest('.'));

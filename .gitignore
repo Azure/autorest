@@ -177,8 +177,8 @@ Thumbs.db
 
 #old nuget restore folder
 .nuget/
-AutoRest/Generators/AutoRest.Ruby*Tests/Gemfile.lock
-AutoRest/Generators/AutoRest.Ruby*/*/RspecTests/Generated/*
+src/generator/AutoRest.Ruby*Tests/Gemfile.lock
+src/generator/AutoRest.Ruby*/*/RspecTests/Generated/*
 
 #netcore 
 /NetCore

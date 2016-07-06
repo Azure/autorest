@@ -24,9 +24,9 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.ClientRuntim
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.Rest.ClientRuntime.Azure.Authentication", "src\client\Microsoft.Rest.ClientRuntime.Azure.Authentication\Microsoft.Rest.ClientRuntime.Azure.Authentication.xproj", "{6319205D-BBFC-4150-BEAE-31B1C9B911DD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Tests", "AutoRest\Generators\CSharp\CSharp.Tests\CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CSharp.Tests", "src\generator\AutoRest.CSharp.Tests\CSharp.Tests.xproj", "{784D4B45-F12A-4B8F-A86C-35A080814A19}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Azure.CSharp.Tests", "AutoRest\Generators\CSharp\Azure.CSharp.Tests\Azure.CSharp.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Azure.CSharp.Tests", "src\generator\AutoRest.CSharp.Azure.Tests\Azure.CSharp.Tests.xproj", "{43DFEF27-2FD7-4827-A669-DFD2DD1CBBCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorTests", "GeneratorTests", "{0B59BFFC-587F-4E08-987C-82CCB57426B1}"
 EndProject
