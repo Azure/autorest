@@ -16,25 +16,26 @@
     <tags>Microsoft AutoRest</tags>
   </metadata>
   <files>
-    <file src="binaries/net45/AutoRest.Core.dll" target="tools" />
     <file src="binaries/net45/AutoRest.exe" target="tools" />
-    <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
-    <file src="binaries/net45/AutoRest.Generator.Extensions.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.CSharp.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.CSharp.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.Extensions.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.NodeJS.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.NodeJS.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Java.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.Java.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Ruby.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.Ruby.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Python.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.Azure.Python.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Generator.AzureResourceSchema.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Modeler.Swagger.dll" target="tools" />
-    <file src="binaries/net45/AutoRest.Modeler.CompositeSwagger.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.AzureResourceSchema.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CompositeSwagger.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Core.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CSharp.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CSharp.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Extensions.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Extensions.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.Azure.Fluent.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.NodeJS.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Python.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Python.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Ruby.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Ruby.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Swagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
     <file src="binaries/net45/YamlDotNet.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
   </files>
-</package>
+</package>  

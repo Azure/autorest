@@ -6,7 +6,7 @@
       <!--Want to prevent NuGet from reporting warnings
       like we are not putting assemblies under the \lib folder-->
       <NoPackageAnalysis>true</NoPackageAnalysis>
-      <Folder>AutoRest/AutoRest.Core</Folder>
+      <Folder>src/core/AutoRest.Core/</Folder>
       <Name>AutoRest</Name>
     </SdkNuGetPackage>
   </ItemGroup>
