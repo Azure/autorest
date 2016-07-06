@@ -65,7 +65,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gulp", "gulp", "{9750C692-C
 		Tools\gulp\gulp-runtime-version-sync.js = Tools\gulp\gulp-runtime-version-sync.js
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.NodeJS.Azure.Tests", "src\generator\AutoRest.NodeJS.Azure.Tests\AutoRest.NodeJS.Azure.Tests.csproj", "{313D65A7-5A0C-48AA-AF93-8A11364FC5D5}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "AutoRest.NodeJS.Azure.Tests", "src\generator\AutoRest.NodeJS.Azure.Tests\AutoRest.NodeJS.Azure.Tests.njsproj", "{8E7B23E3-7E9F-478B-8F69-AB0B531647AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Java", "Java", "{A9C01442-1E93-4C2D-9182-B61C9F53C3FF}"
 EndProject
@@ -73,7 +73,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Java", "src\genera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Java.Azure", "src\generator\AutoRest.Java.Azure\AutoRest.Java.Azure.csproj", "{AFD3F1C4-5C59-4018-B0BB-030E0DA57C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.NodeJS.Tests", "src\generator\AutoRest.NodeJS.Tests\AutoRest.NodeJS.Tests.csproj", "{CB3CA435-07CB-4DF6-A574-4FCB6909D3DD}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "AutoRest.NodeJS.Tests", "src\generator\AutoRest.NodeJS.Tests\AutoRest.NodeJS.Tests.njsproj", "{189F9CFC-764A-48DB-AEA8-638CBBA5B5AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87F4BC36-8A28-4BF7-B9C4-3EE2CD9731CD}"
 	ProjectSection(SolutionItems) = preProject
