@@ -13,19 +13,5 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
     [Serializable]
     public class Header : SwaggerObject
     {
-
-        public override bool Validate(ValidationContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            var errorCount = context.ValidationErrors.Count;
-
-            base.Validate(context);
-
-            return context.ValidationErrors.Count == errorCount;
-        }
     }
 }

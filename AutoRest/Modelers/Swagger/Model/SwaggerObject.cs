@@ -11,6 +11,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using System.Text.RegularExpressions;
 using Microsoft.Rest.Modeler.Swagger.Validators;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -163,40 +164,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                            Resources.InvalidTypeInSwaggerSchema,
                             Type));
             }
-        }
-
-        public override bool Validate(ValidationContext context)
-        {
-            return true;
-            /*
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            var errorCount = context.ValidationErrors.Count;
-
-            base.Validate(context);
-
-            var validator = new SwaggerObjectValidator();
-            foreach (var validationResult in validator.ValidationExceptions(this))
-            {
-                // TODO: put logging somewhere else
-                switch (validationResult.Severity)
-                {
-                    case LogEntrySeverity.Warning:
-                        context.LogWarning(validationResult.Message);
-                        break;
-                    case LogEntrySeverity.Error:
-                        context.LogError(validationResult.Message);
-                        break;
-                }
-            }
-
-            ValidateConstraints(context);
-
-            return context.ValidationErrors.Count == errorCount;
-            */
         }
 
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)

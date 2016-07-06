@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class ValidFormats : TypeRule<SwaggerObject>
+    public class ValidFormats : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

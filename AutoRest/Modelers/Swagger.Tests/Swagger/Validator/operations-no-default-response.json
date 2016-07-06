@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Consumes has an unsupported MIME type",
+    "title": "Operation with multiple body parameters",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -23,15 +23,16 @@
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "type": "string",
-              "description": "error"
-            }
+          "200": {
+            "description": "OK"
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "description": "Test"
     }
   }
 }

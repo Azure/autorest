@@ -349,6 +349,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no default response defined in the responses section.
+        /// </summary>
+        internal static string NoDefaultResponse {
+            get {
+                return ResourceManager.GetString("NoDefaultResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         internal static string NoDefinitionForPathParameter1 {
@@ -444,6 +453,15 @@ namespace Microsoft.Rest.Generator.Properties {
         internal static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path &apos;{0}&apos; in x-ms-paths does not overload a normal path in the paths section..
+        /// </summary>
+        internal static string XMSPathBaseNotInPaths {
+            get {
+                return ResourceManager.GetString("XMSPathBaseNotInPaths", resourceCulture);
             }
         }
     }

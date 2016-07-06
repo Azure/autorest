@@ -246,4 +246,10 @@
   <data name="CodeGenerationError" xml:space="preserve">
     <value>Errors found during Swagger document validation.</value>
   </data>
+  <data name="NoDefaultResponse" xml:space="preserve">
+    <value>There is no default response defined in the responses section</value>
+  </data>
+  <data name="XMSPathBaseNotInPaths" xml:space="preserve">
+    <value>The path '{0}' in x-ms-paths does not overload a normal path in the paths section.</value>
+  </data>
 </root>

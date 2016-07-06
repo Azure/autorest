@@ -34,17 +34,9 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            var extraReader = reader as NestedJsonReader;
             object obj = null;
             if (reader != null && reader.TokenType != JsonToken.Null && serializer != null)
             {
-                var lineInfo = reader as IJsonLineInfo;
-                int lineNumber = lineInfo.LineNumber;
-                int linePosition = lineInfo.LinePosition;
-                if (extraReader != null && extraReader.Source != null)
-                {
-                    lineNumber += extraReader.Source.LineNumber - 1;
-                }
                 JToken rawObj;
                 string rawJson;
                 if (reader.TokenType == JsonToken.StartArray)
@@ -66,7 +58,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 {
                     obj = Activator.CreateInstance(objectType);
                 }
-                var source = new JsonSourceContext(lineNumber, linePosition, rawJson);
+                var source = new JsonSourceContext(rawJson);
 
                 try
                 {

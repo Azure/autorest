@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class OnlyOneBodyParameter : TypeRule<Operation>
+    public class OnlyOneBodyParameter : TypedRule<Operation>
     {
         public override bool IsValid(Operation entity)
         {

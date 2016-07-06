@@ -9,10 +9,8 @@ namespace Microsoft.Rest.Generator
 {
     public class JsonSourceContext : SourceContext
     {
-        public JsonSourceContext(int lineNumber, int linePosition, string jsonSource)
+        public JsonSourceContext(string jsonSource)
         {
-            this.LineNumber = lineNumber;
-            this.LinePosition = linePosition;
             this.RawSource = jsonSource;
         }
     }

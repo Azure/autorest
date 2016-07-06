@@ -1,20 +1,18 @@
 ﻿using System;
-using Microsoft.Rest.Generator;
 using Microsoft.Rest.Modeler.Swagger.Model;
-using System.Linq;
-using System.Collections;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class AnonymousTypes : TypeRule<SwaggerObject>
+    public class DescriptionRequired : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {
-            bool valid = true;
+            bool valid = false;
 
-            if (entity != null && string.IsNullOrEmpty(entity.Reference))
+            if (entity != null)
             {
-                valid = false;
+                valid = !string.IsNullOrEmpty(entity.Description) || !string.IsNullOrEmpty(entity.Reference);
             }
 
             return valid;
@@ -24,7 +22,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         {
             get
             {
-                return ValidationExceptionName.AnonymousTypesDiscouraged;
+                return ValidationExceptionName.DescriptionRequired;
             }
         }
     }

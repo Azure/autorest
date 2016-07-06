@@ -5,9 +5,9 @@ using System;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
-using Microsoft.Rest.Generator.Logging;
 using Resources = Microsoft.Rest.Modeler.Swagger.Properties.Resources;
 using Microsoft.Rest.Modeler.Swagger.Validators;
+using Microsoft.Rest.Generator;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -59,13 +59,13 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
-        [IterableRule(typeof(AnonymousTypes))]
+        [CollectionRule(typeof(AnonymousTypes))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
-        [Rule(typeof(ResponseRequired))]
+        [Rule(typeof(DefaultResponseRequired))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>
@@ -83,114 +83,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// top-level security declaration, an empty array can be used.
         /// </summary>
         public IList<Dictionary<string, List<string>>> Security { get; set; }
-
-        /// <summary>
-        /// Validate the Swagger object against a number of object-specific validation rules.
-        /// </summary>
-        /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(ValidationContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            var errorCount = context.ValidationErrors.Count;
-
-            base.Validate(context);
-
-            context.ValidationErrors.AddRange(Consumes
-                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInRequests1, input)
-                }));
-
-            context.ValidationErrors.AddRange(Produces
-                .Where(input => !string.IsNullOrEmpty(input) && !input.Contains("json"))
-                .Select(input => new LogEntry
-                {
-                    Severity = LogEntrySeverity.Warning,
-                    Message = string.Format(CultureInfo.InvariantCulture, Resources.OnlyJSONInResponses1, input)
-                }));
-
-            if (Parameters != null)
-            {
-                var bodyParameters = new HashSet<string>();
-
-                foreach (var param in Parameters)
-                {
-                    if (param.In == ParameterLocation.Body)
-                        bodyParameters.Add(param.Name);
-                    if (param.Reference != null)
-                    {
-                        var pRef = FindReferencedParameter(param.Reference, context.Parameters);
-                        if (pRef != null && pRef.In == ParameterLocation.Body)
-                        {
-                            bodyParameters.Add(pRef.Name);
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(param.Name))
-                        context.PushTitle(context.Title + "/" + param.Name);
-                    param.Validate(context);
-                    if (!string.IsNullOrEmpty(param.Name))
-                        context.PopTitle();
-                }
-
-                if (bodyParameters.Count > 1)
-                {
-                    context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.TooManyBodyParameters1, string.Join(",", bodyParameters)));
-                }
-
-                FindAllPathParameters(context);
-            }
-
-            if (string.IsNullOrEmpty(Description))
-            {
-                context.LogWarning(Resources.MissingDescription);
-            }
-
-            if (Responses == null || Responses.Count == 0)
-            {
-                context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoResponses));
-            }
-            else
-            {
-                foreach (var response in Responses)
-                {
-                    context.PushTitle(context.Title + "/" + response.Key);
-                    response.Value.Validate(context);
-                    context.PopTitle();
-                }
-            }
-
-            if (ExternalDocs != null)
-            {
-                ExternalDocs.Validate(context);
-            }
-
-            return context.ValidationErrors.Count == errorCount;
-        }
-
-        private void FindAllPathParameters(ValidationContext context)
-        {
-            var parts = context.Path.Split("/?".ToCharArray());
-
-            foreach (var part in parts.Where(p => !string.IsNullOrEmpty(p)))
-            {
-               if (part[0] == '{' && part[part.Length-1] == '}')
-                {
-                    var pName = part.Trim('{','}');
-                    var found = FindParameter(pName, context.Parameters);
-
-                    if (found == null || found.In != ParameterLocation.Path)
-                    {
-                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.NoDefinitionForPathParameter1, pName));
-                    }
-                }
-            }
-        }
 
         private SwaggerParameter FindParameter(string name, IDictionary<string, SwaggerParameter> parameters)
         {

@@ -1,12 +1,14 @@
-﻿using Microsoft.Rest.Generator;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
-    public abstract class TypeRule<T> : Rule where T : class
+    /// <summary>
+    /// A rule that validates objects of type <typeparamref name="T"/>
+    /// </summary>
+    /// <typeparam name="T">The type of the object to validate</typeparam>
+    public abstract class TypedRule<T> : Rule where T : class
     {
-        protected TypeRule()
+        protected TypedRule()
         {
         }
 
@@ -24,7 +26,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
         }
 
         /// <summary>
-        /// Overridable method that lets a child rule return objects to be passed to string.Format
+        /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -33,7 +35,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             object[] formatParams;
             if (!IsValid(entity, out formatParams))
             {
-                yield return CreateException(null, Exception, formatParams);
+                yield return CreateException(Exception, formatParams);
             }
             yield break;
         }
