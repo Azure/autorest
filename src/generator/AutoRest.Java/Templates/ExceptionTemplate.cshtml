@@ -1,0 +1,99 @@
+﻿@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Java
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ModelTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
+@EmptyLine
+
+import com.microsoft.rest.RestException;
+import retrofit2.Response;
+@EmptyLine
+
+/**
+@WrapComment(" * ", "Exception thrown for an invalid response with " + Model.Name + " information.")
+ */
+public class @Model.ExceptionTypeDefinitionName extends RestException {
+    /**
+     * Information about the associated HTTP response.
+     */
+    private Response response;
+
+    /**
+     * The actual response body.
+     */
+    private @Model.Name body;
+
+    /**
+     * Initializes a new instance of the @(Model.ExceptionTypeDefinitionName) class.
+     */
+    public @(Model.ExceptionTypeDefinitionName)() { }
+
+    /**
+     * Initializes a new instance of the @(Model.ExceptionTypeDefinitionName) class.
+     *
+     * @@param message The exception message.
+     */
+    public @(Model.ExceptionTypeDefinitionName)(final String message) {
+        super(message);
+    }
+
+    /**
+     * Initializes a new instance of the @(Model.ExceptionTypeDefinitionName) class.
+     *
+     * @@param message the exception message
+     * @@param cause   exception that caused this exception to occur
+     */
+    public @(Model.ExceptionTypeDefinitionName)(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * Initializes a new instance of the @(Model.ExceptionTypeDefinitionName) class.
+     *
+     * @@param cause exception that caused this exception to occur
+     */
+    public @(Model.ExceptionTypeDefinitionName)(final Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * Gets information about the associated HTTP response.
+     *
+     * @@return the HTTP response
+     */
+    public Response getResponse() {
+        return response;
+    }
+
+    /**
+     * Gets the HTTP response body.
+     *
+     * @@return the response body
+     */
+    public @Model.Name getBody() {
+        return body;
+    }
+
+    /**
+     * Sets the HTTP response.
+     *
+     * @@param response the HTTP response
+     */
+    public void setResponse(Response response) {
+        this.response = response;
+    }
+
+    /**
+     * Sets the HTTP response body.
+     *
+     * @@param body the response body
+     */
+    public void setBody(@Model.Name body) {
+        this.body = body;
+    }
+}

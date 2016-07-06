@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+group :development, :local, :test do
+  gem 'rspec'
+  gem 'faraday-cookie_jar', '~> 0.0.6'
+  gem 'ms_rest', path:'../../client/Ruby/ms-rest'
+end

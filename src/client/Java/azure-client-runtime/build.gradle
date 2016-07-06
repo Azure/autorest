@@ -1,0 +1,96 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+
+version = '1.0.0-SNAPSHOT'
+
+checkstyle {
+    toolVersion = "6.18"
+    configFile = new File("$rootDir/src/client/Java/build-tools/src/main/resources/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/src/client/Java/build-tools/src/main/resources"]
+    reportsDir = new File("$rootDir/src/client/Java/build-tools/reports")
+}
+
+dependencies {
+    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit-dep:4.11'
+    deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+                authentication(userName: username, password: password)
+            }
+            pom.setArtifactId "azure-client-runtime"
+            pom.project {
+                name 'Microsoft Azure AutoRest Runtime for Java'
+                description 'This is the client runtime for AutoRest generated Azure Java clients.'
+                url 'https://github.com/Azure/autorest'
+
+                scm {
+                    url 'scm:git:https://github.com/Azure/AutoRest'
+                    connection 'scm:git:git://github.com/Azure/AutoRest.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://opensource.org/licenses/MIT'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'microsoft'
+                        name 'Microsoft'
+                    }
+                }
+            }
+        }
+    }
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardError"
+    }
+}
+
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: [javadoc]) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+test {
+    reports.getHtml()
+    reports.html.destination = file("$rootDir/TestResults/JavaAzureRuntime")
+}
+
+tasks.compileJava.dependsOn 'clean'

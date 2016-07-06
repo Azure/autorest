@@ -1,0 +1,78 @@
+﻿@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+@if (Model.MethodTemplateModels.Any())
+{
+@:import * as models from "./models";
+}
+@if (Model.MethodGroups.Any()) {
+@:import * as operations from "./operations";
+}
+@EmptyLine
+declare class @(Model.Name) {
+    @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
+    @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
+    /**
+     * @@class
+     * Initializes a new instance of the @Model.Name class.
+     * @@constructor
+     *
+    @foreach (var param in requiredParameters)
+    {
+    @: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
+    @: *
+    }
+
+@if(!Model.IsCustomBaseUri)
+{ 
+     @:* @@param {string} [baseUri] - The base URI of the service.
+     @:*
+}
+
+     * @@param {object} [options] - The parameter options
+     *
+     * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+     *
+     * @@param {object} [options.requestOptions] - Options for the underlying request object
+     * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+     *
+     * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     *
+    @foreach (var param in optionalParameters)
+    {
+    @: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+    @: *
+    }
+     */
+    constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options: ServiceClientOptions);
+
+    @foreach (var property in Model.Properties)
+    {
+    @EmptyLine
+    @:@(property.Name): @(property.Type.TSType(false));
+    }
+
+    @if (Model.MethodGroupModels.Any())
+    {
+    @EmptyLine
+    @:// Operation groups
+    foreach (var methodGroup in Model.MethodGroupModels)
+    {
+    @:@(methodGroup.MethodGroupName): operations.@(methodGroup.MethodGroupType);
+    }
+    }
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+        @EmptyLine
+        @:@(Include(new MethodTemplateTS(), method))
+    }
+}
+@EmptyLine
+export = @(Model.Name);

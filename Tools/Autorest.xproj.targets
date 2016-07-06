@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- this file should be imported into every Autorest xproj file -->
+  
+  <PropertyGroup>
+    <!-- Overridable properties -->
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MsBuildThisFileDirectory)..</SolutionDir>
+    <DotnetFrameworkName Condition="'$(DotnetFrameworkName)' == ''">net451</DotnetFrameworkName>
+    <DotnetRuntimeName Condition="'$(DotnetRuntimeName)' == ''">win7-x64</DotnetRuntimeName>
+    <DotnetOutputPath Condition="'$(DotnetOutputPath)' == ''">$(OutputPath)\$(Configuration)\$(DotnetFrameworkName)\$(DotnetRuntimeName)</DotnetOutputPath>
+    <CommonRoot>$(MsBuildThisFileDirectory)..</CommonRoot>
+    <LibraryFxTarget Condition="'$(LibraryFxTarget)' == ''">net45</LibraryFxTarget>
+  </PropertyGroup>
+
+  <Target Name="CleanAfterClean" AfterTargets="Clean">
+    <!-- ensures that the output folders are actually cleaned and removed --> 
+    <RemoveDir Directories="$(OutputPath)" />
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+  </Target>
+  
+  <Target Name="CopyTestFilesAfterBuild" AfterTargets="Build" Condition="$(MSBuildProjectFile.ToLower().IndexOf('test')) != -1">
+    <!-- Test projects should copy their full outputs to the root of the OutputPath so that xunit integration in Visual Studio works correctly --> 
+    <ItemGroup><AllOutputFiles Include="$(DotnetOutputPath)\**\*.*"/></ItemGroup>
+    <Copy SourceFiles="@(AllOutputFiles)" DestinationFiles="@(AllOutputFiles->'$(OutputPath)\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+   <Target Name="CompileRazorTemplates" BeforeTargets="BeforeBuild" Condition="Exists( '$(MSBuildProjectDirectory)\Templates' )">
+    <Message Text="Compiling Razor templates for project $(MSBuildProjectDirectory) / $(RootNamespace)." />
+    <PropertyGroup>
+      <RazorCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
+      <RazorCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(CommonRoot)\Tools\rzc.exe&quot;</RazorCommand>
+     </PropertyGroup>
+    <!-- Compile razor template. -->
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates&quot; $(RootNamespace).Templates" />
+  </Target>
+
+  <Target Name="Build" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
+  <Target Name="BeforeBuild" BeforeTargets="Build" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
+  <Target Name="Clean" Condition=" '$(OS)' != 'Windows_NT'">
+  </Target>
+
+</Project>

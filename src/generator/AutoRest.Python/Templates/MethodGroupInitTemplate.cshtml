@@ -1,0 +1,25 @@
+﻿@using AutoRest.Python.Templates
+@using System.Linq
+@using AutoRest.Python
+@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+@{
+  if (Model.MethodGroupModels.Any())
+  {
+    foreach (var modelGroupType in Model.MethodGroupModels)
+    {
+@:from .@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
+    }
+@EmptyLine
+@:__all__ = [
+    foreach (var modelGroupType in Model.MethodGroupModels)
+    {
+@:    '@modelGroupType.MethodGroupType',
+    }
+@:]
+  }
+}

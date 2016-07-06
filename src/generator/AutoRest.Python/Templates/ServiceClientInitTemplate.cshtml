@@ -1,0 +1,16 @@
+﻿@using AutoRest.Python.Templates
+@using System.Linq
+@using AutoRest.Python
+@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+from .@(Model.Name.ToPythonCase()) import @(Model.Name)
+from .version import VERSION
+@EmptyLine
+__all__ = ['@(Model.Name)']
+@EmptyLine
+__version__ = VERSION
+@EmptyLine

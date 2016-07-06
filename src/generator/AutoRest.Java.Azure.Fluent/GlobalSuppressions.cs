@@ -1,0 +1,27 @@
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureJavaFluentCodeGenerator.#.ctor(AutoRest.Core.Settings)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureJavaFluentCodeNamer.#NormalizeTopLevelTypes(AutoRest.Core.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodGroupTemplateModel.#ImplImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#.ctor(AutoRest.Core.ClientModel.Method,AutoRest.Core.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#TransformPagingGroupedParameter(AutoRest.Core.Utilities.IndentedStringBuilder,AutoRest.Java.Azure.AzureMethodTemplateModel,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#TransformPagingGroupedParameter(AutoRest.Core.Utilities.IndentedStringBuilder,AutoRest.Java.Azure.AzureMethodTemplateModel,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#TransformPagingGroupedParameter(AutoRest.Core.Utilities.IndentedStringBuilder,AutoRest.Java.Azure.AzureMethodTemplateModel,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "AutoRest.Core.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#TransformPagingGroupedParameter(AutoRest.Core.Utilities.IndentedStringBuilder,AutoRest.Java.Azure.AzureMethodTemplateModel,System.Boolean)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#InterfaceImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentMethodTemplateModel.#ImplImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentModelTemplateModel.#.ctor(AutoRest.Core.ClientModel.CompositeType,AutoRest.Core.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentServiceClientTemplateModel.#InterfaceImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.AzureFluentServiceClientTemplateModel.#ImplImports")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "AutoRest.Java")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.FluentCompositeTypeModel.#.ctor(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "AutoRest.Java.Azure.Fluent.FluentCompositeTypeModel.#.ctor(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "AutoRest.Java.FluentEnumTypeModel.#.ctor(AutoRest.Core.ClientModel.EnumType,System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "AutoRest.Java.FluentEnumTypeModel.#.ctor(AutoRest.Core.ClientModel.EnumType,System.String)")]
+// This file is used by Code Analysis to maintain SuppressMessage 
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given 
+// a specific target and scoped to a namespace, type, member, etc.
+//
+// To add a suppression to this file, right-click the message in the 
+// Code Analysis results, point to "Suppress Message", and click 
+// "In Suppression File".
+// You do not need to add suppressions to this file manually.

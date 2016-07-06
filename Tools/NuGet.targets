@@ -6,7 +6,7 @@
     <NightlyBuildVersion Condition=" $(NightlyBuild) == 'true' ">-Nightly$(NightlyBuildVersion)</NightlyBuildVersion>
   </PropertyGroup>
 
-  <Import Project="$(LibrarySourceFolder)\AutoRest\AutoRest.Core\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
+  <Import Project="$(LibrarySourceFolder)\src\core\AutoRest.Core\*.nuget.proj" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator' "/>
 
   <PropertyGroup>
     <NuGetVerbosity>normal</NuGetVerbosity>

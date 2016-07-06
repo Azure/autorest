@@ -1,0 +1,16 @@
+﻿@using System.Linq;
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodGroupTemplateModel>
+/**
+ * @@class
+ * @Model.MethodGroupType
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the @Model.Name.
+ */
+export interface @(Model.MethodGroupType) {
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @EmptyLine
+    @:@(Include(new MethodTemplateTS(), method))
+    }
+}

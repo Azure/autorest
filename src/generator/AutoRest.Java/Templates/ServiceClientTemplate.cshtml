@@ -1,0 +1,159 @@
+@using System
+@using AutoRest.Java.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
+
+@EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * Initializes a new instance of the @Model.Name class.
+ */
+public final class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+@if (Model.MethodTemplateModels.Any())
+{
+@:    /**
+@:     * The Retrofit service to perform REST calls.
+@:     */
+@:    private @Model.ServiceClientServiceType service;
+}
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /** @(property.Documentation.Period()) */
+@:    private @(property.Type) @(property.Name.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation.Period())
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
+@:        return this.@(property.Name.ToCamelCase());
+@:    }
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation.Period())
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
+@:     */
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
+@:        return this;
+@:    }
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * The @(operation.MethodGroupType) object to access its operations.
+@:     */
+@:    private @(operation.MethodGroupType) @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupType) object.
+@:     */
+@:    public @(operation.MethodGroupType) @(operation.MethodGroupName)() {
+@:        return this.@(operation.MethodGroupName);
+@:    }
+}
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+        super(baseUrl);
+        initialize();
+    }
+
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        this("@Model.BaseUrl", clientBuilder, restBuilder);
+        initialize();
+    }
+
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
+     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+        super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+@EmptyLine
+    private void initialize() {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+@:        this.@(property.Name) = @(property.DefaultValue);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)Impl(retrofit(), this);
+}
+@if (Model.MethodTemplateModels.Any())
+{
+@:        initializeService();
+}
+    }
+
+@if (Model.MethodTemplateModels.Any())
+{
+@EmptyLine
+<text>
+    private void initializeService() {
+        service = retrofit().create(@(Model.ServiceClientServiceType).class);
+    }
+</text>
+@EmptyLine
+if (Model.MethodTemplateModels.Any())
+{
+@:    @Include(new ServiceClientRetrofitTemplate(), Model)
+@EmptyLine
+}
+<text>
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:@(Include(new MethodTemplate(), method))
+    @EmptyLine
+}
+</text>
+}
+}

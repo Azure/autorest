@@ -1,0 +1,59 @@
+﻿@using AutoRest.CSharp.Azure.TemplateModels
+@using AutoRest.CSharp.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
+    using Newtonsoft.Json;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.MethodGroupType) operations.
+    /// </summary>
+    internal partial class @(Model.MethodGroupType) : IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.MethodGroupType) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        internal @(Model.MethodGroupType)(@(Model.Name) client)
+        {
+            if (client == null) 
+            {
+                throw new ArgumentNullException("client");
+            }
+            this.Client = client;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @(Model.Name)
+        /// </summary>
+        public @(Model.Name) Client { get; private set; }
+        @EmptyLine
+        @foreach (var method in Model.MethodTemplateModels)
+        {
+        @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+        @EmptyLine
+        }
+    }
+}

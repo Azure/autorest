@@ -1,0 +1,26 @@
+﻿@using System
+@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Python
+@inherits AutoRest.Core.Template<AutoRest.Python.Azure.TemplateModels.PageTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+from msrest.paging import Paged
+@EmptyLine
+@EmptyLine
+class @(Model.TypeDefinitionName)(Paged):
+    """
+    A paging container for iterating over a list of @Model.ItemType object
+    """
+@EmptyLine
+    _attribute_map = {
+        'next_link': {'key': '@Model.NextLinkName', 'type': 'str'},
+        'current_page': {'key': '@Model.ItemName', 'type': '[@Model.ItemType]'}
+    }
+@EmptyLine
+    def __init__(self, *args, **kwargs):
+@EmptyLine
+        super(@(Model.TypeDefinitionName), self).__init__(*args, **kwargs)

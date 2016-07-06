@@ -1,0 +1,21 @@
+﻿{
+  "codeGenerators": {
+    "CSharp": {
+      "type": "CSharpCodeGenerator, AutoRest.CSharp"
+    },
+    "NodeJS": {
+      "type": "NodeJSCodeGenerator, AutoRest.NodeJS",
+      "settings": {
+        "disableTypeScriptGeneration": true
+      }
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, AutoRest.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+﻿@using AutoRest.Python.Templates
+@using System.Linq
+@using AutoRest.Python
+@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+VERSION = "@Model.Version"
+@EmptyLine

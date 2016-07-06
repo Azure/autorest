@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+group :development, :local, :test do
+  gem 'rspec'
+  gem 'ms_rest', path:'../../client/Ruby/ms-rest'
+  gem 'ms_rest_azure', path:'../../client/Ruby/ms-rest-azure'
+end

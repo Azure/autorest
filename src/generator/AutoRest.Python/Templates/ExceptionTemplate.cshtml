@@ -1,0 +1,25 @@
+﻿@using System.Linq
+@using AutoRest.Python
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.TemplateModels.ServiceClientTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+from msrest.exceptions import (
+    ClientException,
+    SerializationError,
+    DeserializationError,
+    TokenExpiredError,
+    ClientRequestError,
+    AuthenticationError,
+    HttpOperationError,
+    ValidationError,
+)
+@if (Model.NeedsExtraImport)
+{
+@EmptyLine
+<text>
+from msrestazure.azure_exceptions import CloudError
+</text>
+}

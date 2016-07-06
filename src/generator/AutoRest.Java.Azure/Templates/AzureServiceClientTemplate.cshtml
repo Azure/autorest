@@ -1,0 +1,212 @@
+@using System
+@using AutoRest.Java.Azure.Templates
+@using AutoRest.Java.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@using AutoRest.Java.Azure.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureServiceClientTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
+
+@EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * Initializes a new instance of the @(Model.Name)Impl class.
+ */
+public final class @(Model.Name)Impl@(Model.ParentDeclaration) {
+@if (Model.MethodTemplateModels.Any())
+{
+@:    /** The Retrofit service to perform REST calls. */
+@:    private @Model.ServiceClientServiceType service;
+}
+    /** the {@@link AzureClient} used for long running operations. */
+    private AzureClient azureClient;
+@EmptyLine
+    /**
+     * Gets the {@@link AzureClient} used for long running operations.
+     * @@return the azure client;
+     */
+    public AzureClient getAzureClient() {
+        return this.azureClient;
+    }
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /** @(property.Documentation.Period()) */
+@:    private @(property.Type) @(property.Name.ToCamelCase());
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation.Period())
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    public @(property.Type) @(property.Name.ToCamelCase())() {
+@:        return this.@(property.Name.ToCamelCase());
+@:    }
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation.Period())
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
+@:     */
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
+@:        return this;
+@:    }
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * The @(operation.MethodGroupDeclarationType) object to access its operations.
+@:     */
+@:    private @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName);
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupDeclarationType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupDeclarationType) object.
+@:     */
+@:    public @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName)() {
+@:        return this.@(operation.MethodGroupName);
+@:    }
+}
+@EmptyLine
+
+@if (Settings.AddCredentials)
+{
+<text>
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param credentials the management credentials for Azure
+     */
+    public @(Model.Name)Impl(ServiceClientCredentials credentials) {
+        this("@Model.BaseUrl", credentials);
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     * @@param credentials the management credentials for Azure
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
+        this(new RestClient.Builder()
+                .withBaseUrl(baseUrl)
+                .withCredentials(credentials)
+                .build());
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure.
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        initialize();
+    }
+
+@EmptyLine
+
+</text>
+}
+else
+{
+<text>
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+        this(baseUrl, null);
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client to connect to Azure
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
+        restClient.baseUrl("@Model.BaseUrl");
+        initialize();
+    }
+@EmptyLine
+</text>
+}
+    protected void initialize() {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+        @:this.@(property.Name) = @(property.DefaultValue);
+}
+@foreach (var operation in Model.Operations)
+{
+@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
+}
+        @Model.SetDefaultHeaders
+        this.azureClient = new AzureClient(this);
+@if (Model.MethodTemplateModels.Any())
+{
+@:        initializeService();
+}
+    }
+@EmptyLine
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @@return the user agent string.
+     */
+    @@Override
+    public String userAgent() {
+        return String.format("Azure-SDK-For-Java/%s (%s)",
+                getClass().getPackage().getImplementationVersion(),
+                "@Model.Name, @Model.ApiVersion");
+    }
+@if (Model.MethodTemplateModels.Any())
+{
+@EmptyLine
+<text>
+    private void initializeService() {
+        service = restClient().retrofit().create(@(Model.ServiceClientServiceType).class);
+    }
+</text>
+@EmptyLine
+if (Model.MethodTemplateModels.Any())
+{
+@:    @Include(new AzureServiceClientRetrofitTemplate(), Model)
+@EmptyLine
+}
+<text>
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+    @EmptyLine
+}
+</text>
+}
+}
