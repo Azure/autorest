@@ -20,6 +20,11 @@ namespace Microsoft.Rest.Generator
             }
         }
 
+        /// <summary>
+        /// Returns a collection of validation messages for <paramref name="entity"/>
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity)
         {
             if (Rule != null)

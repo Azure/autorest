@@ -9,16 +9,16 @@ namespace Microsoft.Rest.Generator
     {
         private IList<string> _location = new List<string>();
 
-        public ValidationExceptionName ValidationException { get; set; }
+        public IList<string> Location
+        {
+            get { return this._location; }
+        }
 
         public string Message { get; set; }
 
         public LogEntrySeverity Severity { get; set; }
 
-        public IList<string> Location
-        {
-            get { return this._location; }
-        }
+        public ValidationExceptionName ValidationException { get; set; }
 
         public override string ToString()
         {

@@ -1,13 +1,9 @@
-﻿using Microsoft.Rest.Generator;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Rest.Generator
 {
@@ -62,7 +58,7 @@ namespace Microsoft.Rest.Generator
             return RecursiveValidate(entity, new List<RuleAttribute>());
         }
 
-        public IEnumerable<ValidationMessage> RecursiveValidate(object entity, IEnumerable<RuleAttribute> collectionRules)
+        private IEnumerable<ValidationMessage> RecursiveValidate(object entity, IEnumerable<RuleAttribute> collectionRules)
         {
             if (entity != null)
             {
