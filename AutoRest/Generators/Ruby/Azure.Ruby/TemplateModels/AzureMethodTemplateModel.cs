@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
                         string argumentName = param.Name.Replace(cn.GetMethodName((string)Extensions["nextMethodName"]), Name);
-                        builder.AppendLine(string.Format("{0} = {1}", param.Name, argumentName));
+                        builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             headerParams.Add("custom_headers");
             string nextMethodParamaterInvocation = string.Join(", ",headerParams);
 
-            builder.AppendLine(string.Format("{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation));
+            builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation));
             return builder.ToString();
         }
 

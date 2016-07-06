@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Adds method to use for autopagination.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
-        private void AddRubyPageableMethod(ServiceClient serviceClient)
+        private static void AddRubyPageableMethod(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
