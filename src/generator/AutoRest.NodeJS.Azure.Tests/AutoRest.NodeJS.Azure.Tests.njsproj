@@ -48,28 +48,7 @@
       <TestFramework>
       </TestFramework>
     </Compile>
-    <Content Include="bin\Net45-Debug\AutoRest.json" />
-    <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Generator.Azure.Common.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Generator.Azure.NodeJS.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Generator.NodeJS.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Modeler.Swagger.xml" />
-    <Content Include="bin\Net45-Debug\Newtonsoft.Json.xml" />
-    <Content Include="bin\Net45-Debug\xunit.assert.xml" />
-    <Content Include="bin\Net45-Debug\xunit.core.xml" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf-circular.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-data-types.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-def.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref-no-definitions.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-multiple-response-schemas.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-no-content.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-optional-params.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-polymorphism.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
+
     <Content Include="tsconfig.json" />
     <Content Include="tsd.json" />
   </ItemGroup>

@@ -224,65 +224,6 @@
     <Compile Include="AcceptanceTests\complexTypesTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Content Include="bin\Net45-Debug\AutoRest.json" />
-    <Content Include="bin\Net45-Debug\AutoRest.Core.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Generator.NodeJS.xml" />
-    <Content Include="bin\Net45-Debug\AutoRest.Modeler.Swagger.xml" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestBoolTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestComplexTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestDateTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestDateTimeTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutorestHelloWorld.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestHttpInfrastructureTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestIntegerTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestNumberTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestReportService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestRequiredOptionalTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestSwaggerBATArrayService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestSwaggerBATByteService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestSwaggerBATdictionaryService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestSwaggerBATHeaderService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestSwaggerBATService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\AutoRestUrlTestService.js" />
-    <Compile Include="bin\Net45-Debug\Expected\BlobConnector.js" />
-    <Compile Include="bin\Net45-Debug\Expected\DictionaryStore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\HelloSwagger.js" />
-    <Compile Include="bin\Net45-Debug\Expected\HttpDestinationConnector.js" />
-    <Compile Include="bin\Net45-Debug\Expected\MicrosoftAzureRedisCacheManagementAPI.js" />
-    <Compile Include="bin\Net45-Debug\Expected\MicrosoftNullablePrimitvestestAPI.js" />
-    <Compile Include="bin\Net45-Debug\Expected\OptionalParametertestspec.js" />
-    <Compile Include="bin\Net45-Debug\Expected\PolymorphicAnimalStore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\PolymorphismPetStore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\RecursiveTypesAPI.js" />
-    <Compile Include="bin\Net45-Debug\Expected\RedisManagementClient.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SequenceRequestResponseTest.js" />
-    <Compile Include="bin\Net45-Debug\Expected\Simplejsonheadmethod.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SuperInlineProductStore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SwaggerDataTypesClient.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SwaggerNestStore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SwaggerPetstore.js" />
-    <Compile Include="bin\Net45-Debug\Expected\SwaggerPetstoreV2.js" />
-    <Compile Include="bin\Net45-Debug\Expected\TestofswaggerresponseschemasinerrorandnonErrors.js" />
-    <Compile Include="bin\Net45-Debug\Expected\WebApplication9.js" />
-    <Compile Include="bin\Net45-Debug\Expected\YammerConnector.js" />
-    <Content Include="bin\Net45-Debug\Swagger\body-date.json" />
-    <Content Include="bin\Net45-Debug\Swagger\body-string.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf-circular.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-allOf.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-data-types.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-def.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref-no-definitions.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-external-ref.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-multiple-response-schemas.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-no-content.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-optional-params.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-polymorphism.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
-    <Content Include="bin\Net45-Debug\Swagger\swagger.2.0.example.v2.json" />
-    <Content Include="obj\Debug\AutoRest.Generator.NodeJS.Tests.njsproj.FileListAbsolute.txt" />
-    <Content Include="obj\Net45-Debug\AutoRest.Generator.NodeJS.Tests.csproj.FileListAbsolute.txt" />
     <Content Include="packages.config" />
     <Content Include="tsconfig.json" />
     <Content Include="tsd.json" />
@@ -290,9 +231,6 @@
   <ItemGroup>
     <Folder Include="AcceptanceTests" />
     <Folder Include="bin" />
-    <Folder Include="bin\Net45-Debug" />
-    <Folder Include="bin\Net45-Debug\Expected" />
-    <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
     <Folder Include="Expected\AcceptanceTests\" />
     <Folder Include="Expected\AcceptanceTests\BodyArray\" />
@@ -364,10 +302,6 @@
     <Folder Include="Expected\AcceptanceTests\Validation\" />
     <Folder Include="Expected\AcceptanceTests\Validation\models\" />
     <Folder Include="node_modules\" />
-    <Folder Include="obj" />
-    <Folder Include="obj\Debug" />
-    <Folder Include="obj\Net45-Debug" />
-    <Folder Include="obj\Net45-Debug\TempPE" />
     <Folder Include="Swagger" />
   </ItemGroup>
   <ItemGroup>
