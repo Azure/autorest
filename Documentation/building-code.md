@@ -10,11 +10,11 @@ Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
 To compile the code in Visual Studio IDE, 
-- Ensure you are using Visual Studio 2015 (Update 2)
+- Ensure you are using Visual Studio 2015 (Update 3)
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
 
-Install CoreCLR RC2 using [these steps](https://www.microsoft.com/net/core#windows).
+Install .Net CoreCLR RTM using [these steps](https://www.microsoft.com/net/core#windows).
 
 #### on Mac or Linux
 Install Mono 4.3.0 (MonoFramework-MDK-4.3.0.372.macos10.xamarin.x86.pkg)
