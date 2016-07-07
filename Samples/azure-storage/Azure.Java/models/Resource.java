@@ -80,7 +80,7 @@ public class Resource extends BaseResource {
      *
      * @param location the location value to set
      */
-    public void setLocation(String location) {
+    public void withLocation(String location) {
         this.location = location;
     }
 
@@ -98,7 +98,7 @@ public class Resource extends BaseResource {
      *
      * @param tags the tags value to set
      */
-    public void setTags(Map<String, String> tags) {
+    public void withTags(Map<String, String> tags) {
         this.tags = tags;
     }
 

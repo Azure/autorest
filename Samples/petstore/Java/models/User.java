@@ -53,7 +53,7 @@ public class User {
      *
      * @return the id value
      */
-    public Long getId() {
+    public Long id() {
         return this.id;
     }
 
@@ -61,9 +61,11 @@ public class User {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the User object itself.
      */
-    public void setId(Long id) {
+    public User withId(Long id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -71,7 +73,7 @@ public class User {
      *
      * @return the username value
      */
-    public String getUsername() {
+    public String username() {
         return this.username;
     }
 
@@ -79,9 +81,11 @@ public class User {
      * Set the username value.
      *
      * @param username the username value to set
+     * @return the User object itself.
      */
-    public void setUsername(String username) {
+    public User withUsername(String username) {
         this.username = username;
+        return this;
     }
 
     /**
@@ -89,7 +93,7 @@ public class User {
      *
      * @return the firstName value
      */
-    public String getFirstName() {
+    public String firstName() {
         return this.firstName;
     }
 
@@ -97,9 +101,11 @@ public class User {
      * Set the firstName value.
      *
      * @param firstName the firstName value to set
+     * @return the User object itself.
      */
-    public void setFirstName(String firstName) {
+    public User withFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     /**
@@ -107,7 +113,7 @@ public class User {
      *
      * @return the lastName value
      */
-    public String getLastName() {
+    public String lastName() {
         return this.lastName;
     }
 
@@ -115,9 +121,11 @@ public class User {
      * Set the lastName value.
      *
      * @param lastName the lastName value to set
+     * @return the User object itself.
      */
-    public void setLastName(String lastName) {
+    public User withLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     /**
@@ -125,7 +133,7 @@ public class User {
      *
      * @return the email value
      */
-    public String getEmail() {
+    public String email() {
         return this.email;
     }
 
@@ -133,9 +141,11 @@ public class User {
      * Set the email value.
      *
      * @param email the email value to set
+     * @return the User object itself.
      */
-    public void setEmail(String email) {
+    public User withEmail(String email) {
         this.email = email;
+        return this;
     }
 
     /**
@@ -143,7 +153,7 @@ public class User {
      *
      * @return the password value
      */
-    public String getPassword() {
+    public String password() {
         return this.password;
     }
 
@@ -151,9 +161,11 @@ public class User {
      * Set the password value.
      *
      * @param password the password value to set
+     * @return the User object itself.
      */
-    public void setPassword(String password) {
+    public User withPassword(String password) {
         this.password = password;
+        return this;
     }
 
     /**
@@ -161,7 +173,7 @@ public class User {
      *
      * @return the phone value
      */
-    public String getPhone() {
+    public String phone() {
         return this.phone;
     }
 
@@ -169,9 +181,11 @@ public class User {
      * Set the phone value.
      *
      * @param phone the phone value to set
+     * @return the User object itself.
      */
-    public void setPhone(String phone) {
+    public User withPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     /**
@@ -179,7 +193,7 @@ public class User {
      *
      * @return the userStatus value
      */
-    public Integer getUserStatus() {
+    public Integer userStatus() {
         return this.userStatus;
     }
 
@@ -187,9 +201,11 @@ public class User {
      * Set the userStatus value.
      *
      * @param userStatus the userStatus value to set
+     * @return the User object itself.
      */
-    public void setUserStatus(Integer userStatus) {
+    public User withUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
+        return this;
     }
 
 }

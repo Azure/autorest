@@ -1,0 +1,136 @@
+﻿@using System.Linq
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+/* jshint latedef:false */
+/* jshint forin:false */
+/* jshint noempty:false */
+@EmptyLine
+'use strict';
+@EmptyLine
+var util = require('util');
+var msRest = require('ms-rest');
+var ServiceClient = msRest.ServiceClient;
+@if (Model.ContainsDurationProperty())
+{
+@:var moment = require('moment');
+@EmptyLine
+}
+@if (Model.MethodTemplateModels.Any())
+{
+@:var WebResource = msRest.WebResource;
+}
+
+@EmptyLine
+@if (Model.ModelTypes.Any())
+{
+@:var models = require('./models');
+}
+@if (Model.MethodGroups.Any())
+{
+@:var operations = require('./operations');
+}
+@EmptyLine
+@{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
+@{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
+/**
+ * @@class
+ * Initializes a new instance of the @Model.Name class.
+ * @@constructor
+ *
+@foreach (var param in requiredParameters)
+{
+@: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
+@: *
+}
+
+@if(!Model.IsCustomBaseUri)
+{ 
+@: * @@param {string} [baseUri] - The base URI of the service.
+@: *
+}
+
+ * @@param {object} [options] - The parameter options
+ *
+ * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+ *
+ * @@param {object} [options.requestOptions] - Options for the underlying request object
+ * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
+ * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+@foreach (var param in optionalParameters)
+{
+@: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+@: *
+}
+ */
+function @(Model.Name)(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", ": "")options) {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+  @:this.@(property.Name) = @(property.DefaultValue);
+}
+
+@foreach (var param in requiredParameters)
+{
+@:  if (@(param.Name) === null || @(param.Name) === undefined) {
+@:    throw new Error('\'@(param.Name)\' cannot be null.');
+@:  }
+}
+  @EmptyLine
+  if (!options) options = {};
+  @EmptyLine
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
+  
+@if(!Model.IsCustomBaseUri)
+{
+  @:this.baseUri = baseUri;
+
+  @:if (!this.baseUri) {
+    @:this.baseUri = '@Model.BaseUrl';
+  @:}
+}
+else
+{
+  @:this.baseUri = '@Model.BaseUrl';
+}
+
+
+
+@foreach (var param in requiredParameters)
+{
+@:  this.@(param.Name) = @(param.Name);
+}
+  @EmptyLine
+  @foreach (var property in optionalParameters)
+  { 
+  @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
+  @:  this.@(property.Name) = options.@(property.Name);
+  @:}
+  }
+
+  @foreach (var methodGroup in Model.MethodGroupModels)
+  {
+  @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);
+  }
+  
+  @if (Model.ModelTypes.Any())
+  {
+  @:this.models = models;
+  }
+  msRest.addSerializationMixin(this);
+}
+@EmptyLine
+util.inherits(@Model.Name, ServiceClient);
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new MethodTemplate(), method))
+}
+@EmptyLine
+module.exports = @Model.Name;

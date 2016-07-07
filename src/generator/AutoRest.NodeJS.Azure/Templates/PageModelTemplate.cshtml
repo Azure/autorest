@@ -1,0 +1,41 @@
+@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.NodeJS.Azure.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.PageTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+'use strict';
+@EmptyLine
+var util = require('util');
+@EmptyLine
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+@WrapComment(" * ", Model.Documentation)
+@foreach (var property in Model.DocumentationPropertyList)
+{
+    @PageTemplateModel.ConstructPropertyDocumentation(
+                              WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
+                                                             + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+                                                 + " " + property.Documentation))
+}
+ */
+function @(Model.Name)() {
+}
+@EmptyLine
+util.inherits(@(Model.Name), Array);
+@EmptyLine
+/**
+ * Defines the metadata of @Model.Name
+ *
+ * @@returns {object} metadata of @Model.Name
+ *
+ */
+@(Model.Name).prototype.mapper = function () {
+  @(Model.ConstructModelMapper())
+};
+@EmptyLine
+module.exports = @(Model.Name);

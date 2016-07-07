@@ -6,8 +6,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountCreateParameters(Model):
-    """
-    The parameters to provide for the account.
+    """The parameters to provide for the account.
 
     :param location: Resource location
     :type location: str

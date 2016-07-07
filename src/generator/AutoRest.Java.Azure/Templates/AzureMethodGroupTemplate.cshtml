@@ -1,0 +1,51 @@
+﻿@using System
+@using AutoRest.Java.Azure.Templates
+@using System.Linq;
+@using AutoRest.Java
+@using AutoRest.Java.Azure.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
+@EmptyLine
+@foreach (var importClass in Model.ImplImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * An instance of this class provides access to all the operations defined
+ * in @(Model.MethodGroupType).
+ */
+public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
+    /** The Retrofit service to perform REST calls. */
+    private @Model.MethodGroupServiceType service;
+    /** The service client containing this operation class. */
+    private @(Model.ServiceClientType) client;
+    @EmptyLine
+    /**
+     * Initializes an instance of @(Model.MethodGroupImplType).
+     *
+     * @@param retrofit the Retrofit instance built from a Retrofit Builder.
+     * @@param client the instance of the service client containing this operation class.
+     */
+    public @(Model.MethodGroupImplType)(Retrofit retrofit, @(Model.ServiceClientType) client) {
+        this.service = retrofit.create(@(Model.MethodGroupServiceType).class);
+        this.client = client;
+    }
+    @EmptyLine
+
+    @Include(new AzureMethodGroupRetrofitTemplate(), Model)
+
+    @EmptyLine
+
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+    @EmptyLine
+    }
+}

@@ -1,0 +1,350 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Paging Test Service",
+    "description": "Long-running Operation for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/paging/single": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getSinglePages",
+        "description": "A paging operation that finishes on the first call without a nextlink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePages",
+        "description": "A paging operation that includes a nextLink that has 10 pages",
+        "parameters": [
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+          },
+          {
+            "name": "maxresults",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Sets the maximum number of items to return in the response.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          }
+		    ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/odata": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "odata.nextLink", "itemName": "values" },
+        "operationId": "Paging_getOdataMultiplePages",
+        "description": "A paging operation that includes a nextLink in odata format that has 10 pages",
+        "parameters": [
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+          },
+          {
+            "name": "maxresults",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Sets the maximum number of items to return in the response.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/OdataProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/withpath/{offset}": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesWithOffset",
+        "description": "A paging operation that includes a nextLink that has 10 pages",
+        "parameters": [
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+          },
+          {
+            "name": "maxresults",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Sets the maximum number of items to return in the response.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Offset of return value",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/retryfirst": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesRetryFirst",
+        "description": "A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/retrysecond": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesRetrySecond",
+        "description": "A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/single/failure": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getSinglePagesFailure",
+        "description": "A paging operation that receives a 400 on the first call",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/failure": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesFailure",
+        "description": "A paging operation that receives a 400 on the second call",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/failureuri": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesFailureUri",
+        "description": "A paging operation that receives an invalid nextLink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductResult": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "OdataProductResult": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "odata.nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationResult": {
+      "properties": {
+        "status": {
+          "description": "The status of the request",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "canceled",
+            "Accepted",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "OK"
+          ]
+        }
+      }
+    }
+  }
+}

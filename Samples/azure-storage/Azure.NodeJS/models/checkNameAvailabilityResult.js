@@ -8,6 +8,7 @@
  * Initializes a new instance of the CheckNameAvailabilityResult class.
  * @constructor
  * The CheckNameAvailability operation response.
+ *
  * @member {boolean} [nameAvailable] Gets a boolean value that indicates
  * whether the name is available for you to use. If true, the name is
  * available. If false, the name has already been taken or invalid and cannot

@@ -1,0 +1,33 @@
+﻿@using System.Linq
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+*/
+@EmptyLine
+import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+@foreach (var methodGroup in Model.MethodGroupModels)
+{
+@if (methodGroup.ContainsTimeSpan)
+{
+@:import * as moment from 'moment';
+break;
+}
+}
+@foreach (var methodGroup in Model.MethodGroupModels)
+{
+@if (methodGroup.ContainsStream)
+{
+@:import * as stream from 'stream';
+break;
+}
+}
+
+@if (Model.ModelTypes.Any()) {
+@:import * as models from '../models';
+}
+@EmptyLine
+@foreach (var methodGroup in Model.MethodGroupModels) {
+@EmptyLine
+@:@(Include(new MethodGroupTemplateTS(), methodGroup))
+}

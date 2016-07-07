@@ -21,7 +21,7 @@ public class StorageAccountPropertiesCreateParameters {
      *
      * @return the accountType value
      */
-    public AccountType getAccountType() {
+    public AccountType accountType() {
         return this.accountType;
     }
 
@@ -29,9 +29,11 @@ public class StorageAccountPropertiesCreateParameters {
      * Set the accountType value.
      *
      * @param accountType the accountType value to set
+     * @return the StorageAccountPropertiesCreateParameters object itself.
      */
-    public void setAccountType(AccountType accountType) {
+    public StorageAccountPropertiesCreateParameters withAccountType(AccountType accountType) {
         this.accountType = accountType;
+        return this;
     }
 
 }

@@ -1,0 +1,35 @@
+﻿@using System.Linq;
+@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
+/**
+ * The interface defining all the services for @Model.Name to be
+ * used by Retrofit to perform actually REST calls.
+ */
+interface @Model.ServiceClientServiceType {
+@foreach (var method in Model.MethodTemplateModels)
+{
+if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
+{
+@:    @@Multipart
+}
+else
+{
+@:    @@Headers("Content-Type: @method.RequestContentType")
+}
+if (method.HttpMethod == HttpMethod.Delete)
+{
+@:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
+}
+else
+{
+@:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
+}
+if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+{
+@:    @@Streaming
+}
+@:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
+@EmptyLine
+}
+}

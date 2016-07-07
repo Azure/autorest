@@ -4,44 +4,18 @@
 package petstore;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.azure.RestClient;
 
 /**
  * The interface for StorageManagementClient class.
  */
 public interface StorageManagementClient {
     /**
-     * Gets the URL used as the base for all cloud service requests.
+     * Gets the REST client.
      *
-     * @return the BaseUrl object.
-     */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.
@@ -50,85 +24,89 @@ public interface StorageManagementClient {
     AzureClient getAzureClient();
 
     /**
-     * Gets Gets Azure subscription credentials..
+     * Gets the User-Agent header for the client.
      *
-     * @return the credentials value.
+     * @return the user agent string.
      */
-    ServiceClientCredentials getCredentials();
+    String userAgent();
 
     /**
      * Gets Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
      *
      * @return the subscriptionId value.
      */
-    String getSubscriptionId();
+    String subscriptionId();
 
     /**
      * Sets Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call..
      *
      * @param subscriptionId the subscriptionId value.
+     * @return the service client itself
      */
-    void setSubscriptionId(String subscriptionId);
+    StorageManagementClient withSubscriptionId(String subscriptionId);
 
     /**
      * Gets Client Api Version..
      *
      * @return the apiVersion value.
      */
-    String getApiVersion();
+    String apiVersion();
 
     /**
      * Gets Gets or sets the preferred language for the response..
      *
      * @return the acceptLanguage value.
      */
-    String getAcceptLanguage();
+    String acceptLanguage();
 
     /**
      * Sets Gets or sets the preferred language for the response..
      *
      * @param acceptLanguage the acceptLanguage value.
+     * @return the service client itself
      */
-    void setAcceptLanguage(String acceptLanguage);
+    StorageManagementClient withAcceptLanguage(String acceptLanguage);
 
     /**
      * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @return the longRunningOperationRetryTimeout value.
      */
-    int getLongRunningOperationRetryTimeout();
+    int longRunningOperationRetryTimeout();
 
     /**
      * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
+     * @return the service client itself
      */
-    void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+    StorageManagementClient withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
      * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @return the generateClientRequestId value.
      */
-    boolean getGenerateClientRequestId();
+    boolean generateClientRequestId();
 
     /**
      * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
      * @param generateClientRequestId the generateClientRequestId value.
+     * @return the service client itself
      */
-    void setGenerateClientRequestId(boolean generateClientRequestId);
+    StorageManagementClient withGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
-     * Gets the StorageAccountsOperations object to access its operations.
-     * @return the StorageAccountsOperations object.
+     * Gets the StorageAccounts object to access its operations.
+     * @return the StorageAccounts object.
      */
-    StorageAccountsOperations getStorageAccountsOperations();
+    StorageAccounts storageAccounts();
 
     /**
-     * Gets the UsageOperations object to access its operations.
-     * @return the UsageOperations object.
+     * Gets the Usages object to access its operations.
+     * @return the Usages object.
      */
-    UsageOperations getUsageOperations();
+    Usages usages();
 
 }

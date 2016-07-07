@@ -1,0 +1,149 @@
+﻿@using System;
+@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Core.ClientModel
+@using AutoRest.Python
+@using AutoRest.Python.TemplateModels
+@inherits AutoRest.Python.PythonTemplate<AutoRest.Python.TemplateModels.ModelTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+@if(Model.ComplexConstants.Any())
+{
+    foreach(var property in Model.ComplexConstants.Values)
+    {
+@:from .@property.Name.ToPythonCase() import @property.Name
+    }
+}
+@if (Model.BaseModelType != null)
+{
+@:from .@Model.BaseModelType.Name.ToPythonCase() import @Model.BaseModelType.Name
+}
+else
+{
+@:from msrest.serialization import Model
+}
+@if (Model.IsException)
+{
+@:from msrest.exceptions import HttpOperationError
+}
+@EmptyLine
+@EmptyLine
+@if (Model.BaseModelType != null)
+{
+@:class @(Model.Name)(@Model.BaseModelType.Name):
+}
+else
+{
+@:class @(Model.Name)(Model):
+}
+    """@(WrapComment(string.Empty, Model.BuildSummaryAndDescriptionString()))
+@if (Model.ReadOnlyAttributes.Any())
+{
+@EmptyLine
+@:    @WrapComment(string.Empty, "Variables are only populated by the server, and will be ignored when sending a request.")
+}
+@if (Model.ComposedProperties.Any())
+{
+@EmptyLine
+    foreach (var property in Model.ComposedProperties)
+    {
+@:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
+        if (property.IsConstant || property.IsReadOnly)
+        {
+@:    @ParameterWrapComment(string.Empty, ":vartype " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+    }
+        else
+        {
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+        }
+    }
+}
+    """ 
+@if (Model.Validators.Any() || Model.RequiredFieldsList.Any())
+{
+<text>
+    @EmptyLine
+    _validation = {
+    @foreach (var validator in Model.Validators)
+    {
+        @:@(validator)
+    }
+    }
+</text>
+}
+@{
+    var mapAttrList = new List<Property>(Model.ComposedProperties);
+    if (!Model.IsParameterGroup)
+    {
+@EmptyLine
+    @:_attribute_map = {
+    if (mapAttrList.Count > 0)
+    {
+      for (int i = 0; i < mapAttrList.Count; i++) 
+      {
+        @:@(Model.InitializeProperty(mapAttrList[i]))
+      }
+    }
+    @:}
+  }
+}
+@if (Model.SubModelTypes.Any())
+{
+<text>
+@EmptyLine
+    _subtype_map = {
+        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
+    }
+</text>
+}
+@foreach(var property in Model.Properties)
+{
+    if (property.IsConstant)
+    {
+@EmptyLine
+    @:@(Model.InitializeProperty(String.Empty, property))
+    }
+}
+@if (Model.NeedsConstructor)
+{ 
+@EmptyLine
+    @:def __init__(self@(Model.MethodParameterDeclaration())):
+    if (Model.HasParent)
+    {
+        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))
+    }
+    var propertyList = new List<Property>(Model.Properties);
+    if (propertyList.Count > 0)
+    {
+        for (int i = 0; i < propertyList.Count; i++)
+        {
+            if (!propertyList[i].IsConstant)
+            {
+        @:@(Model.InitializeProperty("self", propertyList[i]))
+            }
+	    }
+	}
+    if (Model.NeedsPolymorphicConverter)
+    {
+        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
+    }
+}
+@if (Model.IsException)
+{
+@EmptyLine
+@EmptyLine
+@:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
+@:    """Server responsed with exception of type: '@(Model.Name)'.
+@EmptyLine
+@:    :param deserialize: A deserializer
+@:    :param response: Server response to be deserialized.
+@:    """
+@EmptyLine
+    @:def __init__(self, deserialize, response, *args):
+@EmptyLine
+        @:super(@(Model.ExceptionTypeDefinitionName), self).__init__(deserialize, response, '@(Model.Name)', *args)
+}
+

@@ -1,0 +1,62 @@
+﻿@using System.Linq;
+@using AutoRest.NodeJS.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.MethodTemplateModel>
+// Send Request
+return client.pipeline(httpRequest, function (err, response, responseBody) {
+  if (err) {
+    return callback(err);
+  }
+  var statusCode = response.statusCode;
+  if (@(Model.FailureStatusCodePredicate)) {
+    var error = new Error(responseBody);
+    error.statusCode = response.statusCode;
+    error.request = msRest.stripRequest(httpRequest);
+    error.response = msRest.stripResponse(response);
+    if (responseBody === '') responseBody = null;
+    var parsedErrorResponse;
+    try {
+      parsedErrorResponse = JSON.parse(responseBody);
+      if (parsedErrorResponse) {
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+        if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+      }
+  @if (Model.DefaultResponse.Body != null)
+  {
+      var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse.Body, "error.body", "parsedErrorResponse");
+      if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
+      {
+@:      if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+@:        @(deserializeErrorBody)
+@:      }
+      }
+  }
+    } catch (defaultError) {
+      error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                       '- "%s" for the default response.', defaultError.message, responseBody);
+      return callback(error);
+    }
+    return callback(error);
+  }
+
+  // Create Result
+  var result = null;
+  if (responseBody === '') responseBody = null;
+  @Model.InitializeResult
+  @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
+  {
+      <text>
+  // Deserialize Response
+  if (statusCode === @MethodTemplateModel.GetStatusCodeReference(responsePair.Key)) {
+    @(Model.DeserializeResponse(responsePair.Value.Body))
+  }
+      </text>
+  }
+  @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
+  {
+    @(Model.DeserializeResponse(Model.DefaultResponse.Body))
+  }
+  @EmptyLine
+
+  return callback(null, result, httpRequest, response);
+});

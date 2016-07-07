@@ -30,7 +30,7 @@ public class StorageAccountPropertiesUpdateParameters {
      *
      * @return the accountType value
      */
-    public AccountType getAccountType() {
+    public AccountType accountType() {
         return this.accountType;
     }
 
@@ -38,9 +38,11 @@ public class StorageAccountPropertiesUpdateParameters {
      * Set the accountType value.
      *
      * @param accountType the accountType value to set
+     * @return the StorageAccountPropertiesUpdateParameters object itself.
      */
-    public void setAccountType(AccountType accountType) {
+    public StorageAccountPropertiesUpdateParameters withAccountType(AccountType accountType) {
         this.accountType = accountType;
+        return this;
     }
 
     /**
@@ -48,7 +50,7 @@ public class StorageAccountPropertiesUpdateParameters {
      *
      * @return the customDomain value
      */
-    public CustomDomain getCustomDomain() {
+    public CustomDomain customDomain() {
         return this.customDomain;
     }
 
@@ -56,9 +58,11 @@ public class StorageAccountPropertiesUpdateParameters {
      * Set the customDomain value.
      *
      * @param customDomain the customDomain value to set
+     * @return the StorageAccountPropertiesUpdateParameters object itself.
      */
-    public void setCustomDomain(CustomDomain customDomain) {
+    public StorageAccountPropertiesUpdateParameters withCustomDomain(CustomDomain customDomain) {
         this.customDomain = customDomain;
+        return this;
     }
 
 }

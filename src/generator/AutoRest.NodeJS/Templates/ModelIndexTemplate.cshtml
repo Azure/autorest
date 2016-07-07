@@ -1,0 +1,23 @@
+﻿@using System.Linq
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+/* jshint latedef:false */
+/* jshint forin:false */
+/* jshint noempty:false */
+@EmptyLine
+'use strict';
+@EmptyLine
+@foreach (var model in Model.OrderedModelTemplateModels)
+{
+@:exports.@model.Name = require('./@model.Name.ToCamelCase()');
+}
+@if (!string.IsNullOrWhiteSpace(Model.PolymorphicDictionary))
+{
+@:exports.discriminators = {
+@:  @(Model.PolymorphicDictionary)
+@:};
+}

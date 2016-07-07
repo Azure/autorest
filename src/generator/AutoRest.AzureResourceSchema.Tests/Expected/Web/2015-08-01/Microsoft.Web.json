@@ -1,0 +1,3606 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-08-01/Microsoft.Web.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Web",
+  "description": "Microsoft Web Resource Types",
+  "resourceDefinitions": {
+    "certificates": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/certificates"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Certificate_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/certificates"
+    },
+    "csrs": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/csrs"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Csr_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/csrs"
+    },
+    "hostingEnvironments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/hostingEnvironments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostingEnvironment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/hostingEnvironments_workerPools_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments"
+    },
+    "hostingEnvironments_workerPools": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/hostingEnvironments/workerPools"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkerPool_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments/workerPools"
+    },
+    "managedHostingEnvironments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/managedHostingEnvironments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostingEnvironment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/managedHostingEnvironments"
+    },
+    "serverfarms": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ServerFarmWithRichSku_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms"
+    },
+    "serverfarms_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetGateway_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/gateways"
+    },
+    "serverfarms_virtualNetworkConnections_routes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/serverfarms/virtualNetworkConnections/routes"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetRoute_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/serverfarms/virtualNetworkConnections/routes"
+    },
+    "sites": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Site_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_deployments_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites"
+    },
+    "sites_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/deployments"
+    },
+    "sites_hostNameBindings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostNameBinding_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hostNameBindings"
+    },
+    "sites_hybridconnection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hybridconnection"
+    },
+    "sites_instances_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/instances/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/instances/deployments"
+    },
+    "sites_slots": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Site_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_deployments_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots"
+    },
+    "sites_slots_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/deployments"
+    },
+    "sites_slots_hostNameBindings": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostNameBinding_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hostNameBindings"
+    },
+    "sites_slots_hybridconnection": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hybridconnection"
+    },
+    "sites_slots_instances_deployments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/instances/deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/instances/deployments"
+    },
+    "sites_slots_virtualNetworkConnections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetInfo_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
+    },
+    "sites_slots_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetGateway_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+    },
+    "sites_virtualNetworkConnections": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetInfo_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections"
+    },
+    "sites_virtualNetworkConnections_gateways": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Web/sites/virtualNetworkConnections/gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetGateway_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
+    }
+  },
+  "definitions": {
+    "ApiDefinitionInfo": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of the API definition."
+        }
+      },
+      "description": "Information about the formal API definition for the web app."
+    },
+    "AutoHealActions": {
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Recycle",
+                "LogEvent",
+                "CustomAction"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "ActionType - predefined action to be taken."
+        },
+        "customAction": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AutoHealCustomAction"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "CustomAction - custom action to be taken"
+        },
+        "minProcessExecutionTime": {
+          "type": "string",
+          "description": "MinProcessExecutionTime - minimum time the process must execute\r\n            before taking the action"
+        }
+      },
+      "required": [
+        "actionType"
+      ],
+      "description": "AutoHealActions - Describes the actions which can be\r\n            taken by the auto-heal module when a rule is triggered."
+    },
+    "AutoHealCustomAction": {
+      "type": "object",
+      "properties": {
+        "exe": {
+          "type": "string",
+          "description": "Executable to be run"
+        },
+        "parameters": {
+          "type": "string",
+          "description": "Parameters for the executable"
+        }
+      },
+      "description": "AutoHealCustomAction - Describes the custom action to be executed\r\n            when an auto heal rule is triggered."
+    },
+    "AutoHealRules": {
+      "type": "object",
+      "properties": {
+        "triggers": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AutoHealTriggers"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Triggers - Conditions that describe when to execute the auto-heal actions"
+        },
+        "actions": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AutoHealActions"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Actions - Actions to be executed when a rule is triggered"
+        }
+      },
+      "description": "AutoHealRules - describes the rules which can be defined for auto-heal"
+    },
+    "AutoHealTriggers": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RequestsBasedTrigger"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Requests - Defines a rule based on total requests"
+        },
+        "privateBytesInKB": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "PrivateBytesInKB - Defines a rule based on private bytes"
+        },
+        "statusCodes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StatusCodesBasedTrigger"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "StatusCodes - Defines a rule based on status codes"
+        },
+        "slowRequests": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SlowRequestsBasedTrigger"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "SlowRequests - Defines a rule based on request execution time"
+        }
+      },
+      "description": "AutoHealTriggers - describes the triggers for auto-heal."
+    },
+    "Certificate_properties": {
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of the certificate"
+        },
+        "subjectName": {
+          "type": "string",
+          "description": "Subject name of the certificate"
+        },
+        "hostNames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Host names the certificate applies to"
+        },
+        "pfxBlob": {
+          "type": "string",
+          "description": "Pfx blob"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "App name"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Self link"
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Certificate issuer"
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate issue Date"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Certificate expriration date"
+        },
+        "password": {
+          "type": "string",
+          "description": "Certificate password"
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint"
+        },
+        "valid": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Is the certificate valid?"
+        },
+        "cerBlob": {
+          "type": "string",
+          "description": "Raw bytes of .cer file"
+        },
+        "publicKeyHash": {
+          "type": "string",
+          "description": "Public key hash"
+        },
+        "hostingEnvironmentProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostingEnvironmentProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specification for the hosting environment (App Service Environment) to use for the certificate"
+        }
+      }
+    },
+    "CloningInfo": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation Id of cloning operation. This id ties multiple cloning operations\r\n            together to use the same snapshot"
+        },
+        "overwrite": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Overwrite destination web app"
+        },
+        "cloneCustomHostNames": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If true, clone custom hostnames from source web app"
+        },
+        "cloneSourceControl": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Clone source control from source web app"
+        },
+        "sourceWebAppId": {
+          "type": "string",
+          "description": "ARM resource id of the source web app. Web app resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots"
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "description": "Hosting environment"
+        },
+        "appSettingsOverrides": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Application settings overrides for cloned web app. If specified these settings will override the settings cloned \r\n            from source web app. If not specified, application settings from source web app are retained."
+        },
+        "configureLoadBalancing": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If specified configure load balancing for source and clone site"
+        },
+        "trafficManagerProfileId": {
+          "type": "string",
+          "description": "ARM resource id of the traffic manager profile to use if it exists. Traffic manager resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}"
+        },
+        "trafficManagerProfileName": {
+          "type": "string",
+          "description": "Name of traffic manager profile to create. This is only needed if traffic manager profile does not already exist"
+        }
+      },
+      "description": "Represents information needed for cloning operation"
+    },
+    "ConnStringInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of connection string"
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string value"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "MySql",
+            "SQLServer",
+            "SQLAzure",
+            "Custom"
+          ],
+          "description": "Type of database."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Represents database connection string information"
+    },
+    "CorsSettings": {
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all."
+        }
+      },
+      "description": "Cross-Origin Resource Sharing (CORS) settings for the web app."
+    },
+    "Csr_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name used to locate CSR object"
+        },
+        "distinguishedName": {
+          "type": "string",
+          "description": "Distinguished name of certificate to be created"
+        },
+        "csrString": {
+          "type": "string",
+          "description": "Actual CSR string created"
+        },
+        "pfxBlob": {
+          "type": "string",
+          "description": "PFX certifcate of created certificate"
+        },
+        "password": {
+          "type": "string",
+          "description": "PFX password"
+        },
+        "publicKeyHash": {
+          "type": "string",
+          "description": "Hash of the certificates public key"
+        },
+        "hostingEnvironment": {
+          "type": "string",
+          "description": "Hosting environment"
+        }
+      }
+    },
+    "Deployment_properties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id"
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Status"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author"
+        },
+        "deployer": {
+          "type": "string",
+          "description": "Deployer"
+        },
+        "author_email": {
+          "type": "string",
+          "description": "AuthorEmail"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "StartTime"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "EndTime"
+        },
+        "active": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Active"
+        },
+        "details": {
+          "type": "string",
+          "description": "Detail"
+        }
+      }
+    },
+    "Experiments": {
+      "type": "object",
+      "properties": {
+        "rampUpRules": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RampUpRule"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "List of {Microsoft.Web.Hosting.Administration.RampUpRule} objects."
+        }
+      },
+      "description": "Class containing Routing in production experiments"
+    },
+    "HandlerMapping": {
+      "type": "object",
+      "properties": {
+        "extension": {
+          "type": "string",
+          "description": "Requests with this extension will be handled using the specified FastCGI application."
+        },
+        "scriptProcessor": {
+          "type": "string",
+          "description": "The absolute path to the FastCGI application."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Command-line arguments to be passed to the script processor."
+        }
+      },
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension."
+    },
+    "HostingEnvironment_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment (App Service Environment)"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the hostingEnvironment (App Service Environment), e.g. \"West US\""
+        },
+        "provisioningState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Provisioning state of the hostingEnvironment (App Service Environment)."
+        },
+        "status": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Preparing",
+                "Ready",
+                "Scaling",
+                "Deleting"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Current status of the hostingEnvironment (App Service Environment)."
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "vnetResourceGroupName": {
+          "type": "string",
+          "description": "Resource group of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "vnetSubnetName": {
+          "type": "string",
+          "description": "Subnet of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "virtualNetwork": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VirtualNetworkProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Description of the hostingEnvironment's (App Service Environment) virtual network"
+        },
+        "internalLoadBalancingMode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "None",
+                "Web",
+                "Publishing"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET."
+        },
+        "multiSize": {
+          "type": "string",
+          "description": "Front-end VM size, e.g. \"Medium\", \"Large\""
+        },
+        "multiRoleCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of front-end instances"
+        },
+        "workerPools": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WorkerPool"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Description of worker pools with worker size ids, VM sizes, and number of workers in each pool"
+        },
+        "ipsslAddressCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of IP SSL addresses reserved for this hostingEnvironment (App Service Environment)"
+        },
+        "databaseEdition": {
+          "type": "string",
+          "description": "Edition of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"Standard\""
+        },
+        "databaseServiceObjective": {
+          "type": "string",
+          "description": "Service objective of the metadata database for the hostingEnvironment (App Service Environment) e.g. \"S0\""
+        },
+        "upgradeDomains": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of upgrade domains of this hostingEnvironment (App Service Environment)"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription of the hostingEnvironment (App Service Environment)"
+        },
+        "dnsSuffix": {
+          "type": "string",
+          "description": "DNS suffix of the hostingEnvironment (App Service Environment)"
+        },
+        "lastAction": {
+          "type": "string",
+          "description": "Last deployment action on this hostingEnvironment (App Service Environment)"
+        },
+        "lastActionResult": {
+          "type": "string",
+          "description": "Result of the last deployment action on this hostingEnvironment (App Service Environment)"
+        },
+        "allowedMultiSizes": {
+          "type": "string",
+          "description": "List of comma separated strings describing which VM sizes are allowed for front-ends"
+        },
+        "allowedWorkerSizes": {
+          "type": "string",
+          "description": "List of comma separated strings describing which VM sizes are allowed for workers"
+        },
+        "maximumNumberOfMachines": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum number of VMs in this hostingEnvironment (App Service Environment)"
+        },
+        "vipMappings": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualIPMapping"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Description of IP SSL mapping for this hostingEnvironment (App Service Environment)"
+        },
+        "environmentCapacities": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StampCapacity"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Current total, used, and available worker capacities"
+        },
+        "networkAccessControlList": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkAccessControlEntry"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Access control list for controlling traffic to the hostingEnvironment (App Service Environment)"
+        },
+        "environmentIsHealthy": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "True/false indicating whether the hostingEnvironment (App Service Environment) is healthy"
+        },
+        "environmentStatus": {
+          "type": "string",
+          "description": "Detailed message about with results of the last check of the hostingEnvironment (App Service Environment)"
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "Resource group of the hostingEnvironment (App Service Environment)"
+        },
+        "apiManagementAccountId": {
+          "type": "string",
+          "description": "Api Management Account associated with this Hosting Environment"
+        },
+        "suspended": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)"
+        },
+        "clusterSettings": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Custom settings for changing the behavior of the hosting environment"
+        }
+      }
+    },
+    "HostingEnvironmentProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the hostingEnvironment (App Service Environment)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the hostingEnvironment (App Service Environment) (read only)"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the hostingEnvironment (App Service Environment) (read only)"
+        }
+      },
+      "description": "Specification for a hostingEnvironment (App Service Environment) to use for this resource"
+    },
+    "hostingEnvironments_workerPools_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "workerPools"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkerPool_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/hostingEnvironments/workerPools"
+    },
+    "HostNameBinding_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Hostname"
+        },
+        "siteName": {
+          "type": "string",
+          "description": "Web app name"
+        },
+        "domainId": {
+          "type": "string",
+          "description": "Fully qualified ARM domain resource URI"
+        },
+        "azureResourceName": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "azureResourceType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Website",
+                "TrafficManager"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Azure resource type."
+        },
+        "customHostNameDnsRecordType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "CName",
+                "A"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Custom DNS record type."
+        },
+        "hostNameType": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Verified",
+                "Managed"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Host name type."
+        }
+      }
+    },
+    "HostNameSslState": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Host name"
+        },
+        "sslState": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Disabled",
+                "SniEnabled",
+                "IpBasedEnabled"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "SSL type."
+        },
+        "virtualIP": {
+          "type": "string",
+          "description": "Virtual IP address assigned to the host name if IP based SSL is enabled"
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "SSL cert thumbprint"
+        },
+        "toUpdate": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Set this flag to update existing host name"
+        }
+      },
+      "required": [
+        "sslState"
+      ],
+      "description": "Object that represents a SSL-enabled host name."
+    },
+    "IpSecurityRestriction": {
+      "type": "object",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address the security restriction is valid for"
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask for the range of IP addresses the restriction is valid for"
+        }
+      },
+      "description": "Represents an ip security restriction on a web app."
+    },
+    "NameValuePair": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Pair name"
+        },
+        "value": {
+          "type": "string",
+          "description": "Pair value"
+        }
+      },
+      "description": "Name value pair"
+    },
+    "NetworkAccessControlEntry": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Permit",
+                "Deny"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "order": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "remoteSubnet": {
+          "type": "string"
+        }
+      }
+    },
+    "RampUpRule": {
+      "type": "object",
+      "properties": {
+        "actionHostName": {
+          "type": "string",
+          "description": "Hostname of a slot to which the traffic will be redirected if decided to. E.g. mysite-stage.azurewebsites.net"
+        },
+        "reroutePercentage": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Percentage of the traffic which will be redirected to {Microsoft.Web.Hosting.Administration.RampUpRule.ActionHostName}"
+        },
+        "changeStep": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
+        },
+        "changeIntervalInMinutes": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage"
+        },
+        "minReroutePercentage": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "[Optional] Specifies lower boundary above which ReroutePercentage will stay."
+        },
+        "maxReroutePercentage": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "[Optional] Specifies upper boundary below which ReroutePercentage will stay."
+        },
+        "changeDecisionCallbackUrl": {
+          "type": "string",
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the routing rule. The recommended name would be to point to the slot which will receive the traffic in the experiment."
+        }
+      },
+      "description": "Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance"
+    },
+    "RelayServiceConnectionEntity_properties": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "entityConnectionString": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceConnectionString": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "port": {
+          "oneOf": [
+            {
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "biztalkUri": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestsBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "RequestsBasedTrigger"
+    },
+    "ServerFarmWithRichSku_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for the App Service Plan"
+        },
+        "workerTierName": {
+          "type": "string",
+          "description": "Target worker tier assigned to the App Service Plan"
+        },
+        "adminSiteName": {
+          "type": "string",
+          "description": "App Service Plan administration site"
+        },
+        "hostingEnvironmentProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostingEnvironmentProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specification for the hosting environment (App Service Environment) to use for the App Service Plan"
+        },
+        "maximumNumberOfWorkers": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum number of instances that can be assigned to this App Service Plan"
+        },
+        "perSiteScaling": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan"
+        }
+      }
+    },
+    "Site_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of web app"
+        },
+        "enabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "True if the site is enabled; otherwise, false. Setting this  value to false disables the site (takes the site off line)."
+        },
+        "hostNameSslStates": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostNameSslState"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Hostname SSL states are  used to manage the SSL bindings for site's hostnames."
+        },
+        "serverFarmId": {
+          "type": "string"
+        },
+        "siteConfig": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SiteConfig"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Configuration of web app"
+        },
+        "scmSiteAlsoStopped": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If set indicates whether to stop SCM (KUDU) site when the web app is stopped. Default is false."
+        },
+        "hostingEnvironmentProfile": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostingEnvironmentProfile"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specification for the hosting environment (App Service Environment) to use for the web app"
+        },
+        "microService": {
+          "type": "string"
+        },
+        "gatewaySiteName": {
+          "type": "string",
+          "description": "Name of gateway app associated with web app"
+        },
+        "clientAffinityEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies if the client affinity is enabled when load balancing http request for multiple instances of the web app"
+        },
+        "clientCertEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies if the client certificate is enabled for the web app"
+        },
+        "hostNamesDisabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Specifies if the public hostnames are disabled the web app.\r\n            If set to true the app is only accessible via API Management process"
+        },
+        "containerSize": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Size of a function container"
+        },
+        "maxNumberOfWorkers": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum number of workers\r\n            This only applies to function container"
+        },
+        "cloningInfo": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CloningInfo"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "This is only valid for web app creation. If specified, web app is cloned from \r\n            a source web app"
+        }
+      }
+    },
+    "SiteConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SiteConfig_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Configuration of Azure web site"
+    },
+    "SiteConfig_properties": {
+      "type": "object",
+      "properties": {
+        "numberOfWorkers": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of workers"
+        },
+        "defaultDocuments": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Default documents"
+        },
+        "netFrameworkVersion": {
+          "type": "string",
+          "description": "Net Framework Version"
+        },
+        "phpVersion": {
+          "type": "string",
+          "description": "Version of PHP"
+        },
+        "pythonVersion": {
+          "type": "string",
+          "description": "Version of Python"
+        },
+        "requestTracingEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Enable request tracing"
+        },
+        "requestTracingExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Request tracing expiration time"
+        },
+        "remoteDebuggingEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Remote Debugging Enabled"
+        },
+        "remoteDebuggingVersion": {
+          "type": "string",
+          "description": "Remote Debugging Version"
+        },
+        "httpLoggingEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "HTTP logging Enabled"
+        },
+        "logsDirectorySizeLimit": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "HTTP Logs Directory size limit"
+        },
+        "detailedErrorLoggingEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Detailed error logging enabled"
+        },
+        "publishingUsername": {
+          "type": "string",
+          "description": "Publishing user name"
+        },
+        "publishingPassword": {
+          "type": "string",
+          "description": "Publishing password"
+        },
+        "appSettings": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Application Settings"
+        },
+        "metadata": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NameValuePair"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Site Metadata"
+        },
+        "connectionStrings": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConnStringInfo"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Connection strings"
+        },
+        "handlerMappings": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HandlerMapping"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Handler mappings"
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "Document root"
+        },
+        "scmType": {
+          "type": "string",
+          "description": "SCM type"
+        },
+        "use32BitWorkerProcess": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Use 32 bit worker process"
+        },
+        "webSocketsEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Web socket enabled."
+        },
+        "alwaysOn": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Always On"
+        },
+        "javaVersion": {
+          "type": "string",
+          "description": "Java version"
+        },
+        "javaContainer": {
+          "type": "string",
+          "description": "Java container"
+        },
+        "javaContainerVersion": {
+          "type": "string",
+          "description": "Java container version"
+        },
+        "managedPipelineMode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Integrated",
+                "Classic"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Managed pipeline mode."
+        },
+        "virtualApplications": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualApplication"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Virtual applications"
+        },
+        "loadBalancing": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "WeightedRoundRobin",
+                "LeastRequests",
+                "LeastResponseTime",
+                "WeightedTotalTraffic",
+                "RequestHash"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Site load balancing."
+        },
+        "experiments": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Experiments"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "This is work around for polymophic types"
+        },
+        "limits": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SiteLimits"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Site limits"
+        },
+        "autoHealEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Auto heal enabled"
+        },
+        "autoHealRules": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AutoHealRules"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Auto heal rules"
+        },
+        "tracingOptions": {
+          "type": "string",
+          "description": "Tracing options"
+        },
+        "vnetName": {
+          "type": "string",
+          "description": "Vnet name"
+        },
+        "cors": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/CorsSettings"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "apiDefinition": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ApiDefinitionInfo"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Information about the formal API definition for the web app."
+        },
+        "autoSwapSlotName": {
+          "type": "string",
+          "description": "Auto swap slot name"
+        },
+        "localMySqlEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Local mysql enabled"
+        },
+        "ipSecurityRestrictions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IpSecurityRestriction"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Ip Security restrictions"
+        }
+      }
+    },
+    "SiteLimits": {
+      "type": "object",
+      "properties": {
+        "maxPercentageCpu": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum allowed CPU usage percentage"
+        },
+        "maxMemoryInMb": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum allowed memory usage in MB"
+        },
+        "maxDiskSizeInMb": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Maximum allowed disk size usage in MB"
+        }
+      },
+      "description": "Represents metric limits set on a web app."
+    },
+    "sites_deployments_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/deployments"
+    },
+    "sites_hostNameBindings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostNameBinding_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hostNameBindings"
+    },
+    "sites_hybridconnection_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/hybridconnection"
+    },
+    "sites_slots_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "slots"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Site_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_hybridconnection_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_hostNameBindings_childResource"
+              },
+              {
+                "$ref": "#/definitions/sites_slots_deployments_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots"
+    },
+    "sites_slots_deployments_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "deployments"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Deployment_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/deployments"
+    },
+    "sites_slots_hostNameBindings_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hostNameBindings"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/HostNameBinding_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hostNameBindings"
+    },
+    "sites_slots_hybridconnection_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "hybridconnection"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RelayServiceConnectionEntity_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/hybridconnection"
+    },
+    "sites_slots_virtualNetworkConnections_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetInfo_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_slots_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections"
+    },
+    "sites_slots_virtualNetworkConnections_gateways_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetGateway_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/slots/virtualNetworkConnections/gateways"
+    },
+    "sites_virtualNetworkConnections_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "virtualNetworkConnections"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetInfo_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/sites_virtualNetworkConnections_gateways_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections"
+    },
+    "sites_virtualNetworkConnections_gateways_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "gateways"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-08-01"
+          ]
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetGateway_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Web/sites/virtualNetworkConnections/gateways"
+    },
+    "SkuDescription": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource sku"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Service Tier of the resource sku"
+        },
+        "size": {
+          "type": "string",
+          "description": "Size specifier of the resource sku"
+        },
+        "family": {
+          "type": "string",
+          "description": "Family code of the resource sku"
+        },
+        "capacity": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Current number of instances assigned to the resource"
+        }
+      },
+      "description": "Describes a sku for a scalable resource"
+    },
+    "SlowRequestsBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "timeTaken": {
+          "type": "string",
+          "description": "TimeTaken"
+        },
+        "count": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "SlowRequestsBasedTrigger"
+    },
+    "StampCapacity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the stamp"
+        },
+        "availableCapacity": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Available capacity (# of machines, bytes of storage etc...)"
+        },
+        "totalCapacity": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Total capacity (# of machines, bytes of storage etc...)"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Name of the unit"
+        },
+        "computeMode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Shared",
+                "Dedicated",
+                "Dynamic"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Shared/Dedicated workers."
+        },
+        "workerSize": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Default",
+                "Small",
+                "Medium",
+                "Large"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Size of the machines."
+        },
+        "workerSizeId": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Size Id of machines: \r\n            0 - Small\r\n            1 - Medium\r\n            2 - Large"
+        },
+        "excludeFromCapacityAllocation": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "If true it includes basic sites\r\n            Basic sites are not used for capacity allocation."
+        },
+        "isApplicableForAllComputeModes": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Is capacity applicable for all sites?"
+        },
+        "siteMode": {
+          "type": "string",
+          "description": "Shared or Dedicated"
+        }
+      },
+      "description": "Class containing stamp capacity information"
+    },
+    "StatusCodesBasedTrigger": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "HTTP status code"
+        },
+        "subStatus": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "SubStatus"
+        },
+        "win32Status": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Win32 error code"
+        },
+        "count": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Count"
+        },
+        "timeInterval": {
+          "type": "string",
+          "description": "TimeInterval"
+        }
+      },
+      "description": "StatusCodeBasedTrigger"
+    },
+    "VirtualApplication": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string"
+        },
+        "physicalPath": {
+          "type": "string"
+        },
+        "preloadEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "virtualDirectories": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualDirectory"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      }
+    },
+    "VirtualDirectory": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string"
+        },
+        "physicalPath": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualIPMapping": {
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "type": "string",
+          "description": "Virtual IP address"
+        },
+        "internalHttpPort": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Internal HTTP port"
+        },
+        "internalHttpsPort": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Internal HTTPS port"
+        },
+        "inUse": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Is VIP mapping in use"
+        }
+      },
+      "description": "Class that represents a VIP mapping"
+    },
+    "VirtualNetworkProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the virtual network"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the virtual network (read-only)"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the virtual network (read-only)"
+        },
+        "subnet": {
+          "type": "string",
+          "description": "Subnet within the virtual network"
+        }
+      },
+      "description": "Specification for using a virtual network"
+    },
+    "VnetGateway_properties": {
+      "type": "object",
+      "properties": {
+        "vnetName": {
+          "type": "string",
+          "description": "The VNET name."
+        },
+        "vpnPackageUri": {
+          "type": "string",
+          "description": "The URI where the Vpn package can be downloaded"
+        }
+      }
+    },
+    "VnetInfo_properties": {
+      "type": "object",
+      "properties": {
+        "vnetResourceId": {
+          "type": "string",
+          "description": "The vnet resource id"
+        },
+        "certThumbprint": {
+          "type": "string",
+          "description": "The client certificate thumbprint"
+        },
+        "certBlob": {
+          "type": "string",
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \r\n            Point-To-Site VPN connection."
+        },
+        "routes": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetRoute"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The routes that this virtual network connection uses."
+        },
+        "resyncRequired": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Flag to determine if a resync is required"
+        },
+        "dnsServers": {
+          "type": "string",
+          "description": "Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses."
+        }
+      }
+    },
+    "VnetRoute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/VnetRoute_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "VnetRoute contract used to pass routing information for a vnet."
+    },
+    "VnetRoute_properties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this route. This is only returned by the server and does not need to be set by the client."
+        },
+        "startAddress": {
+          "type": "string",
+          "description": "The starting address for this route. This may also include a CIDR notation, in which case the end address must not be specified."
+        },
+        "endAddress": {
+          "type": "string",
+          "description": "The ending address for this route. If the start address is specified in CIDR notation, this must be omitted."
+        },
+        "routeType": {
+          "type": "string",
+          "description": "The type of route this is:\r\n            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the web app only\r\n            \r\n            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes."
+        }
+      }
+    },
+    "WorkerPool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkerPool_properties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/SkuDescription"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "description": "Worker pool of a hostingEnvironment (App Service Environment)"
+    },
+    "WorkerPool_properties": {
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Worker size id for referencing this worker pool"
+        },
+        "computeMode": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Shared",
+                "Dedicated",
+                "Dynamic"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Shared or dedicated web app hosting."
+        },
+        "workerSize": {
+          "type": "string",
+          "description": "VM size of the worker pool instances"
+        },
+        "workerCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Number of instances in the worker pool"
+        },
+        "instanceNames": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Names of all instances in the worker pool (read only)"
+        }
+      }
+    }
+  }
+}

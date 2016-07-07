@@ -9,6 +9,7 @@
  * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
+ *
  * @member {string} [blob] Gets the blob endpoint.
  * 
  * @member {string} [queue] Gets the queue endpoint.

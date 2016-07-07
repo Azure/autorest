@@ -23,7 +23,7 @@ public class StorageAccountKeys {
      *
      * @return the key1 value
      */
-    public String getKey1() {
+    public String key1() {
         return this.key1;
     }
 
@@ -31,9 +31,11 @@ public class StorageAccountKeys {
      * Set the key1 value.
      *
      * @param key1 the key1 value to set
+     * @return the StorageAccountKeys object itself.
      */
-    public void setKey1(String key1) {
+    public StorageAccountKeys withKey1(String key1) {
         this.key1 = key1;
+        return this;
     }
 
     /**
@@ -41,7 +43,7 @@ public class StorageAccountKeys {
      *
      * @return the key2 value
      */
-    public String getKey2() {
+    public String key2() {
         return this.key2;
     }
 
@@ -49,9 +51,11 @@ public class StorageAccountKeys {
      * Set the key2 value.
      *
      * @param key2 the key2 value to set
+     * @return the StorageAccountKeys object itself.
      */
-    public void setKey2(String key2) {
+    public StorageAccountKeys withKey2(String key2) {
         this.key2 = key2;
+        return this;
     }
 
 }

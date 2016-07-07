@@ -1,0 +1,196 @@
+﻿{
+  "id": "http://schema.management.azure.com/schemas/2015-10-01-preview/Microsoft.DataLakeStore.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.DataLakeStore",
+  "description": "Microsoft DataLakeStore Resource Types",
+  "resourceDefinitions": {
+    "accounts": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeStore/accounts"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the account regional location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the account name."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the value of custom properties."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DataLakeStoreAccountProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the Data Lake Store account properties."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/accounts_firewallRules_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeStore/accounts"
+    },
+    "accounts_firewallRules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DataLakeStore/accounts/firewallRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's subscription ID."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's regional location."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/FirewallRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties of the firewall rule."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeStore/accounts/firewallRules"
+    }
+  },
+  "definitions": {
+    "accounts_firewallRules_childResource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "firewallRules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-10-01-preview"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's name."
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's subscription ID."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the firewall rule's regional location."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/FirewallRuleProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the properties of the firewall rule."
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.DataLakeStore/accounts/firewallRules"
+    },
+    "DataLakeStoreAccountProperties": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "Gets or sets the gateway host."
+        },
+        "defaultGroup": {
+          "type": "string",
+          "description": "Gets or sets the default owner group for all new folders and files created in the Data Lake Store account."
+        }
+      },
+      "description": "Data Lake Store account properties information"
+    },
+    "FirewallRuleProperties": {
+      "type": "object",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the start IP address for the firewall rule."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the end IP address for the firewall rule."
+        }
+      },
+      "description": "Data Lake Store firewall rule properties information"
+    }
+  }
+}

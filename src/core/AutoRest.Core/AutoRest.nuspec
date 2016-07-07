@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>autorest</id>
+    <title>AutoRest</title>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>azure-sdk, Microsoft</owners>
+    <licenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Azure/AutoRest</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <summary>AutoRest code generation of REST API client libraries.</summary>
+    <description>The AutoRest tool generates client libraries for accessing REST APIs that are described using the Swagger format.</description>
+    <copyright>Copyright (c) Microsoft Corporation</copyright>
+    <tags>Microsoft AutoRest</tags>
+  </metadata>
+  <files>
+    <file src="binaries/net45/AutoRest.exe" target="tools" />
+    <file src="binaries/net45/AutoRest.AzureResourceSchema.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CompositeSwagger.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Core.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CSharp.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.CSharp.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Extensions.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Extensions.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.Azure.Fluent.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Java.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.NodeJS.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.NodeJS.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Python.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Python.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Ruby.Azure.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Ruby.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Swagger.dll" target="tools" />
+    <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
+    <file src="binaries/net45/YamlDotNet.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
+  </files>
+</package>  

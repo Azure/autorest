@@ -1,0 +1,487 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Resource Flattening Test Service",
+    "description": "Resource Flattening for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/model-flatten/array": {
+      "put": {
+        "operationId": "putArray",
+        "description": "Put External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "ResourceArray",
+            "description": "External Resource as an Array to put",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resource"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getArray",
+        "description": "Get External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "responses": {
+          "200": {
+            "description": "External Resource as an Array from get",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FlattenedProduct"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/model-flatten/dictionary": {
+      "put": {
+        "operationId": "putDictionary",
+        "description": "Put External Resource as a Dictionary",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "ResourceDictionary",
+            "description": "External Resource as a Dictionary to put",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/FlattenedProduct"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getDictionary",
+        "description": "Get External Resource as a Dictionary",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "responses": {
+          "200": {
+            "description": "External Resource as a Dictionary from get",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/FlattenedProduct"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/model-flatten/resourcecollection": {
+      "put": {
+        "operationId": "putResourceCollection",
+        "description": "Put External Resource as a ResourceCollection",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "ResourceComplexObject",
+            "description": "External Resource as a ResourceCollection to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ResourceCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getResourceCollection",
+        "description": "Get External Resource as a ResourceCollection",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "responses": {
+          "200": {
+            "description": "External Resource as a ResourceCollection from get",
+            "schema": {
+              "$ref": "#/definitions/ResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/model-flatten/customFlattening": {
+      "put": {
+        "operationId": "putSimpleProduct",
+        "description": "Put Simple Product with client flattening true on the model",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to put",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "postFlattenedSimpleProduct",
+        "description": "Put Flattened Simple Product with client flattening true on the parameter",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to post",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/model-flatten/customFlattening/parametergrouping/{name}/": {
+      "put": {
+        "operationId": "putSimpleProductWithGrouping",
+        "description": "Put Simple Product with client flattening true on the model",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to put",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "x-ms-parameter-grouping": {
+              "name": "flatten-parameter-group"
+            },
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          {
+            "name": "name",
+            "description": "Product name with value 'groupproduct'",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "flatten-parameter-group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "parentError": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource Name",
+          "readOnly": true
+        }
+      }
+    },
+    "FlattenedProduct": {
+      "allOf": [
+        {
+          "$ref": "Resource"
+        }
+      ],
+      "description": "Flattened product.",
+      "externalDocs": {
+        "url": "http://tempuri.org"
+      },           
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "p.name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "provisioningStateValues": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "canceled",
+                "Accepted",
+                "Creating",
+                "Created",
+                "Updating",
+                "Updated",
+                "Deleting",
+                "Deleted",
+                "OK"
+              ],
+              "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ResourceCollection": {
+      "properties": {
+        "productresource": {
+          "type": "object",
+          "$ref": "#/definitions/FlattenedProduct"
+        },
+        "arrayofresources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FlattenedProduct"
+          }
+        },
+        "dictionaryofresources": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FlattenedProduct"
+          }
+        }
+      }
+    },
+    "BaseProduct": {
+      "description": "The product documentation.",
+      "required": [
+        "base_product_id"
+      ],
+      "properties": {
+        "base_product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.",
+          "x-ms-client-name": "productId"
+        },
+        "base_product_description": {
+          "type": "string",
+          "description": "Description of product.",
+          "x-ms-client-name": "description"
+        }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
+      }
+    },
+    "SimpleProduct": {
+      "description": "The product documentation.",
+      "allOf": [ { "$ref": "#/definitions/BaseProduct" } ],
+      "properties": {
+        "details": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SimpleProductProperties"
+        }
+      }
+    },
+    "SimpleProductProperties": {
+      "description": "The product documentation.",
+      "required": [
+        "max_product_display_name",
+        "max_product_capacity"
+      ],
+      "properties": {
+        "max_product_display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "max_product_capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people.",
+          "enum": [ "Large" ],
+          "x-ms-client-name": "capacity"
+        },
+        "max_product_image": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductUrl"
+        }
+      }
+    },
+    "GenericUrl": {
+      "description": "The Generic URL.",
+      "properties": {
+        "generic_value": {
+          "type": "string",
+          "description": "Generic URL value."
+        }
+      }
+    },
+    "ProductUrl": {
+      "description": "The product URL.",
+      "allOf": [ { "$ref": "#/definitions/GenericUrl" } ],
+      "properties": {
+        "@odata.value": {
+          "type": "string",
+          "description": "URL value."
+        }
+      }
+    }
+  }
+}

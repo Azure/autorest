@@ -234,8 +234,8 @@ find-orAdd "msbuild.exe" -hint "Install Visual studio 2015"
 
 find-orAdd "javac.exe" -hint "Download and install JAVA JDK"
 
-find-orAdd "node.exe" -hint "See: https://nodejs.org"
-find-orAdd "gulp.cmd" -hint "maybe use 'npm install -g gulp'"
+find-orAdd "node.exe" -hint "See: https://nodejs.org" -folders @("${env:appdata}","${env:ProgramFiles(x86)}","${env:ProgramFiles}")
+find-orAdd "gulp.cmd" -hint "maybe use 'npm install -g gulp'" -folders @("${env:appdata}","${env:ProgramFiles(x86)}","${env:ProgramFiles}")
 
 find-orAdd "ruby.exe" (@() +  ((dir -ea 0 c:\ruby*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see http://rubyinstaller.org/downloads/"
 

@@ -8,6 +8,12 @@ namespace Petstore.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
+    /// <summary>
+    /// A pet
+    /// </summary>
+    /// <remarks>
+    /// A group of properties representing a pet.
+    /// </remarks>
     public partial class Pet
     {
         /// <summary>
@@ -18,6 +24,8 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
+        /// <param name="id">The id of the pet.</param>
+        /// <param name="status">pet status in the store. Possible values include: 'available', 'pending', 'sold'</param>
         public Pet(string name, IList<string> photoUrls, long? id = default(long?), Category category = default(Category), IList<Tag> tags = default(IList<Tag>), string status = default(string))
         {
             Id = id;
@@ -29,7 +37,11 @@ namespace Petstore.Models
         }
 
         /// <summary>
+        /// Gets or sets the id of the pet.
         /// </summary>
+        /// <remarks>
+        /// A more detailed description of the id of the pet.
+        /// </remarks>
         [JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 

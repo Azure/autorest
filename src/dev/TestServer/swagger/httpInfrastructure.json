@@ -1,0 +1,2870 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Http Infrastructure Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/http/failure/emptybody/error": {
+      "get": {
+        "operationId": "httpFailure_getEmptyError",
+        "description": "Get empty error form server",
+        "tags": [
+          "HttpFailure Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returns 400 error code with the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/nomodel/error": {
+      "get": {
+        "operationId": "httpFailure_getNoModelError",
+        "description": "Get empty error form server",
+        "tags": [
+          "HttpFailure Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returns 400 error code with the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/nomodel/empty": {
+      "get": {
+        "operationId": "httpFailure_getNoModelEmpty",
+        "description": "Get empty response from server",
+        "tags": [
+          "HttpFailure Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returns 200 error code with the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        }
+      }
+    },
+    "/http/success/200": {
+      "head": {
+        "operationId": "httpSuccess_head200",
+        "description": "Return 200 status code if successful",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the head request"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpSuccess_get200",
+        "description": "Get 200 success",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the get request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "httpSuccess_options200",
+        "description": "Options 200 success",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the options request",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "httpSuccess_put200",
+        "description": "Put boolean value true returning 200 success",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpSuccess_patch200",
+        "description": "Patch true Boolean value in request returning 200",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "httpSuccess_post200",
+        "description": "Post bollean value true in request that returns a 200",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpSuccess_delete200",
+        "description": "Delete simple boolean value true returns 200",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/success/201": {
+      "put": {
+        "operationId": "httpSuccess_put201",
+        "description": "Put true Boolean value in request returns 201",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "httpSuccess_post201",
+        "description": "Post true Boolean value in request returns 201 (Created)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/success/202": {
+      "put": {
+        "operationId": "httpSuccess_put202",
+        "description": "Put true Boolean value in request returns 202 (Accepted)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpSuccess_patch202",
+        "description": "Patch true Boolean value in request returns 202",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "httpSuccess_post202",
+        "description": "Post true Boolean value in request returns 202 (Accepted)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpSuccess_delete202",
+        "description": "Delete true Boolean value in request returns 202 (accepted)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/success/204": {
+      "head": {
+        "operationId": "httpSuccess_head204",
+        "description": "Return 204 status code if successful",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the true boolean value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "httpSuccess_put204",
+        "description": "Put true Boolean value in request returns 204 (no content)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpSuccess_patch204",
+        "description": "Patch true Boolean value in request returns 204 (no content)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "HttpSuccess_post204",
+        "description": "Post true Boolean value in request returns 204 (no content)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpSuccess_delete204",
+        "description": "Delete true Boolean value in request returns 204 (no content)",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/success/404": {
+      "head": {
+        "operationId": "httpSuccess_head404",
+        "description": "Return 404 status code",
+        "tags": [
+          "HttpSuccess Operations"
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully received the head request"
+          },
+          "404": {
+            "description": "Successfully received the head request"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/redirect/300": {
+      "head": {
+        "operationId": "httpRedirects_head300",
+        "description": "Return 300 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "300": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/head/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpRedirects_get300",
+        "description": "Return 300 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "300": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/get/200" ]
+              }
+            },
+            "schema": {
+              "description": "A list of location options for the request ['/http/success/get/200']",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/redirect/301": {
+      "head": {
+        "operationId": "httpRedirects_head301",
+        "description": "Return 301 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "301": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/head/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpRedirects_get301",
+        "description": "Return 301 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpOperation Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "301": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/get/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "httpRedirects_put301",
+        "description": "Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "301": {
+            "description": "Redirect to another endpoint. This redirect should *not* be automatically followed",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/failure/500" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/redirect/302": {
+      "head": {
+        "operationId": "httpRedirects_head302",
+        "description": "Return 302 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "302": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/head/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpRedirects_get302",
+        "description": "Return 302 status code and redirect to /http/success/200",
+        "tags": [
+          "HttpOperation Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "302": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/get/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpRedirects_patch302",
+        "description": "Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect to another endpoint. This redirect should *not* be automatically followed",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/failure/500" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/redirect/303": {
+      "post": {
+        "operationId": "httpRedirects_post303",
+        "description": "Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned afyter a successful redirect"
+          },
+          "303": {
+            "description": "Redirect to another endpoint. This redirect should be automatically followed with a get request",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/get/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/redirect/307": {
+      "head": {
+        "operationId": "httpRedirects_head307",
+        "description": "Redirect with 307, resulting in a 200 success",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/head/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpRedirects_get307",
+        "description": "Redirect get with 307, resulting in a 200 success",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/get/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "httpRedirects_options307",
+        "description": "options redirected with 307, resulting in a 200 after redirect",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/options/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "HttpRedirects_put307",
+        "description": "Put redirected with 307, resulting in a 200 after redirect",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/put/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpRedirects_patch307",
+        "description": "Patch redirected with 307, resulting in a 200 after redirect",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/patch/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "httpRedirects_post307",
+        "description": "Post redirected with 307, resulting in a 200 after redirect",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/post/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpRedirects_delete307",
+        "description": "Delete redirected with 307, resulting in a 200 after redirect",
+        "tags": [
+          "HttpRedirect Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, should be returned after a successful redirect"
+          },
+          "307": {
+            "description": "Redirect to another endpoint",
+            "headers": {
+              "Location": {
+                "description": "The redirect location for this request",
+                "type": "string",
+                "enum": [ "/http/success/delete/200" ]
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/400": {
+      "head": {
+        "operationId": "httpClientFailure_head400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpClientFailure_get400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "httpClientFailure_options400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "httpClientFailure_put400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpClientFailure_patch400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "httpClientFailure_post400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpClientFailure_delete400",
+        "description": "Return 400 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/401": {
+      "head": {
+        "operationId": "httpClientFailure_head401",
+        "description": "Return 401 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/402": {
+      "get": {
+        "operationId": "httpClientFailure_get402",
+        "description": "Return 402 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/403": {
+      "options": {
+        "operationId": "httpClientFailure_options403",
+        "description": "Return 403 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpClientFailure_get403",
+        "description": "Return 403 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/404": {
+      "put": {
+        "operationId": "httpClientFailure_put404",
+        "description": "Return 404 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/405": {
+      "patch": {
+        "operationId": "httpClientFailure_patch405",
+        "description": "Return 405 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/406": {
+      "post": {
+        "operationId": "httpClientFailure_post406",
+        "description": "Return 406 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/407": {
+      "delete": {
+        "operationId": "httpClientFailure_delete407",
+        "description": "Return 407 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/409": {
+      "put": {
+        "operationId": "httpClientFailure_put409",
+        "description": "Return 409 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/410": {
+      "head": {
+        "operationId": "httpClientFailure_head410",
+        "description": "Return 410 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/411": {
+      "get": {
+        "operationId": "httpClientFailure_get411",
+        "description": "Return 411 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/412": {
+      "options": {
+        "operationId": "httpClientFailure_options412",
+        "description": "Return 412 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpClientFailure_get412",
+        "description": "Return 412 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/413": {
+      "put": {
+        "operationId": "httpClientFailure_put413",
+        "description": "Return 413 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/414": {
+      "patch": {
+        "operationId": "httpClientFailure_patch414",
+        "description": "Return 414 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/415": {
+      "post": {
+        "operationId": "httpClientFailure_post415",
+        "description": "Return 415 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/416": {
+      "get": {
+        "operationId": "httpClientFailure_get416",
+        "description": "Return 416 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/417": {
+      "delete": {
+        "operationId": "httpClientFailure_delete417",
+        "description": "Return 417 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/client/429": {
+      "head": {
+        "operationId": "httpClientFailure_head429",
+        "description": "Return 429 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpClientFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/server/501": {
+      "head": {
+        "operationId": "httpServerFailure_head501",
+        "description": "Return 501 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpServerFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "httpServerFailure_get501",
+        "description": "Return 501 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpServerFailure Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/failure/server/505": {
+      "post": {
+        "operationId": "httpServerFailure_post505",
+        "description": "Return 505 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpServerFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpServerFailure_delete505",
+        "description": "Return 505 status code - should be represented in the client as an error",
+        "tags": [
+          "HttpServerFailure Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/retry/408": {
+      "head": {
+        "operationId": "httpRetry_head408",
+        "description": "Return 408 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the true boolean value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/retry/500": {
+      "put": {
+        "operationId": "httpRetry_put500",
+        "description": "Return 500 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpRetry_patch500",
+        "description": "Return 500 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/retry/502": {
+      "get": {
+        "operationId": "httpRetry_get502",
+        "description": "Return 502 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the true boolean value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "httpRetry_options502",
+        "description": "Return 502 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the true boolean value",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/retry/503": {
+      "post": {
+        "operationId": "httpRetry_post503",
+        "description": "Return 503 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "httpRetry_delete503",
+        "description": "Return 503 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/retry/504": {
+      "put": {
+        "operationId": "httpRetry_put504",
+        "description": "Return 504 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "httpRetry_patch504",
+        "description": "Return 504 status code, then 200 after retry",
+        "tags": [
+          "HttpRetry Operations"
+        ],
+        "parameters": [
+          {
+            "name": "booleanValue",
+            "description": "Simple boolean value true",
+            "in": "body",
+            "schema": {
+              "description": "Simple boolean value true",
+              "type": "boolean",
+              "enum": [ true ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the boolean true value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/204/none/default/Error/response/200/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model204NoModelDefaultError200Valid",
+        "description": "Send a 200 response with valid payload: {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "204": {
+            "description": "Return no payload"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/204/none/default/Error/response/204/none": {
+      "get": {
+        "operationId": "multipleResponses_get200Model204NoModelDefaultError204Valid",
+        "description": "Send a 204 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '204'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "204": {
+            "description": "Return no payload"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/204/none/default/Error/response/201/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model204NoModelDefaultError201Invalid",
+        "description": "Send a 201 response with valid payload: {'statusCode': '201'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "204": {
+            "description": "Return no payload"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/204/none/default/Error/response/202/none": {
+      "get": {
+        "operationId": "multipleResponses_get200Model204NoModelDefaultError202None",
+        "description": "Send a 202 response with no payload:",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "204": {
+            "description": "Return no payload"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/204/none/default/Error/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model204NoModelDefaultError400Valid",
+        "description": "Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "204": {
+            "description": "Return no payload"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/B/default/Error/response/200/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model201ModelDefaultError200Valid",
+        "description": "Send a 200 response with valid payload: {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'statusCode': '201', 'textStatusCode': 'Created'}",
+            "schema": {
+              "$ref": "#/definitions/B"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/B/default/Error/response/201/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model201ModelDefaultError201Valid",
+        "description": "Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'statusCode': '201', 'textStatusCode': 'Created'}",
+            "schema": {
+              "$ref": "#/definitions/B"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/B/default/Error/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200Model201ModelDefaultError400Valid",
+        "description": "Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'statusCode': '201', 'textStatusCode': 'Created'}",
+            "schema": {
+              "$ref": "#/definitions/B"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA201ModelC404ModelDDefaultError200Valid",
+        "description": "Send a 200 response with valid payload: {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'httpCode': '201'}",
+            "schema": {
+              "$ref": "#/definitions/C"
+            }
+          },
+          "404": {
+            "description": "Return {'httpStatusCode': '404'}",
+            "schema": {
+              "$ref": "#/definitions/D"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA201ModelC404ModelDDefaultError201Valid",
+        "description": "Send a 200 response with valid payload: {'httpCode': '201'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'httpCode': '201'}",
+            "schema": {
+              "$ref": "#/definitions/C"
+            }
+          },
+          "404": {
+            "description": "Return {'httpStatusCode': '404'}",
+            "schema": {
+              "$ref": "#/definitions/D"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA201ModelC404ModelDDefaultError404Valid",
+        "description": "Send a 200 response with valid payload: {'httpStatusCode': '404'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'httpCode': '201'}",
+            "schema": {
+              "$ref": "#/definitions/C"
+            }
+          },
+          "404": {
+            "description": "Return {'httpStatusCode': '404'}",
+            "schema": {
+              "$ref": "#/definitions/D"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA201ModelC404ModelDDefaultError400Valid",
+        "description": "Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          },
+          "201": {
+            "description": "Return {'httpCode': '201'}",
+            "schema": {
+              "$ref": "#/definitions/C"
+            }
+          },
+          "404": {
+            "description": "Return {'httpStatusCode': '404'}",
+            "schema": {
+              "$ref": "#/definitions/D"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/Error/response/202/none": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultError202None",
+        "description": "Send a 202 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No Payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/Error/response/204/none": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultError204None",
+        "description": "Send a 204 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No Payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/Error/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultError400Valid",
+        "description": "Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No Payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error with payload: {'code': '400', 'message': 'client error'}",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/none/response/202/invalid": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultNone202Invalid",
+        "description": "Send a 202 response with an unexpected payload {'property': 'value'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted, but this operation will return {'property': 'value'}"
+          },
+          "204": {
+            "description": "No payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error with no payload"
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/none/response/204/none": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultNone204None",
+        "description": "Send a 204 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error with no payload"
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/none/response/400/none": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultNone400None",
+        "description": "Send a 400 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error with no payload"
+          }
+        }
+      }
+    },
+    "/http/payloads/202/none/204/none/default/none/response/400/invalid": {
+      "get": {
+        "operationId": "multipleResponses_get202None204NoneDefaultNone400Invalid",
+        "description": "Send a 400 response with an unexpected payload {'property': 'value'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "202": {
+            "description": "No payload for Accepted"
+          },
+          "204": {
+            "description": "No payload for NoContent"
+          },
+          "default": {
+            "description": "Unexpected error should have no payload, but this operation sends: {'property': 'value'}"
+          }
+        }
+      }
+    },
+    "/http/payloads/default/A/response/200/valid": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultModelA200Valid",
+        "description": "Send a 200 response with valid payload: {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/default/A/response/200/none": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultModelA200None",
+        "description": "Send a 200 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return no payload",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/default/A/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultModelA400Valid",
+        "description": "Send a 400 response with valid payload: {'statusCode': '400'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return {'statusCode': '400'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/default/A/response/400/none": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultModelA400None",
+        "description": "Send a 400 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return no payload",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/default/none/response/200/invalid": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultNone200Invalid",
+        "description": "Send a 200 response with invalid payload: {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return invalid payload {'statusCode': '200'}"
+          }
+        }
+      }
+    },
+    "/http/payloads/default/none/response/200/none": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultNone200None",
+        "description": "Send a 200 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return no payload"
+          }
+        }
+      }
+    },
+    "/http/payloads/default/none/response/400/invalid": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultNone400Invalid",
+        "description": "Send a 400 response with valid payload: {'statusCode': '400'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return invalid payload{'statusCode': '400'}"
+          }
+        }
+      }
+    },
+    "/http/payloads/default/none/response/400/none": {
+      "get": {
+        "operationId": "multipleResponses_getDefaultNone400None",
+        "description": "Send a 400 response with no payload",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "default": {
+            "description": "Return no payload"
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/200/none": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA200None",
+        "description": "Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return no payload",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/200/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA200Valid",
+        "description": "Send a 200 response with payload {'statusCode': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a respose with valid payload {'statusCode': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/200/invalid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA200Invalid",
+        "description": "Send a 200 response with invalid payload {'statusCodeInvalid': '200'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a respose with invalid payload {'statusCodeInvalid': '200'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/400/none": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA400None",
+        "description": "Send a 400 response with no payload client should treat as an http error with no error model",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return no payload, and an unmodeled 400 response",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/400/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA400Valid",
+        "description": "Send a 200 response with payload {'statusCode': '400'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a respose with valid payload {'statusCode': '400'}  but error status code 400, which is unmodeled",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/400/invalid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA400Invalid",
+        "description": "Send a 200 response with invalid payload {'statusCodeInvalid': '400'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a respose with invalid payload {'statusCodeInvalid': '400'}",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    },
+    "/http/payloads/200/A/response/202/valid": {
+      "get": {
+        "operationId": "multipleResponses_get200ModelA202Valid",
+        "description": "Send a 202 response with payload {'statusCode': '202'}",
+        "tags": [
+          "MultipleResponse Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Return a respose with valid payload {'statusCode': '202'}  but unmodeled success status code 202, which is unmodeled",
+            "schema": {
+              "$ref": "#/definitions/A"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "A": {
+      "x-ms-client-name": {
+        "name": "MyException"
+      },
+      "properties": {
+        "statusCode": {
+          "type": "string"
+        }
+      }
+    },
+    "B": {
+      "allOf": [
+        { "$ref": "#/definitions/A" }
+      ],
+      "properties": {
+        "textStatusCode": {
+          "type": "string"
+        }
+      }
+    },
+    "C": {
+      "properties": {
+        "httpCode": {
+          "type": "string"
+        }
+      }
+    },
+    "D": {
+      "properties": {
+        "httpStatusCode": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

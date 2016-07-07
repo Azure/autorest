@@ -7,11 +7,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The Pet model.
+ * A pet.
+ * A group of properties representing a pet.
  */
 public class Pet {
     /**
-     * The id property.
+     * The id of the pet.
+     * A more detailed description of the id of the pet.
      */
     private Long id;
 
@@ -48,7 +50,7 @@ public class Pet {
      *
      * @return the id value
      */
-    public Long getId() {
+    public Long id() {
         return this.id;
     }
 
@@ -56,9 +58,11 @@ public class Pet {
      * Set the id value.
      *
      * @param id the id value to set
+     * @return the Pet object itself.
      */
-    public void setId(Long id) {
+    public Pet withId(Long id) {
         this.id = id;
+        return this;
     }
 
     /**
@@ -66,7 +70,7 @@ public class Pet {
      *
      * @return the category value
      */
-    public Category getCategory() {
+    public Category category() {
         return this.category;
     }
 
@@ -74,9 +78,11 @@ public class Pet {
      * Set the category value.
      *
      * @param category the category value to set
+     * @return the Pet object itself.
      */
-    public void setCategory(Category category) {
+    public Pet withCategory(Category category) {
         this.category = category;
+        return this;
     }
 
     /**
@@ -84,7 +90,7 @@ public class Pet {
      *
      * @return the name value
      */
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
@@ -92,9 +98,11 @@ public class Pet {
      * Set the name value.
      *
      * @param name the name value to set
+     * @return the Pet object itself.
      */
-    public void setName(String name) {
+    public Pet withName(String name) {
         this.name = name;
+        return this;
     }
 
     /**
@@ -102,7 +110,7 @@ public class Pet {
      *
      * @return the photoUrls value
      */
-    public List<String> getPhotoUrls() {
+    public List<String> photoUrls() {
         return this.photoUrls;
     }
 
@@ -110,9 +118,11 @@ public class Pet {
      * Set the photoUrls value.
      *
      * @param photoUrls the photoUrls value to set
+     * @return the Pet object itself.
      */
-    public void setPhotoUrls(List<String> photoUrls) {
+    public Pet withPhotoUrls(List<String> photoUrls) {
         this.photoUrls = photoUrls;
+        return this;
     }
 
     /**
@@ -120,7 +130,7 @@ public class Pet {
      *
      * @return the tags value
      */
-    public List<Tag> getTags() {
+    public List<Tag> tags() {
         return this.tags;
     }
 
@@ -128,9 +138,11 @@ public class Pet {
      * Set the tags value.
      *
      * @param tags the tags value to set
+     * @return the Pet object itself.
      */
-    public void setTags(List<Tag> tags) {
+    public Pet withTags(List<Tag> tags) {
         this.tags = tags;
+        return this;
     }
 
     /**
@@ -138,7 +150,7 @@ public class Pet {
      *
      * @return the status value
      */
-    public String getStatus() {
+    public String status() {
         return this.status;
     }
 
@@ -146,9 +158,11 @@ public class Pet {
      * Set the status value.
      *
      * @param status the status value to set
+     * @return the Pet object itself.
      */
-    public void setStatus(String status) {
+    public Pet withStatus(String status) {
         this.status = status;
+        return this;
     }
 
 }

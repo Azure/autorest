@@ -1,0 +1,17 @@
+﻿@using AutoRest.Ruby.Templates
+@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.RequirementsTemplateModel>
+# encoding: utf-8
+@Header("# ")
+@EmptyLine
+@Model.GetDependencyGems()
+@EmptyLine
+module @Settings.Namespace
+
+  @Model.GetOperationsRequiredFiles()
+  @Model.GetClientRequiredFile()
+
+  @EmptyLine
+  module Models
+    @Model.GetModelsRequiredFiles()
+  end
+end

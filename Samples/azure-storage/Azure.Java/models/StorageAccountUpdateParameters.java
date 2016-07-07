@@ -24,7 +24,7 @@ public class StorageAccountUpdateParameters {
      *
      * @return the tags value
      */
-    public Map<String, String> getTags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -32,9 +32,11 @@ public class StorageAccountUpdateParameters {
      * Set the tags value.
      *
      * @param tags the tags value to set
+     * @return the StorageAccountUpdateParameters object itself.
      */
-    public void setTags(Map<String, String> tags) {
+    public StorageAccountUpdateParameters withTags(Map<String, String> tags) {
         this.tags = tags;
+        return this;
     }
 
     /**
@@ -42,7 +44,7 @@ public class StorageAccountUpdateParameters {
      *
      * @return the properties value
      */
-    public StorageAccountPropertiesUpdateParameters getProperties() {
+    public StorageAccountPropertiesUpdateParameters properties() {
         return this.properties;
     }
 
@@ -50,9 +52,11 @@ public class StorageAccountUpdateParameters {
      * Set the properties value.
      *
      * @param properties the properties value to set
+     * @return the StorageAccountUpdateParameters object itself.
      */
-    public void setProperties(StorageAccountPropertiesUpdateParameters properties) {
+    public StorageAccountUpdateParameters withProperties(StorageAccountPropertiesUpdateParameters properties) {
         this.properties = properties;
+        return this;
     }
 
 }

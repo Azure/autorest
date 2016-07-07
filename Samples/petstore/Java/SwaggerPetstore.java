@@ -3,16 +3,12 @@
 
 package petstore;
 
-import java.util.List;
-import okhttp3.Interceptor;
-import okhttp3.logging.HttpLoggingInterceptor.Level;
-import com.microsoft.rest.AutoRestBaseUrl;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import petstore.models.Order;
 import petstore.models.Pet;
@@ -23,33 +19,9 @@ import petstore.models.User;
  */
 public interface SwaggerPetstore {
     /**
-     * Gets the URL used as the base for all cloud service requests.
-     *
-     * @return the BaseUrl object.
+     * The default base URL.
      */
-    AutoRestBaseUrl getBaseUrl();
-
-    /**
-     * Gets the list of interceptors the OkHttp client will execute.
-     *
-     * @return the list of interceptors.
-     */
-    List<Interceptor> getClientInterceptors();
-
-    /**
-     * Sets the logging level for OkHttp client.
-     *
-     * @param logLevel the logging level enum.
-     */
-    void setLogLevel(Level logLevel);
-
-    /**
-     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
-     * and deserialization operations..
-     *
-     * @return the adapter.
-     */
-    JacksonMapperAdapter getMapperAdapter();
+    String DEFAULT_BASE_URL = "http://petstore.swagger.io/v2";
 
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
@@ -90,6 +62,7 @@ public interface SwaggerPetstore {
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
@@ -99,6 +72,7 @@ public interface SwaggerPetstore {
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
@@ -107,6 +81,7 @@ public interface SwaggerPetstore {
     ServiceCall addPetAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
      * @throws ServiceException exception thrown from REST call
@@ -117,6 +92,7 @@ public interface SwaggerPetstore {
 
     /**
      * Add a new pet to the store.
+     * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.

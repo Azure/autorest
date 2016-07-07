@@ -24,6 +24,8 @@ namespace Petstore.Models
         /// Initializes a new instance of the StorageAccountCreateParameters
         /// class.
         /// </summary>
+        /// <param name="location">Resource location</param>
+        /// <param name="tags">Resource tags</param>
         public StorageAccountCreateParameters(string location, IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
         {
             Location = location;

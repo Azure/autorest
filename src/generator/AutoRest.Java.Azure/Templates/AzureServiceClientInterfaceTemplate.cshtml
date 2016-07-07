@@ -1,0 +1,86 @@
+@using System
+@using AutoRest.Java.Azure.Templates
+@using AutoRest.Java.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureServiceClientTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * The interface for @Model.Name class.
+ */
+public interface @Model.Name {
+    /**
+     * Gets the REST client.
+     *
+     * @@return the {@@link RestClient} object.
+    */
+    RestClient restClient();
+@EmptyLine
+    /**
+     * Gets the {@@link AzureClient} used for long running operations.
+     * @@return the azure client;
+     */
+    AzureClient getAzureClient();
+@EmptyLine
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @@return the user agent string.
+     */
+    String userAgent();
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation).
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    @property.Type @(property.Name.ToCamelCase())();
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation).
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
+@:     */
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupType) object.
+@:     */
+@:    @(operation.MethodGroupType) @(operation.MethodGroupType.ToCamelCase())();
+}
+@EmptyLine
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@Include(new MethodInterfaceTemplate(), method)
+    @EmptyLine
+    }
+</text>
+}
+}

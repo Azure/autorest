@@ -1,0 +1,48 @@
+﻿{
+  "codeGenerators": {
+    "Ruby": {
+      "type": "RubyCodeGenerator, AutoRest.Ruby"
+    },
+    "Azure.Ruby": {
+      "type": "AzureRubyCodeGenerator, AutoRest.Ruby.Azure"
+    },
+    "CSharp": {
+      "type": "CSharpCodeGenerator, AutoRest.CSharp"
+    },
+    "Azure.CSharp": {
+      "type": "AzureCSharpCodeGenerator, AutoRest.CSharp.Azure"
+    },
+    "NodeJS": {
+      "type": "NodeJSCodeGenerator, AutoRest.NodeJS"
+    },
+    "Azure.NodeJS": {
+      "type": "AzureNodeJSCodeGenerator, AutoRest.NodeJS.Azure"
+    },
+    "Java": {
+      "type": "JavaCodeGenerator, AutoRest.Java"
+    },
+    "Azure.Java": {
+      "type": "AzureJavaCodeGenerator, AutoRest.Java.Azure"
+    },
+    "Azure.Java.Fluent": {
+      "type": "AzureJavaFluentCodeGenerator, AutoRest.Java.Azure.Fluent"
+    },
+    "Python": {
+      "type": "PythonCodeGenerator, AutoRest.Python"
+    },
+    "Azure.Python": {
+      "type": "AzurePythonCodeGenerator, AutoRest.Python.Azure"
+    },
+    "AzureResourceSchema": {
+      "type": "AzureResourceSchemaCodeGenerator, AutoRest.AzureResourceSchema"
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, AutoRest.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
+    }
+  }
+}
