@@ -84,10 +84,10 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
             for (int i = 0; i < serviceClient.Methods.Count; i++)
             {
-                var method = serviceClient.Methods[i];
+                Method method = serviceClient.Methods[i];
                 if (method.Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
-                    var pageableExtension = JsonConvert.DeserializeObject<Model.PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
+                    Model.PageableExtension pageableExtension = JsonConvert.DeserializeObject<Model.PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
                     if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
                         serviceClient.Methods.Insert(i, (Method)method.Clone());
@@ -109,7 +109,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 throw new ArgumentNullException(nameof(serviceClient));
             }
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            foreach (Method method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkName = null;
                 var ext = method.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
@@ -121,14 +121,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 string itemName = (string)ext["itemName"] ?? "value";
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositeType = (CompositeType)method.Responses[responseStatus].Body;
-                    var sequenceType = compositeType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                    CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
+                    SequenceType sequenceType = compositeType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
                         compositeType.Extensions[AzureExtensions.PageableExtension] = true;
-                        var pageTemplateModel = new PageTemplateModel(compositeType, serviceClient.ModelTypes, nextLinkName, itemName);
+                        PageTemplateModel pageTemplateModel = new PageTemplateModel(compositeType, serviceClient.ModelTypes, nextLinkName, itemName);
                         if (!pageModels.Contains(pageTemplateModel))
                         {
                             pageModels.Add(pageTemplateModel);
@@ -165,7 +165,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <returns>Async tasks which generates SDK files.</returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient, pageModels);
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
@@ -185,7 +185,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             }
 
             // Models
-            foreach (var model in serviceClientTemplateModel.ModelTemplateModels)
+            foreach (var model in serviceClientTemplateModel.ModelTypes)
             {
                 if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                     (bool)model.Extensions[AzureExtensions.ExternalExtension])

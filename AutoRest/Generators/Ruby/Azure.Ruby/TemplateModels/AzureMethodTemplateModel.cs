@@ -68,9 +68,9 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         public string InvokeNextMethodAsync()
         {
             RubyCodeNamer cn = new RubyCodeNamer();
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             string nextMethodName;
-            var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
+            PageableExtension pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
 
             Method nextMethod = null;
             if (pageableExtension != null && !string.IsNullOrEmpty(pageableExtension.OperationName))
@@ -79,30 +79,29 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                     pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
                 nextMethodName = nextMethod.Name;
             }
-            else 
+            else
             {
                 nextMethodName = cn.GetMethodName((string)(Extensions["nextMethodName"]));
                 nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
             }
 
-            var origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
+            IEnumerable<Parameter> origMethodGroupedParameters = Parameters.Where(p => p.Name.Contains(Name));
             if (origMethodGroupedParameters.Count() > 0)
             {
-                for (int j = 0; j < nextMethod.Parameters.Count; j++)
+                foreach (Parameter param in nextMethod.Parameters)
                 {
-                    Parameter param = nextMethod.Parameters[j];
-
                     if (param.Name.Contains(nextMethod.Name) && (param.Name.Length > nextMethod.Name.Length)) //parameter that contains the method name + postfix, it's a grouped param
                     {
+                        //assigning grouped parameter passed to the lazy method, to the parameter used in the invocation to the next method
                         string argumentName = param.Name.Replace(nextMethodName, Name);
                         builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0} = {1}", param.Name, argumentName));
                     }
                 }
             }
 
-            var headerParams = nextMethod.Parameters.Where(p => (p.Location == ParameterLocation.Header || p.Location == ParameterLocation.None) && !p.IsConstant && p.ClientProperty == null).Select(p => p.Name).ToList() ;
+            IList<string> headerParams = nextMethod.Parameters.Where(p => (p.Location == ParameterLocation.Header || p.Location == ParameterLocation.None) && !p.IsConstant && p.ClientProperty == null).Select(p => p.Name).ToList();
             headerParams.Add("custom_headers");
-            string nextMethodParamaterInvocation = string.Join(", ",headerParams);
+            string nextMethodParamaterInvocation = string.Join(", ", headerParams);
 
             builder.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}_async(next_link, {1})", nextMethodName, nextMethodParamaterInvocation));
             return builder.ToString();
@@ -114,17 +113,17 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         public override string ResponseGeneration()
         {
 
-            var builder = new IndentedStringBuilder();
+            IndentedStringBuilder builder = new IndentedStringBuilder();
             if (ReturnType.Body != null)
             {
                 if (ReturnType.Body is CompositeType)
                 {
-                    var compositeType = (CompositeType)ReturnType.Body;
+                    CompositeType compositeType = (CompositeType)ReturnType.Body;
                     if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
-                    { 
+                    {
                         bool isNextLinkMethod = this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"];
-                        var isPageable = (bool)compositeType.Extensions[AzureExtensions.PageableExtension];
-                        if (isPageable &&!isNextLinkMethod)
+                        bool isPageable = (bool)compositeType.Extensions[AzureExtensions.PageableExtension];
+                        if (isPageable && !isNextLinkMethod)
                         {
                             builder.AppendLine("first_page = {0}_as_lazy({1})", Name, MethodParameterInvocation);
                             builder.AppendLine("first_page.get_all_items");
@@ -276,7 +275,8 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             {
                 if (Extensions.ContainsKey("nextMethodName") && !Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
-                    return "Array";
+                    SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                    return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name) ;
                 }
                 return base.OperationReturnTypeString;
             }

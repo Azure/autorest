@@ -9,7 +9,7 @@ using Microsoft.Rest.Generator.Ruby;
 
 namespace Microsoft.Rest.Generator.Azure.Ruby
 {
-    public class PageTemplateModel : ModelTemplateModel
+    public class PageTemplateModel : AzureModelTemplateModel
     {
         public PageTemplateModel(CompositeType source, ISet<CompositeType> allTypes, string nextLinkName, string itemName)
             : base(source, allTypes)
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 {
                     return null;
                 }
-                var property = Properties.FirstOrDefault(p => p.Type is SequenceType);
+                Property property = Properties.FirstOrDefault(p => p.Type is SequenceType);
                 if (property != null)
                 {
                     return ((SequenceType)property.Type).ElementType as CompositeType;
@@ -59,53 +59,6 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             };
             param.Extensions[Generator.Extensions.SkipUrlEncodingExtension] = true;
             return param;
-        }
-
-        /// <summary>
-        /// Returns code for declaring inheritance.
-        /// </summary>
-        /// <returns>Code for declaring inheritance.</returns>
-        public override string GetBaseTypeName()
-        {
-            if (this.BaseModelType != null)
-            {
-                string typeName = this.BaseModelType.Name;
-
-                if (this.BaseModelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) ||
-                    this.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
-                {
-                    typeName = "MsRestAzure::" + typeName;
-                }
-
-                return " < " + typeName;
-            }
-
-            return string.Empty;
-        }
-
-        /// <summary>
-        /// Gets the list of modules/classes which need to be included.
-        /// </summary>
-        public override List<string> Includes
-        {
-            get
-            {
-                return new List<string>
-                {
-                    "MsRestAzure"
-                };
-            }
-        }
-
-        public override List<string> ClassNamespaces
-        {
-            get
-            {
-                return new List<string>
-                {
-                    "MsRestAzure"
-                };
-            }
         }
     }
 }

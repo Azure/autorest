@@ -18,19 +18,14 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// Initializes a new instance of the AzureServiceClientTemplateModel class.
         /// </summary>
         /// <param name="serviceClient">The service client instance.</param>
-        /// <param name="pageModels">The service client instance.</param>
-        public AzureServiceClientTemplateModel(ServiceClient serviceClient, IList<PageTemplateModel> pageModels)
+        public AzureServiceClientTemplateModel(ServiceClient serviceClient)
             : base(serviceClient)
         {
             MethodTemplateModels.Clear();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
-            PageTemplateModels = pageModels;
         }
-
-        public IList<PageTemplateModel> PageTemplateModels { get; }
-
+        
         /// <summary>
         /// Gets the list of modules/classes which need to be included.
         /// </summary>

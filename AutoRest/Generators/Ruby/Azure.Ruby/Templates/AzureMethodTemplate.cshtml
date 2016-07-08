@@ -22,10 +22,11 @@ else if (!Model.IsLongRunningOperation && Model.IsPageable)
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
 @WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.ReturnType))
 #
@@ -55,10 +56,11 @@ else
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
 @WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
 #

@@ -25,8 +25,6 @@ namespace Microsoft.Rest.Generator.Ruby
             MethodTemplateModels = new List<MethodTemplateModel>();
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
-            ModelTemplateModels = new List<ModelTemplateModel>();
-            ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient.ModelTypes)));
             this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
 
@@ -39,11 +37,6 @@ namespace Microsoft.Rest.Generator.Ruby
         /// Gets and sets the method template models.
         /// </summary>
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
-
-        /// <summary>
-        /// Gets and sets the model template models.
-        /// </summary>
-        public List<ModelTemplateModel> ModelTemplateModels { get; private set; }
 
         /// <summary>
         /// Gets the flag indicating whether url is from x-ms-parameterized-host extension.
