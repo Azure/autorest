@@ -30,7 +30,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the
         /// HeaderResponseProtectedKeyHeaders class.
         /// </summary>
-        /// <param name="contentType">response with header value "Content-Type": "text/html"</param>
+        /// <param name="contentType">response with header value
+        /// "Content-Type": "text/html"</param>
         public HeaderResponseProtectedKeyHeaders(string contentType = default(string))
         {
             ContentType = contentType;

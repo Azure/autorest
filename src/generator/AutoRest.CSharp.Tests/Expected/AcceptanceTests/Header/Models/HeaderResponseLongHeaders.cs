@@ -28,7 +28,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseLongHeaders class.
         /// </summary>
-        /// <param name="value">response with header value "value": 105 or -2</param>
+        /// <param name="value">response with header value "value": 105 or
+        /// -2</param>
         public HeaderResponseLongHeaders(long? value = default(long?))
         {
             Value = value;
