@@ -57,7 +57,7 @@ function gulpRegenerateExpected(options, done) {
     var optsMappingsValue = opts.mappings[key];
     var mappingBaseDir = optsMappingsValue instanceof Array ? optsMappingsValue[0] : optsMappingsValue;
     var args = [
-      'binaries/net45/AutoRest.exe',
+      'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.exe',
       '-Modeler', opts.modeler,
       '-CodeGenerator', opts.codeGenerator,
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,
@@ -115,16 +115,18 @@ function exec(command, args, extArgs) {
   })) {
     return Q.reject(new Error('All arguments must be a boolean, string or number'));
   }
-
   var deferred = Q.defer();
-
   var proc = spawn(command, args, extArgs);
   proc.on('error', function(error) {
     deferred.reject(new Error(command + ' ' + args.join(' ') + ' encountered error ' + error.message));
+    // errors aren't halting the gulp script. Fixing that the easy way:
+    throw new Error(command + ' ' + args.join(' ') + ' encountered error ' + error.message);
   });
   proc.on('exit', function(code) {
     if (code !== 0) {
       deferred.reject(new Error(command + ' ' + args.join(' ') + ' exited with code ' + code));
+      // errors aren't halting the gulp script. Fixing that the easy way:
+      throw new Error(command + ' ' + args.join(' ') + ' exited with code ' + code)
     } else {
       deferred.resolve();
     }

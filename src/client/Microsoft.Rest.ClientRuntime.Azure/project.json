@@ -1,5 +1,5 @@
 {
-  "version": "3.3.1-*",
+  "version": "3.3.2-*",
   "copyright": "Copyright (c) Microsoft Corporation",
   "title": "Client Runtime for Microsoft Azure Libraries",
   "description": "Provides common error handling, tracing, and HTTP/REST-based pipeline manipulation. \nSupported Platforms:\n  -   Portable Class Libraries\n  -   .NET Framework 4.5\n  -   Windows 8\n  -   Windows Phone 8.1\n  -   DotNet Core",

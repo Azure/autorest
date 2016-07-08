@@ -12,10 +12,6 @@
   /t:Test
     Run unit tests.
 
-  /t:Package
-    Builds NuGet packages using the binaries folder contents.
-    The packages will drop to .\binaries\packages.
-
   /t:Publish
     Publishes the built packages. You will need to include your
     publishing key when running. Include: /p:NuGetKey=YOUR_PUBLISHING_KEY
@@ -50,115 +46,166 @@
 
   /p:NuGetSymbolPublishingSource=Uri
     The NuGet Server to push symbol + source packages to.
+    
+  /p:VersionSuffix=nightly-20160102 
+    Provide a version suffix for nightly builds
   -->
 
   <PropertyGroup>
-    <ClientRuntimeSolution>ClientRuntime.sln</ClientRuntimeSolution>
-    <ClientRuntimeWindowsSolution>ClientRuntimeWindows.sln</ClientRuntimeWindowsSolution>
-    <CodeGeneratorSolution>CodeGenerator.sln</CodeGeneratorSolution>
     <LibraryRoot>$(MSBuildThisFileDirectory)</LibraryRoot>
     <LibrarySourceFolder>$(LibraryRoot)</LibrarySourceFolder>
     <LibraryToolsFolder>$(LibraryRoot)Tools</LibraryToolsFolder>
     <BinariesFolder>$(LibraryRoot)binaries</BinariesFolder>
     <TestResultsFolder>$(LibraryRoot)TestResults</TestResultsFolder>
     <PackageOutputDir>$(BinariesFolder)\packages</PackageOutputDir>
+    <!-- Default to Debug -->
     <Configuration Condition="'$(Configuration)' == '' ">Debug</Configuration>
     <CodeSign Condition=" '$(CodeSign)' == '' ">false</CodeSign>
+    
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
     <ZipExeFolder>$(LibraryToolsFolder)\7-Zip</ZipExeFolder>
     <ZipExe>$(ZipExeFolder)\7z.exe</ZipExe>
-  </PropertyGroup>
 
-  <ItemGroup>
-    <LibraryFxTargetList Condition=" '$(FxTargetList)' == '' and '$(Scope)' == 'CodeGenerator' " Include="net45" />
-    <LibraryFxTargetList Condition=" '$(FxTargetList)' != '' " Include="$(FxTargetList)" />
-  </ItemGroup>
+    <!-- Default Package Sources -->
+    <NugetSource Condition=" '$(NuGetPublishingSource)' != '' ">$(NuGetPublishingSource)</NugetSource>
+    <NugetSource Condition=" '$(NuGetPublishingSource)' == '' ">https://www.nuget.org/api/v2/package/</NugetSource>
+    <SymbolSource Condition=" '$(SymbolPublishingSource)' != '' ">$(SymbolPublishingSource)</SymbolSource>
+    <SymbolSource Condition=" '$(SymbolPublishingSource)' == '' ">https://nuget.smbsrc.net/</SymbolSource>
+    
+    <!-- This property is used by the continuous intergration job.
+     Do not remove without first updating the CI job. Also due to a known limitation,
+     make sure pathes do not end with a backslash -->
+    <CorporateScanPaths>$(LibrarySourceFolder)src</CorporateScanPaths>
+    <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
+    <!-- Public token of MSSharedLibKey.snk. -->
+    <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
 
-  <PropertyGroup>
-    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
-    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\NuGet.exe&quot;</NuGetCommand>
-   </PropertyGroup>
-
-  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="ValidateStrongNameSignatureTask" />
-  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="RegexReplaceTask" />
-  <UsingTask AssemblyFile="Tools\AutoRest.Build.Tasks.dll" TaskName="SetEnvVar" />
-
-  <!-- CI build related. -->
-  <PropertyGroup>
+    <!-- CI build related. -->
     <ContinueOnPoliCheckError>true</ContinueOnPoliCheckError>
     <!--OnPremiseBuildTasks is not a good name, but CI server is using that, will update across soon-->
     <CIToolsPath>$(OnPremiseBuildTasks)</CIToolsPath>
     <OnPremiseBuild Condition=" Exists('$(OnPremiseBuildTasks)') ">true</OnPremiseBuild>
     <OnPremiseBuild Condition=" ! Exists('$(OnPremiseBuildTasks)') ">false</OnPremiseBuild>
+    
+    <CanPublish Condition="'$(Scope)' == 'CodeGenerator'">true</CanPublish>
+    <CanPublish Condition="'$(Scope)' == 'ClientRuntime'">true</CanPublish>
+    <CanPublish Condition="'$(CanPublish)' == ''">false</CanPublish>
+ 
+    <!-- NuGet command line -->
+    <NuGetCommand Condition=" '$(OS)' == 'Windows_NT'">&quot;$(LibraryToolsFolder)\nuget.exe&quot;</NuGetCommand>
+    <NuGetCommand Condition=" '$(OS)' != 'Windows_NT'">mono &quot;$(LibraryToolsFolder)\NuGet.exe&quot;</NuGetCommand>
+    
+    <!-- Release build: when no VersionSuffix is passed, and CodeSign is true -->
+    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' == 'true' "></VersionSuffix>
+    
+    <!-- Nightly builds have their own VersionSuffix ( ie, -Nightly20160607 )-->
+    <VersionSuffix Condition=" $(NightlyBuild) == 'true' ">nightly$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
+    
+    <!-- Otherwise, default Version Suffix (update this each preview release) --> 
+    <VersionSuffix Condition="$(VersionSuffix) == ''">preview-0.17</VersionSuffix> 
   </PropertyGroup>
+  
+  <!-- ClientRuntime projects that can be built into packages -->
+  <ItemGroup Condition="'$(Scope)' == 'ClientRuntime' OR '$(Scope)' == 'all'"> 
+    <PackageableLibraries Include="$(LibraryRoot)/src/client/*/project.json" Exclude="$(LibraryRoot)/src/client/*.Tests/project.json"/>
+  </ItemGroup>
+  
+  <!-- CodeGenerator projects that can be built into packages -->
+  <ItemGroup Condition="'$(Scope)' == 'CodeGenerator' OR '$(Scope)' == 'all'"> 
+    <PackageableLibraries Include="$(LibraryRoot)/src/core/AutoRest/project.json" />
+  </ItemGroup>
+    
+  <!-- .xproj files (used for clean and razor compile tasks -->
+  <ItemGroup>
+    <XProjFiles Include="src/**/*.xproj" />
+  </ItemGroup>
+  
+  <!-- Our Custom Tasks -->
+  <Import Project="tools\Autorest.Build.Tasks"/>
+  
+  <!-- Custom Tasks from OnPremiseBuild system -->
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CodeSigningTask" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <UsingTask Condition=" $(OnPremiseBuild) " TaskName="CorporateValidation" AssemblyFile="$(CIToolsPath)\Microsoft.WindowsAzure.Tools.Build.Tasks.OnPremise.dll" />
   <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
-  <ItemGroup>
-    <NetCoreLibraries Include="$(LibraryRoot)/src/client/*/project.json" Exclude="$(LibraryRoot)/src/client/CSharp/*.Tests/project.json"/>
-    <NetCoreTestLibraries Include="$(LibraryRoot)/src/client/*.Tests/project.json" />
-  </ItemGroup>
+  <!-- Packaging is the same as building at this point -->
+  <Target Name="Package" DependsOnTargets="Clean;Build" Condition="'$(Configuration)' == 'Release'" />
+  
+  <!-- Publishing uploads the packages to the nuget server -->
+  <Target Name="Publish"  DependsOnTargets="Package" Condition="'$(Configuration)' == 'Release'" >
+    <Error Condition=" $(CanPublish) == false " Text="Do not attempt to publish both the ClientRuntime and the CodeGenerator at the same time. You must specify /p:Scope=CodeGenerator or /p:Scope=ClientRuntime" />
+    <Error Condition=" '$(NuGetKey)' == '' " Text="You must provide the NuGetKey parameter to the build: /p:NuGetKey=YOUR_PUBLISHING_KEY" />
     
-  <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
-    <CallTarget Targets="BuildMsBuildTask" />
+    <ItemGroup Condition="'$(Scope)' == 'CodeGenerator'">
+      <NugetPackagesToPublish Include="src\core\AutoRest\**\*.nupkg" Exclude="src\core\AutoRest\**\*.symbols.nupkg"/>
+      <SymbolPackagesToPublish Include="src\core\AutoRest\**\*.symbols.nupkg"/>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(Scope)' == 'ClientRuntime'">
+      <NugetPackagesToPublish Include="src\client\**\*.nupkg" Exclude="src\client\**\*.symbols.nupkg"/>
+      <SymbolPackagesToPublish Include="src\client\**\*.symbols.nupkg"/>
+    </ItemGroup>
+
+    <Message Importance="high" Text="Publishing main package to the cloud at $(NugetSource)" />
+    <Exec Command="$(NuGetCommand) push &quot;%(NugetPackagesToPublish.FullPath)&quot; $(NuGetKey) -Source $(NugetSource)" IgnoreExitCode="false" />
+    
+    <Message Importance="high" Text="Publishing symbols package to the cloud at $(SymbolSource)" />
+    <Exec Command="$(NuGetCommand) push &quot;%(SymbolPackagesToPublish.FullPath)&quot; $(NuGetKey) -Source $(SymbolSource)" IgnoreExitCode="true" />          
+  </Target>
+
+
+  <Target Name="Build" DependsOnTargets="RestoreNugetPackages;RazorCompile;">
+    <!-- conditial tasks -->
     <CallTarget Targets="BuildServerPreparation" Condition=" '$(CodeSign)' == 'true' " />
-    <CallTarget Targets="BuildNetCoreLibraries" Condition=" '$(OS)' == 'Windows_NT' "/>
-    <!--
-    The solution file contains configurations for each platform such as Portable-Debug, Net45-Release, etc
-        When invoking msbuild, provide the right configuration name.
-    -->
-    <MSBuild Projects="$(CodeGeneratorSolution)"
-             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;CodeSign=$(CodeSign)"
-             Targets="Build"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-    <ItemGroup>
-      <_OriginalNetCorePackages Include="$(LibraryRoot)/src/client/**/bin/$(Configuration)/*.nupkg" />
-    </ItemGroup>  
-    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(LibraryRoot)\NetCore" 
-        Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
-    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(PackageOutputDir)" 
-        Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
+    <CallTarget Targets="DisableSN" Condition=" '$(OS)' == 'Windows_NT'"/> 
+    
+    <!-- use dotnet pack to build those that are supposed to be packaged --> 
+    <Exec Command="dotnet pack --configuration $(Configuration) --version-suffix $(VersionSuffix)" WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)"/>
+
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
-  
-  <Target Name="BuildNetCoreLibraries" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="dotnet build --configuration $(Configuration)" WorkingDirectory="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)"/>
-    <Exec Command="dotnet build --configuration $(Configuration)" WorkingDirectory="%(NetCoreTestLibraries.RootDir)%(NetCoreTestLibraries.Directory)"/>
-    <Exec Command="dotnet pack --configuration $(Configuration)" WorkingDirectory="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)"/>
-    <ItemGroup>
-      <_OriginalNetCorePackages Include="%(NetCoreLibraries.RootDir)%(NetCoreLibraries.Directory)\bin\*\*.nupkg" />
-    </ItemGroup>  
-    <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(LibraryRoot)\NetCore" />
+
+  <Target Name="DisableSN" > 
+    <!-- Check for admin privs -->
+    <Exec Command="net session" IgnoreExitCode="true" StandardErrorImportance="Low">
+      <Output PropertyName="isadmin" TaskParameter="ExitCode" />
+    </Exec>
+ 
+    <!-- Disable strong name checking -->  
+    <Exec Command='"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -Vr *' Condition="$(isadmin) == 0"/>
+    <Exec Command='"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vr *' Condition="$(isadmin) == 0"/>
   </Target>
   
-  <!-- Project files import some targets coming from nuget packages, so need to restore them first to avoid errors
-      such as "The imported project ....build\Microsoft.Bcl.Build.targets was not found. " -->
+  <Target Name="EnableSN" > 
+    <!-- Check for admin privs -->
+    <Exec Command="net session" IgnoreExitCode="true" StandardErrorImportance="Low">
+      <Output PropertyName="isadmin" TaskParameter="ExitCode" />
+    </Exec>
+ 
+    <!-- Enable strong name checking -->  
+    <Exec Command='"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -Vx *' Condition="$(isadmin) == 0"/>
+    <Exec Command='"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vx *' Condition="$(isadmin) == 0"/>
+  </Target>
+  
+  <!-- clean out compiled files -->
   <Target Name="Clean">
-    <MSBuild Projects="$(CodeGeneratorSolution)"
-             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU"
+    <Message Text="Individually: %(XProjFiles.Identity)" Importance="High" />
+    <Message Text="All: @(XProjFiles)" Importance="High" />
+
+   <MSBuild Projects="%(XProjFiles.Identity)"
+             Properties="Configuration=$(Configuration);Platform=Any CPU"
              Targets="Clean"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <RemoveDir Directories="$(BinariesFolder)" />
     <RemoveDir Directories="$(TestResultsFolder)" />
     <MakeDir Directories="$(BinariesFolder)" />
     <MakeDir Directories="$(TestResultsFolder)" />
-
   </Target>
 
-  <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
-    <!--Note, we use "Rebuild" rather "Build", because code analysis happens during the build, and this ensures the build is not skipped-->
-    <!-- NetCore project currently do not have support for code analysis -->
-    <!--<MSBuild Projects="$(ClientRuntimeSolution)"
-             Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
-             Targets="Rebuild"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />-->
-    <!-- <MSBuild Projects="$(CodeGeneratorSolution)"
-             Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
-             Targets="Rebuild"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" /> -->
+  <Target Name="CodeAnalysis" >
+    <!-- NetCore project currently do not have support for code analysis (Roslyn can do alot of that anyway.) -->
   </Target>
 
   <!-- Run tests. -->
@@ -166,145 +213,48 @@
     <Exec Command="gulp test"/>
   </Target>
 
-  <PropertyGroup>
-    <!-- This property is used by the continuous intergration job.
-         Do not remove without first updating the CI job. Also due to a known limitation,
-         make sure pathes do not end with a backslash -->
-    <CorporateScanPaths>$(LibrarySourceFolder)src</CorporateScanPaths>
-    <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
-    <!-- Public token of MSSharedLibKey.snk. -->
-    <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
-  </PropertyGroup>
+  <!-- 
+    == Sign Packaged Binaries ==
+    Note: This pulls the assemblies out of the created packages and feeds them thru the OnPremiseBuild tools for code signing.
+  -->
+  <Target Name="CodeSignBinaries" Condition="'$(Configuration)' == 'Release'" DependsOnTargets="GetZip">
   
-  <Target Name="SignBinariesForAFxTarget">
-    <GetFrameworkSdkPath>
-      <Output TaskParameter="Path" PropertyName="SdkPath"/>
-    </GetFrameworkSdkPath>
-    <ItemGroup>
-      <DelaySignedAssembliesToValidate Include="binaries\net45\unsigned\*.*" />
-    </ItemGroup>
-    <ValidateStrongNameSignatureTask
-        SdkPath="$(SdkPath)"
-        Assembly="%(DelaySignedAssembliesToValidate.Identity)"
-        ExpectedTokenSignature="$(StrongNameToken)"
-        ExpectedDelaySigned="true"
-        ContinueOnError="false" />
-    <CodeSigningTask
-        Description="Microsoft AutoRest"
-        Keywords="Microsoft AutoRest"
-        UnsignedFiles="@(DelaySignedAssembliesToValidate)"
-        DestinationPath="binaries\net45"
-        SigningLogPath="binaries\net45\signing.log"
-        ToolsPath="$(CIToolsPath)"
-        Condition="!$(DelaySign)"/>
-    <!-- DelaySigned binaries copied locally for testing and not submitted to codesign service. -->
-    <Copy SourceFiles="@(DelaySignedAssembliesToValidate)" DestinationFolder="binaries\net45" Condition="$(DelaySign)" />
-    <ItemGroup>
-      <AfterSignedAssembliesToValidate Include="binaries\net45\*.dll;binaries\net45\*.exe"
-        Exclude="binaries\net45\Newtonsoft.*.dll;binaries\net45\YamlDotNet.dll" />
-    </ItemGroup>
-    <ValidateStrongNameSignatureTask
-        SdkPath="$(SdkPath)"
-        Assembly="%(AfterSignedAssembliesToValidate.Identity)"
-        ExpectedTokenSignature="$(StrongNameToken)"
-        ExpectedDelaySigned="false"
-        ContinueOnError="false"
-        Condition="!$(DelaySign)"/>
-    <RemoveDir Directories="binaries\net45\unsigned;" ContinueOnError="true" />
-  </Target>
-
-  <Target Name="CodeSignBinaries">
     <Error Condition=" !$(OnPremiseBuild) and !$(DelaySign) " Text="No CI tools path available, the code sign will be unable to continue. $(CIToolsPath)" />
     <Message Text="Code signing" Importance="high" />
-    <MSBuild Projects="$(MSBuildProjectFullPath)"
-             Targets="SignBinariesForAFxTarget"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"
-             Properties="StrongNameToken=$(StrongNameToken)">
-    </MSBuild>
-    <MSBuild Projects="$(MSBuildProjectFullPath)"
-             Targets="SignAssembliesInNetCorePackages"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"
-             Properties="StrongNameToken=$(StrongNameToken)">
-    </MSBuild>
-    <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
-  </Target>
-
-  <!--
-  The build tasks project is used for:
-    providing date-based build numbers,
-    processing regular expressions text replacements (e.g. in NuGet specs),
-    validating strong name signatures.
-  -->
-  <Target Name="BuildMsBuildTask" DependsOnTargets="RestoreNugetPackages">
-    <MSBuild Projects="$(LibraryToolsFolder)\AutoRest.Build.Tasks\AutoRest.Build.Tasks.csproj"
-             Targets="Build"
-             Properties="Configuration=Debug;Platform=AnyCPU"/>
-  </Target>
-
-  <Target Name="RestoreNugetPackages">
-    <Exec Command="dotnet restore $(MSBuildThisFileDirectory)" ContinueOnError="false"/>
     
-    <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
-    <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
-  </Target>
-  
-  <!-- Official releases require tools only available on corp network. -->
-  <Target Name="ValidateCorporateCompliance">
-    <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />
-    <CallTarget Targets="CorporateValidation" />
-    <CallTarget Targets="RunBinscope" />
-  </Target>
-
-  <!-- Build server tasks.  -->
-  <Target Name="BuildServerPreparation">
-    <!-- Log build server information. -->
-    <Message Text="Build Server Information" Importance="high" />
-    <Message Text="Hostname                : $(COMPUTERNAME)" />
-    <Message Text="Build Account           : $(USERDOMAIN)\$(USERNAME)" />
-
-    <!-- Log build properties.  -->
-    <Message Text="Build Properties and Variables" Importance="high" />
-    <Message Text="Client Runtime Solution : $(ClientRuntimeSolution)" />
-    <Message Text="Code Generator Solution : $(CodeGeneratorSolution)" />
-    <Message Text="Source folder           : $(LibrarySourceFolder)" />
-  </Target>
-
-  <!-- Conditional import due to a bug in mono related to asterisk -->
-  <Import Condition=" '$(OS)' == 'Windows_NT'" Project="tools\NuGet.targets"/>
-
-  <Target Name="GetZip">
-    <Message Text="Ensure 7zip is available" />
-    <Exec
-      Command="$(LibraryToolsFolder)\AzCopy\AzCopy.exe /Source:https://azuresdktools.blob.core.windows.net/7-zip  /S /Dest:$(ZipExeFolder) /Y"
-      Condition="!Exists('$(ZipExe)')" />
-  </Target>
-  
-  <Target Name="SignAssembliesInNetCorePackages" DependsOnTargets="GetZip">
-    <ItemGroup>
-      <_NetCorePackages Include="$(LibraryRoot)\NetCore\*.nupkg" Exclude="$(LibraryRoot)\NetCore\*Tests*.nupkg" />
-    </ItemGroup> 
+    <ItemGroup Condition="'$(Scope)' == 'CodeGenerator'">
+      <PackagesToSign Include="src\core\AutoRest\**\*.nupkg" Exclude="src\core\AutoRest\**\*.symbols.nupkg"/>
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(Scope)' == 'ClientRuntime'">
+      <PackagesToSign Include="src\client\**\*.nupkg" Exclude="src\client\**\*.symbols.nupkg"/>
+    </ItemGroup>
+    
     <PropertyGroup>
       <_UnsignedFolder>$(PackageOutputDir)\unsigned</_UnsignedFolder>
       <_SignedFolder>$(PackageOutputDir)\signed</_SignedFolder>
     </PropertyGroup>  
+    
     <GetFrameworkSdkPath>
       <Output TaskParameter="Path" PropertyName="SdkPath"/>
     </GetFrameworkSdkPath>
     
-    <Message Text="%(_NetCorePackages.Identity)" Importance="low" />
+    <Message Text="%(PackagesToSign.Identity)" Importance="low" />
     
     <RemoveDir Directories="$(_UnsignedFolder);$(_SignedFolder)" ContinueOnError="false" />
-    <RemoveDir Directories="@(_NetCorePackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
+    <RemoveDir Directories="@(PackagesToSign->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
 
     <MakeDir Directories="$(_UnsignedFolder);$(_SignedFolder)" />
     
-    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(_NetCorePackages->'$(PackageOutputDir)\%(Filename)') %(_NetCorePackages.Identity)" />
+    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(PackagesToSign->'$(PackageOutputDir)\%(Filename)') %(PackagesToSign.Identity)" />
 
-    <RemoveDir Directories="@(_NetCorePackages->'%(RootDir)%(Directory)\%(Filename)\_rels')" />
-    <Delete Files="@(_NetCorePackages->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
+    <!-- clean out OPC files from signing directory -->
+    <RemoveDir Directories="@(PackagesToSign->'%(RootDir)%(Directory)\%(Filename)\_rels')" />
+    <Delete Files="@(PackagesToSign->'%(RootDir)%(Directory)\%(Filename)\[Content_Types].xml')" />
 
     <ItemGroup>
-      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll" />
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.dll"  Exclude="$(PackageOutputDir)\**\Newtonsoft.Json.dll;$(PackageOutputDir)\**\YamlDotNet.dll" />
+      <_TempBinaries Include="$(PackageOutputDir)\**\*.exe" />
       <_PackageBinaries Include="@(_TempBinaries)">
         <!-- Flattened file for signing -->
         <UnsignedFlatFileName>$(_UnsignedFolder)\$([System.String]::new('%(RecursiveDir)%(FileName)%(Extension)').Replace('\', '__'))</UnsignedFlatFileName>
@@ -331,12 +281,12 @@
       Condition="!$(DelaySign)"/>
 
     <!--If we are testing locally then we copy the binaries and do not submit to the code sign server-->
-    <Copy SourceFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')" DestinationFolder="$(_SignedFolder)" Condition="$(DelaySign)" />
+    <!-- <Copy SourceFiles="@(_PackageBinaries->'%(UnsignedFlatFileName)')" DestinationFolder="$(_SignedFolder)" Condition="$(DelaySign)" /> -->
 
     <GetFrameworkSdkPath>
       <Output TaskParameter="Path" PropertyName="WindowsSdkPath"/>
     </GetFrameworkSdkPath>
-    
+
     <ValidateStrongNameSignatureTask
         SdkPath="$(SdkPath)"
         Assembly="%(_PackageBinaries.SignedFlatFileName)"
@@ -345,9 +295,54 @@
         ContinueOnError="false"
         Condition="!$(DelaySign)"/>
 
+    <!-- copy the original nupkg file into the target location -->
     <Copy SourceFiles="@(_PackageBinaries->'%(SignedFlatFileName)')" DestinationFiles="@(_PackageBinaries->'%(FullPath)')"></Copy>
-    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(_NetCorePackages.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(_NetCorePackages.Filename)" />
+    
+    <!-- zip files back up into package -->
+    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y $(PackageOutputDir)\%(PackagesToSign.Filename).nupkg" WorkingDirectory="$(PackageOutputDir)\%(PackagesToSign.Filename)" />
+    
     <Delete Files="@(_PackageBinaries->'%(UnsignedFlatFileName)')" />
     <Delete Files="@(_PackageBinaries->'%(SignedFlatFileName)')" />
+    
+    <CallTarget Targets="ValidateCorporateCompliance" Condition="!$(DelaySign)"/>
   </Target>
+
+  <Target Name="RestoreNugetPackages">
+    <Exec Command="dotnet restore $(MSBuildThisFileDirectory)" ContinueOnError="false"/>
+    <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
+  </Target>
+  
+ <Target Name="RazorCompile">
+    <MSBuild BuildInParallel="false" Projects="%(XProjFiles.Identity)"
+         Properties="Configuration=$(Configuration);Platform=Any CPU"
+         Targets="CompileRazorTemplates" />
+         
+  </Target>
+
+  <!-- Official releases require tools only available on corp network. -->
+  <Target Name="ValidateCorporateCompliance">
+    <Error Text="This target must be run in an on-premise build server." Condition=" '$(OnPremiseBuild)'=='false' " />
+    <CallTarget Targets="CorporateValidation" />
+    <CallTarget Targets="RunBinscope" />
+  </Target>
+
+  <!-- Build server tasks.  -->
+  <Target Name="BuildServerPreparation">
+    <!-- Log build server information. -->
+    <Message Text="Build Server Information" Importance="high" />
+    <Message Text="Hostname                : $(COMPUTERNAME)" />
+    <Message Text="Build Account           : $(USERDOMAIN)\$(USERNAME)" />
+
+    <!-- Log build properties.  -->
+    <Message Text="Build Properties and Variables" Importance="high" />
+    <Message Text="Source folder           : $(LibrarySourceFolder)" />
+  </Target>
+
+  <Target Name="GetZip">
+    <Message Text="Ensure 7zip is available" />
+    <Exec
+      Command="$(LibraryToolsFolder)\AzCopy\AzCopy.exe /Source:https://azuresdktools.blob.core.windows.net/7-zip  /S /Dest:$(ZipExeFolder) /Y"
+      Condition="!Exists('$(ZipExe)')" />
+  </Target>
+  
 </Project>

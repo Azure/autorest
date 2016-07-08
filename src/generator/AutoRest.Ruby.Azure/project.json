@@ -1,0 +1,36 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest Azure Ruby Generator",
+    "tags": [ "Microsoft AutoRest Azure Generator Ruby" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+
+    "AutoRest.Core": {
+      "target": "project"
+    },
+    "AutoRest.Extensions.Azure": {
+      "target": "project"
+    },
+    "AutoRest.Ruby": {
+      "target": "project"
+    }
+  }
+}

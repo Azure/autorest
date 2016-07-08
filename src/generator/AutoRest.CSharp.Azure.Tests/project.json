@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "0.17.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -10,24 +10,22 @@
   },
 
   "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk",
     "compile": {
-     "exclude": [ "CSharpAzureCodeNamingFrameworkTests.*" ]
+     "exclude": [ "CSharpAzureCodeNamingFrameworkTestsXX.*" ]
     }
   },
 
   "testRunner": "xunit",
   "frameworks": {
-    "netcoreapp1.0": {
-      "buildOptions": { "define": [ "PORTABLE" ] },
-      "imports": ["dnxcore50", "portable-net45+win8"]
+    "net451": {
+
     }
   },
 
-  "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0"
-    },
+    "dependencies": {
     "Microsoft.NETCore.Platforms": "1.0.1",
     "AutoRest.CSharp.Tests": { "target": "project" },
     "Microsoft.Rest.ClientRuntime.Azure": { "target": "project" },

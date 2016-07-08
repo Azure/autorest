@@ -1,0 +1,47 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest NodeJS Generator Tests ",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+  "testRunner": "xunit",
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+ "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk",
+
+    "copyToOutput": {
+      "include": ["Expected" ],
+      "mappings" : {
+        "AutoRest.json" : "../../../src/core/AutoRest/AutoRest.json",
+        "Swagger/body-complex.json" : "../../../src/dev/TestServer/swagger/body-complex.json",
+        "Swagger/complex-model.json" : "../../../src/dev/TestServer/swagger/complex-model.json"
+      }
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Newtonsoft.Json": "[9.0.1,10.0)",
+
+    "AutoRest.Core": {
+      "target": "project"
+    },
+    "AutoRest.NodeJS": {
+      "target": "project"
+    },
+    "AutoRest.Swagger.Tests": {
+      "target": "project"
+    }
+  }
+}

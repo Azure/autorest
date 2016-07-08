@@ -471,7 +471,7 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
 });
 
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), 'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.Release.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
@@ -479,7 +479,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.codeGenerators) {
     if (!lang.match(/^Azure\..+/)) {
-      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), 'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -489,7 +489,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
 });
 
 gulp.task('regenerate:expected:samples:azure', function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), 'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.Release.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
@@ -497,7 +497,7 @@ gulp.task('regenerate:expected:samples:azure', function(){
   var autorestConfig = JSON.parse(content);
   for (var lang in autorestConfig.codeGenerators) {
     if (lang.match(/^Azure\..+/)) {
-      var generateCmd = path.join(basePathOrThrow(), 'binaries/net45/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
+      var generateCmd = path.join(basePathOrThrow(), 'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
         console.log(stdout);
         console.error(stderr);
@@ -605,12 +605,14 @@ gulp.task('build:release', function(cb) {
   })));
 });
 
+/*
 gulp.task('package', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['package'],
     verbosity: 'normal',
   })));
 });
+*/
 
 gulp.task('test:clientruntime:node', shell.task('npm test', { cwd: './src/client/NodeJS/ms-rest/', verbosity: 3 }));
 gulp.task('test:clientruntime:nodeazure', shell.task('npm test', { cwd: './src/client/NodeJS/ms-rest-azure/', verbosity: 3 }));
@@ -644,18 +646,20 @@ gulp.task('test:python', shell.task('tox', {cwd: './src/generator/AutoRest.Pytho
 gulp.task('test:python:azure', shell.task('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/', verbosity: 3}));
 
 var xunitTestsDlls = [
-  'src/core/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
-  'src/modeler/AutoRest.Swagger.Tests/bin/Net45-Debug/AutoRest.Swagger.Tests.dll',
-  
-  'src/core/AutoRest.Extensions.Tests/bin/Net45-Debug/AutoRest.Extensions.Tests.dll',
-  'src/core/AutoRest.Extensions.Azure.Tests/bin/Net45-Debug/AutoRest.Extensions.Azure.Tests.dll'
 ];
 
 var xunitNetCoreXproj = [
-  'src/generator/AutoRest.CSharp.Tests/project.json',
-  'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
+  'src/client/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json',
   'src/client/Microsoft.Rest.ClientRuntime.Tests/project.json',
-  'src/client/Microsoft.Rest.ClientRuntime.Azure.Tests/project.json'
+  'src/core/AutoRest.Core.Tests/project.json',
+  'src/core/AutoRest.Extensions.Azure.Tests/project.json',
+  'src/core/AutoRest.Extensions.Tests/project.json',
+  'src/generator/AutoRest.AzureResourceSchema.Tests/project.json',
+  'src/generator/AutoRest.CSharp.Azure.Tests/project.json',
+  'src/generator/AutoRest.CSharp.Tests/project.json',
+  'src/generator/AutoRest.CSharp.Unit.Tests/project.json',
+  'src/modeler/AutoRest.CompositeSwagger.Tests/project.json',
+  'src/modeler/AutoRest.Swagger.Tests/project.json'
 ];
 
 var defaultShellOptions = {
@@ -693,6 +697,7 @@ var xunitnetcore = function(options){
   if (!isWindows) {
       printStatusCodeCmd = 'echo Status code: $?';
   }
+  
   var netcoreScript = 'dotnet test "<%= file.path %>" -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
   return shell(netcoreScript, options);
 }
@@ -753,8 +758,8 @@ gulp.task('test', function(cb){
       'test:xunit',
       'test:clientruntime',
 // DISABLE      'test:nugetPackages:xunit',
-      'test:node',
-      'test:node:azure',
+//      'test:node',
+//      'test:node:azure',
 // DISABLE     'test:nugetPackages:npm',
       'test:ruby',
       'test:ruby:azure',
@@ -779,12 +784,14 @@ gulp.task('test', function(cb){
   }
 });
 
+/*
 gulp.task('analysis', function(cb) {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['codeanalysis'],
     properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
   })));
 });
+*/
 
 gulp.task('default', function(cb){
   // Notes: 
@@ -792,7 +799,8 @@ gulp.task('default', function(cb){
   //   The build RELEASE causes release bits to be built, so we can package RELEASE dlls
   //   Test then runs in DEBUG, but uses the packages created in package
   if (isWindows) {
-    runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
+//'analysis',
+    runSequence('clean', 'build:release', 'build', 'test', cb);
   } else {
     runSequence('clean', 'build', 'test', cb);
   }
