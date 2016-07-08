@@ -21,6 +21,8 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {string} [options.username] The user name for account in the form: 'user@example.com'.
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with. Default environment is "Azure" popularly known as "Public Azure Cloud".
 * @param {string} [options.domain] The domain or tenant id containing this application. Default value is 'common'
+* @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided 
+* then domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format). 
 * @param {string} [options.clientId] The active directory application client id. 
 * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
 * for an example.
@@ -55,7 +57,18 @@ function DeviceTokenCredentials(options) {
   if (!options.tokenCache) {
     options.tokenCache = new adal.MemoryCache();
   }
-  
+
+  if (options.tokenAudience) {
+    if (options.tokenAudience.toLowerCase() !== 'graph') {
+      throw new Error('Valid value for \'tokenAudience\' is \'graph\'.');
+    }
+    if (options.domain.toLowerCase() === 'common') {
+      throw new Error('If the tokenAudience is specified as \'graph\' then \'domain\' cannot be the default \'commmon\' tenant. ' + 
+        'It must be the actual tenant (preferrably a string in a guid format).');
+    }
+  }
+
+  this.tokenAudience = options.tokenAudience;
   this.username = options.username;
   this.environment = options.environment;
   this.domain = options.domain;
@@ -68,7 +81,9 @@ function DeviceTokenCredentials(options) {
 
 DeviceTokenCredentials.prototype.retrieveTokenFromCache = function (callback) {
   var self = this;
-  self.context.acquireToken(self.environment.activeDirectoryResourceId, self.username, self.clientId, function (err, result) {
+  var resource = self.environment.activeDirectoryResourceId;
+  if (self.tokenAudience && self.tokenAudience.toLowerCase() === 'graph') resource = self.environment.activeDirectoryGraphResourceId;
+  self.context.acquireToken(resource, self.username, self.clientId, function (err, result) {
     if (err) return callback(err);
     return callback(null, result.tokenType, result.accessToken);
   });
