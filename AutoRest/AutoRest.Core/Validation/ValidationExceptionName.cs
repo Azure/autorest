@@ -22,5 +22,6 @@
         DefaultResponseRequired,
         XmsPathsMustOverloadPaths,
         DescriptiveDescriptionRequired,
+        OperationIdNounsShouldNotAppearInVerb,
     }
 }

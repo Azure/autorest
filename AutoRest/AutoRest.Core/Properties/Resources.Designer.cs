@@ -403,7 +403,7 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id, following Noun_Verb conventions..
         /// </summary>
         internal static string OnlyOneUnderscoreAllowedInOperationId {
             get {
@@ -417,6 +417,15 @@ namespace Microsoft.Rest.Generator.Properties {
         internal static string OperationIdMissing {
             get {
                 return ResourceManager.GetString("OperationIdMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore..
+        /// </summary>
+        internal static string OperationIdNounInVerb {
+            get {
+                return ResourceManager.GetString("OperationIdNounInVerb", resourceCulture);
             }
         }
         

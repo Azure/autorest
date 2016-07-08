@@ -33,6 +33,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// operation id to uniquely identify an operation.
         /// </summary>
         [Rule(typeof(OperationIdSingleUnderscore))]
+        [Rule(typeof(OperationIdNounInVerb))]
         public string OperationId { get; set; }
 
         public string Summary { get; set; }

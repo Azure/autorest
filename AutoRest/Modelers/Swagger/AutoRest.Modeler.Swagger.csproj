@@ -77,6 +77,7 @@
     <Compile Include="ValidationRules\AnonymousParameterTypes.cs" />
     <Compile Include="ValidationRules\AnonymousTypes.cs" />
     <Compile Include="ValidationRules\DescriptiveDescriptionRequired.cs" />
+    <Compile Include="ValidationRules\OperationIdNounInVerb.cs" />
     <Compile Include="ValidationRules\XmsPathsInPath.cs" />
     <Compile Include="ValidationRules\OperationIdSingleUnderscore.cs" />
     <Compile Include="ValidationRules\DefaultResponseRequired.cs" />
