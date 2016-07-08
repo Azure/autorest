@@ -129,11 +129,57 @@
   <data name="GenerationFailed" xml:space="preserve">
     <value>Code generation failed.</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="HelpMarkdownTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HelpMarkdownTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  
+  <data name="HelpMarkdownTemplate" xml:space="preserve">
+    <value>#AutoRest Command Line Interface Documentation
+
+##Syntax
+```bash
+$syntax$
+```
+
+##Parameters
+$parameters-start$
+**-$parameter$** $parameter-desc$
+
+$parameters-end$
+
+##Code Generators
+$generators-start$
+**-$generator$** $generator-desc$
+
+$generators-end$
+
+##Examples
+$examples-start$
+- $example-desc$
+```bash
+$example$
+```
+
+$examples-end$</value>
   </data>
-  <data name="HelpTextTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HelpTextTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="HelpTextTemplate" xml:space="preserve">
+    <value>Microsoft (R) AutoRest $version$
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Usage: $syntax$
+
+Parameters:
+$parameters-start$
+  -$parameter$: $parameter-desc$
+$parameters-end$
+
+Code Generators:
+$generators-start$
+  -$generator$: $generator-desc$
+$generators-end$
+
+Examples:
+$examples-start$
+  $example-desc$
+  >$example$
+
+$examples-end$</value>
   </data>
 </root>
