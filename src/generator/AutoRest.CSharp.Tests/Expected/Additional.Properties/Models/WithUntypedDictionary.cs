@@ -25,7 +25,8 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.
         /// </summary>
-        /// <param name="additionalProperties">Unmatched properties from the message are deserialized this collection</param>
+        /// <param name="additionalProperties">Unmatched properties from the
+        /// message are deserialized this collection</param>
         public WithUntypedDictionary(IDictionary<string, object> additionalProperties = default(IDictionary<string, object>), string abc = default(string))
         {
             AdditionalProperties = additionalProperties;

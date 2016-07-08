@@ -80,7 +80,7 @@ namespace @(Settings.Namespace).Models
         @:/// </summary>
         foreach (var parameter in Model.ConstructorParametersDocumentation)
         {
-        @:/// @(parameter)
+        @:@WrapComment("/// ", parameter)
         }
         @:public @(Model.Name)(@Model.ConstructorParameters)
             if (!string.IsNullOrEmpty(Model.BaseConstructorCall))
