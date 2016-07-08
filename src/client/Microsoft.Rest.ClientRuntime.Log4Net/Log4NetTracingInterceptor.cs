@@ -18,27 +18,38 @@ namespace Microsoft.Rest.Tracing.Log4Net
         private ILog _logger;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Log4NetTracingInterceptor" /> class with log4net logger.
+        /// </summary>
+        /// <param name="logger">log4net logger.</param>
+        public Log4NetTracingInterceptor(ILog logger)
+        {
+            _logger = logger;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetTracingInterceptor" /> class with configuration file.
         /// </summary>
         /// <param name="filePath">The configuration file absolute path.</param>
         public Log4NetTracingInterceptor(string filePath)
+            : this(LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType))
         {
-            _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+            if (!string.IsNullOrEmpty(filePath))
             {
-                log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(filePath));
-            }
-            else
-            {
-                throw new FileNotFoundException(filePath);
+                if (File.Exists(filePath))
+                {
+                    log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(filePath));
+                }
+                else
+                {
+                    throw new FileNotFoundException(filePath);
+                }
             }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetTracingInterceptor" /> class without configuration file.
         /// </summary>
-        public Log4NetTracingInterceptor() : this(null)
+        public Log4NetTracingInterceptor() : this(string.Empty)
         {
         }
 
