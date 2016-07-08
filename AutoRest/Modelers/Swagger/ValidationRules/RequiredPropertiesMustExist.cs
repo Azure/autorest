@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class RequiredPropertiesMustExist : TypeRule<Schema>
+    public class RequiredPropertiesMustExist : TypedRule<Schema>
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(Schema entity)
         {
@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
                     Schema value = null;
                     if (entity.Properties == null || !entity.Properties.TryGetValue(req, out value))
                     {
-                        yield return CreateException(null, Exception, req);
+                        yield return CreateException(Exception, req);
                     }
                 }
             }

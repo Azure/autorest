@@ -75,8 +75,8 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             // Look for semantic errors and warnings in the document.
-            var validator = new NestedObjectValidator();
-            messages = validator.ValidationExceptions(ServiceDefinition).ToList();
+            var validator = new RecursiveObjectValidator();
+            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
 
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
@@ -166,17 +166,6 @@ namespace Microsoft.Rest.Modeler.Swagger
             var newDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
 
             var context = new ValidationContext();
-
-            // Look for semantic errors and warnings in the new document only.
-            // The old was presumably checked at some earlier point...
-
-            if (!newDefinition.Validate(context))
-            {
-                foreach (var error in context.ValidationErrors)
-                {
-                    Logger.Entries.Add(error);
-                }
-            }
 
             context.ValidationErrors.Clear();
 

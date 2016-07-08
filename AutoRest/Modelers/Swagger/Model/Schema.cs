@@ -61,51 +61,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// </summary>
         public IList<Schema> AllOf { get; set; }
 
-        /// <summary>
-        /// Validate the Swagger object against a number of object-specific validation rules.
-        /// </summary>
-        /// <returns>True if there are no validation errors, false otherwise.</returns>
-        public override bool Validate(ValidationContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            var errorCount = context.ValidationErrors.Count;
-
-            base.Validate(context);
-
-            if (Required != null)
-            {
-                foreach (var req in Required.Where(r =>!string.IsNullOrEmpty(r)))
-                {
-                    Schema value = null;
-                    if (Properties == null || !Properties.TryGetValue(req, out value))
-                    {
-                        context.LogError(string.Format(CultureInfo.InvariantCulture, Resources.MissingRequiredProperty, req));
-                    }
-                }
-            }
-
-            if (Properties != null)
-            {
-                foreach (var prop in Properties)
-                {
-                    context.PushTitle(context.Title + "/" + prop.Key);
-                    prop.Value.Validate(context);
-                    context.PopTitle();
-                }
-            }
-
-            if (ExternalDocs != null)
-            {
-                ExternalDocs.Validate(context);
-            }
-
-            return context.ValidationErrors.Count == errorCount;
-        }
-
         public override bool Compare(SwaggerBase priorVersion, ValidationContext context)
         {
             var priorSchema = priorVersion as Schema;

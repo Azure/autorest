@@ -8,10 +8,6 @@ namespace Microsoft.Rest.Generator
 {
     public abstract class SourceContext
     {
-        public int LineNumber { get; protected set; }
-
-        public int LinePosition { get; protected set; }
-
         public string RawSource { get; protected set; }
     }
 }

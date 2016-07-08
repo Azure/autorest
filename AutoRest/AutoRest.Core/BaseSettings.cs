@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator
             FileSystem = new FileSystem();
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Modeler = "Swagger";
-            ValidationLevel = LogEntrySeverity.Fatal;
+            ValidationLevel = LogEntrySeverity.Error;
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Microsoft.Rest.Generator
                 {
                     PropertyInfo property = entityToPopulate.GetType().GetProperties()
                         .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
-                                             p.GetCustomAttributes<SettingsAliasAttribute>()
+                                             CustomAttributeExtensions.GetCustomAttributes<SettingsAliasAttribute>(p)
                                                 .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
 
                     if (property != null)

@@ -151,6 +151,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value provided for description is not descriptive enough..
+        /// </summary>
+        internal static string DescriptionNotDescriptive {
+            get {
+                return ResourceManager.GetString("DescriptionNotDescriptive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Directory {0} does not exist..
         /// </summary>
         internal static string DirectoryNotExist {
@@ -349,6 +358,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no default response defined in the responses section.
+        /// </summary>
+        internal static string NoDefaultResponse {
+            get {
+                return ResourceManager.GetString("NoDefaultResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         internal static string NoDefinitionForPathParameter1 {
@@ -385,7 +403,7 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id..
+        ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id, following Noun_Verb conventions..
         /// </summary>
         internal static string OnlyOneUnderscoreAllowedInOperationId {
             get {
@@ -399,6 +417,15 @@ namespace Microsoft.Rest.Generator.Properties {
         internal static string OperationIdMissing {
             get {
                 return ResourceManager.GetString("OperationIdMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Per the Noun_Verb convention for Operation Ids, the noun &apos;{0}&apos; should not appear after the underscore..
+        /// </summary>
+        internal static string OperationIdNounInVerb {
+            get {
+                return ResourceManager.GetString("OperationIdNounInVerb", resourceCulture);
             }
         }
         
@@ -444,6 +471,15 @@ namespace Microsoft.Rest.Generator.Properties {
         internal static string TypeShouldBeAssemblyQualified {
             get {
                 return ResourceManager.GetString("TypeShouldBeAssemblyQualified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path &apos;{0}&apos; in x-ms-paths does not overload a normal path in the paths section..
+        /// </summary>
+        internal static string XMSPathBaseNotInPaths {
+            get {
+                return ResourceManager.GetString("XMSPathBaseNotInPaths", resourceCulture);
             }
         }
     }

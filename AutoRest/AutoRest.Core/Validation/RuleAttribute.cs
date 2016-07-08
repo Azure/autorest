@@ -1,18 +1,15 @@
-﻿using Microsoft.Rest.Generator;
-using Microsoft.Rest.Generator.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
-namespace Microsoft.Rest.Modeler.Swagger.Validators
+namespace Microsoft.Rest.Generator
 {
+    /// <summary>
+    /// An attribute that describes a rule to apply to the property or class that it decorates
+    /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        public Type RuleType { get; }
-
         private Rule Rule;
 
         public RuleAttribute(Type ruleType)
@@ -23,6 +20,11 @@ namespace Microsoft.Rest.Modeler.Swagger.Validators
             }
         }
 
+        /// <summary>
+        /// Returns a collection of validation messages for <paramref name="entity"/>
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity)
         {
             if (Rule != null)

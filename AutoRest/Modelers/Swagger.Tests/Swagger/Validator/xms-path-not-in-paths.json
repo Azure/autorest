@@ -19,16 +19,24 @@
   "paths": {
     "/foo": {
       "post": {
-        "operationId": "PostFoo",
-        "summary": "Foo path",
-        "description": "Foo operation",
+        "operationId": "Foo_Post",
+        "description": "Food post",
         "responses": {
           "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "type": "string",
-              "description": "error"
-            }
+            "description": "Default response"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/bar?op=baz": {
+      "post": {
+        "operationId": "Bar_Post",
+        "description": "Baz operation on bar",
+        "responses": {
+          "default": {
+            "description": "Default response"
           }
         }
       }

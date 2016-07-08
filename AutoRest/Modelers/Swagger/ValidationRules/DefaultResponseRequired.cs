@@ -4,25 +4,18 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class ResponseRequired : TypeRule<IDictionary<string, OperationResponse>>
+    public class DefaultResponseRequired : TypedRule<IDictionary<string, OperationResponse>>
     {
         public override bool IsValid(IDictionary<string, OperationResponse> entity)
         {
-            bool valid = true;
-
-            if (entity == null || entity.Count == 0)
-            {
-                valid = false;
-            }
-
-            return valid;
+            return entity != null && entity.ContainsKey("default");
         }
 
         public override ValidationExceptionName Exception
         {
             get
             {
-                return ValidationExceptionName.AResponseMustBeDefined;
+                return ValidationExceptionName.DefaultResponseRequired;
             }
         }
     }

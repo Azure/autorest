@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger.Validators
 {
-    public class OperationIdSingleUnderscore : TypeRule<string>
+    public class OperationIdSingleUnderscore : TypedRule<string>
     {
         public override bool IsValid(string entity)
         {
