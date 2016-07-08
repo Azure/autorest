@@ -43,7 +43,7 @@ project(':azure-client-authentication') {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
     dependencies {
-        compile project(':client-runtime')
+        compile project(':azure-client-runtime')
     }
 }
 
@@ -51,7 +51,7 @@ project(':azure-android-client-authentication') {
     apply plugin: 'com.android.library'
     group = 'com.microsoft.azure'
     dependencies {
-        compile project(':client-runtime')
+        compile project(':azure-client-runtime')
     }
 }
 
@@ -65,6 +65,16 @@ project(':codegen-tests') {
 }
 
 project(':azure-codegen-tests') {
+    apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    dependencies {
+        compile project(':client-runtime')
+        compile project(':azure-client-runtime')
+    }
+}
+
+project(':azure-fluent-codegen-tests') {
     apply plugin: 'java'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7

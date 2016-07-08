@@ -1,0 +1,17 @@
+﻿@using System.Linq
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+/* jshint latedef:false */
+/* jshint forin:false */
+/* jshint noempty:false */
+@EmptyLine
+'use strict';
+@EmptyLine
+@foreach (var methodGroup in Model.MethodGroupModels)
+{
+@:exports.@(methodGroup.MethodGroupType) = require('./@(methodGroup.MethodGroupType.ToCamelCase())');
+}

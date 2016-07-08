@@ -1,0 +1,81 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Parameter Flattening",
+    "description": "Resource Flattening for AutoRest",
+    "version": "1.0.0",
+    "x-ms-code-generation-settings": {
+      "ft": 2
+    }
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/parameterFlattening/{resourceGroupName}/{availabilitySetName}": {
+      "patch": {
+        "tags": [
+          "AvailabilitySets"
+        ],
+        "operationId": "AvailabilitySets_Update",
+        "description": "Updates the tags for an availability set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "availabilitySetName",
+            "x-ms-client-name": "avset",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage availability set.",
+            "maxLength": 80
+          },
+          {
+            "name": "tags",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailabilitySetUpdateParameters"
+            },
+            "description": "The tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailabilitySetUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "title": "A set of tags.",
+          "description": "A description about the set of tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tags"
+      ]
+    }
+  }
+}

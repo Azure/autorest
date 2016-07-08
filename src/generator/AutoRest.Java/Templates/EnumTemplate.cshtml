@@ -1,0 +1,86 @@
+﻿@using System.Linq
+@using AutoRest.Java
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.EnumTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
+@EmptyLine
+@if (!Model.ModelAsString)
+{
+<text>
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+@EmptyLine
+</text>
+}
+
+/**
+ * Defines values for @(Model.Name).
+ */
+@if (!Model.ModelAsString)
+{
+<text>
+public enum @(Model.Name) {
+@for (int i = 0; i < Model.Values.Count - 1; i++)
+{
+@:    /** Enum value @(Model.Values[i].SerializedName). */
+@:    @(Model.Values[i].Name)("@(Model.Values[i].SerializedName)"),
+@EmptyLine
+}
+    /** Enum value @(Model.Values.Last().SerializedName). */
+    @(Model.Values.Last().Name)("@(Model.Values.Last().SerializedName)");
+    @EmptyLine
+
+    /** The actual serialized value for a @(Model.Name) instance. */
+    private String value;
+    @EmptyLine
+
+    @(Model.Name)(String value) {
+        this.value = value;
+    }
+    @EmptyLine
+
+    /**
+     * Parses a serialized value to a @(Model.Name) instance.
+     *
+     * @@param value the serialized value to parse.
+     * @@return the parsed @(Model.Name) object, or null if unable to parse.
+     */
+    @@JsonCreator
+    public static @Model.Name fromString(String value) {
+        @(Model.Name)[] items = @(Model.Name).values();
+        for (@(Model.Name) item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
+    }
+    @EmptyLine
+    
+    @@JsonValue
+    @@Override
+    public String toString() {
+        return this.value;
+    }
+}
+</text>
+}
+else
+{
+<text>
+public final class @(Model.Name) {
+@for (int i = 0; i < Model.Values.Count; i++)
+{
+@:    /** Static value @(Model.Values[i].SerializedName) for @(Model.Name). */
+@:    public static final String @(Model.Values[i].Name) = "@(Model.Values[i].SerializedName)";
+@EmptyLine
+}
+    private @(Model.Name)() {
+    }
+}
+</text>
+}

@@ -1,0 +1,11 @@
+﻿@using System.Linq
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+@foreach (var model in Model.OrderedModelTemplateModels) {
+@EmptyLine
+@:@(Include(new ModelTemplateTS(), model))
+}

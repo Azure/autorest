@@ -98,9 +98,8 @@
   <Import Condition=" $(OnPremiseBuild) == 'true' " Project="$(CIToolsPath)\Microsoft.WindowsAzure.Build.OnPremise.msbuild" />
 
   <ItemGroup>
-    <NetCoreLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*/project.json" Exclude="$(LibraryRoot)/ClientRuntimes/CSharp/*.Tests/project.json"/>
-    <NetCoreTestLibraries Include="$(LibraryRoot)/ClientRuntimes/CSharp/*.Tests/project.json" />
-    <NetCoreTestLibraries Include="$(LibraryRoot)/AutoRest/Generators/CSharp/*/project.json" />
+    <NetCoreLibraries Include="$(LibraryRoot)/src/client/*/project.json" Exclude="$(LibraryRoot)/src/client/CSharp/*.Tests/project.json"/>
+    <NetCoreTestLibraries Include="$(LibraryRoot)/src/client/*.Tests/project.json" />
   </ItemGroup>
     
   <Target Name="Build" DependsOnTargets="RestoreNugetPackages">
@@ -116,7 +115,7 @@
              Targets="Build"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <ItemGroup>
-      <_OriginalNetCorePackages Include="$(LibraryRoot)/ClientRuntimes/CSharp/**/bin/$(Configuration)/*.nupkg" />
+      <_OriginalNetCorePackages Include="$(LibraryRoot)/src/client/**/bin/$(Configuration)/*.nupkg" />
     </ItemGroup>  
     <Copy SourceFiles="@(_OriginalNetCorePackages)" DestinationFolder="$(LibraryRoot)\NetCore" 
         Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'"/>
@@ -144,6 +143,9 @@
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
     <RemoveDir Directories="$(BinariesFolder)" />
     <RemoveDir Directories="$(TestResultsFolder)" />
+    <MakeDir Directories="$(BinariesFolder)" />
+    <MakeDir Directories="$(TestResultsFolder)" />
+
   </Target>
 
   <Target Name="CodeAnalysis" DependsOnTargets="RestoreNugetPackages">
@@ -153,10 +155,10 @@
              Properties="Configuration=%(LibraryFxTargetList.Identity)-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
              Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'ClientRuntime'" />-->
-    <MSBuild Projects="$(CodeGeneratorSolution)"
+    <!-- <MSBuild Projects="$(CodeGeneratorSolution)"
              Properties="Configuration=Net45-$(Configuration);Platform=Any CPU;RunCodeAnalysis=true;CodeAnalysisTreatWarningsAsErrors=true"
              Targets="Rebuild"
-             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
+             Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" /> -->
   </Target>
 
   <!-- Run tests. -->
@@ -168,7 +170,7 @@
     <!-- This property is used by the continuous intergration job.
          Do not remove without first updating the CI job. Also due to a known limitation,
          make sure pathes do not end with a backslash -->
-    <CorporateScanPaths>$(LibrarySourceFolder)ClientRuntimes;$(LibrarySourceFolder)AutoRest</CorporateScanPaths>
+    <CorporateScanPaths>$(LibrarySourceFolder)src</CorporateScanPaths>
     <BinscopeScanPath>$(BinariesFolder)</BinscopeScanPath>
     <!-- Public token of MSSharedLibKey.snk. -->
     <StrongNameToken Condition=" '$(StrongNameToken)' == '' ">31bf3856ad364e35</StrongNameToken>
@@ -240,8 +242,8 @@
   </Target>
 
   <Target Name="RestoreNugetPackages">
-    <Exec Command="dotnet restore %(NetCoreLibraries.FullPath)" ContinueOnError="false"/>
-    <Exec Command="dotnet restore %(NetCoreTestLibraries.FullPath)" ContinueOnError="false"/>
+    <Exec Command="dotnet restore $(MSBuildThisFileDirectory)" ContinueOnError="false"/>
+    
     <Exec Command="$(NuGetCommand) install xunit.runner.console -Version 2.1.0 -OutputDirectory $(LibraryRoot)packages" ContinueOnError="false"/>
     <Exec Command="$(NuGetCommand) restore $(CodeGeneratorSolution)" ContinueOnError="false" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'" />
   </Target>

@@ -1,0 +1,70 @@
+@using System
+@using AutoRest.Java.Templates
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@inherits AutoRest.Core.Template<AutoRest.Java.TemplateModels.ServiceClientTemplateModel>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+
+package @(Settings.Namespace.ToLower());
+@EmptyLine
+@foreach (var importClass in Model.InterfaceImports)
+{
+@:import @importClass;
+}
+@EmptyLine
+
+/**
+ * The interface for @Model.Name class.
+ */
+public interface @Model.Name {
+    /**
+     * The default base URL.
+     */
+    String DEFAULT_BASE_URL = "@Model.BaseUrl";
+@foreach (var property in Model.Properties)
+{
+@EmptyLine
+@:    /**
+@:     * Gets @(property.Documentation).
+@:     *
+@:     * @@return the @(property.Name) value.
+@:     */
+@:    @property.Type @(property.Name.ToCamelCase())();
+if(!property.IsReadOnly)
+{
+@EmptyLine
+@:    /**
+@:     * Sets @(property.Documentation).
+@:     *
+@:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
+@:     * @@return the service client itself
+@:     */
+@:    @(Model.Name) with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase()));
+}
+}
+
+@foreach (var operation in Model.Operations)
+{
+@EmptyLine
+@:    /**
+@:     * Gets the @(operation.MethodGroupType) object to access its operations.
+@:     * @@return the @(operation.MethodGroupType) object.
+@:     */
+@:    @(operation.MethodGroupType) @(operation.MethodGroupName)();
+}
+@EmptyLine
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+    @foreach (var method in Model.MethodTemplateModels)
+    {
+    @:@Include(new MethodInterfaceTemplate(), method)
+    @EmptyLine
+    }
+</text>
+}
+}

@@ -1,0 +1,41 @@
+﻿@using System.Linq
+@using AutoRest.NodeJS.Azure.TemplateModels
+@using AutoRest.NodeJS.Azure.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+/*
+@Header(" * ")
+ */
+@EmptyLine
+'use strict';
+@EmptyLine
+var util = require('util');
+var msRest = require('ms-rest');
+var msRestAzure = require('ms-rest-azure');
+var WebResource = msRest.WebResource;
+@if (Model.ContainsTimeSpan)
+{
+@:var moment = require('moment');
+}
+@EmptyLine
+/**
+ * @@class
+ * @Model.MethodGroupType
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the @Model.Name.
+ * Initializes a new instance of the @Model.MethodGroupType class.
+ * @@constructor
+ *
+ * @@param {@Model.Name} client Reference to the service client.
+ */
+function @(Model.MethodGroupType)(client) {
+  this.client = client;
+}
+
+@EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include(new AzureMethodTemplate(), method as AzureMethodTemplateModel))
+@EmptyLine
+}
+@EmptyLine
+module.exports = @(Model.MethodGroupType);

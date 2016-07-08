@@ -87,7 +87,7 @@ public class StorageAccountProperties {
      *
      * @return the provisioningState value
      */
-    public ProvisioningState getProvisioningState() {
+    public ProvisioningState provisioningState() {
         return this.provisioningState;
     }
 
@@ -95,9 +95,11 @@ public class StorageAccountProperties {
      * Set the provisioningState value.
      *
      * @param provisioningState the provisioningState value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setProvisioningState(ProvisioningState provisioningState) {
+    public StorageAccountProperties withProvisioningState(ProvisioningState provisioningState) {
         this.provisioningState = provisioningState;
+        return this;
     }
 
     /**
@@ -105,7 +107,7 @@ public class StorageAccountProperties {
      *
      * @return the accountType value
      */
-    public AccountType getAccountType() {
+    public AccountType accountType() {
         return this.accountType;
     }
 
@@ -113,9 +115,11 @@ public class StorageAccountProperties {
      * Set the accountType value.
      *
      * @param accountType the accountType value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setAccountType(AccountType accountType) {
+    public StorageAccountProperties withAccountType(AccountType accountType) {
         this.accountType = accountType;
+        return this;
     }
 
     /**
@@ -123,7 +127,7 @@ public class StorageAccountProperties {
      *
      * @return the primaryEndpoints value
      */
-    public Endpoints getPrimaryEndpoints() {
+    public Endpoints primaryEndpoints() {
         return this.primaryEndpoints;
     }
 
@@ -131,9 +135,11 @@ public class StorageAccountProperties {
      * Set the primaryEndpoints value.
      *
      * @param primaryEndpoints the primaryEndpoints value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setPrimaryEndpoints(Endpoints primaryEndpoints) {
+    public StorageAccountProperties withPrimaryEndpoints(Endpoints primaryEndpoints) {
         this.primaryEndpoints = primaryEndpoints;
+        return this;
     }
 
     /**
@@ -141,7 +147,7 @@ public class StorageAccountProperties {
      *
      * @return the primaryLocation value
      */
-    public String getPrimaryLocation() {
+    public String primaryLocation() {
         return this.primaryLocation;
     }
 
@@ -149,9 +155,11 @@ public class StorageAccountProperties {
      * Set the primaryLocation value.
      *
      * @param primaryLocation the primaryLocation value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setPrimaryLocation(String primaryLocation) {
+    public StorageAccountProperties withPrimaryLocation(String primaryLocation) {
         this.primaryLocation = primaryLocation;
+        return this;
     }
 
     /**
@@ -159,7 +167,7 @@ public class StorageAccountProperties {
      *
      * @return the statusOfPrimary value
      */
-    public AccountStatus getStatusOfPrimary() {
+    public AccountStatus statusOfPrimary() {
         return this.statusOfPrimary;
     }
 
@@ -167,9 +175,11 @@ public class StorageAccountProperties {
      * Set the statusOfPrimary value.
      *
      * @param statusOfPrimary the statusOfPrimary value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setStatusOfPrimary(AccountStatus statusOfPrimary) {
+    public StorageAccountProperties withStatusOfPrimary(AccountStatus statusOfPrimary) {
         this.statusOfPrimary = statusOfPrimary;
+        return this;
     }
 
     /**
@@ -177,7 +187,7 @@ public class StorageAccountProperties {
      *
      * @return the lastGeoFailoverTime value
      */
-    public DateTime getLastGeoFailoverTime() {
+    public DateTime lastGeoFailoverTime() {
         return this.lastGeoFailoverTime;
     }
 
@@ -185,9 +195,11 @@ public class StorageAccountProperties {
      * Set the lastGeoFailoverTime value.
      *
      * @param lastGeoFailoverTime the lastGeoFailoverTime value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setLastGeoFailoverTime(DateTime lastGeoFailoverTime) {
+    public StorageAccountProperties withLastGeoFailoverTime(DateTime lastGeoFailoverTime) {
         this.lastGeoFailoverTime = lastGeoFailoverTime;
+        return this;
     }
 
     /**
@@ -195,7 +207,7 @@ public class StorageAccountProperties {
      *
      * @return the secondaryLocation value
      */
-    public String getSecondaryLocation() {
+    public String secondaryLocation() {
         return this.secondaryLocation;
     }
 
@@ -203,9 +215,11 @@ public class StorageAccountProperties {
      * Set the secondaryLocation value.
      *
      * @param secondaryLocation the secondaryLocation value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setSecondaryLocation(String secondaryLocation) {
+    public StorageAccountProperties withSecondaryLocation(String secondaryLocation) {
         this.secondaryLocation = secondaryLocation;
+        return this;
     }
 
     /**
@@ -213,7 +227,7 @@ public class StorageAccountProperties {
      *
      * @return the statusOfSecondary value
      */
-    public AccountStatus getStatusOfSecondary() {
+    public AccountStatus statusOfSecondary() {
         return this.statusOfSecondary;
     }
 
@@ -221,9 +235,11 @@ public class StorageAccountProperties {
      * Set the statusOfSecondary value.
      *
      * @param statusOfSecondary the statusOfSecondary value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setStatusOfSecondary(AccountStatus statusOfSecondary) {
+    public StorageAccountProperties withStatusOfSecondary(AccountStatus statusOfSecondary) {
         this.statusOfSecondary = statusOfSecondary;
+        return this;
     }
 
     /**
@@ -231,7 +247,7 @@ public class StorageAccountProperties {
      *
      * @return the creationTime value
      */
-    public DateTime getCreationTime() {
+    public DateTime creationTime() {
         return this.creationTime;
     }
 
@@ -239,9 +255,11 @@ public class StorageAccountProperties {
      * Set the creationTime value.
      *
      * @param creationTime the creationTime value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setCreationTime(DateTime creationTime) {
+    public StorageAccountProperties withCreationTime(DateTime creationTime) {
         this.creationTime = creationTime;
+        return this;
     }
 
     /**
@@ -249,7 +267,7 @@ public class StorageAccountProperties {
      *
      * @return the customDomain value
      */
-    public CustomDomain getCustomDomain() {
+    public CustomDomain customDomain() {
         return this.customDomain;
     }
 
@@ -257,9 +275,11 @@ public class StorageAccountProperties {
      * Set the customDomain value.
      *
      * @param customDomain the customDomain value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setCustomDomain(CustomDomain customDomain) {
+    public StorageAccountProperties withCustomDomain(CustomDomain customDomain) {
         this.customDomain = customDomain;
+        return this;
     }
 
     /**
@@ -267,7 +287,7 @@ public class StorageAccountProperties {
      *
      * @return the secondaryEndpoints value
      */
-    public Endpoints getSecondaryEndpoints() {
+    public Endpoints secondaryEndpoints() {
         return this.secondaryEndpoints;
     }
 
@@ -275,9 +295,11 @@ public class StorageAccountProperties {
      * Set the secondaryEndpoints value.
      *
      * @param secondaryEndpoints the secondaryEndpoints value to set
+     * @return the StorageAccountProperties object itself.
      */
-    public void setSecondaryEndpoints(Endpoints secondaryEndpoints) {
+    public StorageAccountProperties withSecondaryEndpoints(Endpoints secondaryEndpoints) {
         this.secondaryEndpoints = secondaryEndpoints;
+        return this;
     }
 
 }

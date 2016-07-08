@@ -19,7 +19,7 @@ public class StorageAccount extends Resource {
      *
      * @return the properties value
      */
-    public StorageAccountProperties getProperties() {
+    public StorageAccountProperties properties() {
         return this.properties;
     }
 
@@ -27,9 +27,11 @@ public class StorageAccount extends Resource {
      * Set the properties value.
      *
      * @param properties the properties value to set
+     * @return the StorageAccount object itself.
      */
-    public void setProperties(StorageAccountProperties properties) {
+    public StorageAccount withProperties(StorageAccountProperties properties) {
         this.properties = properties;
+        return this;
     }
 
 }

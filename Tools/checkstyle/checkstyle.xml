@@ -91,7 +91,9 @@
             <property name="scope" value="public"/>
         </module>
         <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
+        <module name="JavadocVariable">
+            <property name="scope" value="public"/>
+        </module>
         <module name="JavadocStyle"/>
 
 

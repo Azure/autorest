@@ -1,0 +1,29 @@
+﻿@using System.Text
+@using AutoRest.CSharp.Templates
+@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.ExtensionsTemplateModel>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.Rest;
+@foreach (var usingString in Model.Usings) {
+@:    using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// Extension methods for @(Model.ExtensionName).
+    /// </summary>
+    public static partial class @(Model.ExtensionName)Extensions
+    {
+        @foreach (var method in Model.MethodTemplateModels)
+        {
+            @:@(Include(new ExtensionMethodTemplate(), method))
+            @EmptyLine 
+        }
+    }
+}

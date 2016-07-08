@@ -1,0 +1,39 @@
+@using System
+@using System.Linq
+@using AutoRest.NodeJS.TemplateModels
+@using AutoRest.NodeJS.Templates
+@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.AzureMethodTemplateModel>
+
+@if (!Model.IsLongRunningOperation)
+{
+@:@(Include( new MethodTemplateTS(), Model as MethodTemplateModel))
+}
+else
+{
+    <text>
+/**
+ *
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+ @WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+ @WrapComment(" * ", Model.Description)@:
+@: *
+}
+@foreach (var parameter in Model.DocumentationParameters)
+{
+ @MethodTemplateModel.ConstructParameterDocumentation(
+                      WrapComment(" * ", "@param {"
+                                        + MethodTemplateModel.GetParameterDocumentationType(parameter)
+                                        + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
+                                        + " " + parameter.Documentation))
+}
+@WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")
+ */
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(true))): void;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(false))): void;
+    </text>
+}

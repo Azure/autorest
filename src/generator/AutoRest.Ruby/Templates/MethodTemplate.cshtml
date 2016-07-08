@@ -1,0 +1,203 @@
+﻿@using System
+@using System.Linq;
+@using AutoRest.Core.ClientModel
+@using AutoRest.Ruby.TemplateModels
+@inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodTemplateModel>
+
+#
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@if (Model.ReturnType.Body != null)
+{
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
+}
+#
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  @Model.ResponseGeneration()
+end
+
+@EmptyLine
+#
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+    @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@WrapComment("# ", string.Format("@return [{0}] HTTP response information.", Model.OperationResponseReturnTypeString))
+#
+def @(Model.Name)_with_http_info(@(Model.MethodParameterDeclaration))
+  @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+end
+
+
+@EmptyLine
+#
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+  @WrapComment("# ", Model.Summary)@:
+@:#
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+  @WrapComment("# ", Model.Description)@:
+@:#
+}
+@foreach (var parameter in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@WrapComment("# ", string.Format("@return [{0}] Promise object which holds the HTTP response.", "Concurrent::Promise"))
+#
+def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
+  @foreach (var parameter in Model.ParameterTemplateModels)
+  {
+    if (parameter.IsRequired && !parameter.IsConstant)
+    {
+  @:fail ArgumentError, '@parameter.Name is nil' if @(parameter.Name).nil?
+  @:
+    }
+      if (parameter.IsConstant)
+      {
+  @:@(parameter.Name) = @(parameter.DefaultValue)
+     } 
+}
+@EmptyLine
+@(Model.BuildInputParameterMappings())
+@EmptyLine
+  request_headers = {}
+@if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.Header))
+{
+  @EmptyLine
+  @:# Set Headers
+  @:@(Model.SetDefaultHeaders)
+  foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.Header))
+  {
+    if (parameter.SerializedName.ToLower() == "Content-Type".ToLower())
+    {
+  @:fail RuntimeError, 'Header Content-Type is forbidden to change'
+    }
+  @:request_headers['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name)) unless @(parameter.Type.ToString(parameter.Name)).nil?
+  }
+}
+
+@if (Model.RequestBody != null)
+{
+  @EmptyLine
+  @:request_headers['Content-Type'] = '@(Model.RequestContentType)'
+  @EmptyLine
+  @:# Serialize Request
+  @:@Model.ConstructRequestBodyMapper("request_mapper")
+  @:request_content = @(Model.ClientReference).serialize(request_mapper,  @(Model.RequestBody.Name), '@(Model.RequestBody.Name)')
+  @:request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
+  @EmptyLine
+}
+
+  path_template = '@Model.Url'
+  options = {
+      middlewares: [@string.Join(", ", Model.FaradayMiddlewares)],
+@if (Model.EncodingPathParams.Any())
+{
+      @:path_params: @(Model.PathParamsRbDict),
+}
+@if (Model.SkipEncodingPathParams.Any())
+{
+      @:skip_encoding_path_params: @(Model.SkipEncodingPathParamsRbDict),
+}
+@if (Model.EncodingQueryParams.Any())
+{
+      @:query_params: @(Model.QueryParamsRbDict),
+}
+@if (Model.SkipEncodingQueryParams.Any())
+{
+      @:skip_encoding_query_params: @(Model.SkipEncodingQueryParamsRbDict),
+}
+@if (Model.RequestBody != null)
+{
+      @:body: request_content,
+}
+      headers: request_headers.merge(custom_headers || {})
+  }
+  
+@EmptyLine
+  request_url = @@base_url || @(Model.ClientReference).base_url
+  @(Model.BuildUrl("request_url"))
+@EmptyLine
+
+  request = MsRest::HttpOperationRequest.new(request_url, path_template, :@Model.HttpMethod.ToString().ToLower(), options)
+  promise = request.run_promise do |req|
+    @(Model.ClientReference).credentials.sign_request(req) unless @(Model.ClientReference).credentials.nil?
+  end
+
+  @EmptyLine
+  promise = promise.then do |http_response|
+    status_code = http_response.status
+    response_content = http_response.body
+    unless @Model.SuccessStatusCodePredicate
+      error_model = JSON.load(response_content)
+      fail @(Model.OperationExceptionTypeString).new(request, http_response, error_model)
+    end
+
+    @EmptyLine
+    # Create Result
+    result = @(Model.OperationResponseReturnTypeString).new(request, http_response)
+    @Model.InitializeResponseBody
+
+    @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null && r.Value.Body.IsSerializable()))
+    {
+    <text>
+    # Deserialize Response
+    if status_code == @Model.GetStatusCodeReference(responsePair.Key)
+      begin
+        @(Model.CreateDeserializationString("response_content", responsePair.Value.Body, "result.body"))
+      rescue Exception => e
+        fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
+      end
+    end
+    </text>
+    }
+
+    @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any() && Model.DefaultResponse.Body.IsSerializable())
+    {
+    <text>
+    begin
+      @(Model.CreateDeserializationString("response_content", Model.ReturnType.Body, "result.body"))
+    rescue Exception => e
+      fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
+    end
+    </text>
+    }
+
+    @EmptyLine
+    result
+  end
+
+  @EmptyLine
+  promise.execute
+end

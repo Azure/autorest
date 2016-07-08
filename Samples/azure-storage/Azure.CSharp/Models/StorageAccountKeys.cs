@@ -22,6 +22,8 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeys class.
         /// </summary>
+        /// <param name="key1">Gets the value of key 1.</param>
+        /// <param name="key2">Gets the value of key 2.</param>
         public StorageAccountKeys(string key1 = default(string), string key2 = default(string))
         {
             Key1 = key1;

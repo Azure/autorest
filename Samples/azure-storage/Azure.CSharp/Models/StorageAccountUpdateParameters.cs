@@ -24,6 +24,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the StorageAccountUpdateParameters
         /// class.
         /// </summary>
+        /// <param name="tags">Resource tags</param>
         public StorageAccountUpdateParameters(IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
         {
             Tags = tags;

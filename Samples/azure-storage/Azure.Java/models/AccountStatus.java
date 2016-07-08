@@ -24,34 +24,25 @@ public enum AccountStatus {
     }
 
     /**
-     * Gets the serialized value for a AccountStatus instance.
-     *
-     * @return the serialized value.
-     */
-    @JsonValue
-    public String toValue() {
-        return this.value;
-    }
-
-    /**
      * Parses a serialized value to a AccountStatus instance.
      *
      * @param value the serialized value to parse.
      * @return the parsed AccountStatus object, or null if unable to parse.
      */
     @JsonCreator
-    public static AccountStatus fromValue(String value) {
+    public static AccountStatus fromString(String value) {
         AccountStatus[] items = AccountStatus.values();
         for (AccountStatus item : items) {
-            if (item.toValue().equals(value)) {
+            if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
         }
         return null;
     }
 
+    @JsonValue
     @Override
     public String toString() {
-        return toValue();
+        return this.value;
     }
 }

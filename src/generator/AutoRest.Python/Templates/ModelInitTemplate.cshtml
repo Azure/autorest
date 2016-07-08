@@ -1,0 +1,35 @@
+﻿@using AutoRest.Python.Templates
+@using System.Linq
+@using AutoRest.Python
+@inherits AutoRest.Core.Template<AutoRest.Python.TemplateModels.ModelInitTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+@{
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  {
+@:from .@(modelType.Name.ToPythonCase()) import @modelType.Name@Model.GetExceptionNameIfExist(modelType, false)
+  }
+  if (Model.ServiceClient.EnumTypes.Any())
+  {
+@:from .@(Model.ServiceClient.Name.ToPythonCase())_enums import (
+    foreach (var enumType in @Model.ServiceClient.EnumTypes)
+    {
+    @:@(enumType.Name),
+    }
+@:)
+  }
+@EmptyLine
+@:__all__ = [
+  foreach (var modelType in Model.ServiceClient.ModelTypes)
+  {
+@:    '@modelType.Name'@Model.GetExceptionNameIfExist(modelType, true),
+  }
+  foreach (var enumType in @Model.ServiceClient.EnumTypes)
+  {
+@:    '@(enumType.Name)',
+  }
+@:]
+}

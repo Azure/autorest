@@ -31,7 +31,7 @@ public class StorageAccountCreateParameters {
      *
      * @return the location value
      */
-    public String getLocation() {
+    public String location() {
         return this.location;
     }
 
@@ -39,9 +39,11 @@ public class StorageAccountCreateParameters {
      * Set the location value.
      *
      * @param location the location value to set
+     * @return the StorageAccountCreateParameters object itself.
      */
-    public void setLocation(String location) {
+    public StorageAccountCreateParameters withLocation(String location) {
         this.location = location;
+        return this;
     }
 
     /**
@@ -49,7 +51,7 @@ public class StorageAccountCreateParameters {
      *
      * @return the tags value
      */
-    public Map<String, String> getTags() {
+    public Map<String, String> tags() {
         return this.tags;
     }
 
@@ -57,9 +59,11 @@ public class StorageAccountCreateParameters {
      * Set the tags value.
      *
      * @param tags the tags value to set
+     * @return the StorageAccountCreateParameters object itself.
      */
-    public void setTags(Map<String, String> tags) {
+    public StorageAccountCreateParameters withTags(Map<String, String> tags) {
         this.tags = tags;
+        return this;
     }
 
     /**
@@ -67,7 +71,7 @@ public class StorageAccountCreateParameters {
      *
      * @return the properties value
      */
-    public StorageAccountPropertiesCreateParameters getProperties() {
+    public StorageAccountPropertiesCreateParameters properties() {
         return this.properties;
     }
 
@@ -75,9 +79,11 @@ public class StorageAccountCreateParameters {
      * Set the properties value.
      *
      * @param properties the properties value to set
+     * @return the StorageAccountCreateParameters object itself.
      */
-    public void setProperties(StorageAccountPropertiesCreateParameters properties) {
+    public StorageAccountCreateParameters withProperties(StorageAccountPropertiesCreateParameters properties) {
         this.properties = properties;
+        return this;
     }
 
 }
