@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator
                         {
                             foreach (ValidationMessage exception in RecursiveValidate(list[i], collectionRules))
                             {
-                                exception.Path.Add($"[{i++}]");
+                                exception.Path.Add($"[{i}]");
                                 yield return exception;
                             }
                         }
@@ -126,6 +126,7 @@ namespace Microsoft.Rest.Generator
                     yield return exception;
                 }
             }
+            yield break;
         }
 
         private IEnumerable<ValidationMessage> ValidateObjectProperties(object entity)
@@ -142,6 +143,7 @@ namespace Microsoft.Rest.Generator
                 {
                     foreach (var exception in rule.GetValidationMessages(value))
                     {
+                        exception.Path.Add(prop.Name);
                         yield return exception;
                     }
                 }
@@ -154,6 +156,7 @@ namespace Microsoft.Rest.Generator
                     yield return exception;
                 }
             }
+            yield break;
         }
     }
 }

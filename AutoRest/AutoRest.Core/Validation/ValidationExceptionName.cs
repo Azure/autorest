@@ -21,5 +21,6 @@
         OnlyOneUnderscoreInOperationId,
         DefaultResponseRequired,
         XmsPathsMustOverloadPaths,
+        DescriptiveDescriptionRequired,
     }
 }

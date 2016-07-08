@@ -151,6 +151,15 @@ namespace Microsoft.Rest.Generator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value provided for description is not descriptive enough..
+        /// </summary>
+        internal static string DescriptionNotDescriptive {
+            get {
+                return ResourceManager.GetString("DescriptionNotDescriptive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Directory {0} does not exist..
         /// </summary>
         internal static string DirectoryNotExist {

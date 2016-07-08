@@ -51,6 +51,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// </summary>
         public virtual Schema AdditionalProperties { get; set; }
 
+        [Rule(typeof(DescriptiveDescriptionRequired))]
         public virtual string Description { get; set; }
 
         /// <summary>
