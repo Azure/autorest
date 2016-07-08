@@ -21,6 +21,8 @@ import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -575,11 +577,16 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Long> getUnixTime() throws ErrorException, IOException {
+    public ServiceResponse<DateTime> getUnixTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnixTime();
-        return getUnixTimeDelegate(call.execute());
+        ServiceResponse<Long> response = getUnixTimeDelegate(call.execute());
+        DateTime body = null;
+        if (response.getBody() != null) {
+            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
+        }
+        return new ServiceResponse<DateTime>(body, response.getResponse());
     }
 
     /**
@@ -589,17 +596,22 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getUnixTime();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getUnixTimeDelegate(response));
+                    ServiceResponse<Long> result = getUnixTimeDelegate(response);
+                    DateTime body = null;
+                    if (result.getBody() != null) {
+                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                    }
+                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -623,8 +635,9 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putUnixTimeDate(intBody);
+    public ServiceResponse<Void> putUnixTimeDate(DateTime intBody) throws ErrorException, IOException {
+        Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Call<ResponseBody> call = service.putUnixTimeDate(intBodyConverted);
         return putUnixTimeDateDelegate(call.execute());
     }
 
@@ -636,11 +649,12 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUnixTimeDateAsync(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.putUnixTimeDate(intBody);
+        Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Call<ResponseBody> call = service.putUnixTimeDate(intBodyConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -667,11 +681,16 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Long> getInvalidUnixTime() throws ErrorException, IOException {
+    public ServiceResponse<DateTime> getInvalidUnixTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidUnixTime();
-        return getInvalidUnixTimeDelegate(call.execute());
+        ServiceResponse<Long> response = getInvalidUnixTimeDelegate(call.execute());
+        DateTime body = null;
+        if (response.getBody() != null) {
+            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
+        }
+        return new ServiceResponse<DateTime>(body, response.getResponse());
     }
 
     /**
@@ -681,17 +700,22 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getInvalidUnixTime();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidUnixTimeDelegate(response));
+                    ServiceResponse<Long> result = getInvalidUnixTimeDelegate(response);
+                    DateTime body = null;
+                    if (result.getBody() != null) {
+                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                    }
+                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -712,11 +736,16 @@ public final class IntsImpl implements Ints {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Long> getNullUnixTime() throws ErrorException, IOException {
+    public ServiceResponse<DateTime> getNullUnixTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNullUnixTime();
-        return getNullUnixTimeDelegate(call.execute());
+        ServiceResponse<Long> response = getNullUnixTimeDelegate(call.execute());
+        DateTime body = null;
+        if (response.getBody() != null) {
+            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
+        }
+        return new ServiceResponse<DateTime>(body, response.getResponse());
     }
 
     /**
@@ -726,17 +755,22 @@ public final class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getNullUnixTime();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullUnixTimeDelegate(response));
+                    ServiceResponse<Long> result = getNullUnixTimeDelegate(response);
+                    DateTime body = null;
+                    if (result.getBody() != null) {
+                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                    }
+                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }

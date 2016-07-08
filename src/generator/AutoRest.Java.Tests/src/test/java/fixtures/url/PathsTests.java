@@ -1,5 +1,6 @@
 package fixtures.url;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -155,4 +156,9 @@ public class PathsTests {
         client.getPathsOperations().arrayCsvInPath(arrayPath);
     }
     */
+
+    @Test
+    public void unixTimeUrl() throws Exception {
+        client.paths().unixTimeUrl(DateTime.parse("2016-04-13T00:00:00Z"));
+    }
 }

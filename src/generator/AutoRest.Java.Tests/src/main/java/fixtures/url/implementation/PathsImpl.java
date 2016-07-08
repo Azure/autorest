@@ -27,6 +27,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -1431,8 +1432,9 @@ public final class PathsImpl implements Paths {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
+    public ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException {
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPathConverted);
         return unixTimeUrlDelegate(call.execute());
     }
 
@@ -1444,11 +1446,12 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall unixTimeUrlAsync(long unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
-        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPath);
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
