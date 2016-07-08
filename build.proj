@@ -109,7 +109,8 @@
   
   <!-- ClientRuntime projects that can be built into packages -->
   <ItemGroup Condition="'$(Scope)' == 'ClientRuntime' OR '$(Scope)' == 'all'"> 
-    <PackageableLibraries Include="$(LibraryRoot)/src/client/*/project.json" Exclude="$(LibraryRoot)/src/client/*.Tests/project.json"/>
+    <PackageableLibraries Include="src/client/*/project.json" Exclude="src/client/*.Tests/project.json;src/client/*.Etw/project.json"  Condition=" '$(OS)' == 'Windows_NT'"/>
+    <PackageableLibraries Include="src/client/*/project.json" Exclude="src/client/*.Tests/project.json;src/client/*.Etw/project.json;src/client/*.Log4Net/project.json"  Condition=" '$(OS)' != 'Windows_NT'"/>
   </ItemGroup>
   
   <!-- CodeGenerator projects that can be built into packages -->
