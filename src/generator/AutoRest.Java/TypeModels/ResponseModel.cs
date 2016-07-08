@@ -283,6 +283,10 @@ namespace AutoRest.Java.TypeModels
             {
                 return target + " = new DateTime(" + source + " * 1000L, DateTimeZone.UTC);";
             }
+            else if (type.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+                return target + " = " + source + ".getDecodedBytes();";
+            }
             else
             {
                 return target + " = " + source + ";";

@@ -900,9 +900,9 @@ public interface Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<String>> getBase64Url() throws ErrorException, IOException;
+    ServiceResponse<List<byte[]>> getBase64Url() throws ErrorException, IOException;
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -911,7 +911,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBase64UrlAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type null value.

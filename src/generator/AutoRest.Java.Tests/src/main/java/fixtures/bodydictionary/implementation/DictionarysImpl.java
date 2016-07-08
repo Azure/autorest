@@ -13,6 +13,7 @@ package fixtures.bodydictionary.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodydictionary.Dictionarys;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -2574,11 +2575,21 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Map<String, String>> getBase64Url() throws ErrorException, IOException {
+    public ServiceResponse<Map<String, byte[]>> getBase64Url() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBase64Url();
-        return getBase64UrlDelegate(call.execute());
+        ServiceResponse<Map<String, Base64Url>> response = getBase64UrlDelegate(call.execute());
+        Map<String, byte[]> body = null;
+        if (response.getBody() != null) {
+            body = new HashMap<String, byte[]>();
+            for (Map.Entry<String, Base64Url> entry : response.getBody().entrySet()) {
+                byte[] value;
+                value = entry.getValue().getDecodedBytes();
+                body.put(entry.getKey(), value);
+            }
+        }
+        return new ServiceResponse<Map<String, byte[]>>(body, response.getResponse());
     }
 
     /**
@@ -2588,17 +2599,27 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBase64UrlAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getBase64Url();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBase64UrlDelegate(response));
+                    ServiceResponse<Map<String, Base64Url>> result = getBase64UrlDelegate(response);
+                    Map<String, byte[]> body = null;
+                    if (result.getBody() != null) {
+                        body = new HashMap<String, byte[]>();
+                        for (Map.Entry<String, Base64Url> entry : result.getBody().entrySet()) {
+                            byte[] value;
+                            value = entry.getValue().getDecodedBytes();
+                            body.put(entry.getKey(), value);
+                        }
+                    }
+                    serviceCallback.success(new ServiceResponse<Map<String, byte[]>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -2607,9 +2628,9 @@ public final class DictionarysImpl implements Dictionarys {
         return serviceCall;
     }
 
-    private ServiceResponse<Map<String, String>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
+    private ServiceResponse<Map<String, Base64Url>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Map<String, Base64Url>, ErrorException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<Map<String, Base64Url>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

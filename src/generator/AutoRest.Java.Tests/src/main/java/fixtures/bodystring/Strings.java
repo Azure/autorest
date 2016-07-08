@@ -216,9 +216,9 @@ public interface Strings {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getBase64Encoded() throws ErrorException, IOException;
+    ServiceResponse<byte[]> getBase64Encoded() throws ErrorException, IOException;
 
     /**
      * Get value that is base64 encoded.
@@ -227,16 +227,16 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBase64EncodedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get value that is base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getBase64UrlEncoded() throws ErrorException, IOException;
+    ServiceResponse<byte[]> getBase64UrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get value that is base64url encoded.
@@ -245,37 +245,37 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBase64UrlEncodedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the String value
+     * @param stringBody the Base64Url value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBase64UrlEncoded(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put value that is base64url encoded.
      *
-     * @param stringBody the String value
+     * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBase64UrlEncodedAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getNullBase64UrlEncoded() throws ErrorException, IOException;
+    ServiceResponse<byte[]> getNullBase64UrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -284,6 +284,6 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullBase64UrlEncodedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
 }
