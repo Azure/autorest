@@ -35,7 +35,8 @@ Using Log4Net for AutoRest Generated Clients:
 ```
 	B) Passing the config file name to ```Log4NetTracingInterceptor``` constructor.
 
-3- Last step is to register the logger into the ServiceClientTracing by having this line called at the start of the application:
+3- Last step is to register the logger into the ServiceClientTracing and enable tracing by having these lines called at the start of the application:
 ```csharp
 	ServiceClientTracing.AddTracingInterceptor(new Log4NetTracingInterceptor());
+	ServiceClientTracing.IsEnabled = true;
 ```
