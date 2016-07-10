@@ -1,0 +1,34 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operation with multiple body parameters",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {}
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "description": "Test"
+    }
+  }
+}
