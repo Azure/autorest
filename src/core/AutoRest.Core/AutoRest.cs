@@ -7,6 +7,9 @@ using AutoRest.Core.ClientModel;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Validation;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Core
 {
@@ -22,7 +25,7 @@ namespace AutoRest.Core
         {
             get
             {
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof (Settings)).Assembly.Location);
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof(Settings)).Assembly.Location);
                 return fvi.FileVersion;
             }
         }
@@ -40,10 +43,22 @@ namespace AutoRest.Core
             Logger.Entries.Clear();
             Logger.LogInfo(Resources.AutoRestCore, Version);
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
-            ServiceClient serviceClient;
+            ServiceClient serviceClient = null;
+
             try
             {
-                serviceClient = modeler.Build();
+                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+                serviceClient = modeler.Build(out messages);
+
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+
+                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
+                {
+                    throw ErrorManager.CreateError(Resources.CodeGenerationError);
+                }
             }
             catch (Exception exception)
             {

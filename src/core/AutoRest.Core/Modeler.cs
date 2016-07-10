@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.ClientModel;
+using AutoRest.Core.Validation;
+using System.Collections.Generic;
 
 namespace AutoRest.Core
 {
@@ -17,5 +19,7 @@ namespace AutoRest.Core
         }
 
         public abstract ServiceClient Build();
+
+        public abstract ServiceClient Build(out IEnumerable<ValidationMessage> messages);
     }
 }
