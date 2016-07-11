@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Model
@@ -26,6 +28,8 @@ namespace AutoRest.Swagger.Model
         /// operations described in the API. Tools and libraries MAY use the 
         /// operation id to uniquely identify an operation.
         /// </summary>
+        [Rule(typeof(OperationIdSingleUnderscore))]
+        [Rule(typeof(OperationIdNounInVerb))]
         public string OperationId { get; set; }
 
         public string Summary { get; set; }
@@ -52,11 +56,13 @@ namespace AutoRest.Swagger.Model
         /// If a parameter is already defined at the Path Item, the 
         /// new definition will override it, but can never remove it.
         /// </summary>
+        [CollectionRule(typeof(AnonymousParameterTypes))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
+        [Rule(typeof(DefaultResponseRequired))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

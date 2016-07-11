@@ -38,31 +38,38 @@ namespace AutoRest.Core.Extensibility
             if (string.IsNullOrEmpty(settings.CodeGenerator))
             {
                 throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture, 
+                    string.Format(CultureInfo.InvariantCulture,
                         Resources.ParameterValueIsMissing, "CodeGenerator"));
             }
 
             CodeGenerator codeGenerator = null;
 
-            string configurationFile = GetConfigurationFileContent(settings);
-
-            if (configurationFile != null)
+            if (string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
             {
-                try
-                {
-                    var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                    codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, settings.CodeGenerator,
-                        settings);
-                    codeGenerator.PopulateSettings(settings.CustomSettings);
-                }
-                catch (Exception ex)
-                {
-                    throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
-                }
+                codeGenerator = new NoOpCodeGenerator(settings);
             }
             else
             {
-                throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+                string configurationFile = GetConfigurationFileContent(settings);
+
+                if (configurationFile != null)
+                {
+                    try
+                    {
+                        var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                        codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, settings.CodeGenerator,
+                            settings);
+                        codeGenerator.PopulateSettings(settings.CustomSettings);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                    }
+                }
+                else
+                {
+                    throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+                }
             }
             Logger.LogInfo(Resources.GeneratorInitialized,
                 settings.CodeGenerator,
@@ -137,7 +144,7 @@ namespace AutoRest.Core.Extensibility
 
             if (!settings.FileSystem.FileExists(path))
             {
-                path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof (Settings)).Location),
+                path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location),
                     ConfigurationFileName);
             }
 
@@ -177,10 +184,10 @@ namespace AutoRest.Core.Extensibility
                     {
                         loadedAssembly = Assembly.Load(assemblyName);
                     }
-                    catch(FileNotFoundException)
+                    catch (FileNotFoundException)
                     {
                         loadedAssembly = Assembly.LoadFrom(assemblyName + ".dll");
-                        if(loadedAssembly == null)
+                        if (loadedAssembly == null)
                         {
                             throw;
                         }
@@ -191,8 +198,8 @@ namespace AutoRest.Core.Extensibility
                                      t.Name == typeName ||
                                      t.FullName == typeName);
 
-                    instance = (T) loadedType.GetConstructor(
-                        new[] {typeof (Settings)}).Invoke(new object[] {settings});
+                    instance = (T)loadedType.GetConstructor(
+                        new[] { typeof(Settings) }).Invoke(new object[] { settings });
 
                     if (!section[key].Settings.IsNullOrEmpty())
                     {

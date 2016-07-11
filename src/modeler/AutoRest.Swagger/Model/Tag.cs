@@ -6,7 +6,7 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Represents a Swagger Tag
     /// </summary>
-    public class Tag
+    public class Tag : SwaggerBase
     {
         public string Name { get; set; }
         public string Description { get; set; }

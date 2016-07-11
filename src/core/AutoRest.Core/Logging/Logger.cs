@@ -90,68 +90,28 @@ namespace AutoRest.Core.Logging
             LogError(null, message, args);
         }
 
-        /// <summary>
-        /// Writes the LogEntry collection to the provided TextWriter.
-        /// </summary>
-        /// <param name="writer">TextWriter for output.</param>
-        /// <param name="verbose">If set to true, output includes full exception stack.</param>
-        public static void WriteErrors(TextWriter writer, bool verbose)
+        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity)
+        {
+            WriteMessages(writer, severity, false);
+        }
+
+        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity, bool verbose)
         {
             if (writer == null)
             {
                 throw new ArgumentNullException("writer");
             }
-            foreach (var logEntry in Entries.Where(e => e.Severity == LogEntrySeverity.Error ||
-                                                        e.Severity == LogEntrySeverity.Fatal)
-                .OrderByDescending(e => e.Severity))
+            foreach (var logEntry in Entries.Where(e => e.Severity == severity))
             {
-                string prefix = "";
-                if (logEntry.Severity == LogEntrySeverity.Fatal)
-                {
-                    prefix = "[FATAL] ";
-                }
-                writer.WriteLine("error: {0}{1}", prefix, logEntry.Message);
+                // Write the severity and message to console
+                writer.WriteLine("{0}: {1}",
+                    logEntry.Severity.ToString().ToUpperInvariant(),
+                    logEntry.Message);
+                // If verbose is on and the entry has an exception, show it
                 if (logEntry.Exception != null && verbose)
                 {
                     writer.WriteLine("{0}", logEntry.Exception);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Writes the LogEntrySeverity.Warning messages to the provided TextWriter. 
-        /// </summary>
-        /// <param name="writer">TextWriter for output.</param>
-        public static void WriteWarnings(TextWriter writer)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-            foreach (var logEntry in Entries.Where(e => e.Severity == LogEntrySeverity.Warning))
-            {
-                writer.WriteLine("{0}: {1}", 
-                    logEntry.Severity.ToString().ToUpperInvariant(), 
-                    logEntry.Message);
-            }
-        }
-
-        /// <summary>
-        /// Writes the LogEntrySeverity.Info messages to the provdied TextWriter.
-        /// </summary>
-        /// <param name="writer">TextWriter for output.</param>
-        public static void WriteInfos(TextWriter writer)
-        {
-            if (writer == null)
-            {
-                throw new ArgumentNullException("writer");
-            }
-
-            foreach (var logEntry in Entries.Where(e => e.Severity == LogEntrySeverity.Info))
-            {
-                writer.WriteLine("{0}: {1}", 
-                    logEntry.Severity.ToString().ToUpperInvariant(), 
-                    logEntry.Message);
             }
         }
     }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Model
 {
@@ -29,9 +28,6 @@ namespace AutoRest.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         public Dictionary<string, Schema> Properties { get; set; }
-
-        [JsonProperty(PropertyName = "$ref")]
-        public string Reference { get; set; }
 
         public bool ReadOnly { get; set; }
 

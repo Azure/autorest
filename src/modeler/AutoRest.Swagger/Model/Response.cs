@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation;
 using System;
 using System.Collections.Generic;
 
@@ -10,10 +12,11 @@ namespace AutoRest.Swagger.Model
     /// Describes a single response from an API Operation.
     /// </summary>
     [Serializable]
-    public class OperationResponse
+    public class OperationResponse : SwaggerBase
     {
         public string Description { get; set; }
 
+        [Rule(typeof(AnonymousTypes))]
         public Schema Schema { get; set; }
 
         public Dictionary<string, Header> Headers { get; set; }
