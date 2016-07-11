@@ -532,7 +532,7 @@ describe('nodejs', function () {
     it('should throw on Put200InvalidJson', function (done) {
       testClient.lROSADs.put200InvalidJson(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('SyntaxError: Unexpected end of input');
+        error.message.should.match(/.*SyntaxError: Unexpected end of (json\s)?input.*/ig);
         done();
       });
     });
@@ -548,7 +548,7 @@ describe('nodejs', function () {
     it('should throw on PutAsyncRelativeRetryInvalidJsonPolling', function (done) {
       testClient.lROSADs.putAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
         should.exist(error);
-        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        error.message.should.match(/.*SyntaxError: Unexpected end of (json\s)?input.*/ig);
         done();
       });
     });
@@ -572,7 +572,7 @@ describe('nodejs', function () {
     it('should throw on DeleteAsyncRelativeRetryInvalidJsonPolling', function (done) {
       testClient.lROSADs.deleteAsyncRelativeRetryInvalidJsonPolling(function (error, result) {
         should.exist(error);
-        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        error.message.should.match(/.*SyntaxError: Unexpected end of (json\s)?input.*/ig);
         done();
       });
     });
@@ -596,7 +596,7 @@ describe('nodejs', function () {
     it('should throw on PostAsyncRelativeRetryInvalidJsonPolling', function (done) {
       testClient.lROSADs.postAsyncRelativeRetryInvalidJsonPolling(product, function (error, result) {
         should.exist(error);
-        error.message.should.match(/.*SyntaxError: Unexpected end of input.*/ig);
+        error.message.should.match(/.*SyntaxError: Unexpected end of (json\s)?input.*/ig);
         done();
       });
     });
