@@ -21,7 +21,7 @@
     "ms-rest": "file:../../client/NodeJS/ms-rest",
     "ms-rest-azure": "file:../../client/NodeJS/ms-rest-azure",
     "jshint": "2.8.0",
-    "moment":  "*",
+    "moment":  "^2.14.1",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
     "should": "5.2.0",
