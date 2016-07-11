@@ -7,6 +7,24 @@ var Q = require('q');
 var spawn = require('child_process').spawn;
 var PluginError = gutil.PluginError;
 
+var isWindows = (process.platform.lastIndexOf('win') === 0);
+var isLinux= (process.platform.lastIndexOf('linux') === 0);
+var isMac = (process.platform.lastIndexOf('mac') === 0);
+
+function GetAutoRestFolder() {
+  if (isWindows) {
+    return "src/core/AutoRest/bin/Release/net451/win7-x64/";
+  }
+  if( isMac ) {
+	return "src/core/AutoRest/bin/Debug/net451/osx.10.11-x64/";
+  } 
+  if( isLinux ) { 
+	return "src/core/AutoRest/bin/Debug/net451/ubuntu.14.04-x64/"
+  }
+   throw new Error("Unknown platform?");
+}
+
+
 const PLUGIN_NAME = 'gulp-regenerate-expected';
 
 function gulpRegenerateExpected(options, done) {
@@ -57,7 +75,7 @@ function gulpRegenerateExpected(options, done) {
     var optsMappingsValue = opts.mappings[key];
     var mappingBaseDir = optsMappingsValue instanceof Array ? optsMappingsValue[0] : optsMappingsValue;
     var args = [
-      'src/core/AutoRest/bin/Release/net451/win7-x64/AutoRest.exe',
+      GetAutoRestFolder()+'AutoRest.exe',
       '-Modeler', opts.modeler,
       '-CodeGenerator', opts.codeGenerator,
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,
