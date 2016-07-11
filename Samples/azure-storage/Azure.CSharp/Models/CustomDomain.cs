@@ -32,8 +32,7 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets or sets gets or sets the custom domain name. Name is the
-        /// CNAME source.
+        /// Gets or sets the custom domain name. Name is the CNAME source.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

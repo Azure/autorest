@@ -28,9 +28,9 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets or sets gets or sets the account type. Possible values
-        /// include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-        /// 'Standard_RAGRS', 'Premium_LRS'
+        /// Gets or sets the account type. Possible values include:
+        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+        /// 'Premium_LRS'
         /// </summary>
         [JsonProperty(PropertyName = "accountType")]
         public AccountType AccountType { get; set; }
