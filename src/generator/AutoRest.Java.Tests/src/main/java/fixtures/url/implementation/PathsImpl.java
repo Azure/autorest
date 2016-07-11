@@ -13,6 +13,7 @@ package fixtures.url.implementation;
 import retrofit2.Retrofit;
 import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.serializer.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -155,7 +156,7 @@ public final class PathsImpl implements Paths {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
-        Call<ResponseBody> base64Url(@Path("base64UrlPath") String base64UrlPath);
+        Call<ResponseBody> base64Url(@Path("base64UrlPath") Base64Url base64UrlPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
@@ -1319,11 +1320,12 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> base64Url(String base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.base64Url(base64UrlPath);
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        Call<ResponseBody> call = service.base64Url(base64UrlPathConverted);
         return base64UrlDelegate(call.execute());
     }
 
@@ -1335,7 +1337,7 @@ public final class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall base64UrlAsync(String base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1343,7 +1345,8 @@ public final class PathsImpl implements Paths {
             serviceCallback.failure(new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.base64Url(base64UrlPath);
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        Call<ResponseBody> call = service.base64Url(base64UrlPathConverted);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

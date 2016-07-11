@@ -13,6 +13,7 @@ package fixtures.bodyarray.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyarray.Arrays;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -2587,11 +2588,21 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<List<String>> getBase64Url() throws ErrorException, IOException {
+    public ServiceResponse<List<byte[]>> getBase64Url() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBase64Url();
-        return getBase64UrlDelegate(call.execute());
+        ServiceResponse<List<Base64Url>> response = getBase64UrlDelegate(call.execute());
+        List<byte[]> body = null;
+        if (response.getBody() != null) {
+            body = new ArrayList<byte[]>();
+            for (Base64Url item : response.getBody()) {
+                byte[] value;
+                value = item.getDecodedBytes();
+                body.add(value);
+            }
+        }
+        return new ServiceResponse<List<byte[]>>(body, response.getResponse());
     }
 
     /**
@@ -2601,17 +2612,27 @@ public final class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBase64UrlAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.getBase64Url();
         final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBase64UrlDelegate(response));
+                    ServiceResponse<List<Base64Url>> result = getBase64UrlDelegate(response);
+                    List<byte[]> body = null;
+                    if (result.getBody() != null) {
+                        body = new ArrayList<byte[]>();
+                        for (Base64Url item : result.getBody()) {
+                            byte[] value;
+                            value = item.getDecodedBytes();
+                            body.add(value);
+                        }
+                    }
+                    serviceCallback.success(new ServiceResponse<List<byte[]>>(body, result.getResponse()));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -2620,9 +2641,9 @@ public final class ArraysImpl implements Arrays {
         return serviceCall;
     }
 
-    private ServiceResponse<List<String>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
-                .register(200, new TypeToken<List<String>>() { }.getType())
+    private ServiceResponse<List<Base64Url>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<List<Base64Url>, ErrorException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<List<Base64Url>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

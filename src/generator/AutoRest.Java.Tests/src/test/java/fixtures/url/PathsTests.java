@@ -145,6 +145,12 @@ public class PathsTests {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }
+
+    @Test
+    public void base64Url() throws Exception {
+        client.paths().base64Url("lorem".getBytes());
+    }
+
     /*
     @Test
     public void arrayCsvInPath() throws Exception {

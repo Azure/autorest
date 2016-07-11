@@ -64,6 +64,10 @@ namespace AutoRest.Java.TypeModels
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
+                else if (Type == KnownPrimaryType.Base64Url)
+                {
+                    return new PrimaryTypeModel(KnownPrimaryType.ByteArray);
+                }
                 else if (Type == KnownPrimaryType.Stream)
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.ByteArray);
@@ -86,6 +90,10 @@ namespace AutoRest.Java.TypeModels
                 else if (Type == KnownPrimaryType.UnixTime)
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.DateTime);
+                }
+                else if (Type == KnownPrimaryType.Base64Url)
+                {
+                    return new PrimaryTypeModel(KnownPrimaryType.ByteArray);
                 }
                 else
                 {
@@ -149,7 +157,8 @@ namespace AutoRest.Java.TypeModels
             }
             else if (primaryType.Type == KnownPrimaryType.Base64Url)
             {
-                Name = "String";
+                Name = "Base64Url";
+                _imports.Add("com.microsoft.rest.Base64Url");
             }
             else if (primaryType.Type == KnownPrimaryType.Boolean)
             {
