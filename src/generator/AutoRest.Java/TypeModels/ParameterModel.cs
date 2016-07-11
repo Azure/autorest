@@ -113,6 +113,19 @@ namespace AutoRest.Java.TypeModels
                     builder.Outdent().AppendLine("}");
                 }
             }
+            else if (wireType.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+                if (!IsRequired)
+                {
+                    builder.AppendLine("Long {0} = {1};", target, wireType.DefaultValue(_method))
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = {2}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;", IsRequired ? "Long " : "", target, source);
+                if (!IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
+            }
             else if (wireType.IsPrimaryType(KnownPrimaryType.Stream))
             {
                 if (!IsRequired)

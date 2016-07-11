@@ -510,7 +510,7 @@ public interface Paths {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException;
+    ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException;
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -520,6 +520,6 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall unixTimeUrlAsync(long unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }
