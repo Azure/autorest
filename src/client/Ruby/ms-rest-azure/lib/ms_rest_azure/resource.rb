@@ -23,6 +23,10 @@ module MsRestAzure
     # @return [Hash{String => String}] the tags attached to resources (optional).
     attr_accessor :tags
 
+    # @return [String] the kind of the resource.
+    # FIXME kind attribute was introduced because of SiteInstance model of azure_mgmt_web gem has kind attribute.
+    attr_accessor :kind
+
     def self.mapper
       {
         required: false,
@@ -73,6 +77,13 @@ module MsRestAzure
                         name: 'String'
                       }
                   }
+                }
+              },
+              kind: {
+                required: false,
+                serialized_name: 'kind',
+                type: {
+                  name: 'String'
                 }
               }
           }
