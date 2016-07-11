@@ -1,0 +1,35 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest Azure.Java code generator",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "[9.0.1,10.0)",
+    "AutoRest.Core": {
+      "target": "project"
+    },
+    "AutoRest.Java": {
+      "target": "project"
+    },
+    "AutoRest.Extensions.Azure": {
+      "target": "project"
+    }
+  }
+}

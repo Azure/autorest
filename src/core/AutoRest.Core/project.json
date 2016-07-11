@@ -1,0 +1,41 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "Autorest Core",
+    "tags": [ "Microsoft AutoRest " ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+  "old_frameworks": {
+    "net451": {
+    },
+    "netcoreapp1.0": {
+      "buildOptions": { "define": [ "PORTABLE" ] },
+      "imports": [ "dnxcore50", "portable-net45+win8" ],
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0-*"
+        }
+      }
+    }
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "[9.0.1,10.0)",
+    "YamlDotNet.Signed": "3.8.0"
+  }
+}

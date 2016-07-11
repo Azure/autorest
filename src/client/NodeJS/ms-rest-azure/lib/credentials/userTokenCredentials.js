@@ -19,6 +19,8 @@ var AzureEnvironment = require('../azureEnvironment');
 * @param {string} username The user name for the Organization Id account.
 * @param {string} password The password for the Organization Id account.
 * @param {object} [options] Object representing optional parameters.
+* @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided 
+* then domain should also be provided its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format).
 * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
 * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
 * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
@@ -55,7 +57,18 @@ function UserTokenCredentials(clientId, domain, username, password, options) {
   if (!options.tokenCache) {
     options.tokenCache = new adal.MemoryCache();
   }
-  
+
+  if (options.tokenAudience) {
+    if (options.tokenAudience.toLowerCase() !== 'graph') {
+      throw new Error('Valid value for \'tokenAudience\' is \'graph\'.');
+    }
+    if (domain.toLowerCase() === 'common') {
+      throw new Error('If the tokenAudience is specified as \'graph\' then \'domain\' cannot be the default \'commmon\' tenant. ' + 
+        'It must be the actual tenant (preferrably a string in a guid format).');
+    }
+  }
+
+  this.tokenAudience = options.tokenAudience;
   this.environment = options.environment;
   this.authorizationScheme = options.authorizationScheme;
   this.tokenCache = options.tokenCache;
@@ -68,7 +81,9 @@ function UserTokenCredentials(clientId, domain, username, password, options) {
 }
 
 function _retrieveTokenFromCache(callback) {
-  this.context.acquireToken(this.environment.activeDirectoryResourceId, this.username, this.clientId, function (err, result) {
+  var resource = this.environment.activeDirectoryResourceId;
+  if (this.tokenAudience && this.tokenAudience.toLowerCase() === 'graph') resource = this.environment.activeDirectoryGraphResourceId;
+  this.context.acquireToken(resource, this.username, this.clientId, function (err, result) {
     if (err) return callback(err);
     return callback(null, result);
   });
@@ -86,8 +101,9 @@ UserTokenCredentials.prototype.getToken = function (callback) {
   _retrieveTokenFromCache.call(this, function (err, result) {
     if (err) {
       //Some error occured in retrieving the token from cache. May be the cache was empty. Let's try again.
-      self.context.acquireTokenWithUsernamePassword(self.environment.activeDirectoryResourceId, self.username, 
-        self.password, self.clientId, function (err, tokenResponse) {
+      var resource = self.environment.activeDirectoryResourceId;
+      if (self.tokenAudience && self.tokenAudience.toLowerCase() === 'graph') resource = self.environment.activeDirectoryGraphResourceId;
+      self.context.acquireTokenWithUsernamePassword(resource, self.username, self.password, self.clientId, function (err, tokenResponse) {
         if (err) {
           return callback(new Error('Failed to acquire token for the user. \n' + err));
         }

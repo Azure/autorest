@@ -1121,10 +1121,15 @@
     "basic": {
       "properties": {
         "id": {
-          "type": "integer"
+          "type": "integer",
+          "description": "Basic Id"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name property with a very 
+          long description that 
+          does not fit on a single line 
+          and a line break."
         },
         "color": {
           "type": "string",

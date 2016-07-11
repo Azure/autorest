@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
+import org.joda.time.DateTime;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -214,9 +215,9 @@ public interface Ints {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Long> getUnixTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getUnixTime() throws ErrorException, IOException;
 
     /**
      * Get datetime encoded as Unix time value.
@@ -225,7 +226,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put datetime encoded as Unix time.
@@ -235,7 +236,7 @@ public interface Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUnixTimeDate(long intBody) throws ErrorException, IOException;
+    ServiceResponse<Void> putUnixTimeDate(DateTime intBody) throws ErrorException, IOException;
 
     /**
      * Put datetime encoded as Unix time.
@@ -245,16 +246,16 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUnixTimeDateAsync(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Long> getInvalidUnixTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getInvalidUnixTime() throws ErrorException, IOException;
 
     /**
      * Get invalid Unix time value.
@@ -263,16 +264,16 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Long> getNullUnixTime() throws ErrorException, IOException;
+    ServiceResponse<DateTime> getNullUnixTime() throws ErrorException, IOException;
 
     /**
      * Get null Unix time value.
@@ -281,6 +282,6 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullUnixTimeAsync(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+    ServiceCall getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
 }

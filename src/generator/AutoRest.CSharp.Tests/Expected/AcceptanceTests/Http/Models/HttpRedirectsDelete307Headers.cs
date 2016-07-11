@@ -30,7 +30,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// Initializes a new instance of the HttpRedirectsDelete307Headers
         /// class.
         /// </summary>
-        /// <param name="location">The redirect location for this request</param>
+        /// <param name="location">The redirect location for this
+        /// request</param>
         public HttpRedirectsDelete307Headers(string location = default(string))
         {
             Location = location;

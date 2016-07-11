@@ -20,6 +20,7 @@ function _createCredentials(parameters) {
   options.tokenCache = this.tokenCache;
   options.username = this.username;
   options.authorizationScheme = this.authorizationScheme;
+  options.tokenAudience = this.tokenAudience;
   if (parameters) {
     if (parameters.domain) {
       options.domain = parameters.domain;
@@ -32,6 +33,9 @@ function _createCredentials(parameters) {
     }
     if (parameters.tokenCache) {
       options.tokenCache = parameters.tokenCache;
+    }
+    if (parameters.tokenAudience) {
+      options.tokenAudience = parameters.tokenAudience;
     }
   }
   var credentials;
@@ -135,7 +139,10 @@ function _crossCheckUserNameWithToken(usernameFromMethodCall, userIdFromToken) {
  * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
  * for an example.
  *
- * @param {string} [options.domain] The domain or tenant id containing this application. Default value is 'common'
+ * @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'.If tokenAudience is provided 
+ * then domain should also be provided its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format).
+ *
+ * @param {string} [options.domain] The domain or tenant id containing this application. Default value is 'common'.
  *
  * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with. Default environment is "Public Azure".
  *
@@ -177,6 +184,7 @@ exports.interactive = function interactive(options, callback) {
     options.language = azureConstants.DEFAULT_LANGUAGE;
   }
 
+  this.tokenAudience = options.tokenAudience;
   this.environment = options.environment;
   this.domain = options.domain;
   this.clientId = options.clientId;
@@ -213,7 +221,12 @@ exports.interactive = function interactive(options, callback) {
     //to build the list of subscriptions across all tenants. So let's build both at the same time :).
     function (tenants, callback) {
       tenantList = tenants;
-      getSubscriptionsFromTenants.call(self, tenants, callback);
+      if (self.tokenAudience && self.tokenAudience.toLowerCase() === 'graph') {
+        // we dont need to get the subscriptionList if the tokenAudience is graph as graph clients are tenant based.
+        return callback(null, []);
+      } else {
+        return getSubscriptionsFromTenants.call(self, tenants, callback);
+      }
     }
   ], function(err, subscriptions) {
     if (err) return callback(err);
@@ -231,6 +244,8 @@ exports.interactive = function interactive(options, callback) {
  * @param {string} [options.clientId] The active directory application client id. 
  * See {@link https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/ Active Directory Quickstart for .Net} 
  * for an example.
+ * @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided 
+ * then domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format).
  * @param {string} [options.domain] The domain or tenant id containing this application. Default value 'common'.
  * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
  * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
@@ -272,7 +287,12 @@ exports.withUsernamePassword = function withUsernamePassword(username, password,
       },
       function (tenants, callback) {
         tenantList = tenants;
-        getSubscriptionsFromTenants.call(creds, tenants, callback);
+        if (options.tokenAudience && options.tokenAudience.toLowerCase() === 'graph') {
+          // we dont need to get the subscriptionList if the tokenAudience is graph as graph clients are tenant based.
+          return callback(null, []);
+        } else {
+          return getSubscriptionsFromTenants.call(options, tenants, callback);
+        }
       },
     ], function (err, subscriptions) {
       return callback(null, creds, subscriptions);
@@ -289,6 +309,7 @@ exports.withUsernamePassword = function withUsernamePassword(username, password,
  * @param {string} secret The application secret for the service principal.
  * @param {string} domain The domain or tenant id containing this application.
  * @param {object} [options] Object representing optional parameters.
+ * @param {string} [options.tokenAudience] The audience for which the token is requested. Valid value is 'graph'.
  * @param {AzureEnvironment} [options.environment] The azure environment to authenticate with.
  * @param {string} [options.authorizationScheme] The authorization scheme. Default value is 'bearer'.
  * @param {object} [options.tokenCache] The token cache. Default value is the MemoryCache object from adal.
@@ -313,10 +334,15 @@ exports.withServicePrincipalSecret = function withServicePrincipalSecret(clientI
   }
   creds.getToken(function (err) {
     if (err) return callback(err);
-    getSubscriptionsFromTenants.call(creds, [domain], function (err, subscriptions) {
-      if (err) return callback(err);
-      return callback(null, creds, subscriptions);
-    });
+    if (options.tokenAudience && options.tokenAudience.toLowerCase() === 'graph') {
+      // we dont need to get the subscriptionList if the tokenAudience is graph as graph clients are tenant based.
+      return callback(null, creds, []);
+    } else {
+      getSubscriptionsFromTenants.call(creds, [domain], function (err, subscriptions) {
+        if (err) return callback(err);
+        return callback(null, creds, subscriptions);
+      });
+    }
   });
 };
 

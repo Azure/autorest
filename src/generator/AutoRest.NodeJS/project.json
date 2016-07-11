@@ -1,0 +1,31 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest NodeJs Generator",
+    "tags": [ "Microsoft AutoRest Azure Generator Extensions" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "dependencies": {
+    "AutoRest.Extensions": {
+      "target": "project"
+    },
+    "AutoRest.Core": {
+      "target": "project"
+    }
+  }
+}

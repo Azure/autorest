@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -150,21 +150,28 @@ namespace AutoRest.CSharp
                 return null;
             }
 
-            string documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
+            string documentation = String.Empty;
             string summary = string.IsNullOrEmpty(property.Summary) ? property.Documentation : property.Summary;
 
-            string firstWord = summary.TrimStart().Split(' ').First();
-            if (firstWord.Length <= 1)
+            if (summary.TrimStart().StartsWith("Gets ", StringComparison.OrdinalIgnoreCase))
             {
-                documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                documentation = summary;
             }
             else
             {
-                documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
-                    ? summary
-                    : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                documentation = property.IsReadOnly ? "Gets " : "Gets or sets ";
+                string firstWord = summary.TrimStart().Split(' ').First();
+                if (firstWord.Length <= 1)
+                {
+                    documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                }
+                else
+                {
+                    documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
+                        ? summary
+                        : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                }
             }
-
             return documentation.EscapeXmlComment();
         }
 

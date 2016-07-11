@@ -50,6 +50,11 @@ function ApplicationTokenCredentials(clientId, domain, secret, options) {
     options.tokenCache = new adal.MemoryCache();
   }
 
+  if (options.tokenAudience && options.tokenAudience.toLowerCase() !== 'graph') {
+    throw new Error('Valid value for \'tokenAudience\' is \'graph\'.');
+  }
+
+  this.tokenAudience = options.tokenAudience;
   this.environment = options.environment;
   this.authorizationScheme = options.authorizationScheme;
   this.tokenCache = options.tokenCache;
@@ -76,7 +81,9 @@ function _retrieveTokenFromCache(callback) {
   //For service principal userId and clientId are the same thing. Since the token has _clientId property we shall 
   //retrieve token using it.
   var self = this;
-  self.context.acquireToken(self.environment.activeDirectoryResourceId, null, self.clientId, function (err, result) {
+  var resource = self.environment.activeDirectoryResourceId;
+  if (self.tokenAudience && self.tokenAudience.toLowerCase() === 'graph') resource = self.environment.activeDirectoryGraphResourceId;
+  self.context.acquireToken(resource, null, self.clientId, function (err, result) {
     if (err) {
       //make sure to remove the stale token from the tokencache. ADAL gives the same error message "Entry not found in cache."
       //for entry not being present in the cache and for accessToken being expired in the cache. We do not want the token cache 
@@ -109,7 +116,9 @@ ApplicationTokenCredentials.prototype.getToken = function (callback) {
         return callback(err);
       } else {
         //Some error occured in retrieving the token from cache. May be the cache was empty or the access token expired. Let's try again.
-        self.context.acquireTokenWithClientCredentials(self.environment.activeDirectoryResourceId, self.clientId, self.secret, function (err, tokenResponse) {
+        var resource = self.environment.activeDirectoryResourceId;
+        if (self.tokenAudience && self.tokenAudience.toLowerCase() === 'graph') resource = self.environment.activeDirectoryGraphResourceId;
+        self.context.acquireTokenWithClientCredentials(resource, self.clientId, self.secret, function (err, tokenResponse) {
           if (err) {
             return callback(new Error('Failed to acquire token for application with the provided secret. \n' + err));
           }

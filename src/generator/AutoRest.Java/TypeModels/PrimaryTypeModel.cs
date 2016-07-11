@@ -60,6 +60,10 @@ namespace AutoRest.Java.TypeModels
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
+                else if (Type == KnownPrimaryType.UnixTime)
+                {
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
+                }
                 else if (Type == KnownPrimaryType.Stream)
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.ByteArray);
@@ -76,6 +80,10 @@ namespace AutoRest.Java.TypeModels
             get
             {
                 if (Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    return new PrimaryTypeModel(KnownPrimaryType.DateTime);
+                }
+                else if (Type == KnownPrimaryType.UnixTime)
                 {
                     return new PrimaryTypeModel(KnownPrimaryType.DateTime);
                 }
@@ -200,6 +208,8 @@ namespace AutoRest.Java.TypeModels
             else if (primaryType.Type == KnownPrimaryType.UnixTime)
             {
                 Name = "long";
+                _imports.Add("org.joda.time.DateTime");
+                _imports.Add("org.joda.time.DateTimeZone");
             }
             else if (primaryType.Type == KnownPrimaryType.Uuid)
             {

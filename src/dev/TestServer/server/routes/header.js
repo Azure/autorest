@@ -201,7 +201,7 @@ var header = function (coverage, optionalCoverage) {
             break;
           }
         } else if (scenario === "min") {
-          if (value === "Mon, 01 Jan 0001 00:00:00 GMT" || value == "Mon, 01 Jan 1 00:00:00 GMT") {
+          if (value === "Mon, 01 Jan 0001 00:00:00 GMT" || value == "Mon, 01 Jan 1 00:00:00 GMT" || value == "Mon, 01 Jan    1 00:00:00 GMT") {
             coverage['HeaderParameterDateTimeRfc1123Min']++;
             res.status(200).end();
             break;

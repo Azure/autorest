@@ -279,6 +279,10 @@ namespace AutoRest.Java.TypeModels
             {
                 return target + " = " + source + ".getDateTime();";
             }
+            else if (type.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+                return target + " = new DateTime(" + source + " * 1000L, DateTimeZone.UTC);";
+            }
             else
             {
                 return target + " = " + source + ";";
