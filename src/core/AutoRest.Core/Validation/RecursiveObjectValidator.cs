@@ -85,14 +85,7 @@ namespace AutoRest.Core.Validation
             classRules = collectionRules.Concat(classRules);
 
             // Apply each rule for the entity
-            foreach (var rule in classRules)
-            {
-                foreach (var exception in rule.GetValidationMessages(entity))
-                {
-                    yield return exception;
-                }
-            }
-            yield break;
+            return classRules.SelectMany(rule => rule.GetValidationMessages(entity));
         }
 
         private IEnumerable<ValidationMessage> ValidateObjectProperties(object entity)

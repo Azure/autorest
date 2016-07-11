@@ -29,12 +29,6 @@ namespace AutoRest.Swagger.Validation
             return valid;
         }
 
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.NonEmptyClientName;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.NonEmptyClientName;
     }
 }

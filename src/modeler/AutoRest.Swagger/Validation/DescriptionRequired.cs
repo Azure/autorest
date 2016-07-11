@@ -8,24 +8,14 @@ namespace AutoRest.Swagger.Validation
 {
     public class DescriptionRequired : TypedRule<SwaggerObject>
     {
+        /// <summary>
+        /// This rule fails if the description is null and the reference is null (since the reference could have a description)
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public override bool IsValid(SwaggerObject entity)
-        {
-            bool valid = false;
+            => entity == null || entity.Description != null || string.IsNullOrEmpty(entity.Reference);
 
-            if (entity != null)
-            {
-                valid = entity.Description != null || !string.IsNullOrEmpty(entity.Reference);
-            }
-
-            return valid;
-        }
-
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.DescriptionRequired;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.DescriptionRequired;
     }
 }

@@ -8,17 +8,14 @@ namespace AutoRest.Swagger.Validation
 {
     public class OperationIdSingleUnderscore : TypedRule<string>
     {
+        /// <summary>
+        /// This rule passes if the entity contains no more than 1 underscore
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public override bool IsValid(string entity)
-        {
-            return entity != null && entity.Count(c => c == '_') <= 1;
-        }
+            => entity != null && entity.Count(c => c == '_') <= 1;
 
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.OneUnderscoreInOperationId;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.OneUnderscoreInOperationId;
     }
 }

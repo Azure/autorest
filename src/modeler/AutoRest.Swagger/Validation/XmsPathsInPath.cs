@@ -4,6 +4,7 @@
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -12,19 +13,11 @@ namespace AutoRest.Swagger.Validation
     {
         public override IEnumerable<ValidationMessage> GetValidationMessages(ServiceDefinition entity)
         {
-            if (entity != null && entity.CustomPaths != null)
-            {
-                foreach (var customPath in entity.CustomPaths.Keys)
-                {
-                    var basePath = GetBasePath(customPath);
-                    if (!entity.Paths.ContainsKey(basePath))
-                    {
-                        yield return CreateException(Exception, customPath);
-                    }
-                }
-            }
+            return entity?.CustomPaths?.Keys
+              .Where(customPath => !entity.Paths.ContainsKey(GetBasePath(customPath)))
+              .Select(basePath => CreateException(Exception, basePath))
 
-            yield break;
+              ?? Enumerable.Empty<ValidationMessage>();
         }
 
         private static string GetBasePath(string customPath)
@@ -32,17 +25,11 @@ namespace AutoRest.Swagger.Validation
             var index = customPath.IndexOf('?');
             if (index == -1)
             {
-                index = customPath.Length;
+                return customPath;
             }
             return customPath.Substring(0, index);
         }
 
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.XmsPathsMustOverloadPaths;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.XmsPathsMustOverloadPaths;
     }
 }

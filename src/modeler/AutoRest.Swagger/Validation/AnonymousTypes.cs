@@ -8,24 +8,13 @@ namespace AutoRest.Swagger.Validation
 {
     public class AnonymousTypes : TypedRule<SwaggerObject>
     {
-        public override bool IsValid(SwaggerObject entity)
-        {
-            bool valid = true;
+        /// <summary>
+        /// An <paramref name="entity"/> fails this rule if it doesn't have a reference (meaning it's defined inline)
+        /// </summary>
+        /// <param name="entity">The entity to validate</param>
+        /// <returns></returns>
+        public override bool IsValid(SwaggerObject entity) => entity == null || !string.IsNullOrEmpty(entity.Reference);
 
-            if (entity != null && string.IsNullOrEmpty(entity.Reference))
-            {
-                valid = false;
-            }
-
-            return valid;
-        }
-
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.AnonymousTypesDiscouraged;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.AnonymousTypesDiscouraged;
     }
 }

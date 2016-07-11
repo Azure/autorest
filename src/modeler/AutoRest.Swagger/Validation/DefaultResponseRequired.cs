@@ -9,17 +9,14 @@ namespace AutoRest.Swagger.Validation
 {
     public class DefaultResponseRequired : TypedRule<IDictionary<string, OperationResponse>>
     {
+        /// <summary>
+        /// This rule fails if the <paramref name="entity"/> lacks responses or lacks a default response
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public override bool IsValid(IDictionary<string, OperationResponse> entity)
-        {
-            return entity != null && entity.ContainsKey("default");
-        }
+            => entity != null && entity.ContainsKey("default");
 
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.DefaultResponseRequired;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.DefaultResponseRequired;
     }
 }

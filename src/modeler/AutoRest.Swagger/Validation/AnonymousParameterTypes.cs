@@ -8,25 +8,16 @@ namespace AutoRest.Swagger.Validation
 {
     public class AnonymousParameterTypes : TypedRule<SwaggerParameter>
     {
-        public override bool IsValid(SwaggerParameter entity)
-        {
-            bool valid = true;
+        private static AnonymousTypes AnonymousTypesRule = new AnonymousTypes();
 
-            if (entity != null && entity.Schema != null)
-            {
-                var anonymousTypesRule = new AnonymousTypes();
-                valid = anonymousTypesRule.IsValid(entity.Schema);
-            }
+        /// <summary>
+        /// An entity fails this rule if it has a schema, and that schema is an anonymous type
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public override bool IsValid(SwaggerParameter entity) =>
+            entity == null || entity.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
 
-            return valid;
-        }
-
-        public override ValidationExceptionName Exception
-        {
-            get
-            {
-                return ValidationExceptionName.AnonymousTypesDiscouraged;
-            }
-        }
+        public override ValidationExceptionName Exception => ValidationExceptionName.AnonymousTypesDiscouraged;
     }
 }
