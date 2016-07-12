@@ -369,6 +369,17 @@ namespace AutoRest.Ruby.TemplateModels
         }
 
         /// <summary>
+        /// Gets the type for operation result.
+        /// </summary>
+        public virtual string OperationReturnTypeString
+        {
+            get
+            {
+                return ReturnType.Body.Name.ToString();
+            }
+        }
+
+        /// <summary>
         /// Creates a code in form of string which deserializes given input variable of given type.
         /// </summary>
         /// <param name="inputVariable">The input variable.</param>
@@ -500,6 +511,24 @@ namespace AutoRest.Ruby.TemplateModels
         }
 
         /// <summary>
+        /// Generates response or body of method
+        /// </summary>
+        public virtual string ResponseGeneration()
+        {
+            IndentedStringBuilder builder = new IndentedStringBuilder("");
+            builder.AppendLine("response = {0}_async({1}).value!", Name, MethodParameterInvocation);
+            if (ReturnType.Body != null)
+            {
+                builder.AppendLine("response.body unless response.nil?");
+            }
+            else
+            {
+                builder.AppendLine("nil");
+            }
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// Gets the formatted status code.
         /// </summary>
         /// <param name="code">The status code.</param>
@@ -617,7 +646,7 @@ namespace AutoRest.Ruby.TemplateModels
             {
                 builder.AppendLine("{1} = @client.deserialize(result_mapper, {0}, '{1}')", responseVariable, valueReference);
             }
-             
+
             return builder.ToString();
         }
 
@@ -635,7 +664,7 @@ namespace AutoRest.Ruby.TemplateModels
             if (transformation.ParameterMappings.Count == 1)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "{0}.nil?",transformation.ParameterMappings[0].InputParameter.Name);
+                    "{0}.nil?", transformation.ParameterMappings[0].InputParameter.Name);
             }
             else
             {
