@@ -72,14 +72,13 @@ namespace AutoRest.Ruby.Azure
             base.NormalizeClientModel(serviceClient);
             AddRubyPageableMethod(serviceClient);
             ApplyPagination(serviceClient);
-
         }
 
         /// <summary>
         /// Adds method to use for autopagination.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
-        private static void AddRubyPageableMethod(ServiceClient serviceClient)
+        private void AddRubyPageableMethod(ServiceClient serviceClient)
         {
             if (serviceClient == null)
             {
@@ -95,6 +94,7 @@ namespace AutoRest.Ruby.Azure
                     if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
                         serviceClient.Methods.Insert(i, (Method)method.Clone());
+                        serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
                         i++;
                     }
                     serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
@@ -121,8 +121,8 @@ namespace AutoRest.Ruby.Azure
                 {
                     continue;
                 }
-                nextLinkName = (string)ext["nextLinkName"];
-                string itemName = (string)ext["itemName"] ?? "value";
+                nextLinkName = CodeNamer.GetPropertyName((string)ext["nextLinkName"]);
+                string itemName = CodeNamer.GetPropertyName((string)ext["itemName"] ?? "value");
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
                     CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;

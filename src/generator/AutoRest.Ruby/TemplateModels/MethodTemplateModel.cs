@@ -515,7 +515,7 @@ namespace AutoRest.Ruby.TemplateModels
         /// </summary>
         public virtual string ResponseGeneration()
         {
-            var builder = new IndentedStringBuilder("");
+            IndentedStringBuilder builder = new IndentedStringBuilder("");
             builder.AppendLine("response = {0}_async({1}).value!", Name, MethodParameterInvocation);
             if (ReturnType.Body != null)
             {

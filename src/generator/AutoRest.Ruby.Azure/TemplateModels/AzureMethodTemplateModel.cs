@@ -67,7 +67,6 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// </summary>
         public string InvokeNextMethodAsync()
         {
-            RubyCodeNamer cn = new RubyCodeNamer();
             StringBuilder builder = new StringBuilder();
             string nextMethodName;
             PageableExtension pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(Extensions[AzureExtensions.PageableExtension].ToString());
@@ -81,7 +80,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             }
             else
             {
-                nextMethodName = cn.GetMethodName((string)(Extensions["nextMethodName"]));
+                nextMethodName = (string)Extensions["nextMethodName"];
                 nextMethod = ServiceClient.Methods.Where(m => m.Name == nextMethodName).FirstOrDefault();
             }
 
@@ -276,7 +275,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 if (Extensions.ContainsKey("nextMethodName") && !Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
                     SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
-                    return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name) ;
+                    return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name);
                 }
                 return base.OperationReturnTypeString;
             }

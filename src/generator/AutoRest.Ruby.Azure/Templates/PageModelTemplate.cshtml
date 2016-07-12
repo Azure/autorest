@@ -29,10 +29,10 @@ module @(Settings.Namespace)
     @if (Model.IsPolymorphic && Model.BaseModelType == null)
     {
       @:@@@@discriminatorMap = Hash.new
-      @:@@@@discriminatorMap["@Model.SerializedName"] = "@Model.Name.ToLowerInvariant()"
+      @:@@@@discriminatorMap["@Model.SerializedName"] = "@Model.Name"
       foreach (var derivedType in Model.DerivedTypes)
         {
-          @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name.ToLowerInvariant()"
+          @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name"
       }
     }
 
@@ -45,42 +45,45 @@ module @(Settings.Namespace)
       @:
     }
     
+      # return [Proc] with next page method call.
       attr_accessor :next_method
 
       @EmptyLine
 
       #
-      # Gets the rest of the items for the request, enabling auto-pagination 
+      # Gets the rest of the items for the request, enabling auto-pagination.
       #
       @WrapComment("# ", string.Format("@return [Array<{0}>] operation results.", Model.ItemType))
       #
       def get_all_items
         items = @@@Model.ItemName
         page = self
-        while page.@(Model.NextLinkParameter.Name) != nil do
+        while page.@(Model.NextLinkName) != nil do
           page = page.get_next_page
           items.concat(page.@Model.ItemName)
         end
         items
       end
 
+      @EmptyLine
+
       #
-      # Gets the next page of results
+      # Gets the next page of results.
       #
       @WrapComment("# ", string.Format("@return [{0}] with next page content.", Model.Name))
       #
       def get_next_page
       @{
-        @:response = @@next_method.call(@@@(Model.NextLinkParameter.Name)).value! unless @@next_method.nil?
+        @:response = @@next_method.call(@@@(Model.NextLinkName)).value! unless @@next_method.nil?
         @:unless response.nil?
-          @:@@@(Model.NextLinkParameter.Name) = response.body.@(Model.NextLinkParameter.Name)
+          @:@@@(Model.NextLinkName) = response.body.@(Model.NextLinkName)
           @:@@@(Model.ItemName) = response.body.@(Model.ItemName)
           @:self
         @:end
       }
       end
 
-@EmptyLine
+      @EmptyLine
       #
       @WrapComment("# ", string.Format("Mapper for {0} class as Ruby Hash.", Model.Name))
       # This will be used for serialization/deserialization.

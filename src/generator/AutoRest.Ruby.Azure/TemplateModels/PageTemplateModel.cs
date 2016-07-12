@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.Collections.Generic;
@@ -18,12 +18,9 @@ namespace AutoRest.Ruby.Azure
         {
             this.NextLinkName = nextLinkName;
             this.ItemName = itemName;
-            this.NextLinkParameter = BuildNextLinkParameter();
         }
 
         public string NextLinkName { get; private set; }
-
-        public Parameter NextLinkParameter { get; private set; }
 
         public string ItemName { get; private set; }
 
@@ -45,22 +42,6 @@ namespace AutoRest.Ruby.Azure
                     return null;
                 }
             }
-        }
-
-        public Parameter BuildNextLinkParameter()
-        {
-            RubyCodeNamer rubyCodeNamer = new RubyCodeNamer();
-            Parameter param = new Parameter
-            {
-                Name = rubyCodeNamer.GetPropertyName(NextLinkName),
-                SerializedName = NextLinkName,
-                Type = new PrimaryType(KnownPrimaryType.String),
-                Documentation = "The NextLink from the previous successful call to List operation.",
-                IsRequired = true,
-                Location = ParameterLocation.Path
-            };
-            param.Extensions[SwaggerExtensions.SkipUrlEncodingExtension] = true;
-            return param;
         }
     }
 }
