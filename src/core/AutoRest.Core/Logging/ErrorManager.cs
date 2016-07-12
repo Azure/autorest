@@ -30,7 +30,7 @@ namespace AutoRest.Core.Logging
             }
 
             var errors =
-                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).ToList();
+                Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).Where(e => e != null).ToList();
             Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, FormatMessageString(message, args))
             {
                 Exception = exception
