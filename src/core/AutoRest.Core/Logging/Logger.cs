@@ -34,7 +34,9 @@ namespace AutoRest.Core.Logging
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public static void LogInfo(string message, params object[] args)
         {
+          lock( typeof( Logger ) ) {
             Entries.Add(new LogEntry(LogEntrySeverity.Info, string.Format(CultureInfo.InvariantCulture, message, args)));
+          }
         }
 
         /// <summary>
