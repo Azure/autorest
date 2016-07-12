@@ -9,7 +9,7 @@ var PluginError = gutil.PluginError;
 
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 var isLinux= (process.platform.lastIndexOf('linux') === 0);
-var isMac = (process.platform.lastIndexOf('mac') === 0);
+var isMac = (process.platform.lastIndexOf('darwin') === 0);
 
 function GetAutoRestFolder() {
   if (isWindows) {
