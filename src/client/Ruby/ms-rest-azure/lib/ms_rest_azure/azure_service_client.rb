@@ -122,7 +122,11 @@ module MsRestAzure
 
       fail AzureOperationError, 'The response from long running operation does not contain a body' if result.response.body.nil? || result.response.body.empty?
 
-      if result.body.respond_to?(:provisioning_state) && !result.body.provisioning_state.nil?
+      # On non flattened resource, we should find provisioning_state inside 'properties'
+      if result.body.respond_to?(:properties) && result.body.properties.respond_to?(:provisioning_state) && !result.body.properties.provisioning_state.nil?
+        polling_state.status = result.body.properties.provisioning_state
+      # On flattened resource, we should find provisioning_state at the top level
+      elsif result.body.respond_to?(:provisioning_state) && !result.body.provisioning_state.nil?
         polling_state.status = result.body.provisioning_state
       else
         polling_state.status = AsyncOperationStatus::SUCCESS_STATUS
