@@ -315,7 +315,12 @@ module MsRest
 
         unless model_props.nil?
           model_props.each do |key, value|
-            instance_variable = object.instance_variable_get("@#{key}")
+            begin
+              instance_variable = object.instance_variable_get("@#{key}")
+            rescue NameError
+              fail ValidationError, "instance variable '#{key}' is expected on '#{object}'."
+            end
+
             if !instance_variable.nil? && instance_variable.respond_to?(:validate)
               instance_variable.validate
             end
