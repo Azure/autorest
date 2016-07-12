@@ -35,6 +35,12 @@ namespace AutoRest.Swagger.Model
         public virtual string Format { get; set; }
 
         /// <summary>
+        /// Returns the KnownFormat of the Format string (provided it matches a KnownFormat)
+        /// Otherwise, returns KnownFormat.none
+        /// </summary>
+        public KnownFormat KnownFormat => KnownFormatExtensions.Parse(Format);
+
+        /// <summary>
         /// Describes the type of items in the array.
         /// </summary>
         public virtual Schema Items { get; set; }
@@ -97,56 +103,66 @@ namespace AutoRest.Swagger.Model
             return new ObjectBuilder(this, swaggerSpecBuilder);
         }
 
+        /// <summary>
+        /// Returns the PrimaryType that the SwaggerObject maps to, given the Type and the KnownFormat.
+        /// 
+        /// Note: Since a given language still may interpret the value of the Format after this, 
+        /// it is possible the final implemented type may not be the type given here. 
+        /// 
+        /// This allows languages to not have a specific PrimaryType decided by the Modeler.
+        /// 
+        /// For example, if the Type is DataType.String, and the KnownFormat is 'char' the C# generator 
+        /// will end up creating a char type in the generated code, but other languages will still 
+        /// use string.
+        /// </summary>
+        /// <returns>
+        /// The PrimaryType that best represents this object.
+        /// </returns>
         public PrimaryType ToType()
         {
             switch (Type)
             {
                 case DataType.String:
-                    if (string.Equals("date", Format, StringComparison.OrdinalIgnoreCase))
+                    switch (KnownFormat)
                     {
+                        case KnownFormat.date:
                         return new PrimaryType(KnownPrimaryType.Date);
-                    }
-                    if (string.Equals("date-time", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.date_time:
                         return new PrimaryType(KnownPrimaryType.DateTime);
-                    }
-                    if (string.Equals("date-time-rfc1123", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.date_time_rfc1123:
                         return new PrimaryType(KnownPrimaryType.DateTimeRfc1123);
-                    }
-                    if (string.Equals("byte", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.@byte:
                         return new PrimaryType(KnownPrimaryType.ByteArray);
-                    }
-                    if (string.Equals("duration", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.duration:
                         return new PrimaryType(KnownPrimaryType.TimeSpan);
-                    }
-                    if (string.Equals("uuid", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.uuid:
                         return new PrimaryType(KnownPrimaryType.Uuid);
-                    }
-                    if (string.Equals("base64url", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.base64url:
                         return new PrimaryType(KnownPrimaryType.Base64Url);
+                        default:
+                            return new PrimaryType(KnownPrimaryType.String);
                     }
-                    return new PrimaryType(KnownPrimaryType.String);
+                   
                 case DataType.Number:
-                    if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
+                    switch (KnownFormat)
                     {
+                        case KnownFormat.@decimal:
                         return new PrimaryType(KnownPrimaryType.Decimal);
+                        default:
+                            return new PrimaryType(KnownPrimaryType.Double);
                     }
-                    return new PrimaryType(KnownPrimaryType.Double);
+
                 case DataType.Integer:
-                    if (string.Equals("int64", Format, StringComparison.OrdinalIgnoreCase))
+                    switch (KnownFormat)
                     {
+                        case KnownFormat.int64:
                         return new PrimaryType(KnownPrimaryType.Long);
-                    }
-                    if (string.Equals("unixtime", Format, StringComparison.OrdinalIgnoreCase))
-                    {
+                        case KnownFormat.unixtime:
                         return new PrimaryType(KnownPrimaryType.UnixTime);
+                        default:
+                            return new PrimaryType(KnownPrimaryType.Int);
                     }
-                    return new PrimaryType(KnownPrimaryType.Int);
+
                 case DataType.Boolean:
                     return new PrimaryType(KnownPrimaryType.Boolean);
                 case DataType.Object:

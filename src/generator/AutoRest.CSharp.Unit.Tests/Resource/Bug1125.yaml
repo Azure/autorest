@@ -1,0 +1,200 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: my_operation
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  /operation2:
+    get:
+      operationId: my_operation2
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObjectWithDefault'
+
+  '/operation3/{letter}':
+    put:
+      operationId: my_operation3
+      parameters:
+        - name: letter
+          in: path
+          required: true
+          type: string
+          format: char
+          description: a single letter
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  '/operation4int/{anint}':
+    put:
+      operationId: my_operation4withint
+      parameters:
+        - name: anint
+          in: path
+          required: false
+          type: integer
+          format: int32
+          description: a single int
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+
+  '/operation4/{letter}':
+    put:
+      operationId: my_operation4
+      parameters:
+        - name: letter
+          in: path
+          required: false
+          type: string
+          format: char
+          description: a single letter that is optional
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  /operation5:
+    put:
+      operationId: my_operation5
+      parameters:
+        - name: someparams
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ParamObject'
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  /operation6:
+    put:
+      operationId: my_operation6
+      parameters:
+        - name: someparams
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ParamObjectWithDefault'
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+  '/operation7/{letter}':
+    get:
+      operationId: my_operation7
+      parameters:
+        - name: letter
+          in: path
+          required: true
+          type: string
+          format: char
+          minimum: a
+          maximum: z
+          description: a single letter that is between a and z (inclusive)
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObjectWithMinMax'
+
+  '/operation8/{letter}':
+    get:
+      operationId: my_operation8
+      parameters:
+        - name: letter
+          in: path
+          required: true
+          type: string
+          format: char
+          minimum: a
+          maximum: z
+          exclusiveMinimum: true
+          exclusiveMaximum: true
+          description: a single letter that is between a and z (exclusive)
+
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObjectWithExclusiveMinMax'
+
+
+definitions:
+  ResultObject:
+    properties:
+      SingleLetter:
+        type: string
+        format: char
+        description: 'This should be a char.'
+
+  ResultObjectWithDefault:
+    properties:
+      SingleLetterWithDefault:
+        type: string
+        format: char
+        default: x
+        description: 'This should be a char and the default should be x.'
+
+  ResultObjectWithMinMax:
+    properties:
+      SingleLetterWithDefault:
+        type: string
+        format: char
+        minimum: a
+        maximum: z
+        description: 'This should be a char and the default should be between a and z (inclusive).'
+
+  ResultObjectWithExclusiveMinMax:
+    properties:
+      SingleLetterWithDefault:
+        type: string
+        format: char
+        exclusiveMinimum: true
+        exclusiveMaximum: true
+        minimum: a
+        maximum: z
+        description: 'This should be a char and the default should be between a and z. (exclusive)'
+
+  ParamObject:
+    properties:
+      SingleLetter:
+        type: string
+        format: char
+        default: x
+        description: 'This should be a char'
+      
+  ParamObjectWithDefault:
+    properties:
+      SingleLetterWithDefault:
+        type: string
+        format: char
+        default: x
+        description: 'This should be a char and the default should be x.'
+      

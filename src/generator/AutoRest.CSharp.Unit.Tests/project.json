@@ -14,7 +14,7 @@
     "keyFile": "../../../Tools/MSSharedLibKey.snk",
 
     "copyToOutput": {
-      "include": ["Resource"],
+      "include": ["Resource"]
     }
   },
 
