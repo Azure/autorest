@@ -146,7 +146,7 @@ module MsRest
           parent_class = get_model(mapper[:type][:class_name])
           discriminator = parent_class.class_eval("@@discriminatorMap")
           model_name = response_body["#{mapper[:type][:polymorphic_discriminator]}"]
-          model_class = get_model(discriminator[model_name].capitalize)
+          model_class = get_model(discriminator[model_name])
         else
           model_class = get_model(mapper[:type][:class_name])
         end
