@@ -94,7 +94,10 @@ namespace AutoRest.Ruby.Azure
                     if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
                         serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
+                        if (serviceClient.Methods[i].Extensions.ContainsKey("nextMethodName"))
+                        {
+                            serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
+                        }
                         i++;
                     }
                     serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
