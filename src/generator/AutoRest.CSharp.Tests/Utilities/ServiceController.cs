@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -47,9 +48,19 @@ namespace AutoRest.CSharp.Tests.Utilities
         {
             get
             {
-                var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH") ??
-                    @"..\..\..\dev\TestServer";
-                return Path.Combine(serverPath, "server");
+                var serverPath = Environment.GetEnvironmentVariable("AUTOREST_TEST_SERVER_PATH").CombinePath("server");
+
+                if (!serverPath.DirectoryExists())
+                {
+                    // otherwise walk up the path till we find a folder 
+                    serverPath = @"dev\TestServer\server".FindFolderByWalkingUpPath();
+                    if (serverPath == null)
+                    {
+                        throw new Exception("Unable to find TestServerPath.\r\n");
+                    }
+                }
+
+                return serverPath;
             }
         }
 

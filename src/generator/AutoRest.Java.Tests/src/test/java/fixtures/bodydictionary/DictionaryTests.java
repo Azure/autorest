@@ -434,6 +434,14 @@ public class DictionaryTests {
     }
 
     @Test
+    public void getBase64Url() throws Exception {
+        Map<String, byte[]> result = client.dictionarys().getBase64Url().getBody();
+        Assert.assertEquals("a string that gets encoded with base64url", new String(result.get("0")));
+        Assert.assertEquals("test string", new String(result.get("1")));
+        Assert.assertEquals("Lorem ipsum", new String(result.get("2")));
+    }
+
+    @Test
     public void getComplexNull() throws Exception {
         Map<String, Widget> result = client.dictionarys().getComplexNull().getBody();
         Assert.assertNull(result);

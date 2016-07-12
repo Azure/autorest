@@ -1,0 +1,45 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consumes has an unsupported MIME type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "Foo_Post",
+        "description": "Food post",
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/bar?op=baz": {
+      "post": {
+        "operationId": "Bar_Post",
+        "description": "Baz operation on bar",
+        "responses": {
+          "default": {
+            "description": "Default response"
+          }
+        }
+      }
+    }
+  }
+}

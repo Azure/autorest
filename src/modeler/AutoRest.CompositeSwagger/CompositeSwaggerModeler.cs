@@ -13,6 +13,8 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using AutoRest.Core.Validation;
+using System.Collections.Generic;
 
 namespace AutoRest.CompositeSwagger
 {
@@ -270,6 +272,13 @@ namespace AutoRest.CompositeSwagger
                         propertyName));
                 }
             }
+        }
+
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
+        {
+            // No composite modeler validation messages yet
+            messages = new List<ValidationMessage>();
+            return Build();
         }
     }
 }

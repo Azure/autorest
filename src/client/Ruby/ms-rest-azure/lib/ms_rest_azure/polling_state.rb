@@ -35,7 +35,11 @@ module MsRestAzure
       update_response(azure_response.response)
       @resource = azure_response.body
 
-      if !@resource.nil? && @resource.respond_to?(:provisioning_state) && !@resource.provisioning_state.nil?
+      # On non flattened resource, we should find provisioning_state inside 'properties'
+      if (!@resource.nil? && @resource.respond_to?(:properties) && @resource.properties.respond_to?(:provisioning_state) && !@resource.properties.provisioning_state.nil?)
+        @status = @resource.properties.provisioning_state
+      # On flattened resource, we should find provisioning_state at the top level
+      elsif !@resource.nil? && @resource.respond_to?(:provisioning_state) && !@resource.provisioning_state.nil?
         @status = @resource.provisioning_state
       else
         case @response.status

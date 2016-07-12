@@ -3,6 +3,7 @@ package fixtures.bodystring;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -90,5 +91,28 @@ public class StringOperationsTests {
             Assert.assertEquals(ServiceException.class, ex.getClass());
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
+    }
+
+    @Test
+    public void getBase64Encoded() throws Exception {
+        byte[] result = client.strings().getBase64Encoded().getBody();
+        Assert.assertEquals("a string that gets encoded with base64", new String(result));
+    }
+
+    @Test
+    public void getBase64UrlEncoded() throws Exception {
+        byte[] result = client.strings().getBase64UrlEncoded().getBody();
+        Assert.assertEquals("a string that gets encoded with base64url", new String(result));
+    }
+
+    @Test
+    public void getNullBase64UrlEncoded() throws Exception {
+        byte[] result = client.strings().getNullBase64UrlEncoded().getBody();
+        Assert.assertNull(result);
+    }
+
+    @Test
+    public void putBase64UrlEncoded() throws Exception {
+        client.strings().putBase64UrlEncoded("a string that gets encoded with base64url".getBytes());
     }
 }

@@ -1,5 +1,6 @@
 package fixtures.url;
 
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -144,6 +145,12 @@ public class PathsTests {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }
+
+    @Test
+    public void base64Url() throws Exception {
+        client.paths().base64Url("lorem".getBytes());
+    }
+
     /*
     @Test
     public void arrayCsvInPath() throws Exception {
@@ -155,4 +162,9 @@ public class PathsTests {
         client.getPathsOperations().arrayCsvInPath(arrayPath);
     }
     */
+
+    @Test
+    public void unixTimeUrl() throws Exception {
+        client.paths().unixTimeUrl(DateTime.parse("2016-04-13T00:00:00Z"));
+    }
 }

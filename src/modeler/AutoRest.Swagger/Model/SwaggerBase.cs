@@ -4,11 +4,14 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model
 {
     [Serializable]
-    public class SwaggerBase
+    [Rule(typeof(ClientNameRequired))]
+    public abstract class SwaggerBase
     {
         public SwaggerBase()
         {

@@ -1,0 +1,30 @@
+{
+  "version": "0.17.0-*",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "AutoRest Swagger Modeler",
+    "tags": [ "Microsoft AutoRest Generator Extensions" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "dependencies": {
+    "Newtonsoft.Json": "[9.0.1,10.0)",
+    "System.Threading.Tasks": "4.0.0",
+    "AutoRest.Core": {
+      "target": "project"
+    }
+  }
+}

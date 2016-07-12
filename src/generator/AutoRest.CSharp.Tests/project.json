@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-*",
+  "version": "0.17.0-*",
   "authors": [ "Microsoft" ],
 
   "packOptions": {
@@ -10,25 +10,26 @@
   },
   
   "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk",
     "compile": {
-     "exclude": [ "CSharpCodeNamingFrameworkTests.*" ]
+     "exclude": [ "CSharpCodeNamingFrameworkTestsXX.*" ]
     }
   },
 
   "testRunner": "xunit",
   "frameworks": {
-    "netcoreapp1.0": {
-      "buildOptions": { "define": [ "PORTABLE" ] },
-      "imports": ["dnxcore50", "portable-net45+win8"]
+    "net451" :{
+
     }
+
   },
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0-*"
-    }, 
     "Microsoft.NETCore.Platforms": "1.0.1",
     "Microsoft.Rest.ClientRuntime":{ "target": "project"},
+    "AutoRest.Core": { "target": "project" },
+    "AutoRest.CSharp": { "target": "project" },
     "Microsoft.Extensions.Logging": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Filter": "1.0.0",

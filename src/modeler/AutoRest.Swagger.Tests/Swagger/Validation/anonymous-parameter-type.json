@@ -1,0 +1,30 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Consumes has an unsupported MIME type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "test": {
+      "name": "PetCreateOrUpdateParameter",
+      "description": "test",
+      "in": "body",
+      "schema": {
+        "type": "string",
+        "description": "error"
+      }
+    }
+  }
+}

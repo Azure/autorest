@@ -25,7 +25,8 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the Order class.
         /// </summary>
-        /// <param name="status">Order Status. Possible values include: 'placed', 'approved', 'delivered'</param>
+        /// <param name="status">Order Status. Possible values include:
+        /// 'placed', 'approved', 'delivered'</param>
         public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), DateTime? shipDate = default(DateTime?), string status = default(string), bool? complete = default(bool?))
         {
             Id = id;

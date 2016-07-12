@@ -469,7 +469,7 @@ public interface Paths {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> base64Url(String base64UrlPath) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -479,7 +479,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall base64UrlAsync(String base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -510,7 +510,7 @@ public interface Paths {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> unixTimeUrl(long unixTimeUrlPath) throws ErrorException, IOException;
+    ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException;
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -520,6 +520,6 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall unixTimeUrlAsync(long unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -36,25 +36,25 @@ namespace Petstore.Models
         }
 
         /// <summary>
-        /// Gets or sets gets the blob endpoint.
+        /// Gets the blob endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "blob")]
         public string Blob { get; set; }
 
         /// <summary>
-        /// Gets or sets gets the queue endpoint.
+        /// Gets the queue endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "queue")]
         public string Queue { get; set; }
 
         /// <summary>
-        /// Gets or sets gets the table endpoint.
+        /// Gets the table endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "table")]
         public string Table { get; set; }
 
         /// <summary>
-        /// Gets or sets gets the file endpoint.
+        /// Gets the file endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "file")]
         public string File { get; set; }

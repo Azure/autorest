@@ -1,7 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Tests.Utilities
 {
@@ -140,6 +143,71 @@ namespace AutoRest.CSharp.Tests.Utilities
                     break;
             }
             return returnCode;
+        }
+
+        public static bool DirectoryExists(this string path)
+        {
+            try
+            {
+                return Directory.Exists(path);
+            }
+            catch
+            {
+            }
+            return false;
+        }
+
+        public static string CombinePath(this string basePath, string additionalPath)
+        {
+            if (basePath == null)
+            {
+                basePath = Directory.GetCurrentDirectory();
+            }
+            if (additionalPath == null)
+            {
+                return basePath;
+            }
+
+            try
+            {
+                return Path.Combine(basePath, additionalPath);
+            }
+            catch
+            {
+            }
+            return null;
+        }
+
+        public static string FindFolderByWalkingUpPath(this string folderName, string currentDirectory = null)
+        {
+            try
+            {
+                currentDirectory = currentDirectory ?? Environment.CurrentDirectory;
+                if (!string.IsNullOrEmpty(currentDirectory))
+                {
+                    try
+                    {
+                        currentDirectory = Path.GetFullPath(currentDirectory);
+                    }
+                    catch
+                    {
+                    }
+
+                    while (!string.IsNullOrEmpty(currentDirectory))
+                    {
+                        var chkPath = Path.Combine(currentDirectory, folderName);
+                        if (chkPath.DirectoryExists())
+                        {
+                            return chkPath;
+                        }
+                        currentDirectory = Path.GetDirectoryName(currentDirectory);
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return null;
         }
     }
 }

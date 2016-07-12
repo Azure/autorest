@@ -13,6 +13,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Swagger
 {
@@ -53,19 +54,30 @@ namespace AutoRest.Swagger
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
+        public override ServiceClient Build()
+        {
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+            return Build(out messages);
+        }
+
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override ServiceClient Build()
+        public override ServiceClient Build(out IEnumerable<ValidationMessage> messages)
         {
             Logger.LogInfo(Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
-                throw ErrorManager.CreateError("Input parameter is required.");
+                throw ErrorManager.CreateError(Resources.InputRequired);
             }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            // Look for semantic errors and warnings in the document.
+            var validator = new RecursiveObjectValidator();
+            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
@@ -187,7 +199,7 @@ namespace AutoRest.Swagger
             ServiceClient.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
             {
-                ServiceDefinition.Schemes = new List<TransferProtocolScheme> {DefaultProtocol};
+                ServiceDefinition.Schemes = new List<TransferProtocolScheme> { DefaultProtocol };
             }
             if (string.IsNullOrEmpty(ServiceDefinition.Host))
             {
@@ -209,7 +221,7 @@ namespace AutoRest.Swagger
             // Load any external references
             foreach (var reference in ServiceDefinition.ExternalReferences)
             {
-                string[] splitReference = reference.Split(new[] {'#'}, StringSplitOptions.RemoveEmptyEntries);
+                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
                 Debug.Assert(splitReference.Length == 2);
                 string filePath = splitReference[0];
                 string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);

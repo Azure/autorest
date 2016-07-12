@@ -28,7 +28,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseFloatHeaders class.
         /// </summary>
-        /// <param name="value">response with header value "value": 0.07 or -3.0</param>
+        /// <param name="value">response with header value "value": 0.07 or
+        /// -3.0</param>
         public HeaderResponseFloatHeaders(double? value = default(double?))
         {
             Value = value;

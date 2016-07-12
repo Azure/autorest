@@ -95,7 +95,7 @@ namespace AutoRest.Python
                     string prefix = m.Index > 0 ? "_" : string.Empty;
                     if (ShouldInsertExtraLowerScoreInTheMiddle(name, m, matchedStr))
                     {
-                        // We will add extra _ if there are multiple capital chars together
+                        // We will add extra _ if there are multiple upper case chars together
                         return prefix + matchedStr.Substring(0, matchedStr.Length - 1) + "_" + matchedStr.Substring(matchedStr.Length - 1);
                     }
                     else

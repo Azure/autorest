@@ -31,9 +31,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsDeleteAsyncNoRetrySucceededHeaders class.
         /// </summary>
-        /// <param name="azureAsyncOperation">Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200</param>
-        /// <param name="location">Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200</param>
-        /// <param name="retryAfter">Number of milliseconds until the next poll should be sent, will be set to zero</param>
+        /// <param name="azureAsyncOperation">Location to poll for result
+        /// status: will be set to
+        /// /lro/deleteasync/noretry/succeeded/operationResults/200</param>
+        /// <param name="location">Location to poll for result status: will be
+        /// set to
+        /// /lro/deleteasync/noretry/succeeded/operationResults/200</param>
+        /// <param name="retryAfter">Number of milliseconds until the next
+        /// poll should be sent, will be set to zero</param>
         public LROsDeleteAsyncNoRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;

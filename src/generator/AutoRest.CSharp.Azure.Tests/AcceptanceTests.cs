@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -249,8 +249,11 @@ namespace AutoRest.CSharp.Azure.Tests
                                     new Product { Location = "West US" }, customHeaders).Result);
             }
         }
-
+#if PORTABLE
         [Fact(Skip = "Failing in CoreCLR - TODO: debug and fix")]
+#else 
+        [Fact]
+#endif
         public void LroHappyPathTestsRest()
         {
             SwaggerSpecRunner.RunTests(
@@ -341,26 +344,26 @@ namespace AutoRest.CSharp.Azure.Tests
 
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product {Location = "West US"}));
-                // TODO: 4103936 Fix exception type
+                
 #if !PORTABLE
-                Assert.Throws<RestException>(
+                Assert.Throws<SerializationException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product {Location = "West US"}));
-                // TODO: 4103936 Fix exception type
+                
                 // UriFormatException invalidHeader = null;
-                var invalidHeader = Assert.Throws<UriFormatException>(() => client.LROSADs.Delete202RetryInvalidHeader());
+                var invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Delete202RetryInvalidHeader());
                 Assert.NotNull(invalidHeader.Message);
 
-                // TODO: 4103936 Fix exception type
+                
                 var invalidAsyncHeader =
-                    Assert.Throws<UriFormatException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
+                    Assert.Throws<SerializationException>(() => client.LROSADs.DeleteAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
 
-                // TODO: 4103936 Fix exception type
-                invalidHeader = Assert.Throws<UriFormatException>(() => client.LROSADs.Post202RetryInvalidHeader());
+                
+                invalidHeader = Assert.Throws<SerializationException>(() => client.LROSADs.Post202RetryInvalidHeader());
                 Assert.NotNull(invalidHeader.Message);
-                // TODO: 4103936 Fix exception type
+                
                 invalidAsyncHeader =
-                    Assert.Throws<UriFormatException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
+                    Assert.Throws<SerializationException>(() => client.LROSADs.PostAsyncRelativeRetryInvalidHeader());
                 Assert.NotNull(invalidAsyncHeader.Message);
 #endif
                 var invalidPollingBody =
@@ -483,6 +486,7 @@ namespace AutoRest.CSharp.Azure.Tests
 #if PORTABLE
                 float totalTests = report.Count - 6;
 #else
+                // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
                 float totalTests = report.Count;
 #endif
                 float executedTests = report.Values.Count(v => v > 0);
@@ -496,7 +500,7 @@ namespace AutoRest.CSharp.Azure.Tests
                     _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
                         "The test coverage for Azure is {0}/{1}",
                         executedTests, totalTests));
-                    Assert.Equal(executedTests, totalTests);
+                    Assert.Equal(totalTests,executedTests);
                 }
             }
         }

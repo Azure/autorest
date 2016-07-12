@@ -147,6 +147,9 @@
   <data name="InfoSectionMissing" xml:space="preserve">
     <value>Swagger specification is missing info section</value>
   </data>
+  <data name="InputRequired" xml:space="preserve">
+    <value>Input parameter is required.</value>
+  </data>
   <data name="InvalidAncestors" xml:space="preserve">
     <value>The schema's '{0}' ancestors should have at lease one property</value>
   </data>

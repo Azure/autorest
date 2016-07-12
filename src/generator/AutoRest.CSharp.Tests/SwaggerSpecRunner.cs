@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
 using System.IO;
 using System.Linq;
+using AutoRest.Core;
 using Xunit;
 
 namespace AutoRest.CSharp.Tests
@@ -81,7 +82,7 @@ namespace AutoRest.CSharp.Tests
         }
     }
 
-    public class Settings
+    public class _Settings
     {        
         public string Input { get; set; }
         

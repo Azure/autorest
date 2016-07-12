@@ -60,35 +60,44 @@ namespace AutoRest
                     {
                         if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                         {
-                            Console.WriteLine(Resources.GenerationFailed);
-                            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                                typeof(Program).Assembly.ManifestModule.Name,
-                                string.Join(" ", args)));
+                            if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(Resources.GenerationFailed);
+                                Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                                    typeof(Program).Assembly.ManifestModule.Name,
+                                    string.Join(" ", args)));
+                            }
                         }
                         else
                         {
-                            Console.WriteLine(Resources.GenerationComplete,
-                                settings.CodeGenerator, settings.Input);
+                            if (!string.Equals("None", settings.CodeGenerator, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Console.WriteLine(Resources.GenerationComplete,
+                                    settings.CodeGenerator, settings.Input);
+                            }
                             exitCode = (int)ExitCode.Success;
                         }
                     }
 
+                    // Write all messages to Console
                     Console.ResetColor();
-                    // Include LogEntrySeverity.Infos for verbose logging.
-                    if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
+                    var validationLevel = settings?.ValidationLevel ?? LogEntrySeverity.Error;
+                    var shouldShowVerbose = settings?.Verbose ?? false;
+                    foreach (var severity in (LogEntrySeverity[])Enum.GetValues(typeof(LogEntrySeverity)))
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Logger.WriteInfos(Console.Out);
+                        // Set the color if the severity level has a set console color
+                        Console.ForegroundColor = severity.GetColorForSeverity();
+                        // Determine if this severity of messages should be treated as errors
+                        bool isErrorMessage = severity >= validationLevel;
+                        // Set the output stream based on if the severity should be an error or not
+                        var outputStream = isErrorMessage ? Console.Error : Console.Out;
+                        // If it's an error level severity or we want to see all output, write to console
+                        if (isErrorMessage || shouldShowVerbose)
+                        {
+                            Logger.WriteMessages(outputStream, severity, shouldShowVerbose);
+                        }
+                        Console.ResetColor();
                     }
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Logger.WriteWarnings(Console.Out);
-
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Logger.WriteErrors(Console.Error,
-                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                    Console.ResetColor();
                 }
             }
             catch (Exception exception)

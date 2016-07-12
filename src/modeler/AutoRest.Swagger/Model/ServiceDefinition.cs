@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model
 {
@@ -13,6 +15,7 @@ namespace AutoRest.Swagger.Model
     /// Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
     /// </summary>
     [Serializable]
+    [Rule(typeof(XmsPathsInPath))]
     public class ServiceDefinition : SpecObject
     {
         public ServiceDefinition()
@@ -86,6 +89,7 @@ namespace AutoRest.Swagger.Model
         /// Dictionary of parameters that can be used across operations.
         /// This property does not define global parameters for all operations.
         /// </summary>
+        [CollectionRule(typeof(AnonymousParameterTypes))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>

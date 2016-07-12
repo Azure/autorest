@@ -423,6 +423,15 @@ public class ArrayTests {
     }
 
     @Test
+    public void getBase64Url() throws Exception {
+        List<byte[]> result = client.arrays().getBase64Url().getBody();
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("a string that gets encoded with base64url", new String(result.get(0)));
+        Assert.assertEquals("test string", new String(result.get(1)));
+        Assert.assertEquals("Lorem ipsum", new String(result.get(2)));
+    }
+
+    @Test
     public void getComplexNull() throws Exception {
         try {
             List<Product> result = client.arrays().getComplexNull().getBody();

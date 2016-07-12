@@ -26,7 +26,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the CatalogArrayOfDictionary class.
         /// </summary>
-        /// <param name="productArrayOfDictionary">Array of dictionary of products</param>
+        /// <param name="productArrayOfDictionary">Array of dictionary of
+        /// products</param>
         public CatalogArrayOfDictionary(IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>))
         {
             ProductArrayOfDictionary = productArrayOfDictionary;

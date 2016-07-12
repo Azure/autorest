@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AspNet.Razor">
-      <HintPath>$(SolutionDir)packages\Microsoft.AspNet.Razor.4.0.0-beta3\lib\net45\Microsoft.AspNet.Razor.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.4.0.0-beta3\lib\net45\Microsoft.AspNet.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
