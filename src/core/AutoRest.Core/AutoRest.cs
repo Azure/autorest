@@ -57,7 +57,7 @@ namespace AutoRest.Core
 
                 if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
                 {
-                    throw ErrorManager.CreateError(Resources.CodeGenerationError);
+                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
                 }
             }
             catch (Exception exception)

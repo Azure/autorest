@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity"></param>
         /// <returns></returns>
         public override bool IsValid(SwaggerObject entity)
-            => entity == null || entity.Description != null || string.IsNullOrEmpty(entity.Reference);
+            => entity == null || entity.Description != null || !string.IsNullOrEmpty(entity.Reference);
 
         public override ValidationExceptionName Exception => ValidationExceptionName.DescriptionRequired;
     }
