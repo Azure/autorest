@@ -9,7 +9,8 @@ Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or 
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
-To compile the code in Visual Studio IDE, 
+To compile the code in Visual Studio IDE,
+ 
 - Ensure you are using Visual Studio 2015 (Update 3)
 - Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
 - Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
@@ -34,7 +35,7 @@ Ensure that your environment includes the `JAVA_HOME`.
 
 Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code. 
 
-In SDK Manager, make sure that build tools >23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows.
+In SDK Manager, make sure that build tools 23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows. If it is not there, it may be in your hidden `AppData\Local` directory.
 
 #### Gradle
 Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).
@@ -67,6 +68,9 @@ gem install bundler
 Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
 >set PATH=PATH;C:\Python35
 
+### Testing Your Environment
+To make sure you've set up all the prerequisites correctly, run `.\Tools\Verify-Settings.ps1` before you attempt to build.
+
 ## Build
 
 ### Visual Studio Build
@@ -74,7 +78,9 @@ There are 2 solutions used to build C# ClientRuntime and AutoRest code generator
 
 ###Command Line
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
+
 >npm install gulp -g
+
 >gulp
 
 If you would like to see what commands are available to you, run `gulp -T`. That will list all of the gulp tasks you can run. By default, just running `gulp` will run a build that will execute clean, build, code analysis, package and test.
@@ -110,6 +116,19 @@ If you would like to see what commands are available to you, run `gulp -T`. That
 Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
  >gulp test
+
+### Troubleshooting
+#### Strong Name Validation Errors
+
+If you're running Windows and get errors like this while building:
+
+> Unhandled Exception: System.IO.FileLoadException: Could not load file or assembly 'AutoRest, Version=0.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. Strong name validation failed. (Exception from HRESULT: 0x8013141A) ---> System.Security.SecurityException: Strong name validation failed. (Exception from HRESULT: 0x8013141A)
+
+It means you need to disable strong name validation on your dev box:
+
+`"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -Vr *`
+`"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vr *`
+
 
 ### Running AutoRest
 #### Command Line
