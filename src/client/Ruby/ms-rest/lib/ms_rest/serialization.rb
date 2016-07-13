@@ -318,7 +318,7 @@ module MsRest
             begin
               instance_variable = object.instance_variable_get("@#{key}")
             rescue NameError
-              fail ValidationError, "instance variable '#{key}' is expected on '#{object}'."
+              fail ValidationError, "instance variable '#{key}' is expected on '#{object.class}'."
             end
 
             if !instance_variable.nil? && instance_variable.respond_to?(:validate)
