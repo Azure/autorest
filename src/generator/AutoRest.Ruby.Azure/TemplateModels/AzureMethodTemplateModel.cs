@@ -282,7 +282,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                     }
                     catch (NullReferenceException nr)
                     {
-                        throw ErrorManager.CreateError(nr, AutoRest.Core.Properties.Resources.CodeGenerationFailed, nr.Message);
+                        throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "No collection type exists in pageable operation return type: {0}", nr.StackTrace));
                     }
                 }
                 return base.OperationReturnTypeString;
