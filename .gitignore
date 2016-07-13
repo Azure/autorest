@@ -188,3 +188,6 @@ src/generator/AutoRest.Ruby*/*/RspecTests/Generated/*
 dnx-clr-win-x86*/
 dnx-coreclr-win-x86*/
 /dnx
+
+# Gemfile.lock
+Gemfile.lock
