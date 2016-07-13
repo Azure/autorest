@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using AutoRest.Core.ClientModel;
+using AutoRest.Core.Logging;
 using AutoRest.Extensions.Azure;
 using AutoRest.Extensions.Azure.Model;
 using AutoRest.Ruby.Azure.Properties;
@@ -274,8 +275,15 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             {
                 if (Extensions.ContainsKey("nextMethodName") && !Extensions.ContainsKey(AzureExtensions.PageableExtension))
                 {
-                    SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
-                    return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name);
+                    try
+                    {
+                        SequenceType sequenceType = ((CompositeType)ReturnType.Body).Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
+                        return string.Format(CultureInfo.InvariantCulture, "Array<{0}>", sequenceType.ElementType.Name);
+                    }
+                    catch (NullReferenceException nr)
+                    {
+                        throw ErrorManager.CreateError(nr, AutoRest.Core.Properties.Resources.CodeGenerationFailed, nr.Message);
+                    }
                 }
                 return base.OperationReturnTypeString;
             }
