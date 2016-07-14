@@ -7,6 +7,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Core.Validation
 {
@@ -97,7 +99,14 @@ namespace AutoRest.Core.Validation
                 var value = prop.GetValue(entity);
 
                 // Get any rules defined on this property and apply them to the property value
-                var propertyRules = prop.GetCustomAttributes<RuleAttribute>(true);
+                var propertyRules = prop.GetCustomAttributes<RuleAttribute>(true).ReEnumerable();
+
+                // if the property has no defined rules, let's supply some defaults
+                if (propertyRules.IsNullOrEmpty())
+                {
+                    propertyRules = GetDefaultRules().ReEnumerable();
+                }
+
                 foreach (var rule in propertyRules)
                 {
                     foreach (var exception in rule.GetValidationMessages(value))
@@ -117,6 +126,16 @@ namespace AutoRest.Core.Validation
             }
             yield break;
         }
+
+        /// <summary>
+        /// The collection of default rules applies to all properties that do not define rules
+        /// These can impose global 
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<RuleAttribute> GetDefaultRules()
+        {
+            yield break;
+        }
     }
 
     internal static class RulesExtensions
@@ -132,7 +151,7 @@ namespace AutoRest.Core.Validation
         {
             if (entity == null)
             {
-                return new List<PropertyInfo>();
+                return Enumerable.Empty<PropertyInfo>();
             }
             return entity.GetType().GetProperties(BindingFlags.FlattenHierarchy | BindingFlags.Public | BindingFlags.Instance)
                          .Where(prop => !Attribute.IsDefined(prop, JsonExtensionDataType))

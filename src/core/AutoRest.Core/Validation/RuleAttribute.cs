@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Core.Validation
 {
@@ -13,15 +14,13 @@ namespace AutoRest.Core.Validation
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        public Type RuleType { get; }
-
-        private Rule Rule;
+        private readonly Rule _rule;
 
         public RuleAttribute(Type ruleType)
         {
             if (typeof(Rule).IsAssignableFrom(ruleType))
             {
-                Rule = (Rule)Activator.CreateInstance(ruleType);
+                _rule = (Rule)Activator.CreateInstance(ruleType);
             }
         }
 
@@ -30,16 +29,6 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity)
-        {
-            if (Rule != null)
-            {
-                foreach(var message in Rule.GetValidationMessages(entity))
-                {
-                    yield return message;
-                }
-            }
-            yield break;
-        }
+        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity) => _rule?.GetValidationMessages(entity) ?? Enumerable.Empty<ValidationMessage>();
     }
 }
