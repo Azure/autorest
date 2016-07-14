@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0.25402" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\</SolutionDir>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0.25402</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.Props')" />
+  <PropertyGroup Label="Globals">
+    <RootNamespace>AutoRest.CSharp.Azure.Fluent</RootNamespace>
+    <ProjectGuid>8464A22C-0C8D-4C84-85A8-0ACE787BDC75</ProjectGuid>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)tools\Autorest.xproj.targets"/>
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets"  Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
+</Project>
