@@ -409,7 +409,8 @@ class StorageAccountsOperations(object):
             self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
         """Lists the access keys for the specified storage account.
 
-        :param resource_group_name: The name of the resource group.
+        :param resource_group_name: The name of the resource group within the
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account.
         :type account_name: str

@@ -32,7 +32,7 @@ class Queries(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_query=False, custom_headers=None, raw=False, **operation_config):
+            self, bool_query=True, custom_headers=None, raw=False, **operation_config):
         """Get true Boolean value on path.
 
         :param bool_query: true boolean value

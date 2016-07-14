@@ -8,6 +8,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-skip-url-encoding](#x-ms-skip-url-encoding) - skips URL encoding for path and query parameters
 * [x-ms-enum](#x-ms-enum) - additional metadata for enums
 * [x-ms-parameter-grouping](#x-ms-parameter-grouping) - groups method parameters in generated clients
+* [x-ms-parameter-location](#x-ms-parameter-location) - provides a mechanism to specify that the global parameter is actually a parameter on the operation and not a client property.
 * [x-ms-paths](#x-ms-paths) - alternative to [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) that allows [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) to have query parameters for non pure REST APIs
 * [x-ms-client-name](#x-ms-client-name) - allows control over identifier names used in client-side code generation for parameters and schema properties.
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
@@ -154,6 +155,87 @@ If none of the parameters are set the name of the composite type is generated as
 }
 ```
 Above Swagger schema will produce a type CustomParameterGroup with 3 properties (if applicable in the generator language).
+
+## x-ms-parameter-location
+
+By default Autorest processes global parameters as properties on the client. For example `subscriptionId` and `apiVersion` which are defined in the global parameters section end up being properties of the client. It would be natural to define resourceGroupName once in the global parameters section and then reference it everywhere, rather than repeating the same definition inline everywhere. One **may not** want resourceGroupName as a property on the client, just because it is defined in the global parameters section. This extension helps you achieve that. You can add this extension with value "method" `"x-ms-parameter-location": "method"` and resourceGroupName will not be a client property. 
+
+Note:
+- Valid values for this extension are: **"client", "method"**.
+- **This extension can only be applied on global parameters. If this is applied on any parameter in an operation then it will be ignored.**
+
+**Example:**
+```
+{
+  "swagger": "2.0",
+  "host": "management.azure.com",
+  "info": {
+    "title": "AwesomeClient",
+    "version": "2015-05-01"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}": {
+      "put": {
+        "operationId": "StorageAccounts_Create",
+        . . .
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"   <<<<<<<<<<<<<<<<<<<<
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  "
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageAccountCreateParameters"
+            },
+            "description": "The parameters to provide for the created account."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ]
+        . . .
+      }
+    }
+  },
+  . . .
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user’s subscription.",
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method" <<<<<<<<<<<<<<<<<<<<<<<<<<<
+    }
+  }
+}
+```
 
 ## x-ms-paths
 

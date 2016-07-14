@@ -50,6 +50,31 @@ namespace AutoRest.Extensions.Tests
         }
 
         [Fact]
+        public void TestParameterLocationExtension()
+        {
+            var setting = new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-parameter-location.json"),
+                PayloadFlatteningThreshold = 3
+            };
+            var modeler = new SwaggerModeler(setting);
+            var clientModel = modeler.Build();
+            SwaggerExtensions.NormalizeClientModel(clientModel, setting);
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(2, clientModel.Properties.Count);
+            Assert.Equal(clientModel.Properties[0].Name, "subscriptionId");
+            Assert.Equal(clientModel.Properties[1].Name, "apiVersion");
+            Assert.True(clientModel.Methods[0].Parameters.Any(p => p.Name == "resourceGroupName" && !p.IsClientProperty));
+            Assert.True(clientModel.Methods[0].Parameters.Any(p => p.Name == "subscriptionId" && p.IsClientProperty));
+            Assert.True(clientModel.Methods[0].Parameters.Any(p => p.Name == "apiVersion" && p.IsClientProperty));
+            Assert.True(clientModel.Methods[1].Parameters.Any(p => p.Name == "resourceGroupName" && !p.IsClientProperty));
+            Assert.True(clientModel.Methods[1].Parameters.Any(p => p.Name == "subscriptionId" && p.IsClientProperty));
+            Assert.True(clientModel.Methods[1].Parameters.Any(p => p.Name == "apiVersion" && p.IsClientProperty));
+        }
+
+        [Fact]
         public void TestClientModelWithPayloadFlatteningViaXMSClientFlatten()
         {
             var setting = new Settings

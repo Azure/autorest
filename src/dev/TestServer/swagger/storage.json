@@ -60,11 +60,7 @@
         "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -110,11 +106,7 @@
         "description": "Deletes a storage account in Microsoft Azure.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -147,11 +139,7 @@
         "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -184,11 +172,7 @@
         "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. This API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -232,11 +216,7 @@
         "description": "Lists the access keys for the specified storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -297,11 +277,7 @@
         "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -330,11 +306,7 @@
         "description": "Regenerates the access keys for the specified storage account.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the user’s subscription."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "name": "accountName",
@@ -791,11 +763,19 @@
       "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "Client Api Version."
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user’s subscription.",
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }

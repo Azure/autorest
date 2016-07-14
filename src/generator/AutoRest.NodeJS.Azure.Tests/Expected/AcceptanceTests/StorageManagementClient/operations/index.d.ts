@@ -215,7 +215,8 @@ export interface StorageAccounts {
     /**
      * Lists the access keys for the specified storage account.
      *
-     * @param {string} resourceGroupName The name of the resource group.
+     * @param {string} resourceGroupName The name of the resource group within the
+     * user’s subscription.
      * 
      * @param {string} accountName The name of the storage account.
      * 
