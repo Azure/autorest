@@ -33,6 +33,7 @@ namespace AutoRest.Extensions
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
         public const string UseSchemePrefix = "useSchemePrefix";
         public const string PositionInOperation = "positionInOperation";
+        public const string ParameterLocationExtension = "x-ms-parameter-location";
 
         private static bool hostChecked = false;
 
@@ -44,6 +45,7 @@ namespace AutoRest.Extensions
         /// <returns></returns>
         public static void NormalizeClientModel(ServiceClient serviceClient, Settings settings)
         {
+            ProcessGlobalParameters(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
             ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
@@ -188,6 +190,42 @@ namespace AutoRest.Extensions
             }
 
             RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        /// <summary>
+        /// Ensures that global parameters that are tagged with x-ms-paramater-location: "method" are not client properties
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public static void ProcessGlobalParameters(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            List<Property> propertiesToProcess = new List<Property>();
+            foreach(var property in serviceClient.Properties)
+            {
+                if (property.Extensions.ContainsKey(ParameterLocationExtension) && property.Extensions[ParameterLocationExtension].ToString().Equals("method", StringComparison.OrdinalIgnoreCase))
+                {
+                    propertiesToProcess.Add(property);
+                }
+            }
+            //set the clientProperty to null for such parameters in the method.
+            foreach(var prop in propertiesToProcess)
+            {
+                serviceClient.Properties.Remove(prop);
+                foreach(var method in serviceClient.Methods)
+                {
+                    foreach(var parameter in method.Parameters)
+                    {
+                        if (parameter.Name == prop.Name && parameter.IsClientProperty)
+                        {
+                            parameter.ClientProperty = null;
+                        } 
+                    }
+                }
+            }
         }
 
         private static void RemoveFlatteningConflicts(CompositeType compositeType)
