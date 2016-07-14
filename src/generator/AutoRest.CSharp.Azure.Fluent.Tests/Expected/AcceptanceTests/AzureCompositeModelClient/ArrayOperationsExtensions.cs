@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ArrayWrapper GetValid(this IArrayOperations operations)
+            public static ArrayWrapperInner GetValid(this IArrayOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IArrayOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapperInner> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -85,7 +85,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ArrayWrapper GetEmpty(this IArrayOperations operations)
+            public static ArrayWrapperInner GetEmpty(this IArrayOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IArrayOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -99,7 +99,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetEmptyAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapperInner> GetEmptyAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -143,7 +143,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ArrayWrapper GetNotProvided(this IArrayOperations operations)
+            public static ArrayWrapperInner GetNotProvided(this IArrayOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IArrayOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -158,7 +158,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetNotProvidedAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapperInner> GetNotProvidedAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

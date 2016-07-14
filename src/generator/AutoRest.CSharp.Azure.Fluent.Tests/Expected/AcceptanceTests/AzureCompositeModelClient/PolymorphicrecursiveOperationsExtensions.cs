@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Fish GetValid(this IPolymorphicrecursiveOperations operations)
+            public static FishInner GetValid(this IPolymorphicrecursiveOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IPolymorphicrecursiveOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Fish> GetValidAsync(this IPolymorphicrecursiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FishInner> GetValidAsync(this IPolymorphicrecursiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -111,7 +111,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// ]
             /// }
             /// </param>
-            public static void PutValid(this IPolymorphicrecursiveOperations operations, Fish complexBody)
+            public static void PutValid(this IPolymorphicrecursiveOperations operations, FishInner complexBody)
             {
                 Task.Factory.StartNew(s => ((IPolymorphicrecursiveOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -180,7 +180,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IPolymorphicrecursiveOperations operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IPolymorphicrecursiveOperations operations, FishInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

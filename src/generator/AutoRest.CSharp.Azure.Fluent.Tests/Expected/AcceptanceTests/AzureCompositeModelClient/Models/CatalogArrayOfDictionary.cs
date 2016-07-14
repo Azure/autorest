@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         /// <param name="productArrayOfDictionary">Array of dictionary of
         /// products</param>
-        public CatalogArrayOfDictionary(IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>))
+        public CatalogArrayOfDictionary(IList<IDictionary<string, ProductInner>> productArrayOfDictionary = default(IList<IDictionary<string, ProductInner>>))
         {
             ProductArrayOfDictionary = productArrayOfDictionary;
         }
@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Gets or sets array of dictionary of products
         /// </summary>
         [JsonProperty(PropertyName = "productArrayOfDictionary")]
-        public IList<IDictionary<string, Product>> ProductArrayOfDictionary { get; set; }
+        public IList<IDictionary<string, ProductInner>> ProductArrayOfDictionary { get; set; }
 
     }
 }

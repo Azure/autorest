@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Basic GetValid(this IBasicOperations operations)
+            public static BasicInner GetValid(this IBasicOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IBasicOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetValidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BasicInner> GetValidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='complexBody'>
             /// Please put {id: 2, name: 'abc', color: 'Magenta'}
             /// </param>
-            public static void PutValid(this IBasicOperations operations, Basic complexBody)
+            public static void PutValid(this IBasicOperations operations, BasicInner complexBody)
             {
                 Task.Factory.StartNew(s => ((IBasicOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -76,7 +76,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IBasicOperations operations, Basic complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IBasicOperations operations, BasicInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -87,7 +87,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Basic GetInvalid(this IBasicOperations operations)
+            public static BasicInner GetInvalid(this IBasicOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IBasicOperations)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BasicInner> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -115,7 +115,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Basic GetEmpty(this IBasicOperations operations)
+            public static BasicInner GetEmpty(this IBasicOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IBasicOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -129,7 +129,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BasicInner> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -143,7 +143,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Basic GetNull(this IBasicOperations operations)
+            public static BasicInner GetNull(this IBasicOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IBasicOperations)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BasicInner> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -172,7 +172,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static Basic GetNotProvided(this IBasicOperations operations)
+            public static BasicInner GetNotProvided(this IBasicOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IBasicOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -187,7 +187,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BasicInner> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

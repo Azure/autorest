@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Azure.Fluent
                 Settings.Namespace + ".Models");
             _namer.NormalizePaginatedMethods(serviceClient, PageClasses);
             _namer.NormalizeODataMethods(serviceClient);
+            _namer.NormalizeTopLevelTypes(serviceClient);
 
             if (serviceClient != null)
             {

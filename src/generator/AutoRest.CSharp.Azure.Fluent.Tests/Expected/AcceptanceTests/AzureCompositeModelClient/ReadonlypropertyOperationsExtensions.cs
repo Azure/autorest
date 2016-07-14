@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ReadonlyObj GetValid(this IReadonlypropertyOperations operations)
+            public static ReadonlyObjInner GetValid(this IReadonlypropertyOperations operations)
             {
                 return Task.Factory.StartNew(s => ((IReadonlypropertyOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ReadonlyObj> GetValidAsync(this IReadonlypropertyOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ReadonlyObjInner> GetValidAsync(this IReadonlypropertyOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             /// <param name='complexBody'>
             /// </param>
-            public static void PutValid(this IReadonlypropertyOperations operations, ReadonlyObj complexBody)
+            public static void PutValid(this IReadonlypropertyOperations operations, ReadonlyObjInner complexBody)
             {
                 Task.Factory.StartNew(s => ((IReadonlypropertyOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -74,7 +74,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IReadonlypropertyOperations operations, ReadonlyObj complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IReadonlypropertyOperations operations, ReadonlyObjInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

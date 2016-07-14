@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product PutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static ProductInner PutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).PutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -56,7 +56,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PutAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ProductInner> PutAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -77,7 +77,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product BeginPutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static ProductInner BeginPutAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPutAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -98,7 +98,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> BeginPutAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ProductInner> BeginPutAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPutAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -119,7 +119,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product Put201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static ProductInner Put201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).Put201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -140,7 +140,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> Put201CreatingSucceeded200Async(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ProductInner> Put201CreatingSucceeded200Async(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -161,7 +161,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static Product BeginPut201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static ProductInner BeginPut201CreatingSucceeded200(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPut201CreatingSucceeded200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -182,7 +182,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> BeginPut201CreatingSucceeded200Async(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ProductInner> BeginPut201CreatingSucceeded200Async(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPut201CreatingSucceeded200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -202,7 +202,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static LROsCustomHeaderPost202Retry200Headers Post202Retry200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static LROsCustomHeaderPost202Retry200HeadersInner Post202Retry200(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).Post202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -222,7 +222,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<LROsCustomHeaderPost202Retry200Headers> Post202Retry200Async(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROsCustomHeaderPost202Retry200HeadersInner> Post202Retry200Async(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -242,7 +242,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static LROsCustomHeaderPost202Retry200Headers BeginPost202Retry200(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static LROsCustomHeaderPost202Retry200HeadersInner BeginPost202Retry200(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPost202Retry200Async(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -262,7 +262,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<LROsCustomHeaderPost202Retry200Headers> BeginPost202Retry200Async(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROsCustomHeaderPost202Retry200HeadersInner> BeginPost202Retry200Async(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPost202Retry200WithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -283,7 +283,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static LROsCustomHeaderPostAsyncRetrySucceededHeaders PostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static LROsCustomHeaderPostAsyncRetrySucceededHeadersInner PostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).PostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -304,7 +304,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<LROsCustomHeaderPostAsyncRetrySucceededHeaders> PostAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> PostAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -325,7 +325,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='product'>
             /// Product to put
             /// </param>
-            public static LROsCustomHeaderPostAsyncRetrySucceededHeaders BeginPostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, Product product = default(Product))
+            public static LROsCustomHeaderPostAsyncRetrySucceededHeadersInner BeginPostAsyncRetrySucceeded(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner))
             {
                 return Task.Factory.StartNew(s => ((ILROsCustomHeaderOperations)s).BeginPostAsyncRetrySucceededAsync(product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -346,7 +346,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<LROsCustomHeaderPostAsyncRetrySucceededHeaders> BeginPostAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> BeginPostAsyncRetrySucceededAsync(this ILROsCustomHeaderOperations operations, ProductInner product = default(ProductInner), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginPostAsyncRetrySucceededWithHttpMessagesAsync(product, null, cancellationToken).ConfigureAwait(false))
                 {

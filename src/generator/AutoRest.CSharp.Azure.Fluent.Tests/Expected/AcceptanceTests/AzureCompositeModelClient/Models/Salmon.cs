@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Azure;
 
     [JsonObject("salmon")]
-    public partial class Salmon : Fish
+    public partial class Salmon : FishInner
     {
         /// <summary>
         /// Initializes a new instance of the Salmon class.
@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>), string location = default(string), bool? iswild = default(bool?))
+        public Salmon(double length, string species = default(string), IList<FishInner> siblings = default(IList<FishInner>), string location = default(string), bool? iswild = default(bool?))
             : base(length, species, siblings)
         {
             Location = location;
