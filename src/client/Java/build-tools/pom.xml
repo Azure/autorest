@@ -1,0 +1,47 @@
+<!--
+ Copyright (c) Microsoft Corporation. All rights reserved.
+ Licensed under the MIT License. See License.txt in the project root for
+ license information.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.microsoft.azure</groupId>
+    <artifactId>autorest-clientruntime-for-java</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>autorest-build-tools</artifactId>
+  <packaging>jar</packaging>
+
+  <name>Build tools for AutoRest client runtime for Java</name>
+  <description>This package contains the build tools for AutoRest generated Java clients.</description>
+  <url>https://github.com/Azure/autorest-clientruntime-for-java</url>
+
+  <licenses>
+    <license>
+      <name>The MIT License (MIT)</name>
+      <url>http://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>scm:git:https://github.com/Azure/autorest-clientruntime-for-java</url>
+    <connection>scm:git:git@github.com:Azure/autorest-clientruntime-for-java.git</connection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <legal><![CDATA[[INFO] Any downloads listed may be third party software.  Microsoft grants you no rights for third party software.]]></legal>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>microsoft</id>
+      <name>Microsoft</name>
+    </developer>
+  </developers>
+</project>
