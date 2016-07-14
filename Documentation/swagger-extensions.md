@@ -160,9 +160,9 @@ Above Swagger schema will produce a type CustomParameterGroup with 3 properties 
 
 By default Autorest processes global parameters as properties on the client. For example `subscriptionId` and `apiVersion` which are defined in the global parameters section end up being properties of the client. It would be natural to define resourceGroupName once in the global parameters section and then reference it everywhere, rather than repeating the same definition inline everywhere. One **may not** want resourceGroupName as a property on the client, just because it is defined in the global parameters section. This extension helps you achieve that. You can add this extension with value "method" `"x-ms-parameter-location": "method"` and resourceGroupName will not be a client property. 
 
-Valid values for this extension are: **"client", "method"**.
-
-**Note: This extension can only be applied on global parameters. If this is applied on any parameter in an operation then it will be ignored.**
+Note:
+- Valid values for this extension are: **"client", "method"**.
+- **This extension can only be applied on global parameters. If this is applied on any parameter in an operation then it will be ignored.**
 
 **Example:**
 ```

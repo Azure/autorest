@@ -20,25 +20,13 @@
         "description": "Request body with properties more than the specified threshold is NOT flattened.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParamterer"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource Group ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "max_product",
@@ -86,25 +74,13 @@
         "description": "Request body with properties less than or equal to the specified threshold is flattened.",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParamterer"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Resource Group ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "min_product",
@@ -237,7 +213,16 @@
       "in": "path",
       "description": "API ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Resource Group ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
