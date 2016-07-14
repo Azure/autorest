@@ -234,78 +234,69 @@ namespace AutoRest.CSharp
 
         protected virtual IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == null)
+            switch (primaryType?.Type)
             {
-                return null;
-            }
-
-            if (primaryType.Type == KnownPrimaryType.Base64Url)
-            {
+                case KnownPrimaryType.Base64Url:
                 primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Boolean)
-            {
+                    break;
+                case KnownPrimaryType.Boolean:
                 primaryType.Name = "bool";
-            }
-            else if (primaryType.Type == KnownPrimaryType.ByteArray)
-            {
+                    break;
+                case KnownPrimaryType.ByteArray:
                 primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Date)
-            {
+                    break;
+                case KnownPrimaryType.Date:
                 primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime)
-            {
+                    break;
+                case KnownPrimaryType.DateTime:
                 primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
-            {
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
                 primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Double)
-            {
+                    break;
+                case KnownPrimaryType.Double:
                 primaryType.Name = "double";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal)
-            {
+                    break;
+                case KnownPrimaryType.Decimal:
                 primaryType.Name = "decimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Int)
-            {
+                    break;
+                case KnownPrimaryType.Int:
                 primaryType.Name = "int";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Long)
-            {
+                    break;
+                case KnownPrimaryType.Long:
                 primaryType.Name = "long";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream)
-            {
+                    break;
+                case KnownPrimaryType.Stream:
                 primaryType.Name = "System.IO.Stream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.String)
+                    break;
+                case KnownPrimaryType.String:
+                    switch (KnownFormatExtensions.Parse( primaryType.Format ) )
             {
+                        case KnownFormat.@char:
+                            primaryType.Name = "char";
+                            break;
+
+                        default:
                 primaryType.Name = "string";
+                            break;
             }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-            {
+                    
+                    break;
+                case KnownPrimaryType.TimeSpan:
                 primaryType.Name = "TimeSpan";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Object)
-            {
+                    break;
+                case KnownPrimaryType.Object:
                 primaryType.Name = "object";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Credentials)
-            {
+                    break;
+                case KnownPrimaryType.Credentials:
                 primaryType.Name = "ServiceClientCredentials";
-            }
-            else if (primaryType.Type == KnownPrimaryType.UnixTime)
-            {
+                    break;
+                case KnownPrimaryType.UnixTime:
                 primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid)
-            {
+                    break;
+                case KnownPrimaryType.Uuid:
                 primaryType.Name = "Guid";
+                    break;
             }
 
             return primaryType;

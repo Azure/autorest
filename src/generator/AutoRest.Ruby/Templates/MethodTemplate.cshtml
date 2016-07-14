@@ -1,7 +1,7 @@
 ﻿@using System
 @using System.Linq;
 @using AutoRest.Core.ClientModel
-@using AutoRest.Ruby
+@using AutoRest.Ruby.TemplateModels
 @inherits AutoRest.Core.Template<AutoRest.Ruby.TemplateModels.MethodTemplateModel>
 
 #
@@ -23,21 +23,12 @@
 #
 @if (Model.ReturnType.Body != null)
 {
-@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.ReturnType.Body.Name))@:
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
 }
 #
 def @(Model.Name)(@(Model.MethodParameterDeclaration))
-  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
-@if (Model.ReturnType.Body != null)
-{
-  @:response.body unless response.nil?
-}
-else
-{
-  @:nil
-}
+  @Model.ResponseGeneration()
 end
-
 
 @EmptyLine
 #

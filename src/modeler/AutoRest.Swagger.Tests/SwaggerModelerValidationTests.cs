@@ -40,6 +40,16 @@ namespace AutoRest.Swagger.Tests
             return messages;
         }
 
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void CleanFileValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "clean-complex-spec.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+
         [Fact]
         public void MissingDescriptionValidation()
         {

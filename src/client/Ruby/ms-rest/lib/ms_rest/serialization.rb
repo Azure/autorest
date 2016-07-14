@@ -146,7 +146,7 @@ module MsRest
           parent_class = get_model(mapper[:type][:class_name])
           discriminator = parent_class.class_eval("@@discriminatorMap")
           model_name = response_body["#{mapper[:type][:polymorphic_discriminator]}"]
-          model_class = get_model(discriminator[model_name].capitalize)
+          model_class = get_model(discriminator[model_name])
         else
           model_class = get_model(mapper[:type][:class_name])
         end
@@ -315,7 +315,12 @@ module MsRest
 
         unless model_props.nil?
           model_props.each do |key, value|
-            instance_variable = object.instance_variable_get("@#{key}")
+            begin
+              instance_variable = object.instance_variable_get("@#{key}")
+            rescue NameError
+              warn("Instance variable '#{key}' is expected on '#{object.class}'.")
+            end
+
             if !instance_variable.nil? && instance_variable.respond_to?(:validate)
               instance_variable.validate
             end
