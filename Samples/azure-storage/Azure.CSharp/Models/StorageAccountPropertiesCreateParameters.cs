@@ -21,7 +21,9 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountPropertiesCreateParameters class.
         /// </summary>
-        /// <param name="accountType">Gets or sets the account type. Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'</param>
+        /// <param name="accountType">Gets or sets the account type. Possible
+        /// values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+        /// 'Standard_RAGRS', 'Premium_LRS'</param>
         public StorageAccountPropertiesCreateParameters(AccountType accountType)
         {
             AccountType = accountType;
