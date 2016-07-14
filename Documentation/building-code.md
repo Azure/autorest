@@ -18,10 +18,10 @@ To set up a machine with the necessary tools for building AutoRest, run `.\Tools
 - .NET CoreCLR
 
 After your machine restarts, run the following command to complete the Android SDK installation:
-`(echo y | android update sdk -u -a -t 6 ) && (echo y | android update sdk -u -a -t 28) && (echo y | android update sdk -u -a -t 139)`
+>`(echo y | android update sdk -u -a -t 6 ) && (echo y | android update sdk -u -a -t 28) && (echo y | android update sdk -u -a -t 139)`
 
 You will also want to run the following command from the project root:
-`gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update`
+>`gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update`
 
 ### .Net
 #### on Windows 
