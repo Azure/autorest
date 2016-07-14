@@ -486,7 +486,7 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
 });
 
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
@@ -504,7 +504,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
 });
 
 gulp.task('regenerate:expected:samples:azure', function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.Release.json');
+  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
   var content = fs.readFileSync(autorestConfigPath).toString();
   if (content.charCodeAt(0) === 0xFEFF) {
     content = content.slice(1);
