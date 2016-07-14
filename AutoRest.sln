@@ -8,6 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generators", "Generators", "{EF9E346D-70C6-45F5-8FF9-9B734F4A1298}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest", "src\core\AutoRest\AutoRest.xproj", "{F589D8B7-1B0F-4182-842B-09866A4A2CEB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8464A22C-0C8D-4C84-85A8-0ACE787BDC75} = {8464A22C-0C8D-4C84-85A8-0ACE787BDC75}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelers", "Modelers", "{02144BF6-4489-4AFC-9B2D-0306C3DD3C19}"
 EndProject

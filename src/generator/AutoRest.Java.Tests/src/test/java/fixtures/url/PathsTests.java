@@ -112,8 +112,6 @@ public class PathsTests {
     @Test
     public void byteNull() throws Exception {
         try {
-
-            String abc-def = "abc";
             client.paths().byteNull(null);
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));

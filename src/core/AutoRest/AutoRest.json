@@ -12,7 +12,7 @@
     "Azure.CSharp": {
       "type": "AzureCSharpCodeGenerator, AutoRest.CSharp.Azure"
     },
-    "Azure.Java.Fluent": {
+    "Azure.CSharp.Fluent": {
       "type": "AzureCSharpFluentCodeGenerator, AutoRest.CSharp.Azure.Fluent"
     },
     "NodeJS": {

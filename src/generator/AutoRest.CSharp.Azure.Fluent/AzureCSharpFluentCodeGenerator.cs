@@ -22,14 +22,9 @@ namespace AutoRest.CSharp.Azure.Fluent
 
         private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.2.0";
 
-        // page extensions class dictionary.
-        private IDictionary<KeyValuePair<string, string>, string> pageClasses;
-
         public AzureCSharpFluentCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpFluentCodeNamer(settings);
-            IsSingleFileGenerationSupported = true;
-            pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
         }
 
         public override string Name
@@ -48,7 +43,35 @@ namespace AutoRest.CSharp.Azure.Fluent
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            base.NormalizeClientModel(serviceClient);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
+            _namer.NormalizeClientModel(serviceClient);
+            _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
+                Settings.Namespace + ".Models");
+            _namer.NormalizePaginatedMethods(serviceClient, PageClasses);
+            _namer.NormalizeODataMethods(serviceClient);
+
+            if (serviceClient != null)
+            {
+                CompositeType resourceType = new CompositeType
+                {
+                    Name = "Resource",
+                    SerializedName = "Resource"
+                };
+                resourceType.Properties.Add(new Property { Name = "location", SerializedName = "location", Type = new PrimaryType(KnownPrimaryType.String) });
+                resourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
+                resourceType.Properties.Add(new Property { Name = "name", SerializedName = "name", Type = new PrimaryType(KnownPrimaryType.String) });
+                resourceType.Properties.Add(new Property { Name = "type", SerializedName = "type", Type = new PrimaryType(KnownPrimaryType.String) });
+                resourceType.Properties.Add(new Property { Name = "tags", SerializedName = "tags", Type = new DictionaryType { ValueType = new PrimaryType(KnownPrimaryType.String) } });
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.BaseModelType != null &&
+                        model.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)model.BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
+                    {
+                        model.BaseModelType = resourceType;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -115,6 +138,10 @@ namespace AutoRest.CSharp.Azure.Fluent
                 {
                     continue;
                 }
+                if (model.IsResource())
+                {
+                    continue;
+                }
 
                 var modelTemplate = new ModelTemplate
                 {
@@ -135,7 +162,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             }
 
             // Page class
-            foreach (var pageClass in pageClasses)
+            foreach (var pageClass in PageClasses)
             {
                 var pageTemplate = new PageTemplate
                 {

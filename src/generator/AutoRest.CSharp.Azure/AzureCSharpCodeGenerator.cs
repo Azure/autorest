@@ -25,6 +25,14 @@ namespace AutoRest.CSharp.Azure
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
 
+        public IDictionary<KeyValuePair<string, string>, string> PageClasses
+        {
+            get
+            {
+                return pageClasses;
+            }
+        }
+
         public AzureCSharpCodeGenerator(Settings settings) : base(settings)
         {
             _namer = new AzureCSharpCodeNamer(settings);
