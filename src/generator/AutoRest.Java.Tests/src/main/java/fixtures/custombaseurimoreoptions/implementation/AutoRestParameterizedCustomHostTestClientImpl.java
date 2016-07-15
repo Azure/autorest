@@ -84,7 +84,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
-        this("{vault}{secret}{dnsSuffix}");
+        this("https://{vault}{secret}{dnsSuffix}");
     }
 
     /**
@@ -104,7 +104,7 @@ public final class AutoRestParameterizedCustomHostTestClientImpl extends Service
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public AutoRestParameterizedCustomHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("{vault}{secret}{dnsSuffix}", clientBuilder, restBuilder);
+        this("https://{vault}{secret}{dnsSuffix}", clientBuilder, restBuilder);
         initialize();
     }
 

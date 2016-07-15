@@ -7,12 +7,12 @@
 
 package com.microsoft.rest;
 
-import java.io.IOException;
-
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.io.IOException;
 
 /**
  * Handles dynamic replacements on base URL. The arguments must be in pairs
@@ -34,6 +34,7 @@ public class BaseUrlHandler implements Interceptor {
             for (int i = 0; i < replacements.length; i += 2) {
                 baseUrl = baseUrl.replaceAll("(?i)\\Q" + replacements[i] + "\\E", replacements[i + 1]);
             }
+            baseUrl = removeRedundantProtocol(baseUrl);
             HttpUrl baseHttpUrl = HttpUrl.parse(baseUrl);
             request = request.newBuilder()
                     .url(baseHttpUrl)
@@ -41,5 +42,13 @@ public class BaseUrlHandler implements Interceptor {
                     .build();
         }
         return chain.proceed(request);
+    }
+
+    private String removeRedundantProtocol(String url) {
+        int last = url.lastIndexOf("://") - 1;
+        while (last >= 0 && Character.isLetter(url.charAt(last))) {
+            --last;
+        }
+        return url.substring(last + 1);
     }
 }
