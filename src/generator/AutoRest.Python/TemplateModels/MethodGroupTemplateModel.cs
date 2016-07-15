@@ -17,7 +17,7 @@ namespace AutoRest.Python.TemplateModels
             // MethodGroup name and type are always the same but can be 
             // changed in derived classes
             MethodGroupName = methodGroupName;
-            MethodGroupType = methodGroupName;
+            MethodGroupType = methodGroupName + "Operations";
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
         }
