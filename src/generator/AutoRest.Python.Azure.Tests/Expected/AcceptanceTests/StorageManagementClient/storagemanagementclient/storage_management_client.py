@@ -32,9 +32,6 @@ class StorageManagementClientConfiguration(AzureConfiguration):
     :type subscription_id: str
     :param api_version: Client Api Version.
     :type api_version: str
-    :param resource_group_name: The name of the resource group within the
-     user’s subscription.
-    :type resource_group_name: str
     :param accept_language: Gets or sets the preferred language for the
      response.
     :type accept_language: str
@@ -50,7 +47,7 @@ class StorageManagementClientConfiguration(AzureConfiguration):
     """
 
     def __init__(
-            self, credentials, subscription_id, resource_group_name, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, subscription_id, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
 
         if credentials is None:
             raise ValueError("Parameter 'credentials' must not be None.")
@@ -60,10 +57,6 @@ class StorageManagementClientConfiguration(AzureConfiguration):
             raise TypeError("Parameter 'subscription_id' must be str.")
         if api_version is not None and not isinstance(api_version, str):
             raise TypeError("Optional parameter 'api_version' must be str.")
-        if resource_group_name is None:
-            raise ValueError("Parameter 'resource_group_name' must not be None.")
-        if not isinstance(resource_group_name, str):
-            raise TypeError("Parameter 'resource_group_name' must be str.")
         if accept_language is not None and not isinstance(accept_language, str):
             raise TypeError("Optional parameter 'accept_language' must be str.")
         if not base_url:
@@ -77,7 +70,6 @@ class StorageManagementClientConfiguration(AzureConfiguration):
         self.credentials = credentials
         self.subscription_id = subscription_id
         self.api_version = api_version
-        self.resource_group_name = resource_group_name
         self.accept_language = accept_language
         self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
         self.generate_client_request_id = generate_client_request_id
@@ -103,9 +95,6 @@ class StorageManagementClient(object):
     :type subscription_id: str
     :param api_version: Client Api Version.
     :type api_version: str
-    :param resource_group_name: The name of the resource group within the
-     user’s subscription.
-    :type resource_group_name: str
     :param accept_language: Gets or sets the preferred language for the
      response.
     :type accept_language: str
@@ -121,9 +110,9 @@ class StorageManagementClient(object):
     """
 
     def __init__(
-            self, credentials, subscription_id, resource_group_name, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, subscription_id, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
 
-        self.config = StorageManagementClientConfiguration(credentials, subscription_id, resource_group_name, api_version, accept_language, long_running_operation_retry_timeout, generate_client_request_id, base_url, filepath)
+        self.config = StorageManagementClientConfiguration(credentials, subscription_id, api_version, accept_language, long_running_operation_retry_timeout, generate_client_request_id, base_url, filepath)
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

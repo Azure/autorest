@@ -31,8 +31,6 @@ var operations = require('./operations');
  *
  * @param {string} subscriptionId - Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
  *
- * @param {string} resourceGroupName - The name of the resource group within the user’s subscription.
- *
  * @param {string} [baseUri] - The base URI of the service.
  *
  * @param {object} [options] - The parameter options
@@ -53,7 +51,7 @@ var operations = require('./operations');
  * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
  *
  */
-function StorageManagementClient(credentials, subscriptionId, resourceGroupName, baseUri, options) {
+function StorageManagementClient(credentials, subscriptionId, baseUri, options) {
   this.apiVersion = '2015-05-01-preview';
   this.acceptLanguage = 'en-US';
   this.longRunningOperationRetryTimeout = 30;
@@ -63,9 +61,6 @@ function StorageManagementClient(credentials, subscriptionId, resourceGroupName,
   }
   if (subscriptionId === null || subscriptionId === undefined) {
     throw new Error('\'subscriptionId\' cannot be null.');
-  }
-  if (resourceGroupName === null || resourceGroupName === undefined) {
-    throw new Error('\'resourceGroupName\' cannot be null.');
   }
 
   if (!options) options = {};
@@ -77,7 +72,6 @@ function StorageManagementClient(credentials, subscriptionId, resourceGroupName,
   }
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
-  this.resourceGroupName = resourceGroupName;
 
   if(options.apiVersion !== null && options.apiVersion !== undefined) { 
     this.apiVersion = options.apiVersion;
