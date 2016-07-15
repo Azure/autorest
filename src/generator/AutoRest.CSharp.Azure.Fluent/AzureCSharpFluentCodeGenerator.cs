@@ -47,32 +47,10 @@ namespace AutoRest.CSharp.Azure.Fluent
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
+            _namer.NormalizeResourceTypes(serviceClient);
+            _namer.NormalizeTopLevelTypes(serviceClient);
             _namer.NormalizePaginatedMethods(serviceClient, PageClasses);
             _namer.NormalizeODataMethods(serviceClient);
-            _namer.NormalizeTopLevelTypes(serviceClient);
-
-            if (serviceClient != null)
-            {
-                CompositeType resourceType = new CompositeType
-                {
-                    Name = "Resource",
-                    SerializedName = "Resource"
-                };
-                resourceType.Properties.Add(new Property { Name = "location", SerializedName = "location", Type = new PrimaryType(KnownPrimaryType.String) });
-                resourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
-                resourceType.Properties.Add(new Property { Name = "name", SerializedName = "name", Type = new PrimaryType(KnownPrimaryType.String) });
-                resourceType.Properties.Add(new Property { Name = "type", SerializedName = "type", Type = new PrimaryType(KnownPrimaryType.String) });
-                resourceType.Properties.Add(new Property { Name = "tags", SerializedName = "tags", Type = new DictionaryType { ValueType = new PrimaryType(KnownPrimaryType.String) } });
-                foreach (var model in serviceClient.ModelTypes)
-                {
-                    if (model.BaseModelType != null &&
-                        model.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                        (bool)model.BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
-                    {
-                        model.BaseModelType = resourceType;
-                    }
-                }
-            }
         }
 
         /// <summary>

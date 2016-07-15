@@ -16,10 +16,54 @@ namespace AutoRest.CSharp.Azure.Fluent
     {
         private HashSet<CompositeType> _innerTypes;
 
+        private CompositeType _resourceType;
+        private CompositeType _subResourceType;
+
         public AzureCSharpFluentCodeNamer(Settings settings)
             :base(settings)
         {
             _innerTypes = new HashSet<CompositeType>();
+
+            _resourceType = new CompositeType
+            {
+                Name = "Resource",
+                SerializedName = "Resource"
+            };
+            _resourceType.Properties.Add(new Property { Name = "location", SerializedName = "location", Type = new PrimaryType(KnownPrimaryType.String) });
+            _resourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
+            _resourceType.Properties.Add(new Property { Name = "name", SerializedName = "name", Type = new PrimaryType(KnownPrimaryType.String) });
+            _resourceType.Properties.Add(new Property { Name = "type", SerializedName = "type", Type = new PrimaryType(KnownPrimaryType.String) });
+            _resourceType.Properties.Add(new Property { Name = "tags", SerializedName = "tags", Type = new DictionaryType { ValueType = new PrimaryType(KnownPrimaryType.String) } });
+
+            _subResourceType = new CompositeType
+            {
+                Name = "SubResource",
+                SerializedName = "SubResource"
+            };
+            _subResourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
+        }
+
+        public void NormalizeResourceTypes(ServiceClient serviceClient)
+        {
+            if (serviceClient != null)
+            {
+                foreach (var model in serviceClient.ModelTypes)
+                {
+                    if (model.BaseModelType != null && model.BaseModelType.Extensions != null &&
+                        model.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
+                        (bool)model.BaseModelType.Extensions[AzureExtensions.AzureResourceExtension])
+                    {
+                        if (model.BaseModelType.Name == "Resource")
+                        {
+                            model.BaseModelType = _resourceType;
+                        }
+                        else if (model.BaseModelType.Name == "SubResource")
+                        {
+                            model.BaseModelType = _subResourceType;
+                        }
+                    }
+                }
+            }
         }
 
         public void NormalizeTopLevelTypes(ServiceClient serviceClient)
