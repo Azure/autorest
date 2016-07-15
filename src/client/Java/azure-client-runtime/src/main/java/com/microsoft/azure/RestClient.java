@@ -14,6 +14,12 @@ import com.microsoft.rest.UserAgentInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import okhttp3.ConnectionPool;
+import okhttp3.Interceptor;
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
 
 import java.lang.reflect.Field;
 import java.net.CookieManager;
@@ -21,13 +27,6 @@ import java.net.CookiePolicy;
 import java.net.Proxy;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.ConnectionPool;
-import okhttp3.Interceptor;
-import okhttp3.JavaNetCookieJar;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
 
 /**
  * An instance of this class stores the client information for making REST calls.
