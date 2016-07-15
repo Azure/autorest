@@ -3,6 +3,7 @@
 // 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -92,6 +93,74 @@ namespace AutoRest.Core.Utilities.Collections
             while (true == enumerator?.MoveNext())
             {
                 yield return enumerator.Current;
+            }
+        }
+
+        public static IEnumerable<TResult> SelectMany<TResult>(this IDictionary source, Func<object,object,IEnumerable<TResult>> selector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var e = source.GetEnumerator();
+            while (e.MoveNext())
+            {
+                foreach (TResult subElement in selector(e.Key, e.Value))
+                {
+                    yield return subElement;
+                }
+            }
+        }
+
+        public static IEnumerable<TResult> SelectMany<TResult>(this IEnumerable source, Func<object, IEnumerable<TResult>> selector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            var e = source.GetEnumerator();
+            while (e.MoveNext())
+            {
+                foreach (TResult subElement in selector(e.Current))
+                {
+                    yield return subElement;
+                }
+            }
+        }
+
+        public static IEnumerable<TResult> SelectMany<TResult>(this IEnumerable source, Func<object, int, IEnumerable<TResult>> selector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            int index = -1;
+            foreach( var item in source )
+            {
+                index++;
+                foreach (TResult subElement in selector(item,index))
+                {
+                    yield return subElement;
+                }
+            }
+        }
+
+
+        public static IEnumerable<TResult> Select<TResult>(this IDictionary source, Func<object, object, TResult> selector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+
+            var e = source.GetEnumerator();
+            while (e.MoveNext())
+            {
+                yield return selector( e.Key, e.Value);
+            }
+        }
+
+        public static IEnumerable<TResult> Select<TResult>(this IEnumerable source, Func<object, TResult> selector)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (selector == null) throw new ArgumentNullException(nameof(selector));
+
+            var e = source.GetEnumerator();
+            while (e.MoveNext())
+            {
+                yield return selector(e.Current);
             }
         }
 

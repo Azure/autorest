@@ -47,6 +47,17 @@ namespace AutoRest.Core.Validation
         /// </summary>
         public IList<string> Path { get; } = new List<string>();
 
+        /// <summary>
+        /// A fluent interface to append a string to the path.
+        /// </summary>
+        /// <param name="path">the string to add to the end of the Path collection</param>
+        /// <returns>This ValidationMethod</returns>
+        public ValidationMessage AppendToPath(string path)
+        {
+            Path.Add(path);
+            return this;
+        }
+
         public override string ToString() => $"{Type.Name}: {Message}\n    Location: Path: {string.Join("->", Path.Reverse())}";
     }
 }

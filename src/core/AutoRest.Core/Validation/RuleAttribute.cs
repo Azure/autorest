@@ -14,13 +14,13 @@ namespace AutoRest.Core.Validation
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class RuleAttribute : Attribute
     {
-        private readonly Rule _rule;
+        internal readonly Rule Rule;
 
         public RuleAttribute(Type ruleType)
         {
             if (typeof(Rule).IsAssignableFrom(ruleType))
             {
-                _rule = (Rule)Activator.CreateInstance(ruleType);
+                Rule = (Rule)Activator.CreateInstance(ruleType);
             }
         }
 
@@ -29,6 +29,6 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity) => _rule?.GetValidationMessages(entity) ?? Enumerable.Empty<ValidationMessage>();
+        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity) => Rule?.GetValidationMessages(entity) ?? Enumerable.Empty<ValidationMessage>();
     }
 }
