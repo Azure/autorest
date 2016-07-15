@@ -11,7 +11,7 @@ using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Python.Properties;
-using Microsoft.Rest.Generator.Python;
+using Microsoft.Rest.Generator.Python.Properties;
 
 namespace AutoRest.Python
 {
