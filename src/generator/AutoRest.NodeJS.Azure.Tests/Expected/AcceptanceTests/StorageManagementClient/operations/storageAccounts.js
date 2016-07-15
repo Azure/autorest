@@ -198,9 +198,6 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -234,7 +231,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.create = function (resourceGroupName, accountName, parameters, options, callback) {
+StorageAccounts.prototype.create = function (accountName, parameters, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -246,7 +243,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
   }
 
   // Send request
-  this.beginCreate(resourceGroupName, accountName, parameters, options, function (err, parsedResult, httpRequest, response){
+  this.beginCreate(accountName, parameters, options, function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
 
     var initialResult = new msRest.HttpOperationResponse();
@@ -291,9 +288,6 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * subsequent PUT request is issued with exact same set of properties, then
  * HTTP 200 would be returned.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -327,7 +321,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName, parameters, options, callback) {
+StorageAccounts.prototype.beginCreate = function (accountName, parameters, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -338,8 +332,8 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -363,7 +357,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -469,9 +463,6 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
 /**
  * Deletes a storage account in Microsoft Azure.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -493,7 +484,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountName, options, callback) {
+StorageAccounts.prototype.deleteMethod = function (accountName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -504,8 +495,8 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -526,7 +517,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -599,9 +590,6 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  * limited to name, account type, location, and account status. The ListKeys
  * operation should be used to retrieve storage keys.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -624,7 +612,7 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.getProperties = function (resourceGroupName, accountName, options, callback) {
+StorageAccounts.prototype.getProperties = function (accountName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -635,8 +623,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -657,7 +645,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -757,9 +745,6 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * use the RegenerateKey operation. The location and name of the storage
  * account cannot be changed after creation.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -807,7 +792,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.update = function (resourceGroupName, accountName, parameters, options, callback) {
+StorageAccounts.prototype.update = function (accountName, parameters, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -818,8 +803,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -843,7 +828,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -949,9 +934,6 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
 /**
  * Lists the access keys for the specified storage account.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account.
  * 
  * @param {object} [options] Optional Parameters.
@@ -972,7 +954,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, options, callback) {
+StorageAccounts.prototype.listKeys = function (accountName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -983,8 +965,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -1005,7 +987,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
@@ -1236,9 +1218,6 @@ StorageAccounts.prototype.list = function (options, callback) {
  * Note that storage keys are not returned; use the ListKeys operation for
  * this.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -1258,7 +1237,7 @@ StorageAccounts.prototype.list = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, options, callback) {
+StorageAccounts.prototype.listByResourceGroup = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1269,8 +1248,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
   }
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
       throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
@@ -1288,7 +1267,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
@@ -1379,9 +1358,6 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
 /**
  * Regenerates the access keys for the specified storage account.
  *
- * @param {string} resourceGroupName The name of the resource group within the
- * user’s subscription.
- * 
  * @param {string} accountName The name of the storage account within the
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
@@ -1406,7 +1382,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountName, options, callback) {
+StorageAccounts.prototype.regenerateKey = function (accountName, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1418,8 +1394,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   var keyName = (options && options.keyName !== undefined) ? options.keyName : undefined;
   // Validate
   try {
-    if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
-      throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
+    if (this.client.resourceGroupName === null || this.client.resourceGroupName === undefined || typeof this.client.resourceGroupName.valueOf() !== 'string') {
+      throw new Error('this.client.resourceGroupName cannot be null or undefined and it must be of type string.');
     }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
@@ -1451,7 +1427,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey';
-  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
+  requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(this.client.resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
   var queryParameters = [];

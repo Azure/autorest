@@ -101,16 +101,13 @@ class StorageAccountsOperations(object):
         return deserialized
 
     def create(
-            self, resource_group_name, account_name, parameters, custom_headers=None, raw=False, **operation_config):
+            self, account_name, parameters, custom_headers=None, raw=False, **operation_config):
         """Asynchronously creates a new storage account with the specified
         parameters. Existing accounts cannot be updated with this API and
         should instead use the Update Storage Account API. If an account is
         already created and subsequent PUT request is issued with exact same
         set of properties, then HTTP 200 would be returned. .
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
@@ -132,7 +129,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
@@ -200,12 +197,9 @@ class StorageAccountsOperations(object):
             get_long_running_status, long_running_operation_timeout)
 
     def delete(
-            self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
+            self, account_name, custom_headers=None, raw=False, **operation_config):
         """Deletes a storage account in Microsoft Azure.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
@@ -223,7 +217,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
@@ -257,14 +251,11 @@ class StorageAccountsOperations(object):
             return client_raw_response
 
     def get_properties(
-            self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
+            self, account_name, custom_headers=None, raw=False, **operation_config):
         """Returns the properties for the specified storage account including but
         not limited to name, account type, location, and account status. The
         ListKeys operation should be used to retrieve storage keys.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
@@ -283,7 +274,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
@@ -324,7 +315,7 @@ class StorageAccountsOperations(object):
         return deserialized
 
     def update(
-            self, resource_group_name, account_name, parameters, custom_headers=None, raw=False, **operation_config):
+            self, account_name, parameters, custom_headers=None, raw=False, **operation_config):
         """Updates the account type or tags for a storage account. It can also be
         used to add a custom domain (note that custom domains cannot be added
         via the Create operation). Only one custom domain is supported per
@@ -336,9 +327,6 @@ class StorageAccountsOperations(object):
         The location and name of the storage account cannot be changed after
         creation.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
@@ -361,7 +349,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
@@ -406,12 +394,9 @@ class StorageAccountsOperations(object):
         return deserialized
 
     def list_keys(
-            self, resource_group_name, account_name, custom_headers=None, raw=False, **operation_config):
+            self, account_name, custom_headers=None, raw=False, **operation_config):
         """Lists the access keys for the specified storage account.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
@@ -427,7 +412,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }
@@ -532,14 +517,11 @@ class StorageAccountsOperations(object):
         return deserialized
 
     def list_by_resource_group(
-            self, resource_group_name, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Lists all the storage accounts available under the given resource
         group. Note that storage keys are not returned; use the ListKeys
         operation for this.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -554,7 +536,7 @@ class StorageAccountsOperations(object):
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
-                    'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+                    'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
                     'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
                 }
                 url = self._client.format_url(url, **path_format_arguments)
@@ -600,12 +582,9 @@ class StorageAccountsOperations(object):
         return deserialized
 
     def regenerate_key(
-            self, resource_group_name, account_name, key_name=None, custom_headers=None, raw=False, **operation_config):
+            self, account_name, key_name=None, custom_headers=None, raw=False, **operation_config):
         """Regenerates the access keys for the specified storage account.
 
-        :param resource_group_name: The name of the resource group within the
-         user’s subscription.
-        :type resource_group_name: str
         :param account_name: The name of the storage account within the
          specified resource group. Storage account names must be between 3
          and 24 characters in length and use numbers and lower-case letters
@@ -629,7 +608,7 @@ class StorageAccountsOperations(object):
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
         path_format_arguments = {
-            'resourceGroupName': self._serialize.url("resource_group_name", resource_group_name, 'str'),
+            'resourceGroupName': self._serialize.url("self.config.resource_group_name", self.config.resource_group_name, 'str'),
             'accountName': self._serialize.url("account_name", account_name, 'str'),
             'subscriptionId': self._serialize.url("self.config.subscription_id", self.config.subscription_id, 'str')
         }

@@ -40,6 +40,10 @@ namespace AutoRest.Swagger.Tests
             });
             IEnumerable<ValidationMessage> messages;
             modeler.Build(out messages);
+
+            // remove debug-level messages
+            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+
             return messages;
         }
 
@@ -64,6 +68,7 @@ namespace AutoRest.Swagger.Tests
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));
+
             messages.AssertOnlyValidationMessage(typeof(EnumContainsDefault));
         }
 

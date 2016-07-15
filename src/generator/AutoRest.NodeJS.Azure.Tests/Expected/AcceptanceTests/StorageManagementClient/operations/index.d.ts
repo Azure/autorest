@@ -49,9 +49,6 @@ export interface StorageAccounts {
      * subsequent PUT request is issued with exact same set of properties, then
      * HTTP 200 would be returned.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -75,8 +72,8 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
-    create(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
+    create(accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
+    create(accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
      * Asynchronously creates a new storage account with the specified parameters.
@@ -85,9 +82,6 @@ export interface StorageAccounts {
      * subsequent PUT request is issued with exact same set of properties, then
      * HTTP 200 would be returned.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -111,15 +105,12 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
-    beginCreate(resourceGroupName: string, accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
+    beginCreate(accountName: string, parameters: models.StorageAccountCreateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
+    beginCreate(accountName: string, parameters: models.StorageAccountCreateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
      * Deletes a storage account in Microsoft Azure.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -132,17 +123,14 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    deleteMethod(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    deleteMethod(resourceGroupName: string, accountName: string, callback: ServiceCallback<void>): void;
+    deleteMethod(accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    deleteMethod(accountName: string, callback: ServiceCallback<void>): void;
 
     /**
      * Returns the properties for the specified storage account including but not
      * limited to name, account type, location, and account status. The ListKeys
      * operation should be used to retrieve storage keys.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -155,8 +143,8 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getProperties(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
-    getProperties(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccount>): void;
+    getProperties(accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
+    getProperties(accountName: string, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
      * Updates the account type or tags for a storage account. It can also be used
@@ -169,9 +157,6 @@ export interface StorageAccounts {
      * use the RegenerateKey operation. The location and name of the storage
      * account cannot be changed after creation.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -209,15 +194,12 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    update(resourceGroupName: string, accountName: string, parameters: models.StorageAccountUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
-    update(resourceGroupName: string, accountName: string, parameters: models.StorageAccountUpdateParameters, callback: ServiceCallback<models.StorageAccount>): void;
+    update(accountName: string, parameters: models.StorageAccountUpdateParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccount>): void;
+    update(accountName: string, parameters: models.StorageAccountUpdateParameters, callback: ServiceCallback<models.StorageAccount>): void;
 
     /**
      * Lists the access keys for the specified storage account.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account.
      * 
      * @param {object} [options] Optional Parameters.
@@ -228,8 +210,8 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listKeys(resourceGroupName: string, accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
-    listKeys(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    listKeys(accountName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    listKeys(accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
 
     /**
      * Lists all the storage accounts available under the subscription. Note that
@@ -251,9 +233,6 @@ export interface StorageAccounts {
      * Note that storage keys are not returned; use the ListKeys operation for
      * this.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -262,15 +241,12 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    listByResourceGroup(resourceGroupName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
-    listByResourceGroup(resourceGroupName: string, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    listByResourceGroup(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountListResult>): void;
+    listByResourceGroup(callback: ServiceCallback<models.StorageAccountListResult>): void;
 
     /**
      * Regenerates the access keys for the specified storage account.
      *
-     * @param {string} resourceGroupName The name of the resource group within the
-     * user’s subscription.
-     * 
      * @param {string} accountName The name of the storage account within the
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
@@ -285,8 +261,8 @@ export interface StorageAccounts {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    regenerateKey(resourceGroupName: string, accountName: string, options: { keyName? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
-    regenerateKey(resourceGroupName: string, accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    regenerateKey(accountName: string, options: { keyName? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StorageAccountKeys>): void;
+    regenerateKey(accountName: string, callback: ServiceCallback<models.StorageAccountKeys>): void;
 }
 
 /**
