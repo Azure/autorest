@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-06-08 Version 0.4.1
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Fix for LRO PUT operation https://github.com/Azure/autorest/issues/1133
+
 2016-05-25 Version 0.4.0
 ++++++++++++++++++++++++
 

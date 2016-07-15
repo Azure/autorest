@@ -231,12 +231,13 @@ class LongRunningOperation(object):
         """
         status = self._get_body_status(response)
         self.status = status if status else 'Succeeded'
-        try:
-            # Even if this fails, status '200' should be successful.
-            self._deserialize(response)
-        except CloudError:
-            if self.method in ['PUT', 'PATCH'] and not status:
-                self._object_from_response(response)
+        if not status:
+            try:
+                # Even if this fails, status '200' should be successful.
+                self._deserialize(response)
+            except CloudError:
+                if self.method in ['PUT', 'PATCH']:
+                    self._object_from_response(response)
 
     def _status_201(self, response):
         """Process response with status code 201.
@@ -278,9 +279,9 @@ class LongRunningOperation(object):
         if (self.async_url or not self.resource) and \
                 self.method in ['PUT', 'PATCH']:
             return False
-        resouce_state = self._get_resource_status()
+        resource_state = self._get_resource_status()
         try:
-            return self.status.lower() == resouce_state.lower()
+            return self.status.lower() == resource_state.lower()
         except AttributeError:
             return True
 
@@ -340,10 +341,11 @@ class LongRunningOperation(object):
         self.status = self._get_body_status(response)
         if not self.status:
             raise BadResponse("No status found in body")
-        try:
-            self._deserialize(response)
-        except CloudError:
-            pass  # Not all 'accept' statuses will deserialize.
+        if self.method in ["POST", "DELETE"]:
+            try:
+                self._deserialize(response)
+            except CloudError:
+                pass  # Not all 'accept' statuses will deserialize.
 
     def get_retry(self, response, *args):
         """Retrieve the URL that will be polled for status. First looks for
