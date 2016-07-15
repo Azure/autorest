@@ -310,7 +310,7 @@ namespace AutoRest.Python
         {
             compositeType.Name = GetTypeName(compositeType.Name);
 
-            foreach (var property in compositeType.Properties)
+            foreach (var property in compositeType.ComposedProperties)
             {
                 property.Name = GetPropertyName(property.GetClientName());
                 if (property.SerializedName != null && !property.WasFlattened())
