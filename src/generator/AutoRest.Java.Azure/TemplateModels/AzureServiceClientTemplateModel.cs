@@ -23,12 +23,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
             ModelTemplateModels.Clear();
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureModelTemplateModel(m, serviceClient)));
-
-            // Default scheme when there's none
-            if (!BaseUrl.Contains("://"))
-            {
-                BaseUrl = string.Format(CultureInfo.InvariantCulture, "https://{1}", BaseUrl);
-            }
         }
 
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
