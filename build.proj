@@ -164,7 +164,9 @@
     <CallTarget Targets="DisableSN" Condition=" '$(OS)' == 'Windows_NT'"/> 
     
     <!-- use dotnet pack to build those that are supposed to be packaged --> 
-    <Exec Command="dotnet pack --configuration $(Configuration) --version-suffix $(VersionSuffix)" WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)"/>
+    
+    <Exec Command="dotnet pack --configuration $(Configuration) --version-suffix $(VersionSuffix)" WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)" Condition="$(VersionSuffix) != ''"/>
+    <Exec Command="dotnet pack --configuration $(Configuration) " WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)" Condition="$(VersionSuffix) == ''"/>
 
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
