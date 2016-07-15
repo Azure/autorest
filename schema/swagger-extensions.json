@@ -538,6 +538,9 @@
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
+        "x-ms-parameter-location": {
+          "$ref": "#/definitions/xmsParameterLocation"
+        },
         "x-ms-client-name": {
           "type": "string",
           "description": "A code-generator-friendly name for the parameter."
@@ -639,6 +642,9 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-parameter-location": {
+          "$ref": "#/definitions/xmsParameterLocation"
         },
         "x-ms-client-name": {
           "type": "string",
@@ -742,6 +748,9 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-parameter-location": {
+          "$ref": "#/definitions/xmsParameterLocation"
         },
         "x-ms-client-name": {
           "type": "string",
@@ -850,6 +859,9 @@
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
+        "x-ms-parameter-location": {
+          "$ref": "#/definitions/xmsParameterLocation"
+        },
         "x-ms-client-name": {
           "type": "string",
           "description": "A code-generator-friendly name for the parameter."
@@ -952,6 +964,9 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-parameter-location": {
+          "$ref": "#/definitions/xmsParameterLocation"
         },
         "x-ms-client-name": {
           "type": "string",
@@ -1086,7 +1101,7 @@
               "type": "boolean"
             }
           ],
-          "default": { }
+          "default": {}
         },
         "type": {
           "$ref": "http://json-schema.org/draft-04/schema#/properties/type"
@@ -1104,7 +1119,7 @@
               }
             }
           ],
-          "default": { }
+          "default": {}
         },
         "allOf": {
           "type": "array",
@@ -1118,7 +1133,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/schema"
           },
-          "default": { }
+          "default": {}
         },
         "discriminator": {
           "type": "string"
@@ -1142,7 +1157,7 @@
         "externalDocs": {
           "$ref": "#/definitions/externalDocs"
         },
-        "example": { },
+        "example": {},
         "x-ms-client-flatten": {
           "$ref": "#/definitions/xmsClientFlatten"
         },
@@ -1192,7 +1207,7 @@
         "externalDocs": {
           "$ref": "#/definitions/externalDocs"
         },
-        "example": { }
+        "example": {}
       },
       "additionalProperties": false
     },
@@ -1559,6 +1574,10 @@
     },
     "xmsClientFlatten": {
       "type": "boolean"
+    },
+    "xmsParameterLocation": {
+      "type": "string",
+      "enum": ["client", "method"]
     }
   }
 }

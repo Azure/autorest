@@ -40,6 +40,9 @@ public abstract class ServiceClient {
     /**
      * Initializes a new instance of the ServiceClient class.
      *
+     * @param baseUrl the service base uri
+     * @param clientBuilder the http client builder
+     * @param restBuilder the retrofit rest client builder
      */
     protected ServiceClient(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         if (clientBuilder == null) {

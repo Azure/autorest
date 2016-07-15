@@ -32,7 +32,7 @@ class Paths(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_path=False, custom_headers=None, raw=False, **operation_config):
+            self, bool_path=True, custom_headers=None, raw=False, **operation_config):
         """Get true Boolean value on path.
 
         :param bool_path: true boolean value

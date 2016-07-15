@@ -22,6 +22,12 @@ namespace AutoRest.Java.TemplateModels
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
             this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+
+            // Default scheme when there's none
+            if (!BaseUrl.Contains("://"))
+            {
+                BaseUrl = string.Format(CultureInfo.InvariantCulture, "https://{0}", BaseUrl);
+            }
         }
 
         public bool IsCustomBaseUri { get; private set; }

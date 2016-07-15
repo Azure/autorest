@@ -50,9 +50,9 @@ TEST_NAME = 'foo'
 RESPONSE_BODY = {'properties':{'provisioningState': 'InProgress'}}
 ASYNC_BODY = json.dumps({ 'status': 'Succeeded' })
 ASYNC_URL = 'http://dummyurlFromAzureAsyncOPHeader_Return200'
-LOCATION_BODY = json.dumps({ 'status': 'Succeeded', 'name': TEST_NAME })
+LOCATION_BODY = json.dumps({ 'name': TEST_NAME })
 LOCATION_URL = 'http://dummyurlurlFromLocationHeader_Return200'
-RESOURCE_BODY = json.dumps({ 'status': 'Succeeded', 'name': TEST_NAME })
+RESOURCE_BODY = json.dumps({ 'name': TEST_NAME })
 RESOURCE_URL = 'http://subscriptions/sub1/resourcegroups/g1/resourcetype1/resource1'
 ERROR = 'http://dummyurl_ReturnError'
 POLLING_STATUS = 200
@@ -303,7 +303,7 @@ class TestLongRunningOperation(unittest.TestCase):
         with self.assertRaises(CloudError): # TODO: Node.js raises on deserialization
             poll.wait()
 
-        LOCATION_BODY = json.dumps({ 'status': 'Succeeded', 'name': TEST_NAME })
+        LOCATION_BODY = json.dumps({ 'name': TEST_NAME })
         POLLING_STATUS = 200
         
 
