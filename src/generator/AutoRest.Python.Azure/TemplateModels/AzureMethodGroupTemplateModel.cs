@@ -14,7 +14,6 @@ namespace AutoRest.Python.Azure.TemplateModels
         public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName) 
             : base(serviceClient, methodGroupName)
         {
-            MethodGroupType = methodGroupName + "Operations";
             // Clear base initialized MethodTemplateModels and re-populate with
             // AzureMethodTemplateModel
             MethodTemplateModels.Clear();
