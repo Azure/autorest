@@ -103,8 +103,9 @@
     <!-- Nightly builds have their own VersionSuffix ( ie, -Nightly20160607 )-->
     <VersionSuffix Condition=" $(NightlyBuild) == 'true' ">Nightly$([System.DateTime]::Now.ToString("yyyyMMdd"))</VersionSuffix>
     
-    <!-- Otherwise, default Version Suffix (update this each preview release) --> 
-    <VersionSuffix Condition="$(VersionSuffix) == ''">preview-0.17</VersionSuffix> 
+    <!-- Otherwise, default Version Suffix if not codesigning--> 
+    <VersionSuffix Condition="$(VersionSuffix) == '' AND '$(CodeSign)' != 'true'">preview-0.17</VersionSuffix> 
+
   </PropertyGroup>
   
   <!-- ClientRuntime projects that can be built into packages -->
@@ -163,7 +164,9 @@
     <CallTarget Targets="DisableSN" Condition=" '$(OS)' == 'Windows_NT'"/> 
     
     <!-- use dotnet pack to build those that are supposed to be packaged --> 
-    <Exec Command="dotnet pack --configuration $(Configuration) --version-suffix $(VersionSuffix)" WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)"/>
+    
+    <Exec Command="dotnet pack --configuration $(Configuration) --version-suffix $(VersionSuffix)" WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)" Condition="$(VersionSuffix) != ''"/>
+    <Exec Command="dotnet pack --configuration $(Configuration) " WorkingDirectory="%(PackageableLibraries.RootDir)%(PackageableLibraries.Directory)" Condition="$(VersionSuffix) == ''"/>
 
     <CallTarget Targets="CodeSignBinaries" Condition=" '$(CodeSign)' == 'true' " />
   </Target>
