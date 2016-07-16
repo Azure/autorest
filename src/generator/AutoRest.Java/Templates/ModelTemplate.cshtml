@@ -96,7 +96,7 @@ if (!jsonSetting.IsNullOrEmpty())
 </text>
 }
 
-@foreach (var property in Model.Properties)
+@foreach (PropertyModel property in Model.PropertyModels)
 {
 @:    /**
 @:     * Get the @property.Name value.
@@ -109,7 +109,7 @@ if (property.Type.Name != ((ITypeModel) property.Type).ResponseVariant.Name)
 @:        if (this.@(property.Name) == null) {
 @:            return null;
 @:        }
-@:        return this.@(property.Name).get@(((ITypeModel)property.Type).ResponseVariant)();
+@:        return @(property.ClientForm);
 }
 else
 {
@@ -128,7 +128,7 @@ if (!property.IsReadOnly)
 @:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
 if (property.Type.Name != ((ITypeModel)property.Type).ResponseVariant.Name)
 {
-@:        this.@(property.Name) = new @(property.Type.Name)(@property.Name);
+@:        this.@(property.Name) = @(property.FromClientForm);
 }
 else
 {
