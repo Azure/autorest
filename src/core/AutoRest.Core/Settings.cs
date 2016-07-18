@@ -205,6 +205,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool Verbose { get; set; }
 
         /// <summary>
+        /// If set to true, print out debug messages.
+        /// </summary>
+        [SettingsAlias("debug")]
+        public bool Debug { get; set; }
+
+        /// <summary>
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pn")]

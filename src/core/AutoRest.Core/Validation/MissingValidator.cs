@@ -1,22 +1,24 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
+// 
 
-using System.Linq;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 
-namespace AutoRest.Swagger.Validation
+namespace AutoRest.Core.Validation
 {
-    public class OperationIdSingleUnderscore : TypedRule<string>
+    /// <summary>
+    /// This validator is applied by default to all string members,
+    /// can be used to find out which properties are not being explicitly 
+    /// validated
+    /// </summary>
+    public class MissingValidator : TypedRule<string>
     {
         /// <summary>
-        /// This rule passes if the entity contains no more than 1 underscore
+        /// Assumes that if this is being applied to a type, that it's not valid. 
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(string entity)
-            => entity != null && entity.Count(c => c == '_') <= 1;
+        public override bool IsValid(string entity) => false;
 
         /// <summary>
         /// The template message for this Rule. 
@@ -24,12 +26,11 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.OnlyOneUnderscoreAllowedInOperationId;
+        public override string MessageTemplate => "Missing Validator";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Error;
-
+        public override LogEntrySeverity Severity => LogEntrySeverity.Debug;
     }
 }
