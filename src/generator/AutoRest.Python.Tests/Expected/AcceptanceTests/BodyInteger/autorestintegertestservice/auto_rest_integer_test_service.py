@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.int_model import IntModel
+from .operations.int_model_operations import IntModelOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestIntegerTestService(object):
     :vartype config: AutoRestIntegerTestServiceConfiguration
 
     :ivar int_model: IntModel operations
-    :vartype int_model: .operations.IntModel
+    :vartype int_model: .operations.IntModelOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestIntegerTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.int_model = IntModel(
+        self.int_model = IntModelOperations(
             self._client, self.config, self._serialize, self._deserialize)

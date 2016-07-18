@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .number import Number
+from .number_operations import NumberOperations
 
 __all__ = [
-    'Number',
+    'NumberOperations',
 ]

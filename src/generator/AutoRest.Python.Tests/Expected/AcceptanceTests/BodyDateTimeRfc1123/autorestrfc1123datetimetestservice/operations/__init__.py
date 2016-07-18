@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .datetimerfc1123 import Datetimerfc1123
+from .datetimerfc1123_operations import Datetimerfc1123Operations
 
 __all__ = [
-    'Datetimerfc1123',
+    'Datetimerfc1123Operations',
 ]

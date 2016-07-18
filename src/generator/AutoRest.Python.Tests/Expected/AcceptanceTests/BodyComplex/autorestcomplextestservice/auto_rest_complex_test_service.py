@@ -12,14 +12,14 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.basic_operations import BasicOperations
-from .operations.primitive import Primitive
-from .operations.array import Array
-from .operations.dictionary import Dictionary
-from .operations.inheritance import Inheritance
-from .operations.polymorphism import Polymorphism
-from .operations.polymorphicrecursive import Polymorphicrecursive
-from .operations.readonlyproperty import Readonlyproperty
+from .operations.basic_operations_operations import BasicOperationsOperations
+from .operations.primitive_operations import PrimitiveOperations
+from .operations.array_operations import ArrayOperations
+from .operations.dictionary_operations import DictionaryOperations
+from .operations.inheritance_operations import InheritanceOperations
+from .operations.polymorphism_operations import PolymorphismOperations
+from .operations.polymorphicrecursive_operations import PolymorphicrecursiveOperations
+from .operations.readonlyproperty_operations import ReadonlypropertyOperations
 from . import models
 
 
@@ -58,21 +58,21 @@ class AutoRestComplexTestService(object):
     :vartype config: AutoRestComplexTestServiceConfiguration
 
     :ivar basic_operations: BasicOperations operations
-    :vartype basic_operations: .operations.BasicOperations
+    :vartype basic_operations: .operations.BasicOperationsOperations
     :ivar primitive: Primitive operations
-    :vartype primitive: .operations.Primitive
+    :vartype primitive: .operations.PrimitiveOperations
     :ivar array: Array operations
-    :vartype array: .operations.Array
+    :vartype array: .operations.ArrayOperations
     :ivar dictionary: Dictionary operations
-    :vartype dictionary: .operations.Dictionary
+    :vartype dictionary: .operations.DictionaryOperations
     :ivar inheritance: Inheritance operations
-    :vartype inheritance: .operations.Inheritance
+    :vartype inheritance: .operations.InheritanceOperations
     :ivar polymorphism: Polymorphism operations
-    :vartype polymorphism: .operations.Polymorphism
+    :vartype polymorphism: .operations.PolymorphismOperations
     :ivar polymorphicrecursive: Polymorphicrecursive operations
-    :vartype polymorphicrecursive: .operations.Polymorphicrecursive
+    :vartype polymorphicrecursive: .operations.PolymorphicrecursiveOperations
     :ivar readonlyproperty: Readonlyproperty operations
-    :vartype readonlyproperty: .operations.Readonlyproperty
+    :vartype readonlyproperty: .operations.ReadonlypropertyOperations
 
     :param api_version: API ID.
     :type api_version: str
@@ -90,19 +90,19 @@ class AutoRestComplexTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.basic_operations = BasicOperations(
+        self.basic_operations = BasicOperationsOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.primitive = Primitive(
+        self.primitive = PrimitiveOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.array = Array(
+        self.array = ArrayOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.dictionary = Dictionary(
+        self.dictionary = DictionaryOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.inheritance = Inheritance(
+        self.inheritance = InheritanceOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphism = Polymorphism(
+        self.polymorphism = PolymorphismOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.polymorphicrecursive = Polymorphicrecursive(
+        self.polymorphicrecursive = PolymorphicrecursiveOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.readonlyproperty = Readonlyproperty(
+        self.readonlyproperty = ReadonlypropertyOperations(
             self._client, self.config, self._serialize, self._deserialize)

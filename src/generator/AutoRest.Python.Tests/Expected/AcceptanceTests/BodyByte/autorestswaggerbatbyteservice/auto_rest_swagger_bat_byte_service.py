@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.byte import Byte
+from .operations.byte_operations import ByteOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATByteService(object):
     :vartype config: AutoRestSwaggerBATByteServiceConfiguration
 
     :ivar byte: Byte operations
-    :vartype byte: .operations.Byte
+    :vartype byte: .operations.ByteOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATByteService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.byte = Byte(
+        self.byte = ByteOperations(
             self._client, self.config, self._serialize, self._deserialize)

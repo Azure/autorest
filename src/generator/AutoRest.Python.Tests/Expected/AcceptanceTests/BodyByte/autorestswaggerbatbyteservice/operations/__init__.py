@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .byte import Byte
+from .byte_operations import ByteOperations
 
 __all__ = [
-    'Byte',
+    'ByteOperations',
 ]

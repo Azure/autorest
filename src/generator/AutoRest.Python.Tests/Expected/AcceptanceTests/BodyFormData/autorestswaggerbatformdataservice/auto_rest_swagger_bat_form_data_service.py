@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.formdata import Formdata
+from .operations.formdata_operations import FormdataOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATFormDataService(object):
     :vartype config: AutoRestSwaggerBATFormDataServiceConfiguration
 
     :ivar formdata: Formdata operations
-    :vartype formdata: .operations.Formdata
+    :vartype formdata: .operations.FormdataOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATFormDataService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.formdata = Formdata(
+        self.formdata = FormdataOperations(
             self._client, self.config, self._serialize, self._deserialize)

@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .dictionary import Dictionary
+from .dictionary_operations import DictionaryOperations
 
 __all__ = [
-    'Dictionary',
+    'DictionaryOperations',
 ]

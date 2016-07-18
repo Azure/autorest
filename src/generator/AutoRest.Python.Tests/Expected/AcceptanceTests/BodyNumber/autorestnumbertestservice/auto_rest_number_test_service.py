@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.number import Number
+from .operations.number_operations import NumberOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestNumberTestService(object):
     :vartype config: AutoRestNumberTestServiceConfiguration
 
     :ivar number: Number operations
-    :vartype number: .operations.Number
+    :vartype number: .operations.NumberOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestNumberTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.number = Number(
+        self.number = NumberOperations(
             self._client, self.config, self._serialize, self._deserialize)
