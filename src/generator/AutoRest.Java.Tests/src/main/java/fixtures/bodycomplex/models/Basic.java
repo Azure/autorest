@@ -16,12 +16,15 @@ package fixtures.bodycomplex.models;
  */
 public class Basic {
     /**
-     * The id property.
+     * Basic Id.
      */
     private Integer id;
 
     /**
-     * The name property.
+     * Name property with a very
+     * long description that
+     * does not fit on a single line
+     * and a line break.
      */
     private String name;
 
