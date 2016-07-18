@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.Core.ClientModel;
 using AutoRest.Java.Azure.Fluent.TypeModels;
 using AutoRest.Java.Azure.TemplateModels;
@@ -50,6 +51,19 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
             get
             {
                 return this.Name.EndsWith("Inner", StringComparison.Ordinal);
+            }
+        }
+
+        public override IEnumerable<string> ImportList
+        {
+            get
+            {
+                List<string> imports = base.ImportList.ToList();
+                if (BaseModelType != null && BaseModelType.Name.EndsWith("Inner", StringComparison.Ordinal) ^ IsInnerModel)
+                {
+                    imports.AddRange(BaseModelType.ImportSafe());
+                }
+                return imports;
             }
         }
     }
