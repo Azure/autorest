@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .paths import Paths
+from .paths_operations import PathsOperations
 
 __all__ = [
-    'Paths',
+    'PathsOperations',
 ]

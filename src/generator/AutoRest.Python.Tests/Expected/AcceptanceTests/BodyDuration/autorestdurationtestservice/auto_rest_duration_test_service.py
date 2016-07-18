@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.duration import Duration
+from .operations.duration_operations import DurationOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestDurationTestService(object):
     :vartype config: AutoRestDurationTestServiceConfiguration
 
     :ivar duration: Duration operations
-    :vartype duration: .operations.Duration
+    :vartype duration: .operations.DurationOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestDurationTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.duration = Duration(
+        self.duration = DurationOperations(
             self._client, self.config, self._serialize, self._deserialize)

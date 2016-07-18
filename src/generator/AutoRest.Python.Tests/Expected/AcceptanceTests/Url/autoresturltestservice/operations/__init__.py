@@ -9,12 +9,12 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .paths import Paths
-from .queries import Queries
-from .path_items import PathItems
+from .paths_operations import PathsOperations
+from .queries_operations import QueriesOperations
+from .path_items_operations import PathItemsOperations
 
 __all__ = [
-    'Paths',
-    'Queries',
-    'PathItems',
+    'PathsOperations',
+    'QueriesOperations',
+    'PathItemsOperations',
 ]

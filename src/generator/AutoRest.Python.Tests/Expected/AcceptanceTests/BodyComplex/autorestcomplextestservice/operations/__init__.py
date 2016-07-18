@@ -9,22 +9,22 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .basic_operations import BasicOperations
-from .primitive import Primitive
-from .array import Array
-from .dictionary import Dictionary
-from .inheritance import Inheritance
-from .polymorphism import Polymorphism
-from .polymorphicrecursive import Polymorphicrecursive
-from .readonlyproperty import Readonlyproperty
+from .basic_operations_operations import BasicOperationsOperations
+from .primitive_operations import PrimitiveOperations
+from .array_operations import ArrayOperations
+from .dictionary_operations import DictionaryOperations
+from .inheritance_operations import InheritanceOperations
+from .polymorphism_operations import PolymorphismOperations
+from .polymorphicrecursive_operations import PolymorphicrecursiveOperations
+from .readonlyproperty_operations import ReadonlypropertyOperations
 
 __all__ = [
-    'BasicOperations',
-    'Primitive',
-    'Array',
-    'Dictionary',
-    'Inheritance',
-    'Polymorphism',
-    'Polymorphicrecursive',
-    'Readonlyproperty',
+    'BasicOperationsOperations',
+    'PrimitiveOperations',
+    'ArrayOperations',
+    'DictionaryOperations',
+    'InheritanceOperations',
+    'PolymorphismOperations',
+    'PolymorphicrecursiveOperations',
+    'ReadonlypropertyOperations',
 ]

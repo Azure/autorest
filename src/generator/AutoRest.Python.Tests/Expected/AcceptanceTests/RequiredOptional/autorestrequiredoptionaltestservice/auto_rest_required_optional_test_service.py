@@ -12,8 +12,8 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.implicit import Implicit
-from .operations.explicit import Explicit
+from .operations.implicit_operations import ImplicitOperations
+from .operations.explicit_operations import ExplicitOperations
 from . import models
 
 
@@ -62,9 +62,9 @@ class AutoRestRequiredOptionalTestService(object):
     :vartype config: AutoRestRequiredOptionalTestServiceConfiguration
 
     :ivar implicit: Implicit operations
-    :vartype implicit: .operations.Implicit
+    :vartype implicit: .operations.ImplicitOperations
     :ivar explicit: Explicit operations
-    :vartype explicit: .operations.Explicit
+    :vartype explicit: .operations.ExplicitOperations
 
     :param required_global_path: number of items to skip
     :type required_global_path: str
@@ -86,7 +86,7 @@ class AutoRestRequiredOptionalTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.implicit = Implicit(
+        self.implicit = ImplicitOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.explicit = Explicit(
+        self.explicit = ExplicitOperations(
             self._client, self.config, self._serialize, self._deserialize)

@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .duration import Duration
+from .duration_operations import DurationOperations
 
 __all__ = [
-    'Duration',
+    'DurationOperations',
 ]

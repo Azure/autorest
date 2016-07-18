@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.files import Files
+from .operations.files_operations import FilesOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATFileService(object):
     :vartype config: AutoRestSwaggerBATFileServiceConfiguration
 
     :ivar files: Files operations
-    :vartype files: .operations.Files
+    :vartype files: .operations.FilesOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATFileService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.files = Files(
+        self.files = FilesOperations(
             self._client, self.config, self._serialize, self._deserialize)

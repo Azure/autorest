@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.paths import Paths
+from .operations.paths_operations import PathsOperations
 from . import models
 
 
@@ -50,7 +50,7 @@ class AutoRestParameterizedHostTestClient(object):
     :vartype config: AutoRestParameterizedHostTestClientConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.Paths
+    :vartype paths: .operations.PathsOperations
 
     :param host: A string value that is used as a global part of the
      parameterized host
@@ -68,5 +68,5 @@ class AutoRestParameterizedHostTestClient(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.paths = Paths(
+        self.paths = PathsOperations(
             self._client, self.config, self._serialize, self._deserialize)

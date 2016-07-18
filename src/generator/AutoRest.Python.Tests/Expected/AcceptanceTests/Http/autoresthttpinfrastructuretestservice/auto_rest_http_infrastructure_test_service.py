@@ -12,13 +12,13 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.http_failure import HttpFailure
-from .operations.http_success import HttpSuccess
-from .operations.http_redirects import HttpRedirects
-from .operations.http_client_failure import HttpClientFailure
-from .operations.http_server_failure import HttpServerFailure
-from .operations.http_retry import HttpRetry
-from .operations.multiple_responses import MultipleResponses
+from .operations.http_failure_operations import HttpFailureOperations
+from .operations.http_success_operations import HttpSuccessOperations
+from .operations.http_redirects_operations import HttpRedirectsOperations
+from .operations.http_client_failure_operations import HttpClientFailureOperations
+from .operations.http_server_failure_operations import HttpServerFailureOperations
+from .operations.http_retry_operations import HttpRetryOperations
+from .operations.multiple_responses_operations import MultipleResponsesOperations
 from . import models
 
 
@@ -49,19 +49,19 @@ class AutoRestHttpInfrastructureTestService(object):
     :vartype config: AutoRestHttpInfrastructureTestServiceConfiguration
 
     :ivar http_failure: HttpFailure operations
-    :vartype http_failure: .operations.HttpFailure
+    :vartype http_failure: .operations.HttpFailureOperations
     :ivar http_success: HttpSuccess operations
-    :vartype http_success: .operations.HttpSuccess
+    :vartype http_success: .operations.HttpSuccessOperations
     :ivar http_redirects: HttpRedirects operations
-    :vartype http_redirects: .operations.HttpRedirects
+    :vartype http_redirects: .operations.HttpRedirectsOperations
     :ivar http_client_failure: HttpClientFailure operations
-    :vartype http_client_failure: .operations.HttpClientFailure
+    :vartype http_client_failure: .operations.HttpClientFailureOperations
     :ivar http_server_failure: HttpServerFailure operations
-    :vartype http_server_failure: .operations.HttpServerFailure
+    :vartype http_server_failure: .operations.HttpServerFailureOperations
     :ivar http_retry: HttpRetry operations
-    :vartype http_retry: .operations.HttpRetry
+    :vartype http_retry: .operations.HttpRetryOperations
     :ivar multiple_responses: MultipleResponses operations
-    :vartype multiple_responses: .operations.MultipleResponses
+    :vartype multiple_responses: .operations.MultipleResponsesOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -77,17 +77,17 @@ class AutoRestHttpInfrastructureTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.http_failure = HttpFailure(
+        self.http_failure = HttpFailureOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.http_success = HttpSuccess(
+        self.http_success = HttpSuccessOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.http_redirects = HttpRedirects(
+        self.http_redirects = HttpRedirectsOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.http_client_failure = HttpClientFailure(
+        self.http_client_failure = HttpClientFailureOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.http_server_failure = HttpServerFailure(
+        self.http_server_failure = HttpServerFailureOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.http_retry = HttpRetry(
+        self.http_retry = HttpRetryOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.multiple_responses = MultipleResponses(
+        self.multiple_responses = MultipleResponsesOperations(
             self._client, self.config, self._serialize, self._deserialize)
