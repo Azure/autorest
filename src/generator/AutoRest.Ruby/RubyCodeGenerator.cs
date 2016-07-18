@@ -201,7 +201,7 @@ namespace AutoRest.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace, this.packageVersion),
+                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
 
