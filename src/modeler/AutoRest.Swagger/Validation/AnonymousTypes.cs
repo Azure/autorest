@@ -8,7 +8,7 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class AnonymousTypes : TypedRule<SwaggerObject>
+    public class AvoidAnonymousTypes : TypedRule<SwaggerObject>
     {
         /// <summary>
         /// An <paramref name="entity"/> fails this rule if it doesn't have a reference (meaning it's defined inline)

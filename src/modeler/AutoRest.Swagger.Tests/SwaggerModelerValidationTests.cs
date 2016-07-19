@@ -69,21 +69,21 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));
 
-            messages.AssertOnlyValidationMessage(typeof(EnumContainsDefault));
+            messages.AssertOnlyValidationMessage(typeof(DefaultMustBeInEnum));
         }
 
         [Fact]
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(typeof(ClientNameRequired));
+            messages.AssertOnlyValidationWarning(typeof(NonEmptyClientName));
         }
 
         [Fact]
         public void RefSiblingPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationWarning(typeof(RefNoSiblings));
+            messages.AssertOnlyValidationWarning(typeof(RefsMustNotHaveSiblings));
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace AutoRest.Swagger.Tests
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));
-            messages.AssertOnlyValidationMessage(typeof(AnonymousTypes));
+            messages.AssertOnlyValidationMessage(typeof(AvoidAnonymousTypes));
         }
 
         [Fact]
@@ -111,7 +111,7 @@ namespace AutoRest.Swagger.Tests
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-group-underscores.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationIdSingleUnderscore));
+            messages.AssertOnlyValidationMessage(typeof(OneUnderscoreInOperationId));
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace AutoRest.Swagger.Tests
         public void XmsPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "xms-path-not-in-paths.json"));
-            messages.AssertOnlyValidationMessage(typeof(XmsPathsInPath));
+            messages.AssertOnlyValidationMessage(typeof(XmsPathsMustOverloadPaths));
         }
     }
 }

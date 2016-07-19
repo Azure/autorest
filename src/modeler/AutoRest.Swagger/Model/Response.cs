@@ -23,7 +23,7 @@ namespace AutoRest.Swagger.Model
             set { _description = value.StripControlCharacters(); }
         }
 
-        [Rule(typeof(AnonymousTypes))]
+        [Rule(typeof(AvoidAnonymousTypes))]
         public Schema Schema { get; set; }
 
         public Dictionary<string, Header> Headers { get; set; }

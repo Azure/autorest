@@ -8,7 +8,7 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ClientNameRequired : TypedRule<SwaggerObject>
+    public class NonEmptyClientName : TypedRule<SwaggerObject>
     {
         public override bool IsValid(SwaggerObject entity)
         {

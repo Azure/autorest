@@ -8,7 +8,7 @@ using AutoRest.Core.Validation;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationIdSingleUnderscore : TypedRule<string>
+    public class OneUnderscoreInOperationId : TypedRule<string>
     {
         /// <summary>
         /// This rule passes if the entity contains no more than 1 underscore

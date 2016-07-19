@@ -20,8 +20,8 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     [Serializable]
     [Rule(typeof(DescriptionRequired))]
-    [Rule(typeof(EnumContainsDefault))]
-    [Rule(typeof(RefNoSiblings))]
+    [Rule(typeof(DefaultMustBeInEnum))]
+    [Rule(typeof(RefsMustNotHaveSiblings))]
     public abstract class SwaggerObject : SwaggerBase
     {
         private string _description;

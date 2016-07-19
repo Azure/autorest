@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
         }
     }
 
-    public class RefNoSiblings : TypedRule<SwaggerObject>
+    public class RefsMustNotHaveSiblings : TypedRule<SwaggerObject>
     {
         /// <summary>
         /// This rule passes if the entity does not have both a reference and define properties inline

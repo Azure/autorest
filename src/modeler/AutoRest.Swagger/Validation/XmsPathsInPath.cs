@@ -14,7 +14,7 @@ using AutoRest.Swagger.Model;
 namespace AutoRest.Swagger.Validation
 {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Xms")]
-    public class XmsPathsInPath : TypedRule<ServiceDefinition>
+    public class XmsPathsMustOverloadPaths : TypedRule<ServiceDefinition>
     {
         /// <summary>
         /// The template message for this Rule. 

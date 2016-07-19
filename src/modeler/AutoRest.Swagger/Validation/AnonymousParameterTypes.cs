@@ -10,7 +10,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class AnonymousParameterTypes : TypedRule<SwaggerParameter>
     {
-        private static AnonymousTypes AnonymousTypesRule = new AnonymousTypes();
+        private static AvoidAnonymousTypes AnonymousTypesRule = new AvoidAnonymousTypes();
 
         /// <summary>
         /// An entity fails this rule if it has a schema, and that schema is an anonymous type

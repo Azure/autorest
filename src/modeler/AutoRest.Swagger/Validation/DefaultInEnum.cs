@@ -30,7 +30,7 @@ namespace AutoRest.Swagger.Validation
         }
     }
 
-    public class EnumContainsDefault : TypedRule<SwaggerObject>
+    public class DefaultMustBeInEnum : TypedRule<SwaggerObject>
     {
         /// <summary>
         ///     An <paramref name="entity" /> fails this rule if it has both default defined and enum and the default isn't in the
