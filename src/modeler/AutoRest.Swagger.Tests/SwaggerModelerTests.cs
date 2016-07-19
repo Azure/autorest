@@ -515,6 +515,26 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].IsConstant);
             Assert.Equal("constant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].DefaultValue);
 
+            Assert.Equal("RefStrEnumRequiredConstant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[7].Name);
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[7].Type.IsPrimaryType(KnownPrimaryType.String));
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[7].IsConstant);
+            Assert.Equal("ReferenceEnum1", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[7].DefaultValue);
+
+            Assert.Equal("RefIntEnumRequiredConstant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[8].Name);
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[8].Type.IsPrimaryType(KnownPrimaryType.Int));
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[8].IsConstant);
+            Assert.Equal("0", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[8].DefaultValue);
+
+            Assert.Equal("RefStrEnum", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[9].Name);
+            Assert.Equal("enum", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[9].Type.ToString());
+            Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[9].IsConstant);
+            Assert.Null(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[9].DefaultValue);
+
+            Assert.Equal("RefIntEnum", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[10].Name);
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[10].Type.IsPrimaryType(KnownPrimaryType.Int));
+            Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[10].IsConstant);
+            Assert.Null(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[10].DefaultValue);
+
             Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").ContainsConstantProperties);
             Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "Error").ContainsConstantProperties);
         }
