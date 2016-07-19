@@ -440,7 +440,16 @@ namespace AutoRest.Swagger.Tests
                 clientModel.ModelTypes.First(m => m.Name == "Product").Properties.First(p => p.Name == "color3").Type as EnumType;
             Assert.Equal(fixedEnum2, fixedEnum);
 
-            Assert.Equal(1, clientModel.EnumTypes.Count);
+            var refEnum =
+               clientModel.ModelTypes.First(m => m.Name == "Product").Properties.First(p => p.Name == "refColor").Type as EnumType;
+            Assert.NotNull(refEnum);
+            Assert.Equal(refEnum.Values,
+                new[] { new EnumValue { Name = "red" }, new EnumValue { Name = "green" }, new EnumValue { Name = "blue" } }.ToList());
+            Assert.True(refEnum.ModelAsString);
+            Assert.Equal("refColors", refEnum.Name);
+
+
+            Assert.Equal(2, clientModel.EnumTypes.Count);
             Assert.Equal("Colors", clientModel.EnumTypes.First().Name);
         }
 
