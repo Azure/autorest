@@ -865,13 +865,13 @@
         },
         "minProcessExecutionTime": {
           "type": "string",
-          "description": "MinProcessExecutionTime - minimum time the process must execute            before taking the action"
+          "description": "MinProcessExecutionTime - minimum time the process must execute\r\n            before taking the action"
         }
       },
       "required": [
         "actionType"
       ],
-      "description": "AutoHealActions - Describes the actions which can be            taken by the auto-heal module when a rule is triggered."
+      "description": "AutoHealActions - Describes the actions which can be\r\n            taken by the auto-heal module when a rule is triggered."
     },
     "AutoHealCustomAction": {
       "type": "object",
@@ -885,7 +885,7 @@
           "description": "Parameters for the executable"
         }
       },
-      "description": "AutoHealCustomAction - Describes the custom action to be executed            when an auto heal rule is triggered."
+      "description": "AutoHealCustomAction - Describes the custom action to be executed\r\n            when an auto heal rule is triggered."
     },
     "AutoHealRules": {
       "type": "object",
@@ -1064,7 +1064,7 @@
       "properties": {
         "correlationId": {
           "type": "string",
-          "description": "Correlation Id of cloning operation. This id ties multiple cloning operations            together to use the same snapshot"
+          "description": "Correlation Id of cloning operation. This id ties multiple cloning operations\r\n            together to use the same snapshot"
         },
         "overwrite": {
           "oneOf": [
@@ -1101,7 +1101,7 @@
         },
         "sourceWebAppId": {
           "type": "string",
-          "description": "ARM resource id of the source web app. Web app resource id is of the form             /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and             /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots"
+          "description": "ARM resource id of the source web app. Web app resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots"
         },
         "hostingEnvironment": {
           "type": "string",
@@ -1119,7 +1119,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Application settings overrides for cloned web app. If specified these settings will override the settings cloned             from source web app. If not specified, application settings from source web app are retained."
+          "description": "Application settings overrides for cloned web app. If specified these settings will override the settings cloned \r\n            from source web app. If not specified, application settings from source web app are retained."
         },
         "configureLoadBalancing": {
           "oneOf": [
@@ -1134,7 +1134,7 @@
         },
         "trafficManagerProfileId": {
           "type": "string",
-          "description": "ARM resource id of the traffic manager profile to use if it exists. Traffic manager resource id is of the form             /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}"
+          "description": "ARM resource id of the traffic manager profile to use if it exists. Traffic manager resource id is of the form \r\n            /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}"
         },
         "trafficManagerProfileName": {
           "type": "string",
@@ -1185,7 +1185,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Gets or sets the list of origins that should be allowed to make cross-origin            calls (for example: http://example.com:12345). Use \"*\" to allow all."
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin\r\n            calls (for example: http://example.com:12345). Use \"*\" to allow all."
         }
       },
       "description": "Cross-Origin Resource Sharing (CORS) settings for the web app."
@@ -1320,7 +1320,7 @@
           "description": "Command-line arguments to be passed to the script processor."
         }
       },
-      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension.             For example it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension."
+      "description": "The IIS handler mappings used to define which handler processes HTTP requests with certain extension. \r\n            For example it is used to configure php-cgi.exe process to handle all HTTP requests with *.php extension."
     },
     "HostingEnvironment_properties": {
       "type": "object",
@@ -1575,7 +1575,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available            (most likely because NSG blocked the incoming traffic)"
+          "description": "True/false indicating whether the hostingEnvironment is suspended. The environment can be suspended e.g. when the management endpoint is no longer available\r\n            (most likely because NSG blocked the incoming traffic)"
         },
         "clusterSettings": {
           "oneOf": [
@@ -1859,7 +1859,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches             {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
+          "description": "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
         },
         "changeIntervalInMinutes": {
           "oneOf": [
@@ -1896,7 +1896,7 @@
         },
         "changeDecisionCallbackUrl": {
           "type": "string",
-          "description": "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.            https://www.siteextensions.net/packages/TiPCallback/"
+          "description": "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/"
         },
         "name": {
           "type": "string",
@@ -2006,7 +2006,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "If True apps assigned to this App Service Plan can be scaled independently            If False apps assigned to this App Service Plan will scale to all instances of the plan"
+          "description": "If True apps assigned to this App Service Plan can be scaled independently\r\n            If False apps assigned to this App Service Plan will scale to all instances of the plan"
         }
       }
     },
@@ -2116,7 +2116,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Specifies if the public hostnames are disabled the web app.            If set to true the app is only accessible via API Management process"
+          "description": "Specifies if the public hostnames are disabled the web app.\r\n            If set to true the app is only accessible via API Management process"
         },
         "containerSize": {
           "oneOf": [
@@ -2138,7 +2138,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Maximum number of workers            This only applies to function container"
+          "description": "Maximum number of workers\r\n            This only applies to function container"
         },
         "cloningInfo": {
           "oneOf": [
@@ -2149,7 +2149,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "This is only valid for web app creation. If specified, web app is cloned from             a source web app"
+          "description": "This is only valid for web app creation. If specified, web app is cloned from \r\n            a source web app"
         }
       }
     },
@@ -3150,7 +3150,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "Size Id of machines:             0 - Small            1 - Medium            2 - Large"
+          "description": "Size Id of machines: \r\n            0 - Small\r\n            1 - Medium\r\n            2 - Large"
         },
         "excludeFromCapacityAllocation": {
           "oneOf": [
@@ -3161,7 +3161,7 @@
               "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
             }
           ],
-          "description": "If true it includes basic sites            Basic sites are not used for capacity allocation."
+          "description": "If true it includes basic sites\r\n            Basic sites are not used for capacity allocation."
         },
         "isApplicableForAllComputeModes": {
           "oneOf": [
@@ -3371,7 +3371,7 @@
         },
         "certBlob": {
           "type": "string",
-          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a             Point-To-Site VPN connection."
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \r\n            Point-To-Site VPN connection."
         },
         "routes": {
           "oneOf": [
@@ -3474,7 +3474,7 @@
         },
         "routeType": {
           "type": "string",
-          "description": "The type of route this is:            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918            INHERITED - Routes inherited from the real Virtual Network routes            STATIC - Static route set on the web app only                        These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them            with new INHERITED routes."
+          "description": "The type of route this is:\r\n            DEFAULT - By default, every web app has routes to the local address ranges specified by RFC1918\r\n            INHERITED - Routes inherited from the real Virtual Network routes\r\n            STATIC - Static route set on the web app only\r\n            \r\n            These values will be used for syncing a Web App's routes with those from a Virtual Network. This operation will clear all DEFAULT and INHERITED routes and replace them\r\n            with new INHERITED routes."
         }
       }
     },

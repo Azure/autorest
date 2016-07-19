@@ -79,33 +79,59 @@ class Polymorphicrecursive(object):
             self, complex_body, custom_headers=None, raw=False, **operation_config):
         """Put complex types that are polymorphic and have recursive references.
 
-        :param complex_body: Please put a salmon that looks like this:{
-         "fishtype": "salmon",    "species": "king",    "length": 1,
-         "age": 1,    "location": "alaska",    "iswild": true,
-         "siblings": [        {            "fishtype": "shark",
-         "species": "predator",            "length": 20,
-         "age": 6,            "siblings": [                {
+        :param complex_body: Please put a salmon that looks like this:
+         {
          "fishtype": "salmon",
-         "species": "coho",                    "length":
-         2,                    "age": 2,                    "location":
-         "atlantic",                    "iswild": true,
-         "siblings": [                        {
+         "species": "king",
+         "length": 1,
+         "age": 1,
+         "location": "alaska",
+         "iswild": true,
+         "siblings": [
+         {
          "fishtype": "shark",
          "species": "predator",
          "length": 20,
-         "age": 6                        },
-         {                            "fishtype":
-         "sawshark",                            "species": "dangerous",
-         "length": 10,
-         "age": 105                        }
-         ]                },                {
+         "age": 6,
+         "siblings": [
+         {
+         "fishtype": "salmon",
+         "species": "coho",
+         "length": 2,
+         "age": 2,
+         "location": "atlantic",
+         "iswild": true,
+         "siblings": [
+         {
+         "fishtype": "shark",
+         "species": "predator",
+         "length": 20,
+         "age": 6
+         },
+         {
          "fishtype": "sawshark",
          "species": "dangerous",
-         "length": 10,                    "age": 105
-         }            ]        },        {
-         "fishtype": "sawshark",            "species":
-         "dangerous",            "length": 10,            "age": 105        }
-         ]}
+         "length": 10,
+         "age": 105
+         }
+         ]
+         },
+         {
+         "fishtype": "sawshark",
+         "species": "dangerous",
+         "length": 10,
+         "age": 105
+         }
+         ]
+         },
+         {
+         "fishtype": "sawshark",
+         "species": "dangerous",
+         "length": 10,
+         "age": 105
+         }
+         ]
+         }
         :type complex_body: :class:`Fish
          <fixtures.acceptancetestsbodycomplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
