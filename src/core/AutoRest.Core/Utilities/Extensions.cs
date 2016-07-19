@@ -311,7 +311,7 @@ namespace AutoRest.Core.Utilities
 
         public static string StripControlCharacters(this string input)
         {
-            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz]", string.Empty);
+            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz-[\cj\cm\ci]]", string.Empty);
         }
     }
 }

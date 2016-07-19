@@ -23,7 +23,7 @@ namespace AutoRest.Core.Validation
         public override bool IsValid(string entity, out object[] formatParameters)
         {
 
-            if (entity.All(ch => ch >= ' ' || ch == '\t'))
+            if (entity.All(ch => ch >= ' ' || ch == '\t' || ch == '\r' || ch == '\n'))
             {
                 formatParameters = null;
                 return true;
