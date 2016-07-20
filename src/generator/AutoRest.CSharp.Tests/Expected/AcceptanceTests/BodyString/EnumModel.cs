@@ -655,6 +655,9 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <summary>
         /// Sends value 'green-color' from a constant
         /// </summary>
+        /// <param name='field1'>
+        /// Sample string.
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -667,9 +670,13 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(string field1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             RefColorConstant enumStringBody = new RefColorConstant();
+            if (field1 != null)
+            {
+                enumStringBody.Field1 = field1;
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

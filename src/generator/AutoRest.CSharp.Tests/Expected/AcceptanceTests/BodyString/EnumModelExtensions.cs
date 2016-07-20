@@ -181,9 +181,12 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void PutReferencedConstant(this IEnumModel operations)
+            /// <param name='field1'>
+            /// Sample string.
+            /// </param>
+            public static void PutReferencedConstant(this IEnumModel operations, string field1 = default(string))
             {
-                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(field1), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -192,12 +195,15 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='field1'>
+            /// Sample string.
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutReferencedConstantAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutReferencedConstantAsync(this IEnumModel operations, string field1 = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutReferencedConstantWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                await operations.PutReferencedConstantWithHttpMessagesAsync(field1, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

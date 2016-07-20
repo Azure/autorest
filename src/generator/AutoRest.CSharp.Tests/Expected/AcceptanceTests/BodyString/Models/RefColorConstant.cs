@@ -23,12 +23,26 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         public RefColorConstant() { }
 
         /// <summary>
+        /// Initializes a new instance of the RefColorConstant class.
+        /// </summary>
+        /// <param name="field1">Sample string.</param>
+        public RefColorConstant(string field1 = default(string))
+        {
+            Field1 = field1;
+        }
+        /// <summary>
         /// Static constructor for RefColorConstant class.
         /// </summary>
         static RefColorConstant()
         {
             ColorConstant = "green-color";
         }
+
+        /// <summary>
+        /// Gets or sets sample string.
+        /// </summary>
+        [JsonProperty(PropertyName = "field1")]
+        public string Field1 { get; set; }
 
         /// <summary>
         /// Referenced Color Constant Description.

@@ -120,3 +120,181 @@ class Enum(object):
         if raw:
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
+
+    def get_referenced(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Get enum value 'red color' from enumeration of 'red color',
+        'green-color', 'blue_color'.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`Colors
+         <fixtures.acceptancetestsbodystring.models.Colors>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        """
+        # Construct URL
+        url = '/string/enum/Referenced'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Colors', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def put_referenced(
+            self, enum_string_body, custom_headers=None, raw=False, **operation_config):
+        """Sends value 'red color' from enumeration of 'red color',
+        'green-color', 'blue_color'.
+
+        :param enum_string_body: Possible values include: 'red color',
+         'green-color', 'blue_color'
+        :type enum_string_body: str or :class:`Colors
+         <fixtures.acceptancetestsbodystring.models.Colors>`
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: None
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        """
+        # Construct URL
+        url = '/string/enum/Referenced'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(enum_string_body, 'Colors')
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
+
+    def get_referenced_constant(
+            self, custom_headers=None, raw=False, **operation_config):
+        """Get value 'green-color' from the constant.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: :class:`RefColorConstant
+         <fixtures.acceptancetestsbodystring.models.RefColorConstant>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        """
+        # Construct URL
+        url = '/string/enum/ReferencedConstant'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('RefColorConstant', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def put_referenced_constant(
+            self, field1=None, custom_headers=None, raw=False, **operation_config):
+        """Sends value 'green-color' from a constant.
+
+        :param field1: Sample string.
+        :type field1: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: None
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        """
+        enum_string_body = models.RefColorConstant(field1=field1)
+
+        # Construct URL
+        url = '/string/enum/ReferencedConstant'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        body_content = self._serialize.body(enum_string_body, 'RefColorConstant')
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response

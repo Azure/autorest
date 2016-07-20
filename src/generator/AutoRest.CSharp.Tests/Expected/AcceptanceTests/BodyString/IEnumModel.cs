@@ -108,6 +108,9 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <summary>
         /// Sends value 'green-color' from a constant
         /// </summary>
+        /// <param name='field1'>
+        /// Sample string.
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -117,6 +120,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(string field1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
