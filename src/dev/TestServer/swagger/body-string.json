@@ -530,6 +530,10 @@
           "type": "string",
           "enum": [ "green-color" ],
           "description": "Referenced Color Constant Description."
+        },
+         "field1": {            
+          "type": "string",          
+          "description": "Sample string."
         }
       },
        "required": [ "ColorConstant" ]

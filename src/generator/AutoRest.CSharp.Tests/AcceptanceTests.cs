@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Tests
                 client.EnumModel.PutReferenced(Colors.Redcolor);
 
                 Assert.Equal(RefColorConstant.ColorConstant, "green-color");
-                Assert.IsType(typeof(RefColorConstant), client.EnumModel.GetReferencedConstant());
+                Assert.Equal("Sample String", client.EnumModel.GetReferencedConstant().Field1);
                 client.EnumModel.PutReferencedConstant();
 
                 var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
