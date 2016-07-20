@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 
@@ -12,9 +13,14 @@ namespace AutoRest.Swagger.Model
     [Serializable]
     public class SecurityDefinition
     {
+        private string _description;
         public SecuritySchemeType SecuritySchemeType { get; set; }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
+        }
 
         public string Name { get; set; }
 

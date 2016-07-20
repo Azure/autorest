@@ -8,6 +8,7 @@ namespace AutoRest.Core.Logging
     /// </summary>
     public enum LogEntrySeverity
     {
+        Debug,
         Info,
         Warning,
         Error,

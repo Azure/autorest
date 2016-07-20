@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Model
     /// Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
     /// </summary>
     [Serializable]
-    [Rule(typeof(XmsPathsInPath))]
+    [Rule(typeof(XmsPathsMustOverloadPaths))]
     public class ServiceDefinition : SpecObject
     {
         public ServiceDefinition()

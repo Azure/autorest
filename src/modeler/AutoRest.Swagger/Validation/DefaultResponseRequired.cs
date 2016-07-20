@@ -4,6 +4,8 @@
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -17,6 +19,18 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(IDictionary<string, OperationResponse> entity)
             => entity != null && entity.ContainsKey("default");
 
-        public override ValidationExceptionName Exception => ValidationExceptionName.DefaultResponseRequired;
+        /// <summary>
+        /// The template message for this Rule. 
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.NoDefaultResponse;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+
     }
 }

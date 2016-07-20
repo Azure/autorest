@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using AutoRest.Core.ClientModel;
+using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
@@ -18,10 +20,11 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     [Serializable]
     [Rule(typeof(DescriptionRequired))]
-    [Rule(typeof(EnumContainsDefault))]
-    [Rule(typeof(RefNoSiblings))]
+    [Rule(typeof(DefaultMustBeInEnum))]
+    [Rule(typeof(RefsMustNotHaveSiblings))]
     public abstract class SwaggerObject : SwaggerBase
     {
+        private string _description;
         public virtual bool IsRequired { get; set; }
 
         /// <summary>
@@ -54,7 +57,11 @@ namespace AutoRest.Swagger.Model
         public virtual Schema AdditionalProperties { get; set; }
 
         [Rule(typeof(DescriptiveDescriptionRequired))]
-        public virtual string Description { get; set; }
+        public virtual string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Determines the format of the array if type array is used.
