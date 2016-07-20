@@ -52,7 +52,7 @@ namespace AutoRest.Core.Validation
                 // key to the location of each validation message
                 return dictionary.SelectMany((key, value)
                     => RecursiveValidate(value, collectionRules).Select(each
-                        => each.AppendToPath((string) key)));
+                        => each.AppendToPath((string)key)));
             }
 
             // if this is a class, validate it's value and it's properties.
@@ -128,8 +128,8 @@ namespace AutoRest.Core.Validation
         /// <summary>
         ///     The collection of rules that apply to all properties regardless of other rules.
         /// </summary>
-        public static IEnumerable<Rule> UniversalRules = new [] { new NoControlCharacters()};
+        public static IEnumerable<Rule> UniversalRules = new[] { new NoControlCharacters() };
 
-     
+
     }
 }
