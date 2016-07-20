@@ -78,7 +78,7 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
-         * @param {object} [options.body.child]
+         * @param {object} options.body.child
          * 
          * @param {number} [options.body.child.count] Count
          * 
@@ -119,7 +119,7 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
-         * @param {object} [options.body.child]
+         * @param {object} options.body.child
          * 
          * @param {number} [options.body.child.count] Count
          * 

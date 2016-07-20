@@ -155,7 +155,7 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
  * Additional parameters for the operation
  * 
  * @param {string}
- * [headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId] The
+ * headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId The
  * fooRequestId
  * 
  * @param {object} [options] Optional Parameters.
