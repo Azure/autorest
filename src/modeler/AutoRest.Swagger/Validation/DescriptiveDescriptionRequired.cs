@@ -5,6 +5,8 @@ using AutoRest.Core.Validation;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -34,6 +36,18 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(string description)
             => !string.IsNullOrWhiteSpace(description) && !description.IsImpermissibleValue();
 
-        public override ValidationExceptionName Exception => ValidationExceptionName.DescriptiveDescription;
+        /// <summary>
+        /// The template message for this Rule. 
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.DescriptionNotDescriptive;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+
     }
 }

@@ -4,6 +4,7 @@
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swagger.Model
 {
@@ -12,6 +13,9 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     public class Operation : SwaggerBase
     {
+        private string _description;
+        private string _summary;
+
         public Operation()
         {
             Consumes = new List<string>();
@@ -28,13 +32,21 @@ namespace AutoRest.Swagger.Model
         /// operations described in the API. Tools and libraries MAY use the 
         /// operation id to uniquely identify an operation.
         /// </summary>
-        [Rule(typeof(OperationIdSingleUnderscore))]
+        [Rule(typeof(OneUnderscoreInOperationId))]
         [Rule(typeof(OperationIdNounInVerb))]
         public string OperationId { get; set; }
 
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value.StripControlCharacters(); }
+        }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Additional external documentation for this operation.

@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.ClientModel
 {
@@ -12,6 +13,9 @@ namespace AutoRest.Core.ClientModel
     /// </summary>
     public class CompositeType : IType
     {
+        private string _summary;
+        private string _documentation;
+
         /// <summary>
         /// Initializes a new instance of CompositeType class.
         /// </summary>
@@ -60,12 +64,20 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the summary.
         /// </summary>
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets or sets the CompositeType documentation.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Documentation
+        {
+            get { return _documentation; }
+            set { _documentation = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets or sets a URL pointing to related external documentation.
