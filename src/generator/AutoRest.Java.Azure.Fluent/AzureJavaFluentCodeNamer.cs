@@ -21,14 +21,19 @@ namespace AutoRest.Java.Azure.Fluent
 
         public void NormalizeTopLevelTypes(ServiceClient serviceClient)
         {
-            foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
+            //foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
+            //{
+            //    AppendInnerToTopLevelType(param.Type, serviceClient);
+            //}
+            //foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+            //{
+            //    AppendInnerToTopLevelType(response.Body, serviceClient);
+            //    AppendInnerToTopLevelType(response.Headers, serviceClient);
+            //}
+            foreach (var model in serviceClient.ModelTypes)
             {
-                AppendInnerToTopLevelType(param.Type, serviceClient);
-            }
-            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
-            {
-                AppendInnerToTopLevelType(response.Body, serviceClient);
-                AppendInnerToTopLevelType(response.Headers, serviceClient);
+                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                AppendInnerToTopLevelType(model, serviceClient);
             }
         }
 
