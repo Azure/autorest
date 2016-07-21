@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.array import Array
+from .operations.array_operations import ArrayOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATArrayService(object):
     :vartype config: AutoRestSwaggerBATArrayServiceConfiguration
 
     :ivar array: Array operations
-    :vartype array: .operations.Array
+    :vartype array: .operations.ArrayOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATArrayService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.array = Array(
+        self.array = ArrayOperations(
             self._client, self.config, self._serialize, self._deserialize)

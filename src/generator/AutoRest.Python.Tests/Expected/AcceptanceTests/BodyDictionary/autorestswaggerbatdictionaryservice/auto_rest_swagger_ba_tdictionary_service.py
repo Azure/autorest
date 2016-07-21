@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.dictionary import Dictionary
+from .operations.dictionary_operations import DictionaryOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATdictionaryService(object):
     :vartype config: AutoRestSwaggerBATdictionaryServiceConfiguration
 
     :ivar dictionary: Dictionary operations
-    :vartype dictionary: .operations.Dictionary
+    :vartype dictionary: .operations.DictionaryOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATdictionaryService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.dictionary = Dictionary(
+        self.dictionary = DictionaryOperations(
             self._client, self.config, self._serialize, self._deserialize)

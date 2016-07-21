@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .date_model import DateModel
+from .date_model_operations import DateModelOperations
 
 __all__ = [
-    'DateModel',
+    'DateModelOperations',
 ]

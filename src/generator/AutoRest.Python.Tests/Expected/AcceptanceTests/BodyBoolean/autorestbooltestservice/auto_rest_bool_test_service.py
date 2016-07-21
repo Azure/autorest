@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.bool_model import BoolModel
+from .operations.bool_model_operations import BoolModelOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestBoolTestService(object):
     :vartype config: AutoRestBoolTestServiceConfiguration
 
     :ivar bool_model: BoolModel operations
-    :vartype bool_model: .operations.BoolModel
+    :vartype bool_model: .operations.BoolModelOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestBoolTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.bool_model = BoolModel(
+        self.bool_model = BoolModelOperations(
             self._client, self.config, self._serialize, self._deserialize)

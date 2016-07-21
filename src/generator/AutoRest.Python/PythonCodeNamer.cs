@@ -11,6 +11,7 @@ using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Python.Properties;
+using Microsoft.Rest.Generator.Python;
 
 namespace AutoRest.Python
 {
@@ -174,10 +175,14 @@ namespace AutoRest.Python
             }
 
             base.NormalizeClientModel(client);
+            var globalParams = new List<Parameter>();
             foreach (var method in client.Methods)
             {
                 foreach (var parameter in method.Parameters)
                 {
+                    if (parameter.Extensions.ContainsKey("hostParameter"))
+                        globalParams.Add(parameter);
+
                     if (parameter.ClientProperty != null)
                     {
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
@@ -185,6 +190,10 @@ namespace AutoRest.Python
                             parameter.ClientProperty.Name);
                     }
                 }
+            }
+            foreach (var parameter in globalParams.Distinct())
+            {
+                QuoteParameter(parameter);
             }
         }
 
@@ -200,7 +209,8 @@ namespace AutoRest.Python
                 {
                     parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.GetClientName()));
                     parameter.Type = NormalizeTypeReference(parameter.Type);
-                    QuoteParameter(parameter);
+                    if (!parameter.Extensions.ContainsKey("hostParameter"))
+                        QuoteParameter(parameter);
                 }
 
                 foreach (var parameterTransformation in method.InputParameterTransformation)

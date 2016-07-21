@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .array import Array
+from .array_operations import ArrayOperations
 
 __all__ = [
-    'Array',
+    'ArrayOperations',
 ]
