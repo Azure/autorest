@@ -300,6 +300,10 @@ namespace AutoRest.Ruby
         /// <returns>Normalized enum type.</returns>
         private IType NormalizeEnumType(EnumType enumType)
         {
+            if (!String.IsNullOrWhiteSpace(enumType.Name))
+            {
+                enumType.Name = PascalCase(RemoveInvalidCharacters(enumType.Name));
+            }
             for (int i = 0; i < enumType.Values.Count; i++)
             {
                 if (enumType.Values[i].Name != null)
@@ -441,6 +445,12 @@ namespace AutoRest.Ruby
                         return "'" + defaultValue + "'.bytes.pack('C*')";
                     }
                 }
+            }
+
+            EnumType enumType = type as EnumType;
+            if (defaultValue != null && enumType != null)
+            {
+                return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
             }
             return defaultValue;
         }
