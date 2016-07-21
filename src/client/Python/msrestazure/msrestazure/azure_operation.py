@@ -422,9 +422,7 @@ class AzureOperationPoller(object):
             self._exception = CloudError(self._response, str(err))
 
         except OperationFailed:
-            error = "Long running operation failed with status {!r}".format(
-                str(self._operation.status))
-            self._exception = CloudError(self._response, error)
+            self._exception = CloudError(self._response)
 
         except OperationFinished:
             pass
