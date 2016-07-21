@@ -16,6 +16,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @EmptyLine
 </text>
 }
+else
+{
+<text>
+import com.fasterxml.jackson.annotation.JsonValue;
+@EmptyLine
+</text>
+}
 
 /**
  * Defines values for @(Model.Name).
@@ -76,10 +83,45 @@ public final class @(Model.Name) {
 @for (int i = 0; i < Model.Values.Count; i++)
 {
 @:    /** Static value @(Model.Values[i].SerializedName) for @(Model.Name). */
-@:    public static final String @(Model.Values[i].Name) = "@(Model.Values[i].SerializedName)";
+@:    public static final @(Model.Name) @(Model.Values[i].Name) = new @(Model.Name)("@(Model.Values[i].SerializedName)");
 @EmptyLine
 }
-    private @(Model.Name)() {
+    private String value;
+@EmptyLine
+    /**
+     * Creates a custom value for @(Model.Name).
+     * @@param value the custom value
+     */
+    public @(Model.Name)(String value) {
+        this.value = value;
+    }
+@EmptyLine
+    @@JsonValue
+    @@Override
+    public String toString() {
+        return value;
+    }
+@EmptyLine
+    @@Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+@EmptyLine
+    @@Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof @(Model.Name))) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+
+        @(Model.Name) rhs = (@(Model.Name)) obj;
+        if (value == null) {
+            return rhs.value == null;
+        } else {
+            return value.equals(rhs.value);
+        }
     }
 }
 </text>

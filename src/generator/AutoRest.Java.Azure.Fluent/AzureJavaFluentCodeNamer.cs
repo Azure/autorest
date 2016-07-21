@@ -30,6 +30,11 @@ namespace AutoRest.Java.Azure.Fluent
                 AppendInnerToTopLevelType(response.Body, serviceClient);
                 AppendInnerToTopLevelType(response.Headers, serviceClient);
             }
+            foreach (var model in serviceClient.ModelTypes)
+            {
+                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                AppendInnerToTopLevelType(model, serviceClient);
+            }
         }
 
         private void AppendInnerToTopLevelType(IType type, ServiceClient serviceClient)
