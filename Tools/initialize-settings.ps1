@@ -289,7 +289,6 @@ $javacInstall = {
     # Also install the Android SDK
     write-host -fore yellow -back black "Installing Android SDK"
     choco install android-sdk -Confirm:$true
-    Move-Item "$($env:LOCALAPPDATA)\Android" "C:\Program Files (x86)"
 }
 
 $nodeInstall = {
@@ -298,13 +297,6 @@ $nodeInstall = {
     # In order to avoid error with Node, we need to install Node 4.x instead of current version
     choco install nodejs -version 4.1.2 -Confirm:$true
 }
-
-<#
-$gulpInstall = {
-    write-host -fore yellow -back black "Installing Gulp"
-    npm install gulp -g
-}
-#>
 
 $rubyInstall = {
     write-host -fore yellow -back black "Installing Ruby"
@@ -342,20 +334,6 @@ $toxInstall = {
     easy_install tox
 }
 
-<#
-$vsupdateInstall = {
-    $url = "http://go.microsoft.com/fwlink/?LinkId=691129"
-    $webClient = New-Object System.Net.WebClient
-    $destination = "$($env:ProgramFiles)\vsupdate.exe"
-
-    # Download the file and save as "vsupdate.exe"
-    $webClient.DownloadFile($url, $destination)
-
-    write-host -fore yellow -back black "Installing Visual Studio Update 3"
-    Start-Process -FilePath $destination
-}
-#>
-
 $coreclrInstall = {
     # NOTE: Visual Studio Update 3 must be installed before .NET Core can be installed
     $url = "https://go.microsoft.com/fwlink/?LinkId=817245"
@@ -380,7 +358,6 @@ find-orAdd "dotnet.exe" -installFunction $dotnetInstall
 find-orAdd "javac.exe" -installFunction $javacInstall
 
 find-orAdd "node.exe" -installFunction $nodeInstall -folders @("${env:appdata}","${env:ProgramFiles(x86)}","${env:ProgramFiles}")
-# find-orAdd "gulp.cmd" -installFunction $gulpInstall -folders @("${env:appdata}","${env:ProgramFiles(x86)}","${env:ProgramFiles}")
 
 find-orAdd "ruby.exe" (@() +  ((dir -ea 0 c:\ruby*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -installFunction $rubyInstall
 
@@ -391,7 +368,6 @@ find-orAdd "tox.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:Progr
 
 find-orAdd "msbuild.exe" -installFunction $msbuildInstall
 
-# find-orAdd "vsupdate.exe" -installFunction $vsupdateInstall
 find-orAdd "coreclr.exe" -installFunction $coreclrInstall
 
 # make sure JAVA_HOME is set
@@ -432,8 +408,9 @@ Restart-Computer
 
 # After restart:
 
-# 1) Run the following command to finish Android SDK setup:
-# > (echo y | android update sdk -u -a -t 6 ) && (echo y | android update sdk -u -a -t 28) && (echo y | android update sdk -u -a -t 139)
+# 1) Run the following commands to finish Android SDK setup:
+# > (echo y | android update sdk -u -a -t build-tools-23.0.1) && (echo y | android update sdk -u -a -t android-23) && (echo y | android update sdk -u -a -t extra-android-m2repository)
+# > Copy-Item "$($env:LOCALAPPDATA)\Android" "C:\Program Files (x86)\Android" -recurse
 
 # 2) Run the following command from the project root:
 # > gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update
