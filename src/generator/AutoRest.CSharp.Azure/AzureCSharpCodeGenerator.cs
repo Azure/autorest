@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Azure
                     if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
                         (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
-                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                        model.BaseModelType = new CompositeType { Name = "Microsoft.Rest.Azure.IResource", SerializedName = "Microsoft.Rest.Azure.IResource" };
                     }
                 }
             }

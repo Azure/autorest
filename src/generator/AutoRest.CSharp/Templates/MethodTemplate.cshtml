@@ -40,20 +40,20 @@
 /// </exception>
 @if (Model.Responses.Where(r => r.Value.Body != null).Any())
 {
-@:/// <exception cref="SerializationException">
+@:/// <exception cref="Microsoft.Rest.SerializationException">
 @:/// Thrown when unable to deserialize the response
 @:/// </exception>
 }
 @if (Model.ParameterTemplateModels.Where(p => !p.IsConstant && p.IsRequired && !p.Type.IsValueType()).Any())
 {
-@:/// <exception cref="ValidationException">
+@:/// <exception cref="Microsoft.Rest.ValidationException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
     }
 /// <return>
 /// A response object containing the response body and response headers.
 /// </return>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels.Where(p => !p.IsConstant))
     {
@@ -61,7 +61,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         {
     @:if (@(parameter.Name) == null)
     @:{
-        @:throw new ValidationException(ValidationRules.CannotBeNull, "@(parameter.Name)");
+        @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@(parameter.Name)");
     @:}
 @:
         }
@@ -93,18 +93,18 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
     @Model.BuildInputMappings()
     // Tracing
-    bool _shouldTrace = ServiceClientTracing.IsEnabled;
+    bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
     string _invocationId = null;
     if (_shouldTrace)
     {
-        _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-        Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+        _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+        System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
     @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.ClientProperty == null))
     {
         @:tracingParameters.Add("@(parameter.Name)", @(parameter.Name));
     }
         tracingParameters.Add("cancellationToken", cancellationToken);
-        ServiceClientTracing.Enter(_invocationId, this, "@(Model.Name)", tracingParameters);
+        Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "@(Model.Name)", tracingParameters);
     }
 
     // Construct URL
@@ -122,16 +122,16 @@ if (Model.IsCustomBaseUri)
 else
 {
     @:var _baseUrl = @(Model.ClientReference).BaseUri.AbsoluteUri;
-    @:var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.TrimStart('/'))").ToString();
+    @:var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.TrimStart('/'))").ToString();
 }    
 }
     @(Model.BuildUrl("_url"))
     // Create HTTP transport objects
-    HttpRequestMessage _httpRequest = new HttpRequestMessage();
-    HttpResponseMessage _httpResponse = null;
+    System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+    System.Net.Http.HttpResponseMessage _httpResponse = null;
 
-    _httpRequest.Method = new HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");
-    _httpRequest.RequestUri = new Uri(_url);
+    _httpRequest.Method = new System.Net.Http.HttpMethod("@(Model.HttpMethod.ToString().ToUpper())");
+    _httpRequest.RequestUri = new System.Uri(_url);
     // Set Headers
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Header))
@@ -176,26 +176,26 @@ else
         if (Model.RequestBody.Type.IsPrimaryType(KnownPrimaryType.Stream))
         {
         <text>
-    StreamContent _fileStreamContent = new StreamContent(@(Model.RequestBody.Name));
+     System.Net.Http.StreamContent _fileStreamContent = new System.Net.Http.StreamContent(@(Model.RequestBody.Name));
     _httpRequest.Content = _fileStreamContent;
-    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
         </text>
         }
         else
         {
             if (!Model.RequestBody.CanBeNull())
             {
-    @:_requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
-    @:_httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-    @:_httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    @:_requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    @:_httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+    @:_httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
             }
             else
             {
     @:if(@(Model.RequestBody.Name) != null)
     @:{
-    @:    _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
-    @:    _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-    @:    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+    @:    _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
+    @:    _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+    @:    _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
     @:}
             }
         }
@@ -203,7 +203,7 @@ else
     else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
     {
         <text>
-    MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+    System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
         </text>
         foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.FormData))
         {
@@ -212,12 +212,12 @@ else
             if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
             {
         <text>        
-        StreamContent _@parameter.Name = new StreamContent(@parameter.Name);
-        _@(parameter.Name).Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+         System.Net.Http.StreamContent _@parameter.Name = new System.Net.Http.StreamContent(@parameter.Name);
+        _@(parameter.Name).Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
         System.IO.FileStream _@(parameter.Name)AsFileStream = @parameter.Name as System.IO.FileStream;
         if (_@(parameter.Name)AsFileStream != null)
         {
-            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+            System.Net.Http.Headers.ContentDispositionHeaderValue _contentDispositionHeaderValue = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
             _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
             _contentDispositionHeaderValue.FileName = _@(parameter.Name)AsFileStream.Name;
             _@(parameter.Name).Headers.ContentDisposition = _contentDispositionHeaderValue;        
@@ -226,7 +226,7 @@ else
             }
             else
             {
-        @:StringContent _@(parameter.Name) = new StringContent(@(parameter.Type.ToString(Model.ClientReference, parameter.Name)), Encoding.UTF8);
+        @:System.Net.Http.StringContent _@(parameter.Name) = new System.Net.Http.StringContent(@(parameter.Type.ToString(Model.ClientReference, parameter.Name)), System.Text.Encoding.UTF8);
             }
         @:_multiPartContent.Add(_@(parameter.Name), "@(parameter.SerializedName)");
     @:}
@@ -249,7 +249,7 @@ else
     // Send Request
     if (_shouldTrace)
     {
-        ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+        Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
     }
 
     cancellationToken.ThrowIfCancellationRequested();
@@ -259,14 +259,14 @@ else
     }
     else
     {
-    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+    @:_httpResponse = await @(Model.ClientReference).HttpClient.SendAsync(_httpRequest, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
     }
     if (_shouldTrace)
     {
-        ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+        Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
     }
 
-    HttpStatusCode _statusCode = _httpResponse.StatusCode;
+    System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
     cancellationToken.ThrowIfCancellationRequested();
     string _responseContent = null;
 
@@ -284,7 +284,7 @@ else
             else
             {
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.Name) _errorBody = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            @:@(Model.DefaultResponse.Body.Name) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
             }
             @:if (_errorBody != null)
             @:{
@@ -292,7 +292,7 @@ else
                 @:ex.Body = _errorBody;
             @:}
         @:}
-        @:catch (JsonException)
+        @:catch (Newtonsoft.Json.JsonException)
         @:{
         @:    // Ignore the exception
         @:}
@@ -307,13 +307,13 @@ else
             @:_responseContent = string.Empty;
         @:}
     }
-            
-        ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-        ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+
+        ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+        ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
         @(Model.InitializeException)
         if (_shouldTrace)
         {
-            ServiceClientTracing.Error(_invocationId, ex);
+            Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
         }
 
         _httpRequest.Dispose();
@@ -346,16 +346,16 @@ else
         @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         @:try
         @:{
-            @:_result.Body = SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.Name)>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
         @:}
-        @:catch (JsonException ex)
+        @:catch (Newtonsoft.Json.JsonException ex)
         @:{
         @:    _httpRequest.Dispose();
         @:    if (_httpResponse != null)
         @:    {
         @:        _httpResponse.Dispose();
         @:    }
-        @:    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+        @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
         @:}
         }
     }
@@ -373,16 +373,16 @@ else
     @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:try
     @:{
-        @:_result.Body = SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.Name)>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
     @:}
-    @:catch (JsonException ex)
+    @:catch (Newtonsoft.Json.JsonException ex)
     @:{
     @:    _httpRequest.Dispose();
     @:    if (_httpResponse != null)
     @:    {
     @:        _httpResponse.Dispose();
     @:    }
-    @:    throw new SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
+    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _defaultResponseContent, ex);
     @:}
         }
     }
@@ -392,22 +392,22 @@ else
 
     @:try
     @:{
-        @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
+        @:_result.Headers = _httpResponse.GetHeadersAsJson().ToObject<@(Model.ReturnType.Headers.Name)>(Newtonsoft.Json.JsonSerializer.Create(@(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body))));
     @:}
-    @:catch (JsonException ex)
+    @:catch (Newtonsoft.Json.JsonException ex)
     @:{
     @:    _httpRequest.Dispose();
     @:    if (_httpResponse != null)
     @:    {
     @:        _httpResponse.Dispose();
     @:    }
-    @:    throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+    @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
     @:}
     }
 
     if (_shouldTrace)
     {
-        ServiceClientTracing.Exit(_invocationId, _result);
+        Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
     }
 
     return _result;
