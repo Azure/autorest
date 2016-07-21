@@ -75,7 +75,7 @@ namespace AutoRest.Java.Azure.TemplateModels
 
         public bool IsPagingNextOperation
         {
-            get { return Url == "{nextLink}"; }
+            get { return Extensions.ContainsKey("nextLinkMethod") && (bool) Extensions["nextLinkMethod"]; }
         }
 
         public bool IsPagingOperation

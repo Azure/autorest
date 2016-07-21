@@ -119,7 +119,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
     @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {
@@ -231,7 +231,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
     @Model.BuildInputMappings()
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {
