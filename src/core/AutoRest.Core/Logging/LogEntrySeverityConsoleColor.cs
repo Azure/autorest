@@ -11,6 +11,7 @@ namespace AutoRest.Core.Logging
     {
         private static IDictionary<LogEntrySeverity, ConsoleColor> _dict = new Dictionary<LogEntrySeverity, ConsoleColor>
         {
+            { LogEntrySeverity.Debug, ConsoleColor.Gray },
             { LogEntrySeverity.Fatal, ConsoleColor.Red },
             { LogEntrySeverity.Error, ConsoleColor.Red },
             { LogEntrySeverity.Warning, ConsoleColor.Yellow },

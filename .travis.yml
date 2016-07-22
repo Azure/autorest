@@ -14,6 +14,10 @@ addons:
     - lib32z1
     # packages for python
     - python3.5
+before_install:
+  # Attempt to work around fact that node modules mess up rvm
+  - PATH=`echo $PATH | sed "s/\.\/node_modules\/\.bin//g"`;
+  - export PATH=$PATH:./node_modules/.bin;
 install:
   # Install npm
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 4

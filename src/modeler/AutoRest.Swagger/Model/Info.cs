@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Model
@@ -14,9 +15,14 @@ namespace AutoRest.Swagger.Model
     [Serializable]
     public class Info : SpecObject
     {
+        private string _description;
         public string Title { get; set; }
 
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); ; }
+        }
 
         public string TermsOfService { get; set; }
 
