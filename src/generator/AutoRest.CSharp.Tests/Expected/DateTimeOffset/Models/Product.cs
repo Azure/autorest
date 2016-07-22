@@ -17,16 +17,6 @@ namespace Fixtures.DateTimeOffset.Models
         /// </summary>
         public Product() { }
 
-        /// <summary>
-        /// Initializes a new instance of the Product class.
-        /// </summary>
-        public Product(System.DateTime? date = default(System.DateTime?), System.DateTimeOffset? dateTime = default(System.DateTimeOffset?), System.Collections.Generic.IList<System.DateTime?> dateArray = default(System.Collections.Generic.IList<System.DateTime?>), System.Collections.Generic.IList<System.DateTimeOffset?> dateTimeArray = default(System.Collections.Generic.IList<System.DateTimeOffset?>))
-        {
-            Date = date;
-            DateTime = dateTime;
-            DateArray = dateArray;
-            DateTimeArray = dateTimeArray;
-        }
 
         /// <summary>
         /// </summary>

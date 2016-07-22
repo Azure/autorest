@@ -52,6 +52,7 @@ namespace AutoRest.Core.Tests
             Assert.Equal(2, ((JArray) settings.CustomSettings["filePathArray"]).Count);
             Assert.Equal(typeof (JArray), settings.CustomSettings["intArray"].GetType());
             Assert.Equal(typeof (long), settings.CustomSettings["intFoo"].GetType());
+            Assert.Equal(typeof(JObject), settings.CustomSettings["complexObject"].GetType());
         }
 
         [Fact]
