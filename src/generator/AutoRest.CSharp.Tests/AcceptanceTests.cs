@@ -287,6 +287,14 @@ namespace AutoRest.CSharp.Tests
                 Assert.Null(client.StringModel.GetNotProvided());
                 Assert.Equal(Colors.Redcolor, client.EnumModel.GetNotExpandable());
                 client.EnumModel.PutNotExpandable(Colors.Redcolor);
+
+                Assert.Equal(Colors.Redcolor, client.EnumModel.GetReferenced());
+                client.EnumModel.PutReferenced(Colors.Redcolor);
+
+                Assert.Equal(RefColorConstant.ColorConstant, "green-color");
+                Assert.Equal("Sample String", client.EnumModel.GetReferencedConstant().Field1);
+                client.EnumModel.PutReferencedConstant();
+
                 var base64UrlEncodedString = client.StringModel.GetBase64UrlEncoded();
                 var base64EncodedString = client.StringModel.GetBase64Encoded();
                 Assert.Equal(Encoding.UTF8.GetString(base64UrlEncodedString),
