@@ -15,7 +15,6 @@ namespace AutoRest.Swagger.Model
     /// Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
     /// </summary>
     [Serializable]
-    [Rule(typeof(XmsPathsMustOverloadPaths))]
     public class ServiceDefinition : SpecObject
     {
         public ServiceDefinition()
@@ -78,6 +77,7 @@ namespace AutoRest.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
+        [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>

@@ -213,8 +213,8 @@
   <data name="InvalidSchemaParameter" xml:space="preserve">
     <value>Only body parameters can have a schema defined.</value>
   </data>
-  <data name="InvalidTypeFormatCombination" xml:space="preserve">
-    <value>Type {0} and format {1} is not a supported combination</value>
+  <data name="UnknownFormat" xml:space="preserve">
+    <value>'{0}' is not a known format.</value>
   </data>
   <data name="MissingDescription" xml:space="preserve">
     <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
@@ -244,7 +244,7 @@
     <value>There is no default response defined in the responses section</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>The path '{0}' in x-ms-paths does not overload a normal path in the paths section.</value>
+    <value>Paths in x-ms-paths must overload a normal path in the paths section.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
     <value>The value provided for description is not descriptive enough.</value>

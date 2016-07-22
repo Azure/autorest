@@ -10,7 +10,6 @@ using AutoRest.Swagger.Validation;
 namespace AutoRest.Swagger.Model
 {
     [Serializable]
-    [Rule(typeof(NonEmptyClientName))]
     public abstract class SwaggerBase
     {
         public SwaggerBase()
@@ -22,6 +21,7 @@ namespace AutoRest.Swagger.Model
         /// Vendor extensions.
         /// </summary>
         [JsonExtensionData]
+        [CollectionRule(typeof(NonEmptyClientName))]
         public Dictionary<string, object> Extensions { get; set; }
     }
 }
