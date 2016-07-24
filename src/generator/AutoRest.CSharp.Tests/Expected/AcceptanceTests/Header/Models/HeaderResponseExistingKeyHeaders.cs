@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseExistingKey operation.
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="userAgent">response with header value "User-Agent":
         /// "overwrite"</param>
-        public HeaderResponseExistingKeyHeaders(string userAgent = default(string))
+        public HeaderResponseExistingKeyHeaders(System.String userAgent = default(System.String))
         {
             UserAgent = userAgent;
         }
@@ -40,8 +35,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "User-Agent": "overwrite"
         /// </summary>
-        [JsonProperty(PropertyName = "User-Agent")]
-        public string UserAgent { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "User-Agent")]
+        public System.String UserAgent { get; set; }
 
     }
 }

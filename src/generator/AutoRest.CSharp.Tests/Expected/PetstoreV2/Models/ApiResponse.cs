@@ -8,12 +8,7 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class ApiResponse
     {
@@ -25,7 +20,7 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the ApiResponse class.
         /// </summary>
-        public ApiResponse(int? code = default(int?), string type = default(string), string message = default(string))
+        public ApiResponse(System.Int32? code = default(System.Int32?), System.String type = default(System.String), System.String message = default(System.String))
         {
             Code = code;
             Type = type;
@@ -34,18 +29,18 @@ namespace Fixtures.PetstoreV2.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "code")]
-        public int? Code { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
+        public System.Int32? Code { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public string Type { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
+        public System.String Type { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
     }
 }

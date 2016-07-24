@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class FloatWrapper
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the FloatWrapper class.
         /// </summary>
-        public FloatWrapper(double? field1 = default(double?), double? field2 = default(double?))
+        public FloatWrapper(System.Double? field1 = default(System.Double?), System.Double? field2 = default(System.Double?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -34,13 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field1")]
-        public double? Field1 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
+        public System.Double? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field2")]
-        public double? Field2 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
+        public System.Double? Field2 { get; set; }
 
     }
 }

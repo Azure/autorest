@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class B : A
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the B class.
         /// </summary>
-        public B(string statusCode = default(string), string textStatusCode = default(string))
+        public B(System.String statusCode = default(System.String), System.String textStatusCode = default(System.String))
             : base(statusCode)
         {
             TextStatusCode = textStatusCode;
@@ -33,8 +28,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "textStatusCode")]
-        public string TextStatusCode { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "textStatusCode")]
+        public System.String TextStatusCode { get; set; }
 
     }
 }

@@ -8,15 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonObject("shark")]
+    [Newtonsoft.Json.JsonObject("shark")]
     public partial class Shark : Fish
     {
         /// <summary>
@@ -27,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+        public Shark(System.Double length, System.DateTime birthday, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), System.Int32? age = default(System.Int32?))
             : base(length, species, siblings)
         {
             Age = age;
@@ -36,18 +30,18 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "age")]
-        public int? Age { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "age")]
+        public System.Int32? Age { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "birthday")]
-        public DateTime Birthday { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "birthday")]
+        public System.DateTime Birthday { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

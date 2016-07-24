@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for get307 operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         /// <param name="location">The redirect location for this
         /// request</param>
-        public HttpRedirectsGet307Headers(string location = default(string))
+        public HttpRedirectsGet307Headers(System.String location = default(System.String))
         {
             Location = location;
         }
@@ -38,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Gets or sets the redirect location for this request
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
-        public string Location { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
+        public System.String Location { get; set; }
 
     }
 }

@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class StringWrapper
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the StringWrapper class.
         /// </summary>
-        public StringWrapper(string field = default(string), string empty = default(string), string nullProperty = default(string))
+        public StringWrapper(System.String field = default(System.String), System.String empty = default(System.String), System.String nullProperty = default(System.String))
         {
             Field = field;
             Empty = empty;
@@ -35,18 +29,18 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
-        public string Field { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
+        public System.String Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "empty")]
-        public string Empty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "empty")]
+        public System.String Empty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "null")]
-        public string NullProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "null")]
+        public System.String NullProperty { get; set; }
 
     }
 }

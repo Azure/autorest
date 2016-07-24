@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseProtectedKey operation.
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="contentType">response with header value
         /// "Content-Type": "text/html"</param>
-        public HeaderResponseProtectedKeyHeaders(string contentType = default(string))
+        public HeaderResponseProtectedKeyHeaders(System.String contentType = default(System.String))
         {
             ContentType = contentType;
         }
@@ -40,8 +35,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "Content-Type": "text/html"
         /// </summary>
-        [JsonProperty(PropertyName = "Content-Type")]
-        public string ContentType { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Content-Type")]
+        public System.String ContentType { get; set; }
 
     }
 }

@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyString
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for EnumModel.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static Colors? GetNotExpandable(this IEnumModel operations)
             {
-                return Task.Factory.StartNew(s => ((IEnumModel)s).GetNotExpandableAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).GetNotExpandableAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Colors?> GetNotExpandableAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Colors?> GetNotExpandableAsync(this IEnumModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNotExpandableWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -63,7 +58,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static void PutNotExpandable(this IEnumModel operations, Colors stringBody)
             {
-                Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -79,7 +74,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutNotExpandableWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }

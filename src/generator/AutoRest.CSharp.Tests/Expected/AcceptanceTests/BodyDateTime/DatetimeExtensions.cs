@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTime
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Datetime.
@@ -27,9 +22,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetNull(this IDatetime operations)
+            public static System.DateTime? GetNull(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetNullAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetNullAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -55,9 +50,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetInvalid(this IDatetime operations)
+            public static System.DateTime? GetInvalid(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -69,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetInvalidAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetInvalidAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -83,9 +78,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetOverflow(this IDatetime operations)
+            public static System.DateTime? GetOverflow(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetOverflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetOverflowAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -97,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetOverflowAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetOverflowAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOverflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -111,9 +106,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetUnderflow(this IDatetime operations)
+            public static System.DateTime? GetUnderflow(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUnderflowAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetUnderflowAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -125,7 +120,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetUnderflowAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetUnderflowAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -141,9 +136,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutUtcMaxDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutUtcMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMaxDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -157,7 +152,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutUtcMaxDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutUtcMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutUtcMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -168,9 +163,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetUtcLowercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetUtcLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetUtcLowercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -182,7 +177,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetUtcLowercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetUtcLowercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -196,9 +191,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetUtcUppercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetUtcUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetUtcUppercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -210,7 +205,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetUtcUppercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetUtcUppercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -227,9 +222,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutLocalPositiveOffsetMaxDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutLocalPositiveOffsetMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -244,7 +239,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutLocalPositiveOffsetMaxDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutLocalPositiveOffsetMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -256,9 +251,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalPositiveOffsetLowercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalPositiveOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -271,7 +266,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -286,9 +281,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalPositiveOffsetUppercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalPositiveOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -301,7 +296,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -318,9 +313,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutLocalNegativeOffsetMaxDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutLocalNegativeOffsetMaxDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -335,7 +330,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutLocalNegativeOffsetMaxDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutLocalNegativeOffsetMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -347,9 +342,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalNegativeOffsetUppercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalNegativeOffsetUppercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -362,7 +357,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -377,9 +372,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalNegativeOffsetLowercaseMaxDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalNegativeOffsetLowercaseMaxDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -392,7 +387,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -408,9 +403,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutUtcMinDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutUtcMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutUtcMinDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -424,7 +419,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutUtcMinDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutUtcMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutUtcMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -435,9 +430,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetUtcMinDateTime(this IDatetime operations)
+            public static System.DateTime? GetUtcMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetUtcMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetUtcMinDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -449,7 +444,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetUtcMinDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetUtcMinDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUtcMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -465,9 +460,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutLocalPositiveOffsetMinDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutLocalPositiveOffsetMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutLocalPositiveOffsetMinDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -481,7 +476,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutLocalPositiveOffsetMinDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutLocalPositiveOffsetMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -492,9 +487,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalPositiveOffsetMinDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalPositiveOffsetMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalPositiveOffsetMinDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -506,7 +501,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalPositiveOffsetMinDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalPositiveOffsetMinDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -522,9 +517,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             /// <param name='datetimeBody'>
             /// </param>
-            public static void PutLocalNegativeOffsetMinDateTime(this IDatetime operations, DateTime datetimeBody)
+            public static void PutLocalNegativeOffsetMinDateTime(this IDatetime operations, System.DateTime datetimeBody)
             {
-                Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMinDateTimeAsync(datetimeBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).PutLocalNegativeOffsetMinDateTimeAsync(datetimeBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -538,7 +533,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutLocalNegativeOffsetMinDateTimeAsync(this IDatetime operations, DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutLocalNegativeOffsetMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -549,9 +544,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DateTime? GetLocalNegativeOffsetMinDateTime(this IDatetime operations)
+            public static System.DateTime? GetLocalNegativeOffsetMinDateTime(this IDatetime operations)
             {
-                return Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetMinDateTimeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDatetime)s).GetLocalNegativeOffsetMinDateTimeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -563,7 +558,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetLocalNegativeOffsetMinDateTimeAsync(this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.DateTime?> GetLocalNegativeOffsetMinDateTimeAsync(this IDatetime operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

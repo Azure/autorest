@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class DoubleWrapper
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DoubleWrapper class.
         /// </summary>
-        public DoubleWrapper(double? field1 = default(double?), double? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default(double?))
+        public DoubleWrapper(System.Double? field1 = default(System.Double?), System.Double? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default(System.Double?))
         {
             Field1 = field1;
             Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
@@ -33,13 +28,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field1")]
-        public double? Field1 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
+        public System.Double? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose")]
-        public double? Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose")]
+        public System.Double? Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose { get; set; }
 
     }
 }

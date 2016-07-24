@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseInteger operation.
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 1 or
         /// -2</param>
-        public HeaderResponseIntegerHeaders(int? value = default(int?))
+        public HeaderResponseIntegerHeaders(System.Int32? value = default(System.Int32?))
         {
             Value = value;
         }
@@ -40,8 +35,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "value": 1 or -2
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public int? Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Int32? Value { get; set; }
 
     }
 }

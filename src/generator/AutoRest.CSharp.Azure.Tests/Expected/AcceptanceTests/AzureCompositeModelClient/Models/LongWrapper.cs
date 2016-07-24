@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class LongWrapper
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the LongWrapper class.
         /// </summary>
-        public LongWrapper(long? field1 = default(long?), long? field2 = default(long?))
+        public LongWrapper(System.Int64? field1 = default(System.Int64?), System.Int64? field2 = default(System.Int64?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -34,13 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field1")]
-        public long? Field1 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
+        public System.Int64? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field2")]
-        public long? Field2 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
+        public System.Int64? Field2 { get; set; }
 
     }
 }

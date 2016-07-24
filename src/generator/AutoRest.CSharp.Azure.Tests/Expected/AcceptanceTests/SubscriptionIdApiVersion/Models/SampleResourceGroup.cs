@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class SampleResourceGroup
     {
@@ -28,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// </summary>
         /// <param name="name">resource group name 'testgroup101'</param>
         /// <param name="location">resource group location 'West US'</param>
-        public SampleResourceGroup(string name = default(string), string location = default(string))
+        public SampleResourceGroup(System.String name = default(System.String), System.String location = default(System.String))
         {
             Name = name;
             Location = location;
@@ -37,14 +31,14 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// Gets or sets resource group name 'testgroup101'
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// Gets or sets resource group location 'West US'
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
-        public string Location { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
+        public System.String Location { get; set; }
 
     }
 }

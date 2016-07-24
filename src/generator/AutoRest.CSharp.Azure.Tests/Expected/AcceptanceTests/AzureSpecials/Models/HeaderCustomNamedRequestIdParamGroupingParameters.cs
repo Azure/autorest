@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Additional parameters for the header_customNamedRequestIdParamGrouping
@@ -33,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// HeaderCustomNamedRequestIdParamGroupingParameters class.
         /// </summary>
         /// <param name="fooClientRequestId">The fooRequestId</param>
-        public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
+        public HeaderCustomNamedRequestIdParamGroupingParameters(System.String fooClientRequestId)
         {
             FooClientRequestId = fooClientRequestId;
         }
@@ -41,20 +35,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Gets or sets the fooRequestId
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string FooClientRequestId { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String FooClientRequestId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (FooClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "FooClientRequestId");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "FooClientRequestId");
             }
         }
     }

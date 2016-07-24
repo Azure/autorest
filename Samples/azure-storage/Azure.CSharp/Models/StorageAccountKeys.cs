@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The access keys for the storage account.
@@ -24,7 +18,7 @@ namespace Petstore.Models
         /// </summary>
         /// <param name="key1">Gets the value of key 1.</param>
         /// <param name="key2">Gets the value of key 2.</param>
-        public StorageAccountKeys(string key1 = default(string), string key2 = default(string))
+        public StorageAccountKeys(System.String key1 = default(System.String), System.String key2 = default(System.String))
         {
             Key1 = key1;
             Key2 = key2;
@@ -33,14 +27,14 @@ namespace Petstore.Models
         /// <summary>
         /// Gets the value of key 1.
         /// </summary>
-        [JsonProperty(PropertyName = "key1")]
-        public string Key1 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "key1")]
+        public System.String Key1 { get; set; }
 
         /// <summary>
         /// Gets the value of key 2.
         /// </summary>
-        [JsonProperty(PropertyName = "key2")]
-        public string Key2 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "key2")]
+        public System.String Key2 { get; set; }
 
     }
 }

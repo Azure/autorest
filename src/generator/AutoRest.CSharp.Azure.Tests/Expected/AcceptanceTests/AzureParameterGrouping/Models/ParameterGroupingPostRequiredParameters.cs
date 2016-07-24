@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Additional parameters for the parameterGrouping_postRequired operation.
@@ -33,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         /// <param name="path">Path parameter</param>
         /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostRequiredParameters(int body, string path, string customHeader = default(string), int? query = default(int?))
+        public ParameterGroupingPostRequiredParameters(System.Int32 body, System.String path, System.String customHeader = default(System.String), System.Int32? query = default(System.Int32?))
         {
             Body = body;
             CustomHeader = customHeader;
@@ -43,37 +37,37 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public int Body { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.Int32 Body { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string CustomHeader { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String CustomHeader { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public int? Query { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.Int32? Query { get; set; }
 
         /// <summary>
         /// Gets or sets path parameter
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string Path { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String Path { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Path == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Path");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Path");
             }
         }
     }

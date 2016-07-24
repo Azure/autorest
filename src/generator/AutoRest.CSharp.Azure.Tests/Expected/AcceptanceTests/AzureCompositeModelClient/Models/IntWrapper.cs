@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class IntWrapper
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the IntWrapper class.
         /// </summary>
-        public IntWrapper(int? field1 = default(int?), int? field2 = default(int?))
+        public IntWrapper(System.Int32? field1 = default(System.Int32?), System.Int32? field2 = default(System.Int32?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -34,13 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field1")]
-        public int? Field1 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
+        public System.Int32? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field2")]
-        public int? Field2 { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
+        public System.Int32? Field2 { get; set; }
 
     }
 }

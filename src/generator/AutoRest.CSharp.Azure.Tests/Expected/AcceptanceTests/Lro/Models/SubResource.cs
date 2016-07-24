@@ -8,15 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    public partial class SubResource : IResource
+    public partial class SubResource : Microsoft.Rest.Azure.IResource
     {
         /// <summary>
         /// Initializes a new instance of the SubResource class.
@@ -27,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the SubResource class.
         /// </summary>
         /// <param name="id">Sub Resource Id</param>
-        public SubResource(string id = default(string))
+        public SubResource(System.String id = default(System.String))
         {
             Id = id;
         }
@@ -35,8 +29,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Gets sub Resource Id
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.String Id { get; private set; }
 
     }
 }

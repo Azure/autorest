@@ -8,14 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
-    [JsonObject("sawshark")]
+    [Newtonsoft.Json.JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
         /// <summary>
@@ -26,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
+        public Sawshark(System.Double length, System.DateTime birthday, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), System.Int32? age = default(System.Int32?), System.Byte[] picture = default(System.Byte[]))
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;
@@ -34,13 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "picture")]
-        public byte[] Picture { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "picture")]
+        public System.Byte[] Picture { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

@@ -8,17 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Additional parameters for the putSimpleProductWithGrouping operation.
     /// </summary>
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class FlattenParameterGroup
     {
         /// <summary>
@@ -39,7 +34,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <param name="description">Description of product.</param>
         /// <param name="genericValue">Generic URL value.</param>
         /// <param name="odatavalue">URL value.</param>
-        public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
+        public FlattenParameterGroup(System.String name, System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String))
         {
             Name = name;
             ProductId = productId;
@@ -52,8 +47,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Gets or sets product name with value 'groupproduct'
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for
@@ -61,52 +56,52 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string ProductId { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string Description { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String Description { get; set; }
 
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string MaxProductDisplayName { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String MaxProductDisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string GenericValue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String GenericValue { get; set; }
 
         /// <summary>
         /// Gets or sets URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string Odatavalue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String Odatavalue { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
             }
             if (ProductId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ProductId");
             }
             if (MaxProductDisplayName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "MaxProductDisplayName");
             }
         }
     }

@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseLong operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 105 or
         /// -2</param>
-        public HeaderResponseLongHeaders(long? value = default(long?))
+        public HeaderResponseLongHeaders(System.Int64? value = default(System.Int64?))
         {
             Value = value;
         }
@@ -38,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "value": 105 or -2
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public long? Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Int64? Value { get; set; }
 
     }
 }

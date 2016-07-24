@@ -8,13 +8,8 @@
 
 namespace Fixtures.MirrorPrimitives
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for SwaggerDataTypesClient.
@@ -33,9 +28,9 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='product'>
             /// The only parameter
             /// </param>
-            public static Product GetProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
+            public static Product GetProduct(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).GetProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).GetProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +48,7 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> GetProductAsync(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> GetProductAsync(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -73,9 +68,9 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='product'>
             /// The only parameter
             /// </param>
-            public static Product PutProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
+            public static Product PutProduct(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PutProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PutProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -93,7 +88,7 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PutProductAsync(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PutProductAsync(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PutProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -113,9 +108,9 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='product'>
             /// The only parameter
             /// </param>
-            public static Product PostProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
+            public static Product PostProduct(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PostProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PostProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -133,7 +128,7 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PostProductAsync(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PostProductAsync(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -153,9 +148,9 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='product'>
             /// The only parameter
             /// </param>
-            public static Product PatchProduct(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product))
+            public static Product PatchProduct(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PatchProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDataTypesClient)s).PatchProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -173,7 +168,7 @@ namespace Fixtures.MirrorPrimitives
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PatchProductAsync(this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PatchProductAsync(this ISwaggerDataTypesClient operations, System.String responseCode = default(System.String), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PatchProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {

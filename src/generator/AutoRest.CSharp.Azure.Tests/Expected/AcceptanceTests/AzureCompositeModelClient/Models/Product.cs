@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The product documentation.
@@ -38,7 +32,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <param name="capacity">Capacity of product. For example, 4
         /// people.</param>
         /// <param name="image">Image URL representing the product.</param>
-        public Product(string productId = default(string), string description = default(string), string displayName = default(string), string capacity = default(string), string image = default(string))
+        public Product(System.String productId = default(System.String), System.String description = default(System.String), System.String displayName = default(System.String), System.String capacity = default(System.String), System.String image = default(System.String))
         {
             ProductId = productId;
             Description = description;
@@ -53,32 +47,32 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>
-        [JsonProperty(PropertyName = "product_id")]
-        public string ProductId { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "product_id")]
+        public System.String ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "description")]
+        public System.String Description { get; set; }
 
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
-        [JsonProperty(PropertyName = "display_name")]
-        public string DisplayName { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "display_name")]
+        public System.String DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets capacity of product. For example, 4 people.
         /// </summary>
-        [JsonProperty(PropertyName = "capacity")]
-        public string Capacity { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "capacity")]
+        public System.String Capacity { get; set; }
 
         /// <summary>
         /// Gets or sets image URL representing the product.
         /// </summary>
-        [JsonProperty(PropertyName = "image")]
-        public string Image { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "image")]
+        public System.String Image { get; set; }
 
     }
 }

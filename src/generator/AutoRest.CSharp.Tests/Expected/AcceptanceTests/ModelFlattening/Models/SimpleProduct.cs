@@ -8,17 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The product documentation.
     /// </summary>
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class SimpleProduct : BaseProduct
     {
         /// <summary>
@@ -38,7 +33,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <param name="description">Description of product.</param>
         /// <param name="genericValue">Generic URL value.</param>
         /// <param name="odatavalue">URL value.</param>
-        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
+        public SimpleProduct(System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String))
             : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
@@ -56,31 +51,31 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_display_name")]
-        public string MaxProductDisplayName { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_display_name")]
+        public System.String MaxProductDisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_image.generic_value")]
-        public string GenericValue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.generic_value")]
+        public System.String GenericValue { get; set; }
 
         /// <summary>
         /// Gets or sets URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
-        public string Odatavalue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
+        public System.String Odatavalue { get; set; }
 
         /// <summary>
         /// Capacity of product. For example, 4 people.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_capacity")]
-        public static string Capacity { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_capacity")]
+        public static System.String Capacity { get; private set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()
@@ -88,7 +83,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             base.Validate();
             if (MaxProductDisplayName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "MaxProductDisplayName");
             }
         }
     }

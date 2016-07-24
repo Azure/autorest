@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class StringOptionalWrapper
     {
@@ -25,15 +20,15 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the StringOptionalWrapper class.
         /// </summary>
-        public StringOptionalWrapper(string value = default(string))
+        public StringOptionalWrapper(System.String value = default(System.String))
         {
             Value = value;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public string Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.String Value { get; set; }
 
     }
 }

@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Basic
     {
@@ -33,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// and a line break.</param>
         /// <param name="color">Possible values include: 'cyan', 'Magenta',
         /// 'YELLOW', 'blacK'</param>
-        public Basic(int? id = default(int?), string name = default(string), string color = default(string))
+        public Basic(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String color = default(System.String))
         {
             Id = id;
             Name = name;
@@ -43,8 +37,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Gets or sets basic Id
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.Int32? Id { get; set; }
 
         /// <summary>
         /// Gets or sets name property with a very
@@ -52,15 +46,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// does not fit on a single line
         /// and a line break.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'cyan', 'Magenta', 'YELLOW',
         /// 'blacK'
         /// </summary>
-        [JsonProperty(PropertyName = "color")]
-        public string Color { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
+        public System.String Color { get; set; }
 
     }
 }

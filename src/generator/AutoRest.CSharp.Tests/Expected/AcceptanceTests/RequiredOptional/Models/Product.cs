@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Product
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(int id, string name = default(string))
+        public Product(System.Int32 id, System.String name = default(System.String))
         {
             Id = id;
             Name = name;
@@ -33,18 +28,18 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.Int32 Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

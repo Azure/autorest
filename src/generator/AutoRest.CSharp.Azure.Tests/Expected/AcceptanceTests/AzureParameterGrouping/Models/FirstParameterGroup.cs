@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Additional parameters for a set of operations, such as:
@@ -32,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the FirstParameterGroup class.
         /// </summary>
         /// <param name="queryOne">Query parameter with default</param>
-        public FirstParameterGroup(string headerOne = default(string), int? queryOne = default(int?))
+        public FirstParameterGroup(System.String headerOne = default(System.String), System.Int32? queryOne = default(System.Int32?))
         {
             HeaderOne = headerOne;
             QueryOne = queryOne;
@@ -40,14 +34,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string HeaderOne { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.String HeaderOne { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public int? QueryOne { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
+        public System.Int32? QueryOne { get; set; }
 
     }
 }

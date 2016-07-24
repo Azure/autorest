@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Dog : Pet
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Dog class.
         /// </summary>
-        public Dog(int? id = default(int?), string name = default(string), string food = default(string))
+        public Dog(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String food = default(System.String))
             : base(id, name)
         {
             Food = food;
@@ -34,8 +28,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "food")]
-        public string Food { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "food")]
+        public System.String Food { get; set; }
 
     }
 }

@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Doggy : Animal
     {
@@ -28,7 +23,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="id">Id.</param>
         /// <param name="description">Description of a Animal.</param>
         /// <param name="name">dog name</param>
-        public Doggy(string id = default(string), string description = default(string), string name = default(string))
+        public Doggy(System.String id = default(System.String), System.String description = default(System.String), System.String name = default(System.String))
             : base(id, description)
         {
             Name = name;
@@ -37,8 +32,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Gets or sets dog name
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
     }
 }

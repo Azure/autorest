@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class PersianCat : BaseCat
     {
@@ -29,7 +24,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="description">Description of a Animal.</param>
         /// <param name="color">cat color</param>
         /// <param name="size">cat size</param>
-        public PersianCat(string id = default(string), string description = default(string), string color = default(string), int? size = default(int?))
+        public PersianCat(System.String id = default(System.String), System.String description = default(System.String), System.String color = default(System.String), System.Int32? size = default(System.Int32?))
             : base(id, description, color)
         {
             Size = size;
@@ -38,8 +33,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Gets or sets cat size
         /// </summary>
-        [JsonProperty(PropertyName = "size")]
-        public int? Size { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "size")]
+        public System.Int32? Size { get; set; }
 
     }
 }

@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for postAsyncRelativeRetryInvalidHeader operation.
@@ -37,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// set to foo</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to /bar</param>
-        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
+        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders(System.String azureAsyncOperation = default(System.String), System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
         {
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
@@ -47,21 +41,21 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
-        [JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public string AzureAsyncOperation { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
+        public System.String AzureAsyncOperation { get; set; }
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
-        public string Location { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
+        public System.String Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to /bar
         /// </summary>
-        [JsonProperty(PropertyName = "Retry-After")]
-        public int? RetryAfter { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
+        public System.Int32? RetryAfter { get; set; }
 
     }
 }

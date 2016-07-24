@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class ClassWrapper
     {
@@ -32,20 +27,20 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public Product Value { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Value == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Value");
             }
             if (this.Value != null)
             {

@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class BurmeseCat : SiameseCat
     {
@@ -30,7 +25,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="color">cat color</param>
         /// <param name="length">cat length</param>
         /// <param name="nickName">cat nick name</param>
-        public BurmeseCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?), int? nickName = default(int?))
+        public BurmeseCat(System.String id = default(System.String), System.String description = default(System.String), System.String color = default(System.String), System.Int32? length = default(System.Int32?), System.Int32? nickName = default(System.Int32?))
             : base(id, description, color, length)
         {
             NickName = nickName;
@@ -39,8 +34,8 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Gets or sets cat nick name
         /// </summary>
-        [JsonProperty(PropertyName = "nickName")]
-        public int? NickName { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "nickName")]
+        public System.Int32? NickName { get; set; }
 
     }
 }

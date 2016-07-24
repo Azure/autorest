@@ -8,18 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Flattened product.
     /// <see href="http://tempuri.org" />
     /// </summary>
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
         /// <summary>
@@ -38,7 +33,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public FlattenedProduct(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
+        public FlattenedProduct(System.String id = default(System.String), System.String type = default(System.String), System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String location = default(System.String), System.String name = default(System.String), System.String pname = default(System.String), System.String flattenedProductType = default(System.String), System.String provisioningStateValues = default(System.String), System.String provisioningState = default(System.String))
             : base(id, type, tags, location, name)
         {
             Pname = pname;
@@ -49,26 +44,26 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.p\\.name")]
-        public string Pname { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.p\\.name")]
+        public System.String Pname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.type")]
-        public string FlattenedProductType { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.type")]
+        public System.String FlattenedProductType { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
+        public System.String ProvisioningStateValues { get; private set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
-        public string ProvisioningState { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
+        public System.String ProvisioningState { get; set; }
 
     }
 }

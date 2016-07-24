@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyString
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for StringModel.
@@ -27,9 +22,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static string GetNull(this IStringModel operations)
+            public static System.String GetNull(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetNullAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.String> GetNullAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,9 +53,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='stringBody'>
             /// Possible values include: ''
             /// </param>
-            public static void PutNull(this IStringModel operations, string stringBody = default(string))
+            public static void PutNull(this IStringModel operations, System.String stringBody = default(System.String))
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutNullAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).PutNullAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -75,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutNullAsync(this IStringModel operations, string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutNullAsync(this IStringModel operations, System.String stringBody = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutNullWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -86,9 +81,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static string GetEmpty(this IStringModel operations)
+            public static System.String GetEmpty(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -100,7 +95,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetEmptyAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.String> GetEmptyAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -117,9 +112,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='stringBody'>
             /// Possible values include: ''
             /// </param>
-            public static void PutEmpty(this IStringModel operations, string stringBody)
+            public static void PutEmpty(this IStringModel operations, System.String stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutEmptyAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).PutEmptyAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -134,7 +129,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutEmptyAsync(this IStringModel operations, System.String stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -146,9 +141,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static string GetMbcs(this IStringModel operations)
+            public static System.String GetMbcs(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetMbcsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetMbcsAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -161,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetMbcsAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.String> GetMbcsAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -180,9 +175,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// Possible values include:
             /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
             /// </param>
-            public static void PutMbcs(this IStringModel operations, string stringBody)
+            public static void PutMbcs(this IStringModel operations, System.String stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutMbcsAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).PutMbcsAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -199,7 +194,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMbcsAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutMbcsAsync(this IStringModel operations, System.String stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -212,9 +207,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static string GetWhitespace(this IStringModel operations)
+            public static System.String GetWhitespace(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetWhitespaceAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetWhitespaceAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -228,7 +223,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetWhitespaceAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.String> GetWhitespaceAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -248,9 +243,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// Possible values include: '    Now is the time for all good men to come to
             /// the aid of their country    '
             /// </param>
-            public static void PutWhitespace(this IStringModel operations, string stringBody)
+            public static void PutWhitespace(this IStringModel operations, System.String stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutWhitespaceAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).PutWhitespaceAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -268,7 +263,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutWhitespaceAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutWhitespaceAsync(this IStringModel operations, System.String stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -279,9 +274,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static string GetNotProvided(this IStringModel operations)
+            public static System.String GetNotProvided(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetNotProvidedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -293,7 +288,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetNotProvidedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.String> GetNotProvidedAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -307,9 +302,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static byte[] GetBase64Encoded(this IStringModel operations)
+            public static System.Byte[] GetBase64Encoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetBase64EncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetBase64EncodedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -321,7 +316,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetBase64EncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Byte[]> GetBase64EncodedAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBase64EncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -335,9 +330,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static byte[] GetBase64UrlEncoded(this IStringModel operations)
+            public static System.Byte[] GetBase64UrlEncoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetBase64UrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetBase64UrlEncodedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -349,7 +344,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetBase64UrlEncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Byte[]> GetBase64UrlEncodedAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBase64UrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -365,9 +360,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             /// <param name='stringBody'>
             /// </param>
-            public static void PutBase64UrlEncoded(this IStringModel operations, byte[] stringBody)
+            public static void PutBase64UrlEncoded(this IStringModel operations, System.Byte[] stringBody)
             {
-                Task.Factory.StartNew(s => ((IStringModel)s).PutBase64UrlEncodedAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).PutBase64UrlEncodedAsync(stringBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -381,7 +376,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBase64UrlEncodedAsync(this IStringModel operations, byte[] stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutBase64UrlEncodedAsync(this IStringModel operations, System.Byte[] stringBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBase64UrlEncodedWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -392,9 +387,9 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static byte[] GetNullBase64UrlEncoded(this IStringModel operations)
+            public static System.Byte[] GetNullBase64UrlEncoded(this IStringModel operations)
             {
-                return Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64UrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IStringModel)s).GetNullBase64UrlEncodedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -406,7 +401,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetNullBase64UrlEncodedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Byte[]> GetNullBase64UrlEncodedAsync(this IStringModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullBase64UrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

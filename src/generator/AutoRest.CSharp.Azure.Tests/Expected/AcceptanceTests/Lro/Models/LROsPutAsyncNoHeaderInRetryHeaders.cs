@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for putAsyncNoHeaderInRetry operation.
@@ -31,15 +25,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsPutAsyncNoHeaderInRetryHeaders class.
         /// </summary>
-        public LROsPutAsyncNoHeaderInRetryHeaders(string azureAsyncOperation = default(string))
+        public LROsPutAsyncNoHeaderInRetryHeaders(System.String azureAsyncOperation = default(System.String))
         {
             AzureAsyncOperation = azureAsyncOperation;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public string AzureAsyncOperation { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
+        public System.String AzureAsyncOperation { get; set; }
 
     }
 }

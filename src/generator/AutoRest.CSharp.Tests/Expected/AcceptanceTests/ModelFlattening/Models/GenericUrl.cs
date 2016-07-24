@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The Generic URL.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Initializes a new instance of the GenericUrl class.
         /// </summary>
         /// <param name="genericValue">Generic URL value.</param>
-        public GenericUrl(string genericValue = default(string))
+        public GenericUrl(System.String genericValue = default(System.String))
         {
             GenericValue = genericValue;
         }
@@ -37,8 +32,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "generic_value")]
-        public string GenericValue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "generic_value")]
+        public System.String GenericValue { get; set; }
 
     }
 }

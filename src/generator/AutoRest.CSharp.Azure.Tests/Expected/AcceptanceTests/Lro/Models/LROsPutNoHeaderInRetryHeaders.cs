@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for putNoHeaderInRetry operation.
@@ -33,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         /// <param name="location">Location to poll for result status: will be
         /// set to /lro/putasync/noheader/202/200/operationResults</param>
-        public LROsPutNoHeaderInRetryHeaders(string location = default(string))
+        public LROsPutNoHeaderInRetryHeaders(System.String location = default(System.String))
         {
             Location = location;
         }
@@ -42,8 +36,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noheader/202/200/operationResults
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
-        public string Location { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
+        public System.String Location { get; set; }
 
     }
 }

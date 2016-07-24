@@ -8,14 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for SubscriptionInMethodOperations.
@@ -32,9 +27,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='subscriptionId'>
             /// This should appear as a method parameter, use value '1234-5678-9012-3456'
             /// </param>
-            public static void PostMethodLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
+            public static void PostMethodLocalValid(this ISubscriptionInMethodOperations operations, System.String subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -50,7 +45,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMethodLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostMethodLocalValidAsync(this ISubscriptionInMethodOperations operations, System.String subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostMethodLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -67,9 +62,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// This should appear as a method parameter, use value null, client-side
             /// validation should prvenet the call
             /// </param>
-            public static void PostMethodLocalNull(this ISubscriptionInMethodOperations operations, string subscriptionId)
+            public static void PostMethodLocalNull(this ISubscriptionInMethodOperations operations, System.String subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalNullAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostMethodLocalNullAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -87,7 +82,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMethodLocalNullAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostMethodLocalNullAsync(this ISubscriptionInMethodOperations operations, System.String subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostMethodLocalNullWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -102,9 +97,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='subscriptionId'>
             /// Should appear as a method parameter -use value '1234-5678-9012-3456'
             /// </param>
-            public static void PostPathLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
+            public static void PostPathLocalValid(this ISubscriptionInMethodOperations operations, System.String subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostPathLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostPathLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -120,7 +115,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostPathLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostPathLocalValidAsync(this ISubscriptionInMethodOperations operations, System.String subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostPathLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -136,9 +131,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// The subscriptionId, which appears in the path, the value is always
             /// '1234-5678-9012-3456'
             /// </param>
-            public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations, string subscriptionId)
+            public static void PostSwaggerLocalValid(this ISubscriptionInMethodOperations operations, System.String subscriptionId)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInMethodOperations)s).PostSwaggerLocalValidAsync(subscriptionId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -155,7 +150,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostSwaggerLocalValidAsync(this ISubscriptionInMethodOperations operations, string subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostSwaggerLocalValidAsync(this ISubscriptionInMethodOperations operations, System.String subscriptionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostSwaggerLocalValidWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false);
             }

@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Error
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), string message = default(string))
+        public Error(System.Int32? status = default(System.Int32?), System.String message = default(System.String))
         {
             Status = status;
             Message = message;
@@ -33,13 +28,13 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public int? Status { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        public System.Int32? Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
     }
 }

@@ -8,31 +8,24 @@
 
 namespace Fixtures.AcceptanceTestsBodyDictionary.Models
 {
-    using Microsoft.Rest;
-    using System;
-    using System.Net.Http;
-    using System.Runtime.Serialization;
-#if !PORTABLE 
-    using System.Security.Permissions;
-#endif
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
 #if !PORTABLE 
-    [Serializable]
+    [System.Serializable]
 #endif
-    public class ErrorException : RestException
+    public class ErrorException : Microsoft.Rest.RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
+        public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
+        public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
 
         /// <summary>
         /// Gets or sets the body object.
@@ -60,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
-        public ErrorException(string message, Exception innerException)
+        public ErrorException(string message, System.Exception innerException)
             : base(message, innerException)
         {
         }
@@ -71,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorException(SerializationInfo info, StreamingContext context)
+        protected ErrorException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -81,16 +74,16 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new System.ArgumentNullException("info");
             }
 
             info.AddValue("Request", Request);

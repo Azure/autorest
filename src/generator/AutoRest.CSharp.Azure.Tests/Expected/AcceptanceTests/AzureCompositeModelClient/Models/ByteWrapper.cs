@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class ByteWrapper
     {
@@ -26,15 +20,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ByteWrapper class.
         /// </summary>
-        public ByteWrapper(byte[] field = default(byte[]))
+        public ByteWrapper(System.Byte[] field = default(System.Byte[]))
         {
             Field = field;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
-        public byte[] Field { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
+        public System.Byte[] Field { get; set; }
 
     }
 }

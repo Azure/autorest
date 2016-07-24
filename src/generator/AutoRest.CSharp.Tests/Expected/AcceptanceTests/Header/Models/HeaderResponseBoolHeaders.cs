@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseBool operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": true or
         /// false</param>
-        public HeaderResponseBoolHeaders(bool? value = default(bool?))
+        public HeaderResponseBoolHeaders(System.Boolean? value = default(System.Boolean?))
         {
             Value = value;
         }
@@ -38,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "value": true or false
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public bool? Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Boolean? Value { get; set; }
 
     }
 }

@@ -8,15 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class SubProduct : SubResource
     {
         /// <summary>
@@ -32,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public SubProduct(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public SubProduct(System.String id = default(System.String), System.String provisioningState = default(System.String), System.String provisioningStateValues = default(System.String))
             : base(id)
         {
             ProvisioningState = provisioningState;
@@ -41,16 +35,16 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
-        public string ProvisioningState { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
+        public System.String ProvisioningState { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
+        public System.String ProvisioningStateValues { get; private set; }
 
     }
 }

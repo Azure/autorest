@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseFloat operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 0.07 or
         /// -3.0</param>
-        public HeaderResponseFloatHeaders(double? value = default(double?))
+        public HeaderResponseFloatHeaders(System.Double? value = default(System.Double?))
         {
             Value = value;
         }
@@ -38,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header value "value": 0.07 or -3.0
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public double? Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Double? Value { get; set; }
 
     }
 }

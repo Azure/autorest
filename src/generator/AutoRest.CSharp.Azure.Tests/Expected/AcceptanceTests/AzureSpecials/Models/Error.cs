@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Error
     {
@@ -26,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), int? constantId = default(int?), string message = default(string))
+        public Error(System.Int32? status = default(System.Int32?), System.Int32? constantId = default(System.Int32?), System.String message = default(System.String))
         {
             Status = status;
             ConstantId = constantId;
@@ -35,18 +29,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public int? Status { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        public System.Int32? Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "constantId")]
-        public int? ConstantId { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constantId")]
+        public System.Int32? ConstantId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
     }
 }

@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for customNamedRequestIdParamGrouping operation.
@@ -32,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// HeaderCustomNamedRequestIdParamGroupingHeaders class.
         /// </summary>
         /// <param name="fooRequestId">Gets the foo-request-id.</param>
-        public HeaderCustomNamedRequestIdParamGroupingHeaders(string fooRequestId = default(string))
+        public HeaderCustomNamedRequestIdParamGroupingHeaders(System.String fooRequestId = default(System.String))
         {
             FooRequestId = fooRequestId;
         }
@@ -40,8 +34,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Gets the foo-request-id.
         /// </summary>
-        [JsonProperty(PropertyName = "foo-request-id")]
-        public string FooRequestId { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "foo-request-id")]
+        public System.String FooRequestId { get; set; }
 
     }
 }

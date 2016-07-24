@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Error
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), string message = default(string), Error parentError = default(Error))
+        public Error(System.Int32? status = default(System.Int32?), System.String message = default(System.String), Error parentError = default(Error))
         {
             Status = status;
             Message = message;
@@ -34,17 +29,17 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
-        public int? Status { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
+        public System.Int32? Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parentError")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "parentError")]
         public Error ParentError { get; set; }
 
     }

@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for post202Retry200 operation.
@@ -35,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// set to /lro/retryerror/post/202/retry/200</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to zero</param>
-        public LRORetrysPost202Retry200Headers(string location = default(string), int? retryAfter = default(int?))
+        public LRORetrysPost202Retry200Headers(System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
         {
             Location = location;
             RetryAfter = retryAfter;
@@ -45,15 +39,15 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/retryerror/post/202/retry/200
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
-        public string Location { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
+        public System.String Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to zero
         /// </summary>
-        [JsonProperty(PropertyName = "Retry-After")]
-        public int? RetryAfter { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
+        public System.Int32? RetryAfter { get; set; }
 
     }
 }

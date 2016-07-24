@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class PetStyle
     {
@@ -25,27 +20,27 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the PetStyle class.
         /// </summary>
-        public PetStyle(string name)
+        public PetStyle(System.String name)
         {
             Name = name;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
             }
         }
     }

@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class IntWrapper
     {
@@ -25,20 +20,20 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the IntWrapper class.
         /// </summary>
-        public IntWrapper(int value)
+        public IntWrapper(System.Int32 value)
         {
             Value = value;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public int Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Int32 Value { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

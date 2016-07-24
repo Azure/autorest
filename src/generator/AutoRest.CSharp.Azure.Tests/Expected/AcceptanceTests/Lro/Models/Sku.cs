@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Sku
     {
@@ -26,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Sku class.
         /// </summary>
-        public Sku(string name = default(string), string id = default(string))
+        public Sku(System.String name = default(System.String), System.String id = default(System.String))
         {
             Name = name;
             Id = id;
@@ -34,13 +28,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.String Id { get; set; }
 
     }
 }

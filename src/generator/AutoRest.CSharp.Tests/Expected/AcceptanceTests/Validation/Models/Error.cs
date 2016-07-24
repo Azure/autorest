@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Error
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? code = default(int?), string message = default(string), string fields = default(string))
+        public Error(System.Int32? code = default(System.Int32?), System.String message = default(System.String), System.String fields = default(System.String))
         {
             Code = code;
             Message = message;
@@ -34,18 +29,18 @@ namespace Fixtures.AcceptanceTestsValidation.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "code")]
-        public int? Code { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
+        public System.Int32? Code { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fields")]
-        public string Fields { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "fields")]
+        public System.String Fields { get; set; }
 
     }
 }

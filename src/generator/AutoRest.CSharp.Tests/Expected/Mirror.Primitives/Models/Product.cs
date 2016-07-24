@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Product
     {
@@ -27,7 +22,7 @@ namespace Fixtures.MirrorPrimitives.Models
         /// </summary>
         /// <param name="enumProperty">Possible values include: 'red', 'blue',
         /// 'green'</param>
-        public Product(int? integer = default(int?), int? intProperty = default(int?), long? longProperty = default(long?), double? number = default(double?), double? floatProperty = default(double?), double? doubleProperty = default(double?), byte[] byteProperty = default(byte[]), string stringProperty = default(string), byte[] base64url = default(byte[]), Guid? uuid = default(Guid?), string enumProperty = default(string), bool? boolean = default(bool?), DateTime? date = default(DateTime?), DateTime? dateTime = default(DateTime?), IList<int?> integerArray = default(IList<int?>), IList<int?> intArray = default(IList<int?>), IList<long?> longArray = default(IList<long?>), IList<double?> numberArray = default(IList<double?>), IList<double?> floatArray = default(IList<double?>), IList<double?> doubleArray = default(IList<double?>), IList<byte[]> byteArray = default(IList<byte[]>), IList<bool?> booleanArray = default(IList<bool?>), IList<string> stringArray = default(IList<string>), IList<byte[]> base64urlArray = default(IList<byte[]>), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTime?> dateTimeArray = default(IList<DateTime?>), IList<Guid?> uuidArray = default(IList<Guid?>))
+        public Product(System.Int32? integer = default(System.Int32?), System.Int32? intProperty = default(System.Int32?), System.Int64? longProperty = default(System.Int64?), System.Double? number = default(System.Double?), System.Double? floatProperty = default(System.Double?), System.Double? doubleProperty = default(System.Double?), System.Byte[] byteProperty = default(System.Byte[]), System.String stringProperty = default(System.String), System.Byte[] base64url = default(System.Byte[]), System.Guid? uuid = default(System.Guid?), System.String enumProperty = default(System.String), System.Boolean? boolean = default(System.Boolean?), System.DateTime? date = default(System.DateTime?), System.DateTime? dateTime = default(System.DateTime?), System.Collections.Generic.IList<System.Int32?> integerArray = default(System.Collections.Generic.IList<System.Int32?>), System.Collections.Generic.IList<System.Int32?> intArray = default(System.Collections.Generic.IList<System.Int32?>), System.Collections.Generic.IList<System.Int64?> longArray = default(System.Collections.Generic.IList<System.Int64?>), System.Collections.Generic.IList<System.Double?> numberArray = default(System.Collections.Generic.IList<System.Double?>), System.Collections.Generic.IList<System.Double?> floatArray = default(System.Collections.Generic.IList<System.Double?>), System.Collections.Generic.IList<System.Double?> doubleArray = default(System.Collections.Generic.IList<System.Double?>), System.Collections.Generic.IList<System.Byte[]> byteArray = default(System.Collections.Generic.IList<System.Byte[]>), System.Collections.Generic.IList<System.Boolean?> booleanArray = default(System.Collections.Generic.IList<System.Boolean?>), System.Collections.Generic.IList<System.String> stringArray = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.IList<System.Byte[]> base64urlArray = default(System.Collections.Generic.IList<System.Byte[]>), System.Collections.Generic.IList<System.DateTime?> dateArray = default(System.Collections.Generic.IList<System.DateTime?>), System.Collections.Generic.IList<System.DateTime?> dateTimeArray = default(System.Collections.Generic.IList<System.DateTime?>), System.Collections.Generic.IList<System.Guid?> uuidArray = default(System.Collections.Generic.IList<System.Guid?>))
         {
             Integer = integer;
             IntProperty = intProperty;
@@ -60,141 +55,141 @@ namespace Fixtures.MirrorPrimitives.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "integer")]
-        public int? Integer { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "integer")]
+        public System.Int32? Integer { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "int")]
-        public int? IntProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "int")]
+        public System.Int32? IntProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "long")]
-        public long? LongProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "long")]
+        public System.Int64? LongProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "number")]
-        public double? Number { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "number")]
+        public System.Double? Number { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "float")]
-        public double? FloatProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "float")]
+        public System.Double? FloatProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "double")]
-        public double? DoubleProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "double")]
+        public System.Double? DoubleProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "byte")]
-        public byte[] ByteProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "byte")]
+        public System.Byte[] ByteProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "string")]
-        public string StringProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "string")]
+        public System.String StringProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(Base64UrlJsonConverter))]
-        [JsonProperty(PropertyName = "base64url")]
-        public byte[] Base64url { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.Base64UrlJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "base64url")]
+        public System.Byte[] Base64url { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "uuid")]
-        public Guid? Uuid { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "uuid")]
+        public System.Guid? Uuid { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'red', 'blue', 'green'
         /// </summary>
-        [JsonProperty(PropertyName = "enum")]
-        public string EnumProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "enum")]
+        public System.String EnumProperty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "boolean")]
-        public bool? Boolean { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "boolean")]
+        public System.Boolean? Boolean { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(DateJsonConverter))]
-        [JsonProperty(PropertyName = "date")]
-        public DateTime? Date { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "date")]
+        public System.DateTime? Date { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateTime")]
-        public DateTime? DateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateTime")]
+        public System.DateTime? DateTime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "integerArray")]
-        public IList<int?> IntegerArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "integerArray")]
+        public System.Collections.Generic.IList<System.Int32?> IntegerArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "intArray")]
-        public IList<int?> IntArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "intArray")]
+        public System.Collections.Generic.IList<System.Int32?> IntArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "longArray")]
-        public IList<long?> LongArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "longArray")]
+        public System.Collections.Generic.IList<System.Int64?> LongArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "numberArray")]
-        public IList<double?> NumberArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "numberArray")]
+        public System.Collections.Generic.IList<System.Double?> NumberArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "floatArray")]
-        public IList<double?> FloatArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "floatArray")]
+        public System.Collections.Generic.IList<System.Double?> FloatArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "doubleArray")]
-        public IList<double?> DoubleArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "doubleArray")]
+        public System.Collections.Generic.IList<System.Double?> DoubleArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "byteArray")]
-        public IList<byte[]> ByteArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "byteArray")]
+        public System.Collections.Generic.IList<System.Byte[]> ByteArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "booleanArray")]
-        public IList<bool?> BooleanArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "booleanArray")]
+        public System.Collections.Generic.IList<System.Boolean?> BooleanArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "stringArray")]
-        public IList<string> StringArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "stringArray")]
+        public System.Collections.Generic.IList<System.String> StringArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "base64urlArray")]
-        public IList<byte[]> Base64urlArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "base64urlArray")]
+        public System.Collections.Generic.IList<System.Byte[]> Base64urlArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateArray")]
-        public IList<DateTime?> DateArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateArray")]
+        public System.Collections.Generic.IList<System.DateTime?> DateArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateTimeArray")]
-        public IList<DateTime?> DateTimeArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateTimeArray")]
+        public System.Collections.Generic.IList<System.DateTime?> DateTimeArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "uuidArray")]
-        public IList<Guid?> UuidArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "uuidArray")]
+        public System.Collections.Generic.IList<System.Guid?> UuidArray { get; set; }
 
     }
 }

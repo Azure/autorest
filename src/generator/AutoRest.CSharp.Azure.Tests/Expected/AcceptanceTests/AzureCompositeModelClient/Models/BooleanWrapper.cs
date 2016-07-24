@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class BooleanWrapper
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the BooleanWrapper class.
         /// </summary>
-        public BooleanWrapper(bool? fieldTrue = default(bool?), bool? fieldFalse = default(bool?))
+        public BooleanWrapper(System.Boolean? fieldTrue = default(System.Boolean?), System.Boolean? fieldFalse = default(System.Boolean?))
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
@@ -34,13 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field_true")]
-        public bool? FieldTrue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field_true")]
+        public System.Boolean? FieldTrue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field_false")]
-        public bool? FieldFalse { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field_false")]
+        public System.Boolean? FieldFalse { get; set; }
 
     }
 }

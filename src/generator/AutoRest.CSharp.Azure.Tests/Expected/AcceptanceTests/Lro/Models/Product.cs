@@ -8,15 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class Product : Resource
     {
         /// <summary>
@@ -35,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public Product(string id = default(string), string type = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), string location = default(string), string name = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public Product(System.String id = default(System.String), System.String type = default(System.String), System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String location = default(System.String), System.String name = default(System.String), System.String provisioningState = default(System.String), System.String provisioningStateValues = default(System.String))
             : base(id, type, tags, location, name)
         {
             ProvisioningState = provisioningState;
@@ -44,16 +38,16 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
-        public string ProvisioningState { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
+        public System.String ProvisioningState { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
+        public System.String ProvisioningStateValues { get; private set; }
 
     }
 }

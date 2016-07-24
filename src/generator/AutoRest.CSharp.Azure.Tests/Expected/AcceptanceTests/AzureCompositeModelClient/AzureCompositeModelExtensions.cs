@@ -8,14 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for AzureCompositeModel.
@@ -37,9 +32,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='resourceGroupName'>
             /// Resource Group ID.
             /// </param>
-            public static CatalogArray List(this IAzureCompositeModel operations, string resourceGroupName)
+            public static CatalogArray List(this IAzureCompositeModel operations, System.String resourceGroupName)
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).ListAsync(resourceGroupName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAzureCompositeModel)s).ListAsync(resourceGroupName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -60,7 +55,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogArray> ListAsync(this IAzureCompositeModel operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<CatalogArray> ListAsync(this IAzureCompositeModel operations, System.String resourceGroupName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ListWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -86,9 +81,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='productDictionaryOfArray'>
             /// Dictionary of Array of product
             /// </param>
-            public static CatalogDictionary Create(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>))
+            public static CatalogDictionary Create(this IAzureCompositeModel operations, System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>>))
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAzureCompositeModel)s).CreateAsync(subscriptionId, resourceGroupName, productDictionaryOfArray), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -112,7 +107,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogDictionary> CreateAsync(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<CatalogDictionary> CreateAsync(this IAzureCompositeModel operations, System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(subscriptionId, resourceGroupName, productDictionaryOfArray, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -138,9 +133,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='productArrayOfDictionary'>
             /// Array of dictionary of products
             /// </param>
-            public static CatalogArray Update(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>))
+            public static CatalogArray Update(this IAzureCompositeModel operations, System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>>))
             {
-                return Task.Factory.StartNew(s => ((IAzureCompositeModel)s).UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAzureCompositeModel)s).UpdateAsync(subscriptionId, resourceGroupName, productArrayOfDictionary), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -164,7 +159,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogArray> UpdateAsync(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<CatalogArray> UpdateAsync(this IAzureCompositeModel operations, System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.UpdateWithHttpMessagesAsync(subscriptionId, resourceGroupName, productArrayOfDictionary, null, cancellationToken).ConfigureAwait(false))
                 {

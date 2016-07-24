@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class ReadonlyObj
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ReadonlyObj class.
         /// </summary>
-        public ReadonlyObj(string id = default(string), int? size = default(int?))
+        public ReadonlyObj(System.String id = default(System.String), System.Int32? size = default(System.Int32?))
         {
             Id = id;
             Size = size;
@@ -34,13 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; private set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.String Id { get; private set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "size")]
-        public int? Size { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "size")]
+        public System.Int32? Size { get; set; }
 
     }
 }

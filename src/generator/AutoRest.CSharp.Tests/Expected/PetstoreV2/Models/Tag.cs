@@ -8,12 +8,7 @@
 
 namespace Fixtures.PetstoreV2.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Tag
     {
@@ -25,7 +20,7 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the Tag class.
         /// </summary>
-        public Tag(long? id = default(long?), string name = default(string))
+        public Tag(System.Int64? id = default(System.Int64?), System.String name = default(System.String))
         {
             Id = id;
             Name = name;
@@ -33,13 +28,13 @@ namespace Fixtures.PetstoreV2.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
-        public long? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
+        public System.Int64? Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
     }
 }

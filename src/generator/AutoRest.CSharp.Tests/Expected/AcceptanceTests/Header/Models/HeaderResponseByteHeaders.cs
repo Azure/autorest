@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseByte operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header values
         /// "啊齄丂狛狜隣郎隣兀﨩"</param>
-        public HeaderResponseByteHeaders(byte[] value = default(byte[]))
+        public HeaderResponseByteHeaders(System.Byte[] value = default(System.Byte[]))
         {
             Value = value;
         }
@@ -38,8 +33,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public byte[] Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.Byte[] Value { get; set; }
 
     }
 }

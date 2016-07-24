@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyDictionary.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Widget
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// <summary>
         /// Initializes a new instance of the Widget class.
         /// </summary>
-        public Widget(int? integer = default(int?), string stringProperty = default(string))
+        public Widget(System.Int32? integer = default(System.Int32?), System.String stringProperty = default(System.String))
         {
             Integer = integer;
             StringProperty = stringProperty;
@@ -33,13 +28,13 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "integer")]
-        public int? Integer { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "integer")]
+        public System.Int32? Integer { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "string")]
-        public string StringProperty { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "string")]
+        public System.String StringProperty { get; set; }
 
     }
 }
