@@ -85,7 +85,7 @@
   "definitions": {
     "Product": {
       "description": "The product documentation.",
-      "required": [ "myintconst", "mystrconst" ],
+      "required": [ "myintconst", "mystrconst", "RefStrEnumRequiredConstant", "RefIntEnumRequiredConstant" ],
       "properties": {
         "product_id": {
           "type": "string",
@@ -127,11 +127,27 @@
           "type": "string",
           "description": "Constant string.",
           "enum": [ "constant" ]
+        },
+        "RefStrEnumRequiredConstant": {
+          "$ref": "#/definitions/RefStrEnum",
+          "description": "RefStrEnumRequiredConstant Description."
+        },
+        "RefIntEnumRequiredConstant": {
+          "$ref": "#/definitions/RefIntEnum",
+          "description": "RefIntEnumRequiredConstant Description."
+        },
+        "RefStrEnum": {
+          "$ref": "#/definitions/RefStrEnum",
+          "description": "RefStrEnumRequiredConstant Description."
+        },
+        "RefIntEnum": {
+          "$ref": "#/definitions/RefIntEnum",
+          "description": "RefIntEnumRequiredConstant Description."
+        },
+        "example": {
+          "name": "Puma",
+          "id": 1
         }
-      },
-      "example": {
-        "name": "Puma",
-        "id": 1
       }
     },
     "Error": {
@@ -147,6 +163,16 @@
           "type": "string"
         }
       }
+    },
+    "RefStrEnum": {
+      "type": "string",
+      "enum": [ "ReferenceEnum1" ],
+      "description": "RefStrEnum Description."
+    },
+    "RefIntEnum": {
+      "type": "integer",
+      "enum": [ 0 ],
+      "description": "RefIntEnum Description."
     }
   },
   "parameters": {

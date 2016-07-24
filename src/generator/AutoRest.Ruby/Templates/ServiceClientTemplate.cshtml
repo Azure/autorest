@@ -10,10 +10,7 @@ module @Settings.Namespace
   # A service client - single point of access to the REST API.
   #
   class @Model.Name < @Model.BaseType
-@if (Model.HasModelTypes)
-{
-    @:include @(Settings.Namespace)::Models
-}
+
     include MsRest::Serialization
 @foreach (var include in Model.Includes)
 {

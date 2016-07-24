@@ -10,7 +10,7 @@ using AutoRest.Swagger.Validation;
 namespace AutoRest.Swagger.Model
 {
     [Serializable]
-    [Rule(typeof(ClientNameRequired))]
+    [Rule(typeof(NonEmptyClientName))]
     public abstract class SwaggerBase
     {
         public SwaggerBase()

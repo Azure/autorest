@@ -105,21 +105,39 @@ namespace AutoRest.Swagger
                     if (name != _schema.Discriminator)
                     {
                         string propertyServiceTypeName;
-                        if (property.Value.Reference != null)
-                        {
-                            propertyServiceTypeName = property.Value.Reference.StripDefinitionPath();
-                        }
-                        else
-                        {
-                            propertyServiceTypeName = serviceTypeName + "_" + property.Key;
-                        }
-                        var propertyType =
-                            property.Value.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName);
+                        Schema refSchema = null;
+
                         if (property.Value.ReadOnly && property.Value.IsRequired)
                         {
                             throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture,
                            Resources.ReadOnlyNotRequired, name, serviceTypeName));
                         }
+
+                        if (property.Value.Reference != null)
+                        {
+                            propertyServiceTypeName = property.Value.Reference.StripDefinitionPath();
+                            var unwrappedSchema = Modeler.Resolver.Unwrap(property.Value);
+
+                            // For Enums use the referenced schema in order to set the correct property Type and Enum values
+                            if (unwrappedSchema.Enum != null)
+                            {
+                                refSchema = new Schema().LoadFrom(unwrappedSchema);
+                                if (property.Value.IsRequired)
+                                {
+                                    refSchema.IsRequired = property.Value.IsRequired;
+                                }
+                                //Todo: Remove the following when referenced descriptions are correctly ignored (Issue https://github.com/Azure/autorest/issues/1283)
+                                refSchema.Description = property.Value.Description;
+                            }
+                        }
+                        else
+                        {
+                            propertyServiceTypeName = serviceTypeName + "_" + property.Key;
+                        }
+
+                        var propertyType = refSchema != null
+                                           ? refSchema.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName)
+                                           : property.Value.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName);
 
                         var propertyObj = new Property
                         {
@@ -129,7 +147,7 @@ namespace AutoRest.Swagger
                             IsReadOnly = property.Value.ReadOnly,
                             Summary = property.Value.Title
                         };
-                        PopulateParameter(propertyObj, property.Value);
+                        PopulateParameter(propertyObj, refSchema != null ? refSchema : property.Value);
                         var propertyCompositeType = propertyType as CompositeType;
                         if (propertyObj.IsConstant || 
                             (propertyCompositeType != null 
@@ -137,7 +155,7 @@ namespace AutoRest.Swagger
                         {
                             objectType.ContainsConstantProperties = true;
                         }
-                        
+
                         objectType.Properties.Add(propertyObj);
                     }
                     else

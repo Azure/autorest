@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -8,20 +9,22 @@ using System.Collections.Generic;
 using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
+using AutoRest.Core.Utilities.Collections;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Tests
 {
     internal static class AssertExtensions
     {
-        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
+        internal static void AssertOnlyValidationWarning(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
-            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), exception);
+            AssertOnlyValidationMessage(messages.Where(m => m.Severity == LogEntrySeverity.Warning), validationType);
         }
 
-        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, ValidationExceptionName exception)
+        internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
-            Assert.Equal(1, messages.Count());
-            Assert.Equal(exception, messages.First().ValidationException);
+            // checks that the collection has one item, and that it is the correct message type.
+            Assert.Collection(messages , message => Assert.Equal(validationType, message.Type));
         }
     }
 
@@ -35,8 +38,12 @@ namespace AutoRest.Swagger.Tests
                 Namespace = "Test",
                 Input = input
             });
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
+            IEnumerable<ValidationMessage> messages;
             modeler.Build(out messages);
+
+            // remove debug-level messages
+            messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
+
             return messages;
         }
 
@@ -54,70 +61,71 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.DescriptionRequired);
+            messages.AssertOnlyValidationMessage(typeof(DescriptionRequired));
         }
 
         [Fact]
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultMustBeInEnum);
+
+            messages.AssertOnlyValidationMessage(typeof(DefaultMustBeInEnum));
         }
 
         [Fact]
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(ValidationExceptionName.NonEmptyClientName);
+            messages.AssertOnlyValidationWarning(typeof(NonEmptyClientName));
         }
 
         [Fact]
         public void RefSiblingPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationWarning(ValidationExceptionName.RefsMustNotHaveSiblings);
+            messages.AssertOnlyValidationWarning(typeof(RefsMustNotHaveSiblings));
         }
 
         [Fact]
         public void NoResponsesValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultResponseRequired);
+            messages.AssertOnlyValidationMessage(typeof(DefaultResponseRequired));
         }
 
         [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.AnonymousTypesDiscouraged);
+            messages.AssertOnlyValidationMessage(typeof(AvoidAnonymousTypes));
         }
 
         [Fact]
         public void AnonymousParameterSchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-parameter-type.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.AnonymousTypesDiscouraged);
+            messages.AssertOnlyValidationMessage(typeof(AnonymousParameterTypes));
         }
 
         [Fact]
         public void OperationGroupSingleUnderscoreValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-group-underscores.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.OneUnderscoreInOperationId);
+            messages.AssertOnlyValidationMessage(typeof(OneUnderscoreInOperationId));
         }
 
         [Fact]
         public void MissingDefaultResponseValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-default-response.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.DefaultResponseRequired);
+            messages.AssertOnlyValidationMessage(typeof(DefaultResponseRequired));
         }
 
         [Fact]
-        public void XMSPathNotInPathsValidation()
+        public void XmsPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "xms-path-not-in-paths.json"));
-            messages.AssertOnlyValidationMessage(ValidationExceptionName.XmsPathsMustOverloadPaths);
+            messages.AssertOnlyValidationMessage(typeof(XmsPathsMustOverloadPaths));
         }
     }
 }
