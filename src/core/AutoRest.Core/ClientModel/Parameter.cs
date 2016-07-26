@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Core.ClientModel
 {
@@ -12,6 +13,8 @@ namespace AutoRest.Core.ClientModel
     /// </summary>
     public class Parameter : IParameter
     {
+        private string _documentation;
+
         /// <summary>
         /// Creates a new instance of Parameter class.
         /// </summary>
@@ -24,6 +27,7 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the parameter name.
         /// </summary>
+        [Rule(typeof(IsIdentifier))]
         public string Name { get; set; }
 
         /// <summary>
@@ -84,8 +88,12 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the documentation.
         /// </summary>
-        public string Documentation { get; set; }
-        
+        public string Documentation
+        {
+            get { return _documentation; }
+            set { _documentation = value.StripControlCharacters(); }
+        }
+
         /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>

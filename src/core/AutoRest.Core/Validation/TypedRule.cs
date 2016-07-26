@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace AutoRest.Core.Validation
 {
@@ -15,18 +17,7 @@ namespace AutoRest.Core.Validation
         {
         }
 
-        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity)
-        {
-            var typedEntity = entity as T;
-            if (typedEntity != null)
-            {
-                foreach (var exception in GetValidationMessages(typedEntity))
-                {
-                    yield return exception;
-                }
-            }
-            yield break;
-        }
+        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity) => entity is T ? GetValidationMessages((T)entity) : Enumerable.Empty<ValidationMessage>();
 
         /// <summary>
         /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
@@ -38,9 +29,8 @@ namespace AutoRest.Core.Validation
             object[] formatParams;
             if (!IsValid(entity, out formatParams))
             {
-                yield return CreateException(Exception, formatParams);
+                yield return new ValidationMessage(this, formatParams);
             }
-            yield break;
         }
 
         /// <summary>
@@ -61,9 +51,6 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool IsValid(T entity)
-        {
-            return true;
-        }
+        public virtual bool IsValid(T entity) => true;
     }
 }

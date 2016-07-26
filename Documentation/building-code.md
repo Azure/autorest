@@ -17,8 +17,9 @@ To set up a machine with the necessary tools for building AutoRest, run `.\Tools
 - Visual Studio 2015
 - .NET CoreCLR
 
-After your machine restarts, run the following command to complete the Android SDK installation:
->`(echo y | android update sdk -u -a -t 6 ) && (echo y | android update sdk -u -a -t 28) && (echo y | android update sdk -u -a -t 139)`
+After your machine restarts, run the following commands to complete the Android SDK installation:
+>`(echo y | android update sdk -u -a -t build-tools-23.0.1) && (echo y | android update sdk -u -a -t android-23) && (echo y | android update sdk -u -a -t extra-android-m2repository)`
+>`Copy-Item "$($env:LOCALAPPDATA)\Android" "C:\Program Files (x86)\Android" -recurse`
 
 You will also want to run the following command from the project root:
 >`gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update`

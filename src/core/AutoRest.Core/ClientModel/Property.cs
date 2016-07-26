@@ -12,6 +12,9 @@ namespace AutoRest.Core.ClientModel
     /// </summary>
     public class Property : IParameter
     {
+        private string _summary;
+        private string _documentation;
+
         /// <summary>
         /// Creates a new instance of Property class.
         /// </summary>
@@ -64,12 +67,20 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the summary.
         /// </summary>
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets or sets the documentation.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Documentation
+        {
+            get { return _documentation; }
+            set { _documentation = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets vendor extensions dictionary.

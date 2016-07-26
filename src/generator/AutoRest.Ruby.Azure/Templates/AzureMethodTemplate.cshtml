@@ -62,9 +62,25 @@ else
 }
 @WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
+@if (Model.ReturnType.Body != null)
+{
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
+@:#
+}
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  @Model.ResponseGeneration()
+end
+@EmptyLine
+#
+@foreach (var parameter in Model.LocalParameters)
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
 @WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
 #
-def @(Model.Name)(@(Model.MethodParameterDeclaration))
+def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   # Send request
   promise = begin_@(Model.Name)_async(@(Model.MethodParameterInvocation))
   @EmptyLine

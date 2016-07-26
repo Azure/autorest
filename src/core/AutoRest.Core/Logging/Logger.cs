@@ -116,5 +116,28 @@ namespace AutoRest.Core.Logging
                 }
             }
         }
+
+        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity, bool verbose,ConsoleColor color)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+            foreach (var logEntry in Entries.Where(e => e.Severity == severity))
+            {
+                var original = Console.ForegroundColor;
+                Console.ForegroundColor = color;
+                // Write the severity and message to console
+                writer.WriteLine("{0}: {1}",
+                    logEntry.Severity.ToString().ToUpperInvariant(),
+                    logEntry.Message);
+                // If verbose is on and the entry has an exception, show it
+                if (logEntry.Exception != null && verbose)
+                {
+                    writer.WriteLine("{0}", logEntry.Exception);
+                }
+                Console.ForegroundColor = original;
+            }
+        }
     }
 }
