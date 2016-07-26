@@ -1522,7 +1522,7 @@ Explicit.prototype.postOptionalStringHeader = function (options, callback) {
  *
  * @param {object} bodyParameter
  * 
- * @param {number} [bodyParameter.id]
+ * @param {number} bodyParameter.id
  * 
  * @param {string} [bodyParameter.name]
  * 
@@ -1658,7 +1658,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
  * 
  * @param {object} [options.bodyParameter]
  * 
- * @param {number} [options.bodyParameter.id]
+ * @param {number} options.bodyParameter.id
  * 
  * @param {string} [options.bodyParameter.name]
  * 
@@ -1770,7 +1770,7 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
  *
  * @param {object} value
  * 
- * @param {number} [value.id]
+ * @param {number} value.id
  * 
  * @param {string} [value.name]
  * 
@@ -1912,7 +1912,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
  * 
  * @param {object} [options.value]
  * 
- * @param {number} [options.value.id]
+ * @param {number} options.value.id
  * 
  * @param {string} [options.value.name]
  * 
