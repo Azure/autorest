@@ -395,6 +395,7 @@ describe('msrest', function () {
   });
 
   describe('deserialize', function () {
+    var mapper = {};
     it('should correctly deserialize a uuid', function (done) {
       mapper = { type : { name: 'Uuid' } };
       var serializedObject = msRest.deserialize(mapper, valid_uuid, 'uuidBody');
