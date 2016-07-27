@@ -452,8 +452,10 @@ namespace Microsoft.Rest.Azure.Authentication
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
             var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
-            return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    authenticationProvider, authResult));
+            return new TokenCredentials(
+                new ApplicationTokenProvider(context, audience, clientId,authenticationProvider, authResult),
+                authResult.TenantId,
+                authResult.UserInfo == null ? null : authResult.UserInfo.DisplayableId);
         }
 
 #if DEBUG && !PORTABLE
@@ -473,8 +475,10 @@ namespace Microsoft.Rest.Azure.Authentication
             var audience = settings.TokenAudience.ToString();
             var context = GetAuthenticationContext(domain, settings, cache);
             var authResult = await authenticationProvider.AuthenticateAsync(clientId, audience, context);
-            return new TokenCredentials(new ApplicationTokenProvider(context, audience, clientId,
-                    authenticationProvider, authResult, expiration));
+            return new TokenCredentials(
+                new ApplicationTokenProvider(context, audience, clientId,authenticationProvider, authResult, expiration),
+                authResult.TenantId,
+                authResult.UserInfo == null ? null : authResult.UserInfo.DisplayableId);
         }
 #endif
         /// <summary>

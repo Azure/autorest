@@ -1,5 +1,5 @@
 {
-  "version": "2.1.2-*",
+  "version": "2.1.2-preview",
   "title": "Log4Net Logger for Microsoft AutoRest Generated Clients",
   "description": "Enables logging of event messages for AutoRest generated client libraries via Log4Net.",
   "copyright": "Copyright (c) Microsoft Corporation",
@@ -20,7 +20,7 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime":  { "target": "project" },
+    "Microsoft.Rest.ClientRuntime": "[2.3.2,3.0)",
     "log4net": "2.0.3"
   },
 
