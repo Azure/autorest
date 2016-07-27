@@ -46,7 +46,11 @@ public class Datetimerfc1123Wrapper {
      * @return the Datetimerfc1123Wrapper object itself.
      */
     public Datetimerfc1123Wrapper withField(DateTime field) {
-        this.field = new DateTimeRfc1123(field);
+        if (field == null) {
+            this.field = null;
+        } else {
+            this.field = new DateTimeRfc1123(field);
+        }
         return this;
     }
 
@@ -69,7 +73,11 @@ public class Datetimerfc1123Wrapper {
      * @return the Datetimerfc1123Wrapper object itself.
      */
     public Datetimerfc1123Wrapper withNow(DateTime now) {
-        this.now = new DateTimeRfc1123(now);
+        if (now == null) {
+            this.now = null;
+        } else {
+            this.now = new DateTimeRfc1123(now);
+        }
         return this;
     }
 
