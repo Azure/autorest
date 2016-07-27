@@ -271,16 +271,16 @@ namespace AutoRest.CSharp
                     break;
                 case KnownPrimaryType.String:
                     switch (KnownFormatExtensions.Parse( primaryType.Format ) )
-            {
+                    {
                         case KnownFormat.@char:
                             primaryType.Name = "char";
                             break;
 
                         default:
-                primaryType.Name = "string";
+                            primaryType.Name = "string";
                             break;
-            }
-                    
+                    }
+
                     break;
                 case KnownPrimaryType.TimeSpan:
                 primaryType.Name = "System.TimeSpan";
@@ -309,7 +309,7 @@ namespace AutoRest.CSharp
             {
                 return new PrimaryType(KnownPrimaryType.String)
                 {
-                    Name = "System.String"
+                    Name = "string"
                 };
             }
             return NormalizeTypeDeclaration(type);
@@ -323,6 +323,15 @@ namespace AutoRest.CSharp
             {
                 property.Name = GetPropertyName(property.GetClientName());
                 property.Type = NormalizeTypeReference(property.Type);
+            }
+
+            if (compositeType.BaseModelType != null)
+            {
+                foreach (var property in compositeType.BaseModelType.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                }
             }
 
             return compositeType;
@@ -358,11 +367,11 @@ namespace AutoRest.CSharp
             dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             if (dictionaryType.ValueType.IsValueType())
             {
-                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<System.String, {0}?>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}?>";
             }
             else
             {
-                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<System.String, {0}>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}>";
             }
             return dictionaryType;
         }
