@@ -146,6 +146,17 @@ namespace AutoRest.Java.Azure.TemplateModels
             get
             {
                 var declaration = base.MethodParameterApiDeclaration;
+                foreach (var parameter in RetrofitParameters.Where(p => 
+                    p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
+                {
+                    if (parameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension) &&
+                        (bool) parameter.Extensions[AzureExtensions.SkipUrlEncodingExtension] == true)
+                    {
+                        declaration = declaration.Replace(
+                            string.Format(CultureInfo.InvariantCulture, "@{0}(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
+                            string.Format(CultureInfo.InvariantCulture, "@{0}(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
+                    }
+                }
                 if (IsPagingNextOperation)
                 {
                     declaration = declaration.Replace("@Path(\"nextLink\")", "@Url");
@@ -633,7 +644,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                 if (this.IsPagingNextOperation)
                 {
                     imports.Remove("retrofit2.http.Path");
-                    imports.Add("retrofit2.http.Url");
                 }
                 if (this.IsPagingNonPollingOperation)
                 {

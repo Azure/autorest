@@ -37,7 +37,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
-import retrofit2.http.Url;
 import retrofit2.Response;
 
 /**
@@ -103,40 +102,40 @@ public final class PagingsImpl implements Pagings {
         Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getSinglePagesNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getSinglePagesNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getOdataMultiplePagesNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getOdataMultiplePagesNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesWithOffsetNext(@Url String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesWithOffsetNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesRetryFirstNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesRetrySecondNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getSinglePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getSinglePagesFailureNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesFailureNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesFailureNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
-        @GET
-        Call<ResponseBody> getMultiplePagesFailureUriNext(@Url String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @GET("{nextLink}")
+        Call<ResponseBody> getMultiplePagesFailureUriNext(@Path(value = "nextLink", encoded = true) String nextPageLink, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 

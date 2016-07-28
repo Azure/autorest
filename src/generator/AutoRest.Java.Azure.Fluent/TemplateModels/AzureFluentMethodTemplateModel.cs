@@ -126,7 +126,6 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                 if (this.IsPagingNextOperation)
                 {
                     imports.Remove("retrofit2.http.Path");
-                    imports.Add("retrofit2.http.Url");
                 }
                 if (this.IsPagingNonPollingOperation)
                 {
