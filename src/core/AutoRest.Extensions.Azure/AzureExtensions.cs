@@ -364,6 +364,8 @@ namespace AutoRest.Extensions.Azure
                         if (nextLinkMethod != null)
                         {
                             nextLinkMethod.Extensions["nextLinkMethod"] = true;
+                            method.Extensions["nextMethodName"] = nextLinkMethod.Name;
+                            method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
                         }
                     }
 

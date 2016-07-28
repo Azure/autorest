@@ -56,31 +56,31 @@ public final class SkipUrlEncodingsInner {
     interface SkipUrlEncodingsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getMethodPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getPathPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
-        Call<ResponseBody> getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getSwaggerPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
-        Call<ResponseBody> getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getMethodQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/method/query/null")
-        Call<ResponseBody> getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getMethodQueryNull(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
-        Call<ResponseBody> getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getPathQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
-        Call<ResponseBody> getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Call<ResponseBody> getSwaggerQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
