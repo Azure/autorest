@@ -20,7 +20,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the ApiResponse class.
         /// </summary>
-        public ApiResponse(System.Int32? code = default(System.Int32?), System.String type = default(System.String), System.String message = default(System.String))
+        public ApiResponse(int? code = default(int?), string type = default(string), string message = default(string))
         {
             Code = code;
             Type = type;
@@ -30,17 +30,17 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32? Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
-        public System.String Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

@@ -34,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to zero</param>
-        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(System.String azureAsyncOperation = default(System.String), System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
+        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
@@ -46,21 +46,21 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public System.String AzureAsyncOperation { get; set; }
+        public string AzureAsyncOperation { get; set; }
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to zero
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
-        public System.Int32? RetryAfter { get; set; }
+        public int? RetryAfter { get; set; }
 
     }
 }

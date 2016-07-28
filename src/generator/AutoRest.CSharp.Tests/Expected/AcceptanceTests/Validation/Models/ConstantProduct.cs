@@ -33,13 +33,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Constant string
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constProperty")]
-        public static System.String ConstProperty { get; private set; }
+        public static string ConstProperty { get; private set; }
 
         /// <summary>
         /// Constant string2
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constProperty2")]
-        public static System.String ConstProperty2 { get; private set; }
+        public static string ConstProperty2 { get; private set; }
 
     }
 }

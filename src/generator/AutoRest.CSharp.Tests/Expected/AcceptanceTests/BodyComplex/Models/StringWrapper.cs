@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the StringWrapper class.
         /// </summary>
-        public StringWrapper(System.String field = default(System.String), System.String empty = default(System.String), System.String nullProperty = default(System.String))
+        public StringWrapper(string field = default(string), string empty = default(string), string nullProperty = default(string))
         {
             Field = field;
             Empty = empty;
@@ -30,17 +30,17 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
-        public System.String Field { get; set; }
+        public string Field { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "empty")]
-        public System.String Empty { get; set; }
+        public string Empty { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "null")]
-        public System.String NullProperty { get; set; }
+        public string NullProperty { get; set; }
 
     }
 }

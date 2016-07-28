@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.String> Get300(this IHttpRedirects operations)
+            public static System.Collections.Generic.IList<string> Get300(this IHttpRedirects operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Get300Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -64,7 +64,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.String>> Get300Async(this IHttpRedirects operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<string>> Get300Async(this IHttpRedirects operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -139,7 +139,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPut301Headers Put301(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPut301Headers Put301(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Put301Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -158,7 +158,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPut301Headers> Put301Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPut301Headers> Put301Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Put301WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -233,7 +233,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPatch302Headers Patch302(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPatch302Headers Patch302(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Patch302Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -252,7 +252,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPatch302Headers> Patch302Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPatch302Headers> Patch302Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Patch302WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -271,7 +271,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPost303Headers Post303(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPost303Headers Post303(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Post303Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -290,7 +290,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPost303Headers> Post303Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPost303Headers> Post303Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Post303WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -363,7 +363,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPut307Headers Put307(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPut307Headers Put307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Put307Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -380,7 +380,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPut307Headers> Put307Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPut307Headers> Put307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Put307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -397,7 +397,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPatch307Headers Patch307(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPatch307Headers Patch307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Patch307Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -414,7 +414,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPatch307Headers> Patch307Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPatch307Headers> Patch307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Patch307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -431,7 +431,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsPost307Headers Post307(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsPost307Headers Post307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Post307Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -448,7 +448,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsPost307Headers> Post307Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsPost307Headers> Post307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Post307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -465,7 +465,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static HttpRedirectsDelete307Headers Delete307(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static HttpRedirectsDelete307Headers Delete307(this IHttpRedirects operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRedirects)s).Delete307Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -482,7 +482,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HttpRedirectsDelete307Headers> Delete307Async(this IHttpRedirects operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HttpRedirectsDelete307Headers> Delete307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Delete307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {

@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean? GetTrue(this IBoolModel operations)
+            public static bool? GetTrue(this IBoolModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetTrueAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean?> GetTrueAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetTrueAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             /// <param name='boolBody'>
             /// </param>
-            public static void PutTrue(this IBoolModel operations, System.Boolean boolBody)
+            public static void PutTrue(this IBoolModel operations, bool boolBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).PutTrueAsync(boolBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -68,7 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutTrueAsync(this IBoolModel operations, System.Boolean boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutTrueAsync(this IBoolModel operations, bool boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -79,7 +79,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean? GetFalse(this IBoolModel operations)
+            public static bool? GetFalse(this IBoolModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetFalseAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -93,7 +93,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean?> GetFalseAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetFalseAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             /// <param name='boolBody'>
             /// </param>
-            public static void PutFalse(this IBoolModel operations, System.Boolean boolBody)
+            public static void PutFalse(this IBoolModel operations, bool boolBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).PutFalseAsync(boolBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -125,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutFalseAsync(this IBoolModel operations, System.Boolean boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutFalseAsync(this IBoolModel operations, bool boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -136,7 +136,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean? GetNull(this IBoolModel operations)
+            public static bool? GetNull(this IBoolModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -150,7 +150,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean?> GetNullAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetNullAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -164,7 +164,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean? GetInvalid(this IBoolModel operations)
+            public static bool? GetInvalid(this IBoolModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean?> GetInvalidAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetInvalidAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

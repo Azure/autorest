@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.IO.Stream>> UploadFileWithHttpMessagesAsync(System.IO.Stream fileContent, System.String fileName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.IO.Stream>> UploadFileWithHttpMessagesAsync(System.IO.Stream fileContent, string fileName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (fileContent == null)
             {

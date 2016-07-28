@@ -34,17 +34,17 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <summary>
         /// number of items to skip
         /// </summary>
-        public System.String RequiredGlobalPath { get; set; }
+        public string RequiredGlobalPath { get; set; }
 
         /// <summary>
         /// number of items to skip
         /// </summary>
-        public System.String RequiredGlobalQuery { get; set; }
+        public string RequiredGlobalQuery { get; set; }
 
         /// <summary>
         /// number of items to skip
         /// </summary>
-        public System.Int32? OptionalGlobalQuery { get; set; }
+        public int? OptionalGlobalQuery { get; set; }
 
         /// <summary>
         /// Gets the IImplicitModel.

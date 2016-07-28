@@ -23,7 +23,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IDictionary<System.String, System.Int32?> GetReport(this IAutoRestReportServiceForAzure operations)
+            public static System.Collections.Generic.IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestReportServiceForAzure)s).GetReportAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -37,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<System.String, System.Int32?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetNull(this INumber operations)
+            public static double? GetNull(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetNullAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetNullAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetInvalidFloat(this INumber operations)
+            public static double? GetInvalidFloat(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetInvalidFloatAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -64,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetInvalidFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetInvalidFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetInvalidDouble(this INumber operations)
+            public static double? GetInvalidDouble(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetInvalidDoubleAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetInvalidDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetInvalidDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -106,7 +106,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Decimal? GetInvalidDecimal(this INumber operations)
+            public static decimal? GetInvalidDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetInvalidDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -120,7 +120,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Decimal?> GetInvalidDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<decimal?> GetInvalidDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -136,7 +136,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigFloat(this INumber operations, System.Double numberBody)
+            public static void PutBigFloat(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigFloatAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigFloatAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigFloatAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -163,7 +163,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetBigFloat(this INumber operations)
+            public static double? GetBigFloat(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigFloatAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetBigFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetBigFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -193,7 +193,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDouble(this INumber operations, System.Double numberBody)
+            public static void PutBigDouble(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -209,7 +209,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDoubleAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDoubleAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetBigDouble(this INumber operations)
+            public static double? GetBigDouble(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDoubleAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -234,7 +234,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetBigDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetBigDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -250,7 +250,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDoublePositiveDecimal(this INumber operations, System.Double numberBody)
+            public static void PutBigDoublePositiveDecimal(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDoublePositiveDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -266,7 +266,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDoublePositiveDecimalAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDoublePositiveDecimalAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -277,7 +277,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetBigDoublePositiveDecimal(this INumber operations)
+            public static double? GetBigDoublePositiveDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDoublePositiveDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -291,7 +291,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetBigDoublePositiveDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetBigDoublePositiveDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDoublePositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -307,7 +307,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDoubleNegativeDecimal(this INumber operations, System.Double numberBody)
+            public static void PutBigDoubleNegativeDecimal(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleNegativeDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -323,7 +323,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDoubleNegativeDecimalAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDoubleNegativeDecimalAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -334,7 +334,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetBigDoubleNegativeDecimal(this INumber operations)
+            public static double? GetBigDoubleNegativeDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDoubleNegativeDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -348,7 +348,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetBigDoubleNegativeDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetBigDoubleNegativeDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDoubleNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -364,7 +364,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimal(this INumber operations, System.Decimal numberBody)
+            public static void PutBigDecimal(this INumber operations, decimal numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -380,7 +380,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDecimalAsync(this INumber operations, System.Decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDecimalAsync(this INumber operations, decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -391,7 +391,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Decimal? GetBigDecimal(this INumber operations)
+            public static decimal? GetBigDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -405,7 +405,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Decimal?> GetBigDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<decimal?> GetBigDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -421,7 +421,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimalPositiveDecimal(this INumber operations, System.Decimal numberBody)
+            public static void PutBigDecimalPositiveDecimal(this INumber operations, decimal numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalPositiveDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -437,7 +437,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDecimalPositiveDecimalAsync(this INumber operations, System.Decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDecimalPositiveDecimalAsync(this INumber operations, decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -448,7 +448,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Decimal? GetBigDecimalPositiveDecimal(this INumber operations)
+            public static decimal? GetBigDecimalPositiveDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalPositiveDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -462,7 +462,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Decimal?> GetBigDecimalPositiveDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<decimal?> GetBigDecimalPositiveDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalPositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -478,7 +478,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimalNegativeDecimal(this INumber operations, System.Decimal numberBody)
+            public static void PutBigDecimalNegativeDecimal(this INumber operations, decimal numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalNegativeDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -494,7 +494,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBigDecimalNegativeDecimalAsync(this INumber operations, System.Decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBigDecimalNegativeDecimalAsync(this INumber operations, decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -505,7 +505,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Decimal? GetBigDecimalNegativeDecimal(this INumber operations)
+            public static decimal? GetBigDecimalNegativeDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetBigDecimalNegativeDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -519,7 +519,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Decimal?> GetBigDecimalNegativeDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<decimal?> GetBigDecimalNegativeDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -535,7 +535,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallFloat(this INumber operations, System.Double numberBody)
+            public static void PutSmallFloat(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutSmallFloatAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -551,7 +551,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutSmallFloatAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutSmallFloatAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutSmallFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -562,7 +562,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetSmallFloat(this INumber operations)
+            public static double? GetSmallFloat(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetSmallFloatAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -576,7 +576,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetSmallFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetSmallFloatAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSmallFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -592,7 +592,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallDouble(this INumber operations, System.Double numberBody)
+            public static void PutSmallDouble(this INumber operations, double numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutSmallDoubleAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -608,7 +608,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutSmallDoubleAsync(this INumber operations, System.Double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutSmallDoubleAsync(this INumber operations, double numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutSmallDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -619,7 +619,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Double? GetSmallDouble(this INumber operations)
+            public static double? GetSmallDouble(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetSmallDoubleAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -633,7 +633,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Double?> GetSmallDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<double?> GetSmallDoubleAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSmallDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -649,7 +649,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallDecimal(this INumber operations, System.Decimal numberBody)
+            public static void PutSmallDecimal(this INumber operations, decimal numberBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).PutSmallDecimalAsync(numberBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -665,7 +665,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutSmallDecimalAsync(this INumber operations, System.Decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutSmallDecimalAsync(this INumber operations, decimal numberBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutSmallDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -676,7 +676,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Decimal? GetSmallDecimal(this INumber operations)
+            public static decimal? GetSmallDecimal(this INumber operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((INumber)s).GetSmallDecimalAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -690,7 +690,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Decimal?> GetSmallDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<decimal?> GetSmallDecimalAsync(this INumber operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSmallDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

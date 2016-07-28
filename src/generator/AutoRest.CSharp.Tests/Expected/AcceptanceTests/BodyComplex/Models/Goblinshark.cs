@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark(System.Double length, System.DateTime birthday, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), System.Int32? age = default(System.Int32?), System.Int32? jawsize = default(System.Int32?))
+        public Goblinshark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
             : base(length, birthday, species, siblings, age)
         {
             Jawsize = jawsize;
@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "jawsize")]
-        public System.Int32? Jawsize { get; set; }
+        public int? Jawsize { get; set; }
 
         /// <summary>
         /// Validate the object.

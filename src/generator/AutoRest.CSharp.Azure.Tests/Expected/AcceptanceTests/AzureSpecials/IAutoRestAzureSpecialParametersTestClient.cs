@@ -40,30 +40,30 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// The subscription id, which appears in the path, always modeled in
         /// credentials. The value is always '1234-5678-9012-3456'
         /// </summary>
-        System.String SubscriptionId { get; set; }
+        string SubscriptionId { get; set; }
 
         /// <summary>
         /// The api version, which appears in the query, the value is always
         /// '2015-07-01-preview'
         /// </summary>
-        System.String ApiVersion { get; }
+        string ApiVersion { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        System.String AcceptLanguage { get; set; }
+        string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running
         /// Operations. Default value is 30.
         /// </summary>
-        System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is
         /// generated and included in each request. Default is true.
         /// </summary>
-        System.Boolean? GenerateClientRequestId { get; set; }
+        bool? GenerateClientRequestId { get; set; }
 
 
         /// <summary>

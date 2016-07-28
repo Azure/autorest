@@ -34,12 +34,12 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <summary>
         /// A string value 'globalItemStringPath' that appears in the path
         /// </summary>
-        public System.String GlobalStringPath { get; set; }
+        public string GlobalStringPath { get; set; }
 
         /// <summary>
         /// should contain value null
         /// </summary>
-        public System.String GlobalStringQuery { get; set; }
+        public string GlobalStringQuery { get; set; }
 
         /// <summary>
         /// Gets the IPaths.

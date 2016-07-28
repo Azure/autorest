@@ -20,7 +20,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the Feature class.
         /// </summary>
-        public Feature(System.String foo = default(System.String), System.Int32? bar = default(System.Int32?))
+        public Feature(string foo = default(string), int? bar = default(int?))
         {
             Foo = foo;
             Bar = bar;
@@ -29,12 +29,12 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "foo")]
-        public System.String Foo { get; set; }
+        public string Foo { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "bar")]
-        public System.Int32? Bar { get; set; }
+        public int? Bar { get; set; }
 
     }
 }

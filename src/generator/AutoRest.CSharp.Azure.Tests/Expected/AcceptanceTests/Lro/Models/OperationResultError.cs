@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         /// <param name="code">The error code for an operation failure</param>
         /// <param name="message">The detailed arror message</param>
-        public OperationResultError(System.Int32? code = default(System.Int32?), System.String message = default(System.String))
+        public OperationResultError(int? code = default(int?), string message = default(string))
         {
             Code = code;
             Message = message;
@@ -32,13 +32,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets the error code for an operation failure
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32? Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// Gets or sets the detailed arror message
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

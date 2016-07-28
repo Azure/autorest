@@ -181,7 +181,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutValidWithHttpMessagesAsync(System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutValidWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             DictionaryWrapper complexBody = new DictionaryWrapper();
             if (defaultProgram != null)
@@ -424,7 +424,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutEmptyWithHttpMessagesAsync(System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutEmptyWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             DictionaryWrapper complexBody = new DictionaryWrapper();
             if (defaultProgram != null)

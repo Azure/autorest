@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Initializes a new instance of the ChildProduct class.
         /// </summary>
         /// <param name="count">Count</param>
-        public ChildProduct(System.Int32? count = default(System.Int32?))
+        public ChildProduct(int? count = default(int?))
         {
             Count = count;
         }
@@ -40,13 +40,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Gets or sets count
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "count")]
-        public System.Int32? Count { get; set; }
+        public int? Count { get; set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constProperty")]
-        public static System.String ConstProperty { get; private set; }
+        public static string ConstProperty { get; private set; }
 
     }
 }

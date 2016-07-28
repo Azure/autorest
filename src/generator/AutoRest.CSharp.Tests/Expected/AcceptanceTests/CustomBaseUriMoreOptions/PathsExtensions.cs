@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             /// <param name='keyVersion'>
             /// The key version. Default value 'v1'.
             /// </param>
-            public static void GetEmpty(this IPaths operations, System.String vault, System.String secret, System.String keyName, System.String keyVersion = "v1")
+            public static void GetEmpty(this IPaths operations, string vault, string secret, string keyName, string keyVersion = "v1")
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).GetEmptyAsync(vault, secret, keyName, keyVersion), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -60,7 +60,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetEmptyAsync(this IPaths operations, System.String vault, System.String secret, System.String keyName, System.String keyVersion = "v1", System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetEmptyAsync(this IPaths operations, string vault, string secret, string keyName, string keyVersion = "v1", System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetEmptyWithHttpMessagesAsync(vault, secret, keyName, keyVersion, null, cancellationToken).ConfigureAwait(false);
             }

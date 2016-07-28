@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// </summary>
         /// <param name="location">Location to poll for result status: will be
         /// set to /lro/put/noheader/202/204/operationresults</param>
-        public LROsDeleteAsyncNoHeaderInRetryHeaders(System.String location = default(System.String))
+        public LROsDeleteAsyncNoHeaderInRetryHeaders(string location = default(string))
         {
             Location = location;
         }
@@ -37,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /lro/put/noheader/202/204/operationresults
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// ParameterGroupingPostOptionalParameters class.
         /// </summary>
         /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostOptionalParameters(System.String customHeader = default(System.String), System.Int32? query = default(System.Int32?))
+        public ParameterGroupingPostOptionalParameters(string customHeader = default(string), int? query = default(int?))
         {
             CustomHeader = customHeader;
             Query = query;
@@ -35,13 +35,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String CustomHeader { get; set; }
+        public string CustomHeader { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? Query { get; set; }
+        public int? Query { get; set; }
 
     }
 }

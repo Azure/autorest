@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         /// Initializes a new instance of the RefColorConstant class.
         /// </summary>
         /// <param name="field1">Sample string.</param>
-        public RefColorConstant(System.String field1 = default(System.String))
+        public RefColorConstant(string field1 = default(string))
         {
             Field1 = field1;
         }
@@ -37,13 +37,13 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         /// Gets or sets sample string.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
-        public System.String Field1 { get; set; }
+        public string Field1 { get; set; }
 
         /// <summary>
         /// Referenced Color Constant Description.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "ColorConstant")]
-        public static System.String ColorConstant { get; private set; }
+        public static string ColorConstant { get; private set; }
 
     }
 }

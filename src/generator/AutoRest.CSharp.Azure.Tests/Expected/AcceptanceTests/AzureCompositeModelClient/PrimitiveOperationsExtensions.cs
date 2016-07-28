@@ -645,7 +645,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             /// <param name='field'>
             /// </param>
-            public static void PutByte(this IPrimitiveOperations operations, System.Byte[] field = default(System.Byte[]))
+            public static void PutByte(this IPrimitiveOperations operations, byte[] field = default(byte[]))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitiveOperations)s).PutByteAsync(field), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -661,7 +661,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutByteAsync(this IPrimitiveOperations operations, System.Byte[] field = default(System.Byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutByteAsync(this IPrimitiveOperations operations, byte[] field = default(byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }

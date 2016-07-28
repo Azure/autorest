@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// This should appear as a method parameter, use value null, this should
             /// result in no serialized parameter
             /// </param>
-            public static void GetMethodLocalNull(this IApiVersionLocalOperations operations, System.String apiVersion = default(System.String))
+            public static void GetMethodLocalNull(this IApiVersionLocalOperations operations, string apiVersion = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetMethodLocalNullAsync(apiVersion), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodLocalNullAsync(this IApiVersionLocalOperations operations, System.String apiVersion = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetMethodLocalNullAsync(this IApiVersionLocalOperations operations, string apiVersion = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetMethodLocalNullWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
             }

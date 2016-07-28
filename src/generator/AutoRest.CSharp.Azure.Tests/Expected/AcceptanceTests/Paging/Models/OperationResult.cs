@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
         /// 'Creating', 'Created', 'Updating', 'Updated', 'Deleting',
         /// 'Deleted', 'OK'</param>
-        public OperationResult(System.String status = default(System.String))
+        public OperationResult(string status = default(string))
         {
             Status = status;
         }
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.String Status { get; set; }
+        public string Status { get; set; }
 
     }
 }

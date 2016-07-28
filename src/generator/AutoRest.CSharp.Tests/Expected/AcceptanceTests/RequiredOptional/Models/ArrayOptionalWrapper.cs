@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the ArrayOptionalWrapper class.
         /// </summary>
-        public ArrayOptionalWrapper(System.Collections.Generic.IList<System.String> value = default(System.Collections.Generic.IList<System.String>))
+        public ArrayOptionalWrapper(System.Collections.Generic.IList<string> value = default(System.Collections.Generic.IList<string>))
         {
             Value = value;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Collections.Generic.IList<System.String> Value { get; set; }
+        public System.Collections.Generic.IList<string> Value { get; set; }
 
     }
 }

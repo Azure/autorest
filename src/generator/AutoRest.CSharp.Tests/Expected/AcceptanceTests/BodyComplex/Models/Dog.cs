@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Dog class.
         /// </summary>
-        public Dog(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String food = default(System.String))
+        public Dog(int? id = default(int?), string name = default(string), string food = default(string))
             : base(id, name)
         {
             Food = food;
@@ -29,7 +29,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "food")]
-        public System.String Food { get; set; }
+        public string Food { get; set; }
 
     }
 }

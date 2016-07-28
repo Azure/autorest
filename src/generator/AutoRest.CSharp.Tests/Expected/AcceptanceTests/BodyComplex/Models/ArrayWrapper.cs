@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
         /// </summary>
-        public ArrayWrapper(System.Collections.Generic.IList<System.String> array = default(System.Collections.Generic.IList<System.String>))
+        public ArrayWrapper(System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>))
         {
             Array = array;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "array")]
-        public System.Collections.Generic.IList<System.String> Array { get; set; }
+        public System.Collections.Generic.IList<string> Array { get; set; }
 
     }
 }

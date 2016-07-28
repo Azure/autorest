@@ -29,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// set to /lro/retryerror/delete/202/retry/200</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to zero</param>
-        public LROSADsDeleteNonRetry400Headers(System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
+        public LROSADsDeleteNonRetry400Headers(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;
             RetryAfter = retryAfter;
@@ -40,14 +40,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /lro/retryerror/delete/202/retry/200
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to zero
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
-        public System.Int32? RetryAfter { get; set; }
+        public int? RetryAfter { get; set; }
 
     }
 }

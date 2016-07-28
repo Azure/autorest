@@ -30,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <param name="timeout">Sets the maximum time that the server can
         /// spend processing the request, in seconds. The default is 30
         /// seconds.</param>
-        public PagingGetOdataMultiplePagesOptions(System.Int32? maxresults = default(System.Int32?), System.Int32? timeout = default(System.Int32?))
+        public PagingGetOdataMultiplePagesOptions(int? maxresults = default(int?), int? timeout = default(int?))
         {
             Maxresults = maxresults;
             Timeout = timeout;
@@ -41,14 +41,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// response.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? Maxresults { get; set; }
+        public int? Maxresults { get; set; }
 
         /// <summary>
         /// Gets or sets sets the maximum time that the server can spend
         /// processing the request, in seconds. The default is 30 seconds.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? Timeout { get; set; }
+        public int? Timeout { get; set; }
 
     }
 }

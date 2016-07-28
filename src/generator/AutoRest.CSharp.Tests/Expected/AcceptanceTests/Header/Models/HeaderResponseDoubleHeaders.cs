@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 7e120 or
         /// -3.0</param>
-        public HeaderResponseDoubleHeaders(System.Double? value = default(System.Double?))
+        public HeaderResponseDoubleHeaders(double? value = default(double?))
         {
             Value = value;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "value": 7e120 or -3.0
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Double? Value { get; set; }
+        public double? Value { get; set; }
 
     }
 }

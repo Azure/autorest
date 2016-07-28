@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
         /// </summary>
         /// <param name="queryTwo">Query parameter with default</param>
-        public ParameterGroupingPostMultiParamGroupsSecondParamGroup(System.String headerTwo = default(System.String), System.Int32? queryTwo = default(System.Int32?))
+        public ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo = default(string), int? queryTwo = default(int?))
         {
             HeaderTwo = headerTwo;
             QueryTwo = queryTwo;
@@ -36,13 +36,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String HeaderTwo { get; set; }
+        public string HeaderTwo { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? QueryTwo { get; set; }
+        public int? QueryTwo { get; set; }
 
     }
 }

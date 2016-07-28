@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Sku class.
         /// </summary>
-        public Sku(System.String name = default(System.String), System.String id = default(System.String))
+        public Sku(string name = default(string), string id = default(string))
         {
             Name = name;
             Id = id;
@@ -29,12 +29,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.String Id { get; set; }
+        public string Id { get; set; }
 
     }
 }

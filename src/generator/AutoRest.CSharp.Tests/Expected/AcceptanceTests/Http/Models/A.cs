@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the A class.
         /// </summary>
-        public A(System.String statusCode = default(System.String))
+        public A(string statusCode = default(string))
         {
             StatusCode = statusCode;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "statusCode")]
-        public System.String StatusCode { get; set; }
+        public string StatusCode { get; set; }
 
     }
 }

@@ -22,7 +22,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// </summary>
         /// <param name="status">pet status in the store. Possible values
         /// include: 'available', 'pending', 'sold'</param>
-        public Pet(System.String name, System.Collections.Generic.IList<System.String> photoUrls, System.Int64? id = default(System.Int64?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), System.Byte[] sByteProperty = default(System.Byte[]), System.DateTime? birthday = default(System.DateTime?), System.Collections.Generic.IDictionary<System.String, Category> dictionary = default(System.Collections.Generic.IDictionary<System.String, Category>), System.String status = default(System.String))
+        public Pet(string name, System.Collections.Generic.IList<string> photoUrls, long? id = default(long?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), byte[] sByteProperty = default(byte[]), System.DateTime? birthday = default(System.DateTime?), System.Collections.Generic.IDictionary<string, Category> dictionary = default(System.Collections.Generic.IDictionary<string, Category>), string status = default(string))
         {
             Id = id;
             Category = category;
@@ -38,7 +38,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64? Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
@@ -48,12 +48,12 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "photoUrls")]
-        public System.Collections.Generic.IList<System.String> PhotoUrls { get; set; }
+        public System.Collections.Generic.IList<string> PhotoUrls { get; set; }
 
         /// <summary>
         /// </summary>
@@ -63,7 +63,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "sByte")]
-        public System.Byte[] SByteProperty { get; set; }
+        public byte[] SByteProperty { get; set; }
 
         /// <summary>
         /// </summary>
@@ -73,14 +73,14 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "dictionary")]
-        public System.Collections.Generic.IDictionary<System.String, Category> Dictionary { get; set; }
+        public System.Collections.Generic.IDictionary<string, Category> Dictionary { get; set; }
 
         /// <summary>
         /// Gets or sets pet status in the store. Possible values include:
         /// 'available', 'pending', 'sold'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.String Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Validate the object.

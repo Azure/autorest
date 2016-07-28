@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <param name="image">Image URL representing the product.</param>
         /// <param name="constStringAsEnum">Constant string as Enum. Possible
         /// values include: 'constant_string_as_enum'</param>
-        public Product(ChildProduct child, System.Collections.Generic.IList<System.String> displayNames = default(System.Collections.Generic.IList<System.String>), System.Int32? capacity = default(System.Int32?), System.String image = default(System.String), EnumConst? constStringAsEnum = default(EnumConst?))
+        public Product(ChildProduct child, System.Collections.Generic.IList<string> displayNames = default(System.Collections.Generic.IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
             Child = new ChildProduct();
             DisplayNames = displayNames;
@@ -57,19 +57,19 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// elements.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "display_names")]
-        public System.Collections.Generic.IList<System.String> DisplayNames { get; set; }
+        public System.Collections.Generic.IList<string> DisplayNames { get; set; }
 
         /// <summary>
         /// Gets or sets non required int betwen 0 and 100 exclusive.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "capacity")]
-        public System.Int32? Capacity { get; set; }
+        public int? Capacity { get; set; }
 
         /// <summary>
         /// Gets or sets image URL representing the product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "image")]
-        public System.String Image { get; set; }
+        public string Image { get; set; }
 
         /// <summary>
         /// </summary>
@@ -92,13 +92,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Constant int
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constInt")]
-        public static System.Int32 ConstInt { get; private set; }
+        public static int ConstInt { get; private set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constString")]
-        public static System.String ConstString { get; private set; }
+        public static string ConstString { get; private set; }
 
         /// <summary>
         /// Validate the object.

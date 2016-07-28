@@ -39,6 +39,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> UpdateWithHttpMessagesAsync(System.String resourceGroupName, System.String avset, System.Collections.Generic.IDictionary<System.String, System.String> tags, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> UpdateWithHttpMessagesAsync(string resourceGroupName, string avset, System.Collections.Generic.IDictionary<string, string> tags, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

@@ -644,7 +644,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='field'>
             /// </param>
-            public static void PutByte(this IPrimitive operations, System.Byte[] field = default(System.Byte[]))
+            public static void PutByte(this IPrimitive operations, byte[] field = default(byte[]))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPrimitive)s).PutByteAsync(field), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -660,7 +660,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutByteAsync(this IPrimitive operations, System.Byte[] field = default(System.Byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutByteAsync(this IPrimitive operations, byte[] field = default(byte[]), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }

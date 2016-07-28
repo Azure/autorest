@@ -210,7 +210,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> array = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             ArrayWrapper complexBody = new ArrayWrapper();
             if (array != null)
@@ -507,7 +507,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> array = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             ArrayWrapper complexBody = new ArrayWrapper();
             if (array != null)

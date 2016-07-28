@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetNull(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetInvalid(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetInvalid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -64,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetInvalidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetInvalidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetEmpty(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetEmpty(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -108,7 +108,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutEmpty(this IArray operations, System.Collections.Generic.IList<System.String> arrayBody)
+            public static void PutEmpty(this IArray operations, System.Collections.Generic.IList<string> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutEmptyAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutEmptyAsync(this IArray operations, System.Collections.Generic.IList<System.String> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutEmptyAsync(this IArray operations, System.Collections.Generic.IList<string> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -135,7 +135,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Boolean?> GetBooleanTfft(this IArray operations)
+            public static System.Collections.Generic.IList<bool?> GetBooleanTfft(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetBooleanTfftAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -149,7 +149,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Boolean?>> GetBooleanTfftAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<bool?>> GetBooleanTfftAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -165,7 +165,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutBooleanTfft(this IArray operations, System.Collections.Generic.IList<System.Boolean?> arrayBody)
+            public static void PutBooleanTfft(this IArray operations, System.Collections.Generic.IList<bool?> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutBooleanTfftAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -181,7 +181,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutBooleanTfftAsync(this IArray operations, System.Collections.Generic.IList<System.Boolean?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutBooleanTfftAsync(this IArray operations, System.Collections.Generic.IList<bool?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutBooleanTfftWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -192,7 +192,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Boolean?> GetBooleanInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<bool?> GetBooleanInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetBooleanInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -206,7 +206,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Boolean?>> GetBooleanInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<bool?>> GetBooleanInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Boolean?> GetBooleanInvalidString(this IArray operations)
+            public static System.Collections.Generic.IList<bool?> GetBooleanInvalidString(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetBooleanInvalidStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -234,7 +234,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Boolean?>> GetBooleanInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<bool?>> GetBooleanInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -248,7 +248,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetIntegerValid(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetIntegerValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetIntegerValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -262,7 +262,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetIntegerValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetIntegerValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -278,7 +278,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutIntegerValid(this IArray operations, System.Collections.Generic.IList<System.Int32?> arrayBody)
+            public static void PutIntegerValid(this IArray operations, System.Collections.Generic.IList<int?> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutIntegerValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -294,7 +294,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutIntegerValidAsync(this IArray operations, System.Collections.Generic.IList<System.Int32?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutIntegerValidAsync(this IArray operations, System.Collections.Generic.IList<int?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutIntegerValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -305,7 +305,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetIntInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetIntInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetIntInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -319,7 +319,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetIntInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetIntInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -333,7 +333,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> GetIntInvalidString(this IArray operations)
+            public static System.Collections.Generic.IList<int?> GetIntInvalidString(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetIntInvalidStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -347,7 +347,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> GetIntInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> GetIntInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -361,7 +361,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int64?> GetLongValid(this IArray operations)
+            public static System.Collections.Generic.IList<long?> GetLongValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetLongValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -375,7 +375,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int64?>> GetLongValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<long?>> GetLongValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -391,7 +391,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutLongValid(this IArray operations, System.Collections.Generic.IList<System.Int64?> arrayBody)
+            public static void PutLongValid(this IArray operations, System.Collections.Generic.IList<long?> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutLongValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -407,7 +407,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutLongValidAsync(this IArray operations, System.Collections.Generic.IList<System.Int64?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutLongValidAsync(this IArray operations, System.Collections.Generic.IList<long?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutLongValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -418,7 +418,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int64?> GetLongInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<long?> GetLongInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetLongInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -432,7 +432,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int64?>> GetLongInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<long?>> GetLongInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -446,7 +446,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Int64?> GetLongInvalidString(this IArray operations)
+            public static System.Collections.Generic.IList<long?> GetLongInvalidString(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetLongInvalidStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -460,7 +460,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int64?>> GetLongInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<long?>> GetLongInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -474,7 +474,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetFloatValid(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetFloatValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetFloatValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -488,7 +488,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetFloatValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetFloatValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -504,7 +504,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutFloatValid(this IArray operations, System.Collections.Generic.IList<System.Double?> arrayBody)
+            public static void PutFloatValid(this IArray operations, System.Collections.Generic.IList<double?> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutFloatValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -520,7 +520,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutFloatValidAsync(this IArray operations, System.Collections.Generic.IList<System.Double?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutFloatValidAsync(this IArray operations, System.Collections.Generic.IList<double?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutFloatValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -531,7 +531,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetFloatInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetFloatInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetFloatInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -545,7 +545,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetFloatInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetFloatInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -559,7 +559,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetFloatInvalidString(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetFloatInvalidString(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetFloatInvalidStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -573,7 +573,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetFloatInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetFloatInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -587,7 +587,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetDoubleValid(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetDoubleValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDoubleValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -601,7 +601,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetDoubleValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetDoubleValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -617,7 +617,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutDoubleValid(this IArray operations, System.Collections.Generic.IList<System.Double?> arrayBody)
+            public static void PutDoubleValid(this IArray operations, System.Collections.Generic.IList<double?> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutDoubleValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -633,7 +633,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDoubleValidAsync(this IArray operations, System.Collections.Generic.IList<System.Double?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutDoubleValidAsync(this IArray operations, System.Collections.Generic.IList<double?> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutDoubleValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -644,7 +644,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetDoubleInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetDoubleInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDoubleInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -658,7 +658,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetDoubleInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetDoubleInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -672,7 +672,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Double?> GetDoubleInvalidString(this IArray operations)
+            public static System.Collections.Generic.IList<double?> GetDoubleInvalidString(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDoubleInvalidStringAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -686,7 +686,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Double?>> GetDoubleInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<double?>> GetDoubleInvalidStringAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -700,7 +700,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.String> GetStringValid(this IArray operations)
+            public static System.Collections.Generic.IList<string> GetStringValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetStringValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -714,7 +714,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.String>> GetStringValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<string>> GetStringValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -730,7 +730,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutStringValid(this IArray operations, System.Collections.Generic.IList<System.String> arrayBody)
+            public static void PutStringValid(this IArray operations, System.Collections.Generic.IList<string> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutStringValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -746,7 +746,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutStringValidAsync(this IArray operations, System.Collections.Generic.IList<System.String> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutStringValidAsync(this IArray operations, System.Collections.Generic.IList<string> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutStringValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -757,7 +757,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.String> GetStringWithNull(this IArray operations)
+            public static System.Collections.Generic.IList<string> GetStringWithNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetStringWithNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -771,7 +771,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.String>> GetStringWithNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<string>> GetStringWithNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -785,7 +785,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.String> GetStringWithInvalid(this IArray operations)
+            public static System.Collections.Generic.IList<string> GetStringWithInvalid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetStringWithInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -799,7 +799,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.String>> GetStringWithInvalidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<string>> GetStringWithInvalidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1255,7 +1255,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Byte[]> GetByteValid(this IArray operations)
+            public static System.Collections.Generic.IList<byte[]> GetByteValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetByteValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1270,7 +1270,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Byte[]>> GetByteValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<byte[]>> GetByteValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1287,7 +1287,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutByteValid(this IArray operations, System.Collections.Generic.IList<System.Byte[]> arrayBody)
+            public static void PutByteValid(this IArray operations, System.Collections.Generic.IList<byte[]> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutByteValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1304,7 +1304,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutByteValidAsync(this IArray operations, System.Collections.Generic.IList<System.Byte[]> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutByteValidAsync(this IArray operations, System.Collections.Generic.IList<byte[]> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutByteValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -1316,7 +1316,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Byte[]> GetByteInvalidNull(this IArray operations)
+            public static System.Collections.Generic.IList<byte[]> GetByteInvalidNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetByteInvalidNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1331,7 +1331,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Byte[]>> GetByteInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<byte[]>> GetByteInvalidNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1346,7 +1346,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Byte[]> GetBase64Url(this IArray operations)
+            public static System.Collections.Generic.IList<byte[]> GetBase64Url(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetBase64UrlAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1361,7 +1361,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Byte[]>> GetBase64UrlAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<byte[]>> GetBase64UrlAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetBase64UrlWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1552,7 +1552,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> GetArrayNull(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IList<string>> GetArrayNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetArrayNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1566,7 +1566,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>>> GetArrayNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>> GetArrayNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1580,7 +1580,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> GetArrayEmpty(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IList<string>> GetArrayEmpty(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetArrayEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1594,7 +1594,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>>> GetArrayEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>> GetArrayEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1608,7 +1608,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> GetArrayItemNull(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IList<string>> GetArrayItemNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetArrayItemNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1622,7 +1622,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>>> GetArrayItemNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>> GetArrayItemNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1636,7 +1636,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> GetArrayItemEmpty(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IList<string>> GetArrayItemEmpty(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetArrayItemEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1650,7 +1650,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>>> GetArrayItemEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>> GetArrayItemEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1665,7 +1665,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> GetArrayValid(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IList<string>> GetArrayValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetArrayValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1680,7 +1680,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>>> GetArrayValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IList<string>>> GetArrayValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1697,7 +1697,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutArrayValid(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> arrayBody)
+            public static void PutArrayValid(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IList<string>> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutArrayValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1714,7 +1714,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutArrayValidAsync(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IList<System.String>> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutArrayValidAsync(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IList<string>> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutArrayValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -1725,7 +1725,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> GetDictionaryNull(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> GetDictionaryNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDictionaryNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1739,7 +1739,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>>> GetDictionaryNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>> GetDictionaryNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1753,7 +1753,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> GetDictionaryEmpty(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> GetDictionaryEmpty(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDictionaryEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1767,7 +1767,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>>> GetDictionaryEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>> GetDictionaryEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1783,7 +1783,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> GetDictionaryItemNull(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> GetDictionaryItemNull(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDictionaryItemNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1799,7 +1799,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>>> GetDictionaryItemNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>> GetDictionaryItemNullAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1815,7 +1815,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> GetDictionaryItemEmpty(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> GetDictionaryItemEmpty(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDictionaryItemEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1831,7 +1831,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>>> GetDictionaryItemEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>> GetDictionaryItemEmptyAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1847,7 +1847,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> GetDictionaryValid(this IArray operations)
+            public static System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> GetDictionaryValid(this IArray operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).GetDictionaryValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1863,7 +1863,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>>> GetDictionaryValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>>> GetDictionaryValidAsync(this IArray operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -1881,7 +1881,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             /// <param name='arrayBody'>
             /// </param>
-            public static void PutDictionaryValid(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> arrayBody)
+            public static void PutDictionaryValid(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> arrayBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IArray)s).PutDictionaryValidAsync(arrayBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1899,7 +1899,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDictionaryValidAsync(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, System.String>> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutDictionaryValidAsync(this IArray operations, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, string>> arrayBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutDictionaryValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
             }

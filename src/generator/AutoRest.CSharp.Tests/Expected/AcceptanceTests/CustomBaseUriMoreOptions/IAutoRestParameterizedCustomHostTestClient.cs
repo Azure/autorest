@@ -32,13 +32,13 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <summary>
         /// The subscription id with value 'test12'.
         /// </summary>
-        System.String SubscriptionId { get; set; }
+        string SubscriptionId { get; set; }
 
         /// <summary>
         /// A string value that is used as a global part of the parameterized
         /// host. Default value 'host'.
         /// </summary>
-        System.String DnsSuffix { get; set; }
+        string DnsSuffix { get; set; }
 
 
         /// <summary>

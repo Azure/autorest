@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// HeaderCustomNamedRequestIdHeaders class.
         /// </summary>
         /// <param name="fooRequestId">Gets the foo-request-id.</param>
-        public HeaderCustomNamedRequestIdHeaders(System.String fooRequestId = default(System.String))
+        public HeaderCustomNamedRequestIdHeaders(string fooRequestId = default(string))
         {
             FooRequestId = fooRequestId;
         }
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Gets the foo-request-id.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "foo-request-id")]
-        public System.String FooRequestId { get; set; }
+        public string FooRequestId { get; set; }
 
     }
 }

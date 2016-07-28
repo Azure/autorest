@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static Error PostRequiredIntegerParameter(this IExplicitModel operations, System.Int32 bodyParameter)
+            public static Error PostRequiredIntegerParameter(this IExplicitModel operations, int bodyParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerParameterAsync(this IExplicitModel operations, System.Int32 bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerParameterAsync(this IExplicitModel operations, int bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredIntegerParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static void PostOptionalIntegerParameter(this IExplicitModel operations, System.Int32? bodyParameter = default(System.Int32?))
+            public static void PostOptionalIntegerParameter(this IExplicitModel operations, int? bodyParameter = default(int?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -74,7 +74,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalIntegerParameterAsync(this IExplicitModel operations, System.Int32? bodyParameter = default(System.Int32?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalIntegerParameterAsync(this IExplicitModel operations, int? bodyParameter = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalIntegerParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
@@ -89,7 +89,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static Error PostRequiredIntegerProperty(this IExplicitModel operations, System.Int32 value)
+            public static Error PostRequiredIntegerProperty(this IExplicitModel operations, int value)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -107,7 +107,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerPropertyAsync(this IExplicitModel operations, System.Int32 value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerPropertyAsync(this IExplicitModel operations, int value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredIntegerPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -124,7 +124,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static void PostOptionalIntegerProperty(this IExplicitModel operations, System.Int32? value = default(System.Int32?))
+            public static void PostOptionalIntegerProperty(this IExplicitModel operations, int? value = default(int?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalIntegerPropertyAsync(this IExplicitModel operations, System.Int32? value = default(System.Int32?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalIntegerPropertyAsync(this IExplicitModel operations, int? value = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalIntegerPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
-            public static Error PostRequiredIntegerHeader(this IExplicitModel operations, System.Int32 headerParameter)
+            public static Error PostRequiredIntegerHeader(this IExplicitModel operations, int headerParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredIntegerHeaderAsync(headerParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -172,7 +172,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerHeaderAsync(this IExplicitModel operations, System.Int32 headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredIntegerHeaderAsync(this IExplicitModel operations, int headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredIntegerHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -189,7 +189,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
-            public static void PostOptionalIntegerHeader(this IExplicitModel operations, System.Int32? headerParameter = default(System.Int32?))
+            public static void PostOptionalIntegerHeader(this IExplicitModel operations, int? headerParameter = default(int?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalIntegerHeaderAsync(headerParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -206,7 +206,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalIntegerHeaderAsync(this IExplicitModel operations, System.Int32? headerParameter = default(System.Int32?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalIntegerHeaderAsync(this IExplicitModel operations, int? headerParameter = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalIntegerHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
             }
@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static Error PostRequiredStringParameter(this IExplicitModel operations, System.String bodyParameter)
+            public static Error PostRequiredStringParameter(this IExplicitModel operations, string bodyParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -237,7 +237,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredStringParameterAsync(this IExplicitModel operations, System.String bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredStringParameterAsync(this IExplicitModel operations, string bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredStringParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -253,7 +253,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static void PostOptionalStringParameter(this IExplicitModel operations, System.String bodyParameter = default(System.String))
+            public static void PostOptionalStringParameter(this IExplicitModel operations, string bodyParameter = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -269,7 +269,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalStringParameterAsync(this IExplicitModel operations, System.String bodyParameter = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalStringParameterAsync(this IExplicitModel operations, string bodyParameter = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalStringParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
@@ -284,7 +284,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static Error PostRequiredStringProperty(this IExplicitModel operations, System.String value)
+            public static Error PostRequiredStringProperty(this IExplicitModel operations, string value)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -302,7 +302,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredStringPropertyAsync(this IExplicitModel operations, System.String value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredStringPropertyAsync(this IExplicitModel operations, string value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredStringPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -319,7 +319,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static void PostOptionalStringProperty(this IExplicitModel operations, System.String value = default(System.String))
+            public static void PostOptionalStringProperty(this IExplicitModel operations, string value = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -336,7 +336,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalStringPropertyAsync(this IExplicitModel operations, System.String value = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalStringPropertyAsync(this IExplicitModel operations, string value = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalStringPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -350,7 +350,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
-            public static Error PostRequiredStringHeader(this IExplicitModel operations, System.String headerParameter)
+            public static Error PostRequiredStringHeader(this IExplicitModel operations, string headerParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredStringHeaderAsync(headerParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -367,7 +367,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredStringHeaderAsync(this IExplicitModel operations, System.String headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredStringHeaderAsync(this IExplicitModel operations, string headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredStringHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -384,7 +384,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static void PostOptionalStringHeader(this IExplicitModel operations, System.String bodyParameter = default(System.String))
+            public static void PostOptionalStringHeader(this IExplicitModel operations, string bodyParameter = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalStringHeaderAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -401,7 +401,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalStringHeaderAsync(this IExplicitModel operations, System.String bodyParameter = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalStringHeaderAsync(this IExplicitModel operations, string bodyParameter = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalStringHeaderWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
@@ -545,7 +545,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static Error PostRequiredArrayParameter(this IExplicitModel operations, System.Collections.Generic.IList<System.String> bodyParameter)
+            public static Error PostRequiredArrayParameter(this IExplicitModel operations, System.Collections.Generic.IList<string> bodyParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -562,7 +562,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayParameterAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayParameterAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> bodyParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredArrayParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -578,7 +578,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='bodyParameter'>
             /// </param>
-            public static void PostOptionalArrayParameter(this IExplicitModel operations, System.Collections.Generic.IList<System.String> bodyParameter = default(System.Collections.Generic.IList<System.String>))
+            public static void PostOptionalArrayParameter(this IExplicitModel operations, System.Collections.Generic.IList<string> bodyParameter = default(System.Collections.Generic.IList<string>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayParameterAsync(bodyParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -594,7 +594,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalArrayParameterAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> bodyParameter = default(System.Collections.Generic.IList<System.String>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalArrayParameterAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> bodyParameter = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalArrayParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
             }
@@ -609,7 +609,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static Error PostRequiredArrayProperty(this IExplicitModel operations, System.Collections.Generic.IList<System.String> value)
+            public static Error PostRequiredArrayProperty(this IExplicitModel operations, System.Collections.Generic.IList<string> value)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -627,7 +627,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayPropertyAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayPropertyAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredArrayPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -644,7 +644,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='value'>
             /// </param>
-            public static void PostOptionalArrayProperty(this IExplicitModel operations, System.Collections.Generic.IList<System.String> value = default(System.Collections.Generic.IList<System.String>))
+            public static void PostOptionalArrayProperty(this IExplicitModel operations, System.Collections.Generic.IList<string> value = default(System.Collections.Generic.IList<string>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayPropertyAsync(value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -661,7 +661,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalArrayPropertyAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> value = default(System.Collections.Generic.IList<System.String>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalArrayPropertyAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> value = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalArrayPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -675,7 +675,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
-            public static Error PostRequiredArrayHeader(this IExplicitModel operations, System.Collections.Generic.IList<System.String> headerParameter)
+            public static Error PostRequiredArrayHeader(this IExplicitModel operations, System.Collections.Generic.IList<string> headerParameter)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostRequiredArrayHeaderAsync(headerParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -692,7 +692,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayHeaderAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> PostRequiredArrayHeaderAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> headerParameter, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostRequiredArrayHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -709,7 +709,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             /// <param name='headerParameter'>
             /// </param>
-            public static void PostOptionalArrayHeader(this IExplicitModel operations, System.Collections.Generic.IList<System.String> headerParameter = default(System.Collections.Generic.IList<System.String>))
+            public static void PostOptionalArrayHeader(this IExplicitModel operations, System.Collections.Generic.IList<string> headerParameter = default(System.Collections.Generic.IList<string>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IExplicitModel)s).PostOptionalArrayHeaderAsync(headerParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -726,7 +726,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PostOptionalArrayHeaderAsync(this IExplicitModel operations, System.Collections.Generic.IList<System.String> headerParameter = default(System.Collections.Generic.IList<System.String>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PostOptionalArrayHeaderAsync(this IExplicitModel operations, System.Collections.Generic.IList<string> headerParameter = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostOptionalArrayHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
             }

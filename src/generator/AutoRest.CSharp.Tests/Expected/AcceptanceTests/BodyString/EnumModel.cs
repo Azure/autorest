@@ -658,7 +658,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(System.String field1 = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutReferencedConstantWithHttpMessagesAsync(string field1 = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RefColorConstant enumStringBody = new RefColorConstant();
             if (field1 != null)

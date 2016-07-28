@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <param name="location">Location to poll for result status: will be
         /// set to
         /// /lro/putasync/noretry/succeeded/operationResults/200</param>
-        public LROsPutAsyncNoRetrySucceededHeaders(System.String azureAsyncOperation = default(System.String), System.String location = default(System.String))
+        public LROsPutAsyncNoRetrySucceededHeaders(string azureAsyncOperation = default(string), string location = default(string))
         {
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
@@ -42,14 +42,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /lro/putasync/noretry/succeeded/operationResults/200
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public System.String AzureAsyncOperation { get; set; }
+        public string AzureAsyncOperation { get; set; }
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noretry/succeeded/operationResults/200
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
     }
 }

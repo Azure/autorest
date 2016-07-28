@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// class.
         /// </summary>
         /// <param name="tags">A set of tags.</param>
-        public AvailabilitySetUpdateParameters(System.Collections.Generic.IDictionary<System.String, System.String> tags)
+        public AvailabilitySetUpdateParameters(System.Collections.Generic.IDictionary<string, string> tags)
         {
             Tags = tags;
         }
@@ -35,7 +35,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// A description about the set of tags.
         /// </remarks>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<System.String, System.String> Tags { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// Validate the object.

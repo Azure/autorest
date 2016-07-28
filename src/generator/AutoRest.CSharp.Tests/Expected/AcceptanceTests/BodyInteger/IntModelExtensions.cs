@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int32? GetNull(this IIntModel operations)
+            public static int? GetNull(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int32?> GetNullAsync(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<int?> GetNullAsync(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int32? GetInvalid(this IIntModel operations)
+            public static int? GetInvalid(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -64,7 +64,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int32?> GetInvalidAsync(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<int?> GetInvalidAsync(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int32? GetOverflowInt32(this IIntModel operations)
+            public static int? GetOverflowInt32(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetOverflowInt32Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int32?> GetOverflowInt32Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<int?> GetOverflowInt32Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -106,7 +106,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int32? GetUnderflowInt32(this IIntModel operations)
+            public static int? GetUnderflowInt32(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetUnderflowInt32Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -120,7 +120,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int32?> GetUnderflowInt32Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<int?> GetUnderflowInt32Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -134,7 +134,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int64? GetOverflowInt64(this IIntModel operations)
+            public static long? GetOverflowInt64(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetOverflowInt64Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -148,7 +148,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int64?> GetOverflowInt64Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<long?> GetOverflowInt64Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -162,7 +162,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Int64? GetUnderflowInt64(this IIntModel operations)
+            public static long? GetUnderflowInt64(this IIntModel operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).GetUnderflowInt64Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -176,7 +176,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Int64?> GetUnderflowInt64Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<long?> GetUnderflowInt64Async(this IIntModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -192,7 +192,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMax32(this IIntModel operations, System.Int32 intBody)
+            public static void PutMax32(this IIntModel operations, int intBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).PutMax32Async(intBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -208,7 +208,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutMax32Async(this IIntModel operations, System.Int32 intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutMax32Async(this IIntModel operations, int intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutMax32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -221,7 +221,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMax64(this IIntModel operations, System.Int64 intBody)
+            public static void PutMax64(this IIntModel operations, long intBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).PutMax64Async(intBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -237,7 +237,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutMax64Async(this IIntModel operations, System.Int64 intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutMax64Async(this IIntModel operations, long intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutMax64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -250,7 +250,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMin32(this IIntModel operations, System.Int32 intBody)
+            public static void PutMin32(this IIntModel operations, int intBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).PutMin32Async(intBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -266,7 +266,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutMin32Async(this IIntModel operations, System.Int32 intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutMin32Async(this IIntModel operations, int intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutMin32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -279,7 +279,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMin64(this IIntModel operations, System.Int64 intBody)
+            public static void PutMin64(this IIntModel operations, long intBody)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IIntModel)s).PutMin64Async(intBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -295,7 +295,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutMin64Async(this IIntModel operations, System.Int64 intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutMin64Async(this IIntModel operations, long intBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }

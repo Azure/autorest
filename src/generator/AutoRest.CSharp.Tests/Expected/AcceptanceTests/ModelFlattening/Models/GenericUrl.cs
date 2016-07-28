@@ -24,7 +24,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Initializes a new instance of the GenericUrl class.
         /// </summary>
         /// <param name="genericValue">Generic URL value.</param>
-        public GenericUrl(System.String genericValue = default(System.String))
+        public GenericUrl(string genericValue = default(string))
         {
             GenericValue = genericValue;
         }
@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Gets or sets generic URL value.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "generic_value")]
-        public System.String GenericValue { get; set; }
+        public string GenericValue { get; set; }
 
     }
 }

@@ -221,14 +221,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 maxresults = pagingGetMultiplePagesOptions.Maxresults;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 timeout = pagingGetMultiplePagesOptions.Timeout;
@@ -421,14 +421,14 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetOdataMultiplePagesWithHttpMessagesAsync(System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetOdataMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetOdataMultiplePagesOptions != null)
             {
                 maxresults = pagingGetOdataMultiplePagesOptions.Maxresults;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetOdataMultiplePagesOptions != null)
             {
                 timeout = pagingGetOdataMultiplePagesOptions.Timeout;
@@ -623,7 +623,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithOffsetWithHttpMessagesAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, System.String clientRequestId = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithOffsetWithHttpMessagesAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
             {
@@ -633,17 +633,17 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             {
                 pagingGetMultiplePagesWithOffsetOptions.Validate();
             }
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 maxresults = pagingGetMultiplePagesWithOffsetOptions.Maxresults;
             }
-            System.Int32 offset = default(System.Int32);
+            int offset = default(int);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 offset = pagingGetMultiplePagesWithOffsetOptions.Offset;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 timeout = pagingGetMultiplePagesWithOffsetOptions.Timeout;
@@ -1626,7 +1626,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetSinglePagesNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetSinglePagesNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -1799,18 +1799,18 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "nextPageLink");
             }
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 maxresults = pagingGetMultiplePagesOptions.Maxresults;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 timeout = pagingGetMultiplePagesOptions.Timeout;
@@ -2010,18 +2010,18 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetOdataMultiplePagesNextWithHttpMessagesAsync(System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetOdataMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "nextPageLink");
             }
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetOdataMultiplePagesOptions != null)
             {
                 maxresults = pagingGetOdataMultiplePagesOptions.Maxresults;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetOdataMultiplePagesOptions != null)
             {
                 timeout = pagingGetOdataMultiplePagesOptions.Timeout;
@@ -2220,18 +2220,18 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithOffsetNextWithHttpMessagesAsync(System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesWithOffsetNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "nextPageLink");
             }
-            System.Int32? maxresults = default(System.Int32?);
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesWithOffsetNextOptions != null)
             {
                 maxresults = pagingGetMultiplePagesWithOffsetNextOptions.Maxresults;
             }
-            System.Int32? timeout = default(System.Int32?);
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesWithOffsetNextOptions != null)
             {
                 timeout = pagingGetMultiplePagesWithOffsetNextOptions.Timeout;
@@ -2426,7 +2426,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -2596,7 +2596,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -2764,7 +2764,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetSinglePagesFailureNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetSinglePagesFailureNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -2932,7 +2932,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesFailureNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesFailureNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {
@@ -3100,7 +3100,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(System.String nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Microsoft.Rest.Azure.IPage<Product>>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(string nextPageLink, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (nextPageLink == null)
             {

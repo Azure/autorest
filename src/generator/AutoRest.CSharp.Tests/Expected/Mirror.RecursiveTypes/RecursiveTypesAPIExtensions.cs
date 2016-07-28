@@ -40,7 +40,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// <param name='body'>
             /// API body mody.
             /// </param>
-            public static Product Post(this IRecursiveTypesAPI operations, System.String subscriptionId, System.String resourceGroupName, System.String apiVersion, Product body = default(Product))
+            public static Product Post(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IRecursiveTypesAPI)s).PostAsync(subscriptionId, resourceGroupName, apiVersion, body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -72,7 +72,7 @@ namespace Fixtures.MirrorRecursiveTypes
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Product> PostAsync(this IRecursiveTypesAPI operations, System.String subscriptionId, System.String resourceGroupName, System.String apiVersion, Product body = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PostAsync(this IRecursiveTypesAPI operations, string subscriptionId, string resourceGroupName, string apiVersion, Product body = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostWithHttpMessagesAsync(subscriptionId, resourceGroupName, apiVersion, body, null, cancellationToken).ConfigureAwait(false))
                 {

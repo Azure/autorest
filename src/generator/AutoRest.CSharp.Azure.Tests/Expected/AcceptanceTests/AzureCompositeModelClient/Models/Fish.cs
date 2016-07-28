@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish(System.Double length, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>))
+        public Fish(double length, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>))
         {
             Species = species;
             Length = length;
@@ -30,12 +30,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "species")]
-        public System.String Species { get; set; }
+        public string Species { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "length")]
-        public System.Double Length { get; set; }
+        public double Length { get; set; }
 
         /// <summary>
         /// </summary>

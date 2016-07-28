@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// HeaderCustomNamedRequestIdParamGroupingParameters class.
         /// </summary>
         /// <param name="fooClientRequestId">The fooRequestId</param>
-        public HeaderCustomNamedRequestIdParamGroupingParameters(System.String fooClientRequestId)
+        public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
         {
             FooClientRequestId = fooClientRequestId;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Gets or sets the fooRequestId
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String FooClientRequestId { get; set; }
+        public string FooClientRequestId { get; set; }
 
         /// <summary>
         /// Validate the object.

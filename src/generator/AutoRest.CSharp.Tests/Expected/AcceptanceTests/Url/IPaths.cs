@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(System.String stringPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get using uri with 'green color' in path parameter
         /// </summary>
@@ -256,7 +256,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(System.Byte[] bytePath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] bytePath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '' as byte array
         /// </summary>
@@ -288,7 +288,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(System.Byte[] bytePath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] bytePath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '2012-01-01' as date
         /// </summary>
@@ -367,7 +367,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Base64UrlWithHttpMessagesAsync(System.Byte[] base64UrlPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> Base64UrlWithHttpMessagesAsync(byte[] base64UrlPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayPath1', 'begin!*'();:@
         /// &amp;=+$,/?#[]end' , null, ''] using the csv-array format
@@ -388,7 +388,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayCsvInPathWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayCsvInPathWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayPath, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get the date 2016-04-13 encoded value as '1460505600' (Unix time)
         /// </summary>

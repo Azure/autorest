@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the FloatWrapper class.
         /// </summary>
-        public FloatWrapper(System.Double? field1 = default(System.Double?), System.Double? field2 = default(System.Double?))
+        public FloatWrapper(double? field1 = default(double?), double? field2 = default(double?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
-        public System.Double? Field1 { get; set; }
+        public double? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
-        public System.Double? Field2 { get; set; }
+        public double? Field2 { get; set; }
 
     }
 }

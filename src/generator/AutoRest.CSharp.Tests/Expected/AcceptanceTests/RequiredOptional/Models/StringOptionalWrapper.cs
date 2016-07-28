@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the StringOptionalWrapper class.
         /// </summary>
-        public StringOptionalWrapper(System.String value = default(System.String))
+        public StringOptionalWrapper(string value = default(string))
         {
             Value = value;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.String Value { get; set; }
+        public string Value { get; set; }
 
     }
 }

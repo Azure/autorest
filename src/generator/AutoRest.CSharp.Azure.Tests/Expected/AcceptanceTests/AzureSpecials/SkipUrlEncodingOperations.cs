@@ -62,7 +62,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodPathValidWithHttpMessagesAsync(System.String unencodedPathParam, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodPathValidWithHttpMessagesAsync(string unencodedPathParam, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (unencodedPathParam == null)
             {
@@ -205,7 +205,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetPathPathValidWithHttpMessagesAsync(System.String unencodedPathParam, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetPathPathValidWithHttpMessagesAsync(string unencodedPathParam, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (unencodedPathParam == null)
             {
@@ -344,7 +344,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String unencodedPathParam = "path1/path2/path3";
+            string unencodedPathParam = "path1/path2/path3";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -483,7 +483,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodQueryValidWithHttpMessagesAsync(System.String q1, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodQueryValidWithHttpMessagesAsync(string q1, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (q1 == null)
             {
@@ -626,7 +626,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodQueryNullWithHttpMessagesAsync(System.String q1 = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetMethodQueryNullWithHttpMessagesAsync(string q1 = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -769,7 +769,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetPathQueryValidWithHttpMessagesAsync(System.String q1, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetPathQueryValidWithHttpMessagesAsync(string q1, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (q1 == null)
             {
@@ -912,7 +912,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String q1 = "value1&q2=value2&q3=value3";
+            string q1 = "value1&q2=value2&q3=value3";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;

@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the ReadonlyObj class.
         /// </summary>
-        public ReadonlyObj(System.String id = default(System.String), System.Int32? size = default(System.Int32?))
+        public ReadonlyObj(string id = default(string), int? size = default(int?))
         {
             Id = id;
             Size = size;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.String Id { get; private set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "size")]
-        public System.Int32? Size { get; set; }
+        public int? Size { get; set; }
 
     }
 }

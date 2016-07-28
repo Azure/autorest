@@ -22,7 +22,7 @@ namespace Fixtures.AdditionalProperties
             /// <param name='limit'>
             /// number of pets to return
             /// </param>
-            public static System.Collections.Generic.IList<Pet> Pets(this IGet operations, System.Int32? limit = 11)
+            public static System.Collections.Generic.IList<Pet> Pets(this IGet operations, int? limit = 11)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IGet)s).PetsAsync(limit), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.AdditionalProperties
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<Pet>> PetsAsync(this IGet operations, System.Int32? limit = 11, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<Pet>> PetsAsync(this IGet operations, int? limit = 11, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PetsWithHttpMessagesAsync(limit, null, cancellationToken).ConfigureAwait(false))
                 {

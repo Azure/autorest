@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>> Head200WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<bool>> Head200WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -162,7 +162,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == System.Net.HttpStatusCode.OK);
@@ -192,7 +192,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>> Head204WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<bool>> Head204WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -299,7 +299,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == System.Net.HttpStatusCode.NoContent);
@@ -329,7 +329,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>> Head404WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<bool>> Head404WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -436,7 +436,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Boolean>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == System.Net.HttpStatusCode.NoContent);

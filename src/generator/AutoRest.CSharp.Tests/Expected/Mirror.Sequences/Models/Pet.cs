@@ -20,7 +20,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet(System.Int64 id, System.String name, System.Collections.Generic.IList<PetStyle> styles = default(System.Collections.Generic.IList<PetStyle>), System.String tag = default(System.String))
+        public Pet(long id, string name, System.Collections.Generic.IList<PetStyle> styles = default(System.Collections.Generic.IList<PetStyle>), string tag = default(string))
         {
             Id = id;
             Name = name;
@@ -31,12 +31,12 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64 Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
@@ -46,7 +46,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tag")]
-        public System.String Tag { get; set; }
+        public string Tag { get; set; }
 
         /// <summary>
         /// Validate the object.

@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public FlattenedProduct(System.String id = default(System.String), System.String type = default(System.String), System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String location = default(System.String), System.String name = default(System.String), System.String pname = default(System.String), System.String flattenedProductType = default(System.String), System.String provisioningStateValues = default(System.String), System.String provisioningState = default(System.String))
+        public FlattenedProduct(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), string flattenedProductType = default(string), string provisioningStateValues = default(string), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {
             Pname = pname;
@@ -45,12 +45,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.p\\.name")]
-        public System.String Pname { get; set; }
+        public string Pname { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.type")]
-        public System.String FlattenedProductType { get; set; }
+        public string FlattenedProductType { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
@@ -58,12 +58,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public System.String ProvisioningStateValues { get; private set; }
+        public string ProvisioningStateValues { get; private set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
-        public System.String ProvisioningState { get; set; }
+        public string ProvisioningState { get; set; }
 
     }
 }

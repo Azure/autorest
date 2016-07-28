@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 105 or
         /// -2</param>
-        public HeaderResponseLongHeaders(System.Int64? value = default(System.Int64?))
+        public HeaderResponseLongHeaders(long? value = default(long?))
         {
             Value = value;
         }
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "value": 105 or -2
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Int64? Value { get; set; }
+        public long? Value { get; set; }
 
     }
 }

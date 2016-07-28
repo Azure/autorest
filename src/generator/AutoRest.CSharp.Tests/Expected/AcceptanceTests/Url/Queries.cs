@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Boolean boolQuery = true;
+            bool boolQuery = true;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Boolean boolQuery = false;
+            bool boolQuery = false;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(System.Boolean? boolQuery = default(System.Boolean?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(bool? boolQuery = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -397,7 +397,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int32 intQuery = 1000000;
+            int intQuery = 1000000;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -509,7 +509,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int32 intQuery = -1000000;
+            int intQuery = -1000000;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -622,7 +622,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntNullWithHttpMessagesAsync(System.Int32? intQuery = default(System.Int32?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntNullWithHttpMessagesAsync(int? intQuery = default(int?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -738,7 +738,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int64 longQuery = 10000000000;
+            long longQuery = 10000000000;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -850,7 +850,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Int64 longQuery = -10000000000;
+            long longQuery = -10000000000;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -963,7 +963,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetLongNullWithHttpMessagesAsync(System.Int64? longQuery = default(System.Int64?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetLongNullWithHttpMessagesAsync(long? longQuery = default(long?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -1079,7 +1079,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Double floatQuery = 1.034E+20;
+            double floatQuery = 1.034E+20;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1191,7 +1191,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Double floatQuery = -1.034E-20;
+            double floatQuery = -1.034E-20;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1304,7 +1304,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatNullWithHttpMessagesAsync(System.Double? floatQuery = default(System.Double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatNullWithHttpMessagesAsync(double? floatQuery = default(double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -1420,7 +1420,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Double doubleQuery = 9999999.999;
+            double doubleQuery = 9999999.999;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1532,7 +1532,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Double doubleQuery = -9999999.999;
+            double doubleQuery = -9999999.999;
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1645,7 +1645,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleNullWithHttpMessagesAsync(System.Double? doubleQuery = default(System.Double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleNullWithHttpMessagesAsync(double? doubleQuery = default(double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -1761,7 +1761,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringUnicodeWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
+            string stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1876,7 +1876,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringUrlEncodedWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
+            string stringQuery = "begin!*'();:@ &=+$,/?#[]end";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1991,7 +1991,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String stringQuery = "";
+            string stringQuery = "";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2107,7 +2107,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(System.String stringQuery = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringQuery = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -2460,7 +2460,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(System.Byte[] byteQuery = default(System.Byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -2576,7 +2576,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.Byte[] byteQuery = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Byte[]>("\"\"", this.Client.SerializationSettings);
+            byte[] byteQuery = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<byte[]>("\"\"", this.Client.SerializationSettings);
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2692,7 +2692,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(System.Byte[] byteQuery = default(System.Byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3269,7 +3269,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3386,7 +3386,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3503,7 +3503,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3622,7 +3622,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3741,7 +3741,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -3860,7 +3860,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;

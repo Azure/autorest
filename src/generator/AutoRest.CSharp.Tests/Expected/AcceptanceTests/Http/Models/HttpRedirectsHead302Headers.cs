@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// </summary>
         /// <param name="location">The redirect location for this
         /// request</param>
-        public HttpRedirectsHead302Headers(System.String location = default(System.String))
+        public HttpRedirectsHead302Headers(string location = default(string))
         {
             Location = location;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// Gets or sets the redirect location for this request
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
     }
 }

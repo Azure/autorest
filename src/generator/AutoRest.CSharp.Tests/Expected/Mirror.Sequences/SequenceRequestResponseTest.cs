@@ -315,7 +315,7 @@ namespace Fixtures.MirrorSequences
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Int32?>>> AddPetStylesWithHttpMessagesAsync(System.Collections.Generic.IList<System.Int32?> petStyle, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<int?>>> AddPetStylesWithHttpMessagesAsync(System.Collections.Generic.IList<int?> petStyle, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (petStyle == null)
             {
@@ -405,7 +405,7 @@ namespace Fixtures.MirrorSequences
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Int32?>>();
+            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<int?>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -414,7 +414,7 @@ namespace Fixtures.MirrorSequences
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IList<System.Int32?>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IList<int?>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -457,7 +457,7 @@ namespace Fixtures.MirrorSequences
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Int32?>>> UpdatePetStylesWithHttpMessagesAsync(System.Collections.Generic.IList<System.Int32?> petStyle, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<int?>>> UpdatePetStylesWithHttpMessagesAsync(System.Collections.Generic.IList<int?> petStyle, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (petStyle == null)
             {
@@ -547,7 +547,7 @@ namespace Fixtures.MirrorSequences
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<System.Int32?>>();
+            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<int?>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -556,7 +556,7 @@ namespace Fixtures.MirrorSequences
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IList<System.Int32?>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IList<int?>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {

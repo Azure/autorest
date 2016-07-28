@@ -27,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         /// <param name="path">Path parameter</param>
         /// <param name="query">Query parameter with default</param>
-        public ParameterGroupingPostRequiredParameters(System.Int32 body, System.String path, System.String customHeader = default(System.String), System.Int32? query = default(System.Int32?))
+        public ParameterGroupingPostRequiredParameters(int body, string path, string customHeader = default(string), int? query = default(int?))
         {
             Body = body;
             CustomHeader = customHeader;
@@ -38,24 +38,24 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32 Body { get; set; }
+        public int Body { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String CustomHeader { get; set; }
+        public string CustomHeader { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? Query { get; set; }
+        public int? Query { get; set; }
 
         /// <summary>
         /// Gets or sets path parameter
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String Path { get; set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// Validate the object.

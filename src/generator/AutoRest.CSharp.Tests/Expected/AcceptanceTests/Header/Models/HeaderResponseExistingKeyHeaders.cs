@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="userAgent">response with header value "User-Agent":
         /// "overwrite"</param>
-        public HeaderResponseExistingKeyHeaders(System.String userAgent = default(System.String))
+        public HeaderResponseExistingKeyHeaders(string userAgent = default(string))
         {
             UserAgent = userAgent;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "User-Agent": "overwrite"
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "User-Agent")]
-        public System.String UserAgent { get; set; }
+        public string UserAgent { get; set; }
 
     }
 }

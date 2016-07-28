@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// and a line break.</param>
         /// <param name="color">Possible values include: 'cyan', 'Magenta',
         /// 'YELLOW', 'blacK'</param>
-        public Basic(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String color = default(System.String))
+        public Basic(int? id = default(int?), string name = default(string), string color = default(string))
         {
             Id = id;
             Name = name;
@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// Gets or sets basic Id
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int32? Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Gets or sets name property with a very
@@ -47,14 +47,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// and a line break.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'cyan', 'Magenta', 'YELLOW',
         /// 'blacK'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
-        public System.String Color { get; set; }
+        public string Color { get; set; }
 
     }
 }

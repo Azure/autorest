@@ -40,24 +40,24 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        System.String SubscriptionId { get; }
+        string SubscriptionId { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        System.String AcceptLanguage { get; set; }
+        string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running
         /// Operations. Default value is 30.
         /// </summary>
-        System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is
         /// generated and included in each request. Default is true.
         /// </summary>
-        System.Boolean? GenerateClientRequestId { get; set; }
+        bool? GenerateClientRequestId { get; set; }
 
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(System.String resourceGroupName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create products
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Update products
@@ -164,7 +164,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 }

@@ -24,7 +24,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="description">Description of a Animal.</param>
         /// <param name="color">cat color</param>
         /// <param name="length">cat length</param>
-        public SiameseCat(System.String id = default(System.String), System.String description = default(System.String), System.String color = default(System.String), System.Int32? length = default(System.Int32?))
+        public SiameseCat(string id = default(string), string description = default(string), string color = default(string), int? length = default(int?))
             : base(id, description, color)
         {
             Length = length;
@@ -34,7 +34,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Gets or sets cat length
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "length")]
-        public System.Int32? Length { get; set; }
+        public int? Length { get; set; }
 
     }
 }

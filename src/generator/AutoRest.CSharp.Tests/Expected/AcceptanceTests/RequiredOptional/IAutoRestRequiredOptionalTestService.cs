@@ -33,17 +33,17 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// <summary>
         /// number of items to skip
         /// </summary>
-        System.String RequiredGlobalPath { get; set; }
+        string RequiredGlobalPath { get; set; }
 
         /// <summary>
         /// number of items to skip
         /// </summary>
-        System.String RequiredGlobalQuery { get; set; }
+        string RequiredGlobalQuery { get; set; }
 
         /// <summary>
         /// number of items to skip
         /// </summary>
-        System.Int32? OptionalGlobalQuery { get; set; }
+        int? OptionalGlobalQuery { get; set; }
 
 
         /// <summary>

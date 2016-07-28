@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(System.Boolean? boolQuery = default(System.Boolean?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetBooleanNullWithHttpMessagesAsync(bool? boolQuery = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '1000000' integer value
         /// </summary>
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntNullWithHttpMessagesAsync(System.Int32? intQuery = default(System.Int32?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetIntNullWithHttpMessagesAsync(int? intQuery = default(int?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '10000000000' 64 bit integer value
         /// </summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetLongNullWithHttpMessagesAsync(System.Int64? longQuery = default(System.Int64?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetLongNullWithHttpMessagesAsync(long? longQuery = default(long?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '1.034E+20' numeric value
         /// </summary>
@@ -182,7 +182,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatNullWithHttpMessagesAsync(System.Double? floatQuery = default(System.Double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> FloatNullWithHttpMessagesAsync(double? floatQuery = default(double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '9999999.999' numeric value
         /// </summary>
@@ -224,7 +224,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleNullWithHttpMessagesAsync(System.Double? doubleQuery = default(System.Double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> DoubleNullWithHttpMessagesAsync(double? doubleQuery = default(double?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
         /// </summary>
@@ -279,7 +279,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(System.String stringQuery = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> StringNullWithHttpMessagesAsync(string stringQuery = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get using uri with query parameter 'green color'
         /// </summary>
@@ -329,7 +329,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(System.Byte[] byteQuery = default(System.Byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteMultiByteWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '' as byte array
         /// </summary>
@@ -358,7 +358,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(System.Byte[] byteQuery = default(System.Byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ByteNullWithHttpMessagesAsync(byte[] byteQuery = default(byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get '2012-01-01' as date
         /// </summary>
@@ -434,7 +434,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get a null array of string using the csv-array format
         /// </summary>
@@ -450,7 +450,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvNullWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an empty array [] of string using the csv-array format
         /// </summary>
@@ -466,7 +466,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringCsvEmptyWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
         /// &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
@@ -484,7 +484,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringSsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
         /// &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
@@ -502,7 +502,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringTsvValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get an array of string ['ArrayQuery1', 'begin!*'();:@
         /// &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
@@ -520,6 +520,6 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(System.Collections.Generic.IList<System.String> arrayQuery = default(System.Collections.Generic.IList<System.String>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> ArrayStringPipesValidWithHttpMessagesAsync(System.Collections.Generic.IList<string> arrayQuery = default(System.Collections.Generic.IList<string>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

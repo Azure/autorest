@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Initializes a new instance of the CatalogDictionary class.
         /// </summary>
         /// <param name="productDictionary">Dictionary of products</param>
-        public CatalogDictionary(System.Collections.Generic.IDictionary<System.String, Product> productDictionary = default(System.Collections.Generic.IDictionary<System.String, Product>))
+        public CatalogDictionary(System.Collections.Generic.IDictionary<string, Product> productDictionary = default(System.Collections.Generic.IDictionary<string, Product>))
         {
             ProductDictionary = productDictionary;
         }
@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Gets or sets dictionary of products
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "productDictionary")]
-        public System.Collections.Generic.IDictionary<System.String, Product> ProductDictionary { get; set; }
+        public System.Collections.Generic.IDictionary<string, Product> ProductDictionary { get; set; }
 
     }
 }

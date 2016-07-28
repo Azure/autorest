@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ByteWrapper class.
         /// </summary>
-        public ByteWrapper(System.Byte[] field = default(System.Byte[]))
+        public ByteWrapper(byte[] field = default(byte[]))
         {
             Field = field;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
-        public System.Byte[] Field { get; set; }
+        public byte[] Field { get; set; }
 
     }
 }

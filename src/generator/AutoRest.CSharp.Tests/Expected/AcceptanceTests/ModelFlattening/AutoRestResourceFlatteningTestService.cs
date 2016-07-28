@@ -400,7 +400,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -515,7 +515,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -594,7 +594,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>();
+            var _result = new Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -603,7 +603,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<string, FlattenedProduct>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {
@@ -1042,7 +1042,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (productId == null)
             {
@@ -1209,32 +1209,32 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             {
                 flattenParameterGroup.Validate();
             }
-            System.String name = default(System.String);
+            string name = default(string);
             if (flattenParameterGroup != null)
             {
                 name = flattenParameterGroup.Name;
             }
-            System.String productId = default(System.String);
+            string productId = default(string);
             if (flattenParameterGroup != null)
             {
                 productId = flattenParameterGroup.ProductId;
             }
-            System.String description = default(System.String);
+            string description = default(string);
             if (flattenParameterGroup != null)
             {
                 description = flattenParameterGroup.Description;
             }
-            System.String maxProductDisplayName = default(System.String);
+            string maxProductDisplayName = default(string);
             if (flattenParameterGroup != null)
             {
                 maxProductDisplayName = flattenParameterGroup.MaxProductDisplayName;
             }
-            System.String genericValue = default(System.String);
+            string genericValue = default(string);
             if (flattenParameterGroup != null)
             {
                 genericValue = flattenParameterGroup.GenericValue;
             }
-            System.String odatavalue = default(System.String);
+            string odatavalue = default(string);
             if (flattenParameterGroup != null)
             {
                 odatavalue = flattenParameterGroup.Odatavalue;

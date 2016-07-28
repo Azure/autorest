@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static Error Post505(this IHttpServerFailure operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static Error Post505(this IHttpServerFailure operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpServerFailure)s).Post505Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> Post505Async(this IHttpServerFailure operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> Post505Async(this IHttpServerFailure operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Post505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -115,7 +115,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static Error Delete505(this IHttpServerFailure operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static Error Delete505(this IHttpServerFailure operations, bool? booleanValue = default(bool?))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpServerFailure)s).Delete505Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -132,7 +132,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<Error> Delete505Async(this IHttpServerFailure operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<Error> Delete505Async(this IHttpServerFailure operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Delete505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {

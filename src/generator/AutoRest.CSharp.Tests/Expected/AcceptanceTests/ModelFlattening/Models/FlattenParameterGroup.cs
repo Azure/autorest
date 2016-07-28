@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <param name="description">Description of product.</param>
         /// <param name="genericValue">Generic URL value.</param>
         /// <param name="odatavalue">URL value.</param>
-        public FlattenParameterGroup(System.String name, System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String))
+        public FlattenParameterGroup(string name, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
         {
             Name = name;
             ProductId = productId;
@@ -48,7 +48,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Gets or sets product name with value 'groupproduct'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for
@@ -57,31 +57,31 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Angeles.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String ProductId { get; set; }
+        public string ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String MaxProductDisplayName { get; set; }
+        public string MaxProductDisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String GenericValue { get; set; }
+        public string GenericValue { get; set; }
 
         /// <summary>
         /// Gets or sets URL value.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String Odatavalue { get; set; }
+        public string Odatavalue { get; set; }
 
         /// <summary>
         /// Validate the object.

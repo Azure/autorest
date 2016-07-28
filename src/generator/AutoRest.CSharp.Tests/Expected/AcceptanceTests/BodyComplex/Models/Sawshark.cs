@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(System.Double length, System.DateTime birthday, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), System.Int32? age = default(System.Int32?), System.Byte[] picture = default(System.Byte[]))
+        public Sawshark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;
@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "picture")]
-        public System.Byte[] Picture { get; set; }
+        public byte[] Picture { get; set; }
 
         /// <summary>
         /// Validate the object.

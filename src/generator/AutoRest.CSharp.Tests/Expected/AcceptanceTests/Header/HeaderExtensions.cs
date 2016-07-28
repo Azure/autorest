@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='userAgent'>
             /// Send a post request with header value "User-Agent": "overwrite"
             /// </param>
-            public static void ParamExistingKey(this IHeader operations, System.String userAgent)
+            public static void ParamExistingKey(this IHeader operations, string userAgent)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamExistingKeyAsync(userAgent), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamExistingKeyAsync(this IHeader operations, System.String userAgent, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamExistingKeyAsync(this IHeader operations, string userAgent, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamExistingKeyWithHttpMessagesAsync(userAgent, null, cancellationToken).ConfigureAwait(false);
             }
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='contentType'>
             /// Send a post request with header value "Content-Type": "text/html"
             /// </param>
-            public static void ParamProtectedKey(this IHeader operations, System.String contentType)
+            public static void ParamProtectedKey(this IHeader operations, string contentType)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamProtectedKeyAsync(contentType), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamProtectedKeyAsync(this IHeader operations, System.String contentType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamProtectedKeyAsync(this IHeader operations, string contentType, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamProtectedKeyWithHttpMessagesAsync(contentType, null, cancellationToken).ConfigureAwait(false);
             }
@@ -147,7 +147,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values 1 or -2
             /// </param>
-            public static void ParamInteger(this IHeader operations, System.String scenario, System.Int32 value)
+            public static void ParamInteger(this IHeader operations, string scenario, int value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamIntegerAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamIntegerAsync(this IHeader operations, System.String scenario, System.Int32 value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamIntegerAsync(this IHeader operations, string scenario, int value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamIntegerWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -182,7 +182,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
-            public static HeaderResponseIntegerHeaders ResponseInteger(this IHeader operations, System.String scenario)
+            public static HeaderResponseIntegerHeaders ResponseInteger(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseIntegerAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -199,7 +199,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseIntegerHeaders> ResponseIntegerAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseIntegerHeaders> ResponseIntegerAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseIntegerWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values 105 or -2
             /// </param>
-            public static void ParamLong(this IHeader operations, System.String scenario, System.Int64 value)
+            public static void ParamLong(this IHeader operations, string scenario, long value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamLongAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -241,7 +241,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamLongAsync(this IHeader operations, System.String scenario, System.Int64 value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamLongAsync(this IHeader operations, string scenario, long value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamLongWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -255,7 +255,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
-            public static HeaderResponseLongHeaders ResponseLong(this IHeader operations, System.String scenario)
+            public static HeaderResponseLongHeaders ResponseLong(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseLongAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -272,7 +272,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseLongHeaders> ResponseLongAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseLongHeaders> ResponseLongAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseLongWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -293,7 +293,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values 0.07 or -3.0
             /// </param>
-            public static void ParamFloat(this IHeader operations, System.String scenario, System.Double value)
+            public static void ParamFloat(this IHeader operations, string scenario, double value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamFloatAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -314,7 +314,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamFloatAsync(this IHeader operations, System.String scenario, System.Double value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamFloatAsync(this IHeader operations, string scenario, double value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamFloatWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -328,7 +328,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
-            public static HeaderResponseFloatHeaders ResponseFloat(this IHeader operations, System.String scenario)
+            public static HeaderResponseFloatHeaders ResponseFloat(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseFloatAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -345,7 +345,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseFloatHeaders> ResponseFloatAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseFloatHeaders> ResponseFloatAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseFloatWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -366,7 +366,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values 7e120 or -3.0
             /// </param>
-            public static void ParamDouble(this IHeader operations, System.String scenario, System.Double value)
+            public static void ParamDouble(this IHeader operations, string scenario, double value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamDoubleAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -387,7 +387,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamDoubleAsync(this IHeader operations, System.String scenario, System.Double value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamDoubleAsync(this IHeader operations, string scenario, double value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamDoubleWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -401,7 +401,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "positive" or "negative"
             /// </param>
-            public static HeaderResponseDoubleHeaders ResponseDouble(this IHeader operations, System.String scenario)
+            public static HeaderResponseDoubleHeaders ResponseDouble(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseDoubleAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -418,7 +418,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseDoubleHeaders> ResponseDoubleAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseDoubleHeaders> ResponseDoubleAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseDoubleWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -439,7 +439,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values true or false
             /// </param>
-            public static void ParamBool(this IHeader operations, System.String scenario, System.Boolean value)
+            public static void ParamBool(this IHeader operations, string scenario, bool value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamBoolAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -460,7 +460,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamBoolAsync(this IHeader operations, System.String scenario, System.Boolean value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamBoolAsync(this IHeader operations, string scenario, bool value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamBoolWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -474,7 +474,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "true" or "false"
             /// </param>
-            public static HeaderResponseBoolHeaders ResponseBool(this IHeader operations, System.String scenario)
+            public static HeaderResponseBoolHeaders ResponseBool(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseBoolAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -491,7 +491,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseBoolHeaders> ResponseBoolAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseBoolHeaders> ResponseBoolAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseBoolWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -515,7 +515,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values "The quick brown fox jumps over the
             /// lazy dog" or null or ""
             /// </param>
-            public static void ParamString(this IHeader operations, System.String scenario, System.String value = default(System.String))
+            public static void ParamString(this IHeader operations, string scenario, string value = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamStringAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -539,7 +539,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamStringAsync(this IHeader operations, System.String scenario, System.String value = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamStringAsync(this IHeader operations, string scenario, string value = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamStringWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -555,7 +555,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values "scenario": "valid" or "null" or
             /// "empty"
             /// </param>
-            public static HeaderResponseStringHeaders ResponseString(this IHeader operations, System.String scenario)
+            public static HeaderResponseStringHeaders ResponseString(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseStringAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -574,7 +574,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseStringHeaders> ResponseStringAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseStringHeaders> ResponseStringAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseStringWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -595,7 +595,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values "2010-01-01" or "0001-01-01"
             /// </param>
-            public static void ParamDate(this IHeader operations, System.String scenario, System.DateTime value)
+            public static void ParamDate(this IHeader operations, string scenario, System.DateTime value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamDateAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -616,7 +616,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamDateAsync(this IHeader operations, System.String scenario, System.DateTime value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamDateAsync(this IHeader operations, string scenario, System.DateTime value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamDateWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -630,7 +630,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
-            public static HeaderResponseDateHeaders ResponseDate(this IHeader operations, System.String scenario)
+            public static HeaderResponseDateHeaders ResponseDate(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseDateAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -647,7 +647,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseDateHeaders> ResponseDateAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseDateHeaders> ResponseDateAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseDateWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -670,7 +670,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values "2010-01-01T12:34:56Z" or
             /// "0001-01-01T00:00:00Z"
             /// </param>
-            public static void ParamDatetime(this IHeader operations, System.String scenario, System.DateTime value)
+            public static void ParamDatetime(this IHeader operations, string scenario, System.DateTime value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamDatetimeAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -693,7 +693,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamDatetimeAsync(this IHeader operations, System.String scenario, System.DateTime value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamDatetimeAsync(this IHeader operations, string scenario, System.DateTime value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamDatetimeWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -708,7 +708,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
-            public static HeaderResponseDatetimeHeaders ResponseDatetime(this IHeader operations, System.String scenario)
+            public static HeaderResponseDatetimeHeaders ResponseDatetime(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseDatetimeAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -726,7 +726,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseDatetimeHeaders> ResponseDatetimeAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseDatetimeHeaders> ResponseDatetimeAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseDatetimeWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -749,7 +749,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or
             /// "Mon, 01 Jan 0001 00:00:00 GMT"
             /// </param>
-            public static void ParamDatetimeRfc1123(this IHeader operations, System.String scenario, System.DateTime? value = default(System.DateTime?))
+            public static void ParamDatetimeRfc1123(this IHeader operations, string scenario, System.DateTime? value = default(System.DateTime?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamDatetimeRfc1123Async(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -772,7 +772,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamDatetimeRfc1123Async(this IHeader operations, System.String scenario, System.DateTime? value = default(System.DateTime?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamDatetimeRfc1123Async(this IHeader operations, string scenario, System.DateTime? value = default(System.DateTime?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamDatetimeRfc1123WithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -787,7 +787,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "valid" or "min"
             /// </param>
-            public static HeaderResponseDatetimeRfc1123Headers ResponseDatetimeRfc1123(this IHeader operations, System.String scenario)
+            public static HeaderResponseDatetimeRfc1123Headers ResponseDatetimeRfc1123(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseDatetimeRfc1123Async(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -805,7 +805,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123Async(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123Async(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseDatetimeRfc1123WithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -826,7 +826,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values "P123DT22H14M12.011S"
             /// </param>
-            public static void ParamDuration(this IHeader operations, System.String scenario, System.TimeSpan value)
+            public static void ParamDuration(this IHeader operations, string scenario, System.TimeSpan value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamDurationAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -847,7 +847,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamDurationAsync(this IHeader operations, System.String scenario, System.TimeSpan value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamDurationAsync(this IHeader operations, string scenario, System.TimeSpan value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamDurationWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -861,7 +861,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "valid"
             /// </param>
-            public static HeaderResponseDurationHeaders ResponseDuration(this IHeader operations, System.String scenario)
+            public static HeaderResponseDurationHeaders ResponseDuration(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseDurationAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -878,7 +878,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseDurationHeaders> ResponseDurationAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseDurationHeaders> ResponseDurationAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseDurationWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -899,7 +899,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='value'>
             /// Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
             /// </param>
-            public static void ParamByte(this IHeader operations, System.String scenario, System.Byte[] value)
+            public static void ParamByte(this IHeader operations, string scenario, byte[] value)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamByteAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -920,7 +920,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamByteAsync(this IHeader operations, System.String scenario, System.Byte[] value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamByteAsync(this IHeader operations, string scenario, byte[] value, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamByteWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -934,7 +934,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='scenario'>
             /// Send a post request with header values "scenario": "valid"
             /// </param>
-            public static HeaderResponseByteHeaders ResponseByte(this IHeader operations, System.String scenario)
+            public static HeaderResponseByteHeaders ResponseByte(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseByteAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -951,7 +951,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseByteHeaders> ResponseByteAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseByteHeaders> ResponseByteAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseByteWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -974,7 +974,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values 'GREY' . Possible values include:
             /// 'White', 'black', 'GREY'
             /// </param>
-            public static void ParamEnum(this IHeader operations, System.String scenario, GreyscaleColors? value = default(GreyscaleColors?))
+            public static void ParamEnum(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ParamEnumAsync(scenario, value), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -997,7 +997,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ParamEnumAsync(this IHeader operations, System.String scenario, GreyscaleColors? value = default(GreyscaleColors?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ParamEnumAsync(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ParamEnumWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
             }
@@ -1012,7 +1012,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// Send a post request with header values "scenario": "valid" or "null" or
             /// "empty"
             /// </param>
-            public static HeaderResponseEnumHeaders ResponseEnum(this IHeader operations, System.String scenario)
+            public static HeaderResponseEnumHeaders ResponseEnum(this IHeader operations, string scenario)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeader)s).ResponseEnumAsync(scenario), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -1030,7 +1030,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<HeaderResponseEnumHeaders> ResponseEnumAsync(this IHeader operations, System.String scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderResponseEnumHeaders> ResponseEnumAsync(this IHeader operations, string scenario, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ResponseEnumWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
                 {

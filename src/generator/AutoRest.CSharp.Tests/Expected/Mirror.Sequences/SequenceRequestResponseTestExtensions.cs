@@ -59,7 +59,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='petStyle'>
             /// Pet style to add to the store
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> AddPetStyles(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<System.Int32?> petStyle)
+            public static System.Collections.Generic.IList<int?> AddPetStyles(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<int?> petStyle)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISequenceRequestResponseTest)s).AddPetStylesAsync(petStyle), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -76,7 +76,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> AddPetStylesAsync(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<System.Int32?> petStyle, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> AddPetStylesAsync(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<int?> petStyle, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.AddPetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -93,7 +93,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='petStyle'>
             /// Pet style to add to the store
             /// </param>
-            public static System.Collections.Generic.IList<System.Int32?> UpdatePetStyles(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<System.Int32?> petStyle)
+            public static System.Collections.Generic.IList<int?> UpdatePetStyles(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<int?> petStyle)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISequenceRequestResponseTest)s).UpdatePetStylesAsync(petStyle), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -110,7 +110,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Int32?>> UpdatePetStylesAsync(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<System.Int32?> petStyle, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<int?>> UpdatePetStylesAsync(this ISequenceRequestResponseTest operations, System.Collections.Generic.IList<int?> petStyle, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.UpdatePetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false))
                 {

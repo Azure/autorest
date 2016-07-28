@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the SubResource class.
         /// </summary>
         /// <param name="id">Sub Resource Id</param>
-        public SubResource(System.String id = default(System.String))
+        public SubResource(string id = default(string))
         {
             Id = id;
         }
@@ -30,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets sub Resource Id
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.String Id { get; private set; }
+        public string Id { get; private set; }
 
     }
 }

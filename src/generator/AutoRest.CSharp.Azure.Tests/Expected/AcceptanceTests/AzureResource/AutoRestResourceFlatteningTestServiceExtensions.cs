@@ -90,7 +90,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='resourceDictionary'>
             /// External Resource as a Dictionary to put
             /// </param>
-            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>))
+            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -108,7 +108,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
             }
@@ -120,7 +120,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IDictionary<System.String, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
+            public static System.Collections.Generic.IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -135,7 +135,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

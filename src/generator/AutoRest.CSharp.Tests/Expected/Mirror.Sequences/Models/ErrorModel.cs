@@ -20,7 +20,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
         /// </summary>
-        public ErrorModel(System.Int32 code, System.String message)
+        public ErrorModel(int code, string message)
         {
             Code = code;
             Message = message;
@@ -29,12 +29,12 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32 Code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
         /// <summary>
         /// Validate the object.

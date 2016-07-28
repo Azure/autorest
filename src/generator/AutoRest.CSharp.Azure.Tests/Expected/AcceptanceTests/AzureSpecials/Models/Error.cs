@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(System.Int32? status = default(System.Int32?), System.Int32? constantId = default(System.Int32?), System.String message = default(System.String))
+        public Error(int? status = default(int?), int? constantId = default(int?), string message = default(string))
         {
             Status = status;
             ConstantId = constantId;
@@ -30,17 +30,17 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.Int32? Status { get; set; }
+        public int? Status { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "constantId")]
-        public System.Int32? ConstantId { get; set; }
+        public int? ConstantId { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header values
         /// "啊齄丂狛狜隣郎隣兀﨩"</param>
-        public HeaderResponseByteHeaders(System.Byte[] value = default(System.Byte[]))
+        public HeaderResponseByteHeaders(byte[] value = default(byte[]))
         {
             Value = value;
         }
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header values "啊齄丂狛狜隣郎隣兀﨩"
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Byte[] Value { get; set; }
+        public byte[] Value { get; set; }
 
     }
 }

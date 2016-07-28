@@ -220,7 +220,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "complexBody");
             }
-            System.String apiVersion = "2016-02-29";
+            string apiVersion = "2016-02-29";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;

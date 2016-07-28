@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='resourceGroupName'>
             /// Resource Group name 'testgroup101'.
             /// </param>
-            public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, System.String resourceGroupName)
+            public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IGroupOperations)s).GetSampleResourceGroupAsync(resourceGroupName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -43,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, System.String resourceGroupName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {

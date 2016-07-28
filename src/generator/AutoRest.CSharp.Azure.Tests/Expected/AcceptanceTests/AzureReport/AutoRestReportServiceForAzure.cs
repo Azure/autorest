@@ -40,19 +40,19 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        public System.String AcceptLanguage { get; set; }
+        public string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running Operations.
         /// Default value is 30.
         /// </summary>
-        public System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is generated and
         /// included in each request. Default is true.
         /// </summary>
-        public System.Boolean? GenerateClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestReportServiceForAzure class.
@@ -305,7 +305,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, System.Int32?>>> GetReportWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -407,7 +407,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, System.Int32?>>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, int?>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -420,7 +420,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<System.String, System.Int32?>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<string, int?>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {

@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": 1 or
         /// -2</param>
-        public HeaderResponseIntegerHeaders(System.Int32? value = default(System.Int32?))
+        public HeaderResponseIntegerHeaders(int? value = default(int?))
         {
             Value = value;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "value": 1 or -2
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Int32? Value { get; set; }
+        public int? Value { get; set; }
 
     }
 }

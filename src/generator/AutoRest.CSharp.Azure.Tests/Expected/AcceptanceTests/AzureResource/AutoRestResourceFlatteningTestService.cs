@@ -40,19 +40,19 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        public System.String AcceptLanguage { get; set; }
+        public string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running Operations.
         /// Default value is 30.
         /// </summary>
-        public System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is generated and
         /// included in each request. Default is true.
         /// </summary>
-        public System.Boolean? GenerateClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -603,7 +603,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -745,7 +745,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
@@ -847,7 +847,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 throw ex;
             }
             // Create Result
-            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -860,7 +860,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>(_responseContent, this.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.Collections.Generic.IDictionary<string, FlattenedProduct>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (Newtonsoft.Json.JsonException ex)
                 {

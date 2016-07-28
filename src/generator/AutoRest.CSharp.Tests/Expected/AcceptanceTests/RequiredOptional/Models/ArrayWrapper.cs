@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
         /// </summary>
-        public ArrayWrapper(System.Collections.Generic.IList<System.String> value)
+        public ArrayWrapper(System.Collections.Generic.IList<string> value)
         {
             Value = value;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Collections.Generic.IList<System.String> Value { get; set; }
+        public System.Collections.Generic.IList<string> Value { get; set; }
 
         /// <summary>
         /// Validate the object.

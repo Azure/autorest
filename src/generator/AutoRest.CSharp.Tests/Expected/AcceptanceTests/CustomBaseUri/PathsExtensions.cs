@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// <param name='accountName'>
             /// Account Name
             /// </param>
-            public static void GetEmpty(this IPaths operations, System.String accountName)
+            public static void GetEmpty(this IPaths operations, string accountName)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).GetEmptyAsync(accountName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetEmptyAsync(this IPaths operations, System.String accountName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetEmptyAsync(this IPaths operations, string accountName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false);
             }

@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the C class.
         /// </summary>
-        public C(System.String httpCode = default(System.String))
+        public C(string httpCode = default(string))
         {
             HttpCode = httpCode;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "httpCode")]
-        public System.String HttpCode { get; set; }
+        public string HttpCode { get; set; }
 
     }
 }

@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsPutAsyncNoHeaderInRetryHeaders class.
         /// </summary>
-        public LROsPutAsyncNoHeaderInRetryHeaders(System.String azureAsyncOperation = default(System.String))
+        public LROsPutAsyncNoHeaderInRetryHeaders(string azureAsyncOperation = default(string))
         {
             AzureAsyncOperation = azureAsyncOperation;
         }
@@ -33,7 +33,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public System.String AzureAsyncOperation { get; set; }
+        public string AzureAsyncOperation { get; set; }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public SubProduct(System.String id = default(System.String), System.String provisioningState = default(System.String), System.String provisioningStateValues = default(System.String))
+        public SubProduct(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(id)
         {
             ProvisioningState = provisioningState;
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
-        public System.String ProvisioningState { get; set; }
+        public string ProvisioningState { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Succeeded', 'Failed', 'canceled',
@@ -44,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public System.String ProvisioningStateValues { get; private set; }
+        public string ProvisioningStateValues { get; private set; }
 
     }
 }

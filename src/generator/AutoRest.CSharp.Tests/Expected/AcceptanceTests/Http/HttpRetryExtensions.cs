@@ -50,7 +50,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put500(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put500(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Put500Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -67,7 +67,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put500Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put500Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put500WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Patch500(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Patch500(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Patch500Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Patch500Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Patch500Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Patch500WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -137,7 +137,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Post503(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Post503(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Post503Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -154,7 +154,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Post503Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Post503Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Post503WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -168,7 +168,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Delete503(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Delete503(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Delete503Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -185,7 +185,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Delete503Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Delete503Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Delete503WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -199,7 +199,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put504(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put504(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Put504Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -216,7 +216,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put504Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put504Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put504WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -230,7 +230,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Patch504(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Patch504(this IHttpRetry operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpRetry)s).Patch504Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -247,7 +247,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Patch504Async(this IHttpRetry operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Patch504Async(this IHttpRetry operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Patch504WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }

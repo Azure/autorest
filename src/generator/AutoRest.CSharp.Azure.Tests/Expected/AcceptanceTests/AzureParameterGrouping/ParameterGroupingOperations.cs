@@ -72,22 +72,22 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             {
                 parameterGroupingPostRequiredParameters.Validate();
             }
-            System.Int32 body = default(System.Int32);
+            int body = default(int);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 body = parameterGroupingPostRequiredParameters.Body;
             }
-            System.String customHeader = default(System.String);
+            string customHeader = default(string);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 customHeader = parameterGroupingPostRequiredParameters.CustomHeader;
             }
-            System.Int32? query = default(System.Int32?);
+            int? query = default(int?);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 query = parameterGroupingPostRequiredParameters.Query;
             }
-            System.String path = default(System.String);
+            string path = default(string);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 path = parameterGroupingPostRequiredParameters.Path;
@@ -246,12 +246,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostOptionalWithHttpMessagesAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParameters), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String customHeader = default(System.String);
+            string customHeader = default(string);
             if (parameterGroupingPostOptionalParameters != null)
             {
                 customHeader = parameterGroupingPostOptionalParameters.CustomHeader;
             }
-            System.Int32? query = default(System.Int32?);
+            int? query = default(int?);
             if (parameterGroupingPostOptionalParameters != null)
             {
                 query = parameterGroupingPostOptionalParameters.Query;
@@ -407,22 +407,22 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String headerOne = default(System.String);
+            string headerOne = default(string);
             if (firstParameterGroup != null)
             {
                 headerOne = firstParameterGroup.HeaderOne;
             }
-            System.Int32? queryOne = default(System.Int32?);
+            int? queryOne = default(int?);
             if (firstParameterGroup != null)
             {
                 queryOne = firstParameterGroup.QueryOne;
             }
-            System.String headerTwo = default(System.String);
+            string headerTwo = default(string);
             if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
                 headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo;
             }
-            System.Int32? queryTwo = default(System.Int32?);
+            int? queryTwo = default(int?);
             if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
                 queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo;
@@ -589,12 +589,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String headerOne = default(System.String);
+            string headerOne = default(string);
             if (firstParameterGroup != null)
             {
                 headerOne = firstParameterGroup.HeaderOne;
             }
-            System.Int32? queryOne = default(System.Int32?);
+            int? queryOne = default(int?);
             if (firstParameterGroup != null)
             {
                 queryOne = firstParameterGroup.QueryOne;

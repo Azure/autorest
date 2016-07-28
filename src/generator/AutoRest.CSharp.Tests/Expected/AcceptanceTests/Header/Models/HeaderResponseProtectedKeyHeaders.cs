@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="contentType">response with header value
         /// "Content-Type": "text/html"</param>
-        public HeaderResponseProtectedKeyHeaders(System.String contentType = default(System.String))
+        public HeaderResponseProtectedKeyHeaders(string contentType = default(string))
         {
             ContentType = contentType;
         }
@@ -36,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "Content-Type": "text/html"
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Content-Type")]
-        public System.String ContentType { get; set; }
+        public string ContentType { get; set; }
 
     }
 }

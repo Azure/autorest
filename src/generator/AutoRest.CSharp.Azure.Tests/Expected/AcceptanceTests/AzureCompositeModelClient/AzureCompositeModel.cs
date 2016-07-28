@@ -41,24 +41,24 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        public System.String SubscriptionId { get; private set; }
+        public string SubscriptionId { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        public System.String AcceptLanguage { get; set; }
+        public string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running Operations.
         /// Default value is 30.
         /// </summary>
-        public System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is generated and
         /// included in each request. Default is true.
         /// </summary>
-        public System.Boolean? GenerateClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
         /// Gets the IBasicOperations.
@@ -374,13 +374,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(System.String resourceGroupName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (resourceGroupName == null)
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "resourceGroupName");
             }
-            System.String apiVersion = "2014-04-01-preview";
+            string apiVersion = "2014-04-01-preview";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -554,7 +554,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (subscriptionId == null)
             {
@@ -564,7 +564,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "resourceGroupName");
             }
-            System.String apiVersion = "2014-04-01-preview";
+            string apiVersion = "2014-04-01-preview";
             CatalogDictionaryOfArray bodyParameter = new CatalogDictionaryOfArray();
             if (productDictionaryOfArray != null)
             {
@@ -751,7 +751,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(System.String subscriptionId, System.String resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<System.String, Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (subscriptionId == null)
             {
@@ -761,7 +761,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             {
                 throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "resourceGroupName");
             }
-            System.String apiVersion = "2014-04-01-preview";
+            string apiVersion = "2014-04-01-preview";
             CatalogArrayOfDictionary bodyParameter = new CatalogArrayOfDictionary();
             if (productArrayOfDictionary != null)
             {

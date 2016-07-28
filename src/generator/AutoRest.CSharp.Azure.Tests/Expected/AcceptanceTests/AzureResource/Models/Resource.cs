@@ -28,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <param name="type">Resource Type</param>
         /// <param name="location">Resource Location</param>
         /// <param name="name">Resource Name</param>
-        public Resource(System.String id = default(System.String), System.String type = default(System.String), System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String location = default(System.String), System.String name = default(System.String))
+        public Resource(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string))
         {
             Id = id;
             Type = type;
@@ -41,30 +41,30 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// Gets resource Id
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.String Id { get; private set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource Type
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
-        public System.String Type { get; private set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<System.String, System.String> Tags { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// Gets or sets resource Location
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets resource Name
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; private set; }
+        public string Name { get; private set; }
 
     }
 }

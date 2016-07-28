@@ -89,7 +89,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='resourceDictionary'>
             /// External Resource as a Dictionary to put
             /// </param>
-            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>))
+            public static void PutDictionary(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutDictionaryAsync(resourceDictionary), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -107,7 +107,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
             }
@@ -119,7 +119,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Collections.Generic.IDictionary<System.String, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
+            public static System.Collections.Generic.IDictionary<string, FlattenedProduct> GetDictionary(this IAutoRestResourceFlatteningTestService operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).GetDictionaryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -134,7 +134,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -265,7 +265,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='odatavalue'>
             /// URL value.
             /// </param>
-            public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String))
+            public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PostFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -297,7 +297,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<SimpleProduct> PostFlattenedSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<SimpleProduct> PostFlattenedSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostFlattenedSimpleProductWithHttpMessagesAsync(productId, maxProductDisplayName, description, genericValue, odatavalue, null, cancellationToken).ConfigureAwait(false))
                 {

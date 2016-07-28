@@ -39,19 +39,19 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        System.String AcceptLanguage { get; set; }
+        string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running
         /// Operations. Default value is 30.
         /// </summary>
-        System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is
         /// generated and included in each request. Default is true.
         /// </summary>
-        System.Boolean? GenerateClientRequestId { get; set; }
+        bool? GenerateClientRequestId { get; set; }
 
 
             /// <summary>
@@ -91,7 +91,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<System.String, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutDictionaryWithHttpMessagesAsync(System.Collections.Generic.IDictionary<string, FlattenedProduct> resourceDictionary = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get External Resource as a Dictionary
@@ -102,7 +102,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, FlattenedProduct>>> GetDictionaryWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Put External Resource as a ResourceCollection

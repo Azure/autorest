@@ -34,12 +34,12 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        System.String SubscriptionId { get; set; }
+        string SubscriptionId { get; set; }
 
         /// <summary>
         /// Required string following pattern \d{2}-\d{2}-\d{4}
         /// </summary>
-        System.String ApiVersion { get; set; }
+        string ApiVersion { get; set; }
 
 
             /// <summary>
@@ -57,7 +57,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(System.String resourceGroupName, System.Int32 id, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Validates body parameters on the method. See swagger for details.
@@ -76,7 +76,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(System.String resourceGroupName, System.Int32 id, Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

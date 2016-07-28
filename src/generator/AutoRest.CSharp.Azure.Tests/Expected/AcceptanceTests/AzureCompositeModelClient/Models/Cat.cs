@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String color = default(System.String), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>))
+        public Cat(int? id = default(int?), string name = default(string), string color = default(string), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>))
             : base(id, name)
         {
             Color = color;
@@ -30,7 +30,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
-        public System.String Color { get; set; }
+        public string Color { get; set; }
 
         /// <summary>
         /// </summary>

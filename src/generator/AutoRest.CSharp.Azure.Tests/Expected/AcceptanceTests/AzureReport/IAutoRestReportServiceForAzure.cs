@@ -39,19 +39,19 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        System.String AcceptLanguage { get; set; }
+        string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running
         /// Operations. Default value is 30.
         /// </summary>
-        System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is
         /// generated and included in each request. Default is true.
         /// </summary>
-        System.Boolean? GenerateClientRequestId { get; set; }
+        bool? GenerateClientRequestId { get; set; }
 
 
             /// <summary>
@@ -63,7 +63,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<System.String, System.Int32?>>> GetReportWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 }

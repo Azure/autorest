@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the IntWrapper class.
         /// </summary>
-        public IntWrapper(System.Int32? field1 = default(System.Int32?), System.Int32? field2 = default(System.Int32?))
+        public IntWrapper(int? field1 = default(int?), int? field2 = default(int?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
-        public System.Int32? Field1 { get; set; }
+        public int? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
-        public System.Int32? Field2 { get; set; }
+        public int? Field2 { get; set; }
 
     }
 }

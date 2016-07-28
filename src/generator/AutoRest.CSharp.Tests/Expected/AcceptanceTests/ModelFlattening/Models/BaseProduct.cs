@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
         /// <param name="description">Description of product.</param>
-        public BaseProduct(System.String productId, System.String description = default(System.String))
+        public BaseProduct(string productId, string description = default(string))
         {
             ProductId = productId;
             Description = description;
@@ -41,13 +41,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Angeles.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "base_product_id")]
-        public System.String ProductId { get; set; }
+        public string ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "base_product_description")]
-        public System.String Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// Validate the object.

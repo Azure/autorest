@@ -179,7 +179,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='field1'>
             /// Sample string.
             /// </param>
-            public static void PutReferencedConstant(this IEnumModel operations, System.String field1 = default(System.String))
+            public static void PutReferencedConstant(this IEnumModel operations, string field1 = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IEnumModel)s).PutReferencedConstantAsync(field1), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -196,7 +196,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutReferencedConstantAsync(this IEnumModel operations, System.String field1 = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutReferencedConstantAsync(this IEnumModel operations, string field1 = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutReferencedConstantWithHttpMessagesAsync(field1, null, cancellationToken).ConfigureAwait(false);
             }

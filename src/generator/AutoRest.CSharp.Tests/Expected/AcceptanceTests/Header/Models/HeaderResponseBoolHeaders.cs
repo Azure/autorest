@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header value "value": true or
         /// false</param>
-        public HeaderResponseBoolHeaders(System.Boolean? value = default(System.Boolean?))
+        public HeaderResponseBoolHeaders(bool? value = default(bool?))
         {
             Value = value;
         }
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header value "value": true or false
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Boolean? Value { get; set; }
+        public bool? Value { get; set; }
 
     }
 }

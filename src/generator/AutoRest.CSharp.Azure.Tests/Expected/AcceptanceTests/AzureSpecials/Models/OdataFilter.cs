@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the OdataFilter class.
         /// </summary>
-        public OdataFilter(System.Int32? id = default(System.Int32?), System.String name = default(System.String))
+        public OdataFilter(int? id = default(int?), string name = default(string))
         {
             Id = id;
             Name = name;
@@ -29,12 +29,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int32? Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
     }
 }

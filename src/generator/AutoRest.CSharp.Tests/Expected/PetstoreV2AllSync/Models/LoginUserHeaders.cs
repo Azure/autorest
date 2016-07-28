@@ -25,7 +25,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// </summary>
         /// <param name="xRateLimit">calls per hour allowed by the user</param>
         /// <param name="xExpiresAfter">date in UTC when toekn expires</param>
-        public LoginUserHeaders(System.Int32? xRateLimit = default(System.Int32?), System.DateTime? xExpiresAfter = default(System.DateTime?))
+        public LoginUserHeaders(int? xRateLimit = default(int?), System.DateTime? xExpiresAfter = default(System.DateTime?))
         {
             XRateLimit = xRateLimit;
             XExpiresAfter = xExpiresAfter;
@@ -35,7 +35,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// Gets or sets calls per hour allowed by the user
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "X-Rate-Limit")]
-        public System.Int32? XRateLimit { get; set; }
+        public int? XRateLimit { get; set; }
 
         /// <summary>
         /// Gets or sets date in UTC when toekn expires

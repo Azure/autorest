@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the LongWrapper class.
         /// </summary>
-        public LongWrapper(System.Int64? field1 = default(System.Int64?), System.Int64? field2 = default(System.Int64?))
+        public LongWrapper(long? field1 = default(long?), long? field2 = default(long?))
         {
             Field1 = field1;
             Field2 = field2;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
-        public System.Int64? Field1 { get; set; }
+        public long? Field1 { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field2")]
-        public System.Int64? Field2 { get; set; }
+        public long? Field2 { get; set; }
 
     }
 }

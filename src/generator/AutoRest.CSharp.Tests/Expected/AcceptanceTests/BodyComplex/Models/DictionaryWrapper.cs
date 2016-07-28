@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapper class.
         /// </summary>
-        public DictionaryWrapper(System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>))
+        public DictionaryWrapper(System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
         {
             DefaultProgram = defaultProgram;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "defaultProgram")]
-        public System.Collections.Generic.IDictionary<System.String, System.String> DefaultProgram { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> DefaultProgram { get; set; }
 
     }
 }

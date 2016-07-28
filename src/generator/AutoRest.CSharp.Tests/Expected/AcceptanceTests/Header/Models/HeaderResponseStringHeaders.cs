@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header values "The quick brown
         /// fox jumps over the lazy dog" or null or ""</param>
-        public HeaderResponseStringHeaders(System.String value = default(System.String))
+        public HeaderResponseStringHeaders(string value = default(string))
         {
             Value = value;
         }
@@ -37,7 +37,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// jumps over the lazy dog" or null or ""
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.String Value { get; set; }
+        public string Value { get; set; }
 
     }
 }

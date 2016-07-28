@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdWithHttpMessagesAsync(System.String fooClientRequestId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdWithHttpMessagesAsync(string fooClientRequestId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0
         /// in the header of the request, via a parameter group

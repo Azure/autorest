@@ -63,7 +63,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdWithHttpMessagesAsync(System.String fooClientRequestId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdWithHttpMessagesAsync(string fooClientRequestId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (fooClientRequestId == null)
             {
@@ -237,7 +237,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             {
                 headerCustomNamedRequestIdParamGroupingParameters.Validate();
             }
-            System.String fooClientRequestId = default(System.String);
+            string fooClientRequestId = default(string);
             if (headerCustomNamedRequestIdParamGroupingParameters != null)
             {
                 fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.FooClientRequestId;

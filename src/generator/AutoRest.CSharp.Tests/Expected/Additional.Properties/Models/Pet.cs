@@ -22,7 +22,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         /// <param name="additionalProperties">Unmatched properties from the
         /// message are deserialized this collection</param>
-        public Pet(System.Collections.Generic.IDictionary<System.String, Feature> additionalProperties = default(System.Collections.Generic.IDictionary<System.String, Feature>), System.String name = default(System.String), System.Int32? birthday = default(System.Int32?), WithStringDictionary wsd = default(WithStringDictionary), WithUntypedDictionary wud = default(WithUntypedDictionary), WithTypedDictionary wtd = default(WithTypedDictionary))
+        public Pet(System.Collections.Generic.IDictionary<string, Feature> additionalProperties = default(System.Collections.Generic.IDictionary<string, Feature>), string name = default(string), int? birthday = default(int?), WithStringDictionary wsd = default(WithStringDictionary), WithUntypedDictionary wud = default(WithUntypedDictionary), WithTypedDictionary wtd = default(WithTypedDictionary))
         {
             AdditionalProperties = additionalProperties;
             Name = name;
@@ -37,17 +37,17 @@ namespace Fixtures.AdditionalProperties.Models
         /// deserialized this collection
         /// </summary>
         [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<System.String, Feature> AdditionalProperties { get; set; }
+        public System.Collections.Generic.IDictionary<string, Feature> AdditionalProperties { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "birthday")]
-        public System.Int32? Birthday { get; set; }
+        public int? Birthday { get; set; }
 
         /// <summary>
         /// </summary>

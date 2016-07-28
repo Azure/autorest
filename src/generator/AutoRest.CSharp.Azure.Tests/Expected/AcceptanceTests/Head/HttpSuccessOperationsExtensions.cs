@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean Head200(this IHttpSuccessOperations operations)
+            public static bool Head200(this IHttpSuccessOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean> Head200Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool> Head200Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -50,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean Head204(this IHttpSuccessOperations operations)
+            public static bool Head204(this IHttpSuccessOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -64,7 +64,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean> Head204Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool> Head204Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean Head404(this IHttpSuccessOperations operations)
+            public static bool Head404(this IHttpSuccessOperations operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccessOperations)s).Head404Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -92,7 +92,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean> Head404Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool> Head404Async(this IHttpSuccessOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

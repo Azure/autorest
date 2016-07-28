@@ -2637,7 +2637,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutByteWithHttpMessagesAsync(System.Byte[] field = default(System.Byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             ByteWrapper complexBody = new ByteWrapper();
             if (field != null)

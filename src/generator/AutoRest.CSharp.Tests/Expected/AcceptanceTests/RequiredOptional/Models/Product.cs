@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(System.Int32 id, System.String name = default(System.String))
+        public Product(int id, string name = default(string))
         {
             Id = id;
             Name = name;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int32 Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Validate the object.

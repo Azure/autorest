@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the FirstParameterGroup class.
         /// </summary>
         /// <param name="queryOne">Query parameter with default</param>
-        public FirstParameterGroup(System.String headerOne = default(System.String), System.Int32? queryOne = default(System.Int32?))
+        public FirstParameterGroup(string headerOne = default(string), int? queryOne = default(int?))
         {
             HeaderOne = headerOne;
             QueryOne = queryOne;
@@ -35,13 +35,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.String HeaderOne { get; set; }
+        public string HeaderOne { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "")]
-        public System.Int32? QueryOne { get; set; }
+        public int? QueryOne { get; set; }
 
     }
 }

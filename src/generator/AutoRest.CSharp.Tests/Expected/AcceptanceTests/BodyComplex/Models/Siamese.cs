@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Siamese class.
         /// </summary>
-        public Siamese(System.Int32? id = default(System.Int32?), System.String name = default(System.String), System.String color = default(System.String), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>), System.String breed = default(System.String))
+        public Siamese(int? id = default(int?), string name = default(string), string color = default(string), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>), string breed = default(string))
             : base(id, name, color, hates)
         {
             Breed = breed;
@@ -29,7 +29,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "breed")]
-        public System.String Breed { get; set; }
+        public string Breed { get; set; }
 
     }
 }

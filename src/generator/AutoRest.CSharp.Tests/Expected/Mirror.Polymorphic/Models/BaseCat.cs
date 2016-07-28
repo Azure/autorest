@@ -23,7 +23,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="id">Id.</param>
         /// <param name="description">Description of a Animal.</param>
         /// <param name="color">cat color</param>
-        public BaseCat(System.String id = default(System.String), System.String description = default(System.String), System.String color = default(System.String))
+        public BaseCat(string id = default(string), string description = default(string), string color = default(string))
             : base(id, description)
         {
             Color = color;
@@ -33,7 +33,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Gets or sets cat color
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
-        public System.String Color { get; set; }
+        public string Color { get; set; }
 
     }
 }

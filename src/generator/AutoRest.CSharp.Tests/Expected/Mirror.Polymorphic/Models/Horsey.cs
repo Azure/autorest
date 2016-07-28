@@ -23,7 +23,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <param name="id">Id.</param>
         /// <param name="description">Description of a Animal.</param>
         /// <param name="breed">horse breed</param>
-        public Horsey(System.String id = default(System.String), System.String description = default(System.String), System.String breed = default(System.String))
+        public Horsey(string id = default(string), string description = default(string), string breed = default(string))
             : base(id, description)
         {
             Breed = breed;
@@ -33,7 +33,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// Gets or sets horse breed
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "breed")]
-        public System.String Breed { get; set; }
+        public string Breed { get; set; }
 
     }
 }

@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// <summary>
         /// Initializes a new instance of the Widget class.
         /// </summary>
-        public Widget(System.Int32? integer = default(System.Int32?), System.String stringProperty = default(System.String))
+        public Widget(int? integer = default(int?), string stringProperty = default(string))
         {
             Integer = integer;
             StringProperty = stringProperty;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "integer")]
-        public System.Int32? Integer { get; set; }
+        public int? Integer { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "string")]
-        public System.String StringProperty { get; set; }
+        public string StringProperty { get; set; }
 
     }
 }

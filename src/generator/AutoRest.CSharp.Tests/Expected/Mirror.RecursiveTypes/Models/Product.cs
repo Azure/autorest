@@ -24,7 +24,7 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// product for a given latitude & longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
-        public Product(System.String productId = default(System.String), Product parentProduct = default(Product), System.Collections.Generic.IList<Product> innerProducts = default(System.Collections.Generic.IList<Product>))
+        public Product(string productId = default(string), Product parentProduct = default(Product), System.Collections.Generic.IList<Product> innerProducts = default(System.Collections.Generic.IList<Product>))
         {
             ProductId = productId;
             ParentProduct = parentProduct;
@@ -38,7 +38,7 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// Angeles.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "product_id")]
-        public System.String ProductId { get; set; }
+        public string ProductId { get; set; }
 
         /// <summary>
         /// </summary>

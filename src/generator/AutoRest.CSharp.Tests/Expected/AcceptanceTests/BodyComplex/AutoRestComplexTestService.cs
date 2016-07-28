@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// API ID.
         /// </summary>
-        public System.String ApiVersion { get; private set; }
+        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// Gets the IBasicOperations.

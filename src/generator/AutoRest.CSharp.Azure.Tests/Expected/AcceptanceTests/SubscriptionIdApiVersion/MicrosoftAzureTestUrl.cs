@@ -40,29 +40,29 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         /// <summary>
         /// Subscription Id.
         /// </summary>
-        public System.String SubscriptionId { get; set; }
+        public string SubscriptionId { get; set; }
 
         /// <summary>
         /// API Version with value '2014-04-01-preview'.
         /// </summary>
-        public System.String ApiVersion { get; private set; }
+        public string ApiVersion { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
         /// </summary>
-        public System.String AcceptLanguage { get; set; }
+        public string AcceptLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets the retry timeout in seconds for Long Running Operations.
         /// Default value is 30.
         /// </summary>
-        public System.Int32? LongRunningOperationRetryTimeout { get; set; }
+        public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
         /// When set to true a unique x-ms-client-request-id value is generated and
         /// included in each request. Default is true.
         /// </summary>
-        public System.Boolean? GenerateClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
         /// Gets the IGroupOperations.

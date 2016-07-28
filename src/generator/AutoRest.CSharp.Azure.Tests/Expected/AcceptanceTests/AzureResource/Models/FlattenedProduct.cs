@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <param name="type">Resource Type</param>
         /// <param name="location">Resource Location</param>
         /// <param name="name">Resource Name</param>
-        public FlattenedProduct(System.String id = default(System.String), System.String type = default(System.String), System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String location = default(System.String), System.String name = default(System.String), System.String pname = default(System.String), System.Int32? lsize = default(System.Int32?), System.String provisioningState = default(System.String))
+        public FlattenedProduct(string id = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string location = default(string), string name = default(string), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
             : base(id, type, tags, location, name)
         {
             Pname = pname;
@@ -36,17 +36,17 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.pname")]
-        public System.String Pname { get; set; }
+        public string Pname { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.lsize")]
-        public System.Int32? Lsize { get; set; }
+        public int? Lsize { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
-        public System.String ProvisioningState { get; set; }
+        public string ProvisioningState { get; set; }
 
     }
 }

@@ -26,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
             /// </param>
-            public static void GetMethodPathValid(this ISkipUrlEncodingOperations operations, System.String unencodedPathParam)
+            public static void GetMethodPathValid(this ISkipUrlEncodingOperations operations, string unencodedPathParam)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodPathValidAsync(unencodedPathParam), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -43,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodPathValidAsync(this ISkipUrlEncodingOperations operations, System.String unencodedPathParam, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetMethodPathValidAsync(this ISkipUrlEncodingOperations operations, string unencodedPathParam, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetMethodPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false);
             }
@@ -57,7 +57,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='unencodedPathParam'>
             /// Unencoded path parameter with value 'path1/path2/path3'
             /// </param>
-            public static void GetPathPathValid(this ISkipUrlEncodingOperations operations, System.String unencodedPathParam)
+            public static void GetPathPathValid(this ISkipUrlEncodingOperations operations, string unencodedPathParam)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetPathPathValidAsync(unencodedPathParam), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetPathPathValidAsync(this ISkipUrlEncodingOperations operations, System.String unencodedPathParam, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetPathPathValidAsync(this ISkipUrlEncodingOperations operations, string unencodedPathParam, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetPathPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false);
             }
@@ -114,7 +114,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
             /// </param>
-            public static void GetMethodQueryValid(this ISkipUrlEncodingOperations operations, System.String q1)
+            public static void GetMethodQueryValid(this ISkipUrlEncodingOperations operations, string q1)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodQueryValidAsync(q1), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -132,7 +132,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodQueryValidAsync(this ISkipUrlEncodingOperations operations, System.String q1, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetMethodQueryValidAsync(this ISkipUrlEncodingOperations operations, string q1, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetMethodQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
             }
@@ -146,7 +146,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='q1'>
             /// Unencoded query parameter with value null
             /// </param>
-            public static void GetMethodQueryNull(this ISkipUrlEncodingOperations operations, System.String q1 = default(System.String))
+            public static void GetMethodQueryNull(this ISkipUrlEncodingOperations operations, string q1 = default(string))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetMethodQueryNullAsync(q1), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -163,7 +163,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetMethodQueryNullAsync(this ISkipUrlEncodingOperations operations, System.String q1 = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetMethodQueryNullAsync(this ISkipUrlEncodingOperations operations, string q1 = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetMethodQueryNullWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
             }
@@ -178,7 +178,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='q1'>
             /// Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
             /// </param>
-            public static void GetPathQueryValid(this ISkipUrlEncodingOperations operations, System.String q1)
+            public static void GetPathQueryValid(this ISkipUrlEncodingOperations operations, string q1)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((ISkipUrlEncodingOperations)s).GetPathQueryValidAsync(q1), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -196,7 +196,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task GetPathQueryValidAsync(this ISkipUrlEncodingOperations operations, System.String q1, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task GetPathQueryValidAsync(this ISkipUrlEncodingOperations operations, string q1, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetPathQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
             }

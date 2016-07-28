@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(System.Int32? code = default(System.Int32?), System.String message = default(System.String), System.String fields = default(System.String))
+        public Error(int? code = default(int?), string message = default(string), string fields = default(string))
         {
             Code = code;
             Message = message;
@@ -30,17 +30,17 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32? Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "fields")]
-        public System.String Fields { get; set; }
+        public string Fields { get; set; }
 
     }
 }

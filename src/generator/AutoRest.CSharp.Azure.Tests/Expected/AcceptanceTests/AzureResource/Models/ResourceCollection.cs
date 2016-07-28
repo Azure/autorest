@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
         /// </summary>
-        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), System.Collections.Generic.IList<FlattenedProduct> arrayofresources = default(System.Collections.Generic.IList<FlattenedProduct>), System.Collections.Generic.IDictionary<System.String, FlattenedProduct> dictionaryofresources = default(System.Collections.Generic.IDictionary<System.String, FlattenedProduct>))
+        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), System.Collections.Generic.IList<FlattenedProduct> arrayofresources = default(System.Collections.Generic.IList<FlattenedProduct>), System.Collections.Generic.IDictionary<string, FlattenedProduct> dictionaryofresources = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
         {
             Productresource = productresource;
             Arrayofresources = arrayofresources;
@@ -40,7 +40,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "dictionaryofresources")]
-        public System.Collections.Generic.IDictionary<System.String, FlattenedProduct> Dictionaryofresources { get; set; }
+        public System.Collections.Generic.IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
 
     }
 }

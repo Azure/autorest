@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// A string value that is used as a global part of the parameterized host
         /// </summary>
-        public System.String Host { get; set; }
+        public string Host { get; set; }
 
         /// <summary>
         /// Gets the IPaths.

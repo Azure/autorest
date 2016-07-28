@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(System.Int32? status = default(System.Int32?), System.String message = default(System.String))
+        public Error(int? status = default(int?), string message = default(string))
         {
             Status = status;
             Message = message;
@@ -29,12 +29,12 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.Int32? Status { get; set; }
+        public int? Status { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

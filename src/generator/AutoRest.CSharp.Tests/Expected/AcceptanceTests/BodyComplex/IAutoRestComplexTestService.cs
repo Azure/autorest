@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// API ID.
         /// </summary>
-        System.String ApiVersion { get; }
+        string ApiVersion { get; }
 
 
         /// <summary>

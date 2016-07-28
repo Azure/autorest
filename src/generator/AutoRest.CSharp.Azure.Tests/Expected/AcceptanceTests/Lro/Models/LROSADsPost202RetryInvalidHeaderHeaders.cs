@@ -29,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// set to /foo</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to /bar</param>
-        public LROSADsPost202RetryInvalidHeaderHeaders(System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
+        public LROSADsPost202RetryInvalidHeaderHeaders(string location = default(string), int? retryAfter = default(int?))
         {
             Location = location;
             RetryAfter = retryAfter;
@@ -40,14 +40,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// /foo
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to /bar
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
-        public System.Int32? RetryAfter { get; set; }
+        public int? RetryAfter { get; set; }
 
     }
 }

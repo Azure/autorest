@@ -52,7 +52,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='defaultProgram'>
             /// </param>
-            public static void PutValid(this IDictionary operations, System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>))
+            public static void PutValid(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).PutValidAsync(defaultProgram), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -68,7 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutValidAsync(this IDictionary operations, System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='defaultProgram'>
             /// </param>
-            public static void PutEmpty(this IDictionary operations, System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>))
+            public static void PutEmpty(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).PutEmptyAsync(defaultProgram), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -125,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task PutEmptyAsync(this IDictionary operations, System.Collections.Generic.IDictionary<System.String, System.String> defaultProgram = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task PutEmptyAsync(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }

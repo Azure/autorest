@@ -20,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(System.Int32? code = default(System.Int32?), System.String message = default(System.String))
+        public Error(int? code = default(int?), string message = default(string))
         {
             Code = code;
             Message = message;
@@ -29,12 +29,12 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32? Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

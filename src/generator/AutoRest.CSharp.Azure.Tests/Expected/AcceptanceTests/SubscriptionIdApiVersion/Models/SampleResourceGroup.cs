@@ -22,7 +22,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// </summary>
         /// <param name="name">resource group name 'testgroup101'</param>
         /// <param name="location">resource group location 'West US'</param>
-        public SampleResourceGroup(System.String name = default(System.String), System.String location = default(System.String))
+        public SampleResourceGroup(string name = default(string), string location = default(string))
         {
             Name = name;
             Location = location;
@@ -32,13 +32,13 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// Gets or sets resource group name 'testgroup101'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets resource group location 'West US'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
     }
 }

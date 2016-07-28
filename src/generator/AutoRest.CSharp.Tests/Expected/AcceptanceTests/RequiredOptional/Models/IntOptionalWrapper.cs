@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the IntOptionalWrapper class.
         /// </summary>
-        public IntOptionalWrapper(System.Int32? value = default(System.Int32?))
+        public IntOptionalWrapper(int? value = default(int?))
         {
             Value = value;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
-        public System.Int32? Value { get; set; }
+        public int? Value { get; set; }
 
     }
 }

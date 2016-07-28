@@ -56,7 +56,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='pagingGetMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePages(this IPagingOperations operations, System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePages(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -75,7 +75,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesAsync(this IPagingOperations operations, System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesAsync(this IPagingOperations operations, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesWithHttpMessagesAsync(clientRequestId, pagingGetMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -95,7 +95,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='pagingGetOdataMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetOdataMultiplePages(this IPagingOperations operations, System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
+            public static Microsoft.Rest.Azure.IPage<Product> GetOdataMultiplePages(this IPagingOperations operations, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -115,7 +115,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetOdataMultiplePagesAsync(this IPagingOperations operations, System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetOdataMultiplePagesAsync(this IPagingOperations operations, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOdataMultiplePagesWithHttpMessagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -134,7 +134,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             /// <param name='clientRequestId'>
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesWithOffset(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, System.String clientRequestId = default(System.String))
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesWithOffset(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -153,7 +153,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesWithOffsetAsync(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, System.String clientRequestId = default(System.String), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesWithOffsetAsync(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesWithOffsetWithHttpMessagesAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -316,7 +316,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetSinglePagesNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetSinglePagesNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -333,7 +333,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetSinglePagesNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetSinglePagesNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSinglePagesNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -355,7 +355,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='pagingGetMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -377,7 +377,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesNextAsync(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesNextAsync(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -400,7 +400,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='pagingGetOdataMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetOdataMultiplePagesNext(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
+            public static Microsoft.Rest.Azure.IPage<Product> GetOdataMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetOdataMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -423,7 +423,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetOdataMultiplePagesNextAsync(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetOdataMultiplePagesNextAsync(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = default(PagingGetOdataMultiplePagesOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOdataMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -445,7 +445,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='pagingGetMultiplePagesWithOffsetNextOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesWithOffsetNext(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions))
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesWithOffsetNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions))
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -467,7 +467,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesWithOffsetNextAsync(this IPagingOperations operations, System.String nextPageLink, System.String clientRequestId = default(System.String), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesWithOffsetNextAsync(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesWithOffsetNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -485,7 +485,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesRetryFirstNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesRetryFirstNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetryFirstNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -503,7 +503,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesRetryFirstNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesRetryFirstNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesRetryFirstNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -522,7 +522,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesRetrySecondNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesRetrySecondNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesRetrySecondNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -541,7 +541,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesRetrySecondNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesRetrySecondNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesRetrySecondNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -558,7 +558,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetSinglePagesFailureNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetSinglePagesFailureNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetSinglePagesFailureNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -575,7 +575,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetSinglePagesFailureNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetSinglePagesFailureNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSinglePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -592,7 +592,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFailureNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFailureNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -609,7 +609,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFailureNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFailureNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesFailureNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -626,7 +626,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='nextPageLink'>
             /// The NextLink from the previous successful call to List operation.
             /// </param>
-            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFailureUriNext(this IPagingOperations operations, System.String nextPageLink)
+            public static Microsoft.Rest.Azure.IPage<Product> GetMultiplePagesFailureUriNext(this IPagingOperations operations, string nextPageLink)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesFailureUriNextAsync(nextPageLink), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -643,7 +643,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFailureUriNextAsync(this IPagingOperations operations, System.String nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async Task<Microsoft.Rest.Azure.IPage<Product>> GetMultiplePagesFailureUriNextAsync(this IPagingOperations operations, string nextPageLink, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetMultiplePagesFailureUriNextWithHttpMessagesAsync(nextPageLink, null, cancellationToken).ConfigureAwait(false))
                 {

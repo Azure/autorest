@@ -22,7 +22,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         /// <param name="additionalProperties">Unmatched properties from the
         /// message are deserialized this collection</param>
-        public WithStringDictionary(System.Collections.Generic.IDictionary<System.String, System.String> additionalProperties = default(System.Collections.Generic.IDictionary<System.String, System.String>), System.String abc = default(System.String))
+        public WithStringDictionary(System.Collections.Generic.IDictionary<string, string> additionalProperties = default(System.Collections.Generic.IDictionary<string, string>), string abc = default(string))
         {
             AdditionalProperties = additionalProperties;
             Abc = abc;
@@ -33,12 +33,12 @@ namespace Fixtures.AdditionalProperties.Models
         /// deserialized this collection
         /// </summary>
         [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<System.String, System.String> AdditionalProperties { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> AdditionalProperties { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "abc")]
-        public System.String Abc { get; set; }
+        public string Abc { get; set; }
 
     }
 }

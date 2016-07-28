@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Boolean? Get200(this IHttpSuccess operations)
+            public static bool? Get200(this IHttpSuccess operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Get200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -61,7 +61,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Boolean?> Get200Async(this IHttpSuccess operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> Get200Async(this IHttpSuccess operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put200(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Put200Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -95,7 +95,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put200Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put200Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put200WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -109,7 +109,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Patch200(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Patch200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch200Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -126,7 +126,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Patch200Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Patch200Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Patch200WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Post200(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Post200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Post200Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Post200Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Post200Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Post200WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Delete200(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Delete200(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete200Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -188,7 +188,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Delete200Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Delete200Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Delete200WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -202,7 +202,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put201(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put201(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Put201Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -219,7 +219,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put201Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put201Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put201WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -233,7 +233,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Post201(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Post201(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Post201Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -250,7 +250,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Post201Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Post201Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Post201WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -264,7 +264,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put202(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Put202Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put202Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put202Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put202WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -295,7 +295,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Patch202(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Patch202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch202Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -312,7 +312,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Patch202Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Patch202Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Patch202WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -326,7 +326,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Post202(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Post202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Post202Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -343,7 +343,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Post202Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Post202Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Post202WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -357,7 +357,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Delete202(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Delete202(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete202Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -374,7 +374,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Delete202Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Delete202Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Delete202WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -413,7 +413,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Put204(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Put204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Put204Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -430,7 +430,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Put204Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Put204Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Put204WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -444,7 +444,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Patch204(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Patch204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Patch204Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -461,7 +461,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Patch204Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Patch204Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Patch204WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -475,7 +475,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Post204(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Post204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Post204Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -492,7 +492,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Post204Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Post204Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Post204WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }
@@ -506,7 +506,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='booleanValue'>
             /// Simple boolean value true
             /// </param>
-            public static void Delete204(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?))
+            public static void Delete204(this IHttpSuccess operations, bool? booleanValue = default(bool?))
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpSuccess)s).Delete204Async(booleanValue), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -523,7 +523,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Delete204Async(this IHttpSuccess operations, System.Boolean? booleanValue = default(System.Boolean?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Delete204Async(this IHttpSuccess operations, bool? booleanValue = default(bool?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Delete204WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
             }

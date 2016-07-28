@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         /// <param name="productDictionaryOfArray">Dictionary of Array of
         /// product</param>
-        public CatalogDictionaryOfArray(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>>))
+        public CatalogDictionaryOfArray(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>>))
         {
             ProductDictionaryOfArray = productDictionaryOfArray;
         }
@@ -31,7 +31,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Gets or sets dictionary of Array of product
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "productDictionaryOfArray")]
-        public System.Collections.Generic.IDictionary<System.String, System.Collections.Generic.IList<Product>> ProductDictionaryOfArray { get; set; }
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> ProductDictionaryOfArray { get; set; }
 
     }
 }

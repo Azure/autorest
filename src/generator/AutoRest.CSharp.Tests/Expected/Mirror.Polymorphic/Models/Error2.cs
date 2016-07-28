@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Error2 class.
         /// </summary>
-        public Error2(System.Int32? code = default(System.Int32?), System.String message = default(System.String), System.String fields = default(System.String))
+        public Error2(int? code = default(int?), string message = default(string), string fields = default(string))
         {
             Code = code;
             Message = message;
@@ -30,17 +30,17 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
-        public System.Int32? Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "fields")]
-        public System.String Fields { get; set; }
+        public string Fields { get; set; }
 
     }
 }

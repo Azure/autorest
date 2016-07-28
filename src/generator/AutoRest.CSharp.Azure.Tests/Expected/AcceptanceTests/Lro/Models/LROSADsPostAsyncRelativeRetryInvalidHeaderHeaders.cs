@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// set to foo</param>
         /// <param name="retryAfter">Number of milliseconds until the next
         /// poll should be sent, will be set to /bar</param>
-        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders(System.String azureAsyncOperation = default(System.String), System.String location = default(System.String), System.Int32? retryAfter = default(System.Int32?))
+        public LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders(string azureAsyncOperation = default(string), string location = default(string), int? retryAfter = default(int?))
         {
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
@@ -42,20 +42,20 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
-        public System.String AzureAsyncOperation { get; set; }
+        public string AzureAsyncOperation { get; set; }
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to foo
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to /bar
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
-        public System.Int32? RetryAfter { get; set; }
+        public int? RetryAfter { get; set; }
 
     }
 }

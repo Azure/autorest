@@ -252,7 +252,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Object Get200ModelA201ModelC404ModelDDefaultError200Valid(this IMultipleResponses operations)
+            public static object Get200ModelA201ModelC404ModelDDefaultError200Valid(this IMultipleResponses operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -266,7 +266,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Object> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<object> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -280,7 +280,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Object Get200ModelA201ModelC404ModelDDefaultError201Valid(this IMultipleResponses operations)
+            public static object Get200ModelA201ModelC404ModelDDefaultError201Valid(this IMultipleResponses operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -294,7 +294,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Object> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<object> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -308,7 +308,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Object Get200ModelA201ModelC404ModelDDefaultError404Valid(this IMultipleResponses operations)
+            public static object Get200ModelA201ModelC404ModelDDefaultError404Valid(this IMultipleResponses operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -322,7 +322,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Object> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<object> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -337,7 +337,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static System.Object Get200ModelA201ModelC404ModelDDefaultError400Valid(this IMultipleResponses operations)
+            public static object Get200ModelA201ModelC404ModelDDefaultError400Valid(this IMultipleResponses operations)
             {
                 return System.Threading.Tasks.Task.Factory.StartNew(s => ((IMultipleResponses)s).Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -352,7 +352,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task<System.Object> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task<object> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(this IMultipleResponses operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

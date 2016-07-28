@@ -20,7 +20,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the PetStyle class.
         /// </summary>
-        public PetStyle(System.String name)
+        public PetStyle(string name)
         {
             Name = name;
         }
@@ -28,7 +28,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Validate the object.

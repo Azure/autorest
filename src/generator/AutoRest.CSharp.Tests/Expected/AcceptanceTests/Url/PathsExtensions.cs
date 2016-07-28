@@ -350,7 +350,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='stringPath'>
             /// null string value
             /// </param>
-            public static void StringNull(this IPaths operations, System.String stringPath)
+            public static void StringNull(this IPaths operations, string stringPath)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).StringNullAsync(stringPath), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -367,7 +367,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task StringNullAsync(this IPaths operations, System.String stringPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task StringNullAsync(this IPaths operations, string stringPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.StringNullWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -447,7 +447,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='bytePath'>
             /// '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
             /// </param>
-            public static void ByteMultiByte(this IPaths operations, System.Byte[] bytePath)
+            public static void ByteMultiByte(this IPaths operations, byte[] bytePath)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).ByteMultiByteAsync(bytePath), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -464,7 +464,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ByteMultiByteAsync(this IPaths operations, System.Byte[] bytePath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ByteMultiByteAsync(this IPaths operations, byte[] bytePath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ByteMultiByteWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -503,7 +503,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='bytePath'>
             /// null as byte array (should throw)
             /// </param>
-            public static void ByteNull(this IPaths operations, System.Byte[] bytePath)
+            public static void ByteNull(this IPaths operations, byte[] bytePath)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).ByteNullAsync(bytePath), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -520,7 +520,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ByteNullAsync(this IPaths operations, System.Byte[] bytePath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ByteNullAsync(this IPaths operations, byte[] bytePath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ByteNullWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -650,7 +650,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='base64UrlPath'>
             /// base64url encoded value
             /// </param>
-            public static void Base64Url(this IPaths operations, System.Byte[] base64UrlPath)
+            public static void Base64Url(this IPaths operations, byte[] base64UrlPath)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).Base64UrlAsync(base64UrlPath), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -667,7 +667,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task Base64UrlAsync(this IPaths operations, System.Byte[] base64UrlPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task Base64UrlAsync(this IPaths operations, byte[] base64UrlPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Base64UrlWithHttpMessagesAsync(base64UrlPath, null, cancellationToken).ConfigureAwait(false);
             }
@@ -683,7 +683,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' ,
             /// null, ''] using the csv-array format
             /// </param>
-            public static void ArrayCsvInPath(this IPaths operations, System.Collections.Generic.IList<System.String> arrayPath)
+            public static void ArrayCsvInPath(this IPaths operations, System.Collections.Generic.IList<string> arrayPath)
             {
                 System.Threading.Tasks.Task.Factory.StartNew(s => ((IPaths)s).ArrayCsvInPathAsync(arrayPath), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -702,7 +702,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async System.Threading.Tasks.Task ArrayCsvInPathAsync(this IPaths operations, System.Collections.Generic.IList<System.String> arrayPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+            public static async System.Threading.Tasks.Task ArrayCsvInPathAsync(this IPaths operations, System.Collections.Generic.IList<string> arrayPath, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.ArrayCsvInPathWithHttpMessagesAsync(arrayPath, null, cancellationToken).ConfigureAwait(false);
             }

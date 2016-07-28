@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the BooleanWrapper class.
         /// </summary>
-        public BooleanWrapper(System.Boolean? fieldTrue = default(System.Boolean?), System.Boolean? fieldFalse = default(System.Boolean?))
+        public BooleanWrapper(bool? fieldTrue = default(bool?), bool? fieldFalse = default(bool?))
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field_true")]
-        public System.Boolean? FieldTrue { get; set; }
+        public bool? FieldTrue { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "field_false")]
-        public System.Boolean? FieldFalse { get; set; }
+        public bool? FieldFalse { get; set; }
 
     }
 }

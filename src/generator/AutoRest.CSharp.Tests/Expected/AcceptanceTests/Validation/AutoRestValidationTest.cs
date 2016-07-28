@@ -35,12 +35,12 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        public System.String SubscriptionId { get; set; }
+        public string SubscriptionId { get; set; }
 
         /// <summary>
         /// Required string following pattern \d{2}-\d{2}-\d{4}
         /// </summary>
-        public System.String ApiVersion { get; set; }
+        public string ApiVersion { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestValidationTest class.
@@ -176,7 +176,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(System.String resourceGroupName, System.Int32 id, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -372,7 +372,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(System.String resourceGroupName, System.Int32 id, Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -564,7 +564,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// </return>
         public async System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> GetWithConstantInPathWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            System.String constantParam = "constant";
+            string constantParam = "constant";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -670,7 +670,7 @@ namespace Fixtures.AcceptanceTestsValidation
             {
                 body.Validate();
             }
-            System.String constantParam = "constant";
+            string constantParam = "constant";
             // Tracing
             bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;

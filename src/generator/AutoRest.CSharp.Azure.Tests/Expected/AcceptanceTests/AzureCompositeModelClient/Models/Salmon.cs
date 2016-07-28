@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon(System.Double length, System.String species = default(System.String), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), System.String location = default(System.String), System.Boolean? iswild = default(System.Boolean?))
+        public Salmon(double length, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), string location = default(string), bool? iswild = default(bool?))
             : base(length, species, siblings)
         {
             Location = location;
@@ -31,12 +31,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "iswild")]
-        public System.Boolean? Iswild { get; set; }
+        public bool? Iswild { get; set; }
 
         /// <summary>
         /// Validate the object.

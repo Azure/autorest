@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <param name="description">Description of product.</param>
         /// <param name="genericValue">Generic URL value.</param>
         /// <param name="odatavalue">URL value.</param>
-        public SimpleProduct(System.String productId, System.String maxProductDisplayName, System.String description = default(System.String), System.String genericValue = default(System.String), System.String odatavalue = default(System.String))
+        public SimpleProduct(string productId, string maxProductDisplayName, string description = default(string), string genericValue = default(string), string odatavalue = default(string))
             : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
@@ -52,25 +52,25 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Gets or sets display name of product.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_display_name")]
-        public System.String MaxProductDisplayName { get; set; }
+        public string MaxProductDisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.generic_value")]
-        public System.String GenericValue { get; set; }
+        public string GenericValue { get; set; }
 
         /// <summary>
         /// Gets or sets URL value.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
-        public System.String Odatavalue { get; set; }
+        public string Odatavalue { get; set; }
 
         /// <summary>
         /// Capacity of product. For example, 4 people.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_capacity")]
-        public static System.String Capacity { get; private set; }
+        public static string Capacity { get; private set; }
 
         /// <summary>
         /// Validate the object.
