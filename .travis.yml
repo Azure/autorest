@@ -27,7 +27,7 @@ install:
   - rvm use 2.3.0 --install --binary --fuzzy
   - gem install bundler
   - bundle install
-  - pip install --user tox
+  - pip install --user tox-travis
   # Install android SDK
   - mkdir android
   - wget -qO- "http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz" | tar -zxv -C ./android
