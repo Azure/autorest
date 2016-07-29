@@ -149,14 +149,14 @@ declare class AutoRestResourceFlatteningTestService {
          * 
          * @param {object} [options.simpleBodyProduct] Simple body product to put
          * 
-         * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
+         * @param {string} options.simpleBodyProduct.maxProductDisplayName Display
          * name of product.
          * 
          * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
          * 
          * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
          * 
-         * @param {string} [options.simpleBodyProduct.productId] Unique identifier
+         * @param {string} options.simpleBodyProduct.productId Unique identifier
          * representing a specific product for a given latitude & longitude. For
          * example, uberX in San Francisco will have a different product_id than
          * uberX in Los Angeles.
@@ -205,18 +205,18 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {object} flattenParameterGroup Additional parameters for the
          * operation
          * 
-         * @param {string} [flattenParameterGroup.name] Product name with value
+         * @param {string} flattenParameterGroup.name Product name with value
          * 'groupproduct'
          * 
-         * @param {string} [flattenParameterGroup.productId] Unique identifier
+         * @param {string} flattenParameterGroup.productId Unique identifier
          * representing a specific product for a given latitude & longitude. For
          * example, uberX in San Francisco will have a different product_id than
          * uberX in Los Angeles.
          * 
          * @param {string} [flattenParameterGroup.description] Description of product.
          * 
-         * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
-         * of product.
+         * @param {string} flattenParameterGroup.maxProductDisplayName Display name of
+         * product.
          * 
          * @param {string} [flattenParameterGroup.genericValue] Generic URL value.
          * 

@@ -25,7 +25,6 @@ module @(Settings.Namespace)
     @if (Model.IsPolymorphic && Model.BaseModelType == null)
     {
       @:@@@@discriminatorMap = Hash.new
-      @:@@@@discriminatorMap["@Model.SerializedName"] = "@Model.Name"
       foreach (var derivedType in Model.DerivedTypes)
       {
       @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name"

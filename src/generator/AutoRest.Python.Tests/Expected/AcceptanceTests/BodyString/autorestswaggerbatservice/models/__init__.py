@@ -10,11 +10,13 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
+from .ref_color_constant import RefColorConstant
 from .auto_rest_swagger_bat_service_enums import (
     Colors,
 )
 
 __all__ = [
     'Error', 'ErrorException',
+    'RefColorConstant',
     'Colors',
 ]

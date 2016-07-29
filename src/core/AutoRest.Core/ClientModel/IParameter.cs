@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Core.ClientModel
 {
@@ -15,6 +16,7 @@ namespace AutoRest.Core.ClientModel
         Dictionary<string, object> Extensions { get; }
         bool IsConstant { get; set; }
         bool IsRequired { get; set; }
+        [Rule(typeof(IsIdentifier))]
         string Name { get; set; }
         string SerializedName { get; set; }
         IType Type { get; set; }

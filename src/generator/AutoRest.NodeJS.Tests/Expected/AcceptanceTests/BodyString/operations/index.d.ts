@@ -261,4 +261,67 @@ export interface EnumModel {
      */
     putNotExpandable(stringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putNotExpandable(stringBody: string, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getReferenced(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string>): void;
+    getReferenced(callback: ServiceCallback<string>): void;
+
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color',
+     * 'blue_color'
+     *
+     * @param {string} enumStringBody Possible values include: 'red color',
+     * 'green-color', 'blue_color'
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putReferenced(enumStringBody: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putReferenced(enumStringBody: string, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getReferencedConstant(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.RefColorConstant>): void;
+    getReferencedConstant(callback: ServiceCallback<models.RefColorConstant>): void;
+
+    /**
+     * Sends value 'green-color' from a constant
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.field1] Sample string.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putReferencedConstant(options: { field1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putReferencedConstant(callback: ServiceCallback<void>): void;
 }

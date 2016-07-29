@@ -22,3 +22,14 @@ export interface ErrorModel {
     status?: number;
     message?: string;
 }
+
+/**
+ * @class
+ * Initializes a new instance of the RefColorConstant class.
+ * @constructor
+ * @member {string} [field1] Sample string.
+ * 
+ */
+export interface RefColorConstant {
+    field1?: string;
+}

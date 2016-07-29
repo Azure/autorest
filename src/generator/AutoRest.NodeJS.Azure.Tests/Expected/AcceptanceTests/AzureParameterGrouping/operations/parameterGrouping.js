@@ -35,15 +35,14 @@ function ParameterGrouping(client) {
  * @param {object} parameterGroupingPostRequiredParameters Additional
  * parameters for the operation
  * 
- * @param {number} [parameterGroupingPostRequiredParameters.body]
+ * @param {number} parameterGroupingPostRequiredParameters.body
  * 
  * @param {string} [parameterGroupingPostRequiredParameters.customHeader]
  * 
  * @param {number} [parameterGroupingPostRequiredParameters.query] Query
  * parameter with default
  * 
- * @param {string} [parameterGroupingPostRequiredParameters.path] Path
- * parameter
+ * @param {string} parameterGroupingPostRequiredParameters.path Path parameter
  * 
  * @param {object} [options] Optional Parameters.
  * 

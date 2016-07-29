@@ -512,7 +512,7 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
  * @param {number} [pagingGetMultiplePagesWithOffsetOptions.maxresults] Sets
  * the maximum number of items to return in the response.
  * 
- * @param {number} [pagingGetMultiplePagesWithOffsetOptions.offset] Offset of
+ * @param {number} pagingGetMultiplePagesWithOffsetOptions.offset Offset of
  * return value
  * 
  * @param {number} [pagingGetMultiplePagesWithOffsetOptions.timeout] Sets the

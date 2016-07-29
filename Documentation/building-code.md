@@ -3,6 +3,27 @@
 ## Build Prerequisites
 AutoRest is developed primarily in C# but generates code for multiple languages. To build and test AutoRest requires a few things be installed locally.
 
+### Initialize Settings
+To set up a machine with the necessary tools for building AutoRest, run `.\Tools\initialize-settings.ps1`; this script will determine which tools are missing on your machine and installs them. **After all installations are complete, the script will restart your machine.**
+
+`initialize-settings.ps1` will look for the following tools on your machine:
+- .NET 4.5+
+- Java
+- Node.js
+- Ruby
+- Gradle
+- Python
+- tox
+- Visual Studio 2015
+- .NET CoreCLR
+
+After your machine restarts, run the following commands to complete the Android SDK installation:
+>`(echo y | android update sdk -u -a -t build-tools-23.0.1) && (echo y | android update sdk -u -a -t android-23) && (echo y | android update sdk -u -a -t extra-android-m2repository)`
+>`Copy-Item "$($env:LOCALAPPDATA)\Android" "C:\Program Files (x86)\Android" -recurse`
+
+You will also want to run the following command from the project root:
+>`gem install bundler && npm install && npm install gulp && npm install gulp -g && npm update`
+
 ### .Net
 #### on Windows 
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).

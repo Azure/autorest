@@ -36,7 +36,7 @@ function StorageAccounts(client) {
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {string} [accountName.name]
+ * @param {string} accountName.name
  * 
  * @param {string} [accountName.type]
  * 
@@ -212,7 +212,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
@@ -305,7 +305,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
@@ -785,7 +785,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * indirect CName validation is enabled. Default value is false. This should
  * only be set on updates
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 

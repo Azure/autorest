@@ -40,14 +40,18 @@ module MsRestAzure
       expect(status.retry_after).to eq(10)
     end
 
-    it 'should throw error during deserialization if invalid status was provided' do
+    it 'should not throw error during deserialization if unknown status was provided' do
       response_json = {
-          'status' => 'NotValidStatus',
+          'status' => 'Provisioning',
           'error' => nil,
           'retryAfter' => 5
       }
 
-      expect { status = AsyncOperationStatus.deserialize_object response_json }.to raise_error(AzureOperationError)
+      status = AsyncOperationStatus.deserialize_object response_json
+
+      expect(status.status).to eq('Provisioning')
+      expect(status.error).to be_nil
+      expect(status.retry_after).to eq(5)
     end
   end
 
