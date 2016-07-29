@@ -1,0 +1,37 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: my_operation
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+
+definitions:
+  ResultObject:
+    properties:
+      properties:
+        x-ms-client-flatten: true
+        $ref: '#/definitions/MoreProperties'
+    allOf: [{$ref: '#/definitions/TestAllOfObject'}]
+    
+  MoreProperties:
+    properties:
+      SampleString:
+        type: string
+        description: 'This is a sample string'
+
+  TestAllOfObject:
+    properties:
+      String1:
+        type: string
+        description: 'This is a sample string1'
+      Int1:
+        type: integer
+        format: int32
+        description: 'This is a sample integer'

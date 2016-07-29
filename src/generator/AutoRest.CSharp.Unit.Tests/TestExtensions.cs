@@ -68,7 +68,8 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 try
                 {
-                    Directory.Delete(outputFolder, true);
+                    fileSystem.EmptyDirectory(outputFolder);
+                    fileSystem.DeleteDirectory(outputFolder);
                 }
                 catch
                 {
