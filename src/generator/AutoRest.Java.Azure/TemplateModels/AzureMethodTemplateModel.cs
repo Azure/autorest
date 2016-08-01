@@ -381,8 +381,9 @@ namespace AutoRest.Java.Azure.TemplateModels
 
                 builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
-                    .AppendLine("public Page<{0}> nextPage(String nextPageLink) throws {1}, IOException {{",
+                    .AppendLine("public Page<{0}> nextPage(String {1}) throws {2}, IOException {{",
                         ((SequenceType)ReturnType.Body).ElementType.Name,
+                        nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name,
                         OperationExceptionTypeString)
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
@@ -447,7 +448,9 @@ namespace AutoRest.Java.Azure.TemplateModels
                 var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
                     invocation,
                     filterRequired ? nextMethod.MethodRequiredParameterInvocationWithCallback : nextMethod.MethodParameterInvocationWithCallback);
-                builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
+                builder.AppendLine(nextCall.Replace(
+                    string.Format(", {0}", nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
+                    "")).Outdent();
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
@@ -470,7 +473,9 @@ namespace AutoRest.Java.Azure.TemplateModels
                 var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.getBody().getNextPageLink(), {1});",
                     this.Name,
                     filterRequired ? MethodRequiredParameterInvocationWithCallback : MethodParameterInvocationWithCallback);
-                builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
+                builder.AppendLine(nextCall.Replace(
+                    string.Format(", {0}", ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name),
+                    "")).Outdent();
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
