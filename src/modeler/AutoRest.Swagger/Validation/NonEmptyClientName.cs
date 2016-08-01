@@ -3,32 +3,26 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
-using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class NonEmptyClientName : TypedRule<SwaggerObject>
+    public class NonEmptyClientName : ExtensionRule
     {
-        public override bool IsValid(SwaggerObject entity)
-        {
-            bool valid = true;
+        protected override string ExtensionName => "x-ms-client-name";
 
-            object clientName = null;
-            if (entity != null && entity.Extensions != null && entity.Extensions.TryGetValue("x-ms-client-name", out clientName))
+        public override bool IsValid(object clientName)
+        {
+            var ext = clientName as Newtonsoft.Json.Linq.JContainer;
+            if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
             {
-                var ext = clientName as Newtonsoft.Json.Linq.JContainer;
-                if (ext != null && (ext["name"] == null || string.IsNullOrEmpty(ext["name"].ToString())))
-                {
-                    valid = false;
-                }
-                else if (string.IsNullOrEmpty(clientName as string))
-                {
-                    valid = false;
-                }
+                return false;
+            }
+            else if (string.IsNullOrEmpty(clientName as string))
+            {
+                return false;
             }
 
-            return valid;
+            return true;
         }
 
         /// <summary>
@@ -43,6 +37,5 @@ namespace AutoRest.Swagger.Validation
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
-
     }
 }

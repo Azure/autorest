@@ -23,6 +23,7 @@
       "get": {
         "summary": "List all pets",
         "operationId": "listPets",
+        "description": "foo",
         "tags": [
           "pets"
         ],
@@ -60,6 +61,7 @@
       "post": {
         "summary": "Create a pet",
         "operationId": "createPets",
+        "description": "foo",
         "tags": [
           "pets"
         ],
@@ -80,6 +82,7 @@
       "get": {
         "summary": "Info for a specific pet",
         "operationId": "showPetById",
+        "description": "foo",
         "tags": [
           "pets"
         ],
@@ -111,6 +114,7 @@
     "/foo": {
       "get": {
         "operationId": "Foo_Get",
+        "description": "foo",
         "responses": {
           "default": {
             "$ref": "#/responses/FooResponse"
@@ -119,6 +123,34 @@
       },
       "post": {
         "operationId": "Foo_Post",
+        "description": "foo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fooPost",
+            "schema": {
+              "type": "object",
+              "description": "A foo object"
+            },
+            "description": "Foo body parameter"
+          },
+          {
+            "$ref": "#/parameters/FooQueryParam"
+          }
+        ],
+        "responses": {
+          "default": {
+            "$ref": "#/responses/FooResponse"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/foo?overload=true": {
+      "post": {
+        "operationId": "Foo_PostOverload",
+        "description": "foo",
         "parameters": [
           {
             "in": "body",
@@ -201,6 +233,17 @@
         }
       },
       "description": "An error result"
+    },
+    "Foo": {
+      "description": "foo",
+      "x-ms-external": true,
+      "properties": {
+        "bar": {
+          "description": "bar",
+          "type": "string",
+          "x-ms-client-name": "Baz"
+        }
+      }
     }
   }
 }

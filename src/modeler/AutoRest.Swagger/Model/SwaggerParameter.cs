@@ -3,6 +3,8 @@
 
 using System;
 using Newtonsoft.Json;
+using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model
 {
@@ -11,6 +13,7 @@ namespace AutoRest.Swagger.Model
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
     [Serializable]
+    [Rule(typeof(ParameterDescriptionRequired))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;

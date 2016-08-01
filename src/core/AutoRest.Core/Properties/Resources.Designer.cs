@@ -294,15 +294,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Type {0} and format {1} is not a supported combination.
-        /// </summary>
-        public static string InvalidTypeFormatCombination {
-            get {
-                return ResourceManager.GetString("InvalidTypeFormatCombination", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to &apos;{0}&apos; code generator does not support code generation to a single file..
         /// </summary>
         public static string LanguageDoesNotSupportSingleFileGeneration {
@@ -456,7 +447,16 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to The path &apos;{0}&apos; in x-ms-paths does not overload a normal path in the paths section..
+        ///    Looks up a localized string similar to &apos;{0}&apos; is not a known format..
+        /// </summary>
+        public static string UnknownFormat {
+            get {
+                return ResourceManager.GetString("UnknownFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section..
         /// </summary>
         public static string XMSPathBaseNotInPaths {
             get {

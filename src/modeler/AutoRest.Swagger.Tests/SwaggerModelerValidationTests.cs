@@ -61,7 +61,7 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(DescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
         }
 
         [Fact]
@@ -126,6 +126,41 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "xms-path-not-in-paths.json"));
             messages.AssertOnlyValidationMessage(typeof(XmsPathsMustOverloadPaths));
+        }
+
+        [Fact]
+        public void InvalidFormatValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "invalid-format.json"));
+            messages.AssertOnlyValidationMessage(typeof(ValidFormats));
+        }
+
+        [Fact]
+        public void NestedPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "nested-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(AvoidNestedProperties));
+        }
+
+        [Fact]
+        public void RequiredPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "required-property-not-in-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
+        }
+
+        [Fact]
+        public void OperationDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operation-missing-description.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationDescriptionRequired));
+        }
+
+        [Fact]
+        public void ParameterDescriptionValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "parameter-missing-description.json"));
+            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired));
         }
     }
 }
