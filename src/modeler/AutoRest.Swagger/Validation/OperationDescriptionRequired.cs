@@ -8,15 +8,15 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class DescriptionRequired : TypedRule<SwaggerObject>
+    public class OperationDescriptionRequired : TypedRule<Operation>
     {
         /// <summary>
         /// This rule fails if the description is null and the reference is null (since the reference could have a description)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerObject entity)
-            => entity == null || entity.Description != null || !string.IsNullOrEmpty(entity.Reference);
+        public override bool IsValid(Operation entity)
+            => entity == null || entity.Description != null;
 
         /// <summary>
         /// The template message for this Rule. 

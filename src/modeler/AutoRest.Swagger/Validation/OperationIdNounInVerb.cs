@@ -23,7 +23,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity">The operation id to test</param>
         /// <param name="formatParameters">The noun to be put in the failure message</param>
         /// <returns></returns>
-        public override bool IsValid(string entity, out object[] formatParameters)
+        public override bool IsValid(string entity, RuleContext context, out object[] formatParameters)
         {
             foreach (Match match in Regex.Matches(entity, NOUN_VERB_PATTERN))
             {

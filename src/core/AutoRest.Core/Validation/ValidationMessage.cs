@@ -20,11 +20,11 @@ namespace AutoRest.Core.Validation
             Severity = rule.Severity;
             Message = string.Empty;
         }
-        public ValidationMessage(Rule rule,params object[] formatArguments)
+        public ValidationMessage(Rule rule, params object[] formatArguments)
         {
             Type = rule.GetType();
             Severity = rule.Severity;
-            Message = string.Format(CultureInfo.CurrentCulture,rule.MessageTemplate, formatArguments);
+            Message = string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments);
         }
 
         /// <summary>
