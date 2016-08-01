@@ -6,18 +6,25 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
     public class AvoidNestedProperties : TypedRule<Schema>
     {
+        private const string ClientFlattenExtensionName = "x-ms-client-flatten";
         /// <summary>
         /// An <paramref name="entity" /> fails this rule if it 
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         public override bool IsValid(Schema schema, RuleContext context)
-            => context.Key != "properties" || schema.Extensions.ContainsKey("x-ms-client-flatten");
+            => context.Key != "properties" || IsClientFlattenUsed(schema.Extensions);
+
+        private static bool IsClientFlattenUsed(Dictionary<string, object> extensions)
+            => extensions.ContainsKey(ClientFlattenExtensionName)
+            && extensions[ClientFlattenExtensionName] is bool
+            && (bool)extensions[ClientFlattenExtensionName] == true;
 
         /// <summary>
         ///     The template message for this Rule.

@@ -80,20 +80,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void RefSiblingPropertiesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "ref-sibling-properties.json"));
-            messages.AssertOnlyValidationWarning(typeof(RefsMustNotHaveSiblings));
-        }
-
-        [Fact]
-        public void NoResponsesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(typeof(DefaultResponseRequired));
-        }
-
-        [Fact]
         public void AnonymousSchemasDiscouragedValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "anonymous-response-type.json"));
@@ -115,10 +101,10 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void MissingDefaultResponseValidation()
+        public void NoResponsesValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-default-response.json"));
-            messages.AssertOnlyValidationMessage(typeof(DefaultResponseRequired));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "operations-no-responses.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResponseRequired));
         }
 
         [Fact]
