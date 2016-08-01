@@ -39,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+        public override LogEntrySeverity Severity => LogEntrySeverity.Info;
 
     }
 }

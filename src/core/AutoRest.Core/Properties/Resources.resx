@@ -226,7 +226,7 @@
     <value>Could not find a definition for the path parameter '{0}'</value>
   </data>
   <data name="NoResponses" xml:space="preserve">
-    <value>No response objects defined.</value>
+    <value>No responses defined.</value>
   </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
@@ -239,9 +239,6 @@
   </data>
   <data name="CodeGenerationError" xml:space="preserve">
     <value>Errors found during Swagger document validation.</value>
-  </data>
-  <data name="NoDefaultResponse" xml:space="preserve">
-    <value>There is no default response defined in the responses section</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
     <value>Paths in x-ms-paths must overload a normal path in the paths section.</value>

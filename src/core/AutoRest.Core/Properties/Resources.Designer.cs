@@ -348,15 +348,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to There is no default response defined in the responses section.
-        /// </summary>
-        public static string NoDefaultResponse {
-            get {
-                return ResourceManager.GetString("NoDefaultResponse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Could not find a definition for the path parameter &apos;{0}&apos;.
         /// </summary>
         public static string NoDefinitionForPathParameter {
@@ -366,7 +357,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to No response objects defined..
+        ///    Looks up a localized string similar to No responses defined..
         /// </summary>
         public static string NoResponses {
             get {

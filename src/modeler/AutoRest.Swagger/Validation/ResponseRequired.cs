@@ -6,10 +6,11 @@ using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class DefaultResponseRequired : TypedRule<IDictionary<string, OperationResponse>>
+    public class ResponseRequired : TypedRule<IDictionary<string, OperationResponse>>
     {
         /// <summary>
         /// This rule fails if the <paramref name="entity"/> lacks responses or lacks a default response
@@ -17,7 +18,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity"></param>
         /// <returns></returns>
         public override bool IsValid(IDictionary<string, OperationResponse> entity)
-            => entity != null && entity.ContainsKey("default");
+            => entity != null && entity.Any();
 
         /// <summary>
         /// The template message for this Rule. 
@@ -25,7 +26,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.NoDefaultResponse;
+        public override string MessageTemplate => Resources.NoResponses;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
