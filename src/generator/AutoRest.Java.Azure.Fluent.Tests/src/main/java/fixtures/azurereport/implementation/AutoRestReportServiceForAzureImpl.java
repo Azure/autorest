@@ -201,9 +201,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Map<String, Integer>>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getReport(this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Map<String, Integer>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

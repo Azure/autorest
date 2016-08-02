@@ -18,7 +18,7 @@ import retrofit2.Call;
  *
  * @param <T> the type of the returning object
  */
-public class ServiceCall<T> extends AbstractFuture<T> {
+public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     /**
      * The Retrofit method invocation.
      */
@@ -71,10 +71,10 @@ public class ServiceCall<T> extends AbstractFuture<T> {
      * Invoke this method to report completed, allowing
      * {@link AbstractFuture#get()} to be unblocked.
      *
-     * @param result the object returned.
+     * @param result the service response returned.
      * @return true if successfully reported; false otherwise.
      */
-    public boolean success(T result) {
+    public boolean success(ServiceResponse<T> result) {
         return set(result);
     }
 

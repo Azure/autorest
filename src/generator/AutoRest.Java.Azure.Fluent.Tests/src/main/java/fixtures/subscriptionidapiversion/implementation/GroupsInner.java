@@ -90,7 +90,7 @@ public final class GroupsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+    public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -101,7 +101,7 @@ public final class GroupsInner {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SampleResourceGroupInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SampleResourceGroupInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SampleResourceGroupInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

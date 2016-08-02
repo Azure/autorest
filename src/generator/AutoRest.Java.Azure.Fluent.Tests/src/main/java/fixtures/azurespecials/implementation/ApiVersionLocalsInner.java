@@ -90,10 +90,10 @@ public final class ApiVersionLocalsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -140,10 +140,10 @@ public final class ApiVersionLocalsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
         final String apiVersion = null;
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -184,9 +184,9 @@ public final class ApiVersionLocalsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -233,10 +233,10 @@ public final class ApiVersionLocalsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -283,10 +283,10 @@ public final class ApiVersionLocalsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         final String apiVersion = "2.0";
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

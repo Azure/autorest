@@ -295,7 +295,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -337,7 +337,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -370,10 +370,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -415,10 +415,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -474,7 +474,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -516,7 +516,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -549,10 +549,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -594,10 +594,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -653,7 +653,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -695,7 +695,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -728,10 +728,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -773,10 +773,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -832,7 +832,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -874,7 +874,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -907,10 +907,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> beginPutAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -952,10 +952,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> beginPutAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1008,7 +1008,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1040,9 +1040,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400HeadersInner>> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1095,7 +1095,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1127,9 +1127,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400HeadersInner>> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1182,7 +1182,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1214,9 +1214,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400HeadersInner>> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1271,7 +1271,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1313,7 +1313,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1346,10 +1346,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1391,10 +1391,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> beginPostNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1449,7 +1449,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1491,7 +1491,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1524,10 +1524,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1569,10 +1569,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> beginPost202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1627,7 +1627,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1669,7 +1669,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1702,10 +1702,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1747,10 +1747,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> beginPostAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1805,7 +1805,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1847,7 +1847,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1880,10 +1880,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1925,10 +1925,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1984,7 +1984,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2026,7 +2026,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2059,10 +2059,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2104,10 +2104,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2162,7 +2162,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2204,7 +2204,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2237,10 +2237,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2282,10 +2282,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2338,7 +2338,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2370,9 +2370,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2425,7 +2425,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2457,9 +2457,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2514,7 +2514,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2556,7 +2556,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2589,10 +2589,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2634,10 +2634,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> beginPost202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2692,7 +2692,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2734,7 +2734,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2767,10 +2767,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2812,10 +2812,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2870,7 +2870,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2912,7 +2912,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2945,10 +2945,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPut200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2990,10 +2990,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPut200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3049,7 +3049,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3091,7 +3091,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3124,10 +3124,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3169,10 +3169,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3227,7 +3227,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3269,7 +3269,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3302,10 +3302,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3347,10 +3347,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3403,7 +3403,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3435,9 +3435,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeadersInner>> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3490,7 +3490,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3522,9 +3522,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3577,7 +3577,7 @@ public final class LROSADsInner {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3609,9 +3609,9 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3666,7 +3666,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3708,7 +3708,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3741,10 +3741,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3786,10 +3786,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> beginPost202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3844,7 +3844,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3886,7 +3886,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3919,10 +3919,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3964,10 +3964,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4022,7 +4022,7 @@ public final class LROSADsInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4064,7 +4064,7 @@ public final class LROSADsInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4097,10 +4097,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4142,10 +4142,10 @@ public final class LROSADsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

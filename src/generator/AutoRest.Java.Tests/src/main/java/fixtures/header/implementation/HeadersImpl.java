@@ -215,12 +215,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -266,9 +266,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseExistingKey();
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -320,12 +320,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -371,9 +371,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseProtectedKey();
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -427,12 +427,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -484,12 +484,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -543,12 +543,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -600,12 +600,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseLong(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -659,12 +659,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -716,12 +716,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -775,12 +775,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -832,12 +832,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -891,12 +891,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -948,12 +948,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseBool(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1006,13 +1006,13 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final String value = null;
         Call<ResponseBody> call = service.paramString(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1059,12 +1059,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1116,12 +1116,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseString(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1178,7 +1178,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1186,7 +1186,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDate(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1238,12 +1238,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDate(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1300,7 +1300,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1308,7 +1308,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1360,12 +1360,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1422,7 +1422,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1432,7 +1432,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
             valueConverted = new DateTimeRfc1123(value);
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1483,7 +1483,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1492,7 +1492,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
             valueConverted = new DateTimeRfc1123(value);
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1544,12 +1544,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1606,7 +1606,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1614,7 +1614,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1666,12 +1666,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1729,7 +1729,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1738,7 +1738,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         String valueConverted = Base64.encodeBase64String(value);
         Call<ResponseBody> call = service.paramByte(scenario, valueConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1790,12 +1790,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseByte(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1848,13 +1848,13 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final GreyscaleColors value = null;
         Call<ResponseBody> call = service.paramEnum(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1901,12 +1901,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramEnum(scenario, value);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1958,12 +1958,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2009,9 +2009,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.customRequestId();
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

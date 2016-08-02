@@ -164,9 +164,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -226,13 +226,13 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         final String clientRequestId = null;
         final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -294,7 +294,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
         if (pagingGetMultiplePagesOptions != null) {
@@ -305,7 +305,7 @@ public final class PagingsImpl implements Pagings {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -365,13 +365,13 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         final String clientRequestId = null;
         final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
         Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -433,7 +433,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         Validator.validate(pagingGetOdataMultiplePagesOptions);
         Integer maxresults = null;
         if (pagingGetOdataMultiplePagesOptions != null) {
@@ -444,7 +444,7 @@ public final class PagingsImpl implements Pagings {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
         Call<ResponseBody> call = service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -514,7 +514,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
@@ -524,7 +524,7 @@ public final class PagingsImpl implements Pagings {
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -591,7 +591,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
@@ -600,7 +600,7 @@ public final class PagingsImpl implements Pagings {
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -659,9 +659,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -717,9 +717,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -775,9 +775,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -833,9 +833,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -891,9 +891,9 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PagedList<Product>>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PagedList<Product>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<PagedList<Product>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<PagedList<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -949,7 +949,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1014,7 +1014,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1085,7 +1085,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1159,7 +1159,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl1<Product>>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl1<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1230,7 +1230,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl1<Product>>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl1<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1304,7 +1304,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1369,7 +1369,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1433,7 +1433,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1494,7 +1494,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1555,7 +1555,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1616,7 +1616,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -1677,7 +1677,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<PageImpl<Product>>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<PageImpl<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }

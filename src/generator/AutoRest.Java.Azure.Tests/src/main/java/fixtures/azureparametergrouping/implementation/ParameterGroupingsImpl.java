@@ -108,7 +108,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -118,7 +118,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
         Call<ResponseBody> call = service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -167,12 +167,12 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
         Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -222,7 +222,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -233,7 +233,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             query = parameterGroupingPostOptionalParameters.query();
         }
         Call<ResponseBody> call = service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,7 +285,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
@@ -293,7 +293,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
         String headerTwo = null;
         Integer queryTwo = null;
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -354,7 +354,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -374,7 +374,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -423,12 +423,12 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
         final FirstParameterGroup firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -478,7 +478,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
@@ -489,7 +489,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
             queryOne = firstParameterGroup.queryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

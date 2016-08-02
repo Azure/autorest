@@ -664,7 +664,7 @@ namespace AutoRest.Java.TemplateModels
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "final ServiceCall<{0}> serviceCall = new ServiceCall<>(call);",
-                    ReturnTypeModel.ClientResponseTypeString);
+                    ReturnTypeModel.GenericBodyClientTypeString);
             }
         }
 

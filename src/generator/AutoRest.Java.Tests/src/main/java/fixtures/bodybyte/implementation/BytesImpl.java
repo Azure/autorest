@@ -94,9 +94,9 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,9 +142,9 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -190,9 +190,9 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNonAscii();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -244,12 +244,12 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putNonAscii(byteBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -295,9 +295,9 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

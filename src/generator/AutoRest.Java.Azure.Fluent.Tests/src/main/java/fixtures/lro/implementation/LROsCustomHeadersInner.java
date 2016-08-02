@@ -118,7 +118,7 @@ public final class LROsCustomHeadersInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -160,7 +160,7 @@ public final class LROsCustomHeadersInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -193,10 +193,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -238,10 +238,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -296,7 +296,7 @@ public final class LROsCustomHeadersInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -338,7 +338,7 @@ public final class LROsCustomHeadersInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -371,10 +371,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -416,10 +416,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<ProductInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -475,7 +475,7 @@ public final class LROsCustomHeadersInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -517,7 +517,7 @@ public final class LROsCustomHeadersInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -550,10 +550,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -595,10 +595,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -653,7 +653,7 @@ public final class LROsCustomHeadersInner {
         }
         final ProductInner product = null;
         Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -695,7 +695,7 @@ public final class LROsCustomHeadersInner {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -728,10 +728,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -773,10 +773,10 @@ public final class LROsCustomHeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

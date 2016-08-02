@@ -112,12 +112,12 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Error>> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         if (pathParameter == null) {
             throw new IllegalArgumentException("Parameter pathParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
-        final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -163,10 +163,10 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
         final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -207,9 +207,9 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -256,10 +256,10 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -300,9 +300,9 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -349,10 +349,10 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -393,9 +393,9 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -445,12 +445,12 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Error>> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.requiredGlobalPath() == null) {
             throw new IllegalArgumentException("Parameter this.client.requiredGlobalPath() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.requiredGlobalPath());
-        final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -499,12 +499,12 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Error>> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.requiredGlobalQuery() == null) {
             throw new IllegalArgumentException("Parameter this.client.requiredGlobalQuery() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.requiredGlobalQuery());
-        final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -549,9 +549,9 @@ public final class ImplicitsImpl implements Implicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Error>> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
-        final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

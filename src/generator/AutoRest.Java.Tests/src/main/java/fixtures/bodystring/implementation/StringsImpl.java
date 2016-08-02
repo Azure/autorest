@@ -127,9 +127,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<String>> getNullAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<String>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -176,10 +176,10 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
         final String stringBody = null;
         Call<ResponseBody> call = service.putNull(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -220,9 +220,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putNull(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -268,9 +268,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<String>> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<ServiceResponse<String>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -322,12 +322,12 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -373,9 +373,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<String>> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getMbcs();
-        final ServiceCall<ServiceResponse<String>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -427,12 +427,12 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -478,9 +478,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<String>> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getWhitespace();
-        final ServiceCall<ServiceResponse<String>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -532,12 +532,12 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -583,9 +583,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<String>> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        final ServiceCall<ServiceResponse<String>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -636,9 +636,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getBase64Encoded();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -694,9 +694,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getBase64UrlEncoded();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -754,13 +754,13 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         Call<ResponseBody> call = service.putBase64UrlEncoded(stringBodyConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -811,9 +811,9 @@ public final class StringsImpl implements Strings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<byte[]>> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNullBase64UrlEncoded();
-        final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

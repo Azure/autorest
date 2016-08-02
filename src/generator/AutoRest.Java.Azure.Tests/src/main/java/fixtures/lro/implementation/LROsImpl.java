@@ -402,7 +402,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -444,7 +444,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -477,10 +477,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -522,10 +522,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -581,7 +581,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -623,7 +623,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -656,10 +656,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -701,10 +701,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -759,7 +759,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -801,7 +801,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -834,10 +834,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -879,10 +879,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -937,7 +937,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -979,7 +979,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1012,10 +1012,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1057,10 +1057,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1116,7 +1116,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1158,7 +1158,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1191,10 +1191,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1236,10 +1236,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1294,7 +1294,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1336,7 +1336,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1369,10 +1369,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1414,10 +1414,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1473,7 +1473,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1515,7 +1515,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1548,10 +1548,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1593,10 +1593,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1651,7 +1651,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1693,7 +1693,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1726,10 +1726,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1771,10 +1771,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1829,7 +1829,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1871,7 +1871,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1904,10 +1904,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1949,10 +1949,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2007,7 +2007,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2049,7 +2049,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2082,10 +2082,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2127,10 +2127,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2185,7 +2185,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2227,7 +2227,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2260,10 +2260,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2305,10 +2305,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2363,7 +2363,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2405,7 +2405,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2438,10 +2438,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2483,10 +2483,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2541,7 +2541,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2583,7 +2583,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2616,10 +2616,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2661,10 +2661,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2719,7 +2719,7 @@ public final class LROsImpl implements LROs {
         }
         final Sku sku = null;
         Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2761,7 +2761,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(sku, serviceCallback);
         Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2794,10 +2794,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Sku>> beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
+    public ServiceCall<Sku> beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
         final Sku sku = null;
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2839,10 +2839,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Sku>> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
+    public ServiceCall<Sku> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         Validator.validate(sku);
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2897,7 +2897,7 @@ public final class LROsImpl implements LROs {
         }
         final Sku sku = null;
         Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2939,7 +2939,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(sku, serviceCallback);
         Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2972,10 +2972,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Sku>> beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
+    public ServiceCall<Sku> beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
         final Sku sku = null;
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3017,10 +3017,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Sku>> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
+    public ServiceCall<Sku> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         Validator.validate(sku);
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3075,7 +3075,7 @@ public final class LROsImpl implements LROs {
         }
         final SubProduct product = null;
         Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3117,7 +3117,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3150,10 +3150,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SubProduct>> beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
+    public ServiceCall<SubProduct> beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
         final SubProduct product = null;
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3195,10 +3195,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SubProduct>> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
+    public ServiceCall<SubProduct> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3253,7 +3253,7 @@ public final class LROsImpl implements LROs {
         }
         final SubProduct product = null;
         Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3295,7 +3295,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3328,10 +3328,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SubProduct>> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
+    public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
         final SubProduct product = null;
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3373,10 +3373,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SubProduct>> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
+    public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SubProduct>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SubProduct> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3429,7 +3429,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3461,9 +3461,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3517,7 +3517,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3549,9 +3549,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3605,7 +3605,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3637,9 +3637,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3693,7 +3693,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3725,9 +3725,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3780,7 +3780,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3812,9 +3812,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3868,7 +3868,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3900,9 +3900,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3956,7 +3956,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3988,9 +3988,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4044,7 +4044,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4076,9 +4076,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4132,7 +4132,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4164,9 +4164,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4219,7 +4219,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4251,9 +4251,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4306,7 +4306,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4338,9 +4338,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4393,7 +4393,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4425,9 +4425,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4480,7 +4480,7 @@ public final class LROsImpl implements LROs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4512,9 +4512,9 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Sku>> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
+    public ServiceCall<Sku> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
         Call<ResponseBody> call = service.beginPost200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Sku>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Sku> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4570,7 +4570,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4612,7 +4612,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4645,10 +4645,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4690,10 +4690,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4748,7 +4748,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4790,7 +4790,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4823,10 +4823,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4868,10 +4868,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -4926,7 +4926,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -4968,7 +4968,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5001,10 +5001,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5046,10 +5046,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5105,7 +5105,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5147,7 +5147,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5180,10 +5180,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5225,10 +5225,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5284,7 +5284,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5326,7 +5326,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5359,10 +5359,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5404,10 +5404,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5462,7 +5462,7 @@ public final class LROsImpl implements LROs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5504,7 +5504,7 @@ public final class LROsImpl implements LROs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -5537,10 +5537,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -5582,10 +5582,10 @@ public final class LROsImpl implements LROs {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

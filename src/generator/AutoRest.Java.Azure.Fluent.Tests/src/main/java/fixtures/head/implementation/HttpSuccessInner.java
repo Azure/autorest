@@ -83,9 +83,9 @@ public final class HttpSuccessInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -132,9 +132,9 @@ public final class HttpSuccessInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -181,9 +181,9 @@ public final class HttpSuccessInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

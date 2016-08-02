@@ -100,9 +100,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DictionaryWrapper>> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -155,13 +155,13 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -207,9 +207,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DictionaryWrapper>> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -262,13 +262,13 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putEmpty(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -314,9 +314,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DictionaryWrapper>> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -362,9 +362,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DictionaryWrapper>> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

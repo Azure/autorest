@@ -98,9 +98,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getTrue();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -148,9 +148,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putTrue(boolBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -196,9 +196,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getFalse();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -246,9 +246,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putFalse(boolBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -294,9 +294,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -342,9 +342,9 @@ public final class BoolsImpl implements Bools {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

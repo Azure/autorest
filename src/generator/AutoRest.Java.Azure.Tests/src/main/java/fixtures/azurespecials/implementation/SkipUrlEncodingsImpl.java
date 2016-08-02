@@ -109,12 +109,12 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -166,12 +166,12 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         if (unencodedPathParam == null) {
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -218,10 +218,10 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
         final String unencodedPathParam = "path1/path2/path3";
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -273,12 +273,12 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -325,10 +325,10 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
         final String q1 = null;
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -369,9 +369,9 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -423,12 +423,12 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         if (q1 == null) {
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -475,10 +475,10 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
         final String q1 = "value1&q2=value2&q3=value3";
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -87,7 +87,7 @@ public final class PathsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -96,7 +96,7 @@ public final class PathsInner {
         }
         String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
         Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -151,7 +151,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -193,7 +193,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -226,10 +226,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -271,10 +271,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -330,7 +330,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -372,7 +372,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -405,10 +405,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -450,10 +450,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -506,7 +506,7 @@ public final class LRORetrysImpl implements LRORetrys {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -538,9 +538,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -594,7 +594,7 @@ public final class LRORetrysImpl implements LRORetrys {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -626,9 +626,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -681,7 +681,7 @@ public final class LRORetrysImpl implements LRORetrys {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -713,9 +713,9 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -770,7 +770,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -812,7 +812,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -845,10 +845,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -890,10 +890,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -948,7 +948,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -990,7 +990,7 @@ public final class LRORetrysImpl implements LRORetrys {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1023,10 +1023,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1068,10 +1068,10 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -82,9 +82,9 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -135,12 +135,12 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

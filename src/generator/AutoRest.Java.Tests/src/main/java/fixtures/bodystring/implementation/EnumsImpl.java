@@ -83,9 +83,9 @@ public final class EnumsImpl implements Enums {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Colors>> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
+    public ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         Call<ResponseBody> call = service.getNotExpandable();
-        final ServiceCall<ServiceResponse<Colors>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Colors> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -137,12 +137,12 @@ public final class EnumsImpl implements Enums {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

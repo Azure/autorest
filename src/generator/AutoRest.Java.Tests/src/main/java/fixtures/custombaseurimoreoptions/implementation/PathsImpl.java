@@ -104,7 +104,7 @@ public final class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -123,7 +123,7 @@ public final class PathsImpl implements Paths {
         final String keyVersion = null;
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -187,7 +187,7 @@ public final class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -205,7 +205,7 @@ public final class PathsImpl implements Paths {
         }
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
