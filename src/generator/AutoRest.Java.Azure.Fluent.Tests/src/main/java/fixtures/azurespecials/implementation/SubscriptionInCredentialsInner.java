@@ -98,12 +98,12 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -153,12 +153,12 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -211,7 +211,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -219,7 +219,7 @@ public final class SubscriptionInCredentialsInner {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -269,12 +269,12 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -324,12 +324,12 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

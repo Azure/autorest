@@ -171,9 +171,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getNullAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getNullAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -219,9 +219,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidFloat();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -267,9 +267,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDouble();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -315,9 +315,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BigDecimal>> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDecimal();
-        final ServiceCall<ServiceResponse<BigDecimal>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BigDecimal> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -365,9 +365,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putBigFloat(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -413,9 +413,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getBigFloat();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -463,9 +463,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putBigDouble(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -511,9 +511,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getBigDouble();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -561,9 +561,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -609,9 +609,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -659,9 +659,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -707,9 +707,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -761,12 +761,12 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -812,9 +812,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BigDecimal>> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
         Call<ResponseBody> call = service.getBigDecimal();
-        final ServiceCall<ServiceResponse<BigDecimal>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BigDecimal> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -866,12 +866,12 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -917,9 +917,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BigDecimal>> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
-        final ServiceCall<ServiceResponse<BigDecimal>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BigDecimal> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -971,12 +971,12 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1022,9 +1022,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BigDecimal>> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
-        final ServiceCall<ServiceResponse<BigDecimal>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BigDecimal> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1072,9 +1072,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1120,9 +1120,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getSmallFloat();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1170,9 +1170,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1218,9 +1218,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Double>> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
         Call<ResponseBody> call = service.getSmallDouble();
-        final ServiceCall<ServiceResponse<Double>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Double> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1272,12 +1272,12 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1323,9 +1323,9 @@ public final class NumbersImpl implements Numbers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BigDecimal>> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
         Call<ResponseBody> call = service.getSmallDecimal();
-        final ServiceCall<ServiceResponse<BigDecimal>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BigDecimal> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -92,7 +92,7 @@ public final class GroupsImpl implements Groups {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
+    public ServiceCall<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -103,7 +103,7 @@ public final class GroupsImpl implements Groups {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<SampleResourceGroup>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<SampleResourceGroup> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

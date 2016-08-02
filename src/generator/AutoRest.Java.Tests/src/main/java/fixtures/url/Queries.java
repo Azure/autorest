@@ -41,7 +41,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value on path.
@@ -59,7 +59,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -77,7 +77,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -96,7 +96,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1000000' integer value.
@@ -114,7 +114,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1000000' integer value.
@@ -132,7 +132,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null integer value (no query parameter).
@@ -150,7 +150,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getIntNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null integer value (no query parameter).
      *
@@ -169,7 +169,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -187,7 +187,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -205,7 +205,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -223,7 +223,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getLongNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -242,7 +242,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1.034E+20' numeric value.
@@ -260,7 +260,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -278,7 +278,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -296,7 +296,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> floatNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null numeric value (no query parameter).
      *
@@ -315,7 +315,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '9999999.999' numeric value.
@@ -333,7 +333,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-9999999.999' numeric value.
@@ -351,7 +351,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -369,7 +369,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> doubleNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null numeric value (no query parameter).
      *
@@ -388,7 +388,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -406,7 +406,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -424,7 +424,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get ''.
@@ -442,7 +442,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (no query parameter in url).
@@ -460,7 +460,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> stringNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null (no query parameter in url).
      *
@@ -479,7 +479,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -497,7 +497,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> enumValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -516,7 +516,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (no query parameter in url).
@@ -534,7 +534,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> enumNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null (no query parameter in url).
      *
@@ -553,7 +553,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -571,7 +571,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -590,7 +590,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '' as byte array.
@@ -608,7 +608,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -626,7 +626,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> byteNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -645,7 +645,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '2012-01-01' as date.
@@ -663,7 +663,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -681,7 +681,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -700,7 +700,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -718,7 +718,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -736,7 +736,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -755,7 +755,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -773,7 +773,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -792,7 +792,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a null array of string using the csv-array format.
@@ -810,7 +810,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -829,7 +829,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -847,7 +847,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -866,7 +866,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -884,7 +884,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -903,7 +903,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -921,7 +921,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -940,7 +940,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -958,7 +958,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -977,6 +977,6 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ServiceResponse<Void>> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

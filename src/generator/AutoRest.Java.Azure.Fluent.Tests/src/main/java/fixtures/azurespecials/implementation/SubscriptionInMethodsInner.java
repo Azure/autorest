@@ -95,12 +95,12 @@ public final class SubscriptionInMethodsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -152,12 +152,12 @@ public final class SubscriptionInMethodsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -209,12 +209,12 @@ public final class SubscriptionInMethodsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -266,12 +266,12 @@ public final class SubscriptionInMethodsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

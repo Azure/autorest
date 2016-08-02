@@ -101,9 +101,9 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Basic>> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ServiceResponse<Basic>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -156,13 +156,13 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.apiVersion());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -208,9 +208,9 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Basic>> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<ServiceResponse<Basic>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -256,9 +256,9 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Basic>> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<ServiceResponse<Basic>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -304,9 +304,9 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Basic>> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<Basic>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -352,9 +352,9 @@ public final class BasicsImpl implements Basics {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Basic>> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        final ServiceCall<ServiceResponse<Basic>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -174,9 +174,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<IntWrapper>> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceCall<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getInt();
-        final ServiceCall<ServiceResponse<IntWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<IntWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -229,13 +229,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putInt(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -281,9 +281,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<LongWrapper>> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceCall<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getLong();
-        final ServiceCall<ServiceResponse<LongWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<LongWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -336,13 +336,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putLong(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -388,9 +388,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<FloatWrapper>> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceCall<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getFloat();
-        final ServiceCall<ServiceResponse<FloatWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<FloatWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -443,13 +443,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putFloat(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -495,9 +495,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DoubleWrapper>> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceCall<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDouble();
-        final ServiceCall<ServiceResponse<DoubleWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DoubleWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -550,13 +550,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDouble(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -602,9 +602,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<BooleanWrapper>> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceCall<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getBool();
-        final ServiceCall<ServiceResponse<BooleanWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<BooleanWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -657,13 +657,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putBool(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -709,9 +709,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<StringWrapper>> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceCall<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getString();
-        final ServiceCall<ServiceResponse<StringWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<StringWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -764,13 +764,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putString(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -816,9 +816,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateWrapper>> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceCall<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDate();
-        final ServiceCall<ServiceResponse<DateWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -871,13 +871,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDate(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -923,9 +923,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DatetimeWrapper>> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceCall<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDateTime();
-        final ServiceCall<ServiceResponse<DatetimeWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DatetimeWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -978,13 +978,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTime(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1030,9 +1030,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceCall<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
-        final ServiceCall<ServiceResponse<Datetimerfc1123Wrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Datetimerfc1123Wrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1085,13 +1085,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1137,9 +1137,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DurationWrapper>> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceCall<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDuration();
-        final ServiceCall<ServiceResponse<DurationWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DurationWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DurationWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1192,13 +1192,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDuration(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1244,9 +1244,9 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ByteWrapper>> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceCall<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getByte();
-        final ServiceCall<ServiceResponse<ByteWrapper>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ByteWrapper> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1299,13 +1299,13 @@ public final class PrimitivesImpl implements Primitives {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putByte(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

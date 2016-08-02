@@ -84,9 +84,9 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ReadonlyObj>> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
+    public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ServiceResponse<ReadonlyObj>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ReadonlyObj> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ReadonlyObj>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -139,13 +139,13 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

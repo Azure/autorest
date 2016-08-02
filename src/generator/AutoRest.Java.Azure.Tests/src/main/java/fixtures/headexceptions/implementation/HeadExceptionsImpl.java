@@ -84,9 +84,9 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -131,9 +131,9 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -178,9 +178,9 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

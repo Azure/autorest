@@ -102,7 +102,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<InputStream>> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -111,7 +111,7 @@ public final class FormdatasImpl implements Formdatas {
         }
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
         Call<ResponseBody> call = service.uploadFile(fileContentConverted, fileName);
-        final ServiceCall<ServiceResponse<InputStream>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -164,13 +164,13 @@ public final class FormdatasImpl implements Formdatas {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<InputStream>> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
         Call<ResponseBody> call = service.uploadFileViaBody(fileContentConverted);
-        final ServiceCall<ServiceResponse<InputStream>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

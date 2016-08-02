@@ -226,10 +226,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
         final List<ResourceInner> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -271,10 +271,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putArrayAsync(List<ResourceInner> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putArrayAsync(List<ResourceInner> resourceArray, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -320,9 +320,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<List<FlattenedProductInner>>> getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
+    public ServiceCall<List<FlattenedProductInner>> getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
         Call<ResponseBody> call = service.getArray(this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<List<FlattenedProductInner>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<List<FlattenedProductInner>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<FlattenedProductInner>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -369,10 +369,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
         final Map<String, FlattenedProductInner> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -414,10 +414,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -463,9 +463,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Map<String, FlattenedProductInner>>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
+    public ServiceCall<Map<String, FlattenedProductInner>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary(this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Map<String, FlattenedProductInner>>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Map<String, FlattenedProductInner>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProductInner>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -512,10 +512,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
         final ResourceCollectionInner resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -557,10 +557,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -606,9 +606,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<ResourceCollectionInner>> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
+    public ServiceCall<ResourceCollectionInner> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection(this.acceptLanguage(), this.userAgent());
-        final ServiceCall<ServiceResponse<ResourceCollectionInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<ResourceCollectionInner> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ResourceCollectionInner>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

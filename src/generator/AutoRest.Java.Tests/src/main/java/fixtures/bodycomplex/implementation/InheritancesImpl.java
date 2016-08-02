@@ -84,9 +84,9 @@ public final class InheritancesImpl implements Inheritances {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Siamese>> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
+    public ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ServiceResponse<Siamese>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Siamese> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Siamese>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -139,13 +139,13 @@ public final class InheritancesImpl implements Inheritances {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

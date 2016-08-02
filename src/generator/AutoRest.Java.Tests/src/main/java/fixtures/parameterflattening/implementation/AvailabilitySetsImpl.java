@@ -100,7 +100,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -114,7 +114,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.withTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -117,9 +117,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -175,9 +175,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -233,9 +233,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -291,9 +291,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -351,13 +351,13 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -408,9 +408,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -466,9 +466,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -526,13 +526,13 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -583,9 +583,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<DateTime>> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
-        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

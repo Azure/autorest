@@ -89,9 +89,9 @@ public final class FilesImpl implements Files {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<InputStream>> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getFile();
-        final ServiceCall<ServiceResponse<InputStream>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -137,9 +137,9 @@ public final class FilesImpl implements Files {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<InputStream>> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getFileLarge();
-        final ServiceCall<ServiceResponse<InputStream>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -185,9 +185,9 @@ public final class FilesImpl implements Files {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<InputStream>> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyFile();
-        final ServiceCall<ServiceResponse<InputStream>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

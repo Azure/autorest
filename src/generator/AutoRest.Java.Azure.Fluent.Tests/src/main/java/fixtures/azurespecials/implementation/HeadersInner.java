@@ -87,12 +87,12 @@ public final class HeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -146,14 +146,14 @@ public final class HeadersInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
         Call<ResponseBody> call = service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent());
-        final ServiceCall<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

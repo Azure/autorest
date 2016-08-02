@@ -91,9 +91,9 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Period>> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -145,12 +145,12 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
-        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -196,9 +196,9 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Period>> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getPositiveDuration();
-        final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -244,9 +244,9 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Period>> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

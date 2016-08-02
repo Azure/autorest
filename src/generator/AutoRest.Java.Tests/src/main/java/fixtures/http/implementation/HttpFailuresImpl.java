@@ -85,9 +85,9 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyError();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -133,9 +133,9 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNoModelError();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -180,9 +180,9 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall<ServiceResponse<Boolean>> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNoModelEmpty();
-        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
+        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
