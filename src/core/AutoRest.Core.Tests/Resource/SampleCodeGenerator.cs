@@ -41,7 +41,7 @@ namespace AutoRest.Core.Tests.Resource
             var viewModel = new SampleViewModel();
             var model = new SampleModel();
             model.Model = viewModel;
-            await Write(model, Path.Combine("Models", "Pet.cs"));
+            await Write(model, Path.Combine(Settings.ModelsName, "Pet.cs"));
         }
 
         public override void NormalizeClientModel(ServiceClient serviceClient)
