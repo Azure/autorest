@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Azure
                         Name = "odataQuery",
                         Type = new CompositeType
                         {
-                            Name = string.Format(CultureInfo.InvariantCulture, "ODataQuery<{0}>", odataFilter.Type.Name)
+                            Name = string.Format(CultureInfo.InvariantCulture, "Microsoft.Rest.Azure.OData.ODataQuery<{0}>", odataFilter.Type.Name)
                         },
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
