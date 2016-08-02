@@ -84,7 +84,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<ServiceResponse<Boolean>> head200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
@@ -133,7 +133,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head204Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<ServiceResponse<Boolean>> head204Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
@@ -182,7 +182,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head404Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<ServiceResponse<Boolean>> head404Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {

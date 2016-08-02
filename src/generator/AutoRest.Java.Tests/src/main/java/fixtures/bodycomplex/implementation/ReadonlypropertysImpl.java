@@ -84,7 +84,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
+    public ServiceCall<ServiceResponse<ReadonlyObj>> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<ServiceResponse<ReadonlyObj>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ReadonlyObj>(serviceCallback) {
@@ -139,7 +139,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

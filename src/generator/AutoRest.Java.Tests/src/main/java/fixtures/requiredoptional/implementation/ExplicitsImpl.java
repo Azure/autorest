@@ -177,7 +177,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -225,7 +225,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) {
         final Integer bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -269,7 +269,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -324,7 +324,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -376,7 +376,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) {
         final IntOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -421,7 +421,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -472,7 +472,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -520,7 +520,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final Integer headerParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -564,7 +564,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -618,7 +618,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -669,7 +669,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -713,7 +713,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -768,7 +768,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -820,7 +820,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) {
         final StringOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -865,7 +865,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -920,7 +920,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -971,7 +971,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1015,7 +1015,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1070,7 +1070,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1122,7 +1122,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) {
         final Product bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1167,7 +1167,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1223,7 +1223,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1275,7 +1275,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) {
         final ClassOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1320,7 +1320,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1376,7 +1376,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1428,7 +1428,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) {
         final List<String> bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1473,7 +1473,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1529,7 +1529,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
@@ -1581,7 +1581,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) {
         final ArrayOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1626,7 +1626,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1683,7 +1683,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
@@ -1737,7 +1737,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final List<String> headerParameter = null;
         String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
@@ -1784,7 +1784,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(headerParameter);
         String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);

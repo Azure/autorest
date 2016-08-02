@@ -93,7 +93,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> head501Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head501();
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
@@ -140,7 +140,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> get501Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get501();
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -188,7 +188,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post505Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> post505Async(final ServiceCallback<Error> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post505(booleanValue);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
@@ -232,7 +232,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post505(booleanValue);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
@@ -280,7 +280,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete505Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> delete505Async(final ServiceCallback<Error> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete505(booleanValue);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
@@ -324,7 +324,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall<ServiceResponse<Error>> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete505(booleanValue);
         final ServiceCall<ServiceResponse<Error>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {

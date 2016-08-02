@@ -38,7 +38,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Colors>> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -59,6 +59,6 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

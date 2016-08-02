@@ -91,7 +91,7 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<ServiceResponse<Period>> getNullAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
@@ -145,7 +145,7 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -196,7 +196,7 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<ServiceResponse<Period>> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getPositiveDuration();
         final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
@@ -244,7 +244,7 @@ public final class DurationsImpl implements Durations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall<ServiceResponse<Period>> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<ServiceResponse<Period>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {

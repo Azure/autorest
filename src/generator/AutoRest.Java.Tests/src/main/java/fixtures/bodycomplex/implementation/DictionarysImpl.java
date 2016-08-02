@@ -100,7 +100,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<DictionaryWrapper>> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
@@ -155,7 +155,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -207,7 +207,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<DictionaryWrapper>> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
@@ -262,7 +262,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -314,7 +314,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<DictionaryWrapper>> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
@@ -362,7 +362,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<DictionaryWrapper>> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall<ServiceResponse<DictionaryWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {

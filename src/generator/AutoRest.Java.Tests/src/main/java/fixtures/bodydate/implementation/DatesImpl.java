@@ -107,7 +107,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -155,7 +155,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDate();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -203,7 +203,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowDate();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -251,7 +251,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowDate();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -305,7 +305,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -356,7 +356,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMaxDate();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -410,7 +410,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -461,7 +461,7 @@ public final class DatesImpl implements Dates {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall<ServiceResponse<LocalDate>> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMinDate();
         final ServiceCall<ServiceResponse<LocalDate>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {

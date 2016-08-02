@@ -215,7 +215,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
@@ -266,7 +266,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseExistingKey();
         final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -320,7 +320,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
@@ -371,7 +371,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseProtectedKey();
         final ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -427,7 +427,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -484,7 +484,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -543,7 +543,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -600,7 +600,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -659,7 +659,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -716,7 +716,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -775,7 +775,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -832,7 +832,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -891,7 +891,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -948,7 +948,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1006,7 +1006,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1059,7 +1059,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1116,7 +1116,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1178,7 +1178,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1238,7 +1238,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1300,7 +1300,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1360,7 +1360,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1422,7 +1422,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1483,7 +1483,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1544,7 +1544,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1606,7 +1606,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1666,7 +1666,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1729,7 +1729,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1790,7 +1790,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1848,7 +1848,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1901,7 +1901,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1958,7 +1958,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2009,7 +2009,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.customRequestId();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

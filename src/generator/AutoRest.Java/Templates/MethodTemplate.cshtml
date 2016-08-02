@@ -86,7 +86,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -210,7 +210,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {

@@ -41,7 +41,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Error>> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly optional query parameter.
@@ -59,7 +59,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test implicitly optional query parameter.
      *
@@ -78,7 +78,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly optional header parameter.
@@ -96,7 +96,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test implicitly optional header parameter.
      *
@@ -115,7 +115,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly optional body parameter.
@@ -133,7 +133,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Test implicitly optional body parameter.
      *
@@ -152,7 +152,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Void>> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter.
@@ -171,7 +171,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Error>> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly required query parameter.
@@ -190,7 +190,7 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Error>> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test implicitly optional query parameter.
@@ -208,6 +208,6 @@ public interface Implicits {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ServiceResponse<Error>> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

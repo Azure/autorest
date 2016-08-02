@@ -88,7 +88,7 @@ public final class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }

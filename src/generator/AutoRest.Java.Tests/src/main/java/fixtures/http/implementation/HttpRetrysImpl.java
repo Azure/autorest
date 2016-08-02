@@ -111,7 +111,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head408Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head408Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head408();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -160,7 +160,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put500Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put500(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -204,7 +204,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put500(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -253,7 +253,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch500Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch500(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -297,7 +297,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch500(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -345,7 +345,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall get502Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> get502Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get502();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -394,7 +394,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post503Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post503(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -438,7 +438,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post503(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -487,7 +487,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete503Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete503(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -531,7 +531,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete503(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -580,7 +580,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put504Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put504(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -624,7 +624,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put504(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -673,7 +673,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch504Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch504(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -717,7 +717,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch504(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

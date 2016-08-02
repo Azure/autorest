@@ -151,7 +151,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -199,7 +199,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall get200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall<ServiceResponse<Boolean>> get200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.get200();
         final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
@@ -248,7 +248,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put200Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -292,7 +292,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -341,7 +341,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch200Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -385,7 +385,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -434,7 +434,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post200Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -478,7 +478,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -527,7 +527,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete200Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -571,7 +571,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete200(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -620,7 +620,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put201Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put201Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put201(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -664,7 +664,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put201(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -713,7 +713,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post201Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post201Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post201(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -757,7 +757,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post201(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -806,7 +806,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put202Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put202Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -850,7 +850,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -899,7 +899,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch202Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch202Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -943,7 +943,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -992,7 +992,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post202Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post202Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1036,7 +1036,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1085,7 +1085,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete202Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete202Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1129,7 +1129,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete202(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1177,7 +1177,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -1226,7 +1226,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put204Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.put204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1270,7 +1270,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1319,7 +1319,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch204Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.patch204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1363,7 +1363,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1412,7 +1412,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post204Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1456,7 +1456,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1505,7 +1505,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete204Async(final ServiceCallback<Void> serviceCallback) {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -1549,7 +1549,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete204(booleanValue);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1597,7 +1597,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404();
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {

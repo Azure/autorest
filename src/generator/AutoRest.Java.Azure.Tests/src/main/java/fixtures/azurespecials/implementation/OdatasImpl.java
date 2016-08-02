@@ -81,7 +81,7 @@ public final class OdatasImpl implements Odatas {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
@@ -131,7 +131,7 @@ public final class OdatasImpl implements Odatas {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

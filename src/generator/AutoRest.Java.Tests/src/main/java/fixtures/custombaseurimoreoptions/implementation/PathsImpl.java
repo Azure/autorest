@@ -104,7 +104,7 @@ public final class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -187,7 +187,7 @@ public final class PathsImpl implements Paths {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }

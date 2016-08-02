@@ -83,7 +83,7 @@ public final class HeadExceptionsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -130,7 +130,7 @@ public final class HeadExceptionsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -177,7 +177,7 @@ public final class HeadExceptionsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
