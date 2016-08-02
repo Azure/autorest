@@ -39,7 +39,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
@@ -58,7 +58,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Add a new pet to the store.
@@ -78,7 +78,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall addPetAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> addPetAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Add a new pet to the store.
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
@@ -99,7 +99,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Update an existing pet.
@@ -117,7 +117,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updatePetAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Update an existing pet.
      *
@@ -136,7 +136,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Finds Pets by status.
@@ -156,7 +156,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
     /**
      * Finds Pets by status.
      * Multiple status values can be provided with comma seperated strings.
@@ -177,7 +177,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Finds Pets by tags.
@@ -197,7 +197,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
     /**
      * Finds Pets by tags.
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
@@ -218,7 +218,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Fake endpoint to test byte array return by 'Find pet by ID'.
@@ -240,7 +240,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Find pet by ID.
@@ -262,7 +262,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Updates a pet in the store with form data.
@@ -283,7 +283,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Updates a pet in the store with form data.
      *
@@ -307,7 +307,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Deletes a pet.
@@ -327,7 +327,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Deletes a pet.
      *
@@ -348,7 +348,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * uploads an image.
@@ -368,7 +368,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * uploads an image.
      *
@@ -391,7 +391,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Returns pet inventories by status.
@@ -411,7 +411,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Place an order for a pet.
@@ -429,7 +429,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall placeOrderAsync(final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
     /**
      * Place an order for a pet.
      *
@@ -448,7 +448,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Find purchase order by ID.
@@ -471,7 +471,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete purchase order by ID.
@@ -494,7 +494,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Create user.
@@ -514,7 +514,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUserAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUserAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Create user.
      * This can only be done by the logged in user.
@@ -535,7 +535,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUserAsync(User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Creates list of users with given input array.
@@ -553,7 +553,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Creates list of users with given input array.
      *
@@ -572,7 +572,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Creates list of users with given input array.
@@ -590,7 +590,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Creates list of users with given input array.
      *
@@ -609,7 +609,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Logs user into the system.
@@ -627,7 +627,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall loginUserAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> loginUserAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
     /**
      * Logs user into the system.
      *
@@ -648,7 +648,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Logs out current logged in user session.
@@ -666,7 +666,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall logoutUserAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get user by user name.
@@ -687,7 +687,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Updated user.
@@ -710,7 +710,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Updated user.
      * This can only be done by the logged in user.
@@ -734,7 +734,7 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete user.
@@ -757,6 +757,6 @@ public interface SwaggerPetstore {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

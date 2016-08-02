@@ -82,23 +82,17 @@ public final class UsagesImpl implements Usages {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall listAsync(final ServiceCallback<List<Usage>> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) {
         if (this.client.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<List<Usage>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Usage>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -106,7 +100,10 @@ public final class UsagesImpl implements Usages {
                     ServiceResponse<PageImpl<Usage>> result = listDelegate(response);
                     serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
