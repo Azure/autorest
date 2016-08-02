@@ -82,6 +82,7 @@ namespace AutoRest.CompositeSwagger
                 compositeClient.Name = Settings.ClientName;
             }
             compositeClient.Namespace = Settings.Namespace;
+            compositeClient.ModelsName = Settings.ModelsName;
             compositeClient.Documentation = compositeSwaggerModel.Info.Description;
 
             return compositeClient;

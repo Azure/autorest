@@ -80,7 +80,7 @@ namespace AutoRest.CSharp
             SwaggerExtensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + ".Models");
+                Settings.Namespace + "." + Settings.ModelsName);
         }
 
         private void PopulateAdditionalProperties(ServiceClient serviceClient)
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp
                 {
                     Model = new ModelTemplateModel(model),
                 };
-                await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
+                await Write(modelTemplate, Path.Combine(Settings.ModelsName, model.Name + ".cs"));
             }
 
             // Enums
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
+                await Write(enumTemplate, Path.Combine(Settings.ModelsName, enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
 
             // Exception
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp
                 {
                     Model = new ModelTemplateModel(exceptionType),
                 };
-                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+                await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
             }
         }
     }
