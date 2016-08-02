@@ -99,22 +99,25 @@ public final class EnumsImpl implements Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         Call<ResponseBody> call = service.getNotExpandable();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Colors>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNotExpandableDelegate(response));
+                    ServiceResponse<Colors> clientResponse = getNotExpandableDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -150,26 +153,28 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putNotExpandableDelegate(response));
+                    ServiceResponse<Void> clientResponse = putNotExpandableDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

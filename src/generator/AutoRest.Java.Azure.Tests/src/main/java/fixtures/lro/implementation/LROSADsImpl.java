@@ -317,7 +317,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -359,7 +359,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -390,23 +390,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutNonRetry400Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry400Delegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -432,23 +435,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry400Delegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -490,7 +496,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -532,7 +538,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -563,23 +569,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry201Creating400Delegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -605,23 +614,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry201Creating400Delegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -663,7 +675,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -705,7 +717,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -736,23 +748,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry201Creating400InvalidJsonDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400InvalidJsonDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -778,23 +793,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutNonRetry201Creating400InvalidJsonDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400InvalidJsonDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -836,7 +854,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -878,7 +896,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -909,23 +927,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> clientResponse = beginPutAsyncRelativeRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -951,23 +972,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> clientResponse = beginPutAsyncRelativeRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1006,7 +1030,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1036,22 +1060,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDeleteNonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> clientResponse = beginDeleteNonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1090,7 +1117,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1120,22 +1147,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDelete202NonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> clientResponse = beginDelete202NonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1174,7 +1204,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1204,22 +1234,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> clientResponse = beginDeleteAsyncRelativeRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1260,7 +1293,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1302,7 +1335,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1333,23 +1366,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostNonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> clientResponse = beginPostNonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1375,23 +1411,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostNonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> clientResponse = beginPostNonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1432,7 +1471,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1474,7 +1513,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1505,23 +1544,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202NonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> clientResponse = beginPost202NonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1547,23 +1589,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202NonRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> clientResponse = beginPost202NonRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1604,7 +1649,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1646,7 +1691,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1677,23 +1722,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> clientResponse = beginPostAsyncRelativeRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1719,23 +1767,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetry400Delegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> clientResponse = beginPostAsyncRelativeRetry400Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1776,7 +1827,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1818,7 +1869,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1849,23 +1900,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutError201NoProvisioningStatePayloadDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutError201NoProvisioningStatePayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1891,23 +1945,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutError201NoProvisioningStatePayloadDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPutError201NoProvisioningStatePayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -1949,7 +2006,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -1991,7 +2048,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2022,23 +2079,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2064,23 +2124,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2121,7 +2184,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2163,7 +2226,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2194,23 +2257,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2236,23 +2302,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2291,7 +2360,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2321,22 +2390,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDelete204SucceededDelegate(response));
+                    ServiceResponse<Void> clientResponse = beginDelete204SucceededDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2375,7 +2447,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2405,22 +2477,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryNoStatusDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> clientResponse = beginDeleteAsyncRelativeRetryNoStatusDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2461,7 +2536,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2503,7 +2578,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2534,23 +2609,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202NoLocationDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> clientResponse = beginPost202NoLocationDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2576,23 +2654,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202NoLocationDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> clientResponse = beginPost202NoLocationDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2633,7 +2714,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2675,7 +2756,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2706,23 +2787,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryNoPayloadDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> clientResponse = beginPostAsyncRelativeRetryNoPayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2748,23 +2832,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryNoPayloadDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> clientResponse = beginPostAsyncRelativeRetryNoPayloadDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2805,7 +2892,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2847,7 +2934,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -2878,23 +2965,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPut200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPut200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPut200InvalidJsonDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPut200InvalidJsonDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2920,23 +3010,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Product>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPut200InvalidJsonDelegate(response));
+                    ServiceResponse<Product> clientResponse = beginPut200InvalidJsonDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -2978,7 +3071,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3020,7 +3113,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3051,23 +3144,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3093,23 +3189,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3150,7 +3249,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3192,7 +3291,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3223,23 +3322,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3265,23 +3367,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response));
+                    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3320,7 +3425,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3350,22 +3455,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDelete202RetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> clientResponse = beginDelete202RetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3404,7 +3512,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3434,22 +3542,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3488,7 +3599,7 @@ public final class LROSADsImpl implements LROSADs {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3518,22 +3629,25 @@ public final class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3574,7 +3688,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3616,7 +3730,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3647,23 +3761,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202RetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> clientResponse = beginPost202RetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3689,23 +3806,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPost202RetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> clientResponse = beginPost202RetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3746,7 +3866,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3788,7 +3908,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3819,23 +3939,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3861,23 +3984,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidHeaderDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidHeaderDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -3918,7 +4044,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         final Product product = null;
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3960,7 +4086,7 @@ public final class LROSADsImpl implements LROSADs {
         }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
@@ -3991,23 +4117,26 @@ public final class LROSADsImpl implements LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         final Product product = null;
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -4033,23 +4162,26 @@ public final class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(product, serviceCallback);
+    public ServiceCall beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response));
+                    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (CloudException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

@@ -96,22 +96,25 @@ public final class BoolsImpl implements Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getTrue();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getTrueDelegate(response));
+                    ServiceResponse<Boolean> clientResponse = getTrueDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -143,22 +146,25 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putTrue(boolBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putTrueDelegate(response));
+                    ServiceResponse<Void> clientResponse = putTrueDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -188,22 +194,25 @@ public final class BoolsImpl implements Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getFalse();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFalseDelegate(response));
+                    ServiceResponse<Boolean> clientResponse = getFalseDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -235,22 +244,25 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putFalse(boolBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putFalseDelegate(response));
+                    ServiceResponse<Void> clientResponse = putFalseDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -280,22 +292,25 @@ public final class BoolsImpl implements Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response));
+                    ServiceResponse<Boolean> clientResponse = getNullDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -325,22 +340,25 @@ public final class BoolsImpl implements Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Boolean>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response));
+                    ServiceResponse<Boolean> clientResponse = getInvalidDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
