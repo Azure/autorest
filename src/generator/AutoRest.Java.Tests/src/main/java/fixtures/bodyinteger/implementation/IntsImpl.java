@@ -130,22 +130,25 @@ public final class IntsImpl implements Ints {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Integer>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response));
+                    ServiceResponse<Integer> clientResponse = getNullDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -175,22 +178,25 @@ public final class IntsImpl implements Ints {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Integer>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response));
+                    ServiceResponse<Integer> clientResponse = getInvalidDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -220,22 +226,25 @@ public final class IntsImpl implements Ints {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowInt32();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Integer>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getOverflowInt32Delegate(response));
+                    ServiceResponse<Integer> clientResponse = getOverflowInt32Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -265,22 +274,25 @@ public final class IntsImpl implements Ints {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowInt32();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Integer>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getUnderflowInt32Delegate(response));
+                    ServiceResponse<Integer> clientResponse = getUnderflowInt32Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -310,22 +322,25 @@ public final class IntsImpl implements Ints {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowInt64();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Long>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getOverflowInt64Delegate(response));
+                    ServiceResponse<Long> clientResponse = getOverflowInt64Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -355,22 +370,25 @@ public final class IntsImpl implements Ints {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowInt64();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Long>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getUnderflowInt64Delegate(response));
+                    ServiceResponse<Long> clientResponse = getUnderflowInt64Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -402,22 +420,25 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMax32(intBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMax32Delegate(response));
+                    ServiceResponse<Void> clientResponse = putMax32Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -449,22 +470,25 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMax64(intBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMax64Delegate(response));
+                    ServiceResponse<Void> clientResponse = putMax64Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -496,22 +520,25 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMin32(intBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMin32Delegate(response));
+                    ServiceResponse<Void> clientResponse = putMin32Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -543,22 +570,25 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMin64(intBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMin64Delegate(response));
+                    ServiceResponse<Void> clientResponse = putMin64Delegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -593,15 +623,11 @@ public final class IntsImpl implements Ints {
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnixTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -611,9 +637,16 @@ public final class IntsImpl implements Ints {
                     if (result.getBody() != null) {
                         body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -646,23 +679,26 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         Call<ResponseBody> call = service.putUnixTimeDate(intBodyConverted);
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putUnixTimeDateDelegate(response));
+                    ServiceResponse<Void> clientResponse = putUnixTimeDateDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -697,15 +733,11 @@ public final class IntsImpl implements Ints {
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidUnixTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -715,9 +747,16 @@ public final class IntsImpl implements Ints {
                     if (result.getBody() != null) {
                         body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -752,15 +791,11 @@ public final class IntsImpl implements Ints {
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNullUnixTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -770,9 +805,16 @@ public final class IntsImpl implements Ints {
                     if (result.getBody() != null) {
                         body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
