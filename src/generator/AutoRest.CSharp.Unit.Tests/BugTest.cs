@@ -40,8 +40,13 @@ namespace AutoRest.CSharp.Unit.Tests
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec()
         {
+           return GenerateCodeForTestFromSpec($"{GetType().Name}.yaml");
+        }
+
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string file)
+        {
             var fs = CreateMockFilesystem();
-            $"{GetType().Name}.yaml".GenerateCodeInto(fs);
+            file.GenerateCodeInto(fs);
             return fs;
         }
 
