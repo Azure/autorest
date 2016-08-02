@@ -123,10 +123,6 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
                 }
-                if (this.IsPagingNextOperation)
-                {
-                    imports.Remove("retrofit2.http.Path");
-                }
                 if (this.IsPagingNonPollingOperation)
                 {
                     imports.RemoveAll(i => new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe().Contains(i));
