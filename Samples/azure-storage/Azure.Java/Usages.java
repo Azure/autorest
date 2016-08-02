@@ -33,6 +33,6 @@ public interface Usages {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall listAsync(final ServiceCallback<List<Usage>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) throws IllegalArgumentException;
 
 }
