@@ -94,7 +94,7 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<ServiceResponse<byte[]>> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
@@ -142,7 +142,7 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<ServiceResponse<byte[]>> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
@@ -190,7 +190,7 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<ServiceResponse<byte[]>> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNonAscii();
         final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
@@ -244,7 +244,7 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
@@ -295,7 +295,7 @@ public final class BytesImpl implements Bytes {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall<ServiceResponse<byte[]>> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<ServiceResponse<byte[]>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {

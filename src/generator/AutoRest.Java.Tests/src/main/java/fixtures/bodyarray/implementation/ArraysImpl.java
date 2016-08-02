@@ -345,7 +345,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -393,7 +393,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -441,7 +441,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -496,7 +496,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -548,7 +548,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Boolean>>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTfft();
         final ServiceCall<ServiceResponse<List<Boolean>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
@@ -603,7 +603,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -655,7 +655,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Boolean>>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
         final ServiceCall<ServiceResponse<List<Boolean>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
@@ -703,7 +703,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Boolean>>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidString();
         final ServiceCall<ServiceResponse<List<Boolean>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
@@ -751,7 +751,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntegerValid();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -806,7 +806,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -858,7 +858,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidNull();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -906,7 +906,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Integer>>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidString();
         final ServiceCall<ServiceResponse<List<Integer>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
@@ -954,7 +954,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Long>>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongValid();
         final ServiceCall<ServiceResponse<List<Long>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
@@ -1009,7 +1009,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1061,7 +1061,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Long>>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidNull();
         final ServiceCall<ServiceResponse<List<Long>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
@@ -1109,7 +1109,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Long>>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidString();
         final ServiceCall<ServiceResponse<List<Long>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
@@ -1157,7 +1157,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatValid();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1212,7 +1212,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1264,7 +1264,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidNull();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1312,7 +1312,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidString();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1360,7 +1360,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleValid();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1415,7 +1415,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1467,7 +1467,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1515,7 +1515,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Double>>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidString();
         final ServiceCall<ServiceResponse<List<Double>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
@@ -1563,7 +1563,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<String>>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringValid();
         final ServiceCall<ServiceResponse<List<String>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
@@ -1618,7 +1618,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1670,7 +1670,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<String>>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithNull();
         final ServiceCall<ServiceResponse<List<String>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
@@ -1718,7 +1718,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<String>>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithInvalid();
         final ServiceCall<ServiceResponse<List<String>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
@@ -1766,7 +1766,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<UUID>>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         Call<ResponseBody> call = service.getUuidValid();
         final ServiceCall<ServiceResponse<List<UUID>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
@@ -1821,7 +1821,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1873,7 +1873,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<UUID>>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         Call<ResponseBody> call = service.getUuidInvalidChars();
         final ServiceCall<ServiceResponse<List<UUID>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<UUID>>(serviceCallback) {
@@ -1921,7 +1921,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<LocalDate>>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateValid();
         final ServiceCall<ServiceResponse<List<LocalDate>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
@@ -1976,7 +1976,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2028,7 +2028,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<LocalDate>>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidNull();
         final ServiceCall<ServiceResponse<List<LocalDate>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
@@ -2076,7 +2076,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<LocalDate>>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidChars();
         final ServiceCall<ServiceResponse<List<LocalDate>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
@@ -2124,7 +2124,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<DateTime>>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeValid();
         final ServiceCall<ServiceResponse<List<DateTime>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
@@ -2179,7 +2179,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2231,7 +2231,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
         final ServiceCall<ServiceResponse<List<DateTime>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
@@ -2279,7 +2279,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
         final ServiceCall<ServiceResponse<List<DateTime>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
@@ -2337,7 +2337,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
         final ServiceCall<ServiceResponse<List<DateTime>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
@@ -2407,7 +2407,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2464,7 +2464,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Period>>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
         Call<ResponseBody> call = service.getDurationValid();
         final ServiceCall<ServiceResponse<List<Period>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Period>>(serviceCallback) {
@@ -2519,7 +2519,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2571,7 +2571,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<byte[]>>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteValid();
         final ServiceCall<ServiceResponse<List<byte[]>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
@@ -2626,7 +2626,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2678,7 +2678,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<byte[]>>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteInvalidNull();
         final ServiceCall<ServiceResponse<List<byte[]>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
@@ -2736,7 +2736,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<byte[]>>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getBase64Url();
         final ServiceCall<ServiceResponse<List<byte[]>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
@@ -2794,7 +2794,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Product>>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexNull();
         final ServiceCall<ServiceResponse<List<Product>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -2842,7 +2842,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Product>>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexEmpty();
         final ServiceCall<ServiceResponse<List<Product>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -2890,7 +2890,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Product>>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemNull();
         final ServiceCall<ServiceResponse<List<Product>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -2938,7 +2938,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Product>>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemEmpty();
         final ServiceCall<ServiceResponse<List<Product>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -2986,7 +2986,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Product>>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexValid();
         final ServiceCall<ServiceResponse<List<Product>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -3041,7 +3041,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3093,7 +3093,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<List<String>>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayNull();
         final ServiceCall<ServiceResponse<List<List<String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
@@ -3141,7 +3141,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<List<String>>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayEmpty();
         final ServiceCall<ServiceResponse<List<List<String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
@@ -3189,7 +3189,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<List<String>>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemNull();
         final ServiceCall<ServiceResponse<List<List<String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
@@ -3237,7 +3237,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<List<String>>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemEmpty();
         final ServiceCall<ServiceResponse<List<List<String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
@@ -3285,7 +3285,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<List<String>>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayValid();
         final ServiceCall<ServiceResponse<List<List<String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
@@ -3340,7 +3340,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3392,7 +3392,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Map<String, String>>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryNull();
         final ServiceCall<ServiceResponse<List<Map<String, String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
@@ -3440,7 +3440,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryEmpty();
         final ServiceCall<ServiceResponse<List<Map<String, String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
@@ -3488,7 +3488,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemNull();
         final ServiceCall<ServiceResponse<List<Map<String, String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
@@ -3536,7 +3536,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
         final ServiceCall<ServiceResponse<List<Map<String, String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
@@ -3584,7 +3584,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
+    public ServiceCall<ServiceResponse<List<Map<String, String>>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryValid();
         final ServiceCall<ServiceResponse<List<Map<String, String>>>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
@@ -3639,7 +3639,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }

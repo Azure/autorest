@@ -108,7 +108,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -167,7 +167,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
@@ -222,7 +222,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -285,7 +285,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
@@ -354,7 +354,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -423,7 +423,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
         final FirstParameterGroup firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
@@ -478,7 +478,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {

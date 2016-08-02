@@ -194,7 +194,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<ServiceResponse<Product>> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -266,7 +266,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -334,7 +334,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -391,7 +391,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
         final String constantParam = "constant";
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
         final ServiceCall<ServiceResponse<Void>> serviceCall = new ServiceCall<>(call);
@@ -439,7 +439,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<ServiceResponse<Product>> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
         final String constantParam = "constant";
         final Product body = null;
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
@@ -484,7 +484,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall<ServiceResponse<Product>> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(body);
         final String constantParam = "constant";
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);

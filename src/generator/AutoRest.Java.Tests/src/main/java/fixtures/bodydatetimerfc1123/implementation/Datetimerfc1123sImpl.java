@@ -117,7 +117,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -175,7 +175,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -233,7 +233,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -291,7 +291,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -351,7 +351,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -408,7 +408,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -466,7 +466,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
@@ -526,7 +526,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -583,7 +583,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall<ServiceResponse<DateTime>> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
         final ServiceCall<ServiceResponse<DateTime>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {

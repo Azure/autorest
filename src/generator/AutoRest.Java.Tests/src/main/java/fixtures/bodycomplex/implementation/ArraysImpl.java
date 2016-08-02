@@ -96,7 +96,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<ArrayWrapper>> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<ServiceResponse<ArrayWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
@@ -151,7 +151,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -203,7 +203,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<ArrayWrapper>> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<ServiceResponse<ArrayWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
@@ -258,7 +258,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -310,7 +310,7 @@ public final class ArraysImpl implements Arrays {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall<ServiceResponse<ArrayWrapper>> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall<ServiceResponse<ArrayWrapper>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {

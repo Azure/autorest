@@ -93,7 +93,7 @@ public final class ApiVersionDefaultsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -148,7 +148,7 @@ public final class ApiVersionDefaultsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -203,7 +203,7 @@ public final class ApiVersionDefaultsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -258,7 +258,7 @@ public final class ApiVersionDefaultsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }

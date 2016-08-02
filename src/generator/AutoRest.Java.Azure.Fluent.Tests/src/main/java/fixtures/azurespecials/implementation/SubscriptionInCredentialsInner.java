@@ -98,7 +98,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -153,7 +153,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -211,7 +211,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -269,7 +269,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -324,7 +324,7 @@ public final class SubscriptionInCredentialsInner {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

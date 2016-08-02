@@ -84,7 +84,7 @@ public final class InheritancesImpl implements Inheritances {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
+    public ServiceCall<ServiceResponse<Siamese>> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<ServiceResponse<Siamese>> serviceCall = new ServiceCall<>(call);
         call.enqueue(new ServiceResponseCallback<Siamese>(serviceCallback) {
@@ -139,7 +139,7 @@ public final class InheritancesImpl implements Inheritances {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall<ServiceResponse<Void>> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
