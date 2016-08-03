@@ -14,7 +14,7 @@ using AutoRest.Swagger.Model;
 namespace AutoRest.Swagger.Validation
 {
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Xms")]
-    public class XmsPathsMustOverloadPaths : TypedRule<ServiceDefinition>
+    public class XmsPathsMustOverloadPaths : TypedRule<Dictionary<string, Operation>>
     {
         /// <summary>
         /// The template message for this Rule. 
@@ -29,13 +29,9 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
 
-        public override IEnumerable<ValidationMessage> GetValidationMessages(ServiceDefinition entity)
+        public override bool IsValid(Dictionary<string, Operation> xmsPath, RuleContext context)
         {
-            return entity?.CustomPaths?.Keys
-                .Where(customPath => !entity.Paths.ContainsKey(GetBasePath(customPath)))
-                .Select(basePath => new ValidationMessage(this,basePath))
-                
-                   ?? Enumerable.Empty<ValidationMessage>();
+            return context?.GetServiceDefinition()?.Paths?.ContainsKey(GetBasePath(context.Key)) ?? false;
         }
 
         private static string GetBasePath(string customPath)

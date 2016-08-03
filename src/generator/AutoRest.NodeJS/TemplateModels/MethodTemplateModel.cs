@@ -293,6 +293,7 @@ namespace AutoRest.NodeJS.TemplateModels
 
                                 var propertyParameter = new Parameter();
                                 propertyParameter.Type = property.Type;
+                                propertyParameter.IsRequired = property.IsRequired;
                                 propertyParameter.Name = param.Name + "." + property.Name;
                                 string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation}).Where(s => !string.IsNullOrEmpty(s)));
                                 propertyParameter.Documentation = documentationString;

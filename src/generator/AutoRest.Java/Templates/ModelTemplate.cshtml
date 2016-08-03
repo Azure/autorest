@@ -128,7 +128,11 @@ if (!property.IsReadOnly)
 @:    public @(Model.Name) with@(property.Name.ToPascalCase())(@(((ITypeModel)property.Type).ResponseVariant) @property.Name) {
 if (property.Type.Name != ((ITypeModel)property.Type).ResponseVariant.Name)
 {
-@:        this.@(property.Name) = @(property.FromClientForm);
+@:        if (@property.Name == null) {
+@:            this.@(property.Name) = null;
+@:        } else {
+@:            this.@(property.Name) = @(property.FromClientForm);
+@:        }
 }
 else
 {

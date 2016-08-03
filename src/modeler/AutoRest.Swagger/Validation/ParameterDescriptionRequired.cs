@@ -8,25 +8,15 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    internal static class SwaggerObjectExtensions
-    {
-        internal static bool DefinesInlineProperties(this SwaggerObject entity)
-        {
-            return entity.Description != null
-                || entity.Items != null
-                || entity.Type != null;
-        }
-    }
-
-    public class RefsMustNotHaveSiblings : TypedRule<SwaggerObject>
+    public class ParameterDescriptionRequired : TypedRule<SwaggerParameter>
     {
         /// <summary>
-        /// This rule passes if the entity does not have both a reference and define properties inline
+        /// This rule fails if the description is null and the reference is null (since the reference could have a description)
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerObject entity)
-            => entity == null || string.IsNullOrEmpty(entity.Reference) || !entity.DefinesInlineProperties();
+        public override bool IsValid(SwaggerParameter entity)
+            => entity == null || entity.Description != null || !string.IsNullOrEmpty(entity.Reference);
 
         /// <summary>
         /// The template message for this Rule. 
@@ -34,12 +24,11 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.ConflictingRef;
+        public override string MessageTemplate => Resources.MissingDescription;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override LogEntrySeverity Severity => LogEntrySeverity.Info;
-
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
     }
 }

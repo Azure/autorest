@@ -28,7 +28,6 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "format": "wrong",
             "description": "test parameter",
             "x-ms-client-name": ""
           }

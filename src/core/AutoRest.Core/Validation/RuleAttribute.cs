@@ -23,12 +23,5 @@ namespace AutoRest.Core.Validation
                 Rule = (Rule)Activator.CreateInstance(ruleType);
             }
         }
-
-        /// <summary>
-        /// Returns a collection of validation messages for <paramref name="entity"/>
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public virtual IEnumerable<ValidationMessage> GetValidationMessages(object entity) => Rule?.GetValidationMessages(entity) ?? Enumerable.Empty<ValidationMessage>();
     }
 }

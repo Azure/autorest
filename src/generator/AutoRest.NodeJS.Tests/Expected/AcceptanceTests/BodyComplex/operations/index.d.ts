@@ -792,11 +792,11 @@ export interface Polymorphism {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -843,11 +843,11 @@ export interface Polymorphism {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -942,11 +942,11 @@ export interface Polymorphicrecursive {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 

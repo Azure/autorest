@@ -11,6 +11,7 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Describes a single API operation on a path.
     /// </summary>
+    [Rule(typeof(OperationDescriptionRequired))]
     public class Operation : SwaggerBase
     {
         private string _description;
@@ -74,7 +75,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
-        [Rule(typeof(DefaultResponseRequired))]
+        [Rule(typeof(ResponseRequired))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>
