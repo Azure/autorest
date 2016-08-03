@@ -46,6 +46,20 @@ namespace AutoRest.CSharp.Unit.Tests
 
         internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
         {
+            var settings = new Settings
+            {
+                Modeler = "Swagger",
+                CodeGenerator = "CSharp",
+                FileSystem = fileSystem,
+                OutputDirectory = "GeneratedCode",
+                Namespace = "Test"
+            };
+
+            return inputFile.GenerateCodeInto(fileSystem, settings);
+        }
+
+        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
+        {
             string fileName = Path.GetFileName(inputFile);
 
             // If inputFile does not contain a path use the local Resource folder
@@ -58,15 +72,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 fileSystem.Copy(inputFile);
             }
 
-            var settings = new Settings
-            {
-                Modeler = "Swagger",
-                CodeGenerator = "CSharp",
-                FileSystem = fileSystem,
-                OutputDirectory = "GeneratedCode",
-                Namespace = "Test",
-                Input = fileName
-            };
+            settings.Input = fileName;
 
             var codeGenerator = new CSharpCodeGenerator(settings);
             var modeler = ExtensionsLoader.GetModeler(settings);
