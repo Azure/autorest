@@ -122,6 +122,9 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   var requestUrl = this.client.baseUri +
                    '//parameterGrouping/postRequired/{path}';
   requestUrl = requestUrl.replace('{path}', encodeURIComponent(path));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
@@ -129,9 +132,6 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -287,6 +287,9 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//parameterGrouping/postOptional';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
@@ -294,9 +297,6 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -459,6 +459,9 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//parameterGrouping/postMultipleParameterGroups';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
@@ -469,9 +472,6 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -609,6 +609,9 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//parameterGrouping/sharedParameterGroupObject';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
@@ -616,9 +619,6 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
