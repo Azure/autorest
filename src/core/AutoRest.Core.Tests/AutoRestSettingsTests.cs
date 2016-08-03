@@ -105,7 +105,7 @@ namespace AutoRest.Core.Tests
             {
                 "-h", " --i", "/c/input",
                 "-output", " c:\\output", "-clientName", "MyClient",
-                "-m", "MyModels"
+                "-mname", "MyModels"
             });
             Assert.True(settings.ShowHelp);
             Assert.Equal("/c/input", settings.Input);

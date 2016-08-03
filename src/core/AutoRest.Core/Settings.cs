@@ -82,10 +82,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string Input { get; set; }
 
         /// <summary>
-        /// Gets or sets a name for the Models Namespace and Models output folde
+        /// Gets or sets a name for the generated client models Namespace and Models output folder
         /// </summary>
-        [SettingsInfo("The name to use for Models Namespace and Models output folder.")]
-        [SettingsAlias("m")]
+        [SettingsInfo("Name to use for the generated client models namespace and folder name. Not supported by all code generators.")]
+        [SettingsAlias("mname")]
         public string ModelsName { get; set; }
 
         /// <summary>

@@ -15,6 +15,8 @@
   **-Modeler** The Modeler to use on the input. If not specified, defaults to Swagger. Aliases: -m
   
   **-ClientName** Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. Aliases: -name
+
+  **-ModelsName** Name to use for the generated client models namespace and folder name. By default, uses the value of 'Models'. This is not currently supported by all code generators. Aliases: -mname
   
   **-PayloadFlatteningThreshold** The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments. Aliases: -ft
   
@@ -73,3 +75,9 @@ AutoRest.exe -Namespace MyNamespace -Header "Copyright Contoso Ltd" -Input swagg
 ```bash
 AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -CodeGenSettings settings.json
 ```
+
+  - Generate C# client in MyNamespace with custom Models name from swagger.json input:
+```bash
+AutoRest.exe -Namespace MyNamespace -ModelsName MyModels -CodeGenerator CSharp -Modeler Swagger -Input swagger.json
+```
+
