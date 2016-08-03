@@ -516,6 +516,7 @@ namespace AutoRest.NodeJS.TemplateModels
         {
             var builder = new IndentedStringBuilder("  ");
             BuildPathParameters(variableName, builder);
+            RemoveDuplicateForwardSlashes("requestUrl", builder);
             if (HasQueryParameters())
             {
                 BuildQueryParameterArray(builder);
@@ -628,11 +629,10 @@ namespace AutoRest.NodeJS.TemplateModels
         /// Generate code to remove duplicated forward slashes from a URL in code
         /// </summary>
         /// <param name="urlVariableName"></param>
+        /// <param name="builder">The stringbuilder for url construction</param>
         /// <returns></returns>
-        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName)
+        public virtual string RemoveDuplicateForwardSlashes(string urlVariableName, IndentedStringBuilder builder)
         {
-            var builder = new IndentedStringBuilder("  ");
-
             builder.AppendLine("// trim all duplicate forward slashes in the url");
             builder.AppendLine("var regex = /([^:]\\/)\\/+/gi;");
             builder.AppendLine("{0} = {0}.replace(regex, '$1');", urlVariableName);

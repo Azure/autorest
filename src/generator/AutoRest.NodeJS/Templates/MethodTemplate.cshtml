@@ -103,7 +103,6 @@
   @:                 '/@(Model.Url.EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
-  @(Model.RemoveDuplicateForwardSlashes("requestUrl"))
   @EmptyLine
   // Create HTTP transport objects
   var httpRequest = new WebResource();
