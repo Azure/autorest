@@ -213,7 +213,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final String body = null;
         Call<ResponseBody> call = service.addPetUsingByteArray(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -256,7 +256,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.addPetUsingByteArray(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -307,7 +307,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final Pet body = null;
         Call<ResponseBody> call = service.addPet(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -354,7 +354,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.addPet(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -403,7 +403,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final Pet body = null;
         Call<ResponseBody> call = service.updatePet(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -448,7 +448,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.updatePet(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -503,7 +503,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         String statusConverted = this.mapperAdapter().serializeList(status, CollectionFormat.CSV);
         Call<ResponseBody> call = service.findPetsByStatus(statusConverted);
         final ServiceCall<List<Pet>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -552,7 +552,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         String statusConverted = this.mapperAdapter().serializeList(status, CollectionFormat.CSV);
         Call<ResponseBody> call = service.findPetsByStatus(statusConverted);
         final ServiceCall<List<Pet>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -606,7 +606,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         String tagsConverted = this.mapperAdapter().serializeList(tags, CollectionFormat.CSV);
         Call<ResponseBody> call = service.findPetsByTags(tagsConverted);
         final ServiceCall<List<Pet>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -655,7 +655,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         String tagsConverted = this.mapperAdapter().serializeList(tags, CollectionFormat.CSV);
         Call<ResponseBody> call = service.findPetsByTags(tagsConverted);
         final ServiceCall<List<Pet>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -707,7 +707,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.findPetsWithByteArray(petId);
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -760,7 +760,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
         Call<ResponseBody> call = service.getPetById(petId);
         final ServiceCall<Pet> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Pet>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Pet>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -822,7 +822,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final String status = null;
         Call<ResponseBody> call = service.updatePetWithForm(petId, name, status);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -876,7 +876,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.updatePetWithForm(petId, name, status);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -927,7 +927,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final String apiKey = null;
         Call<ResponseBody> call = service.deletePet(petId, apiKey);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -972,7 +972,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.deletePet(petId, apiKey);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1033,7 +1033,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1088,7 +1088,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, fileConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1136,7 +1136,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getInventory();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1185,7 +1185,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final Order body = null;
         Call<ResponseBody> call = service.placeOrder(body);
         final ServiceCall<Order> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Order>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Order>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1230,7 +1230,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.placeOrder(body);
         final ServiceCall<Order> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Order>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Order>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1289,7 +1289,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.getOrderById(orderId);
         final ServiceCall<Order> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Order>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Order>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1349,7 +1349,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.deleteOrder(orderId);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1401,7 +1401,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final User body = null;
         Call<ResponseBody> call = service.createUser(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1448,7 +1448,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.createUser(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1496,7 +1496,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final List<User> body = null;
         Call<ResponseBody> call = service.createUsersWithArrayInput(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1541,7 +1541,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.createUsersWithArrayInput(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1589,7 +1589,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final List<User> body = null;
         Call<ResponseBody> call = service.createUsersWithListInput(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1634,7 +1634,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.createUsersWithListInput(body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1684,7 +1684,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final String password = null;
         Call<ResponseBody> call = service.loginUser(username, password);
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1729,7 +1729,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.loginUser(username, password);
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1777,7 +1777,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     public ServiceCall<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.logoutUser();
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1832,7 +1832,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.getUserByName(username);
         final ServiceCall<User> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<User>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<User>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1894,7 +1894,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         final User body = null;
         Call<ResponseBody> call = service.updateUser(username, body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1950,7 +1950,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         Validator.validate(body);
         Call<ResponseBody> call = service.updateUser(username, body);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2009,7 +2009,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
         }
         Call<ResponseBody> call = service.deleteUser(username);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
