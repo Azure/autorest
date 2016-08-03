@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
 
                 if (this.ModelTypes.Any( m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)))
                 {
-                    yield return "Models";
+                    yield return this.ModelsName;
                 }
             }
         }

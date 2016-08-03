@@ -53,6 +53,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             CodeGenerator = "CSharp";
             Modeler = "Swagger";
             ValidationLevel = LogEntrySeverity.Error;
+            ModelsName = "Models";
         }
 
         /// <summary>
@@ -79,6 +80,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("i")]
         [SettingsAlias("input")]
         public string Input { get; set; }
+
+        /// <summary>
+        /// Gets or sets a name for the generated client models Namespace and Models output folder
+        /// </summary>
+        [SettingsInfo("Name to use for the generated client models namespace and folder name. Not supported by all code generators.")]
+        [SettingsAlias("mname")]
+        public string ModelsName { get; set; }
 
         /// <summary>
         /// Gets or sets a base namespace for generated code.

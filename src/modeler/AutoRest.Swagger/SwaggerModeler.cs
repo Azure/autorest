@@ -195,6 +195,7 @@ namespace AutoRest.Swagger
                 ServiceClient.Name = Settings.ClientName;
             }
             ServiceClient.Namespace = Settings.Namespace;
+            ServiceClient.ModelsName = Settings.ModelsName;
             ServiceClient.ApiVersion = ServiceDefinition.Info.Version;
             ServiceClient.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)

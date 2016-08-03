@@ -41,6 +41,11 @@ namespace AutoRest.Core.ClientModel
         public string Namespace { get; set; }
 
         /// <summary>
+        /// Gets or sets the Models Name if applicable.
+        /// </summary>
+        public string ModelsName { get; set; }
+
+        /// <summary>
         /// Gets or sets the version of the API described by this service.
         /// </summary>
         public string ApiVersion { get; set; }

@@ -40,7 +40,7 @@ namespace AutoRest.Core.Tests
             };
             SampleCodeGenerator codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
-            Assert.Contains(Path.Combine(settings.OutputDirectory, "Models"), _fileSystem.VirtualStore.Keys);
+            Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName), _fileSystem.VirtualStore.Keys);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace AutoRest.Core.Tests
                 OutputDirectory = Path.GetTempPath()
             };
             string existingContents = "this is dummy";
-            string path = Path.Combine(settings.OutputDirectory, "Models", "Pet.cs");
+            string path = Path.Combine(settings.OutputDirectory, settings.ModelsName, "Pet.cs");
             _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
             var codeGenerator = new SampleCodeGenerator(settings);
             codeGenerator.Generate(new ServiceClient()).GetAwaiter().GetResult();
