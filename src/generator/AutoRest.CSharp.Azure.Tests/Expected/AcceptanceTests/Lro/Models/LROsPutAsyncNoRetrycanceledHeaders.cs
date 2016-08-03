@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for putAsyncNoRetrycanceled operation.
@@ -46,14 +40,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noretry/canceled/operationResults/200
         /// </summary>
-        [JsonProperty(PropertyName = "Azure-AsyncOperation")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Azure-AsyncOperation")]
         public string AzureAsyncOperation { get; set; }
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/putasync/noretry/canceled/operationResults/200
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
     }

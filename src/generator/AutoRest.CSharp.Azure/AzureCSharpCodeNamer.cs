@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Azure
         {
             if (primaryType != null && primaryType.Type == KnownPrimaryType.Credentials)
             {
-                primaryType.Name = "ServiceClientCredentials";
+                primaryType.Name = "Microsoft.Rest.ServiceClientCredentials";
                 return primaryType;
             }
             else
@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Azure
                         Name = "odataQuery",
                         Type = new CompositeType
                         {
-                            Name = string.Format(CultureInfo.InvariantCulture, "ODataQuery<{0}>", odataFilter.Type.Name)
+                            Name = string.Format(CultureInfo.InvariantCulture, "Microsoft.Rest.Azure.OData.ODataQuery<{0}>", odataFilter.Type.Name)
                         },
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
@@ -166,10 +166,10 @@ namespace AutoRest.CSharp.Azure
                     continue;
                 }
                 var pageTypeFormat = "{0}<{1}>";
-                var ipageTypeFormat = "IPage<{0}>";
+                var ipageTypeFormat = "Microsoft.Rest.Azure.IPage<{0}>";
                 if (string.IsNullOrWhiteSpace(nextLinkString))
                 {
-                    ipageTypeFormat = "IEnumerable<{0}>";
+                    ipageTypeFormat = "System.Collections.Generic.IEnumerable<{0}>";
                 }
                 
 

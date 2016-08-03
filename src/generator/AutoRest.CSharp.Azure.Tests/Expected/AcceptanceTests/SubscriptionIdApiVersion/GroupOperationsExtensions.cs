@@ -8,14 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for GroupOperations.
@@ -33,7 +28,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// </param>
             public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
             {
-                return Task.Factory.StartNew(s => ((IGroupOperations)s).GetSampleResourceGroupAsync(resourceGroupName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IGroupOperations)s).GetSampleResourceGroupAsync(resourceGroupName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -48,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {

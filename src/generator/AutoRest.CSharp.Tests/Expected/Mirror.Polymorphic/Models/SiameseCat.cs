@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class SiameseCat : BaseCat
     {
@@ -38,7 +33,7 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Gets or sets cat length
         /// </summary>
-        [JsonProperty(PropertyName = "length")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "length")]
         public int? Length { get; set; }
 
     }

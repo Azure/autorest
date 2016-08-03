@@ -5,14 +5,9 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
 @foreach (var usingString in Model.Usings) {
-@:    using @usingString;
+   @:using @usingString;
 }
 @EmptyLine
     /// <summary>

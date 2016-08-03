@@ -8,13 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
+   using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Extension methods for HeadExceptionOperations.
@@ -29,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head200(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head200Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head200Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head200Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task Head200Async(this IHeadExceptionOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -54,7 +49,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head204(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head204Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head204Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -66,7 +61,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head204Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task Head204Async(this IHeadExceptionOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -79,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static void Head404(this IHeadExceptionOperations operations)
             {
-                Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head404Async(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeadExceptionOperations)s).Head404Async(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -91,7 +86,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head404Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task Head404Async(this IHeadExceptionOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

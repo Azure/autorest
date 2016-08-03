@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class StorageAccountCheckNameAvailabilityParameters
     {
@@ -21,7 +15,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountCheckNameAvailabilityParameters class.
         /// </summary>
-        public StorageAccountCheckNameAvailabilityParameters(string name, string type = default(string))
+        public StorageAccountCheckNameAvailabilityParameters(System.String name, System.String type = default(System.String))
         {
             Name = name;
             Type = type;
@@ -29,25 +23,25 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
+        public System.String Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
-        public string Type { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
+        public System.String Type { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
             }
         }
     }

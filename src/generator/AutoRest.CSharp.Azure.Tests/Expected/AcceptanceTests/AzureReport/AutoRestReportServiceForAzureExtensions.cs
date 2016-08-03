@@ -8,14 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for AutoRestReportServiceForAzure.
@@ -28,9 +23,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
+            public static System.Collections.Generic.IDictionary<string, int?> GetReport(this IAutoRestReportServiceForAzure operations)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestReportServiceForAzure)s).GetReportAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestReportServiceForAzure)s).GetReportAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -42,7 +37,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, int?>> GetReportAsync(this IAutoRestReportServiceForAzure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

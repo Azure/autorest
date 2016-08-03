@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseDuration operation.
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header values
         /// "P123DT22H14M12.011S"</param>
-        public HeaderResponseDurationHeaders(TimeSpan? value = default(TimeSpan?))
+        public HeaderResponseDurationHeaders(System.TimeSpan? value = default(System.TimeSpan?))
         {
             Value = value;
         }
@@ -40,8 +35,8 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Gets or sets response with header values "P123DT22H14M12.011S"
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
-        public TimeSpan? Value { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.TimeSpan? Value { get; set; }
 
     }
 }

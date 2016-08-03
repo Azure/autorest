@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class DictionaryWrapper
     {
@@ -26,15 +20,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapper class.
         /// </summary>
-        public DictionaryWrapper(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
+        public DictionaryWrapper(System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
         {
             DefaultProgram = defaultProgram;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "defaultProgram")]
-        public IDictionary<string, string> DefaultProgram { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "defaultProgram")]
+        public System.Collections.Generic.IDictionary<string, string> DefaultProgram { get; set; }
 
     }
 }

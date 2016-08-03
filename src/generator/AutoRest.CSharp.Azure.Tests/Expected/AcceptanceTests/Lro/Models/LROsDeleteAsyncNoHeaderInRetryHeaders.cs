@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for deleteAsyncNoHeaderInRetry operation.
@@ -42,7 +36,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/put/noheader/202/204/operationresults
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
     }

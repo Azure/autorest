@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for HttpFailure.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetEmptyError(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetEmptyErrorAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpFailure)s).GetEmptyErrorAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetEmptyErrorAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetEmptyErrorAsync(this IHttpFailure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -57,7 +52,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetNoModelError(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelErrorAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelErrorAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -69,7 +64,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetNoModelErrorAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetNoModelErrorAsync(this IHttpFailure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNoModelErrorWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -85,7 +80,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static bool? GetNoModelEmpty(this IHttpFailure operations)
             {
-                return Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHttpFailure)s).GetNoModelEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -97,7 +92,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetNoModelEmptyAsync(this IHttpFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetNoModelEmptyAsync(this IHttpFailure operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNoModelEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

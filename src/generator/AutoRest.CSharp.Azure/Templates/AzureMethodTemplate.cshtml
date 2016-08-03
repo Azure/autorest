@@ -42,7 +42,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
     @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(
@@ -83,7 +83,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// The cancellation token.
 @:/// </param>
 <text>
-public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
+public async System.Threading.Tasks.Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
     @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(

@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Product
     {
@@ -33,7 +27,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
         public ProductProperties Properties { get; set; }
 
     }

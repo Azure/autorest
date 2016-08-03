@@ -8,14 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for HeaderOperations.
@@ -34,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static HeaderCustomNamedRequestIdHeaders CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
             {
-                return Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdAsync(fooClientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdAsync(fooClientRequestId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -50,7 +45,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestIdAsync(this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestIdAsync(this IHeaderOperations operations, string fooClientRequestId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,7 +65,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static HeaderCustomNamedRequestIdParamGroupingHeaders CustomNamedRequestIdParamGrouping(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters)
             {
-                return Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IHeaderOperations)s).CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HeaderCustomNamedRequestIdParamGroupingHeaders> CustomNamedRequestIdParamGroupingAsync(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<HeaderCustomNamedRequestIdParamGroupingHeaders> CustomNamedRequestIdParamGroupingAsync(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(headerCustomNamedRequestIdParamGroupingParameters, null, cancellationToken).ConfigureAwait(false))
                 {

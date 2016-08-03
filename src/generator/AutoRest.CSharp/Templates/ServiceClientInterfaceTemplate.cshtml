@@ -5,29 +5,21 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-
 @foreach (var usingString in Model.Usings) {
-@:    using @usingString;
+    @:using @usingString;
 }
 @EmptyLine
     /// <summary>
     @WrapComment("/// ", Model.Documentation.EscapeXmlComment())
     /// </summary>
-    public partial interface I@(Model.Name) : IDisposable
+    public partial interface I@(Model.Name) : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
         @if (!Model.IsCustomBaseUri)
         {
-        @:Uri BaseUri { get; set; }
+        @:System.Uri BaseUri { get; set; }
         }
         
         @EmptyLine
@@ -35,13 +27,13 @@ namespace @Settings.Namespace
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
         @EmptyLine
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
         @EmptyLine
 
         @foreach (var property in Model.Properties)
@@ -89,7 +81,7 @@ namespace @Settings.Namespace
         @:/// <param name='cancellationToken'>
         @:/// The cancellation token.
         @:/// </param>
-        @:Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
+        @:System.Threading.Tasks.Task<@(method.OperationResponseReturnTypeString)> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
         @EmptyLine
         @:
     }

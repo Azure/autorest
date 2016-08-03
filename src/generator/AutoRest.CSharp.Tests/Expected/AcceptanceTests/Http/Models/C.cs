@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class C
     {
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "httpCode")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "httpCode")]
         public string HttpCode { get; set; }
 
     }

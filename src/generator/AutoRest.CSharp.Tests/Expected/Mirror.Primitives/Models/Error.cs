@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Error
     {
@@ -34,17 +29,17 @@ namespace Fixtures.MirrorPrimitives.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "code")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
         public int? Code { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "fields")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "fields")]
         public string Fields { get; set; }
 
     }

@@ -8,13 +8,8 @@
 
 namespace Fixtures.MirrorPolymorphic
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for PolymorphicAnimalStore.
@@ -38,7 +33,7 @@ namespace Fixtures.MirrorPolymorphic
             /// </param>
             public static Animal CreateOrUpdatePolymorphicAnimals(this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal))
             {
-                return Task.Factory.StartNew(s => ((IPolymorphicAnimalStore)s).CreateOrUpdatePolymorphicAnimalsAsync(animalCreateOrUpdateParameter), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPolymorphicAnimalStore)s).CreateOrUpdatePolymorphicAnimalsAsync(animalCreateOrUpdateParameter), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +54,7 @@ namespace Fixtures.MirrorPolymorphic
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync(this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync(this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(animalCreateOrUpdateParameter, null, cancellationToken).ConfigureAwait(false))
                 {

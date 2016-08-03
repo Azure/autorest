@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class DateWrapper
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DateWrapper class.
         /// </summary>
-        public DateWrapper(DateTime? field = default(DateTime?), DateTime? leap = default(DateTime?))
+        public DateWrapper(System.DateTime? field = default(System.DateTime?), System.DateTime? leap = default(System.DateTime?))
         {
             Field = field;
             Leap = leap;
@@ -33,15 +28,15 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(DateJsonConverter))]
-        [JsonProperty(PropertyName = "field")]
-        public DateTime? Field { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
+        public System.DateTime? Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(DateJsonConverter))]
-        [JsonProperty(PropertyName = "leap")]
-        public DateTime? Leap { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "leap")]
+        public System.DateTime? Leap { get; set; }
 
     }
 }

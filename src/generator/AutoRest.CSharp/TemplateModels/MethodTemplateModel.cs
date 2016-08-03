@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.TemplateModels
 
             if (addCustomHeaderParameters)
             {
-                declarations.Add("Dictionary<string, List<string>> customHeaders = null");
+                declarations.Add("System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null");
             }
 
             return string.Join(", ", declarations);
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.TemplateModels
             {
                 declarations += ", ";
             }            
-            declarations += "CancellationToken cancellationToken = default(CancellationToken)";
+            declarations += "System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)";
 
             return declarations;
         }
@@ -166,21 +166,21 @@ namespace AutoRest.CSharp.TemplateModels
                 if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                            "HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
+                            "Microsoft.Rest.HttpOperationResponse<{0},{1}>", ReturnType.Body.Name, ReturnType.Headers.Name);
                 }
                 else if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationResponse<{0}>", ReturnType.Body.Name);
+                        "Microsoft.Rest.HttpOperationResponse<{0}>", ReturnType.Body.Name);
                 }
                 else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                        "Microsoft.Rest.HttpOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {
-                    return "HttpOperationResponse";
+                    return "Microsoft.Rest.HttpOperationResponse";
                 }
             }
         }
@@ -195,16 +195,16 @@ namespace AutoRest.CSharp.TemplateModels
                 if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Body.Name);
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.Name);
                 }
                 else if(ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "Task<{0}>", ReturnType.Headers.Name);
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {
-                    return "Task";
+                    return "System.Threading.Tasks.Task";
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.TemplateModels
                 }
                 else
                 {
-                    return "HttpOperationException";
+                    return "Microsoft.Rest.HttpOperationException";
                 }
             }
         }
@@ -330,19 +330,19 @@ namespace AutoRest.CSharp.TemplateModels
         {
             if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
-                return "new DateJsonConverter()";
+                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
             }
             else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
-                return "new DateTimeRfc1123JsonConverter()";
+                return "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
             }
             else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
-                return "new Base64UrlJsonConverter()";
+                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
             }
             else if (serializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
             {
-                return "new UnixTimeJsonConverter()";
+                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
             }
             return ClientReference + ".SerializationSettings";
         }
@@ -356,15 +356,15 @@ namespace AutoRest.CSharp.TemplateModels
         {
             if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Date))
             {
-                return "new DateJsonConverter()";
+                return "new Microsoft.Rest.Serialization.DateJsonConverter()";
             }
             else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.Base64Url))
             {
-                return "new Base64UrlJsonConverter()";
+                return "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
             }
             else if (deserializationType.IsOrContainsPrimaryType(KnownPrimaryType.UnixTime))
             {
-                return "new UnixTimeJsonConverter()";
+                return "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
             }
             return ClientReference + ".DeserializationSettings";
         }
@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.TemplateModels
 
             foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
+                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", System.Uri.EscapeDataString({2}));";
                 if (pathParameter.SkipUrlEncoding())
                 {
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
@@ -424,10 +424,10 @@ namespace AutoRest.CSharp.TemplateModels
             }
             if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("List<string> _queryParameters = new List<string>();");
+                builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
+                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
                     if (queryParameter.CanBeNull())
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)

@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyFile
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Files.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static System.IO.Stream GetFile(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetFileAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IFiles)s).GetFileAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> GetFileAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.IO.Stream> GetFileAsync(this IFiles operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 var _result = await operations.GetFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
@@ -56,7 +51,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static System.IO.Stream GetFileLarge(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetFileLargeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IFiles)s).GetFileLargeAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -68,7 +63,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> GetFileLargeAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.IO.Stream> GetFileLargeAsync(this IFiles operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 var _result = await operations.GetFileLargeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
@@ -83,7 +78,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// </param>
             public static System.IO.Stream GetEmptyFile(this IFiles operations)
             {
-                return Task.Factory.StartNew(s => ((IFiles)s).GetEmptyFileAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IFiles)s).GetEmptyFileAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -95,7 +90,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> GetEmptyFileAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.IO.Stream> GetEmptyFileAsync(this IFiles operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 var _result = await operations.GetEmptyFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();

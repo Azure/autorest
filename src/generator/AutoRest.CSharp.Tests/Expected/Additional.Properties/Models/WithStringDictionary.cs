@@ -8,12 +8,7 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class WithStringDictionary
     {
@@ -27,7 +22,7 @@ namespace Fixtures.AdditionalProperties.Models
         /// </summary>
         /// <param name="additionalProperties">Unmatched properties from the
         /// message are deserialized this collection</param>
-        public WithStringDictionary(IDictionary<string, string> additionalProperties = default(IDictionary<string, string>), string abc = default(string))
+        public WithStringDictionary(System.Collections.Generic.IDictionary<string, string> additionalProperties = default(System.Collections.Generic.IDictionary<string, string>), string abc = default(string))
         {
             AdditionalProperties = additionalProperties;
             Abc = abc;
@@ -37,12 +32,12 @@ namespace Fixtures.AdditionalProperties.Models
         /// Gets or sets unmatched properties from the message are
         /// deserialized this collection
         /// </summary>
-        [JsonExtensionData]
-        public IDictionary<string, string> AdditionalProperties { get; set; }
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, string> AdditionalProperties { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "abc")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "abc")]
         public string Abc { get; set; }
 
     }

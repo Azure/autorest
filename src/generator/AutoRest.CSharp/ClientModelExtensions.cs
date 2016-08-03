@@ -259,24 +259,24 @@ namespace AutoRest.CSharp
             {
                 if (primaryType.Type == KnownPrimaryType.Date)
                 {
-                    serializationSettings = "new DateJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.DateJsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
                 {
-                    serializationSettings = "new DateTimeRfc1123JsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.Base64Url)
                 {
-                    serializationSettings = "new Base64UrlJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.UnixTime)
                 {
-                    serializationSettings = "new UnixTimeJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
                 }
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                    "SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
+                    "Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
                     reference,
                     serializationSettings);
         }
@@ -473,7 +473,7 @@ namespace AutoRest.CSharp
                     {
                         sb.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\", {2});",
+                            .AppendLine("throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.{0}, \"{1}\", {2});",
                                 constraint, valueReference.Replace("this.", ""), constraintValue).Outdent()
                             .AppendLine("}");
                     }
@@ -481,7 +481,7 @@ namespace AutoRest.CSharp
                     {
                         sb.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\");",
+                            .AppendLine("throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.{0}, \"{1}\");",
                                 constraint, valueReference.Replace("this.", "")).Outdent()
                             .AppendLine("}");
                     }

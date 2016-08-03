@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyString.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class RefColorConstant
     {
@@ -41,13 +36,13 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         /// <summary>
         /// Gets or sets sample string.
         /// </summary>
-        [JsonProperty(PropertyName = "field1")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field1")]
         public string Field1 { get; set; }
 
         /// <summary>
         /// Referenced Color Constant Description.
         /// </summary>
-        [JsonProperty(PropertyName = "ColorConstant")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "ColorConstant")]
         public static string ColorConstant { get; private set; }
 
     }

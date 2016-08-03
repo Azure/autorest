@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Basic
     {
@@ -43,7 +37,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Gets or sets basic Id
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public int? Id { get; set; }
 
         /// <summary>
@@ -52,14 +46,14 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// does not fit on a single line
         /// and a line break.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'cyan', 'Magenta', 'YELLOW',
         /// 'blacK'
         /// </summary>
-        [JsonProperty(PropertyName = "color")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
         public string Color { get; set; }
 
     }

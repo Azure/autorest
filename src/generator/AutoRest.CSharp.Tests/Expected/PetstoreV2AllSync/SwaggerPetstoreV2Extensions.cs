@@ -8,13 +8,8 @@
 
 namespace Fixtures.PetstoreV2AllSync
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for SwaggerPetstoreV2.
@@ -32,7 +27,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Pet AddPet(this ISwaggerPetstoreV2 operations, Pet body)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).AddPetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).AddPetAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -47,7 +42,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Pet> AddPetAsync(this ISwaggerPetstoreV2 operations, Pet body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Pet> AddPetAsync(this ISwaggerPetstoreV2 operations, Pet body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.AddPetWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -67,9 +62,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<Pet> AddPetWithHttpMessages(this ISwaggerPetstoreV2 operations, Pet body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<Pet> AddPetWithHttpMessages(this ISwaggerPetstoreV2 operations, Pet body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.AddPetWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.AddPetWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -83,7 +78,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdatePet(this ISwaggerPetstoreV2 operations, Pet body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -98,7 +93,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdatePetAsync(this ISwaggerPetstoreV2 operations, Pet body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task UpdatePetAsync(this ISwaggerPetstoreV2 operations, Pet body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.UpdatePetWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
             }
@@ -115,9 +110,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdatePetWithHttpMessages(this ISwaggerPetstoreV2 operations, Pet body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse UpdatePetWithHttpMessages(this ISwaggerPetstoreV2 operations, Pet body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.UpdatePetWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdatePetWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -132,9 +127,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='status'>
             /// Status values that need to be considered for filter
             /// </param>
-            public static IList<Pet> FindPetsByStatus(this ISwaggerPetstoreV2 operations, IList<string> status)
+            public static System.Collections.Generic.IList<Pet> FindPetsByStatus(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> status)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByStatusAsync(status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByStatusAsync(status), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -152,7 +147,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<Pet>> FindPetsByStatusAsync(this ISwaggerPetstoreV2 operations, IList<string> status, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<Pet>> FindPetsByStatusAsync(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> status, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.FindPetsByStatusWithHttpMessagesAsync(status, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -175,9 +170,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<IList<Pet>> FindPetsByStatusWithHttpMessages(this ISwaggerPetstoreV2 operations, IList<string> status, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<Pet>> FindPetsByStatusWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> status, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.FindPetsByStatusWithHttpMessagesAsync(status, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.FindPetsByStatusWithHttpMessagesAsync(status, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -193,9 +188,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='tags'>
             /// Tags to filter by
             /// </param>
-            public static IList<Pet> FindPetsByTags(this ISwaggerPetstoreV2 operations, IList<string> tags)
+            public static System.Collections.Generic.IList<Pet> FindPetsByTags(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> tags)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByTagsAsync(tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).FindPetsByTagsAsync(tags), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -214,7 +209,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<Pet>> FindPetsByTagsAsync(this ISwaggerPetstoreV2 operations, IList<string> tags, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IList<Pet>> FindPetsByTagsAsync(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> tags, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.FindPetsByTagsWithHttpMessagesAsync(tags, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -238,9 +233,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<IList<Pet>> FindPetsByTagsWithHttpMessages(this ISwaggerPetstoreV2 operations, IList<string> tags, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<Pet>> FindPetsByTagsWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<string> tags, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.FindPetsByTagsWithHttpMessagesAsync(tags, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.FindPetsByTagsWithHttpMessagesAsync(tags, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -257,7 +252,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Pet GetPetById(this ISwaggerPetstoreV2 operations, long petId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetPetByIdAsync(petId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetPetByIdAsync(petId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -275,7 +270,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Pet> GetPetByIdAsync(this ISwaggerPetstoreV2 operations, long petId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Pet> GetPetByIdAsync(this ISwaggerPetstoreV2 operations, long petId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetPetByIdWithHttpMessagesAsync(petId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -298,9 +293,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<Pet> GetPetByIdWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<Pet> GetPetByIdWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetPetByIdWithHttpMessagesAsync(petId, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetPetByIdWithHttpMessagesAsync(petId, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -323,7 +318,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdatePetWithForm(this ISwaggerPetstoreV2 operations, long petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetWithFormAsync(petId, fileContent, fileName, status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetWithFormAsync(petId, fileContent, fileName, status), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -347,7 +342,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdatePetWithFormAsync(this ISwaggerPetstoreV2 operations, long petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task UpdatePetWithFormAsync(this ISwaggerPetstoreV2 operations, long petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.UpdatePetWithFormWithHttpMessagesAsync(petId, fileContent, fileName, status, null, cancellationToken).ConfigureAwait(false);
             }
@@ -373,9 +368,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdatePetWithFormWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse UpdatePetWithFormWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.UpdatePetWithFormWithHttpMessagesAsync(petId, fileContent, fileName, status, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdatePetWithFormWithHttpMessagesAsync(petId, fileContent, fileName, status, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -391,7 +386,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeletePet(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "")
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeletePetAsync(petId, apiKey), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeletePetAsync(petId, apiKey), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -408,7 +403,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeletePetAsync(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "", CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task DeletePetAsync(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "", System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.DeletePetWithHttpMessagesAsync(petId, apiKey, null, cancellationToken).ConfigureAwait(false);
             }
@@ -427,9 +422,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeletePetWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "", Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse DeletePetWithHttpMessages(this ISwaggerPetstoreV2 operations, long petId, string apiKey = "", System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.DeletePetWithHttpMessagesAsync(petId, apiKey, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeletePetWithHttpMessagesAsync(petId, apiKey, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -441,9 +436,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IDictionary<string, int?> GetInventory(this ISwaggerPetstoreV2 operations)
+            public static System.Collections.Generic.IDictionary<string, int?> GetInventory(this ISwaggerPetstoreV2 operations)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetInventoryAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetInventoryAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -458,7 +453,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, int?>> GetInventoryAsync(this ISwaggerPetstoreV2 operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IDictionary<string, int?>> GetInventoryAsync(this ISwaggerPetstoreV2 operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInventoryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -478,9 +473,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<IDictionary<string, int?>> GetInventoryWithHttpMessages(this ISwaggerPetstoreV2 operations, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IDictionary<string, int?>> GetInventoryWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetInventoryWithHttpMessagesAsync(customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetInventoryWithHttpMessagesAsync(customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -494,7 +489,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Order PlaceOrder(this ISwaggerPetstoreV2 operations, Order body)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).PlaceOrderAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).PlaceOrderAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -509,7 +504,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Order> PlaceOrderAsync(this ISwaggerPetstoreV2 operations, Order body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Order> PlaceOrderAsync(this ISwaggerPetstoreV2 operations, Order body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PlaceOrderWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -529,9 +524,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<Order> PlaceOrderWithHttpMessages(this ISwaggerPetstoreV2 operations, Order body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<Order> PlaceOrderWithHttpMessages(this ISwaggerPetstoreV2 operations, Order body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.PlaceOrderWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.PlaceOrderWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -549,7 +544,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static Order GetOrderById(this ISwaggerPetstoreV2 operations, string orderId)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetOrderByIdAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetOrderByIdAsync(orderId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -568,7 +563,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Order> GetOrderByIdAsync(this ISwaggerPetstoreV2 operations, string orderId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Order> GetOrderByIdAsync(this ISwaggerPetstoreV2 operations, string orderId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetOrderByIdWithHttpMessagesAsync(orderId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -592,9 +587,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<Order> GetOrderByIdWithHttpMessages(this ISwaggerPetstoreV2 operations, string orderId, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<Order> GetOrderByIdWithHttpMessages(this ISwaggerPetstoreV2 operations, string orderId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetOrderByIdWithHttpMessagesAsync(orderId, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetOrderByIdWithHttpMessagesAsync(orderId, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -612,7 +607,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeleteOrder(this ISwaggerPetstoreV2 operations, string orderId)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteOrderAsync(orderId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteOrderAsync(orderId), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -631,7 +626,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteOrderAsync(this ISwaggerPetstoreV2 operations, string orderId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task DeleteOrderAsync(this ISwaggerPetstoreV2 operations, string orderId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.DeleteOrderWithHttpMessagesAsync(orderId, null, cancellationToken).ConfigureAwait(false);
             }
@@ -652,9 +647,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteOrderWithHttpMessages(this ISwaggerPetstoreV2 operations, string orderId, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse DeleteOrderWithHttpMessages(this ISwaggerPetstoreV2 operations, string orderId, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.DeleteOrderWithHttpMessagesAsync(orderId, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteOrderWithHttpMessagesAsync(orderId, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -671,7 +666,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void CreateUser(this ISwaggerPetstoreV2 operations, User body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUserAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUserAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -689,7 +684,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CreateUserAsync(this ISwaggerPetstoreV2 operations, User body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task CreateUserAsync(this ISwaggerPetstoreV2 operations, User body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.CreateUserWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
             }
@@ -709,9 +704,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CreateUserWithHttpMessages(this ISwaggerPetstoreV2 operations, User body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse CreateUserWithHttpMessages(this ISwaggerPetstoreV2 operations, User body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.CreateUserWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.CreateUserWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -723,9 +718,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='body'>
             /// List of user object
             /// </param>
-            public static void CreateUsersWithArrayInput(this ISwaggerPetstoreV2 operations, IList<User> body)
+            public static void CreateUsersWithArrayInput(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithArrayInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithArrayInputAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -740,7 +735,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CreateUsersWithArrayInputAsync(this ISwaggerPetstoreV2 operations, IList<User> body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task CreateUsersWithArrayInputAsync(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.CreateUsersWithArrayInputWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
             }
@@ -757,9 +752,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CreateUsersWithArrayInputWithHttpMessages(this ISwaggerPetstoreV2 operations, IList<User> body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse CreateUsersWithArrayInputWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.CreateUsersWithArrayInputWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.CreateUsersWithArrayInputWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -771,9 +766,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='body'>
             /// List of user object
             /// </param>
-            public static void CreateUsersWithListInput(this ISwaggerPetstoreV2 operations, IList<User> body)
+            public static void CreateUsersWithListInput(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithListInputAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).CreateUsersWithListInputAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -788,7 +783,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CreateUsersWithListInputAsync(this ISwaggerPetstoreV2 operations, IList<User> body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task CreateUsersWithListInputAsync(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.CreateUsersWithListInputWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
             }
@@ -805,9 +800,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CreateUsersWithListInputWithHttpMessages(this ISwaggerPetstoreV2 operations, IList<User> body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse CreateUsersWithListInputWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.IList<User> body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.CreateUsersWithListInputWithHttpMessagesAsync(body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.CreateUsersWithListInputWithHttpMessagesAsync(body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -824,7 +819,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static string LoginUser(this ISwaggerPetstoreV2 operations, string username, string password)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LoginUserAsync(username, password), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LoginUserAsync(username, password), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -842,7 +837,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> LoginUserAsync(this ISwaggerPetstoreV2 operations, string username, string password, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<string> LoginUserAsync(this ISwaggerPetstoreV2 operations, string username, string password, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.LoginUserWithHttpMessagesAsync(username, password, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -865,9 +860,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<string,LoginUserHeaders> LoginUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, string password, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<string,LoginUserHeaders> LoginUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, string password, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.LoginUserWithHttpMessagesAsync(username, password, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.LoginUserWithHttpMessagesAsync(username, password, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -878,7 +873,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void LogoutUser(this ISwaggerPetstoreV2 operations)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LogoutUserAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).LogoutUserAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -890,7 +885,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LogoutUserAsync(this ISwaggerPetstoreV2 operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task LogoutUserAsync(this ISwaggerPetstoreV2 operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.LogoutUserWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -904,9 +899,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse LogoutUserWithHttpMessages(this ISwaggerPetstoreV2 operations, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse LogoutUserWithHttpMessages(this ISwaggerPetstoreV2 operations, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.LogoutUserWithHttpMessagesAsync(customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.LogoutUserWithHttpMessagesAsync(customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -920,7 +915,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static User GetUserByName(this ISwaggerPetstoreV2 operations, string username)
             {
-                return Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetUserByNameAsync(username), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).GetUserByNameAsync(username), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -935,7 +930,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<User> GetUserByNameAsync(this ISwaggerPetstoreV2 operations, string username, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<User> GetUserByNameAsync(this ISwaggerPetstoreV2 operations, string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetUserByNameWithHttpMessagesAsync(username, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -955,9 +950,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<User> GetUserByNameWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse<User> GetUserByNameWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.GetUserByNameWithHttpMessagesAsync(username, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetUserByNameWithHttpMessagesAsync(username, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -977,7 +972,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void UpdateUser(this ISwaggerPetstoreV2 operations, string username, User body)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdateUserAsync(username, body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdateUserAsync(username, body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -998,7 +993,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateUserAsync(this ISwaggerPetstoreV2 operations, string username, User body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task UpdateUserAsync(this ISwaggerPetstoreV2 operations, string username, User body, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.UpdateUserWithHttpMessagesAsync(username, body, null, cancellationToken).ConfigureAwait(false);
             }
@@ -1021,9 +1016,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdateUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, User body, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse UpdateUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, User body, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.UpdateUserWithHttpMessagesAsync(username, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateUserWithHttpMessagesAsync(username, body, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1040,7 +1035,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// </param>
             public static void DeleteUser(this ISwaggerPetstoreV2 operations, string username)
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteUserAsync(username), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).DeleteUserAsync(username), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -1058,7 +1053,7 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteUserAsync(this ISwaggerPetstoreV2 operations, string username, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task DeleteUserAsync(this ISwaggerPetstoreV2 operations, string username, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.DeleteUserWithHttpMessagesAsync(username, null, cancellationToken).ConfigureAwait(false);
             }
@@ -1078,9 +1073,9 @@ namespace Fixtures.PetstoreV2AllSync
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, Dictionary<string, List<string>> customHeaders = null)
+            public static Microsoft.Rest.HttpOperationResponse DeleteUserWithHttpMessages(this ISwaggerPetstoreV2 operations, string username, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null)
             {
-                return operations.DeleteUserWithHttpMessagesAsync(username, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteUserWithHttpMessagesAsync(username, customHeaders, System.Threading.CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

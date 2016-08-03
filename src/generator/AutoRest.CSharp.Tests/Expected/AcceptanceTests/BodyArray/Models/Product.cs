@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyArray.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Product
     {
@@ -33,12 +28,12 @@ namespace Fixtures.AcceptanceTestsBodyArray.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "integer")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "integer")]
         public int? Integer { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "string")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "string")]
         public string StringProperty { get; set; }
 
     }

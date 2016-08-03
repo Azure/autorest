@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The product documentation.
@@ -44,13 +39,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Gets or sets count
         /// </summary>
-        [JsonProperty(PropertyName = "count")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "count")]
         public int? Count { get; set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
-        [JsonProperty(PropertyName = "constProperty")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constProperty")]
         public static string ConstProperty { get; private set; }
 
     }
