@@ -90,7 +90,7 @@ public final class UsagesInner {
         }
         Call<ResponseBody> call = service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<List<UsageInner>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<UsageInner>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<UsageInner>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
