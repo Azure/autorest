@@ -124,7 +124,7 @@ public final class PathsImpl implements Paths {
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -206,7 +206,7 @@ public final class PathsImpl implements Paths {
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

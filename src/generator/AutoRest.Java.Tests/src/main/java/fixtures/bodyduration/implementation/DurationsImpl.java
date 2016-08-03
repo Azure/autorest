@@ -94,7 +94,7 @@ public final class DurationsImpl implements Durations {
     public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -151,7 +151,7 @@ public final class DurationsImpl implements Durations {
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -199,7 +199,7 @@ public final class DurationsImpl implements Durations {
     public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getPositiveDuration();
         final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -247,7 +247,7 @@ public final class DurationsImpl implements Durations {
     public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<Period> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Period>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

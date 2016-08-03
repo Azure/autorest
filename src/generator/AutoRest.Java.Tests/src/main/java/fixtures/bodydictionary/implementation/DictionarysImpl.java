@@ -347,7 +347,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Integer>> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -395,7 +395,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Integer>> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -454,7 +454,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -502,7 +502,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getNullValue();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -550,7 +550,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getNullKey();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -598,7 +598,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyStringKey();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -646,7 +646,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -694,7 +694,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Boolean>> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTfft();
         final ServiceCall<Map<String, Boolean>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -753,7 +753,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -801,7 +801,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
         final ServiceCall<Map<String, Boolean>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -849,7 +849,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidString();
         final ServiceCall<Map<String, Boolean>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -897,7 +897,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Integer>> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntegerValid();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -956,7 +956,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1004,7 +1004,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Integer>> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidNull();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1052,7 +1052,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Integer>> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidString();
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1100,7 +1100,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Long>> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongValid();
         final ServiceCall<Map<String, Long>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1159,7 +1159,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1207,7 +1207,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Long>> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidNull();
         final ServiceCall<Map<String, Long>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1255,7 +1255,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Long>> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidString();
         final ServiceCall<Map<String, Long>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1303,7 +1303,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatValid();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1362,7 +1362,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1410,7 +1410,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidNull();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1458,7 +1458,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidString();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1506,7 +1506,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleValid();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1565,7 +1565,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1613,7 +1613,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1661,7 +1661,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Double>> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidString();
         final ServiceCall<Map<String, Double>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1709,7 +1709,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringValid();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1768,7 +1768,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1816,7 +1816,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithNull();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1864,7 +1864,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, String>> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithInvalid();
         final ServiceCall<Map<String, String>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1912,7 +1912,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, LocalDate>> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateValid();
         final ServiceCall<Map<String, LocalDate>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1971,7 +1971,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2019,7 +2019,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, LocalDate>> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidNull();
         final ServiceCall<Map<String, LocalDate>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2067,7 +2067,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidChars();
         final ServiceCall<Map<String, LocalDate>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2115,7 +2115,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, DateTime>> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeValid();
         final ServiceCall<Map<String, DateTime>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2174,7 +2174,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2222,7 +2222,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
         final ServiceCall<Map<String, DateTime>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2270,7 +2270,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
         final ServiceCall<Map<String, DateTime>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2328,7 +2328,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
         final ServiceCall<Map<String, DateTime>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2407,7 +2407,7 @@ public final class DictionarysImpl implements Dictionarys {
         }
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBodyConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2455,7 +2455,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Period>> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
         Call<ResponseBody> call = service.getDurationValid();
         final ServiceCall<Map<String, Period>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Period>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Period>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2514,7 +2514,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2562,7 +2562,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, byte[]>> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteValid();
         final ServiceCall<Map<String, byte[]>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2621,7 +2621,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2669,7 +2669,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, byte[]>> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteInvalidNull();
         final ServiceCall<Map<String, byte[]>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2727,7 +2727,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, byte[]>> getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getBase64Url();
         final ServiceCall<Map<String, byte[]>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2785,7 +2785,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Widget>> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexNull();
         final ServiceCall<Map<String, Widget>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2833,7 +2833,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Widget>> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexEmpty();
         final ServiceCall<Map<String, Widget>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2881,7 +2881,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Widget>> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemNull();
         final ServiceCall<Map<String, Widget>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2929,7 +2929,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Widget>> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemEmpty();
         final ServiceCall<Map<String, Widget>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2977,7 +2977,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Widget>> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexValid();
         final ServiceCall<Map<String, Widget>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3036,7 +3036,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3084,7 +3084,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, List<String>>> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayNull();
         final ServiceCall<Map<String, List<String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3132,7 +3132,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, List<String>>> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayEmpty();
         final ServiceCall<Map<String, List<String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3180,7 +3180,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, List<String>>> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemNull();
         final ServiceCall<Map<String, List<String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3228,7 +3228,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, List<String>>> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemEmpty();
         final ServiceCall<Map<String, List<String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3276,7 +3276,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, List<String>>> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayValid();
         final ServiceCall<Map<String, List<String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3335,7 +3335,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3383,7 +3383,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryNull();
         final ServiceCall<Map<String, Map<String, String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3431,7 +3431,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryEmpty();
         final ServiceCall<Map<String, Map<String, String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3479,7 +3479,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemNull();
         final ServiceCall<Map<String, Map<String, String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3527,7 +3527,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
         final ServiceCall<Map<String, Map<String, String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3575,7 +3575,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryValid();
         final ServiceCall<Map<String, Map<String, String>>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3634,7 +3634,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(arrayBody);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

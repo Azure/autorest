@@ -230,7 +230,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         final List<ResourceInner> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -275,7 +275,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -323,7 +323,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall<List<FlattenedProductInner>> getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
         Call<ResponseBody> call = service.getArray(this.acceptLanguage(), this.userAgent());
         final ServiceCall<List<FlattenedProductInner>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<FlattenedProductInner>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<FlattenedProductInner>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -373,7 +373,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         final Map<String, FlattenedProductInner> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -418,7 +418,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -466,7 +466,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall<Map<String, FlattenedProductInner>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary(this.acceptLanguage(), this.userAgent());
         final ServiceCall<Map<String, FlattenedProductInner>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProductInner>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProductInner>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -516,7 +516,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         final ResourceCollectionInner resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -561,7 +561,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -609,7 +609,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall<ResourceCollectionInner> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection(this.acceptLanguage(), this.userAgent());
         final ServiceCall<ResourceCollectionInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ResourceCollectionInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ResourceCollectionInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

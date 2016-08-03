@@ -102,7 +102,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -159,7 +159,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -216,7 +216,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -273,7 +273,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

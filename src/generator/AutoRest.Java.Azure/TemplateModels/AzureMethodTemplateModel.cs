@@ -214,15 +214,13 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 if (this.IsPagingOperation)
                 {
-                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                        ReturnTypeModel.SequenceElementTypeString);
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall<{0}> serviceCall, final ListOperationCallback<{1}> serviceCallback",
+                        ReturnTypeModel.ServiceCallGenericParameterString, ReturnTypeModel.SequenceElementTypeString);
                 }
                 else
                 {
@@ -244,15 +242,13 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 if (this.IsPagingOperation)
                 {
-                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                        ReturnTypeModel.SequenceElementTypeString);
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall serviceCall, final ListOperationCallback<{0}> serviceCallback",
-                    sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCall<{0}> serviceCall, final ListOperationCallback<{1}> serviceCallback",
+                        ReturnTypeModel.ServiceCallGenericParameterString, ReturnTypeModel.SequenceElementTypeString);
                 }
                 else
                 {
@@ -439,6 +435,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} result = {1}Delegate(response);",
                     ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("if (serviceCallback != null) {").Indent();
                 builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                 builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
                     .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -460,7 +457,15 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
                 }
-                builder.Outdent().AppendLine("}");
+                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+                if (ReturnType.Headers == null)
+                {
+                builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), response));", ReturnTypeModel.ClientResponseType);
+                }
+                else
+                {
+                    builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeModel.ClientResponseType);
+                }
                 return builder.ToString();
             }
             else if (this.IsPagingNextOperation)
@@ -577,6 +582,13 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     return "serviceCall.newCall(call);";
                 }
+                else if (this.IsPagingOperation)
+                {
+                    SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "final ServiceCall<List<{0}>> serviceCall = new ServiceCall<>(call);",
+                        sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
+                }
                 return base.ServiceCallConstruction;
             }
         }
@@ -613,7 +625,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.Remove("java.util.List");
                     imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;

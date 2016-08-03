@@ -115,7 +115,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         tags1.withTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

@@ -104,7 +104,7 @@ public final class GroupsImpl implements Groups {
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SampleResourceGroup> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SampleResourceGroup>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

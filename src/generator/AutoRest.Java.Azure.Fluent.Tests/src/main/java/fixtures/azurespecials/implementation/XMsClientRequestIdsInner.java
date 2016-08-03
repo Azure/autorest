@@ -84,7 +84,7 @@ public final class XMsClientRequestIdsInner {
     public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -140,7 +140,7 @@ public final class XMsClientRequestIdsInner {
         }
         Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

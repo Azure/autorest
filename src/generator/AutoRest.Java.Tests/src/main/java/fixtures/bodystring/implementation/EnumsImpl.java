@@ -104,7 +104,7 @@ public final class EnumsImpl implements Enums {
     public ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         Call<ResponseBody> call = service.getNotExpandable();
         final ServiceCall<Colors> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Colors>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -161,7 +161,7 @@ public final class EnumsImpl implements Enums {
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

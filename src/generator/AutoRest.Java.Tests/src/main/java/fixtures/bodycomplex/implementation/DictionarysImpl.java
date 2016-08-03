@@ -103,7 +103,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -162,7 +162,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -210,7 +210,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -269,7 +269,7 @@ public final class DictionarysImpl implements Dictionarys {
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putEmpty(complexBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -317,7 +317,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -365,7 +365,7 @@ public final class DictionarysImpl implements Dictionarys {
     public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall<DictionaryWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<DictionaryWrapper>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

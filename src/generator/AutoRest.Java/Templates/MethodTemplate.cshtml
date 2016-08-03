@@ -86,7 +86,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
-public ServiceCall<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -118,7 +118,7 @@ public ServiceCall<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.N
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCall, serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
@@ -210,7 +210,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
-public ServiceCall<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -238,7 +238,7 @@ public ServiceCall<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.N
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ServiceCallConstruction
-    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCallback) {
+    call.enqueue(new @Model.InternalCallback<@(Model.ReturnTypeModel.ClientCallbackTypeString)>(serviceCall, serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {

@@ -118,7 +118,7 @@ public final class ImplicitsImpl implements Implicits {
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -167,7 +167,7 @@ public final class ImplicitsImpl implements Implicits {
         final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -210,7 +210,7 @@ public final class ImplicitsImpl implements Implicits {
     public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -260,7 +260,7 @@ public final class ImplicitsImpl implements Implicits {
         final String queryParameter = null;
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -303,7 +303,7 @@ public final class ImplicitsImpl implements Implicits {
     public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -353,7 +353,7 @@ public final class ImplicitsImpl implements Implicits {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -396,7 +396,7 @@ public final class ImplicitsImpl implements Implicits {
     public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -451,7 +451,7 @@ public final class ImplicitsImpl implements Implicits {
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.requiredGlobalPath());
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -505,7 +505,7 @@ public final class ImplicitsImpl implements Implicits {
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.requiredGlobalQuery());
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -552,7 +552,7 @@ public final class ImplicitsImpl implements Implicits {
     public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.optionalGlobalQuery());
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

@@ -87,7 +87,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<Fish> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Fish>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -250,7 +250,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

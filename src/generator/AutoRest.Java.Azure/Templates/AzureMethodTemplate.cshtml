@@ -6,6 +6,7 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.TemplateModels
 @using AutoRest.Java.TypeModels
+@using AutoRest.Java.Azure.TypeModels
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodTemplateModel>
 @if (!Model.IsLongRunningOperation)
 {
@@ -90,7 +91,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException {
     if (serviceCallback == null) {
         throw new IllegalArgumentException("ServiceCallback is required for async calls.");
     }
@@ -206,7 +207,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
     if (serviceCallback == null) {
         throw new IllegalArgumentException("ServiceCallback is required for async calls.");
     }
