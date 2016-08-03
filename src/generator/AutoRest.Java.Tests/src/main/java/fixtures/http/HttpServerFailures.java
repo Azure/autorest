@@ -38,7 +38,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -56,7 +56,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -74,7 +74,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -93,7 +93,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -111,7 +111,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete505Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -130,6 +130,6 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

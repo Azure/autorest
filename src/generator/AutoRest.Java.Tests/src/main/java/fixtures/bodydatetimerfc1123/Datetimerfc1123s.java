@@ -38,7 +38,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid datetime value.
@@ -56,7 +56,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow datetime value.
@@ -74,7 +74,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow datetime value.
@@ -92,7 +92,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -113,7 +113,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -131,7 +131,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -149,7 +149,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -170,7 +170,7 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -188,6 +188,6 @@ public interface Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
 }

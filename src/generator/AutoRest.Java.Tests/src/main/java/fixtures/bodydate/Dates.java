@@ -38,7 +38,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid date value.
@@ -56,7 +56,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow date value.
@@ -74,7 +74,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow date value.
@@ -92,7 +92,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max date value 9999-12-31.
@@ -113,7 +113,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get max date value 9999-12-31.
@@ -131,7 +131,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min date value 0000-01-01.
@@ -152,7 +152,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get min date value 0000-01-01.
@@ -170,6 +170,6 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
 
 }

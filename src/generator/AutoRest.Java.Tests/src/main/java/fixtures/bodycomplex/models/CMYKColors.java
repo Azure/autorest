@@ -10,22 +10,58 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Defines values for CMYKColors.
  */
 public final class CMYKColors {
     /** Static value cyan for CMYKColors. */
-    public static final String CYAN = "cyan";
+    public static final CMYKColors CYAN = new CMYKColors("cyan");
 
     /** Static value Magenta for CMYKColors. */
-    public static final String MAGENTA = "Magenta";
+    public static final CMYKColors MAGENTA = new CMYKColors("Magenta");
 
     /** Static value YELLOW for CMYKColors. */
-    public static final String YELLOW = "YELLOW";
+    public static final CMYKColors YELLOW = new CMYKColors("YELLOW");
 
     /** Static value blacK for CMYKColors. */
-    public static final String BLACK = "blacK";
+    public static final CMYKColors BLACK = new CMYKColors("blacK");
 
-    private CMYKColors() {
+    private String value;
+
+    /**
+     * Creates a custom value for CMYKColors.
+     * @param value the custom value
+     */
+    public CMYKColors(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CMYKColors)) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        CMYKColors rhs = (CMYKColors) obj;
+        if (value == null) {
+            return rhs.value == null;
+        } else {
+            return value.equals(rhs.value);
+        }
     }
 }

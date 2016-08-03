@@ -63,7 +63,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                 {
                     imports.AddRange(BaseModelType.ImportSafe());
                 }
-                return imports;
+                return imports.Distinct();
             }
         }
     }

@@ -31,7 +31,7 @@ public class Basic {
     /**
      * Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
      */
-    private String color;
+    private CMYKColors color;
 
     /**
      * Get the id value.
@@ -78,7 +78,7 @@ public class Basic {
      *
      * @return the color value
      */
-    public String color() {
+    public CMYKColors color() {
         return this.color;
     }
 
@@ -88,7 +88,7 @@ public class Basic {
      * @param color the color value to set
      * @return the Basic object itself.
      */
-    public Basic withColor(String color) {
+    public Basic withColor(CMYKColors color) {
         this.color = color;
         return this;
     }

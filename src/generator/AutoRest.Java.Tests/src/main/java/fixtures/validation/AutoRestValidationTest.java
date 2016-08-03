@@ -78,7 +78,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -101,7 +101,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -125,7 +125,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      *
@@ -141,7 +141,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      *
@@ -157,7 +157,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      *
      * @param body the Product value
@@ -174,6 +174,6 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
 }
