@@ -21,28 +21,10 @@
       "post": {
         "operationId": "PostFoo",
         "summary": "Foo path",
-        "description": "Foo operation",
         "responses": {
           "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Response"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Error": {
-      "description": "Default error",
-      "required": [
-        "foo"
-      ],
-      "properties": {
-        "bar": {
-          "description": "bar property",
-          "type": "string"
         }
       }
     }

@@ -36,39 +36,28 @@ namespace AutoRest.Swagger
 
             _schema = Modeler.Resolver.Unwrap(_schema);
 
-            // If primitive type
-            if (_schema.Type != null && _schema.Type != DataType.Object || ( _schema.AdditionalProperties != null && _schema.Properties.IsNullOrEmpty() ))
+            // If it's a primitive type, let the parent build service handle it
+            if (_schema.IsPrimitiveType())
             {
-                // Notes: 
-                //      'additionalProperties' on a type AND no defined 'properties', indicates that
-                //      this type is a Dictionary. (and is handled by ObjectBuilder)
-
                 return _schema.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
             }
 
-            // If object with file format treat as stream
-            if (_schema.Type != null 
-                && _schema.Type == DataType.Object 
-                && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            // If it's known primary type, return that type
+            var primaryType = _schema.GetSimplePrimaryType();
+            if (primaryType != KnownPrimaryType.None)
             {
-                return new PrimaryType(KnownPrimaryType.Stream);
-            }
-
-            // If the object does not have any properties, treat it as raw json (i.e. object)
-            if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends) && _schema.AdditionalProperties == null)
-            {
-                return new PrimaryType(KnownPrimaryType.Object);
+                return new PrimaryType(primaryType);
             }
 
             // Otherwise create new object type
-            var objectType = new CompositeType 
-                            { 
-                                Name = serviceTypeName, 
-                                SerializedName = serviceTypeName, 
-                                Documentation = _schema.Description,
-                                ExternalDocsUrl = _schema.ExternalDocs?.Url,
-                                Summary = _schema.Title
-                            };
+            var objectType = new CompositeType
+            {
+                Name = serviceTypeName,
+                SerializedName = serviceTypeName,
+                Documentation = _schema.Description,
+                ExternalDocsUrl = _schema.ExternalDocs?.Url,
+                Summary = _schema.Title
+            };
 
             // Put this in already generated types serializationProperty
             Modeler.GeneratedTypes[serviceTypeName] = objectType;
@@ -149,8 +138,8 @@ namespace AutoRest.Swagger
                         };
                         PopulateParameter(propertyObj, refSchema != null ? refSchema : property.Value);
                         var propertyCompositeType = propertyType as CompositeType;
-                        if (propertyObj.IsConstant || 
-                            (propertyCompositeType != null 
+                        if (propertyObj.IsConstant ||
+                            (propertyCompositeType != null
                                 && propertyCompositeType.ContainsConstantProperties))
                         {
                             objectType.ContainsConstantProperties = true;
