@@ -205,7 +205,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getReport(this.acceptLanguage(), this.userAgent());
         final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

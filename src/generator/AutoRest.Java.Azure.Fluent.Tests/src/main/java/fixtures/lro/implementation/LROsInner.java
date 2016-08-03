@@ -369,7 +369,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -411,7 +411,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -454,7 +454,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -499,7 +499,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -548,7 +548,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -590,7 +590,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -633,7 +633,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -678,7 +678,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -726,7 +726,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -768,7 +768,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -811,7 +811,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -856,7 +856,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -904,7 +904,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -946,7 +946,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -989,7 +989,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1034,7 +1034,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1083,7 +1083,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1125,7 +1125,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1168,7 +1168,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1213,7 +1213,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1261,7 +1261,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1303,7 +1303,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1346,7 +1346,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1391,7 +1391,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1440,7 +1440,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1482,7 +1482,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1525,7 +1525,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1570,7 +1570,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1618,7 +1618,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1660,7 +1660,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1703,7 +1703,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1748,7 +1748,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1796,7 +1796,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1838,7 +1838,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -1881,7 +1881,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1926,7 +1926,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1974,7 +1974,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2016,7 +2016,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2059,7 +2059,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2104,7 +2104,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2152,7 +2152,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2194,7 +2194,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2237,7 +2237,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2282,7 +2282,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2330,7 +2330,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2372,7 +2372,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2415,7 +2415,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2460,7 +2460,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2508,7 +2508,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2550,7 +2550,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2593,7 +2593,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2638,7 +2638,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2686,7 +2686,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SkuInner> putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2728,7 +2728,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SkuInner> putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2771,7 +2771,7 @@ public final class LROsInner {
         final SkuInner sku = null;
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SkuInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2816,7 +2816,7 @@ public final class LROsInner {
         Validator.validate(sku);
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SkuInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2864,7 +2864,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SkuInner> putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2906,7 +2906,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SkuInner> putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -2949,7 +2949,7 @@ public final class LROsInner {
         final SkuInner sku = null;
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SkuInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2994,7 +2994,7 @@ public final class LROsInner {
         Validator.validate(sku);
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SkuInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3042,7 +3042,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SubProductInner> putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3084,7 +3084,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SubProductInner> putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3127,7 +3127,7 @@ public final class LROsInner {
         final SubProductInner product = null;
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SubProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3172,7 +3172,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SubProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3220,7 +3220,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SubProductInner> putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3262,7 +3262,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3305,7 +3305,7 @@ public final class LROsInner {
         final SubProductInner product = null;
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SubProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3350,7 +3350,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SubProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SubProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3397,7 +3397,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3437,7 +3437,7 @@ public final class LROsInner {
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3485,7 +3485,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3525,7 +3525,7 @@ public final class LROsInner {
     public ServiceCall<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3573,7 +3573,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3613,7 +3613,7 @@ public final class LROsInner {
     public ServiceCall<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3661,7 +3661,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3701,7 +3701,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3748,7 +3748,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3788,7 +3788,7 @@ public final class LROsInner {
     public ServiceCall<ProductInner> beginDelete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3836,7 +3836,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3876,7 +3876,7 @@ public final class LROsInner {
     public ServiceCall<ProductInner> beginDelete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -3924,7 +3924,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -3964,7 +3964,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4012,7 +4012,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4052,7 +4052,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4100,7 +4100,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4140,7 +4140,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4187,7 +4187,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4227,7 +4227,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4274,7 +4274,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4314,7 +4314,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4361,7 +4361,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4401,7 +4401,7 @@ public final class LROsInner {
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4448,7 +4448,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<SkuInner> post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4488,7 +4488,7 @@ public final class LROsInner {
     public ServiceCall<SkuInner> beginPost200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
         Call<ResponseBody> call = service.beginPost200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SkuInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SkuInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4537,7 +4537,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4579,7 +4579,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4622,7 +4622,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4667,7 +4667,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4715,7 +4715,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4757,7 +4757,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4800,7 +4800,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4845,7 +4845,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -4893,7 +4893,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4935,7 +4935,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -4978,7 +4978,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5023,7 +5023,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5072,7 +5072,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5114,7 +5114,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5157,7 +5157,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5202,7 +5202,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5251,7 +5251,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5293,7 +5293,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5336,7 +5336,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5381,7 +5381,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5429,7 +5429,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5471,7 +5471,7 @@ public final class LROsInner {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+    public ServiceCall<Void> postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
         if (serviceCallback == null) {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
@@ -5514,7 +5514,7 @@ public final class LROsInner {
         final ProductInner product = null;
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -5559,7 +5559,7 @@ public final class LROsInner {
         Validator.validate(product);
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

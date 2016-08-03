@@ -163,7 +163,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final List<Resource> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -208,7 +208,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -256,7 +256,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getArray();
         final ServiceCall<List<FlattenedProduct>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -306,7 +306,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final Map<String, FlattenedProduct> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -351,7 +351,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -399,7 +399,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary();
         final ServiceCall<Map<String, FlattenedProduct>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -449,7 +449,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final ResourceCollection resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -494,7 +494,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -542,7 +542,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection();
         final ServiceCall<ResourceCollection> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -592,7 +592,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final SimpleProduct simpleBodyProduct = null;
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -637,7 +637,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         Validator.validate(simpleBodyProduct);
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -720,7 +720,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         simpleBodyProduct.withOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -802,7 +802,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
         final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -891,7 +891,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
         final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

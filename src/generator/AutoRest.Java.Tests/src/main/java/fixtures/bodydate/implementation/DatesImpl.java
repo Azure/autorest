@@ -110,7 +110,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -158,7 +158,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDate();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -206,7 +206,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowDate();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -254,7 +254,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowDate();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -311,7 +311,7 @@ public final class DatesImpl implements Dates {
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -359,7 +359,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMaxDate();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -416,7 +416,7 @@ public final class DatesImpl implements Dates {
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -464,7 +464,7 @@ public final class DatesImpl implements Dates {
     public ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMinDate();
         final ServiceCall<LocalDate> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

@@ -112,7 +112,7 @@ public final class FormdatasImpl implements Formdatas {
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
         Call<ResponseBody> call = service.uploadFile(fileContentConverted, fileName);
         final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -171,7 +171,7 @@ public final class FormdatasImpl implements Formdatas {
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
         Call<ResponseBody> call = service.uploadFileViaBody(fileContentConverted);
         final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

@@ -102,7 +102,7 @@ public final class GroupsInner {
         }
         Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<SampleResourceGroupInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SampleResourceGroupInner>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<SampleResourceGroupInner>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

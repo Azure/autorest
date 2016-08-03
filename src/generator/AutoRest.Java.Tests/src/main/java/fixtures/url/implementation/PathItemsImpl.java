@@ -120,7 +120,7 @@ public final class PathItemsImpl implements PathItems {
         final String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -188,7 +188,7 @@ public final class PathItemsImpl implements PathItems {
         }
         Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -263,7 +263,7 @@ public final class PathItemsImpl implements PathItems {
         final String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -331,7 +331,7 @@ public final class PathItemsImpl implements PathItems {
         }
         Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -406,7 +406,7 @@ public final class PathItemsImpl implements PathItems {
         final String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -474,7 +474,7 @@ public final class PathItemsImpl implements PathItems {
         }
         Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -549,7 +549,7 @@ public final class PathItemsImpl implements PathItems {
         final String pathItemStringQuery = null;
         Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -617,7 +617,7 @@ public final class PathItemsImpl implements PathItems {
         }
         Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.globalStringPath(), localStringQuery, pathItemStringQuery, this.client.globalStringQuery());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

@@ -98,7 +98,7 @@ public final class PathsImpl implements Paths {
         String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
         Call<ResponseBody> call = service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

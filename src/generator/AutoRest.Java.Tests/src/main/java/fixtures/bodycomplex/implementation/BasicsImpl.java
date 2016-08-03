@@ -104,7 +104,7 @@ public final class BasicsImpl implements Basics {
     public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -163,7 +163,7 @@ public final class BasicsImpl implements Basics {
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.apiVersion());
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -211,7 +211,7 @@ public final class BasicsImpl implements Basics {
     public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
         final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -259,7 +259,7 @@ public final class BasicsImpl implements Basics {
     public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -307,7 +307,7 @@ public final class BasicsImpl implements Basics {
     public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -355,7 +355,7 @@ public final class BasicsImpl implements Basics {
     public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall<Basic> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Basic>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

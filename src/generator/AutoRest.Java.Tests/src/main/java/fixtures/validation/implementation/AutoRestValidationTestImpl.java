@@ -206,7 +206,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
         final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -279,7 +279,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         final Product body = null;
         Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -347,7 +347,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         Validator.validate(body);
         Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
         final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -395,7 +395,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         final String constantParam = "constant";
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -444,7 +444,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         final Product body = null;
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -489,7 +489,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         final String constantParam = "constant";
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

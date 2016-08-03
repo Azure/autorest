@@ -221,7 +221,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -269,7 +269,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseExistingKey();
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -326,7 +326,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -374,7 +374,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseProtectedKey();
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -433,7 +433,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -490,7 +490,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -549,7 +549,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -606,7 +606,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseLong(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -665,7 +665,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -722,7 +722,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -781,7 +781,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -838,7 +838,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -897,7 +897,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -954,7 +954,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseBool(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1013,7 +1013,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         final String value = null;
         Call<ResponseBody> call = service.paramString(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1065,7 +1065,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1122,7 +1122,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseString(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1187,7 +1187,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDate(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1244,7 +1244,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseDate(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1309,7 +1309,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1366,7 +1366,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1433,7 +1433,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1493,7 +1493,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, valueConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1550,7 +1550,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1615,7 +1615,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1672,7 +1672,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1739,7 +1739,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         String valueConverted = Base64.encodeBase64String(value);
         Call<ResponseBody> call = service.paramByte(scenario, valueConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1796,7 +1796,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseByte(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1855,7 +1855,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         final GreyscaleColors value = null;
         Call<ResponseBody> call = service.paramEnum(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1907,7 +1907,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.paramEnum(scenario, value);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1964,7 +1964,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2012,7 +2012,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.customRequestId();
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

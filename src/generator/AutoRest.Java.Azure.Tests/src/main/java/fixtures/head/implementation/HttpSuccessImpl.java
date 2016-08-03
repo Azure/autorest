@@ -87,7 +87,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
@@ -136,7 +136,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
@@ -185,7 +185,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 try {

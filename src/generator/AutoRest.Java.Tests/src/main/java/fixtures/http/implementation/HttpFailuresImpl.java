@@ -88,7 +88,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyError();
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -136,7 +136,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNoModelError();
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -183,7 +183,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNoModelEmpty();
         final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

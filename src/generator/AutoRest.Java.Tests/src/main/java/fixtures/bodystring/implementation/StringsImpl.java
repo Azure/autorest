@@ -130,7 +130,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -180,7 +180,7 @@ public final class StringsImpl implements Strings {
         final String stringBody = null;
         Call<ResponseBody> call = service.putNull(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -223,7 +223,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putNull(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -271,7 +271,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -328,7 +328,7 @@ public final class StringsImpl implements Strings {
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -376,7 +376,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getMbcs();
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -433,7 +433,7 @@ public final class StringsImpl implements Strings {
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -481,7 +481,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getWhitespace();
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -538,7 +538,7 @@ public final class StringsImpl implements Strings {
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -586,7 +586,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -639,7 +639,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getBase64Encoded();
         final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -697,7 +697,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getBase64UrlEncoded();
         final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -761,7 +761,7 @@ public final class StringsImpl implements Strings {
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         Call<ResponseBody> call = service.putBase64UrlEncoded(stringBodyConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -814,7 +814,7 @@ public final class StringsImpl implements Strings {
     public ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNullBase64UrlEncoded();
         final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

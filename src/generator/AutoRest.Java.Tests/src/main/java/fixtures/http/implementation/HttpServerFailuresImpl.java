@@ -96,7 +96,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head501();
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
@@ -143,7 +143,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get501();
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -192,7 +192,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.post505(booleanValue);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -235,7 +235,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post505(booleanValue);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -284,7 +284,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         final Boolean booleanValue = null;
         Call<ResponseBody> call = service.delete505(booleanValue);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -327,7 +327,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     public ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete505(booleanValue);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

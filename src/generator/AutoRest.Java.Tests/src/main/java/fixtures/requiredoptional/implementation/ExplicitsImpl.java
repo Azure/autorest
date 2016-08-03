@@ -180,7 +180,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -229,7 +229,7 @@ public final class ExplicitsImpl implements Explicits {
         final Integer bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -272,7 +272,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -331,7 +331,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -380,7 +380,7 @@ public final class ExplicitsImpl implements Explicits {
         final IntOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -425,7 +425,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -475,7 +475,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -524,7 +524,7 @@ public final class ExplicitsImpl implements Explicits {
         final Integer headerParameter = null;
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -567,7 +567,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -624,7 +624,7 @@ public final class ExplicitsImpl implements Explicits {
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -673,7 +673,7 @@ public final class ExplicitsImpl implements Explicits {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -716,7 +716,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -775,7 +775,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -824,7 +824,7 @@ public final class ExplicitsImpl implements Explicits {
         final StringOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -869,7 +869,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -926,7 +926,7 @@ public final class ExplicitsImpl implements Explicits {
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -975,7 +975,7 @@ public final class ExplicitsImpl implements Explicits {
         final String bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1018,7 +1018,7 @@ public final class ExplicitsImpl implements Explicits {
     public ServiceCall<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1077,7 +1077,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1126,7 +1126,7 @@ public final class ExplicitsImpl implements Explicits {
         final Product bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1171,7 +1171,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1230,7 +1230,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1279,7 +1279,7 @@ public final class ExplicitsImpl implements Explicits {
         final ClassOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1324,7 +1324,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1383,7 +1383,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1432,7 +1432,7 @@ public final class ExplicitsImpl implements Explicits {
         final List<String> bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1477,7 +1477,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1536,7 +1536,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1585,7 +1585,7 @@ public final class ExplicitsImpl implements Explicits {
         final ArrayOptionalWrapper bodyParameter = null;
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1630,7 +1630,7 @@ public final class ExplicitsImpl implements Explicits {
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1691,7 +1691,7 @@ public final class ExplicitsImpl implements Explicits {
         String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postRequiredArrayHeader(headerParameterConverted);
         final ServiceCall<Error> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Error>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1742,7 +1742,7 @@ public final class ExplicitsImpl implements Explicits {
         String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1789,7 +1789,7 @@ public final class ExplicitsImpl implements Explicits {
         String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         Call<ResponseBody> call = service.postOptionalArrayHeader(headerParameterConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

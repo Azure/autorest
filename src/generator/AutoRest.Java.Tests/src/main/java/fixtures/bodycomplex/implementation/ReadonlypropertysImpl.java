@@ -87,7 +87,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
         final ServiceCall<ReadonlyObj> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ReadonlyObj>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<ReadonlyObj>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -146,7 +146,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {

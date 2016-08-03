@@ -221,7 +221,7 @@ public final class QueriesImpl implements Queries {
         final boolean boolQuery = true;
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -271,7 +271,7 @@ public final class QueriesImpl implements Queries {
         final boolean boolQuery = false;
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -321,7 +321,7 @@ public final class QueriesImpl implements Queries {
         final Boolean boolQuery = null;
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -364,7 +364,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -414,7 +414,7 @@ public final class QueriesImpl implements Queries {
         final int intQuery = 1000000;
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -464,7 +464,7 @@ public final class QueriesImpl implements Queries {
         final int intQuery = -1000000;
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -514,7 +514,7 @@ public final class QueriesImpl implements Queries {
         final Integer intQuery = null;
         Call<ResponseBody> call = service.getIntNull(intQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -557,7 +557,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getIntNull(intQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -607,7 +607,7 @@ public final class QueriesImpl implements Queries {
         final long longQuery = 10000000000L;
         Call<ResponseBody> call = service.getTenBillion(longQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -657,7 +657,7 @@ public final class QueriesImpl implements Queries {
         final long longQuery = -10000000000L;
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -707,7 +707,7 @@ public final class QueriesImpl implements Queries {
         final Long longQuery = null;
         Call<ResponseBody> call = service.getLongNull(longQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -750,7 +750,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getLongNull(longQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -800,7 +800,7 @@ public final class QueriesImpl implements Queries {
         final double floatQuery = 1.034E+20;
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -850,7 +850,7 @@ public final class QueriesImpl implements Queries {
         final double floatQuery = -1.034E-20;
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -900,7 +900,7 @@ public final class QueriesImpl implements Queries {
         final Double floatQuery = null;
         Call<ResponseBody> call = service.floatNull(floatQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -943,7 +943,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.floatNull(floatQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -993,7 +993,7 @@ public final class QueriesImpl implements Queries {
         final double doubleQuery = 9999999.999;
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1043,7 +1043,7 @@ public final class QueriesImpl implements Queries {
         final double doubleQuery = -9999999.999;
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1093,7 +1093,7 @@ public final class QueriesImpl implements Queries {
         final Double doubleQuery = null;
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1136,7 +1136,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1186,7 +1186,7 @@ public final class QueriesImpl implements Queries {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1236,7 +1236,7 @@ public final class QueriesImpl implements Queries {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1286,7 +1286,7 @@ public final class QueriesImpl implements Queries {
         final String stringQuery = "";
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1336,7 +1336,7 @@ public final class QueriesImpl implements Queries {
         final String stringQuery = null;
         Call<ResponseBody> call = service.stringNull(stringQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1379,7 +1379,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.stringNull(stringQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1429,7 +1429,7 @@ public final class QueriesImpl implements Queries {
         final UriColor enumQuery = null;
         Call<ResponseBody> call = service.enumValid(enumQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1472,7 +1472,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.enumValid(enumQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1522,7 +1522,7 @@ public final class QueriesImpl implements Queries {
         final UriColor enumQuery = null;
         Call<ResponseBody> call = service.enumNull(enumQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1565,7 +1565,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.enumNull(enumQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1617,7 +1617,7 @@ public final class QueriesImpl implements Queries {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1662,7 +1662,7 @@ public final class QueriesImpl implements Queries {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteMultiByte(byteQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1714,7 +1714,7 @@ public final class QueriesImpl implements Queries {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteEmpty(byteQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1766,7 +1766,7 @@ public final class QueriesImpl implements Queries {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1811,7 +1811,7 @@ public final class QueriesImpl implements Queries {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         Call<ResponseBody> call = service.byteNull(byteQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1861,7 +1861,7 @@ public final class QueriesImpl implements Queries {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         Call<ResponseBody> call = service.dateValid(dateQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1911,7 +1911,7 @@ public final class QueriesImpl implements Queries {
         final LocalDate dateQuery = null;
         Call<ResponseBody> call = service.dateNull(dateQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -1954,7 +1954,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.dateNull(dateQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2004,7 +2004,7 @@ public final class QueriesImpl implements Queries {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
         Call<ResponseBody> call = service.dateTimeValid(dateTimeQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2054,7 +2054,7 @@ public final class QueriesImpl implements Queries {
         final DateTime dateTimeQuery = null;
         Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2097,7 +2097,7 @@ public final class QueriesImpl implements Queries {
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.dateTimeNull(dateTimeQuery);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2149,7 +2149,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2196,7 +2196,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2248,7 +2248,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2295,7 +2295,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvNull(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2347,7 +2347,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2394,7 +2394,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         Call<ResponseBody> call = service.arrayStringCsvEmpty(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2446,7 +2446,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2493,7 +2493,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         Call<ResponseBody> call = service.arrayStringSsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2545,7 +2545,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2592,7 +2592,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         Call<ResponseBody> call = service.arrayStringTsvValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2644,7 +2644,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -2691,7 +2691,7 @@ public final class QueriesImpl implements Queries {
         String arrayQueryConverted = this.client.mapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         Call<ResponseBody> call = service.arrayStringPipesValid(arrayQueryConverted);
         final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
