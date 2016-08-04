@@ -46,6 +46,11 @@ class @(Model.Name)Configuration(Configuration):
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
 }
+@foreach(var property in Model.ConstantProperties)
+{
+@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+}
 
 @if (!Model.IsCustomBaseUri)
 { 
@@ -76,10 +81,14 @@ else
 @if (Model.Properties.Any())
 {
     @EmptyLine
-  foreach (var property in Model.Properties)
+    foreach (var property in Model.Properties)
     {
         @:self.@(property.Name) = @(property.Name)
-  }
+    }
+    foreach (var property in Model.ConstantProperties)
+    {
+        @:self.@(property.Name) = @(property.DefaultValue)
+    }
 }
 @EmptyLine
 @EmptyLine

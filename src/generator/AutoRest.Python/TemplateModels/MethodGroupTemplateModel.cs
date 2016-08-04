@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 
@@ -13,6 +15,7 @@ namespace AutoRest.Python.TemplateModels
         public MethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
         {
             this.LoadFrom(serviceClient);
+            ConstantProperties = new List<Property>();
             MethodTemplateModels = new List<MethodTemplateModel>();
             // MethodGroup name and type are always the same but can be 
             // changed in derived classes
@@ -20,6 +23,34 @@ namespace AutoRest.Python.TemplateModels
             MethodGroupType = methodGroupName + "Operations";
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
+
+            foreach (var groupMethod in MethodTemplateModels)
+            {
+                var constantParameters = groupMethod.Parameters.Where(p => p.IsConstant);
+                foreach (var constant in constantParameters)
+                {
+                    var existingProperty = ConstantProperties.FirstOrDefault(p => p.SerializedName == constant.SerializedName);
+                    if (existingProperty == null)
+                    {
+                        existingProperty = new Property
+                        {
+                            Name = constant.Name,
+                            DefaultValue = constant.DefaultValue,
+                            IsConstant = constant.IsConstant,
+                            IsRequired = constant.IsRequired,
+                            Documentation = constant.Documentation,
+                            SerializedName = constant.SerializedName,
+                            Type = constant.Type
+                        };
+                        ConstantProperties.Add(existingProperty);
+                    }
+                    if (constant.ClientProperty == null)
+                    {
+                        constant.Name = "self." + constant.Name;
+                        constant.ClientProperty = existingProperty;
+                    }
+                }
+            }
         }
 
         public virtual bool HasAnyModel
@@ -42,10 +73,55 @@ namespace AutoRest.Python.TemplateModels
             get { return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null); }
         }
 
+        public List<Property> ConstantProperties { get; private set; }
+
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
         public string MethodGroupName { get; set; }
 
         public string MethodGroupType { get; set; }
+
+        /// <summary>
+        /// Provides the modelProperty documentation string along with default value if any.
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter documentation string along with default value if any 
+        /// in correct jsdoc notation</returns>
+        public string GetPropertyDocumentationString(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+            string propertyName = property.Name.Split('.').Last();
+            string docString = string.Format(CultureInfo.InvariantCulture, ":ivar {0}:", propertyName);
+
+            string summary = property.Summary;
+            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+            {
+                summary += ".";
+            }
+
+            string documentation = property.Documentation;
+            if (property.DefaultValue != PythonConstants.None)
+            {
+                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    documentation += ".";
+                }
+                documentation += " Constant value: " + property.DefaultValue + ".";
+            }
+
+            if (!string.IsNullOrWhiteSpace(summary))
+            {
+                docString += " " + summary;
+            }
+
+            if (!string.IsNullOrWhiteSpace(documentation))
+            {
+                docString += " " + documentation;
+            }
+            return docString;
+        }
     }
 }

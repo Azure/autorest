@@ -30,11 +30,14 @@ namespace AutoRest.Python.TemplateModels
             {
                 this.HasAnyModel = true;
             }
-
+            ConstantProperties = Properties.Where(p => p.IsConstant).ToList();
+            Properties.RemoveAll(p => ConstantProperties.Contains(p));
             this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
         }
 
         public bool IsCustomBaseUri { get; private set; }
+
+        public List<Property> ConstantProperties { get; set; }
 
         public ServiceClient ServiceClient { get; set; }
 
@@ -221,27 +224,73 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
+        ///// <summary>
+        ///// Provides the property documentation string.
+        ///// </summary>
+        ///// <param name="property">Parameter to be documented</param>
+        ///// <returns>Parameter documentation string correct notation</returns>
+        //public static string GetPropertyDocumentationString(Property property)
+        //{
+        //    if (property == null)
+        //    {
+        //        throw new ArgumentNullException("property");
+        //    }
+
+        //    string docString = ":param ";
+
+        //    docString += property.Name + ":";
+
+        //    if (!string.IsNullOrWhiteSpace(property.Documentation))
+        //    {
+        //        docString += " " + property.Documentation;
+        //    }
+
+        //    return docString;
+        //}
+
         /// <summary>
-        /// Provides the property documentation string.
+        /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
-        /// <returns>Parameter documentation string correct notation</returns>
+        /// <returns>Parameter documentation string along with default value if any 
+        /// in correct jsdoc notation</returns>
         public static string GetPropertyDocumentationString(Property property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
-
-            string docString = ":param ";
-
-            docString += property.Name + ":";
-
-            if (!string.IsNullOrWhiteSpace(property.Documentation))
+            string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
+            if (property.IsConstant || property.IsReadOnly)
             {
-                docString += " " + property.Documentation;
+                docString = string.Format(CultureInfo.InvariantCulture, ":ivar {0}:", property.Name);
             }
 
+            string summary = property.Summary;
+            if (!string.IsNullOrWhiteSpace(summary) && !summary.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+            {
+                summary += ".";
+            }
+
+            string documentation = property.Documentation;
+            if (property.DefaultValue != PythonConstants.None)
+            {
+                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    documentation += ".";
+                }
+                documentation += " Default value: " + property.DefaultValue + " .";
+            }
+
+            if (!string.IsNullOrWhiteSpace(summary))
+            {
+                docString += " " + summary;
+            }
+
+            if (!string.IsNullOrWhiteSpace(documentation))
+            {
+                docString += " " + documentation;
+            }
             return docString;
         }
 

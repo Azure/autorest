@@ -54,6 +54,11 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
 }
+@foreach(var property in Model.ConstantProperties)
+{
+@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + Model.GetPropertyDocumentationType(property.Type))
+}
 
 @if (!Model.IsCustomBaseUri)
 { 
@@ -88,6 +93,10 @@ else
   foreach (var property in Model.Properties)
   {
         @:self.@(property.Name) = @(property.Name)
+  }
+  foreach (var property in Model.ConstantProperties)
+  {
+        @:self.@(property.Name) = @(property.DefaultValue)
   }
 }
 @EmptyLine
