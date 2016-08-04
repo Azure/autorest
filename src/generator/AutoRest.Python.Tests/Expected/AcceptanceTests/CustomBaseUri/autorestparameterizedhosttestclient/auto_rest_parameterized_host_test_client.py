@@ -22,7 +22,7 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
     attributes.
 
     :param host: A string value that is used as a global part of the
-     parameterized host
+     parameterized host. Default value: "host".
     :type host: str
     :param str filepath: Existing config
     """
@@ -53,7 +53,7 @@ class AutoRestParameterizedHostTestClient(object):
     :vartype paths: .operations.PathsOperations
 
     :param host: A string value that is used as a global part of the
-     parameterized host
+     parameterized host. Default value: "host".
     :type host: str
     :param str filepath: Existing config
     """
