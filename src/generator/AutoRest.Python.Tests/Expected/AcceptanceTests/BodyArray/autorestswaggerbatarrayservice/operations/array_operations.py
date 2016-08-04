@@ -21,7 +21,6 @@ class ArrayOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
-    :param deserializer: An objec model deserializer.
     """
 
     def __init__(self, client, config, serializer, deserializer):
