@@ -78,7 +78,7 @@ else
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
         self.add_user_agent('@Model.UserAgent/{}'.format(VERSION))
-@if (Model.Properties.Any())
+@if (Model.Properties.Any() || Model.ConstantProperties.Any())
 {
     @EmptyLine
     foreach (var property in Model.Properties)

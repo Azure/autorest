@@ -279,7 +279,7 @@ namespace AutoRest.Python.TemplateModels
                 {
                     documentation += ".";
                 }
-                documentation += " Default value: " + property.DefaultValue + " .";
+                documentation += " Default value: " + property.DefaultValue + ".";
             }
 
             if (!string.IsNullOrWhiteSpace(summary))
