@@ -76,13 +76,13 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/customNamedRequestId';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -211,13 +211,13 @@ Header.prototype.customNamedRequestIdParamGrouping = function (headerCustomNamed
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/customNamedRequestIdParamGrouping';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

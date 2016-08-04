@@ -98,6 +98,9 @@ Paths.prototype.getEmpty = function (vault, secret, keyName, options, callback) 
   requestUrl = requestUrl.replace('{dnsSuffix}', this.client.dnsSuffix);
   requestUrl = requestUrl.replace('{keyName}', encodeURIComponent(keyName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (keyVersion !== null && keyVersion !== undefined) {
     queryParameters.push('keyVersion=' + encodeURIComponent(keyVersion));
@@ -105,9 +108,6 @@ Paths.prototype.getEmpty = function (vault, secret, keyName, options, callback) 
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

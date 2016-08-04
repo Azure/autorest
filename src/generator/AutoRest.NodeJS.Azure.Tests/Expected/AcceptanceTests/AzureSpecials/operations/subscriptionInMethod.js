@@ -78,13 +78,13 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
   var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -196,13 +196,13 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
   var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -313,13 +313,13 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
   var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -430,13 +430,13 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
   var requestUrl = this.client.baseUri +
                    '//azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

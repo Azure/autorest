@@ -104,6 +104,9 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -117,9 +120,6 @@ PathItems.prototype.getAllWithValues = function (localStringPath, pathItemString
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -251,6 +251,9 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -264,9 +267,6 @@ PathItems.prototype.getGlobalQueryNull = function (localStringPath, pathItemStri
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -396,6 +396,9 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -409,9 +412,6 @@ PathItems.prototype.getGlobalAndLocalQueryNull = function (localStringPath, path
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -540,6 +540,9 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   requestUrl = requestUrl.replace('{localStringPath}', encodeURIComponent(localStringPath));
   requestUrl = requestUrl.replace('{pathItemStringPath}', encodeURIComponent(pathItemStringPath));
   requestUrl = requestUrl.replace('{globalStringPath}', encodeURIComponent(this.client.globalStringPath));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (localStringQuery !== null && localStringQuery !== undefined) {
     queryParameters.push('localStringQuery=' + encodeURIComponent(localStringQuery));
@@ -553,9 +556,6 @@ PathItems.prototype.getLocalPathItemQueryNull = function (localStringPath, pathI
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -90,6 +90,9 @@ Odata.prototype.getWithFilter = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/odata/filter';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (filter !== null && filter !== undefined) {
     queryParameters.push('$filter=' + encodeURIComponent(filter));
@@ -103,9 +106,6 @@ Odata.prototype.getWithFilter = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -62,14 +62,14 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/bool/true';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -159,14 +159,14 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/bool/false';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -266,6 +266,9 @@ Queries.prototype.getBooleanNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/bool/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (boolQuery !== null && boolQuery !== undefined) {
     queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
@@ -273,9 +276,6 @@ Queries.prototype.getBooleanNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -365,14 +365,14 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/int/1000000';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -462,14 +462,14 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/int/-1000000';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -569,6 +569,9 @@ Queries.prototype.getIntNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/int/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (intQuery !== null && intQuery !== undefined) {
     queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
@@ -576,9 +579,6 @@ Queries.prototype.getIntNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -668,14 +668,14 @@ Queries.prototype.getTenBillion = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/long/10000000000';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -765,14 +765,14 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/long/-10000000000';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -872,6 +872,9 @@ Queries.prototype.getLongNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/long/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (longQuery !== null && longQuery !== undefined) {
     queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
@@ -879,9 +882,6 @@ Queries.prototype.getLongNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -971,14 +971,14 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/float/1.034E+20';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1068,14 +1068,14 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/float/-1.034E-20';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1175,6 +1175,9 @@ Queries.prototype.floatNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/float/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (floatQuery !== null && floatQuery !== undefined) {
     queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
@@ -1182,9 +1185,6 @@ Queries.prototype.floatNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1274,14 +1274,14 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/double/9999999.999';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1371,14 +1371,14 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/double/-9999999.999';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1478,6 +1478,9 @@ Queries.prototype.doubleNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/double/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (doubleQuery !== null && doubleQuery !== undefined) {
     queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
@@ -1485,9 +1488,6 @@ Queries.prototype.doubleNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1577,14 +1577,14 @@ Queries.prototype.stringUnicode = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/string/unicode/';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1674,14 +1674,14 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1771,14 +1771,14 @@ Queries.prototype.stringEmpty = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/string/empty';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1878,6 +1878,9 @@ Queries.prototype.stringNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/string/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (stringQuery !== null && stringQuery !== undefined) {
     queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
@@ -1885,9 +1888,6 @@ Queries.prototype.stringNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1991,6 +1991,9 @@ Queries.prototype.enumValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/enum/green%20color';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
     queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery));
@@ -1998,9 +2001,6 @@ Queries.prototype.enumValid = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2104,6 +2104,9 @@ Queries.prototype.enumNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/enum/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (enumQuery !== null && enumQuery !== undefined) {
     queryParameters.push('enumQuery=' + encodeURIComponent(enumQuery));
@@ -2111,9 +2114,6 @@ Queries.prototype.enumNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2214,6 +2214,9 @@ Queries.prototype.byteMultiByte = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/byte/multibyte';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
     queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
@@ -2221,9 +2224,6 @@ Queries.prototype.byteMultiByte = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2313,14 +2313,14 @@ Queries.prototype.byteEmpty = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/byte/empty';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2421,6 +2421,9 @@ Queries.prototype.byteNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/byte/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (byteQuery !== null && byteQuery !== undefined) {
     queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
@@ -2428,9 +2431,6 @@ Queries.prototype.byteNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2520,14 +2520,14 @@ Queries.prototype.dateValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/date/2012-01-01';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2628,6 +2628,9 @@ Queries.prototype.dateNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/date/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (dateQuery !== null && dateQuery !== undefined) {
     queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
@@ -2635,9 +2638,6 @@ Queries.prototype.dateNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2727,14 +2727,14 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/datetime/2012-01-01T01%3A01%3A01Z';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2836,6 +2836,9 @@ Queries.prototype.dateTimeNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/datetime/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
     queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
@@ -2843,9 +2846,6 @@ Queries.prototype.dateTimeNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2951,6 +2951,9 @@ Queries.prototype.arrayStringCsvValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join(',')));
@@ -2958,9 +2961,6 @@ Queries.prototype.arrayStringCsvValid = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3065,6 +3065,9 @@ Queries.prototype.arrayStringCsvNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join(',')));
@@ -3072,9 +3075,6 @@ Queries.prototype.arrayStringCsvNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3179,6 +3179,9 @@ Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/csv/string/empty';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join(',')));
@@ -3186,9 +3189,6 @@ Queries.prototype.arrayStringCsvEmpty = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3294,6 +3294,9 @@ Queries.prototype.arrayStringSsvValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/ssv/string/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join(' ')));
@@ -3301,9 +3304,6 @@ Queries.prototype.arrayStringSsvValid = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3409,6 +3409,9 @@ Queries.prototype.arrayStringTsvValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/tsv/string/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join('	')));
@@ -3416,9 +3419,6 @@ Queries.prototype.arrayStringTsvValid = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3524,6 +3524,9 @@ Queries.prototype.arrayStringPipesValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//queries/array/pipes/string/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (arrayQuery !== null && arrayQuery !== undefined) {
     queryParameters.push('arrayQuery=' + encodeURIComponent(arrayQuery.join('|')));
@@ -3531,9 +3534,6 @@ Queries.prototype.arrayStringPipesValid = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
