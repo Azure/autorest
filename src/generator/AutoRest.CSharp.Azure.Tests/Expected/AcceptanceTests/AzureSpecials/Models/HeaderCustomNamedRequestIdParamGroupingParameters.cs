@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Additional parameters for the header_customNamedRequestIdParamGrouping
@@ -41,20 +35,20 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Gets or sets the fooRequestId
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
         public string FooClientRequestId { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (FooClientRequestId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "FooClientRequestId");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "FooClientRequestId");
             }
         }
     }

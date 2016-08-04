@@ -288,8 +288,10 @@ namespace Microsoft.Rest.Azure.Authentication
             var authResult = await task.ConfigureAwait(false);
             var newUserId = new UserIdentifier(authResult.UserInfo.DisplayableId,
                 UserIdentifierType.RequiredDisplayableId);
-            return new TokenCredentials(new UserTokenProvider(authenticationContext, clientSettings.ClientId,
-                serviceSettings.TokenAudience, newUserId));
+            return new TokenCredentials(
+                new UserTokenProvider(authenticationContext, clientSettings.ClientId,serviceSettings.TokenAudience, newUserId),
+                authResult.TenantId,
+                authResult.UserInfo.DisplayableId);
         }
 #endif
         /// <summary>
@@ -354,11 +356,14 @@ namespace Microsoft.Rest.Azure.Authentication
             var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
             try
             {
-                await authenticationContext.AcquireTokenAsync(serviceSettings.TokenAudience.ToString(),
+                var authResult = await authenticationContext.AcquireTokenAsync(serviceSettings.TokenAudience.ToString(),
                       clientId, credentials).ConfigureAwait(false);
                 return
-                    new TokenCredentials(new UserTokenProvider(authenticationContext, clientId,
-                        serviceSettings.TokenAudience, new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId)));
+                    new TokenCredentials(
+                        new UserTokenProvider(authenticationContext, clientId,serviceSettings.TokenAudience, 
+                                new UserIdentifier(username, UserIdentifierType.RequiredDisplayableId)),
+                        authResult.TenantId,
+                        authResult.UserInfo == null ? null : authResult.UserInfo.DisplayableId);
             }
             catch (AdalException ex)
             {
@@ -474,7 +479,9 @@ namespace Microsoft.Rest.Azure.Authentication
                             authenticationContext,
                             clientId,
                             serviceSettings.TokenAudience,
-                            new UserIdentifier(authenticationResult.UserInfo.DisplayableId, UserIdentifierType.RequiredDisplayableId)));
+                            new UserIdentifier(authenticationResult.UserInfo.DisplayableId, UserIdentifierType.RequiredDisplayableId)),
+                        authenticationResult.TenantId,
+                        authenticationResult.UserInfo == null ? null : authenticationResult.UserInfo.DisplayableId);
                 }
 
                 return null;
@@ -554,11 +561,13 @@ namespace Microsoft.Rest.Azure.Authentication
             var authenticationContext = GetAuthenticationContext(domain, serviceSettings, cache);
             try
             {
-                await authenticationContext.AcquireTokenSilentAsync(serviceSettings.TokenAudience.ToString(),
+                var authResult = await authenticationContext.AcquireTokenSilentAsync(serviceSettings.TokenAudience.ToString(),
                       clientId, userId).ConfigureAwait(false);
                 return
-                    new TokenCredentials(new UserTokenProvider(authenticationContext, clientId,
-                        serviceSettings.TokenAudience, userId));
+                    new TokenCredentials(
+                        new UserTokenProvider(authenticationContext, clientId,serviceSettings.TokenAudience, userId),
+                        authResult.TenantId,
+                        authResult.UserInfo == null ? null : authResult.UserInfo.DisplayableId);
             }
             catch (AdalException ex)
             {

@@ -77,13 +77,13 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -193,13 +193,13 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -304,13 +304,13 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}';
   requestUrl = requestUrl.replace('{unencodedPathParam}', unencodedPathParam);
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -420,14 +420,14 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/query/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -536,6 +536,9 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/method/query/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (q1 !== null && q1 !== undefined) {
     queryParameters.push('q1=' + q1);
@@ -543,9 +546,6 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -655,14 +655,14 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/path/query/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -767,14 +767,14 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/query/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

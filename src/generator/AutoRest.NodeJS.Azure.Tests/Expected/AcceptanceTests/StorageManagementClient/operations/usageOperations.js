@@ -79,14 +79,14 @@ UsageOperations.prototype.list = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

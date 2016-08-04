@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.ClientModel
@@ -16,6 +17,9 @@ namespace AutoRest.Core.ClientModel
     /// </summary>
     public class Method : ICloneable
     {
+        private string _description;
+        private string _summary;
+
         /// <summary>
         /// Initializes a new instance of the Method class.
         /// </summary>
@@ -129,12 +133,20 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets or sets the summary.
         /// </summary>
-        public string Summary { get; set; }
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets or sets a URL pointing to related external documentation.

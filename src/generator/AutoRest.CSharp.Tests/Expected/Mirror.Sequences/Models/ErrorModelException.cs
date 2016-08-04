@@ -8,31 +8,24 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using Microsoft.Rest;
-    using System;
-    using System.Net.Http;
-    using System.Runtime.Serialization;
-#if !PORTABLE 
-    using System.Security.Permissions;
-#endif
 
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
 #if !PORTABLE 
-    [Serializable]
+    [System.Serializable]
 #endif
-    public class ErrorModelException : RestException
+    public class ErrorModelException : Microsoft.Rest.RestException
     {
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
+        public Microsoft.Rest.HttpRequestMessageWrapper Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
+        public Microsoft.Rest.HttpResponseMessageWrapper Response { get; set; }
 
         /// <summary>
         /// Gets or sets the body object.
@@ -60,7 +53,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>
-        public ErrorModelException(string message, Exception innerException)
+        public ErrorModelException(string message, System.Exception innerException)
             : base(message, innerException)
         {
         }
@@ -71,7 +64,7 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorModelException(SerializationInfo info, StreamingContext context)
+        protected ErrorModelException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -81,16 +74,16 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new System.ArgumentNullException("info");
             }
 
             info.AddValue("Request", Request);

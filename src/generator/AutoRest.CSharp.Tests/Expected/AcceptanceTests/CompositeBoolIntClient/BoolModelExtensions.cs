@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for BoolModel.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetTrue(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetTrueAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetTrueAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetTrueAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -59,7 +54,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutTrue(this IBoolModel operations, bool boolBody)
             {
-                Task.Factory.StartNew(s => ((IBoolModel)s).PutTrueAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).PutTrueAsync(boolBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +68,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutTrueAsync(this IBoolModel operations, bool boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -86,7 +81,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetFalse(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetFalseAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -98,7 +93,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetFalseAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetFalseAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -116,7 +111,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static void PutFalse(this IBoolModel operations, bool boolBody)
             {
-                Task.Factory.StartNew(s => ((IBoolModel)s).PutFalseAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).PutFalseAsync(boolBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -130,7 +125,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutFalseAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutFalseAsync(this IBoolModel operations, bool boolBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -143,7 +138,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetNull(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -155,7 +150,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetNullAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetNullAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -171,7 +166,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static bool? GetInvalid(this IBoolModel operations)
             {
-                return Task.Factory.StartNew(s => ((IBoolModel)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBoolModel)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -183,7 +178,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetInvalidAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<bool?> GetInvalidAsync(this IBoolModel operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

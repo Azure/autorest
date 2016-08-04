@@ -1,0 +1,32 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Definition missing description",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "responses": {
+          "default": {
+            "description": "Response"
+          }
+        }
+      }
+    }
+  }
+}

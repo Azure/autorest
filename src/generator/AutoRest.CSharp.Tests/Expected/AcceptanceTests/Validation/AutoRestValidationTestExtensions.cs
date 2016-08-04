@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsValidation
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for AutoRestValidationTest.
@@ -35,7 +30,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product ValidationOfMethodParameters(this IAutoRestValidationTest operations, string resourceGroupName, int id)
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfMethodParametersAsync(resourceGroupName, id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfMethodParametersAsync(resourceGroupName, id), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +48,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> ValidationOfMethodParametersAsync(this IAutoRestValidationTest operations, string resourceGroupName, int id, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> ValidationOfMethodParametersAsync(this IAutoRestValidationTest operations, string resourceGroupName, int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ValidationOfMethodParametersWithHttpMessagesAsync(resourceGroupName, id, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -77,7 +72,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product ValidationOfBody(this IAutoRestValidationTest operations, string resourceGroupName, int id, Product body = default(Product))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfBodyAsync(resourceGroupName, id, body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).ValidationOfBodyAsync(resourceGroupName, id, body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -97,7 +92,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> ValidationOfBodyAsync(this IAutoRestValidationTest operations, string resourceGroupName, int id, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> ValidationOfBodyAsync(this IAutoRestValidationTest operations, string resourceGroupName, int id, Product body = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ValidationOfBodyWithHttpMessagesAsync(resourceGroupName, id, body, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -110,7 +105,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static void GetWithConstantInPath(this IAutoRestValidationTest operations)
             {
-                Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).GetWithConstantInPathAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).GetWithConstantInPathAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -119,7 +114,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetWithConstantInPathAsync(this IAutoRestValidationTest operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetWithConstantInPathAsync(this IAutoRestValidationTest operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetWithConstantInPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -131,7 +126,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static Product PostWithConstantInBody(this IAutoRestValidationTest operations, Product body = default(Product))
             {
-                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).PostWithConstantInBodyAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).PostWithConstantInBodyAsync(body), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -142,7 +137,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PostWithConstantInBodyAsync(this IAutoRestValidationTest operations, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PostWithConstantInBodyAsync(this IAutoRestValidationTest operations, Product body = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostWithConstantInBodyWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
                 {

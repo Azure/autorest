@@ -4,6 +4,8 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
@@ -37,19 +39,40 @@ namespace AutoRest.CSharp.Unit.Tests
             fileSystem.WriteFile(destination, File.ReadAllText(sourceFileOnDisk));
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem)
+        internal static string[] GetFilesByExtension(this IFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
         {
-            fileSystem.Copy(Path.Combine("Resource", inputFile));
+            return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
+        }
 
+        internal static MemoryFileSystem GenerateCodeInto(this string inputFile,  MemoryFileSystem fileSystem)
+        {
             var settings = new Settings
             {
                 Modeler = "Swagger",
                 CodeGenerator = "CSharp",
                 FileSystem = fileSystem,
                 OutputDirectory = "GeneratedCode",
-                Namespace = "Test",
-                Input = inputFile
+                Namespace = "Test"
             };
+
+            return inputFile.GenerateCodeInto(fileSystem, settings);
+        }
+
+        internal static MemoryFileSystem GenerateCodeInto(this string inputFile, MemoryFileSystem fileSystem, Settings settings)
+        {
+            string fileName = Path.GetFileName(inputFile);
+
+            // If inputFile does not contain a path use the local Resource folder
+            if (inputFile == fileName)
+            {
+                fileSystem.Copy(Path.Combine("Resource", inputFile));
+            }
+            else
+            {
+                fileSystem.Copy(inputFile);
+            }
+
+            settings.Input = fileName;
 
             var codeGenerator = new CSharpCodeGenerator(settings);
             var modeler = ExtensionsLoader.GetModeler(settings);
@@ -68,7 +91,8 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 try
                 {
-                    Directory.Delete(outputFolder, true);
+                    fileSystem.EmptyDirectory(outputFolder);
+                    fileSystem.DeleteDirectory(outputFolder);
                 }
                 catch
                 {

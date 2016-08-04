@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyDuration
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Duration.
@@ -27,9 +22,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static TimeSpan? GetNull(this IDuration operations)
+            public static System.TimeSpan? GetNull(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDuration)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetNullAsync(this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetNullAsync(this IDuration operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -57,9 +52,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// </param>
             /// <param name='durationBody'>
             /// </param>
-            public static void PutPositiveDuration(this IDuration operations, TimeSpan durationBody)
+            public static void PutPositiveDuration(this IDuration operations, System.TimeSpan durationBody)
             {
-                Task.Factory.StartNew(s => ((IDuration)s).PutPositiveDurationAsync(durationBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDuration)s).PutPositiveDurationAsync(durationBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutPositiveDurationAsync(this IDuration operations, TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutPositiveDurationAsync(this IDuration operations, System.TimeSpan durationBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -84,9 +79,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static TimeSpan? GetPositiveDuration(this IDuration operations)
+            public static System.TimeSpan? GetPositiveDuration(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetPositiveDurationAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDuration)s).GetPositiveDurationAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -98,7 +93,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetPositiveDurationAsync(this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetPositiveDurationAsync(this IDuration operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -112,9 +107,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static TimeSpan? GetInvalid(this IDuration operations)
+            public static System.TimeSpan? GetInvalid(this IDuration operations)
             {
-                return Task.Factory.StartNew(s => ((IDuration)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDuration)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -126,7 +121,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetInvalidAsync(this IDuration operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.TimeSpan?> GetInvalidAsync(this IDuration operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

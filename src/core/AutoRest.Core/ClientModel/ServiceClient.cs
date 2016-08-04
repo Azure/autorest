@@ -14,6 +14,8 @@ namespace AutoRest.Core.ClientModel
     /// </summary>
     public class ServiceClient
     {
+        private string _documentation;
+
         /// <summary>
         /// Creates a new instance of Client class.
         /// </summary>
@@ -37,6 +39,11 @@ namespace AutoRest.Core.ClientModel
         /// Gets or sets the base namespace of the client model if applicable.
         /// </summary>
         public string Namespace { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Models Name if applicable.
+        /// </summary>
+        public string ModelsName { get; set; }
 
         /// <summary>
         /// Gets or sets the version of the API described by this service.
@@ -97,7 +104,11 @@ namespace AutoRest.Core.ClientModel
         /// <summary>
         /// Gets or sets the documentation.
         /// </summary>
-        public string Documentation { get; set; }
+        public string Documentation
+        {
+            get { return _documentation; }
+            set { _documentation = value.StripControlCharacters(); }
+        }
 
         /// <summary>
         /// Gets vendor extensions dictionary.

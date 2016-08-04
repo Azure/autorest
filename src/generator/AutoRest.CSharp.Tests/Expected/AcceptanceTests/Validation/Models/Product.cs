@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The product documentation.
@@ -38,7 +33,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <param name="image">Image URL representing the product.</param>
         /// <param name="constStringAsEnum">Constant string as Enum. Possible
         /// values include: 'constant_string_as_enum'</param>
-        public Product(ChildProduct child, IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
+        public Product(ChildProduct child, System.Collections.Generic.IList<string> displayNames = default(System.Collections.Generic.IList<string>), int? capacity = default(int?), string image = default(string), EnumConst? constStringAsEnum = default(EnumConst?))
         {
             Child = new ChildProduct();
             DisplayNames = displayNames;
@@ -61,90 +56,90 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Gets or sets non required array of unique items from 0 to 6
         /// elements.
         /// </summary>
-        [JsonProperty(PropertyName = "display_names")]
-        public IList<string> DisplayNames { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "display_names")]
+        public System.Collections.Generic.IList<string> DisplayNames { get; set; }
 
         /// <summary>
         /// Gets or sets non required int betwen 0 and 100 exclusive.
         /// </summary>
-        [JsonProperty(PropertyName = "capacity")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "capacity")]
         public int? Capacity { get; set; }
 
         /// <summary>
         /// Gets or sets image URL representing the product.
         /// </summary>
-        [JsonProperty(PropertyName = "image")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "child")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "child")]
         public ChildProduct Child { get; set; }
 
         /// <summary>
         /// Gets or sets constant string as Enum. Possible values include:
         /// 'constant_string_as_enum'
         /// </summary>
-        [JsonProperty(PropertyName = "constStringAsEnum")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constStringAsEnum")]
         public EnumConst? ConstStringAsEnum { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "constChild")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constChild")]
         public static ConstantProduct ConstChild { get; private set; }
 
         /// <summary>
         /// Constant int
         /// </summary>
-        [JsonProperty(PropertyName = "constInt")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constInt")]
         public static int ConstInt { get; private set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
-        [JsonProperty(PropertyName = "constString")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "constString")]
         public static string ConstString { get; private set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Child == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Child");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Child");
             }
             if (this.DisplayNames != null)
             {
                 if (this.DisplayNames.Count > 6)
                 {
-                    throw new ValidationException(ValidationRules.MaxItems, "DisplayNames", 6);
+                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.MaxItems, "DisplayNames", 6);
                 }
                 if (this.DisplayNames.Count < 0)
                 {
-                    throw new ValidationException(ValidationRules.MinItems, "DisplayNames", 0);
+                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.MinItems, "DisplayNames", 0);
                 }
                 if (this.DisplayNames.Count != this.DisplayNames.Distinct().Count())
                 {
-                    throw new ValidationException(ValidationRules.UniqueItems, "DisplayNames");
+                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.UniqueItems, "DisplayNames");
                 }
             }
             if (this.Capacity >= 100)
             {
-                throw new ValidationException(ValidationRules.ExclusiveMaximum, "Capacity", 100);
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.ExclusiveMaximum, "Capacity", 100);
             }
             if (this.Capacity <= 0)
             {
-                throw new ValidationException(ValidationRules.ExclusiveMinimum, "Capacity", 0);
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.ExclusiveMinimum, "Capacity", 0);
             }
             if (this.Image != null)
             {
                 if (!System.Text.RegularExpressions.Regex.IsMatch(this.Image, "http://\\w+"))
                 {
-                    throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
+                    throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.Pattern, "Image", "http://\\w+");
                 }
             }
         }

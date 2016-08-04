@@ -8,19 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
     using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestParameterizedCustomHostTestClient : IDisposable
+    public partial interface IAutoRestParameterizedCustomHostTestClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
@@ -29,12 +22,12 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// The subscription id with value 'test12'.

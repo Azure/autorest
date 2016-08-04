@@ -15,3 +15,4 @@
 'use strict';
 
 exports.ErrorModel = require('./errorModel');
+exports.RefColorConstant = require('./refColorConstant');

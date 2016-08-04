@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class CatalogArray
     {
@@ -27,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Initializes a new instance of the CatalogArray class.
         /// </summary>
         /// <param name="productArray">Array of products</param>
-        public CatalogArray(IList<Product> productArray = default(IList<Product>))
+        public CatalogArray(System.Collections.Generic.IList<Product> productArray = default(System.Collections.Generic.IList<Product>))
         {
             ProductArray = productArray;
         }
@@ -35,8 +29,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Gets or sets array of products
         /// </summary>
-        [JsonProperty(PropertyName = "productArray")]
-        public IList<Product> ProductArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "productArray")]
+        public System.Collections.Generic.IList<Product> ProductArray { get; set; }
 
     }
 }

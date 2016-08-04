@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Fish
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish(double length, string species = default(string), IList<Fish> siblings = default(IList<Fish>))
+        public Fish(double length, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>))
         {
             Species = species;
             Length = length;
@@ -35,23 +29,23 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "species")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "species")]
         public string Species { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "length")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "length")]
         public double Length { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "siblings")]
-        public IList<Fish> Siblings { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "siblings")]
+        public System.Collections.Generic.IList<Fish> Siblings { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

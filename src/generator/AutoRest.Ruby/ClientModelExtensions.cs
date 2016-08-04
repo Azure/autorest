@@ -265,7 +265,7 @@ namespace AutoRest.Ruby
         /// <returns>True if client contain model types, false otherwise.</returns>
         public static bool HasModelTypes(this ServiceClient client)
         {
-            return client.ModelTypes.Any(mt => mt.Extensions.Count == 0);
+            return client.ModelTypes.Any();
         }
 
         /// <summary>

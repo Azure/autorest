@@ -8,14 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
-    [JsonObject("shark")]
+    [Newtonsoft.Json.JsonObject("shark")]
     public partial class Shark : Fish
     {
         /// <summary>
@@ -26,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+        public Shark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?))
             : base(length, species, siblings)
         {
             Age = age;
@@ -35,18 +30,18 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "age")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "age")]
         public int? Age { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "birthday")]
-        public DateTime Birthday { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "birthday")]
+        public System.DateTime Birthday { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

@@ -8,13 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -22,27 +15,27 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// Composite Swagger Client that represents merging body complex and
     /// complex model swagger clients
     /// </summary>
-    public partial interface IAzureCompositeModel : IDisposable
+    public partial interface IAzureCompositeModel : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        Uri BaseUri { get; set; }
+        System.Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        ServiceClientCredentials Credentials { get; }
+        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Subscription ID.
@@ -125,7 +118,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Create products
@@ -148,7 +141,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Update products
@@ -171,7 +164,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>> productArrayOfDictionary = default(System.Collections.Generic.IList<System.Collections.Generic.IDictionary<string, Product>>), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 }

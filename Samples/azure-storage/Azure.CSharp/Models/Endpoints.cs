@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The URIs that are used to perform a retrieval of a public blob, queue
@@ -27,7 +21,7 @@ namespace Petstore.Models
         /// <param name="queue">Gets the queue endpoint.</param>
         /// <param name="table">Gets the table endpoint.</param>
         /// <param name="file">Gets the file endpoint.</param>
-        public Endpoints(string blob = default(string), string queue = default(string), string table = default(string), string file = default(string))
+        public Endpoints(System.String blob = default(System.String), System.String queue = default(System.String), System.String table = default(System.String), System.String file = default(System.String))
         {
             Blob = blob;
             Queue = queue;
@@ -38,26 +32,26 @@ namespace Petstore.Models
         /// <summary>
         /// Gets the blob endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "blob")]
-        public string Blob { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "blob")]
+        public System.String Blob { get; set; }
 
         /// <summary>
         /// Gets the queue endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "queue")]
-        public string Queue { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "queue")]
+        public System.String Queue { get; set; }
 
         /// <summary>
         /// Gets the table endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "table")]
-        public string Table { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "table")]
+        public System.String Table { get; set; }
 
         /// <summary>
         /// Gets the file endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "file")]
-        public string File { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "file")]
+        public System.String File { get; set; }
 
     }
 }

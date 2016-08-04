@@ -136,9 +136,9 @@ namespace AutoRest.CSharp.Tests
             Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Name);
             Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[0].Type.Name);
             Assert.Equal("ChildList", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Name);
-            Assert.Equal("IList<Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Type.Name);
+            Assert.Equal("System.Collections.Generic.IList<Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[1].Type.Name);
             Assert.Equal("ChildDict", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Name);
-            Assert.Equal("IDictionary<string, Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Type.Name);
+            Assert.Equal("System.Collections.Generic.IDictionary<string, Child>", serviceClient.ModelTypes.First(m => m.Name == "Sample").Properties[2].Type.Name);
             Assert.Equal("Child", serviceClient.ModelTypes.First(m => m.Name == "Child").Name);
             Assert.Equal("string", serviceClient.ModelTypes.First(m => m.Name == "Child").Properties[0].Type.Name);
         }
@@ -260,8 +260,8 @@ namespace AutoRest.CSharp.Tests
             codeGenerator.NormalizeClientModel(serviceClient);
 
             Assert.Equal("GreetingsModel", complexType.Name);
-            Assert.Equal("IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Body.Name);
-            Assert.Equal("IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Body.Name);
+            Assert.Equal("System.Collections.Generic.IList<GreetingsModel>", serviceClient.Methods[0].ReturnType.Body.Name);
+            Assert.Equal("System.Collections.Generic.IDictionary<string, GreetingsModel>", serviceClient.Methods[1].ReturnType.Body.Name);
         }
 
         [Fact(Skip = "TODO: Test is not correct.")]

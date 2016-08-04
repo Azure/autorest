@@ -37,6 +37,12 @@ namespace AutoRest
                 Description = "Generate C# client with a credentials property in MyNamespace from swagger.json input:",
                 Example =
                     "AutoRest.exe -AddCredentials true -Namespace MyNamespace -CodeGenerator CSharp -Modeler Swagger -Input swagger.json"
+            },
+            new HelpExample
+            {
+                Description = "Generate C# client in MyNamespace with custom Models name from swagger.json input:",
+                Example =
+                    "AutoRest.exe -Namespace MyNamespace -ModelsName MyModels -CodeGenerator CSharp -Modeler Swagger -Input swagger.json"
             }
         };
 

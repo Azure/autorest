@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Pet
     {
@@ -25,7 +20,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet(long id, string name, IList<PetStyle> styles = default(IList<PetStyle>), string tag = default(string))
+        public Pet(long id, string name, System.Collections.Generic.IList<PetStyle> styles = default(System.Collections.Generic.IList<PetStyle>), string tag = default(string))
         {
             Id = id;
             Name = name;
@@ -35,35 +30,35 @@ namespace Fixtures.MirrorSequences.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "styles")]
-        public IList<PetStyle> Styles { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "styles")]
+        public System.Collections.Generic.IList<PetStyle> Styles { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "tag")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "tag")]
         public string Tag { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Name == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Name");
             }
             if (this.Styles != null)
             {

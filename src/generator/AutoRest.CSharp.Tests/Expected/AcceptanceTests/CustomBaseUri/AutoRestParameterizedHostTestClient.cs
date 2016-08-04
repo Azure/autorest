@@ -8,26 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Newtonsoft.Json;
     using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial class AutoRestParameterizedHostTestClient : ServiceClient<AutoRestParameterizedHostTestClient>, IAutoRestParameterizedHostTestClient
+    public partial class AutoRestParameterizedHostTestClient : Microsoft.Rest.ServiceClient<AutoRestParameterizedHostTestClient>, IAutoRestParameterizedHostTestClient
     {
         /// <summary>
         /// The base URI of the service.
@@ -37,12 +24,12 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        public JsonSerializerSettings SerializationSettings { get; private set; }
+        public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// A string value that is used as a global part of the parameterized host
@@ -60,7 +47,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestParameterizedHostTestClient(params DelegatingHandler[] handlers) : base(handlers)
+        public AutoRestParameterizedHostTestClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -74,7 +61,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestParameterizedHostTestClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public AutoRestParameterizedHostTestClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
@@ -91,29 +78,29 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             this.Paths = new Paths(this);
             this.BaseUri = "http://{accountName}{host}";
             this.Host = "host";
-            SerializationSettings = new JsonSerializerSettings
+            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings = new JsonSerializerSettings
+            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
             CustomInitialize();

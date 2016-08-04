@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class StringWrapper
     {
@@ -35,17 +29,17 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
         public string Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "empty")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "empty")]
         public string Empty { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "null")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "null")]
         public string NullProperty { get; set; }
 
     }

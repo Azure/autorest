@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.TemplateModels
             {
                 if (this.ModelTypes.Any() || this.HeaderTypes.Any())
                 {
-                    yield return "Models";
+                    yield return this.ModelsName;
                 }
             }
         }

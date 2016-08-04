@@ -14,16 +14,26 @@ namespace Microsoft.Rest
     /// </summary>
     public class TokenCredentials : ServiceClientCredentials
     {
-         /// <summary>
+        /// <summary>
         /// The bearer token type, as serialized in an http Authentication header.
         /// </summary>
         private const string BearerTokenType = "Bearer";
 
-       /// <summary>
+        /// <summary>
         /// Gets or sets secure token used to authenticate against Microsoft Azure API. 
         /// No anonymous requests are allowed.
         /// </summary>
         protected ITokenProvider TokenProvider { get; private set; }
+
+        /// <summary>
+        /// Gets Tenant ID
+        /// </summary>
+        public string TenantId { get; private set; }
+
+        /// <summary>
+        /// Gets UserInfo.DisplayableId
+        /// </summary>
+        public string CallerId { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenCredentials"/>
@@ -66,6 +76,19 @@ namespace Microsoft.Rest
             }
 
             this.TokenProvider = tokenProvider;
+        }
+
+        /// <summary>
+        /// Create an access token credentials object, given an interface to a token source.
+        /// </summary>
+        /// <param name="tokenProvider">The source of tokens for these credentials.</param>
+        /// <param name="tenantId">Tenant ID from AuthenticationResult</param>
+        /// <param name="callerId">UserInfo.DisplayableId field from AuthenticationResult</param>
+        public TokenCredentials(ITokenProvider tokenProvider, string tenantId, string callerId)
+            : this(tokenProvider)
+        {
+            this.TenantId = tenantId;
+            this.CallerId = callerId;
         }
 
         /// <summary>

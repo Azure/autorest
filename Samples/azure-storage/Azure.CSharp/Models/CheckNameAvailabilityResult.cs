@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The CheckNameAvailability operation response.
@@ -34,7 +28,7 @@ namespace Petstore.Models
         /// 'AccountNameInvalid', 'AlreadyExists'</param>
         /// <param name="message">Gets an error message explaining the Reason
         /// value in more detail.</param>
-        public CheckNameAvailabilityResult(bool? nameAvailable = default(bool?), Reason? reason = default(Reason?), string message = default(string))
+        public CheckNameAvailabilityResult(System.Boolean? nameAvailable = default(System.Boolean?), Reason? reason = default(Reason?), System.String message = default(System.String))
         {
             NameAvailable = nameAvailable;
             Reason = reason;
@@ -46,22 +40,22 @@ namespace Petstore.Models
         /// for you to use. If true, the name is available. If false, the
         /// name has already been taken or invalid and cannot be used.
         /// </summary>
-        [JsonProperty(PropertyName = "nameAvailable")]
-        public bool? NameAvailable { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "nameAvailable")]
+        public System.Boolean? NameAvailable { get; set; }
 
         /// <summary>
         /// Gets the reason that a storage account name could not be used. The
         /// Reason element is only returned if NameAvailable is false.
         /// Possible values include: 'AccountNameInvalid', 'AlreadyExists'
         /// </summary>
-        [JsonProperty(PropertyName = "reason")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "reason")]
         public Reason? Reason { get; set; }
 
         /// <summary>
         /// Gets an error message explaining the Reason value in more detail.
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
+        public System.String Message { get; set; }
 
     }
 }

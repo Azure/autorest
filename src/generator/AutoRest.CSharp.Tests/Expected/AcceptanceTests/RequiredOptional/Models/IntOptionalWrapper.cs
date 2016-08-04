@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class IntOptionalWrapper
     {
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public int? Value { get; set; }
 
     }

@@ -8,12 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.Rest;
     using Models;
 
     /// <summary>
@@ -33,10 +27,10 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<bool?>> GetTrueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<bool?>> GetTrueWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Set Boolean value true
         /// </summary>
@@ -51,7 +45,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutTrueWithHttpMessagesAsync(bool boolBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutTrueWithHttpMessagesAsync(bool boolBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get false Boolean value
         /// </summary>
@@ -64,10 +58,10 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<bool?>> GetFalseWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<bool?>> GetFalseWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Set Boolean value false
         /// </summary>
@@ -82,7 +76,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> PutFalseWithHttpMessagesAsync(bool boolBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse> PutFalseWithHttpMessagesAsync(bool boolBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get null Boolean value
         /// </summary>
@@ -95,10 +89,10 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<bool?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<bool?>> GetNullWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get invalid Boolean value
         /// </summary>
@@ -111,9 +105,9 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<bool?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<bool?>> GetInvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

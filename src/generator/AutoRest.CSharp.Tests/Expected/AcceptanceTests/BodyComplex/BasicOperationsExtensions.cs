@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for BasicOperations.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Basic GetValid(this IBasicOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IBasicOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetValidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Basic> GetValidAsync(this IBasicOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -60,7 +55,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IBasicOperations operations, Basic complexBody)
             {
-                Task.Factory.StartNew(s => ((IBasicOperations)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).PutValidAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -75,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IBasicOperations operations, Basic complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IBasicOperations operations, Basic complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -88,7 +83,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Basic GetInvalid(this IBasicOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IBasicOperations)s).GetInvalidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).GetInvalidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -100,7 +95,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Basic> GetInvalidAsync(this IBasicOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -116,7 +111,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Basic GetEmpty(this IBasicOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IBasicOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).GetEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -128,7 +123,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Basic> GetEmptyAsync(this IBasicOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -144,7 +139,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Basic GetNull(this IBasicOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IBasicOperations)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -156,7 +151,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Basic> GetNullAsync(this IBasicOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -173,7 +168,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Basic GetNotProvided(this IBasicOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IBasicOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IBasicOperations)s).GetNotProvidedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -186,7 +181,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Basic> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Basic> GetNotProvidedAsync(this IBasicOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

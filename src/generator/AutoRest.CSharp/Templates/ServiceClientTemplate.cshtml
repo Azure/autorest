@@ -7,22 +7,9 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Newtonsoft.Json;
 @foreach (var usingString in Model.Usings) {
-@:    using @usingString;
+    @:using @usingString;
 }
 @EmptyLine
     @if (!string.IsNullOrWhiteSpace(Model.Documentation))
@@ -32,7 +19,7 @@ namespace @Settings.Namespace
     @:/// </summary>
     }
 
-    public partial class @Model.Name : ServiceClient<@Model.Name>, I@(Model.Name)
+    public partial class @Model.Name : Microsoft.Rest.ServiceClient<@Model.Name>, I@(Model.Name)
     {
         @(Include(new ServiceClientBodyTemplate(), Model))
 
@@ -57,7 +44,7 @@ namespace @Settings.Namespace
         }
         else
         {
-            @:this.BaseUri = new Uri("@Model.BaseUrl");
+            @:this.BaseUri = new System.Uri("@Model.BaseUrl");
         }
 
         @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
@@ -65,46 +52,46 @@ namespace @Settings.Namespace
             @:this.@(property.Name) = @(property.DefaultValue);
         }
 
-            SerializationSettings = new JsonSerializerSettings
+            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
             @if (Model.NeedsTransformationConverter)
             {
-            @:SerializationSettings.Converters.Add(new TransformationJsonConverter());
+            @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
             }
-            DeserializationSettings = new JsonSerializerSettings
+            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
             @foreach (var polymorphicType in Model.ModelTypes.Where(t => t.PolymorphicDiscriminator != null))
             {
-            @:SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
-            @:DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
+            @:SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
+            @:DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<@(polymorphicType.Name)>("@(polymorphicType.PolymorphicDiscriminator)"));
             }
 
             CustomInitialize();
             
             @if (Model.NeedsTransformationConverter)
             {
-            @:DeserializationSettings.Converters.Add(new TransformationJsonConverter());
+            @:DeserializationSettings.Converters.Add(new Microsoft.Rest.Serialization.TransformationJsonConverter());
             }
     
         }    

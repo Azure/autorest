@@ -8,26 +8,15 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Newtonsoft.Json;
     using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
     /// BasicOperations operations.
     /// </summary>
-    internal partial class BasicOperations : IServiceOperations<AzureCompositeModel>, IBasicOperations
+    internal partial class BasicOperations : Microsoft.Rest.IServiceOperations<AzureCompositeModel>, IBasicOperations
     {
         /// <summary>
         /// Initializes a new instance of the BasicOperations class.
@@ -35,14 +24,14 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
         internal BasicOperations(AzureCompositeModel client)
         {
             if (client == null) 
             {
-                throw new ArgumentNullException("client");
+                throw new System.ArgumentNullException("client");
             }
             this.Client = client;
         }
@@ -64,41 +53,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Basic>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Basic>> GetValidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetValid", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetValid", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/valid").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/valid").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -131,15 +120,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -148,21 +137,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -172,7 +161,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<Basic>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<Basic>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -185,21 +174,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -219,52 +208,52 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(Basic complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PutValidWithHttpMessagesAsync(Basic complexBody, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (complexBody == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "complexBody");
             }
             string apiVersion = "2016-02-29";
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("complexBody", complexBody);
                 tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "PutValid", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "PutValid", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/valid").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/valid").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -290,9 +279,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             string _requestContent = null;
             if(complexBody != null)
             {
-                _requestContent = SafeJsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
-                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(complexBody, this.Client.SerializationSettings);
+                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Set Credentials
             if (this.Client.Credentials != null)
@@ -303,15 +292,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -320,21 +309,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -344,7 +333,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -353,7 +342,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -370,41 +359,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Basic>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Basic>> GetInvalidWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetInvalid", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/invalid").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/invalid").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -437,15 +426,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -454,21 +443,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -478,7 +467,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<Basic>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<Basic>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -491,21 +480,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -522,41 +511,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Basic>> GetEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Basic>> GetEmptyWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetEmpty", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/empty").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/empty").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -589,15 +578,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -606,21 +595,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -630,7 +619,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<Basic>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<Basic>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -643,21 +632,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -674,41 +663,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Basic>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Basic>> GetNullWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetNull", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/null").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/null").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -741,15 +730,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -758,21 +747,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -782,7 +771,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<Basic>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<Basic>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -795,21 +784,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }
@@ -827,41 +816,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Basic>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<Basic>> GetNotProvidedWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
-            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            bool _shouldTrace = Microsoft.Rest.ServiceClientTracing.IsEnabled;
             string _invocationId = null;
             if (_shouldTrace)
             {
-                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
-                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                _invocationId = Microsoft.Rest.ServiceClientTracing.NextInvocationId.ToString();
+                System.Collections.Generic.Dictionary<string, object> tracingParameters = new System.Collections.Generic.Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetNotProvided", tracingParameters);
+                Microsoft.Rest.ServiceClientTracing.Enter(_invocationId, this, "GetNotProvided", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/notprovided").ToString();
-            List<string> _queryParameters = new List<string>();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "complex/basic/notprovided").ToString();
+            System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
+            System.Net.Http.HttpRequestMessage _httpRequest = new System.Net.Http.HttpRequestMessage();
+            System.Net.Http.HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", System.Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -894,15 +883,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Send Request
             if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+                Microsoft.Rest.ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                Microsoft.Rest.ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            System.Net.HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
             if ((int)_statusCode != 200)
@@ -911,21 +900,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 try
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    Error _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
                         ex.Body = _errorBody;
                     }
                 }
-                catch (JsonException)
+                catch (Newtonsoft.Json.JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                ex.Request = new Microsoft.Rest.HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new Microsoft.Rest.HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    Microsoft.Rest.ServiceClientTracing.Error(_invocationId, ex);
                 }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -935,7 +924,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<Basic>();
+            var _result = new Microsoft.Rest.Azure.AzureOperationResponse<Basic>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -948,21 +937,21 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Basic>(_responseContent, this.Client.DeserializationSettings);
                 }
-                catch (JsonException ex)
+                catch (Newtonsoft.Json.JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
                     {
                         _httpResponse.Dispose();
                     }
-                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
                 }
             }
             if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
+                Microsoft.Rest.ServiceClientTracing.Exit(_invocationId, _result);
             }
             return _result;
         }

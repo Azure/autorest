@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using AutoRest.Core.ClientModel;
 
 namespace AutoRest.Core.Utilities
@@ -61,21 +62,16 @@ namespace AutoRest.Core.Utilities
         }
 
         /// <summary>
-        /// Determines whether a sequence is empty.
+        ///     Determines whether the collection object is either null or an empty collection.
         /// </summary>
-        /// <typeparam name='T'>Type of elements in the sequence.</typeparam>
-        /// <param name='sequence'>The sequence.</param>
-        /// <returns>True if the sequence is empty, false otherwise.</returns>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> sequence)
-        {
-            if (sequence == null ||
-                !sequence.Any())
-            {
-                return true;
-            }
-
-            return false;
-        }
+        /// <typeparam name="T"> </typeparam>
+        /// <param name="collection"> The collection. </param>
+        /// <returns>
+        ///     <c>true</c> if [is null or empty] [the specified collection]; otherwise, <c>false</c> .
+        /// </returns>
+        /// <remarks>
+        /// </remarks>
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection) => collection == null || !collection.Any();
 
         /// <summary>
         /// Word wrap a string of text to a given width.
@@ -121,7 +117,7 @@ namespace AutoRest.Core.Utilities
 
                 // If the last character was a space, mark that spot as a
                 // candidate for a potential line break
-                if (!char.IsWhiteSpace(last) && char.IsWhiteSpace(text[i]))
+                if (!Char.IsWhiteSpace(last) && Char.IsWhiteSpace(text[i]))
                 {
                     end = i - 1;
                 }
@@ -311,6 +307,11 @@ namespace AutoRest.Core.Utilities
             SequenceType sequenceType = type as SequenceType;
             PrimaryType sequencePrimaryType = sequenceType?.ElementType as PrimaryType;
             return sequencePrimaryType != null && sequencePrimaryType.IsPrimaryType(typeToMatch);
+        }
+
+        public static string StripControlCharacters(this string input)
+        {
+            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz-[\cj\cm\ci]]", string.Empty);
         }
     }
 }

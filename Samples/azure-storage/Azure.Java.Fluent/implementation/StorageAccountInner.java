@@ -5,6 +5,7 @@ package petstore.implementation;
 
 import petstore.StorageAccountProperties;
 import com.microsoft.azure.Resource;
+import com.microsoft.azure.Resource;
 
 /**
  * The storage account.

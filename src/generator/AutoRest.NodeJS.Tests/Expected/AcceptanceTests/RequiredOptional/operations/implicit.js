@@ -189,6 +189,9 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//reqopt/implicit/optional/query';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameter !== null && queryParameter !== undefined) {
     queryParameters.push('queryParameter=' + encodeURIComponent(queryParameter));
@@ -196,9 +199,6 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -638,14 +638,14 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//reqopt/global/required/query';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('required-global-query=' + encodeURIComponent(this.client.requiredGlobalQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -757,6 +757,9 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//reqopt/global/optional/query';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (this.client.optionalGlobalQuery !== null && this.client.optionalGlobalQuery !== undefined) {
     queryParameters.push('optional-global-query=' + encodeURIComponent(this.client.optionalGlobalQuery.toString()));
@@ -764,9 +767,6 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

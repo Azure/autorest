@@ -71,13 +71,13 @@ BasicOperations.prototype.getValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -214,14 +214,14 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -339,13 +339,13 @@ BasicOperations.prototype.getInvalid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/invalid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -466,13 +466,13 @@ BasicOperations.prototype.getEmpty = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/empty';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -593,13 +593,13 @@ BasicOperations.prototype.getNull = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/null';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -720,13 +720,13 @@ BasicOperations.prototype.getNotProvided = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/notprovided';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
