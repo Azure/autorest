@@ -20,7 +20,10 @@ class QueriesOperations(object):
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
-    :param deserializer: An objec model deserializer.
+    :param deserializer: An object model deserializer.
+    :ivar byte_query: '' as byte array. Constant value: bytearray("", encoding="utf-8").
+    :ivar date_query: '2012-01-01' as date. Constant value: "2012-01-01".
+    :ivar date_time_query: '2012-01-01T01:01:01Z' as date-time. Constant value: "2012-01-01T01:01:01Z".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -30,13 +33,14 @@ class QueriesOperations(object):
         self._deserialize = deserializer
 
         self.config = config
+        self.byte_query = bytearray("", encoding="utf-8")
+        self.date_query = "2012-01-01"
+        self.date_time_query = "2012-01-01T01:01:01Z"
 
     def get_boolean_true(
-            self, bool_query=True, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get true Boolean value on path.
 
-        :param bool_query: true boolean value
-        :type bool_query: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -46,6 +50,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        bool_query = True
+
         # Construct URL
         url = '/queries/bool/true'
 
@@ -71,11 +77,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_query=False, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get false Boolean value on path.
 
-        :param bool_query: false boolean value
-        :type bool_query: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -85,6 +89,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        bool_query = False
+
         # Construct URL
         url = '/queries/bool/false'
 
@@ -150,11 +156,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_query=1000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '1000000' integer value.
 
-        :param int_query: '1000000' integer value
-        :type int_query: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -164,6 +168,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        int_query = 1000000
+
         # Construct URL
         url = '/queries/int/1000000'
 
@@ -189,11 +195,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_query=-1000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-1000000' integer value.
 
-        :param int_query: '-1000000' integer value
-        :type int_query: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -203,6 +207,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        int_query = -1000000
+
         # Construct URL
         url = '/queries/int/-1000000'
 
@@ -268,11 +274,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_query=10000000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '10000000000' 64 bit integer value.
 
-        :param long_query: '10000000000' 64 bit integer value
-        :type long_query: long
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -282,6 +286,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        long_query = 10000000000
+
         # Construct URL
         url = '/queries/long/10000000000'
 
@@ -307,11 +313,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_query=-10000000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-10000000000' 64 bit integer value.
 
-        :param long_query: '-10000000000' 64 bit integer value
-        :type long_query: long
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -321,6 +325,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        long_query = -10000000000
+
         # Construct URL
         url = '/queries/long/-10000000000'
 
@@ -386,11 +392,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_query=1.034E+20, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '1.034E+20' numeric value.
 
-        :param float_query: '1.034E+20'numeric value
-        :type float_query: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -400,6 +404,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        float_query = 1.034E+20
+
         # Construct URL
         url = '/queries/float/1.034E+20'
 
@@ -425,11 +431,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_query=-1.034E-20, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-1.034E-20' numeric value.
 
-        :param float_query: '-1.034E-20'numeric value
-        :type float_query: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -439,6 +443,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        float_query = -1.034E-20
+
         # Construct URL
         url = '/queries/float/-1.034E-20'
 
@@ -504,11 +510,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_query=9999999.999, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '9999999.999' numeric value.
 
-        :param double_query: '9999999.999'numeric value
-        :type double_query: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -518,6 +522,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        double_query = 9999999.999
+
         # Construct URL
         url = '/queries/double/9999999.999'
 
@@ -543,11 +549,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_query=-9999999.999, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-9999999.999' numeric value.
 
-        :param double_query: '-9999999.999'numeric value
-        :type double_query: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -557,6 +561,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        double_query = -9999999.999
+
         # Construct URL
         url = '/queries/double/-9999999.999'
 
@@ -622,11 +628,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_query="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
 
-        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
-        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -636,6 +640,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_query = "啊齄丂狛狜隣郎隣兀﨩"
+
         # Construct URL
         url = '/queries/string/unicode/'
 
@@ -661,12 +667,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_query="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get 'begin!*'();:@ &=+$,/?#[]end.
 
-        :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-         value
-        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -676,6 +679,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_query = "begin!*'();:@ &=+$,/?#[]end"
+
         # Construct URL
         url = '/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend'
 
@@ -701,11 +706,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def string_empty(
-            self, string_query="", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get ''.
 
-        :param string_query: '' string value
-        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -715,6 +718,8 @@ class QueriesOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_query = ""
+
         # Construct URL
         url = '/queries/string/empty'
 
@@ -905,11 +910,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_query=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '' as byte array.
 
-        :param byte_query: '' as byte array
-        :type byte_query: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -924,7 +927,7 @@ class QueriesOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
+        query_parameters['byteQuery'] = self._serialize.query("self.byte_query", self.byte_query, 'bytearray')
 
         # Construct headers
         header_parameters = {}
@@ -984,11 +987,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def date_valid(
-            self, date_query, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '2012-01-01' as date.
 
-        :param date_query: '2012-01-01' as date
-        :type date_query: date
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1003,7 +1004,7 @@ class QueriesOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['dateQuery'] = self._serialize.query("date_query", date_query, 'date')
+        query_parameters['dateQuery'] = self._serialize.query("self.date_query", self.date_query, 'date')
 
         # Construct headers
         header_parameters = {}
@@ -1063,11 +1064,9 @@ class QueriesOperations(object):
             return client_raw_response
 
     def date_time_valid(
-            self, date_time_query, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '2012-01-01T01:01:01Z' as date-time.
 
-        :param date_time_query: '2012-01-01T01:01:01Z' as date-time
-        :type date_time_query: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1082,7 +1081,7 @@ class QueriesOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['dateTimeQuery'] = self._serialize.query("date_time_query", date_time_query, 'iso-8601')
+        query_parameters['dateTimeQuery'] = self._serialize.query("self.date_time_query", self.date_time_query, 'iso-8601')
 
         # Construct headers
         header_parameters = {}

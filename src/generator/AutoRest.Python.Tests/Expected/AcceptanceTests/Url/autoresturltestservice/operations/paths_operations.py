@@ -20,7 +20,10 @@ class PathsOperations(object):
     :param client: Client for service requests.
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
-    :param deserializer: An objec model deserializer.
+    :param deserializer: An object model deserializer.
+    :ivar byte_path: '' as byte array. Constant value: bytearray("", encoding="utf-8").
+    :ivar date_path: '2012-01-01' as date. Constant value: "2012-01-01".
+    :ivar date_time_path: '2012-01-01T01:01:01Z' as date-time. Constant value: "2012-01-01T01:01:01Z".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -30,13 +33,14 @@ class PathsOperations(object):
         self._deserialize = deserializer
 
         self.config = config
+        self.byte_path = bytearray("", encoding="utf-8")
+        self.date_path = "2012-01-01"
+        self.date_time_path = "2012-01-01T01:01:01Z"
 
     def get_boolean_true(
-            self, bool_path=True, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get true Boolean value on path.
 
-        :param bool_path: true boolean value
-        :type bool_path: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -46,6 +50,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        bool_path = True
+
         # Construct URL
         url = '/paths/bool/true/{boolPath}'
         path_format_arguments = {
@@ -74,11 +80,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_path=False, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get false Boolean value on path.
 
-        :param bool_path: false boolean value
-        :type bool_path: bool
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -88,6 +92,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        bool_path = False
+
         # Construct URL
         url = '/paths/bool/false/{boolPath}'
         path_format_arguments = {
@@ -116,11 +122,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_path=1000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '1000000' integer value.
 
-        :param int_path: '1000000' integer value
-        :type int_path: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -130,6 +134,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        int_path = 1000000
+
         # Construct URL
         url = '/paths/int/1000000/{intPath}'
         path_format_arguments = {
@@ -158,11 +164,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_path=-1000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-1000000' integer value.
 
-        :param int_path: '-1000000' integer value
-        :type int_path: int
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -172,6 +176,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        int_path = -1000000
+
         # Construct URL
         url = '/paths/int/-1000000/{intPath}'
         path_format_arguments = {
@@ -200,11 +206,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_path=10000000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '10000000000' 64 bit integer value.
 
-        :param long_path: '10000000000' 64 bit integer value
-        :type long_path: long
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -214,6 +218,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        long_path = 10000000000
+
         # Construct URL
         url = '/paths/long/10000000000/{longPath}'
         path_format_arguments = {
@@ -242,11 +248,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_path=-10000000000, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-10000000000' 64 bit integer value.
 
-        :param long_path: '-10000000000' 64 bit integer value
-        :type long_path: long
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -256,6 +260,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        long_path = -10000000000
+
         # Construct URL
         url = '/paths/long/-10000000000/{longPath}'
         path_format_arguments = {
@@ -284,11 +290,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_path=1.034E+20, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '1.034E+20' numeric value.
 
-        :param float_path: '1.034E+20'numeric value
-        :type float_path: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -298,6 +302,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        float_path = 1.034E+20
+
         # Construct URL
         url = '/paths/float/1.034E+20/{floatPath}'
         path_format_arguments = {
@@ -326,11 +332,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_path=-1.034E-20, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-1.034E-20' numeric value.
 
-        :param float_path: '-1.034E-20'numeric value
-        :type float_path: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -340,6 +344,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        float_path = -1.034E-20
+
         # Construct URL
         url = '/paths/float/-1.034E-20/{floatPath}'
         path_format_arguments = {
@@ -368,11 +374,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_path=9999999.999, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '9999999.999' numeric value.
 
-        :param double_path: '9999999.999'numeric value
-        :type double_path: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -382,6 +386,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        double_path = 9999999.999
+
         # Construct URL
         url = '/paths/double/9999999.999/{doublePath}'
         path_format_arguments = {
@@ -410,11 +416,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_path=-9999999.999, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '-9999999.999' numeric value.
 
-        :param double_path: '-9999999.999'numeric value
-        :type double_path: float
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -424,6 +428,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        double_path = -9999999.999
+
         # Construct URL
         url = '/paths/double/-9999999.999/{doublePath}'
         path_format_arguments = {
@@ -452,11 +458,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_path="啊齄丂狛狜隣郎隣兀﨩", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
 
-        :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
-        :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -466,6 +470,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_path = "啊齄丂狛狜隣郎隣兀﨩"
+
         # Construct URL
         url = '/paths/string/unicode/{stringPath}'
         path_format_arguments = {
@@ -494,12 +500,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_path="begin!*'();:@ &=+$,/?#[]end", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get 'begin!*'();:@ &=+$,/?#[]end.
 
-        :param string_path: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-         value
-        :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -509,6 +512,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_path = "begin!*'();:@ &=+$,/?#[]end"
+
         # Construct URL
         url = '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
         path_format_arguments = {
@@ -537,11 +542,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def string_empty(
-            self, string_path="", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get ''.
 
-        :param string_path: '' string value
-        :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -551,6 +554,8 @@ class PathsOperations(object):
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
+        string_path = ""
+
         # Construct URL
         url = '/paths/string/empty/{stringPath}'
         path_format_arguments = {
@@ -753,11 +758,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_path=bytearray("", encoding="utf-8"), custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '' as byte array.
 
-        :param byte_path: '' as byte array
-        :type byte_path: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -770,7 +773,7 @@ class PathsOperations(object):
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
         path_format_arguments = {
-            'bytePath': self._serialize.url("byte_path", byte_path, 'bytearray')
+            'bytePath': self._serialize.url("self.byte_path", self.byte_path, 'bytearray')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -837,11 +840,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def date_valid(
-            self, date_path, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '2012-01-01' as date.
 
-        :param date_path: '2012-01-01' as date
-        :type date_path: date
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -854,7 +855,7 @@ class PathsOperations(object):
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
         path_format_arguments = {
-            'datePath': self._serialize.url("date_path", date_path, 'date')
+            'datePath': self._serialize.url("self.date_path", self.date_path, 'date')
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -922,11 +923,9 @@ class PathsOperations(object):
             return client_raw_response
 
     def date_time_valid(
-            self, date_time_path, custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get '2012-01-01T01:01:01Z' as date-time.
 
-        :param date_time_path: '2012-01-01T01:01:01Z' as date-time
-        :type date_time_path: datetime
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -939,7 +938,7 @@ class PathsOperations(object):
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
         path_format_arguments = {
-            'dateTimePath': self._serialize.url("date_time_path", date_time_path, 'iso-8601')
+            'dateTimePath': self._serialize.url("self.date_time_path", self.date_time_path, 'iso-8601')
         }
         url = self._client.format_url(url, **path_format_arguments)
 

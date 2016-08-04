@@ -24,31 +24,33 @@ namespace AutoRest.Python.TemplateModels
             Methods.Where(m => m.Group == MethodGroupName)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
-            foreach (var groupMethod in MethodTemplateModels)
+            var allParameters = MethodTemplateModels.SelectMany(x => x.Parameters).Where(p => p.IsConstant && p.ClientProperty == null).ToList();
+            foreach (var parameter in allParameters)
             {
-                var constantParameters = groupMethod.Parameters.Where(p => p.IsConstant);
-                foreach (var constant in constantParameters)
+                var conflicts = allParameters.Where(p => p.Name == parameter.Name && p.DefaultValue != parameter.DefaultValue);
+                if (conflicts.Any())
                 {
-                    var existingProperty = ConstantProperties.FirstOrDefault(p => p.SerializedName == constant.SerializedName);
+                    continue;
+                }
+                else 
+                {
+                    var existingProperty = ConstantProperties.FirstOrDefault(p => p.Name == parameter.Name);
                     if (existingProperty == null)
                     {
                         existingProperty = new Property
                         {
-                            Name = constant.Name,
-                            DefaultValue = constant.DefaultValue,
-                            IsConstant = constant.IsConstant,
-                            IsRequired = constant.IsRequired,
-                            Documentation = constant.Documentation,
-                            SerializedName = constant.SerializedName,
-                            Type = constant.Type
+                            Name = parameter.Name,
+                            DefaultValue = parameter.DefaultValue,
+                            IsConstant = parameter.IsConstant,
+                            IsRequired = parameter.IsRequired,
+                            Documentation = parameter.Documentation,
+                            SerializedName = parameter.SerializedName,
+                            Type = parameter.Type
                         };
                         ConstantProperties.Add(existingProperty);
                     }
-                    if (constant.ClientProperty == null)
-                    {
-                        constant.Name = "self." + constant.Name;
-                        constant.ClientProperty = existingProperty;
-                    }
+                    if (!parameter.Name.StartsWith("self."))
+                        parameter.Name = "self." + parameter.Name;
                 }
             }
         }
