@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The product documentation.
@@ -53,31 +47,31 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>
-        [JsonProperty(PropertyName = "product_id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "product_id")]
         public string ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
-        [JsonProperty(PropertyName = "description")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
-        [JsonProperty(PropertyName = "display_name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "display_name")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets capacity of product. For example, 4 people.
         /// </summary>
-        [JsonProperty(PropertyName = "capacity")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "capacity")]
         public string Capacity { get; set; }
 
         /// <summary>
         /// Gets or sets image URL representing the product.
         /// </summary>
-        [JsonProperty(PropertyName = "image")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
 
     }

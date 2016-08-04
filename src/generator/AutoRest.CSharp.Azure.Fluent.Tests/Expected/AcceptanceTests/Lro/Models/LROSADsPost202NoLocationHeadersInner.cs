@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for post202NoLocation operation.
@@ -44,14 +38,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Gets or sets location to poll for result status: will not be set
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to zero
         /// </summary>
-        [JsonProperty(PropertyName = "Retry-After")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
         public int? RetryAfter { get; set; }
 
     }

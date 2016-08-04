@@ -77,6 +77,11 @@ namespace AutoRest.CSharp.Azure.Fluent
                 AppendInnerToTopLevelType(response.Body, serviceClient);
                 AppendInnerToTopLevelType(response.Headers, serviceClient);
             }
+            foreach (var model in serviceClient.ModelTypes)
+            {
+                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                AppendInnerToTopLevelType(model, serviceClient);
+            }
         }
 
         private void AppendInnerToTopLevelType(IType type, ServiceClient serviceClient)
@@ -88,7 +93,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             CompositeType compositeType = type as CompositeType;
             SequenceType sequenceType = type as SequenceType;
             DictionaryType dictionaryType = type as DictionaryType;
-            if (compositeType != null && !compositeType.IsGeneric() && !_innerTypes.Contains(compositeType))
+            if (compositeType != null && !_innerTypes.Contains(compositeType))
             {
                 compositeType.Name += "Inner";
                 _innerTypes.Add(compositeType);
@@ -102,5 +107,6 @@ namespace AutoRest.CSharp.Azure.Fluent
                 AppendInnerToTopLevelType(dictionaryType.ValueType, serviceClient);
             }
         }
+
     }
 }

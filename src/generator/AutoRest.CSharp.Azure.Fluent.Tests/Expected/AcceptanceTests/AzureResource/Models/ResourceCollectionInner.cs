@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class ResourceCollectionInner
     {
@@ -26,7 +20,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollectionInner class.
         /// </summary>
-        public ResourceCollectionInner(FlattenedProductInner productresource = default(FlattenedProductInner), IList<FlattenedProductInner> arrayofresources = default(IList<FlattenedProductInner>), IDictionary<string, FlattenedProductInner> dictionaryofresources = default(IDictionary<string, FlattenedProductInner>))
+        public ResourceCollectionInner(FlattenedProductInner productresource = default(FlattenedProductInner), System.Collections.Generic.IList<FlattenedProductInner> arrayofresources = default(System.Collections.Generic.IList<FlattenedProductInner>), System.Collections.Generic.IDictionary<string, FlattenedProductInner> dictionaryofresources = default(System.Collections.Generic.IDictionary<string, FlattenedProductInner>))
         {
             Productresource = productresource;
             Arrayofresources = arrayofresources;
@@ -35,18 +29,18 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productresource")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "productresource")]
         public FlattenedProductInner Productresource { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "arrayofresources")]
-        public IList<FlattenedProductInner> Arrayofresources { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "arrayofresources")]
+        public System.Collections.Generic.IList<FlattenedProductInner> Arrayofresources { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dictionaryofresources")]
-        public IDictionary<string, FlattenedProductInner> Dictionaryofresources { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dictionaryofresources")]
+        public System.Collections.Generic.IDictionary<string, FlattenedProductInner> Dictionaryofresources { get; set; }
 
     }
 }

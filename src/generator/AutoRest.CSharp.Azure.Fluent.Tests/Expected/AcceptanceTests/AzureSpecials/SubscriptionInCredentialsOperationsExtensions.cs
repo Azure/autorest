@@ -8,14 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for SubscriptionInCredentialsOperations.
@@ -31,7 +26,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -44,7 +39,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMethodGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostMethodGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostMethodGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -59,7 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalNull(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +68,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMethodGlobalNullAsync(this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostMethodGlobalNullAsync(this ISubscriptionInCredentialsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostMethodGlobalNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -87,7 +82,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostMethodGlobalNotProvidedValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNotProvidedValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostMethodGlobalNotProvidedValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -100,7 +95,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMethodGlobalNotProvidedValidAsync(this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostMethodGlobalNotProvidedValidAsync(this ISubscriptionInCredentialsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostMethodGlobalNotProvidedValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -114,7 +109,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostPathGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostPathGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostPathGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -127,7 +122,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostPathGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostPathGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostPathGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -141,7 +136,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static void PostSwaggerGlobalValid(this ISubscriptionInCredentialsOperations operations)
             {
-                Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostSwaggerGlobalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((ISubscriptionInCredentialsOperations)s).PostSwaggerGlobalValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -154,7 +149,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostSwaggerGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PostSwaggerGlobalValidAsync(this ISubscriptionInCredentialsOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PostSwaggerGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

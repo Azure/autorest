@@ -8,15 +8,9 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class FlattenedProductInner : Resource
     {
         /// <summary>
@@ -37,17 +31,17 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.pname")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.pname")]
         public string Pname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.lsize")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.lsize")]
         public int? Lsize { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }
 
     }

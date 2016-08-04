@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class ArrayWrapperInner
     {
@@ -26,15 +20,15 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapperInner class.
         /// </summary>
-        public ArrayWrapperInner(IList<string> array = default(IList<string>))
+        public ArrayWrapperInner(System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>))
         {
             Array = array;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "array")]
-        public IList<string> Array { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "array")]
+        public System.Collections.Generic.IList<string> Array { get; set; }
 
     }
 }
