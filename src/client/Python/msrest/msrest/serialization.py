@@ -629,6 +629,8 @@ class Serializer(object):
         :rtype: str
         :raises: TypeError if format invalid.
         """
+        if isinstance(attr, str):
+            attr = isodate.parse_datetime(attr)
         try:
             if not attr.tzinfo:
                 _LOGGER.warning(
