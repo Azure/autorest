@@ -454,24 +454,15 @@ namespace AutoRest.Python
                 else
                 {
                     //TODO: Add support for default KnownPrimaryType.DateTimeRfc1123
-                    //TODO: Default date objects can only be supported with an isodate import statement
 
-                    //if (primaryType.Type == KnownPrimaryType.Date)
-                    //{
-                    //    parsedDefault = "isodate.parse_date(\"" + defaultValue + "\")";
-                    //}
+                    if (primaryType.Type == KnownPrimaryType.Date ||
+                        primaryType.Type == KnownPrimaryType.DateTime ||
+                        primaryType.Type == KnownPrimaryType.TimeSpan)
+                    {
+                        parsedDefault = CodeNamer.QuoteValue(defaultValue);
+                    }
 
-                    //else if (primaryType.Type == KnownPrimaryType.DateTime)
-                    //{
-                    //    parsedDefault = "isodate.parse_datetime(\"" + defaultValue + "\")";
-                    //}
-
-                    //else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-                    //{
-                    //    parsedDefault = "isodate.parse_duration(\"" + defaultValue + "\")";
-                    //}
-
-                    if (primaryType.Type == KnownPrimaryType.ByteArray)
+                    else if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
                         parsedDefault = "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
                     }

@@ -28,19 +28,15 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param api_version: API ID.
+    :ivar api_version: API ID. Default value: "2014-04-01-preview".
     :type api_version: str
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, api_version, base_url=None, filepath=None):
+            self, base_url=None, filepath=None):
 
-        if api_version is None:
-            raise ValueError("Parameter 'api_version' must not be None.")
-        if not isinstance(api_version, str):
-            raise TypeError("Parameter 'api_version' must be str.")
         if not base_url:
             base_url = 'http://localhost'
 
@@ -48,7 +44,7 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         self.add_user_agent('autorestcomplextestservice/{}'.format(VERSION))
 
-        self.api_version = api_version
+        self.api_version = "2014-04-01-preview"
 
 
 class AutoRestComplexTestService(object):
@@ -74,16 +70,14 @@ class AutoRestComplexTestService(object):
     :ivar readonlyproperty: Readonlyproperty operations
     :vartype readonlyproperty: .operations.ReadonlypropertyOperations
 
-    :param api_version: API ID.
-    :type api_version: str
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, api_version, base_url=None, filepath=None):
+            self, base_url=None, filepath=None):
 
-        self.config = AutoRestComplexTestServiceConfiguration(api_version, base_url, filepath)
+        self.config = AutoRestComplexTestServiceConfiguration(base_url, filepath)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

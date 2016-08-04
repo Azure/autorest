@@ -224,32 +224,8 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        ///// <summary>
-        ///// Provides the property documentation string.
-        ///// </summary>
-        ///// <param name="property">Parameter to be documented</param>
-        ///// <returns>Parameter documentation string correct notation</returns>
-        //public static string GetPropertyDocumentationString(Property property)
-        //{
-        //    if (property == null)
-        //    {
-        //        throw new ArgumentNullException("property");
-        //    }
-
-        //    string docString = ":param ";
-
-        //    docString += property.Name + ":";
-
-        //    if (!string.IsNullOrWhiteSpace(property.Documentation))
-        //    {
-        //        docString += " " + property.Documentation;
-        //    }
-
-        //    return docString;
-        //}
-
         /// <summary>
-        /// Provides the modelProperty documentation string along with default value if any.
+        /// Provides the property documentation string along with default value if any.
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter documentation string along with default value if any 

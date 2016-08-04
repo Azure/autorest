@@ -62,7 +62,7 @@ class UTC(tzinfo):
 class ComplexTests(unittest.TestCase):
 
     def test_complex(self):
-        client = AutoRestComplexTestService(base_url="http://localhost:3000",api_version="2015-01-01")
+        client = AutoRestComplexTestService(base_url="http://localhost:3000")
 
         # GET basic/valid
         basic_result = client.basic_operations.get_valid()
