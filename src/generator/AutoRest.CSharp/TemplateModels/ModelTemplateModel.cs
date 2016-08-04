@@ -17,6 +17,9 @@ namespace AutoRest.CSharp.TemplateModels
         [JsonProperty("constructorsIncludeOnlyRequiredProperties")]
         public bool ConstructorsIncludeOnlyRequiredProperties { get; set; }
 
+        [JsonProperty("addDataContractAttributes")]
+        public bool AddDataContractAttributes { get; set; }
+
     }
 
     public class ModelTemplateModel : CompositeType

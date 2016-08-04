@@ -12,7 +12,10 @@
     "x-ms-code-generation-settings": {
         "useDateTimeOffset": true,
         "csharpOptions": {
-            "modelOptions": { "constructorsIncludeOnlyRequiredProperties": true }
+            "modelOptions": {
+                "constructorsIncludeOnlyRequiredProperties": true,
+                "addDataContractAttributes":  true
+            }
         }
     }
   },
