@@ -159,14 +159,14 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -259,7 +259,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * 
  * @param {string} [options.body.image] Image URL representing the product.
  * 
- * @param {object} [options.body.child]
+ * @param {object} options.body.child
  * 
  * @param {number} [options.body.child.count] Count
  * 
@@ -350,14 +350,14 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -544,7 +544,7 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
  * 
  * @param {string} [options.body.image] Image URL representing the product.
  * 
- * @param {object} [options.body.child]
+ * @param {object} options.body.child
  * 
  * @param {number} [options.body.child.count] Count
  * 

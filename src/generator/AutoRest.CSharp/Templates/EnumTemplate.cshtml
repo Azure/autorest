@@ -2,26 +2,23 @@
 @inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.EnumTemplateModel>
 @Header("// ")
 @EmptyLine
-namespace @(Settings.Namespace).Models
+namespace @(Settings.Namespace).@(Settings.ModelsName)
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime.Serialization;
 @EmptyLine
     /// <summary>
     @WrapComment("/// ", "Defines values for " + Model.TypeDefinitionName + ".")
     /// </summary>
     @if (!Model.ModelAsString)
     {
-    @:[JsonConverter(typeof(StringEnumConverter))]
+    @:[Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     @:public enum @Model.TypeDefinitionName
     @:{
         for (int i = 0; i < Model.Values.Count - 1; i++)
         {
-@:        [EnumMember(Value = "@Model.Values[i].SerializedName")]
+@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values[i].SerializedName")]
 @:        @(Model.Values[i].Name),
         }
-@:        [EnumMember(Value = "@Model.Values.Last().SerializedName")]
+@:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values.Last().SerializedName")]
 @:        @(Model.Values.Last().Name)
     @:}
     }

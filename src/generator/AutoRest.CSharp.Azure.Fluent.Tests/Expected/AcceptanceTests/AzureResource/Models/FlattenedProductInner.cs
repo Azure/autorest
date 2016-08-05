@@ -8,16 +8,10 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
-    public partial class FlattenedProductInner : Resource
+    [Microsoft.Rest.Serialization.JsonTransformation]
+    public partial class FlattenedProductInner : Microsoft.Rest.Azure.Resource
     {
         /// <summary>
         /// Initializes a new instance of the FlattenedProductInner class.
@@ -27,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProductInner class.
         /// </summary>
-        public FlattenedProductInner(String location = default(String), String id = default(String), String name = default(String), String type = default(String), IDictionary<string, String> tags = default(IDictionary<string, String>), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
+        public FlattenedProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
             : base(location, id, name, type, tags)
         {
             Pname = pname;
@@ -37,17 +31,17 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.pname")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.pname")]
         public string Pname { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.lsize")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.lsize")]
         public int? Lsize { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }
 
     }

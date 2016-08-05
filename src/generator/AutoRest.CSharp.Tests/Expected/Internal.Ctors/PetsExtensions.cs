@@ -8,12 +8,7 @@
 
 namespace Fixtures.InternalCtors
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
 
     /// <summary>
     /// Extension methods for Pets.
@@ -28,7 +23,7 @@ namespace Fixtures.InternalCtors
             /// </param>
             public static void Get(this IPets operations)
             {
-                Task.Factory.StartNew(s => ((IPets)s).GetAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPets)s).GetAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -40,7 +35,7 @@ namespace Fixtures.InternalCtors
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetAsync(this IPets operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetAsync(this IPets operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

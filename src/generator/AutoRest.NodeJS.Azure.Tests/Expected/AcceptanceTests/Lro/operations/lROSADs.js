@@ -160,13 +160,13 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/put/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -409,13 +409,13 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/put/201/creating/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -658,13 +658,13 @@ LROSADs.prototype.beginPutNonRetry201Creating400InvalidJson = function (options,
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/put/201/creating/400/invalidjson';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -909,13 +909,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/putasync/retry/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1106,13 +1106,13 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/delete/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1272,13 +1272,13 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/delete/202/retry/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1442,13 +1442,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/deleteasync/retry/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1625,13 +1625,13 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/post/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1822,13 +1822,13 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/post/202/retry/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2023,13 +2023,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/nonretryerror/postasync/retry/400';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2238,13 +2238,13 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/put/201/noprovisioningstatepayload';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2489,13 +2489,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/nostatus';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2723,13 +2723,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/nostatuspayload';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -2922,13 +2922,13 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/delete/204/nolocation';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3092,13 +3092,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/nostatus';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3277,13 +3277,13 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/post/202/nolocation';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3478,13 +3478,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/nopayload';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3693,13 +3693,13 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/put/200/invalidjson';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -3927,13 +3927,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/invalidheader';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4161,13 +4161,13 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/putasync/retry/invalidjsonpolling';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4360,13 +4360,13 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/delete/202/retry/invalidheader';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4528,13 +4528,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/invalidheader';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4698,13 +4698,13 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/deleteasync/retry/invalidjsonpolling';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -4883,13 +4883,13 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/post/202/retry/invalidheader';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5084,13 +5084,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/invalidheader';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -5285,13 +5285,13 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/error/postasync/retry/invalidjsonpolling';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

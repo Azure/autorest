@@ -8,41 +8,28 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Newtonsoft.Json;
     using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial class AutoRestComplexTestService : ServiceClient<AutoRestComplexTestService>, IAutoRestComplexTestService
+    public partial class AutoRestComplexTestService : Microsoft.Rest.ServiceClient<AutoRestComplexTestService>, IAutoRestComplexTestService
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        public Uri BaseUri { get; set; }
+        public System.Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        public JsonSerializerSettings SerializationSettings { get; private set; }
+        public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public JsonSerializerSettings DeserializationSettings { get; private set; }        
+        public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// API ID.
@@ -95,7 +82,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestComplexTestService(params DelegatingHandler[] handlers) : base(handlers)
+        public AutoRestComplexTestService(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
@@ -109,7 +96,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestComplexTestService(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public AutoRestComplexTestService(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
@@ -123,14 +110,14 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestComplexTestService(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestComplexTestService(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
-                throw new ArgumentNullException("baseUri");
+                throw new System.ArgumentNullException("baseUri");
             }
             this.BaseUri = baseUri;
         }
@@ -150,11 +137,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <exception cref="ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestComplexTestService(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AutoRestComplexTestService(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
-                throw new ArgumentNullException("baseUri");
+                throw new System.ArgumentNullException("baseUri");
             }
             this.BaseUri = baseUri;
         }
@@ -176,35 +163,35 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             this.Polymorphism = new Polymorphism(this);
             this.Polymorphicrecursive = new Polymorphicrecursive(this);
             this.Readonlyproperty = new Readonlyproperty(this);
-            this.BaseUri = new Uri("http://localhost");
+            this.BaseUri = new System.Uri("http://localhost");
             this.ApiVersion = "2014-04-01-preview";
-            SerializationSettings = new JsonSerializerSettings
+            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings = new JsonSerializerSettings
+            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<JsonConverter>
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                ContractResolver = new Microsoft.Rest.Serialization.ReadOnlyJsonContractResolver(),
+                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
                     {
-                        new Iso8601TimeSpanConverter()
+                        new Microsoft.Rest.Serialization.Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
-            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
+            SerializationSettings.Converters.Add(new Microsoft.Rest.Serialization.PolymorphicSerializeJsonConverter<Fish>("fishtype"));
+            DeserializationSettings.Converters.Add(new  Microsoft.Rest.Serialization.PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
             CustomInitialize();
         }    
     }

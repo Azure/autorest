@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class CatalogDictionaryInner
     {
@@ -27,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Initializes a new instance of the CatalogDictionaryInner class.
         /// </summary>
         /// <param name="productDictionary">Dictionary of products</param>
-        public CatalogDictionaryInner(IDictionary<string, ProductInner> productDictionary = default(IDictionary<string, ProductInner>))
+        public CatalogDictionaryInner(System.Collections.Generic.IDictionary<string, ProductInner> productDictionary = default(System.Collections.Generic.IDictionary<string, ProductInner>))
         {
             ProductDictionary = productDictionary;
         }
@@ -35,8 +29,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Gets or sets dictionary of products
         /// </summary>
-        [JsonProperty(PropertyName = "productDictionary")]
-        public IDictionary<string, ProductInner> ProductDictionary { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "productDictionary")]
+        public System.Collections.Generic.IDictionary<string, ProductInner> ProductDictionary { get; set; }
 
     }
 }

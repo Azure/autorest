@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace AutoRest.Core.Validation
 {
@@ -15,32 +17,20 @@ namespace AutoRest.Core.Validation
         {
         }
 
-        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity)
-        {
-            var typedEntity = entity as T;
-            if (typedEntity != null)
-            {
-                foreach (var exception in GetValidationMessages(typedEntity))
-                {
-                    yield return exception;
-                }
-            }
-            yield break;
-        }
+        public sealed override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context) => entity is T ? GetValidationMessages((T)entity, context) : Enumerable.Empty<ValidationMessage>();
 
         /// <summary>
         /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ValidationMessage> GetValidationMessages(T entity)
+        public virtual IEnumerable<ValidationMessage> GetValidationMessages(T entity, RuleContext context)
         {
             object[] formatParams;
-            if (!IsValid(entity, out formatParams))
+            if (!IsValid(entity, context, out formatParams))
             {
-                yield return CreateException(Exception, formatParams);
+                yield return new ValidationMessage(this, formatParams);
             }
-            yield break;
         }
 
         /// <summary>
@@ -50,10 +40,10 @@ namespace AutoRest.Core.Validation
         /// <param name="formatParameters"></param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        public virtual bool IsValid(T entity, out object[] formatParameters)
+        public virtual bool IsValid(T entity, RuleContext context, out object[] formatParameters)
         {
             formatParameters = new object[0];
-            return IsValid(entity);
+            return IsValid(entity, context);
         }
 
         /// <summary>
@@ -61,9 +51,8 @@ namespace AutoRest.Core.Validation
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool IsValid(T entity)
-        {
-            return true;
-        }
+        public virtual bool IsValid(T entity, RuleContext context) => IsValid(entity);
+
+        public virtual bool IsValid(T entity) => true;
     }
 }

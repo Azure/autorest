@@ -8,16 +8,10 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
-    public partial class SubProductInner : SubResource
+    [Microsoft.Rest.Serialization.JsonTransformation]
+    public partial class SubProductInner : Microsoft.Rest.Azure.SubResource
     {
         /// <summary>
         /// Initializes a new instance of the SubProductInner class.
@@ -31,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public SubProductInner(String id = default(String), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public SubProductInner(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(id)
         {
             ProvisioningState = provisioningState;
@@ -40,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }
 
         /// <summary>
@@ -48,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
     }

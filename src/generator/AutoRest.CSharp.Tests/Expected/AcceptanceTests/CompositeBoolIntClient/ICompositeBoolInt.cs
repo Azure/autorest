@@ -8,35 +8,28 @@
 
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
     using Models;
 
     /// <summary>
     /// Composite Swagger Client that represents merging body boolean and body
     /// integer swagger clients
     /// </summary>
-    public partial interface ICompositeBoolInt : IDisposable
+    public partial interface ICompositeBoolInt : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        Uri BaseUri { get; set; }
+        System.Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
 
         /// <summary>

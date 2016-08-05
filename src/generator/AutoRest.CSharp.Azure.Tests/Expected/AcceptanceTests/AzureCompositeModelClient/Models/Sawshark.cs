@@ -8,15 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonObject("sawshark")]
+    [Newtonsoft.Json.JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
         /// <summary>
@@ -27,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
+        public Sawshark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;
@@ -35,13 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "picture")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "picture")]
         public byte[] Picture { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

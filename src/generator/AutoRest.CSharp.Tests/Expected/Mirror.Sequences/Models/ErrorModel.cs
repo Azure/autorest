@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class ErrorModel
     {
@@ -33,25 +28,25 @@ namespace Fixtures.MirrorSequences.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "code")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "code")]
         public int Code { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Message == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Message");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Message");
             }
         }
     }

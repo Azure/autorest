@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class DatetimeWrapper
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapper class.
         /// </summary>
-        public DatetimeWrapper(DateTime? field = default(DateTime?), DateTime? now = default(DateTime?))
+        public DatetimeWrapper(System.DateTime? field = default(System.DateTime?), System.DateTime? now = default(System.DateTime?))
         {
             Field = field;
             Now = now;
@@ -33,13 +28,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
-        public DateTime? Field { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
+        public System.DateTime? Field { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "now")]
-        public DateTime? Now { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "now")]
+        public System.DateTime? Now { get; set; }
 
     }
 }

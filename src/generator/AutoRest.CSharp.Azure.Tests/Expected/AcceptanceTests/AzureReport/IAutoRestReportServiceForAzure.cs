@@ -8,40 +8,33 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestReportServiceForAzure : IDisposable
+    public partial interface IAutoRestReportServiceForAzure : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        Uri BaseUri { get; set; }
+        System.Uri BaseUri { get; set; }
 
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        ServiceClientCredentials Credentials { get; }
+        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -70,7 +63,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<System.Collections.Generic.IDictionary<string, int?>>> GetReportWithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 }

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
             {
                 if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
                 {
-                    return "ex = new CloudException(_errorBody.Message);";
+                    return "ex = new Microsoft.Rest.Azure.CloudException(_errorBody.Message);";
                 }
                 return base.InitializeExceptionWithMessage;
             }
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         {
             get
             {
-                if (OperationExceptionTypeString == "CloudException")
+                if (OperationExceptionTypeString == "Microsoft.Rest.Azure.CloudException")
                 {
                     IndentedStringBuilder sb = new IndentedStringBuilder();
                     sb.AppendLine(base.InitializeExceptionWithMessage)
@@ -138,22 +138,22 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                     if (ReturnType.Headers != null)
                     {
                         return string.Format(CultureInfo.InvariantCulture,
-                                    "AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
+                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0},{1}>", bodyName, ReturnType.Headers.Name);
                     }
                     else
                     {
                         return string.Format(CultureInfo.InvariantCulture,
-                                    "AzureOperationResponse<{0}>", bodyName);
+                                    "Microsoft.Rest.Azure.AzureOperationResponse<{0}>", bodyName);
                     }
                 }
                 else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                                    "AzureOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
+                                    "Microsoft.Rest.Azure.AzureOperationHeaderResponse<{0}>", ReturnType.Headers.Name);
                 }
                 else
                 {
-                    return "AzureOperationResponse";
+                    return "Microsoft.Rest.Azure.AzureOperationResponse";
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
             {
                 if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
-                    return "CloudException";
+                    return "Microsoft.Rest.Azure.CloudException";
                 }
                 return base.OperationExceptionTypeString;
             }
@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                     this.ReturnType.Body != null)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
-                    sb.AppendFormat("_result.Body = (_statusCode == HttpStatusCode.{0});", code.ToString()).AppendLine();
+                    sb.AppendFormat("_result.Body = (_statusCode == System.Net.HttpStatusCode.{0});", code.ToString()).AppendLine();
                 }
                 sb.AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
                     .AppendLine("{").Indent()
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                 var sb= new IndentedStringBuilder();
                 sb.AppendLine("if ({0}.GenerateClientRequestId != null && {0}.GenerateClientRequestId.Value)", this.ClientReference)
                    .AppendLine("{").Indent()
-                       .AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", 
+                       .AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", System.Guid.NewGuid().ToString());", 
                            this.ClientRequestIdString, this.ClientReference).Outdent()
                    .AppendLine("}")
                    .AppendLine(base.SetDefaultHeaders);
@@ -278,14 +278,14 @@ namespace AutoRest.CSharp.Azure.TemplateModels
 
         private void AddQueryParametersToUri(string variableName, IndentedStringBuilder builder)
         {
-            builder.AppendLine("List<string> _queryParameters = new List<string>();");
+            builder.AppendLine("System.Collections.Generic.List<string> _queryParameters = new System.Collections.Generic.List<string>();");
             if (LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
                 foreach (var queryParameter in LogicalParameterTemplateModels
                     .Where(p => p.Location == ParameterLocation.Query).Select(p => p as AzureParameterTemplateModel))
                 {
                     string queryParametersAddString =
-                        "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
+                        "_queryParameters.Add(string.Format(\"{0}={{0}}\", System.Uri.EscapeDataString({1})));";
 
                     if (queryParameter.IsODataFilterExpression)
                     {
@@ -319,7 +319,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         {
             foreach (var pathParameter in LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
+                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", System.Uri.EscapeDataString({2}));";
                 if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
                 {
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";

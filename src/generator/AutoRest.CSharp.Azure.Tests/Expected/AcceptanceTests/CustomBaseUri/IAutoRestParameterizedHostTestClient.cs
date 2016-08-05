@@ -8,20 +8,13 @@
 
 namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestParameterizedHostTestClient : IDisposable
+    public partial interface IAutoRestParameterizedHostTestClient : System.IDisposable
     {
         /// <summary>
         /// The base URI of the service.
@@ -30,17 +23,17 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        JsonSerializerSettings SerializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }
+        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
         /// </summary>
-        ServiceClientCredentials Credentials { get; }
+        Microsoft.Rest.ServiceClientCredentials Credentials { get; }
 
         /// <summary>
         /// A string value that is used as a global part of the parameterized

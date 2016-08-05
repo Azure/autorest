@@ -14,20 +14,20 @@
 }
 else
 {
-@:public Uri BaseUri { get; set; }
+@:public System.Uri BaseUri { get; set; }
 }
 @EmptyLine
 
 /// <summary>
 /// Gets or sets json serialization settings.
 /// </summary>
-public JsonSerializerSettings SerializationSettings { get; private set; }
+public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
 @EmptyLine
 
 /// <summary>
 /// Gets or sets json deserialization settings.
 /// </summary>
-public JsonSerializerSettings DeserializationSettings { get; private set; }        
+public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
 @EmptyLine
         
 @foreach (var property in Model.Properties)
@@ -54,7 +54,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
 {
     this.Initialize();
 }
@@ -69,7 +69,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
 {
     this.Initialize();
 }
@@ -86,14 +86,14 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
 @:{
 @:    if (baseUri == null)
 @:    {
-@:        throw new ArgumentNullException("baseUri");
+@:        throw new System.ArgumentNullException("baseUri");
 @:    }
 @:
 @:    this.BaseUri = baseUri;
@@ -115,11 +115,11 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// <exception cref="ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 @:    if (baseUri == null)
 @:    {
-@:        throw new ArgumentNullException("baseUri");
+@:        throw new System.ArgumentNullException("baseUri");
 @:    }
 @:
 @:    this.BaseUri = baseUri;
@@ -142,16 +142,16 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
 @:{
 foreach (var param in parameters)
 {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
-@:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+@:        throw new System.ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
 foreach (var param in parameters)
@@ -183,16 +183,16 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 foreach (var param in parameters)
 {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
-@:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+@:        throw new System.ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
 foreach (var param in parameters)
@@ -226,20 +226,20 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, @(Model.RequiredConstructorParameters), params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
 @:{
 @:    if (baseUri == null)
 @:    {
-@:        throw new ArgumentNullException("baseUri");
+@:        throw new System.ArgumentNullException("baseUri");
 @:    }
     foreach (var param in parameters)
     {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
-@:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+@:        throw new System.ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
 
@@ -281,18 +281,18 @@ foreach (var param in parameters)
 @:/// <exception cref="ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
-@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, @(Model.RequiredConstructorParameters), System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 @:    if (baseUri == null)
 @:    {
-@:        throw new ArgumentNullException("baseUri");
+@:        throw new System.ArgumentNullException("baseUri");
 @:    }
 
 foreach (var param in parameters)
 {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
-@:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
+@:        throw new System.ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
 

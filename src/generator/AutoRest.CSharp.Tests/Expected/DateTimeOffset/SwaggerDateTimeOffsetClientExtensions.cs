@@ -8,13 +8,8 @@
 
 namespace Fixtures.DateTimeOffset
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for SwaggerDateTimeOffsetClient.
@@ -35,7 +30,7 @@ namespace Fixtures.DateTimeOffset
             /// </param>
             public static Product GetProduct(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).GetProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).GetProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +48,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> GetProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> GetProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -75,7 +70,7 @@ namespace Fixtures.DateTimeOffset
             /// </param>
             public static Product PutProduct(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PutProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PutProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -93,7 +88,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PutProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PutProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PutProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -115,7 +110,7 @@ namespace Fixtures.DateTimeOffset
             /// </param>
             public static Product PostProduct(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PostProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PostProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -133,7 +128,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PostProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PostProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PostProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -155,7 +150,7 @@ namespace Fixtures.DateTimeOffset
             /// </param>
             public static Product PatchProduct(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product))
             {
-                return Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PatchProductAsync(responseCode, product), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((ISwaggerDateTimeOffsetClient)s).PatchProductAsync(responseCode, product), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -173,7 +168,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PatchProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Product> PatchProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.PatchProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {

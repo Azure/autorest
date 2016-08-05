@@ -5,19 +5,8 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Newtonsoft.Json;
 @foreach (var usingString in Model.Usings) {
 @:    using @usingString;
 }
@@ -25,7 +14,7 @@ namespace @Settings.Namespace
     /// <summary>
     /// @(Model.MethodGroupType) operations.
     /// </summary>
-    internal partial class @(Model.MethodGroupType) : IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
+    internal partial class @(Model.MethodGroupType) : Microsoft.Rest.IServiceOperations<@(Model.Name)>, I@(Model.MethodGroupType)
     {
         /// <summary>
         /// Initializes a new instance of the @(Model.MethodGroupType) class.
@@ -33,14 +22,14 @@ namespace @Settings.Namespace
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        /// <exception cref="ArgumentNullException">
+        /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
         internal @(Model.MethodGroupType)(@(Model.Name) client)
         {
             if (client == null) 
             {
-                throw new ArgumentNullException("client");
+                throw new System.ArgumentNullException("client");
             }
             this.Client = client;
         }

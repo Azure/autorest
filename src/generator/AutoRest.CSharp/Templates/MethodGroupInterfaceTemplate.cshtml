@@ -6,14 +6,8 @@
 @EmptyLine
 namespace @Settings.Namespace
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.Rest;
 @foreach (var usingString in Model.Usings) {
-@:    using @usingString;
+    @:using @usingString;
 }
 @EmptyLine
     /// <summary>
@@ -56,17 +50,17 @@ namespace @Settings.Namespace
         @:/// </exception>
         @if (method.Responses.Where(r => r.Value.Body != null).Any())
         {
-        @:/// <exception cref="SerializationException">
+        @:/// <exception cref="Microsoft.Rest.SerializationException">
         @:/// Thrown when unable to deserialize the response
         @:/// </exception>
         }
         @if (method.ParameterTemplateModels.Where(p => !p.IsConstant && p.IsRequired && !p.Type.IsValueType()).Any())
         {
-        @:/// <exception cref="ValidationException">
+        @:/// <exception cref="Microsoft.Rest.ValidationException">
         @:/// Thrown when a required parameter is null
         @:/// </exception>
         }
-        @:Task<@method.OperationResponseReturnTypeString> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
+        @:System.Threading.Tasks.Task<@method.OperationResponseReturnTypeString> @(method.Name)WithHttpMessagesAsync(@(method.GetAsyncMethodParameterDeclaration(true)));
     }
     }
 }

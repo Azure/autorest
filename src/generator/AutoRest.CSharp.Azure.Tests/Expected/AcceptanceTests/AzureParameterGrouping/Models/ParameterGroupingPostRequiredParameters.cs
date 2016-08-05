@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Additional parameters for the parameterGrouping_postRequired operation.
@@ -43,37 +37,37 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
         public int Body { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
         public string CustomHeader { get; set; }
 
         /// <summary>
         /// Gets or sets query parameter with default
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
         public int? Query { get; set; }
 
         /// <summary>
         /// Gets or sets path parameter
         /// </summary>
-        [JsonProperty(PropertyName = "")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "")]
         public string Path { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Path == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Path");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Path");
             }
         }
     }

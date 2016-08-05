@@ -28,15 +28,10 @@ namespace AutoRest.CSharp.Azure.TemplateModels
         {
             get
             {
-                if (MethodTemplateModels.Any(m =>
-                    m.ParameterTemplateModels.Any(p => ((AzureParameterTemplateModel)p).IsODataFilterExpression)))
-                {
-                    yield return "Microsoft.Rest.Azure.OData";
-                }
                 yield return "Microsoft.Rest.Azure";
                 if (this.ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)))
                 {
-                    yield return "Models";
+                    yield return this.ModelsName;
                 }
             }
         }

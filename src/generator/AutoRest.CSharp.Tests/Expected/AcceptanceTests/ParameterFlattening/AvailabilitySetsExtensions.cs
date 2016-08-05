@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for AvailabilitySets.
@@ -36,9 +31,9 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// <param name='tags'>
             /// A set of tags. A description about the set of tags.
             /// </param>
-            public static void Update(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags)
+            public static void Update(this IAvailabilitySets operations, string resourceGroupName, string avset, System.Collections.Generic.IDictionary<string, string> tags)
             {
-                Task.Factory.StartNew(s => ((IAvailabilitySets)s).UpdateAsync(resourceGroupName, avset, tags), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IAvailabilitySets)s).UpdateAsync(resourceGroupName, avset, tags), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -59,7 +54,7 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task UpdateAsync(this IAvailabilitySets operations, string resourceGroupName, string avset, System.Collections.Generic.IDictionary<string, string> tags, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.UpdateWithHttpMessagesAsync(resourceGroupName, avset, tags, null, cancellationToken).ConfigureAwait(false);
             }

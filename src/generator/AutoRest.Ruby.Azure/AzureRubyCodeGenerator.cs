@@ -57,7 +57,7 @@ namespace AutoRest.Ruby.Azure
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The \"gem 'ms_rest_azure' ~> 0.2\" is required for working with generated code."; }
+            get { return "The \"gem 'ms_rest_azure' ~> 0.3\" is required for working with generated code."; }
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace AutoRest.Ruby.Azure
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace, this.packageVersion),
+                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
 

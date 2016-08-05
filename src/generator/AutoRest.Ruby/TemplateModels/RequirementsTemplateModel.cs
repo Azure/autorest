@@ -47,11 +47,6 @@ namespace AutoRest.Ruby.TemplateModels
         private readonly string ns;
 
         /// <summary>
-        /// The name of the package version to be used in creating a version.rb file.
-        /// </summary>
-        private readonly string packageVersion;
-
-        /// <summary>
         /// Returns the ordered list of models. Ordered means that if some model has
         /// another model as a base then the base will be before the model in the list.
         /// </summary>
@@ -121,12 +116,10 @@ namespace AutoRest.Ruby.TemplateModels
         /// <param name="sdkName">The name of the SDK.</param>
         /// <param name="implementationFileExtension">The files extension.</param>
         /// <param name="ns">The namespace of the SDK.</param>
-        /// <param name="packageVersion">The name of the package version to be used in creating a version.rb file.</param>
-        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns, string packageVersion)
+        public RequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string implementationFileExtension, string ns)
         {
             this.LoadFrom(serviceClient);
             this.ns = ns;
-            this.packageVersion = packageVersion;
             this.sdkName = sdkName;
             this.implementationFileExtension = implementationFileExtension;
         }
@@ -196,13 +189,6 @@ require 'ms_rest'";
                 requirements = requirements 
                     + Environment.NewLine 
                     + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/module_definition'", GeneratedFolderName, this.sdkName);
-            }
-
-            if (!string.IsNullOrWhiteSpace(this.packageVersion))
-            {
-                requirements = requirements
-                    + Environment.NewLine
-                    + string.Format(CultureInfo.InvariantCulture, "require '{0}/{1}/version'", GeneratedFolderName, this.sdkName);
             }
 
             return requirements;

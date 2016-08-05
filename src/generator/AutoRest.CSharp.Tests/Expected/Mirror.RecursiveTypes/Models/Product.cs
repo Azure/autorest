@@ -8,12 +8,7 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Product
     {
@@ -29,7 +24,7 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// product for a given latitude & longitude. For example, uberX in
         /// San Francisco will have a different product_id than uberX in Los
         /// Angeles.</param>
-        public Product(string productId = default(string), Product parentProduct = default(Product), IList<Product> innerProducts = default(IList<Product>))
+        public Product(string productId = default(string), Product parentProduct = default(Product), System.Collections.Generic.IList<Product> innerProducts = default(System.Collections.Generic.IList<Product>))
         {
             ProductId = productId;
             ParentProduct = parentProduct;
@@ -42,18 +37,18 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>
-        [JsonProperty(PropertyName = "product_id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "product_id")]
         public string ProductId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "parentProduct")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "parentProduct")]
         public Product ParentProduct { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "innerProducts")]
-        public IList<Product> InnerProducts { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "innerProducts")]
+        public System.Collections.Generic.IList<Product> InnerProducts { get; set; }
 
     }
 }

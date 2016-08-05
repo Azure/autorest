@@ -393,6 +393,9 @@
           "type": "string",
           "enum": [ "red", "green", "blue" ]
         },
+        "refColor": {
+          "$ref": "#/definitions/RefColor"
+        },
         "byte": {
           "type": "string",
           "format": "byte"
@@ -486,6 +489,14 @@
     "Object": {
       "type": "object",
       "properties": { }
+    },
+    "RefColor": {
+      "x-ms-enum": {
+        "name": "refColors",
+        "modelAsString": true
+      },
+      "type": "string",
+      "enum": [ "red", "green", "blue" ]
     },
     "Error": {
       "properties": {

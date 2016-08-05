@@ -246,13 +246,13 @@ namespace AutoRest.CSharp
                 primaryType.Name = "byte[]";
                     break;
                 case KnownPrimaryType.Date:
-                primaryType.Name = "DateTime";
+                primaryType.Name = "System.DateTime";
                     break;
                 case KnownPrimaryType.DateTime:
-                primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
+                primaryType.Name = UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
                     break;
                 case KnownPrimaryType.DateTimeRfc1123:
-                primaryType.Name = "DateTime";
+                primaryType.Name = "System.DateTime";
                     break;
                 case KnownPrimaryType.Double:
                 primaryType.Name = "double";
@@ -271,31 +271,31 @@ namespace AutoRest.CSharp
                     break;
                 case KnownPrimaryType.String:
                     switch (KnownFormatExtensions.Parse( primaryType.Format ) )
-            {
+                    {
                         case KnownFormat.@char:
                             primaryType.Name = "char";
                             break;
 
                         default:
-                primaryType.Name = "string";
+                            primaryType.Name = "string";
                             break;
-            }
-                    
+                    }
+
                     break;
                 case KnownPrimaryType.TimeSpan:
-                primaryType.Name = "TimeSpan";
+                primaryType.Name = "System.TimeSpan";
                     break;
                 case KnownPrimaryType.Object:
                 primaryType.Name = "object";
                     break;
                 case KnownPrimaryType.Credentials:
-                primaryType.Name = "ServiceClientCredentials";
+                primaryType.Name = "Microsoft.Rest.ServiceClientCredentials";
                     break;
                 case KnownPrimaryType.UnixTime:
-                primaryType.Name = "DateTime";
+                primaryType.Name = "System.DateTime";
                     break;
                 case KnownPrimaryType.Uuid:
-                primaryType.Name = "Guid";
+                primaryType.Name = "System.Guid";
                     break;
             }
 
@@ -325,6 +325,15 @@ namespace AutoRest.CSharp
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
+            if (compositeType.BaseModelType != null)
+            {
+                foreach (var property in compositeType.BaseModelType.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                }
+            }
+
             return compositeType;
         }
 
@@ -344,11 +353,11 @@ namespace AutoRest.CSharp
             sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             if (sequenceType.ElementType.IsValueType())
             {
-                sequenceType.NameFormat = "IList<{0}?>";
+                sequenceType.NameFormat = "System.Collections.Generic.IList<{0}?>";
             }
             else
             {
-                sequenceType.NameFormat = "IList<{0}>";
+                sequenceType.NameFormat = "System.Collections.Generic.IList<{0}>";
             }
             return sequenceType;
         }
@@ -358,11 +367,11 @@ namespace AutoRest.CSharp
             dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             if (dictionaryType.ValueType.IsValueType())
             {
-                dictionaryType.NameFormat = "IDictionary<string, {0}?>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}?>";
             }
             else
             {
-                dictionaryType.NameFormat = "IDictionary<string, {0}>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}>";
             }
             return dictionaryType;
         }
@@ -402,7 +411,7 @@ namespace AutoRest.CSharp
                             primaryType.Type == KnownPrimaryType.UnixTime)
                         {
 
-                            return "SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +
+                            return "Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +
                                 ">(" + CodeNamer.QuoteValue("\"" + defaultValue + "\"") + ", this.Client.SerializationSettings)";
                         }
                     }

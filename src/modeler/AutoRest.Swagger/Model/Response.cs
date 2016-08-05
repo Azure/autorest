@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System;
@@ -14,9 +15,15 @@ namespace AutoRest.Swagger.Model
     [Serializable]
     public class OperationResponse : SwaggerBase
     {
-        public string Description { get; set; }
+        private string _description;
 
-        [Rule(typeof(AnonymousTypes))]
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value.StripControlCharacters(); }
+        }
+
+        [Rule(typeof(AvoidAnonymousTypes))]
         public Schema Schema { get; set; }
 
         public Dictionary<string, Header> Headers { get; set; }

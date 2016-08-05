@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for delete202NoRetry204 operation.
@@ -45,14 +39,14 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets or sets location to poll for result status: will be set to
         /// /lro/delete/202/noretry/204
         /// </summary>
-        [JsonProperty(PropertyName = "Location")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Location")]
         public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets number of milliseconds until the next poll should be
         /// sent, will be set to zero
         /// </summary>
-        [JsonProperty(PropertyName = "Retry-After")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "Retry-After")]
         public int? RetryAfter { get; set; }
 
     }

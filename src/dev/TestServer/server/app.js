@@ -454,7 +454,10 @@ var coverage = {
   "putDecimalBig": 1,
   "putDecimalSmall": 1,
   "putDecimalBigPositiveDecimal" : 1,
-  "putDecimalBigNegativeDecimal" : 1,
+  "getEnumReferenced" : 1,
+  "putEnumReferenced" : 1,
+  "getEnumReferencedConstant" : 1,
+  "putEnumReferencedConstant" : 1
 };
 
 // view engine setup

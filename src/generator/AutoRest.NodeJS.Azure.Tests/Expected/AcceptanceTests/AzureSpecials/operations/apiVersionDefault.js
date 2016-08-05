@@ -73,14 +73,14 @@ ApiVersionDefault.prototype.getMethodGlobalValid = function (options, callback) 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -186,14 +186,14 @@ ApiVersionDefault.prototype.getMethodGlobalNotProvidedValid = function (options,
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -299,14 +299,14 @@ ApiVersionDefault.prototype.getPathGlobalValid = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -412,14 +412,14 @@ ApiVersionDefault.prototype.getSwaggerGlobalValid = function (options, callback)
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

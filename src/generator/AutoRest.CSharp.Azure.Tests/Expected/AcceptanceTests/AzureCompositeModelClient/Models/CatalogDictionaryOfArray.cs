@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class CatalogDictionaryOfArray
     {
@@ -28,7 +22,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// </summary>
         /// <param name="productDictionaryOfArray">Dictionary of Array of
         /// product</param>
-        public CatalogDictionaryOfArray(IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>))
+        public CatalogDictionaryOfArray(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> productDictionaryOfArray = default(System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>>))
         {
             ProductDictionaryOfArray = productDictionaryOfArray;
         }
@@ -36,8 +30,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Gets or sets dictionary of Array of product
         /// </summary>
-        [JsonProperty(PropertyName = "productDictionaryOfArray")]
-        public IDictionary<string, IList<Product>> ProductDictionaryOfArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "productDictionaryOfArray")]
+        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.IList<Product>> ProductDictionaryOfArray { get; set; }
 
     }
 }

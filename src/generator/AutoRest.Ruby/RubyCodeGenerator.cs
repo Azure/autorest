@@ -108,7 +108,7 @@ namespace AutoRest.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The \"gem 'ms_rest' ~> 0.2\" is required for working with generated code."; }
+            get { return "The \"gem 'ms_rest' ~> 0.3\" is required for working with generated code."; }
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace AutoRest.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace, this.packageVersion),
+                Model = new RequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension, this.Settings.Namespace),
             };
             await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
 

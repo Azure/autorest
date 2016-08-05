@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class OperationResult
     {
@@ -41,12 +35,12 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "error")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "error")]
         public OperationResultError Error { get; set; }
 
     }

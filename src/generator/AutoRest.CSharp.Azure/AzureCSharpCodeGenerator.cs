@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Azure
             AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
-                Settings.Namespace + ".Models");
+                Settings.Namespace + "." + Settings.ModelsName);
             _namer.NormalizePaginatedMethods(serviceClient, pageClasses);
             _namer.NormalizeODataMethods(serviceClient);
 
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Azure
                     if (model.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && 
                         (bool)model.Extensions[AzureExtensions.AzureResourceExtension])
                     {
-                        model.BaseModelType = new CompositeType { Name = "IResource", SerializedName = "IResource" };
+                        model.BaseModelType = new CompositeType { Name = "Microsoft.Rest.Azure.IResource", SerializedName = "Microsoft.Rest.Azure.IResource" };
                     }
                 }
             }
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Azure
                     Model = new AzureModelTemplateModel(model),
                 };
 
-                await Write(modelTemplate, Path.Combine("Models", model.Name + ".cs"));
+                await Write(modelTemplate, Path.Combine(Settings.ModelsName, model.Name + ".cs"));
             }
 
             // Enums
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Azure
                 {
                     Model = new EnumTemplateModel(enumType),
                 };
-                await Write(enumTemplate, Path.Combine("Models", enumTemplate.Model.TypeDefinitionName + ".cs"));
+                await Write(enumTemplate, Path.Combine(Settings.ModelsName, enumTemplate.Model.TypeDefinitionName + ".cs"));
             }
 
             // Page class
@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Azure
                 {
                     Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("Models", pageTemplate.Model.TypeDefinitionName + ".cs"));
+                await Write(pageTemplate, Path.Combine(Settings.ModelsName, pageTemplate.Model.TypeDefinitionName + ".cs"));
             }
 
             // Exceptions
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Azure
                 {
                     Model = new ModelTemplateModel(exceptionType),
                 };
-                await Write(exceptionTemplate, Path.Combine("Models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
+                await Write(exceptionTemplate, Path.Combine(Settings.ModelsName, exceptionTemplate.Model.ExceptionTypeDefinitionName + ".cs"));
             }
         }
     }

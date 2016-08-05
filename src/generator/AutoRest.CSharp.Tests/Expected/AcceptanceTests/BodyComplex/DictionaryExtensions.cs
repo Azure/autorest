@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Dictionary.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetValid(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetValidAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<DictionaryWrapper> GetValidAsync(this IDictionary operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -57,9 +52,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='defaultProgram'>
             /// </param>
-            public static void PutValid(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
+            public static void PutValid(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutValidAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).PutValidAsync(defaultProgram), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +68,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }
@@ -86,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetEmpty(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).GetEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -98,7 +93,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetEmptyAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<DictionaryWrapper> GetEmptyAsync(this IDictionary operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -114,9 +109,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             /// <param name='defaultProgram'>
             /// </param>
-            public static void PutEmpty(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
+            public static void PutEmpty(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>))
             {
-                Task.Factory.StartNew(s => ((IDictionary)s).PutEmptyAsync(defaultProgram), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).PutEmptyAsync(defaultProgram), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -130,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutEmptyAsync(this IDictionary operations, System.Collections.Generic.IDictionary<string, string> defaultProgram = default(System.Collections.Generic.IDictionary<string, string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }
@@ -143,7 +138,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetNull(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNullAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).GetNullAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -155,7 +150,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetNullAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<DictionaryWrapper> GetNullAsync(this IDictionary operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -172,7 +167,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static DictionaryWrapper GetNotProvided(this IDictionary operations)
             {
-                return Task.Factory.StartNew(s => ((IDictionary)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IDictionary)s).GetNotProvidedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -185,7 +180,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionary operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -8,16 +8,10 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonTransformation]
-    public partial class ProductInner : Resource
+    [Microsoft.Rest.Serialization.JsonTransformation]
+    public partial class ProductInner : Microsoft.Rest.Azure.Resource
     {
         /// <summary>
         /// Initializes a new instance of the ProductInner class.
@@ -31,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public ProductInner(String location = default(String), String id = default(String), String name = default(String), String type = default(String), IDictionary<string, String> tags = default(IDictionary<string, String>), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public ProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(location, id, name, type, tags)
         {
             ProvisioningState = provisioningState;
@@ -40,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningState")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningState")]
         public string ProvisioningState { get; set; }
 
         /// <summary>
@@ -48,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "properties.provisioningStateValues")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties.provisioningStateValues")]
         public string ProvisioningStateValues { get; private set; }
 
     }

@@ -7,6 +7,7 @@ var utils = require('../util/utils')
 var string = function (coverage) {
   var base64String    = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjQ=";
   var base64UrlString = "YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw";
+  var RefColorConstant = { "field1": "Sample String" };
   
   router.put('/:scenario', function (req, res, next) {
     if (req.params.scenario === 'null') {
@@ -93,7 +94,46 @@ var string = function (coverage) {
     } else {
       utils.send400(res, next, "Did not like enum in the req '" + util.inspect(req.body) + "'");
     }
+	});
+   router.get('/enum/notExpandable', function (req, res, next) {
+    coverage['getEnumNotExpandable']++;
+    res.status(200).end('"red color"');
   });
+  
+  router.put('/enum/notExpandable', function (req, res, next) {
+    if (req.body === 'red color') {
+      coverage['putEnumNotExpandable']++;
+      res.status(200).end();
+    } else {
+      utils.send400(res, next, "Did not like enum in the req '" + util.inspect(req.body) + "'");
+    }
+    });
+    router.get('/enum/Referenced', function (req, res, next) {
+      coverage['getEnumReferenced']++;
+      res.status(200).end('"red color"');
+    });
+
+    router.put('/enum/Referenced', function (req, res, next) {
+      if (req.body === 'red color') {
+        coverage['putEnumReferenced']++;
+        res.status(200).end();
+      } else {
+        utils.send400(res, next, "Did not like enum in the req '" + util.inspect(req.body) + "'");
+      }
+    });
+    router.get('/enum/ReferencedConstant', function (req, res, next) {
+      coverage['getEnumReferencedConstant']++;
+      res.status(200).end(JSON.stringify(RefColorConstant));
+    });
+
+    router.put('/enum/ReferencedConstant', function (req, res, next) {
+      if (req.body.ColorConstant === 'green-color') {
+        coverage['putEnumReferencedConstant']++;
+        res.status(200).end();
+      } else {
+        utils.send400(res, next, "Did not like constant in the req '" + util.inspect(req.body) + "'");
+      }
+    });
 }
 
 string.prototype.router = router;

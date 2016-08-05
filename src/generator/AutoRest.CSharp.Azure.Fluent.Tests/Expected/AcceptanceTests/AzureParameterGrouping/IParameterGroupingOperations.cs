@@ -8,12 +8,6 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
@@ -37,10 +31,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<AzureOperationResponse> PostRequiredWithHttpMessagesAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostRequiredWithHttpMessagesAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Post a bunch of optional parameters grouped
         /// </summary>
@@ -56,7 +50,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<AzureOperationResponse> PostOptionalWithHttpMessagesAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParametersInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostOptionalWithHttpMessagesAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParametersInner), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Post parameters from multiple different parameter groups
         /// </summary>
@@ -75,7 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroupInner), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Post parameters with a shared parameter group object
         /// </summary>
@@ -91,6 +85,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

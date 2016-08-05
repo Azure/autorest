@@ -8,15 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
-    [JsonObject("goblin")]
+    [Newtonsoft.Json.JsonObject("goblin")]
     public partial class Goblinshark : Shark
     {
         /// <summary>
@@ -27,7 +21,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
+        public Goblinshark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?), int? jawsize = default(int?))
             : base(length, birthday, species, siblings, age)
         {
             Jawsize = jawsize;
@@ -35,13 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "jawsize")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "jawsize")]
         public int? Jawsize { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

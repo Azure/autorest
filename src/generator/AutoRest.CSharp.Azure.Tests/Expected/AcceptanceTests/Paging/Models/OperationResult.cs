@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class OperationResult
     {
@@ -40,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
     }

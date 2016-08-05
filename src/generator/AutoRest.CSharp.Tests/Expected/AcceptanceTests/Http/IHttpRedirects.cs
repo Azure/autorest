@@ -8,12 +8,6 @@
 
 namespace Fixtures.AcceptanceTestsHttp
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Microsoft.Rest;
     using Models;
 
     /// <summary>
@@ -33,7 +27,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead300Headers>> Head300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsHead300Headers>> Head300WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Return 300 status code and redirect to /http/success/200
         /// </summary>
@@ -46,10 +40,10 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        /// <exception cref="SerializationException">
+        /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<IList<string>,HttpRedirectsGet300Headers>> Get300WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationResponse<System.Collections.Generic.IList<string>,HttpRedirectsGet300Headers>> Get300WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
@@ -62,7 +56,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead301Headers>> Head301WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsHead301Headers>> Head301WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Return 301 status code and redirect to /http/success/200
         /// </summary>
@@ -75,7 +69,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet301Headers>> Get301WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsGet301Headers>> Get301WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Put true Boolean value in request returns 301.  This request
         /// should not be automatically redirected, but should return the
@@ -93,7 +87,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPut301Headers>> Put301WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPut301Headers>> Put301WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
@@ -106,7 +100,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead302Headers>> Head302WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsHead302Headers>> Head302WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Return 302 status code and redirect to /http/success/200
         /// </summary>
@@ -119,7 +113,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet302Headers>> Get302WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsGet302Headers>> Get302WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Patch true Boolean value in request returns 302.  This request
         /// should not be automatically redirected, but should return the
@@ -137,7 +131,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPatch302Headers>> Patch302WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPatch302Headers>> Patch302WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Post true Boolean value in request returns 303.  This request
         /// should be automatically redirected usign a get, ultimately
@@ -155,7 +149,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPost303Headers>> Post303WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPost303Headers>> Post303WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Redirect with 307, resulting in a 200 success
         /// </summary>
@@ -168,7 +162,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsHead307Headers>> Head307WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsHead307Headers>> Head307WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Redirect get with 307, resulting in a 200 success
         /// </summary>
@@ -181,7 +175,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsGet307Headers>> Get307WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsGet307Headers>> Get307WithHttpMessagesAsync(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Put redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -197,7 +191,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPut307Headers>> Put307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPut307Headers>> Put307WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Patch redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -213,7 +207,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPatch307Headers>> Patch307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPatch307Headers>> Patch307WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Post redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -229,7 +223,7 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsPost307Headers>> Post307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsPost307Headers>> Post307WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete redirected with 307, resulting in a 200 after redirect
         /// </summary>
@@ -245,6 +239,6 @@ namespace Fixtures.AcceptanceTestsHttp
         /// <exception cref="ErrorException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationHeaderResponse<HttpRedirectsDelete307Headers>> Delete307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        System.Threading.Tasks.Task<Microsoft.Rest.HttpOperationHeaderResponse<HttpRedirectsDelete307Headers>> Delete307WithHttpMessagesAsync(bool? booleanValue = default(bool?), System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }

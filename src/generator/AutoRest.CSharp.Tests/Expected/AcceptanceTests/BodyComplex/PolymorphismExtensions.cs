@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Polymorphism.
@@ -29,7 +24,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static Fish GetValid(this IPolymorphism operations)
             {
-                return Task.Factory.StartNew(s => ((IPolymorphism)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IPolymorphism)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -41,7 +36,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Fish> GetValidAsync(this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<Fish> GetValidAsync(this IPolymorphism operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -93,7 +88,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValid(this IPolymorphism operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -141,7 +136,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IPolymorphism operations, Fish complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -184,7 +179,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static void PutValidMissingRequired(this IPolymorphism operations, Fish complexBody)
             {
-                Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidMissingRequiredAsync(complexBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPolymorphism)s).PutValidMissingRequiredAsync(complexBody), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -226,7 +221,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidMissingRequiredAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidMissingRequiredAsync(this IPolymorphism operations, Fish complexBody, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidMissingRequiredWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

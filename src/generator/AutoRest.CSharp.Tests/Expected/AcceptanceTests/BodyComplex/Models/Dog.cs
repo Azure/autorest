@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Dog : Pet
     {
@@ -33,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "food")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "food")]
         public string Food { get; set; }
 
     }

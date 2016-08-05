@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class StorageAccountPropertiesUpdateParameters
     {
@@ -45,7 +39,7 @@ namespace Petstore.Models
         /// PremiumLRS. Possible values include: 'Standard_LRS',
         /// 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         /// </summary>
-        [JsonProperty(PropertyName = "accountType")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "accountType")]
         public AccountType? AccountType { get; set; }
 
         /// <summary>
@@ -54,13 +48,13 @@ namespace Petstore.Models
         /// account at this time. To clear the existing custom domain, use an
         /// empty string for the custom domain name property.
         /// </summary>
-        [JsonProperty(PropertyName = "customDomain")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "customDomain")]
         public CustomDomain CustomDomain { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

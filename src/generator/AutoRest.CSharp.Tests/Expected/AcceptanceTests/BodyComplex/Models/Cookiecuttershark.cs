@@ -8,14 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
-    [JsonObject("cookiecuttershark")]
+    [Newtonsoft.Json.JsonObject("cookiecuttershark")]
     public partial class Cookiecuttershark : Shark
     {
         /// <summary>
@@ -26,7 +21,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Cookiecuttershark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+        public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), System.Collections.Generic.IList<Fish> siblings = default(System.Collections.Generic.IList<Fish>), int? age = default(int?))
             : base(length, birthday, species, siblings, age)
         {
         }
@@ -34,7 +29,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()

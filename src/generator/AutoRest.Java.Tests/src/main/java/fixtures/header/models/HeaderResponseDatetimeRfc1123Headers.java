@@ -42,7 +42,11 @@ public class HeaderResponseDatetimeRfc1123Headers {
      * @return the HeaderResponseDatetimeRfc1123Headers object itself.
      */
     public HeaderResponseDatetimeRfc1123Headers withValue(DateTime value) {
-        this.value = new DateTimeRfc1123(value);
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = new DateTimeRfc1123(value);
+        }
         return this;
     }
 
