@@ -37,7 +37,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 204 status code if successful.
@@ -55,7 +55,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 404 status code if successful.
@@ -73,6 +73,6 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

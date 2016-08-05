@@ -40,6 +40,6 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

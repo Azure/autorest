@@ -6,6 +6,7 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.TemplateModels
 @using AutoRest.Java.TypeModels
+@using AutoRest.Java.Azure.TypeModels
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodTemplateModel>
 @if (!Model.IsLongRunningOperation)
 {
@@ -90,7 +91,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException {
     if (serviceCallback == null) {
         throw new IllegalArgumentException("ServiceCallback is required for async calls.");
     }
@@ -119,7 +120,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
     @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {
@@ -206,7 +207,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
     if (serviceCallback == null) {
         throw new IllegalArgumentException("ServiceCallback is required for async calls.");
     }
@@ -231,7 +232,7 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
     @Model.BuildInputMappings()
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {

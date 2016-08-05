@@ -48,7 +48,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with integer properties.
@@ -69,7 +69,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with long properties.
@@ -87,7 +87,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with long properties.
@@ -108,7 +108,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with float properties.
@@ -126,7 +126,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with float properties.
@@ -147,7 +147,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with double properties.
@@ -165,7 +165,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with double properties.
@@ -186,7 +186,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with bool properties.
@@ -204,7 +204,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with bool properties.
@@ -225,7 +225,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with string properties.
@@ -243,7 +243,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with string properties.
@@ -264,7 +264,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with date properties.
@@ -282,7 +282,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with date properties.
@@ -303,7 +303,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with datetime properties.
@@ -321,7 +321,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with datetime properties.
@@ -342,7 +342,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -360,7 +360,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -381,7 +381,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with duration properties.
@@ -399,7 +399,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with duration properties.
@@ -420,7 +420,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with byte properties.
@@ -438,7 +438,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with byte properties.
@@ -459,6 +459,6 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

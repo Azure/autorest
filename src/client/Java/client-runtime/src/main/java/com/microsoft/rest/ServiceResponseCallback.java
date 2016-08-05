@@ -19,6 +19,11 @@ import retrofit2.Callback;
  */
 public abstract class ServiceResponseCallback<T> implements Callback<ResponseBody> {
     /**
+     * The client service call object.
+     */
+    private ServiceCall<T> serviceCall;
+
+    /**
      * The client callback.
      */
     private ServiceCallback<T> serviceCallback;
@@ -26,14 +31,21 @@ public abstract class ServiceResponseCallback<T> implements Callback<ResponseBod
     /**
      * Creates an instance of ServiceResponseCallback.
      *
+     * @param serviceCall the client service call to call on a terminal state.
      * @param serviceCallback the client callback to call on a terminal state.
      */
-    public ServiceResponseCallback(ServiceCallback<T> serviceCallback) {
+    public ServiceResponseCallback(ServiceCall<T> serviceCall, ServiceCallback<T> serviceCallback) {
+        this.serviceCall = serviceCall;
         this.serviceCallback = serviceCallback;
     }
 
     @Override
     public void onFailure(Call<ResponseBody> call, Throwable t) {
-        serviceCallback.failure(new ServiceException(t));
+        if (serviceCallback != null) {
+            serviceCallback.failure(t);
+        }
+        if (serviceCall != null) {
+            serviceCall.failure(t);
+        }
     }
 }

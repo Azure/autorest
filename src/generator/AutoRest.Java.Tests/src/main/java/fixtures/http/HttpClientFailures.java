@@ -38,7 +38,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> head400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -56,7 +56,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -74,7 +74,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -93,7 +93,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -111,7 +111,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -130,7 +130,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -148,7 +148,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -167,7 +167,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -185,7 +185,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -204,7 +204,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -222,7 +222,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head401Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> head401Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -240,7 +240,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get402Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get402Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -258,7 +258,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get403Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get403Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -276,7 +276,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put404Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put404Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
@@ -295,7 +295,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -313,7 +313,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch405Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch405Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -332,7 +332,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -350,7 +350,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post406Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post406Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
@@ -369,7 +369,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -387,7 +387,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete407Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete407Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
@@ -406,7 +406,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -424,7 +424,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put409Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put409Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -443,7 +443,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -461,7 +461,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head410Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> head410Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -479,7 +479,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get411Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get411Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -497,7 +497,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get412Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get412Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -515,7 +515,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put413Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put413Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
@@ -534,7 +534,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -552,7 +552,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch414Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch414Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
@@ -571,7 +571,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -589,7 +589,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post415Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post415Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -608,7 +608,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -626,7 +626,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get416Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> get416Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -644,7 +644,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete417Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete417Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
@@ -663,7 +663,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -681,6 +681,6 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head429Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> head429Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

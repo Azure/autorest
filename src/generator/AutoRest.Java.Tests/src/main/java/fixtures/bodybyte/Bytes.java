@@ -37,7 +37,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty byte value ''.
@@ -55,7 +55,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -73,7 +73,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -94,7 +94,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -112,6 +112,6 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
 }

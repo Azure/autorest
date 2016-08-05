@@ -38,7 +38,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Int value.
@@ -56,7 +56,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow Int32 value.
@@ -74,7 +74,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow Int32 value.
@@ -92,7 +92,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get overflow Int64 value.
@@ -110,7 +110,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get underflow Int64 value.
@@ -128,7 +128,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max int32 value.
@@ -148,7 +148,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put max int64 value.
@@ -168,7 +168,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min int32 value.
@@ -188,7 +188,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put min int64 value.
@@ -208,7 +208,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get datetime encoded as Unix time value.
@@ -226,7 +226,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put datetime encoded as Unix time.
@@ -246,7 +246,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Unix time value.
@@ -264,7 +264,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Unix time value.
@@ -282,6 +282,6 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException;
 
 }

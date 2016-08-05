@@ -38,7 +38,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<Siamese> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types that extend others.
@@ -59,6 +59,6 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

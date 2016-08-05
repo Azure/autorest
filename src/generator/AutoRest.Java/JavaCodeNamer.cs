@@ -340,7 +340,7 @@ namespace AutoRest.Java
             }
 
             var enumType = type as EnumType;
-            if (enumType != null && enumType.ModelAsString)
+            if (enumType != null && enumType.ModelAsString && enumType.Name.IsNullOrEmpty())
             {
                 type = new PrimaryTypeModel(KnownPrimaryType.String);
             }

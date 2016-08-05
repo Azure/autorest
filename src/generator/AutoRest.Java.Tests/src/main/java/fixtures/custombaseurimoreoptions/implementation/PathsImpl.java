@@ -102,44 +102,42 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter vault is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
         if (secret == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter secret is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
         }
         if (this.client.dnsSuffix() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null.");
         }
         if (keyName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
         }
         if (this.client.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String keyVersion = null;
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response));
+                    ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -187,43 +185,41 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         if (vault == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter vault is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
         if (secret == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter secret is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
         }
         if (this.client.dnsSuffix() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null.");
         }
         if (keyName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter keyName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
         }
         if (this.client.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
         Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response));
+                    ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
