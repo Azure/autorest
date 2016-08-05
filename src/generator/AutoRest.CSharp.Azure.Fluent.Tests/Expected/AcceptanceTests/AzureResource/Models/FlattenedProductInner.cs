@@ -11,7 +11,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
     using System.Linq;
 
     [Microsoft.Rest.Serialization.JsonTransformation]
-    public partial class FlattenedProductInner : Resource
+    public partial class FlattenedProductInner : Microsoft.Rest.Azure.Resource
     {
         /// <summary>
         /// Initializes a new instance of the FlattenedProductInner class.
@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProductInner class.
         /// </summary>
-        public FlattenedProductInner(String location = default(String), String id = default(String), String name = default(String), String type = default(String), IDictionary<string, String> tags = default(IDictionary<string, String>), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
+        public FlattenedProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string pname = default(string), int? lsize = default(int?), string provisioningState = default(string))
             : base(location, id, name, type, tags)
         {
             Pname = pname;

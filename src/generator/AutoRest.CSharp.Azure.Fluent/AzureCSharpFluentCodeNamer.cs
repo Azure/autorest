@@ -26,21 +26,26 @@ namespace AutoRest.CSharp.Azure.Fluent
 
             _resourceType = new CompositeType
             {
-                Name = "Resource",
-                SerializedName = "Resource"
+                Name = "Microsoft.Rest.Azure.Resource",
+                SerializedName = "Resource",
             };
-            _resourceType.Properties.Add(new Property { Name = "location", SerializedName = "location", Type = new PrimaryType(KnownPrimaryType.String) });
-            _resourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
-            _resourceType.Properties.Add(new Property { Name = "name", SerializedName = "name", Type = new PrimaryType(KnownPrimaryType.String) });
-            _resourceType.Properties.Add(new Property { Name = "type", SerializedName = "type", Type = new PrimaryType(KnownPrimaryType.String) });
-            _resourceType.Properties.Add(new Property { Name = "tags", SerializedName = "tags", Type = new DictionaryType { ValueType = new PrimaryType(KnownPrimaryType.String) } });
+
+            var stringType = new PrimaryType(KnownPrimaryType.String)
+            {
+                Name = "string"
+            };
+            _resourceType.Properties.Add(new Property { Name = "location", SerializedName = "location", Type = stringType });
+            _resourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = stringType });
+            _resourceType.Properties.Add(new Property { Name = "name", SerializedName = "name", Type = stringType });
+            _resourceType.Properties.Add(new Property { Name = "type", SerializedName = "type", Type = stringType });
+            _resourceType.Properties.Add(new Property { Name = "tags", SerializedName = "tags", Type = new DictionaryType { ValueType = stringType, NameFormat = "System.Collections.Generic.IDictionary<string, {0}>" } });
 
             _subResourceType = new CompositeType
             {
-                Name = "SubResource",
+                Name = "Microsoft.Rest.Azure.SubResource",
                 SerializedName = "SubResource"
             };
-            _subResourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = new PrimaryType(KnownPrimaryType.String) });
+            _subResourceType.Properties.Add(new Property { Name = "id", SerializedName = "id", Type = stringType });
         }
 
         public void NormalizeResourceTypes(ServiceClient serviceClient)
@@ -79,7 +84,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             }
             foreach (var model in serviceClient.ModelTypes)
             {
-                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                if (model.BaseModelType != null && model.BaseModelType.IsResource())
                 AppendInnerToTopLevelType(model, serviceClient);
             }
         }
@@ -108,5 +113,37 @@ namespace AutoRest.CSharp.Azure.Fluent
             }
         }
 
+        public void NormalizeModelProperties(ServiceClient serviceClient)
+        {
+            foreach (var modelType in serviceClient.ModelTypes)
+            {
+                foreach (var property in modelType.Properties)
+                {
+                    AddNamespaceToResourceType(property.Type, serviceClient);
+                }
+            }
+        }
+
+        private void AddNamespaceToResourceType(IType type, ServiceClient serviceClient)
+        {
+            var compositeType = type as CompositeType;
+            var sequenceType = type as SequenceType;
+            var dictionaryType = type as DictionaryType;
+            // SubResource property { get; set; } => Microsoft.Rest.Azure.SubResource property { get; set; }
+            if (compositeType != null && (compositeType.Name.Equals("Resource") || compositeType.Name.Equals("SubResource")))
+            {
+                compositeType.Name = "Microsoft.Rest.Azure." + compositeType.Name;
+            }
+            // iList<SubResource> property { get; set; } => iList<Microsoft.Rest.Azure.SubResource> property { get; set; }
+            else if (sequenceType != null)
+            {
+                AddNamespaceToResourceType(sequenceType.ElementType, serviceClient);
+            }
+            // IDictionary<string, SubResource> property { get; set; } => IDictionary<string, Microsoft.Rest.Azure.SubResource> property { get; set; }
+            else if (dictionaryType != null)
+            {
+                AddNamespaceToResourceType(dictionaryType.ValueType, serviceClient);
+            }
+        }
     }
 }

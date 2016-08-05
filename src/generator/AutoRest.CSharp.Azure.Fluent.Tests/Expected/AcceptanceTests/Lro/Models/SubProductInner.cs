@@ -11,7 +11,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     using System.Linq;
 
     [Microsoft.Rest.Serialization.JsonTransformation]
-    public partial class SubProductInner : SubResource
+    public partial class SubProductInner : Microsoft.Rest.Azure.SubResource
     {
         /// <summary>
         /// Initializes a new instance of the SubProductInner class.
@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public SubProductInner(String id = default(String), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public SubProductInner(string id = default(string), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(id)
         {
             ProvisioningState = provisioningState;

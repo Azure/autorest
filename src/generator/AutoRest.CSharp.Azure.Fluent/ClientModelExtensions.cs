@@ -9,9 +9,9 @@ namespace AutoRest.CSharp.Azure.Fluent
         public static bool IsResource(this IType type)
         {
             CompositeType compositeType = type as CompositeType;
-            return compositeType != null && (type.Name == "Resource" || type.Name == "SubResource") &&
-                compositeType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) &&
-                    (bool)compositeType.Extensions[AzureExtensions.AzureResourceExtension];
+            return compositeType != null && 
+                (type.Name == "Resource" || type.Name == "SubResource" ||
+                 type.Name == "Microsoft.Rest.Azure.Resource" || type.Name == "Microsoft.Rest.Azure.SubResource");
         }
 
         public static bool IsGeneric(this IType type)

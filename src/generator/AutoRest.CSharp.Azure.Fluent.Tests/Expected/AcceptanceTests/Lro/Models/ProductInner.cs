@@ -11,7 +11,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     using System.Linq;
 
     [Microsoft.Rest.Serialization.JsonTransformation]
-    public partial class ProductInner : Resource
+    public partial class ProductInner : Microsoft.Rest.Azure.Resource
     {
         /// <summary>
         /// Initializes a new instance of the ProductInner class.
@@ -25,7 +25,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
         /// 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
         /// 'OK'</param>
-        public ProductInner(String location = default(String), String id = default(String), String name = default(String), String type = default(String), IDictionary<string, String> tags = default(IDictionary<string, String>), string provisioningState = default(string), string provisioningStateValues = default(string))
+        public ProductInner(string location = default(string), string id = default(string), string name = default(string), string type = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), string provisioningState = default(string), string provisioningStateValues = default(string))
             : base(location, id, name, type, tags)
         {
             ProvisioningState = provisioningState;
