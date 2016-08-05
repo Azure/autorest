@@ -237,7 +237,7 @@ namespace AutoRest.Python.TemplateModels
                 throw new ArgumentNullException("property");
             }
             string docString = string.Format(CultureInfo.InvariantCulture, ":param {0}:", property.Name);
-            if (property.IsConstant || property.IsReadOnly)
+            if (property.IsConstant)
             {
                 docString = string.Format(CultureInfo.InvariantCulture, ":ivar {0}:", property.Name);
             }
@@ -249,15 +249,6 @@ namespace AutoRest.Python.TemplateModels
             }
 
             string documentation = property.Documentation;
-            if (property.DefaultValue != PythonConstants.None)
-            {
-                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
-                {
-                    documentation += ".";
-                }
-                documentation += " Default value: " + property.DefaultValue + ".";
-            }
-
             if (!string.IsNullOrWhiteSpace(summary))
             {
                 docString += " " + summary;

@@ -22,6 +22,8 @@ class SkipUrlEncodingOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An objec model deserializer.
+    :ivar unencoded_path_param: An unencoded path parameter with value 'path1/path2/path3'. Constant value: "path1/path2/path3".
+    :ivar q1: An unencoded query parameter with value 'value1&q2=value2&q3=value3'. Constant value: "value1&q2=value2&q3=value3".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -29,6 +31,8 @@ class SkipUrlEncodingOperations(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
+        self.unencoded_path_param = "path1/path2/path3"
+        self.q1 = "value1&q2=value2&q3=value3"
 
         self.config = config
 
@@ -129,13 +133,10 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_path_valid(
-            self, unencoded_path_param="path1/path2/path3", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get method with unencoded path parameter with value
         'path1/path2/path3'.
 
-        :param unencoded_path_param: An unencoded path parameter with value
-         'path1/path2/path3'
-        :type unencoded_path_param: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -148,7 +149,7 @@ class SkipUrlEncodingOperations(object):
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}'
         path_format_arguments = {
-            'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
+            'unencodedPathParam': self._serialize.url("self.unencoded_path_param", self.unencoded_path_param, 'str', skip_quote=True)
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -311,13 +312,10 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_query_valid(
-            self, q1="value1&q2=value2&q3=value3", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'.
 
-        :param q1: An unencoded query parameter with value
-         'value1&q2=value2&q3=value3'
-        :type q1: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -332,7 +330,7 @@ class SkipUrlEncodingOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['q1'] = self._serialize.query("q1", q1, 'str', skip_quote=True)
+        query_parameters['q1'] = self._serialize.query("self.q1", self.q1, 'str', skip_quote=True)
 
         # Construct headers
         header_parameters = {}
