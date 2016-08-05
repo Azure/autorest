@@ -34,10 +34,9 @@ namespace AutoRest.Python.TemplateModels
                 }
                 else 
                 {
-                    var existingProperty = ConstantProperties.FirstOrDefault(p => p.Name == parameter.Name);
-                    if (existingProperty == null)
+                    if (!ConstantProperties.Any(p => p.Name == parameter.Name))
                     {
-                        existingProperty = new Property
+                        var constantProperty = new Property
                         {
                             Name = parameter.Name,
                             DefaultValue = parameter.DefaultValue,
@@ -47,7 +46,7 @@ namespace AutoRest.Python.TemplateModels
                             SerializedName = parameter.SerializedName,
                             Type = parameter.Type
                         };
-                        ConstantProperties.Add(existingProperty);
+                        ConstantProperties.Add(constantProperty);
                     }
                     if (!parameter.Name.StartsWith("self."))
                         parameter.Name = "self." + parameter.Name;

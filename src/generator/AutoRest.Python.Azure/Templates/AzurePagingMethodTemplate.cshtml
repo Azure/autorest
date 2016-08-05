@@ -24,6 +24,14 @@
 {
 @EmptyLine
 }
+@if (Model.ConstantParameters.Any())
+{
+	foreach (var parameter in Model.ConstantParameters)
+	{
+        @:@(parameter.Name) = @(parameter.DefaultValue)
+	}
+@EmptyLine
+}
         def internal_paging(next_link=None, raw=False):
 @EmptyLine
             if not next_link:
