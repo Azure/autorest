@@ -8,6 +8,7 @@ using System.Net.Http;
 using Microsoft.Rest.ClientRuntime.Tests.Fakes;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
+using System.Net.Http.Headers;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {
@@ -161,5 +162,54 @@ namespace Microsoft.Rest.ClientRuntime.Tests
                 Assert.Equal("Text", ex.Response.Content);
             }
         }
+
+        [Fact]
+        public void AddDefaultUserAgentInfo()
+        {
+            string defaultProductName = "FxVersion";
+
+            FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
+            fakeClient.SetUserAgent();
+            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
+            ProductInfoHeaderValue pInfoValue = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            Assert.True(pInfoValue.Product.Name.Equals(defaultProductName));
+        }
+
+        [Fact]
+        public void AddUserAgentInfoWithoutVersion()
+        {
+            string defaultProductName = "FxVersion";
+            string testProductName = "TestProduct";            
+
+            FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
+            fakeClient.SetUserAgent(testProductName);
+            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
+            HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentValueCollection = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent;
+
+            var defProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            var testProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            Assert.True(defProd.Product.Name.Equals(defaultProductName));
+            Assert.True(testProd.Product.Name.Equals(testProductName));
+        }
+
+        [Fact]
+        public void AddUserAgentInfoWithVersion()
+        {
+            string defaultProductName = "FxVersion";
+            string testProductName = "TestProduct";
+            string testProductVersion = "1.0.0.0";
+
+            FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
+            fakeClient.SetUserAgent(testProductName, testProductVersion);
+            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
+            HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentValueCollection = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent;
+
+            var defProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            var testProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            Assert.True(defProd.Product.Name.Equals(defaultProductName));
+            Assert.True(testProd.Product.Name.Equals(testProductName));
+            Assert.True(testProd.Product.Version.Equals(testProductVersion));
+        }
+
     }
 }

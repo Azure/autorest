@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using SysDiag = System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,9 +20,56 @@ namespace Microsoft.Rest
         where T : ServiceClient<T>
     {
         /// <summary>
+        /// ProductName string to be used to set Framework Version in UserAgent
+        /// </summary>
+        private const string FXVERSION = "FxVersion";
+
+        /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
         private bool _disposed;
+
+        /// <summary>
+        /// Field used for ClientVersion property
+        /// </summary>
+        private string _clientVersion;
+        
+        /// <summary>
+        /// Field used for Framework Version property
+        /// </summary>
+        private string _fxVersion;
+
+        /// <summary>
+        /// Assembly/File version for Assembly containing ServiceClient type
+        /// </summary>
+        private string ClientVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_clientVersion))
+                {
+                    _clientVersion = GetClientVersion();
+                }
+
+                return _clientVersion;
+            }
+        }
+
+        /// <summary>
+        /// File Version for System.dll loaded in current app domain
+        /// </summary>
+        private string FxVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_fxVersion))
+                {
+                    _fxVersion = GetFrameWorkVersion();
+                }
+
+                return _fxVersion;
+            }
+        }
 
         /// <summary>
         /// Reference to the first HTTP handler (which is the start of send HTTP
@@ -211,6 +259,23 @@ namespace Microsoft.Rest
                 GetClientVersion()));
         }
 
+        public bool SetUserAgent()
+        {
+            if (!_disposed && HttpClient != null)
+            {
+                // Clear the old user agent
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, GetFrameWorkVersion()));
+
+                // Returns true if the user agent was set 
+                return true;
+            }
+
+            // Returns false if the HttpClient was disposed before invoking the method
+            return false;
+            
+        }
+
         /// <summary>
         /// Sets the product name to be used in the user agent header when making requests
         /// </summary>
@@ -220,7 +285,7 @@ namespace Microsoft.Rest
             if (!_disposed && HttpClient != null)
             {
                 // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                SetUserAgent();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
 
                 // Returns true if the user agent was set 
@@ -241,7 +306,7 @@ namespace Microsoft.Rest
             if (!_disposed && HttpClient != null)
             {
                 // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                SetUserAgent();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
 
                 // Returns true if the user agent was set
@@ -297,6 +362,20 @@ namespace Microsoft.Rest
                         .Substring("Version=".Length);
             }
             return version;
+        }
+
+        /// <summary>
+        /// Gets the version of mscorlib 
+        /// </summary>
+        /// <returns></returns>
+        private string GetFrameWorkVersion()
+        {
+            string fxFileVersion = string.Empty;
+            Assembly assembly = typeof(Object).GetTypeInfo().Assembly;
+            AssemblyFileVersionAttribute fvAttribute =
+                        assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+            fxFileVersion = fvAttribute?.Version;
+            return fxFileVersion;
         }
     }
 }
