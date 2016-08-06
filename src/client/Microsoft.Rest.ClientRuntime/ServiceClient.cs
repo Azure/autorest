@@ -39,7 +39,9 @@ namespace Microsoft.Rest
         private string _fxVersion;
 
         /// <summary>
-        /// Assembly/File version for Assembly containing ServiceClient type
+        /// Gets the AssemblyInformationalVersion if available
+        /// if not it gets the AssemblyFileVerion
+        /// if neither are available it will default to the Assembly Version of a service client.
         /// </summary>
         private string ClientVersion
         {
@@ -47,7 +49,41 @@ namespace Microsoft.Rest
             {
                 if (string.IsNullOrEmpty(_clientVersion))
                 {
-                    _clientVersion = GetClientVersion();
+                    //string version = String.Empty;
+                    Type type = this.GetType();
+                    Assembly assembly = type.GetTypeInfo().Assembly;
+
+                    try
+                    {
+                        // try to get AssemblyInformationalVersion first
+                        AssemblyInformationalVersionAttribute aivAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
+                        _clientVersion = aivAttribute?.InformationalVersion;
+
+                        // if not available try to get AssemblyFileVersion
+                        if (String.IsNullOrEmpty(_clientVersion))
+                        {
+                            AssemblyFileVersionAttribute fvAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+                            _clientVersion = fvAttribute?.Version;
+                        }
+                    }
+                    catch (AmbiguousMatchException)
+                    {
+                        // in case there are more then one attribute of the type
+                    }
+
+                    // no usable version attribute found so default to Assembly Version
+                    if (String.IsNullOrEmpty(_clientVersion))
+                    {
+                        _clientVersion =
+                            assembly
+                                .FullName
+                                .Split(',')
+                                .Select(c => c.Trim())
+                                .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
+                                .Substring("Version=".Length);
+                    }
                 }
 
                 return _clientVersion;
@@ -55,15 +91,18 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// File Version for System.dll loaded in current app domain
+        /// Get file version for System.dll
         /// </summary>
-        private string FxVersion
+        private string FrameworkVersion
         {
             get
             {
                 if (string.IsNullOrEmpty(_fxVersion))
                 {
-                    _fxVersion = GetFrameWorkVersion();
+                    Assembly assembly = typeof(Object).GetTypeInfo().Assembly;
+                    AssemblyFileVersionAttribute fvAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+                    _fxVersion = fvAttribute?.Version;
                 }
 
                 return _fxVersion;
@@ -264,7 +303,7 @@ namespace Microsoft.Rest
             {
                 // Clear the old user agent
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, GetFrameWorkVersion()));
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
 
                 // Returns true if the user agent was set 
                 return true;
@@ -285,7 +324,7 @@ namespace Microsoft.Rest
             {
                 // Clear the old user agent
                 SetUserAgent();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, ClientVersion));
 
                 // Returns true if the user agent was set 
                 return true;
@@ -361,20 +400,6 @@ namespace Microsoft.Rest
                         .Substring("Version=".Length);
             }
             return version;
-        }
-
-        /// <summary>
-        /// Gets the version of mscorlib 
-        /// </summary>
-        /// <returns></returns>
-        private string GetFrameWorkVersion()
-        {
-            string fxFileVersion = string.Empty;
-            Assembly assembly = typeof(Object).GetTypeInfo().Assembly;
-            AssemblyFileVersionAttribute fvAttribute =
-                        assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
-            fxFileVersion = fvAttribute?.Version;
-            return fxFileVersion;
         }
     }
 }
