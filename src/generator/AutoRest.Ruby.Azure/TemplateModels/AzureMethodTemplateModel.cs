@@ -119,7 +119,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 if (ReturnType.Body is CompositeType)
                 {
                     CompositeType compositeType = (CompositeType)ReturnType.Body;
-                    if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                    if (compositeType.Extensions.ContainsKey(AzureExtensions.PageableExtension) && this.Extensions.ContainsKey("nextMethodName"))
                     {
                         bool isNextLinkMethod = this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"];
                         bool isPageable = (bool)compositeType.Extensions[AzureExtensions.PageableExtension];
