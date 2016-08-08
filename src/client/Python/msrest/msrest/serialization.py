@@ -603,6 +603,8 @@ class Serializer(object):
         :param Date attr: Object to be serialized.
         :rtype: str
         """
+        if isinstance(attr, str):
+            attr = isodate.parse_date(attr)
         t = "{:04}-{:02}-{:02}".format(attr.year, attr.month, attr.day)
         return t
 
@@ -613,6 +615,8 @@ class Serializer(object):
         :param TimeDelta attr: Object to be serialized.
         :rtype: str
         """
+        if isinstance(attr, str):
+            attr = isodate.parse_duration(attr)
         return isodate.duration_isoformat(attr)
 
     @staticmethod

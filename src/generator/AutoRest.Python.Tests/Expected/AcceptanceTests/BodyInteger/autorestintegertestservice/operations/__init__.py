@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .int_model import IntModel
+from .int_model_operations import IntModelOperations
 
 __all__ = [
-    'IntModel',
+    'IntModelOperations',
 ]

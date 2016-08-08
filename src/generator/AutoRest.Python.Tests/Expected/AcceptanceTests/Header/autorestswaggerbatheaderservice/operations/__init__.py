@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .header import Header
+from .header_operations import HeaderOperations
 
 __all__ = [
-    'Header',
+    'HeaderOperations',
 ]

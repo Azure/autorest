@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.paths import Paths
+from .operations.paths_operations import PathsOperations
 from . import models
 
 
@@ -57,7 +57,7 @@ class AutoRestParameterizedCustomHostTestClient(object):
     :vartype config: AutoRestParameterizedCustomHostTestClientConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.Paths
+    :vartype paths: .operations.PathsOperations
 
     :param subscription_id: The subscription id with value 'test12'.
     :type subscription_id: str
@@ -77,5 +77,5 @@ class AutoRestParameterizedCustomHostTestClient(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.paths = Paths(
+        self.paths = PathsOperations(
             self._client, self.config, self._serialize, self._deserialize)

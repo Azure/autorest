@@ -160,7 +160,7 @@ namespace AutoRest.Python.TemplateModels
             List<string> requiredDeclarations = new List<string>();
             List<string> combinedDeclarations = new List<string>();
 
-            foreach (var parameter in LocalParameters)
+            foreach (var parameter in DocumentationParameters)
             {
                 if (parameter.IsRequired && parameter.DefaultValue == PythonConstants.None)
                 {
@@ -501,7 +501,15 @@ namespace AutoRest.Python.TemplateModels
         {
             get
             {
-                return this.LocalParameters;
+                return this.LocalParameters.Where(p => !p.IsConstant);
+            }
+        }
+
+        public IEnumerable<ParameterTemplateModel> ConstantParameters
+        {
+            get
+            {
+                return this.LocalParameters.Where(p => p.IsConstant && !p.Name.StartsWith("self."));
             }
         }
 

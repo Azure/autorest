@@ -34,6 +34,10 @@ class @(Model.MethodGroupType)(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An objec model deserializer.
+@foreach(var property in Model.ConstantProperties)
+{
+    @:@Model.GetPropertyDocumentationString(property)
+}
     """
 @EmptyLine
     def __init__(self, client, config, serializer, deserializer):
@@ -41,6 +45,10 @@ class @(Model.MethodGroupType)(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
+@foreach(var property in Model.ConstantProperties)
+{
+        @:@property.Name = @property.DefaultValue
+}
 @EmptyLine
         self.config = config
 @foreach (var method in Model.MethodTemplateModels)

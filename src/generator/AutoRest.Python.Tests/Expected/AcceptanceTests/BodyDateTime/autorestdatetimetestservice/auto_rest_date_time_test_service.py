@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.datetime_model import DatetimeModel
+from .operations.datetime_model_operations import DatetimeModelOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestDateTimeTestService(object):
     :vartype config: AutoRestDateTimeTestServiceConfiguration
 
     :ivar datetime_model: DatetimeModel operations
-    :vartype datetime_model: .operations.DatetimeModel
+    :vartype datetime_model: .operations.DatetimeModelOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestDateTimeTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.datetime_model = DatetimeModel(
+        self.datetime_model = DatetimeModelOperations(
             self._client, self.config, self._serialize, self._deserialize)

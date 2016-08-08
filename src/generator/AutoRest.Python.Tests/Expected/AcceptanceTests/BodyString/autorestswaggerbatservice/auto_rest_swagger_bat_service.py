@@ -12,8 +12,8 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.string import String
-from .operations.enum import Enum
+from .operations.string_operations import StringOperations
+from .operations.enum_operations import EnumOperations
 from . import models
 
 
@@ -44,9 +44,9 @@ class AutoRestSwaggerBATService(object):
     :vartype config: AutoRestSwaggerBATServiceConfiguration
 
     :ivar string: String operations
-    :vartype string: .operations.String
+    :vartype string: .operations.StringOperations
     :ivar enum: Enum operations
-    :vartype enum: .operations.Enum
+    :vartype enum: .operations.EnumOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -62,7 +62,7 @@ class AutoRestSwaggerBATService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.string = String(
+        self.string = StringOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.enum = Enum(
+        self.enum = EnumOperations(
             self._client, self.config, self._serialize, self._deserialize)

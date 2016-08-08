@@ -9,10 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .implicit import Implicit
-from .explicit import Explicit
+from .implicit_operations import ImplicitOperations
+from .explicit_operations import ExplicitOperations
 
 __all__ = [
-    'Implicit',
-    'Explicit',
+    'ImplicitOperations',
+    'ExplicitOperations',
 ]
