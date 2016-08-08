@@ -49,7 +49,6 @@ namespace Microsoft.Rest
             {
                 if (string.IsNullOrEmpty(_clientVersion))
                 {
-                    //string version = String.Empty;
                     Type type = this.GetType();
                     Assembly assembly = type.GetTypeInfo().Assembly;
 
