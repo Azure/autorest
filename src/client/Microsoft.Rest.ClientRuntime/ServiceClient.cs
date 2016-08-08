@@ -293,10 +293,14 @@ namespace Microsoft.Rest
             FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();
-            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName, ClientVersion));
+            SetUserAgent(type.FullName, ClientVersion);
         }
 
-        public bool SetUserAgent()
+        /// <summary>
+        /// Set default info in UserAgent
+        /// </summary>
+        /// <returns>True: Setting UserAgent succeeded. False: Setting UserAgent failed</returns>
+        private bool SetUserAgent()
         {
             if (!_disposed && HttpClient != null)
             {
@@ -319,18 +323,7 @@ namespace Microsoft.Rest
         /// <param name="productName">Name of the product to be used in the user agent</param>
         public bool SetUserAgent(string productName)
         {
-            if (!_disposed && HttpClient != null)
-            {
-                // Clear the old user agent
-                SetUserAgent();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, ClientVersion));
-
-                // Returns true if the user agent was set 
-                return true;
-            }
-
-            // Returns false if the HttpClient was disposed before invoking the method
-            return false;
+            return SetUserAgent(productName, ClientVersion);
         }
 
         /// <summary>
@@ -340,10 +333,8 @@ namespace Microsoft.Rest
         /// <param name="version">Version of the product to be used in the user agent</param>
         public bool SetUserAgent(string productName, string version)
         {
-            if (!_disposed && HttpClient != null)
+            if (SetUserAgent())
             {
-                // Clear the old user agent
-                SetUserAgent();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
 
                 // Returns true if the user agent was set

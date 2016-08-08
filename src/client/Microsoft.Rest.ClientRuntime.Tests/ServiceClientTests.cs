@@ -164,18 +164,6 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         }
 
         [Fact]
-        public void AddDefaultUserAgentInfo()
-        {
-            string defaultProductName = "FxVersion";
-
-            FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
-            fakeClient.SetUserAgent();
-            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
-            ProductInfoHeaderValue pInfoValue = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
-            Assert.True(pInfoValue.Product.Name.Equals(defaultProductName));
-        }
-
-        [Fact]
         public void AddUserAgentInfoWithoutVersion()
         {
             string defaultProductName = "FxVersion";
@@ -183,13 +171,13 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
             fakeClient.SetUserAgent(testProductName);
-            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
+            HttpResponseMessage response = fakeClient.DoStuffSync();
             HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentValueCollection = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent;
 
-            var defProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
-            var testProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
-            Assert.True(defProd.Product.Name.Equals(defaultProductName));
-            Assert.True(testProd.Product.Name.Equals(testProductName));
+            var defaultProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            var testProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            Assert.True(defaultProduct.Product.Name.Equals(defaultProductName));
+            Assert.True(testProduct.Product.Name.Equals(testProductName));
         }
 
         [Fact]
@@ -201,14 +189,14 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
             fakeClient.SetUserAgent(testProductName, testProductVersion);
-            HttpResponseMessage response = fakeClient.DoStuffSync("Text");
+            HttpResponseMessage response = fakeClient.DoStuffSync();
             HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentValueCollection = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent;
 
-            var defProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
-            var testProd = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
-            Assert.True(defProd.Product.Name.Equals(defaultProductName));
-            Assert.True(testProd.Product.Name.Equals(testProductName));
-            Assert.True(testProd.Product.Version.Equals(testProductVersion));
+            var defaultProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            var testProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+            Assert.True(defaultProduct.Product.Name.Equals(defaultProductName));
+            Assert.True(testProduct.Product.Name.Equals(testProductName));
+            Assert.True(testProduct.Product.Version.Equals(testProductVersion));
         }
 
     }
