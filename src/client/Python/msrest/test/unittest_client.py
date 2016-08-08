@@ -169,7 +169,7 @@ class TestServiceClient(unittest.TestCase):
 
         ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'})
         mock_client._configure_session.assert_called_with(session)
-        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': 16, 'id':'1234'})
+        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': '16', 'id':'1234'})
         self.assertEqual(session.request.call_count, 1)
         session.request.call_count = 0
         session.close.assert_called_with()
@@ -178,7 +178,7 @@ class TestServiceClient(unittest.TestCase):
         with self.assertRaises(ClientRequestError):
             ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'}, test='value')
         mock_client._configure_session.assert_called_with(session, test='value')
-        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': 16, 'id':'1234'})
+        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': '16', 'id':'1234'})
         self.assertEqual(session.request.call_count, 1)
         session.request.call_count = 0
         session.close.assert_called_with()
