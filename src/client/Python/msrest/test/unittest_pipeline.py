@@ -165,7 +165,7 @@ class TestClientRequest(unittest.TestCase):
         request.add_content(data)
 
         self.assertEqual(request.data, json.dumps(data))
-        self.assertEqual(request.headers.get('Content-Length'), 17)
+        self.assertEqual(request.headers.get('Content-Length'), '17')
 
     def test_request_url_with_params(self):
 
