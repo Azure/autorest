@@ -16,8 +16,8 @@ addons:
     - python3.5
 before_install:
   # Attempt to work around fact that node modules mess up rvm
-  - PATH=`echo $PATH | sed "s/\.\/node_modules\/\.bin//g"`;
-  - export PATH=$PATH:./node_modules/.bin;
+  - PATH=`echo $PATH | sed "s/\.\/node_modules\/\.bin//g"`
+  - export PATH=$PATH:./node_modules/.bin
 install:
   # Install npm
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 4
@@ -39,6 +39,16 @@ install:
   - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
   - sudo apt-get update
   - sudo apt-get install dotnet-dev-1.0.0-preview2-003121 -y
+  # Install go
+  - sudo curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
+  - sudo tar -xvf go1.6.linux-amd64.tar.gz
+  - sudo mv go /usr/local/
+  - export PATH=$PATH:/usr/local/go/bin
+  - export GOPATH=`pwd`/src/generator/AutoRest.Go.Tests
+  - sudo chmod -R 777 `echo $GOPATH`
+  - sudo apt-get install git -y
+  - sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
+  - sudo apt-get install glide
 script:
   - gulp
 after_script:

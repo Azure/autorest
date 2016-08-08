@@ -1,0 +1,31 @@
+﻿@using AutoRest.Go
+@using AutoRest.Core.ClientModel
+@using AutoRest.Go.Templates
+@using AutoRest.Core.Utilities
+
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.ModelTemplateModel>
+
+@WrapComment("// ", string.Format("{0} is {1}", Model.Name, Model.Documentation.ToSentence()))
+type @Model.Name struct {
+@if (Model.IsResponseType)
+{
+    @:autorest.Response `json:"-"`
+}
+    @(Model.Fields())
+}
+
+@if (!string.IsNullOrEmpty(Model.NextLink))
+{
+@:@EmptyLine
+@:// @(Model.PreparerMethodName()) prepares a request to retrieve the next set of results. It returns
+@:// nil if no more results exist.
+@:func (client @(Model.Name)) @(Model.PreparerMethodName())() (*http.Request, error) {
+    @:if client.@(Model.NextLink) == nil || len(to.String(client.@(Model.NextLink))) <= 0 {
+        @:return nil, nil
+    @:}
+    @:return autorest.Prepare(&http.Request{},
+        @:autorest.AsJSON(),
+        @:autorest.AsGet(),
+        @:autorest.WithBaseURL(to.String(client.@(Model.NextLink))));
+@:}
+}
