@@ -19,7 +19,7 @@ namespace Petstore.Models
         /// class.
         /// </summary>
         /// <param name="tags">Resource tags</param>
-        public StorageAccountUpdateParameters(System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
+        public StorageAccountUpdateParameters(System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
         {
             Tags = tags;
             Properties = properties;
@@ -29,7 +29,7 @@ namespace Petstore.Models
         /// Gets or sets resource tags
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<System.String, System.String> Tags { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>

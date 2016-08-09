@@ -15,7 +15,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountCheckNameAvailabilityParameters class.
         /// </summary>
-        public StorageAccountCheckNameAvailabilityParameters(System.String name, System.String type = default(System.String))
+        public StorageAccountCheckNameAvailabilityParameters(string name, string type = default(string))
         {
             Name = name;
             Type = type;
@@ -24,12 +24,12 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
-        public System.String Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Validate the object.

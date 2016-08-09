@@ -11,11 +11,11 @@ module @Settings.Namespace
   #
   class @Model.Name < @Model.BaseType
 
-    include MsRest::Serialization
 @foreach (var include in Model.Includes)
 {
     @:include @include
 }
+    @Model.IncludeSerializer
     @EmptyLine
 
     # @@return [String] the base URI of the service.

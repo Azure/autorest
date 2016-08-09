@@ -14,7 +14,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the User class.
         /// </summary>
         /// <param name="userStatus">User Status</param>
-        public User(System.Int64? id = default(System.Int64?), System.String username = default(System.String), System.String firstName = default(System.String), System.String lastName = default(System.String), System.String email = default(System.String), System.String password = default(System.String), System.String phone = default(System.String), System.Int32? userStatus = default(System.Int32?))
+        public User(long? id = default(long?), string username = default(string), string firstName = default(string), string lastName = default(string), string email = default(string), string password = default(string), string phone = default(string), int? userStatus = default(int?))
         {
             Id = id;
             Username = username;
@@ -29,43 +29,43 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64? Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "username")]
-        public System.String Username { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "firstName")]
-        public System.String FirstName { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "lastName")]
-        public System.String LastName { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "email")]
-        public System.String Email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "password")]
-        public System.String Password { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "phone")]
-        public System.String Phone { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Gets or sets user Status
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "userStatus")]
-        public System.Int32? UserStatus { get; set; }
+        public int? UserStatus { get; set; }
 
     }
 }

@@ -22,7 +22,7 @@ namespace Petstore.Models
         /// <param name="id">The id of the pet.</param>
         /// <param name="status">pet status in the store. Possible values
         /// include: 'available', 'pending', 'sold'</param>
-        public Pet(System.String name, System.Collections.Generic.IList<System.String> photoUrls, System.Int64? id = default(System.Int64?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), System.String status = default(System.String))
+        public Pet(string name, System.Collections.Generic.IList<string> photoUrls, long? id = default(long?), Category category = default(Category), System.Collections.Generic.IList<Tag> tags = default(System.Collections.Generic.IList<Tag>), string status = default(string))
         {
             Id = id;
             Category = category;
@@ -39,7 +39,7 @@ namespace Petstore.Models
         /// A more detailed description of the id of the pet.
         /// </remarks>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64? Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
@@ -49,12 +49,12 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "photoUrls")]
-        public System.Collections.Generic.IList<System.String> PhotoUrls { get; set; }
+        public System.Collections.Generic.IList<string> PhotoUrls { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,7 +66,7 @@ namespace Petstore.Models
         /// 'available', 'pending', 'sold'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.String Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Validate the object.

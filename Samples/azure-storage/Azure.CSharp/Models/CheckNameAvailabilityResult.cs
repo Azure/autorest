@@ -28,7 +28,7 @@ namespace Petstore.Models
         /// 'AccountNameInvalid', 'AlreadyExists'</param>
         /// <param name="message">Gets an error message explaining the Reason
         /// value in more detail.</param>
-        public CheckNameAvailabilityResult(System.Boolean? nameAvailable = default(System.Boolean?), Reason? reason = default(Reason?), System.String message = default(System.String))
+        public CheckNameAvailabilityResult(bool? nameAvailable = default(bool?), Reason? reason = default(Reason?), string message = default(string))
         {
             NameAvailable = nameAvailable;
             Reason = reason;
@@ -41,7 +41,7 @@ namespace Petstore.Models
         /// name has already been taken or invalid and cannot be used.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "nameAvailable")]
-        public System.Boolean? NameAvailable { get; set; }
+        public bool? NameAvailable { get; set; }
 
         /// <summary>
         /// Gets the reason that a storage account name could not be used. The
@@ -55,7 +55,7 @@ namespace Petstore.Models
         /// Gets an error message explaining the Reason value in more detail.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
-        public System.String Message { get; set; }
+        public string Message { get; set; }
 
     }
 }

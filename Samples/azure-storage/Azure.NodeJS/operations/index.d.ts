@@ -20,7 +20,7 @@ export interface StorageAccounts {
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
      * 
-     * @param {string} [accountName.name]
+     * @param {string} accountName.name
      * 
      * @param {string} [accountName.type]
      * 
@@ -52,14 +52,14 @@ export interface StorageAccounts {
      * @param {object} parameters The parameters to provide for the created
      * account.
      * 
-     * @param {string} [parameters.location] Resource location
+     * @param {string} parameters.location Resource location
      * 
      * @param {object} [parameters.tags] Resource tags
      * 
      * @param {object} [parameters.properties]
      * 
-     * @param {string} [parameters.properties.accountType] Gets or sets the
-     * account type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
+     * @param {string} parameters.properties.accountType Gets or sets the account
+     * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
      * @param {object} [options] Optional Parameters.
@@ -90,14 +90,14 @@ export interface StorageAccounts {
      * @param {object} parameters The parameters to provide for the created
      * account.
      * 
-     * @param {string} [parameters.location] Resource location
+     * @param {string} parameters.location Resource location
      * 
      * @param {object} [parameters.tags] Resource tags
      * 
      * @param {object} [parameters.properties]
      * 
-     * @param {string} [parameters.properties.accountType] Gets or sets the
-     * account type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
+     * @param {string} parameters.properties.accountType Gets or sets the account
+     * type. Possible values include: 'Standard_LRS', 'Standard_ZRS',
      * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
      * @param {object} [options] Optional Parameters.
@@ -194,7 +194,7 @@ export interface StorageAccounts {
      * is supported per storage account at this time. To clear the existing
      * custom domain, use an empty string for the custom domain name property.
      * 
-     * @param {string} [parameters.properties.customDomain.name] Gets or sets the
+     * @param {string} parameters.properties.customDomain.name Gets or sets the
      * custom domain name. Name is the CNAME source.
      * 
      * @param {boolean} [parameters.properties.customDomain.useSubDomain]
@@ -277,7 +277,7 @@ export interface StorageAccounts {
      * @param {object} regenerateKey Specifies name of the key which should be
      * regenerated. key1 or key2 for the default keys
      * 
-     * @param {string} [regenerateKey.keyName]
+     * @param {string} regenerateKey.keyName
      * 
      * @param {object} [options] Optional Parameters.
      * 

@@ -22,7 +22,7 @@ namespace Petstore.Models
         /// <param name="useSubDomain">Indicates whether indirect CName
         /// validation is enabled. Default value is false. This should only
         /// be set on updates</param>
-        public CustomDomain(System.String name, System.Boolean? useSubDomain = default(System.Boolean?))
+        public CustomDomain(string name, bool? useSubDomain = default(bool?))
         {
             Name = name;
             UseSubDomain = useSubDomain;
@@ -32,7 +32,7 @@ namespace Petstore.Models
         /// Gets or sets the custom domain name. Name is the CNAME source.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether indirect CName validation is
@@ -40,7 +40,7 @@ namespace Petstore.Models
         /// updates
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "useSubDomain")]
-        public System.Boolean? UseSubDomain { get; set; }
+        public bool? UseSubDomain { get; set; }
 
         /// <summary>
         /// Validate the object.

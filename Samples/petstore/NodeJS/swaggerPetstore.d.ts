@@ -61,9 +61,9 @@ declare class SwaggerPetstore {
          * 
          * @param {string} [options.body.category.name]
          * 
-         * @param {string} [options.body.name]
+         * @param {string} options.body.name
          * 
-         * @param {array} [options.body.photoUrls]
+         * @param {array} options.body.photoUrls
          * 
          * @param {array} [options.body.tags]
          * 
@@ -96,9 +96,9 @@ declare class SwaggerPetstore {
          * 
          * @param {string} [options.body.category.name]
          * 
-         * @param {string} [options.body.name]
+         * @param {string} options.body.name
          * 
-         * @param {array} [options.body.photoUrls]
+         * @param {array} options.body.photoUrls
          * 
          * @param {array} [options.body.tags]
          * 

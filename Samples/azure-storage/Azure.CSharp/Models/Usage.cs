@@ -24,7 +24,7 @@ namespace Petstore.Models
         /// <param name="limit">Gets the maximum count of the resources that
         /// can be allocated in the subscription.</param>
         /// <param name="name">Gets the name of the type of usage.</param>
-        public Usage(UsageUnit unit, System.Int32 currentValue, System.Int32 limit, UsageName name)
+        public Usage(UsageUnit unit, int currentValue, int limit, UsageName name)
         {
             Unit = unit;
             CurrentValue = currentValue;
@@ -44,14 +44,14 @@ namespace Petstore.Models
         /// subscription.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "currentValue")]
-        public System.Int32 CurrentValue { get; set; }
+        public int CurrentValue { get; set; }
 
         /// <summary>
         /// Gets the maximum count of the resources that can be allocated in
         /// the subscription.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "limit")]
-        public System.Int32 Limit { get; set; }
+        public int Limit { get; set; }
 
         /// <summary>
         /// Gets the name of the type of usage.
