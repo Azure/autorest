@@ -167,7 +167,8 @@ namespace Microsoft.Rest.ClientRuntime.Tests
         public void AddUserAgentInfoWithoutVersion()
         {
             string defaultProductName = "FxVersion";
-            string testProductName = "TestProduct";            
+            string testProductName = "TestProduct";
+            Version defaultProductVer, testProductVer;
 
             FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
             fakeClient.SetUserAgent(testProductName);
@@ -176,8 +177,15 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             var defaultProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
             var testProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+
+            Version.TryParse(defaultProduct.Product.Version, out defaultProductVer);
+            Version.TryParse(testProduct.Product.Version, out testProductVer);
+
             Assert.True(defaultProduct.Product.Name.Equals(defaultProductName));
+            Assert.NotNull(defaultProductVer);
+
             Assert.True(testProduct.Product.Name.Equals(testProductName));
+            Assert.NotNull(testProductVer);
         }
 
         [Fact]
@@ -186,6 +194,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             string defaultProductName = "FxVersion";
             string testProductName = "TestProduct";
             string testProductVersion = "1.0.0.0";
+            Version defaultProductVer, testProductVer;
 
             FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
             fakeClient.SetUserAgent(testProductName, testProductVersion);
@@ -194,7 +203,13 @@ namespace Microsoft.Rest.ClientRuntime.Tests
 
             var defaultProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(defaultProductName)).FirstOrDefault<ProductInfoHeaderValue>();
             var testProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(testProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+
+            Version.TryParse(defaultProduct.Product.Version, out defaultProductVer);
+            Version.TryParse(testProduct.Product.Version, out testProductVer);
+
             Assert.True(defaultProduct.Product.Name.Equals(defaultProductName));
+            Assert.NotNull(defaultProductVer);
+
             Assert.True(testProduct.Product.Name.Equals(testProductName));
             Assert.True(testProduct.Product.Version.Equals(testProductVersion));
         }
