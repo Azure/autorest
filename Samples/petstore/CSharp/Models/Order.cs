@@ -15,7 +15,7 @@ namespace Petstore.Models
         /// </summary>
         /// <param name="status">Order Status. Possible values include:
         /// 'placed', 'approved', 'delivered'</param>
-        public Order(System.Int64? id = default(System.Int64?), System.Int64? petId = default(System.Int64?), System.Int32? quantity = default(System.Int32?), System.DateTime? shipDate = default(System.DateTime?), System.String status = default(System.String), System.Boolean? complete = default(System.Boolean?))
+        public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), System.DateTime? shipDate = default(System.DateTime?), string status = default(string), bool? complete = default(bool?))
         {
             Id = id;
             PetId = petId;
@@ -28,17 +28,17 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64? Id { get; private set; }
+        public long? Id { get; private set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "petId")]
-        public System.Int64? PetId { get; set; }
+        public long? PetId { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "quantity")]
-        public System.Int32? Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -50,12 +50,12 @@ namespace Petstore.Models
         /// 'approved', 'delivered'
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
-        public System.String Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "complete")]
-        public System.Boolean? Complete { get; set; }
+        public bool? Complete { get; set; }
 
     }
 }

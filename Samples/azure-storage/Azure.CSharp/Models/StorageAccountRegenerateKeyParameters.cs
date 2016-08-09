@@ -15,7 +15,7 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountRegenerateKeyParameters class.
         /// </summary>
-        public StorageAccountRegenerateKeyParameters(System.String keyName)
+        public StorageAccountRegenerateKeyParameters(string keyName)
         {
             KeyName = keyName;
         }
@@ -23,7 +23,7 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "keyName")]
-        public System.String KeyName { get; set; }
+        public string KeyName { get; set; }
 
         /// <summary>
         /// Validate the object.

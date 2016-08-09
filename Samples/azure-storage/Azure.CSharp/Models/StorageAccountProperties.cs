@@ -50,7 +50,7 @@ namespace Petstore.Models
         /// perform a retrieval of a public blob, queue or table object from
         /// the secondary location of the storage account. Only available if
         /// the accountType is StandardRAGRS.</param>
-        public StorageAccountProperties(ProvisioningState? provisioningState = default(ProvisioningState?), AccountType? accountType = default(AccountType?), Endpoints primaryEndpoints = default(Endpoints), System.String primaryLocation = default(System.String), AccountStatus? statusOfPrimary = default(AccountStatus?), System.DateTime? lastGeoFailoverTime = default(System.DateTime?), System.String secondaryLocation = default(System.String), AccountStatus? statusOfSecondary = default(AccountStatus?), System.DateTime? creationTime = default(System.DateTime?), CustomDomain customDomain = default(CustomDomain), Endpoints secondaryEndpoints = default(Endpoints))
+        public StorageAccountProperties(ProvisioningState? provisioningState = default(ProvisioningState?), AccountType? accountType = default(AccountType?), Endpoints primaryEndpoints = default(Endpoints), string primaryLocation = default(string), AccountStatus? statusOfPrimary = default(AccountStatus?), System.DateTime? lastGeoFailoverTime = default(System.DateTime?), string secondaryLocation = default(string), AccountStatus? statusOfSecondary = default(AccountStatus?), System.DateTime? creationTime = default(System.DateTime?), CustomDomain customDomain = default(CustomDomain), Endpoints secondaryEndpoints = default(Endpoints))
         {
             ProvisioningState = provisioningState;
             AccountType = accountType;
@@ -93,7 +93,7 @@ namespace Petstore.Models
         /// Gets the location of the primary for the storage account.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "primaryLocation")]
-        public System.String PrimaryLocation { get; set; }
+        public string PrimaryLocation { get; set; }
 
         /// <summary>
         /// Gets the status indicating whether the primary location of the
@@ -119,7 +119,7 @@ namespace Petstore.Models
         /// StandardRAGRS.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "secondaryLocation")]
-        public System.String SecondaryLocation { get; set; }
+        public string SecondaryLocation { get; set; }
 
         /// <summary>
         /// Gets the status indicating whether the secondary location of the

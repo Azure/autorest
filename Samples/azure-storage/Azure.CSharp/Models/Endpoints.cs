@@ -21,7 +21,7 @@ namespace Petstore.Models
         /// <param name="queue">Gets the queue endpoint.</param>
         /// <param name="table">Gets the table endpoint.</param>
         /// <param name="file">Gets the file endpoint.</param>
-        public Endpoints(System.String blob = default(System.String), System.String queue = default(System.String), System.String table = default(System.String), System.String file = default(System.String))
+        public Endpoints(string blob = default(string), string queue = default(string), string table = default(string), string file = default(string))
         {
             Blob = blob;
             Queue = queue;
@@ -33,25 +33,25 @@ namespace Petstore.Models
         /// Gets the blob endpoint.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "blob")]
-        public System.String Blob { get; set; }
+        public string Blob { get; set; }
 
         /// <summary>
         /// Gets the queue endpoint.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "queue")]
-        public System.String Queue { get; set; }
+        public string Queue { get; set; }
 
         /// <summary>
         /// Gets the table endpoint.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "table")]
-        public System.String Table { get; set; }
+        public string Table { get; set; }
 
         /// <summary>
         /// Gets the file endpoint.
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "file")]
-        public System.String File { get; set; }
+        public string File { get; set; }
 
     }
 }

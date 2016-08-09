@@ -13,7 +13,7 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Category class.
         /// </summary>
-        public Category(System.Int64? id = default(System.Int64?), System.String name = default(System.String))
+        public Category(long? id = default(long?), string name = default(string))
         {
             Id = id;
             Name = name;
@@ -22,12 +22,12 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public System.Int64? Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
-        public System.String Name { get; set; }
+        public string Name { get; set; }
 
     }
 }

@@ -20,7 +20,7 @@ namespace Petstore.Models
         /// </summary>
         /// <param name="location">Resource location</param>
         /// <param name="tags">Resource tags</param>
-        public StorageAccountCreateParameters(System.String location, System.Collections.Generic.IDictionary<System.String, System.String> tags = default(System.Collections.Generic.IDictionary<System.String, System.String>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
+        public StorageAccountCreateParameters(string location, System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
         {
             Location = location;
             Tags = tags;
@@ -31,13 +31,13 @@ namespace Petstore.Models
         /// Gets or sets resource location
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
-        public System.String Location { get; set; }
+        public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
         [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
-        public System.Collections.Generic.IDictionary<System.String, System.String> Tags { get; set; }
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>
