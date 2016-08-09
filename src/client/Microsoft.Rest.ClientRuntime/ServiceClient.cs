@@ -294,28 +294,7 @@ namespace Microsoft.Rest
             Type type = this.GetType();
             SetUserAgent(type.FullName, ClientVersion);
         }
-
-        /// <summary>
-        /// Set default info in UserAgent
-        /// </summary>
-        /// <returns>True: Setting UserAgent succeeded. False: Setting UserAgent failed</returns>
-        private bool SetUserAgent()
-        {
-            if (!_disposed && HttpClient != null)
-            {
-                // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
-
-                // Returns true if the user agent was set 
-                return true;
-            }
-
-            // Returns false if the HttpClient was disposed before invoking the method
-            return false;
-            
-        }
-
+        
         /// <summary>
         /// Sets the product name to be used in the user agent header when making requests
         /// </summary>
@@ -332,11 +311,14 @@ namespace Microsoft.Rest
         /// <param name="version">Version of the product to be used in the user agent</param>
         public bool SetUserAgent(string productName, string version)
         {
-            if (SetUserAgent())
+            if (!_disposed && HttpClient != null)
             {
+                // Clear the old user agent
+                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
 
-                // Returns true if the user agent was set
+                // Returns true if the user agent was set 
                 return true;
             }
 
