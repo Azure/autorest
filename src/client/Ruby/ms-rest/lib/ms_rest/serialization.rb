@@ -16,8 +16,7 @@ module MsRest
     # @param object_name [String] Name of the deserialized object.
     #
     def deserialize(mapper, response_body, object_name)
-      serialization = Serialization.new(self)
-      serialization.deserialize(mapper, response_body, object_name)
+      build_serializer.deserialize(mapper, response_body, object_name)
     end
 
     #
@@ -28,8 +27,16 @@ module MsRest
     # @param object_name [String] Name of the serialized object.
     #
     def serialize(mapper, object, object_name)
-      serialization = Serialization.new(self)
-      serialization.serialize(mapper, object, object_name)
+      build_serializer.serialize(mapper, object, object_name)
+    end
+
+    private
+
+    #
+    # Builds serializer
+    #
+    def build_serializer
+      Serialization.new(self)
     end
 
     #

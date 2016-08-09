@@ -61,5 +61,16 @@ namespace AutoRest.Ruby.TemplateModels
                 return "MsRest::ServiceClient";
             }
         }
+
+        /// <summary>
+        /// Gets the serializer type of the client.
+        /// </summary>
+        public virtual string IncludeSerializer
+        {
+            get
+            {
+                return "include MsRest::Serialization";
+            }
+        }
     }
 }
