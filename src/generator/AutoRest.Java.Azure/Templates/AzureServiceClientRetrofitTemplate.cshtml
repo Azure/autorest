@@ -22,10 +22,6 @@ if (method.HttpMethod == HttpMethod.Delete)
 {
 @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
 }
-else if (method.IsPagingNextOperation)
-{
-@:    @@GET
-}
 else
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
