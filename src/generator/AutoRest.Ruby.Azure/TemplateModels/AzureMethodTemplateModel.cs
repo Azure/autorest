@@ -273,7 +273,8 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         {
             get
             {
-                if (Extensions.ContainsKey("nextMethodName") && !Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                if (Extensions.ContainsKey("nextMethodName") && (!Extensions.ContainsKey(AzureExtensions.PageableExtension) ||
+                    (Extensions.ContainsKey(AzureExtensions.PageableExtension) && Extensions.ContainsKey(AzureExtensions.LongRunningExtension))))
                 {
                     try
                     {
