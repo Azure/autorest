@@ -1,4 +1,7 @@
-##2016.07.21 ms_rest version 0.3.1
+##2016.08.10 ms_rest_azure version 0.4.0
+* Adding & inheriting serialization class from ms_rest generic serializer
+
+##2016.07.21 ms_rest_azure version 0.3.1
 * [Bug fixes](https://github.com/Azure/autorest/commit/ede944a1fa30a7453aa30e6fa79154dc43393cdf)
 
 ##2016.07.14 ms_rest_azure version 0.3.0
