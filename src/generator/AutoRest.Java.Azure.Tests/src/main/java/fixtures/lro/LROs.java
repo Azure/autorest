@@ -65,7 +65,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -85,7 +85,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -103,7 +103,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -122,7 +122,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -141,7 +141,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -161,7 +161,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -179,7 +179,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -198,7 +198,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -217,7 +217,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -237,7 +237,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -255,7 +255,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -274,7 +274,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -293,7 +293,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -313,7 +313,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -331,7 +331,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -350,7 +350,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -369,7 +369,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -389,7 +389,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -407,7 +407,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -426,7 +426,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -445,7 +445,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -465,7 +465,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -483,7 +483,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -502,7 +502,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -521,7 +521,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -541,7 +541,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -559,7 +559,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -578,7 +578,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -597,7 +597,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -617,7 +617,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -635,7 +635,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -654,7 +654,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -673,7 +673,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -693,7 +693,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -711,7 +711,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -730,7 +730,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -749,7 +749,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -769,7 +769,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -787,7 +787,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -806,7 +806,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -825,7 +825,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -845,7 +845,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -863,7 +863,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -882,7 +882,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -901,7 +901,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -921,7 +921,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -939,7 +939,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -958,7 +958,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -977,7 +977,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -997,7 +997,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1015,7 +1015,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -1034,7 +1034,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with non resource.
@@ -1053,7 +1053,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> putNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with non resource.
      *
@@ -1073,7 +1073,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with non resource.
@@ -1091,7 +1091,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with non resource.
      *
@@ -1110,7 +1110,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with non resource.
@@ -1129,7 +1129,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> putAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with non resource.
      *
@@ -1149,7 +1149,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with non resource.
@@ -1167,7 +1167,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with non resource.
      *
@@ -1186,7 +1186,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with sub resource.
@@ -1205,7 +1205,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> putSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with sub resource.
      *
@@ -1225,7 +1225,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with sub resource.
@@ -1243,7 +1243,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with sub resource.
      *
@@ -1262,7 +1262,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with sub resource.
@@ -1281,7 +1281,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> putAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with sub resource.
      *
@@ -1301,7 +1301,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running put request with sub resource.
@@ -1319,7 +1319,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running put request with sub resource.
      *
@@ -1338,7 +1338,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1357,7 +1357,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1375,7 +1375,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1394,7 +1394,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1412,7 +1412,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1431,7 +1431,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1449,7 +1449,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete succeeds and returns right away.
@@ -1468,7 +1468,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete succeeds and returns right away.
@@ -1486,7 +1486,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1505,7 +1505,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> delete202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1523,7 +1523,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1542,7 +1542,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1560,7 +1560,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -1579,7 +1579,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -1597,7 +1597,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1616,7 +1616,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1634,7 +1634,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1653,7 +1653,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1671,7 +1671,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1690,7 +1690,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1708,7 +1708,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1727,7 +1727,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1745,7 +1745,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1764,7 +1764,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1782,7 +1782,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -1801,7 +1801,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -1819,7 +1819,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Sku> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -1838,7 +1838,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -1858,7 +1858,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -1876,7 +1876,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -1895,7 +1895,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -1914,7 +1914,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> post202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -1934,7 +1934,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -1952,7 +1952,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -1971,7 +1971,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1990,7 +1990,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2010,7 +2010,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2028,7 +2028,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2047,7 +2047,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2066,7 +2066,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2086,7 +2086,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2104,7 +2104,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2123,7 +2123,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2142,7 +2142,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2162,7 +2162,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2180,7 +2180,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2199,7 +2199,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2218,7 +2218,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2238,7 +2238,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2256,7 +2256,7 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2275,6 +2275,6 @@ public interface LROs {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

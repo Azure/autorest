@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class ByteWrapper
     {
@@ -32,7 +27,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
         public byte[] Field { get; set; }
 
     }

@@ -8,14 +8,9 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Models;
+   using Microsoft.Rest.Azure;
+   using Models;
 
     /// <summary>
     /// Extension methods for ArrayOperations.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetValid(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArrayOperations)s).GetValidAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -42,7 +37,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,9 +53,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             /// <param name='array'>
             /// </param>
-            public static void PutValid(this IArrayOperations operations, IList<string> array = default(IList<string>))
+            public static void PutValid(this IArrayOperations operations, System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArrayOperations)s).PutValidAsync(array), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IArrayOperations)s).PutValidAsync(array), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -74,7 +69,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutValidAsync(this IArrayOperations operations, System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -87,7 +82,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetEmpty(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArrayOperations)s).GetEmptyAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -99,7 +94,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetEmptyAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<ArrayWrapper> GetEmptyAsync(this IArrayOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -115,9 +110,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             /// <param name='array'>
             /// </param>
-            public static void PutEmpty(this IArrayOperations operations, IList<string> array = default(IList<string>))
+            public static void PutEmpty(this IArrayOperations operations, System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>))
             {
-                Task.Factory.StartNew(s => ((IArrayOperations)s).PutEmptyAsync(array), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IArrayOperations)s).PutEmptyAsync(array), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -131,7 +126,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task PutEmptyAsync(this IArrayOperations operations, System.Collections.Generic.IList<string> array = default(System.Collections.Generic.IList<string>), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -145,7 +140,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static ArrayWrapper GetNotProvided(this IArrayOperations operations)
             {
-                return Task.Factory.StartNew(s => ((IArrayOperations)s).GetNotProvidedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IArrayOperations)s).GetNotProvidedAsync(), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -158,7 +153,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetNotProvidedAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<ArrayWrapper> GetNotProvidedAsync(this IArrayOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

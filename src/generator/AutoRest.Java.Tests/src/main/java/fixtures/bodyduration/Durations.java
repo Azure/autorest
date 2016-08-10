@@ -38,7 +38,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put a positive duration value.
@@ -59,7 +59,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a positive duration value.
@@ -77,7 +77,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an invalid duration value.
@@ -95,6 +95,6 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
 }

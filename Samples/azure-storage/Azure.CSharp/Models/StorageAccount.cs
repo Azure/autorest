@@ -1,13 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The storage account.
@@ -27,7 +21,7 @@ namespace Petstore.Models
         /// <param name="type">Resource type</param>
         /// <param name="location">Resource location</param>
         /// <param name="tags">Resource tags</param>
-        public StorageAccount(string id = default(string), string name = default(string), string type = default(string), string location = default(string), IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountProperties properties = default(StorageAccountProperties))
+        public StorageAccount(string id = default(string), string name = default(string), string type = default(string), string location = default(string), System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountProperties properties = default(StorageAccountProperties))
             : base(id, name, type, location, tags)
         {
             Properties = properties;
@@ -35,13 +29,13 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
         public StorageAccountProperties Properties { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

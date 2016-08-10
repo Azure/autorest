@@ -345,7 +345,7 @@ export interface Explicit {
      *
      * @param {object} bodyParameter
      * 
-     * @param {number} [bodyParameter.id]
+     * @param {number} bodyParameter.id
      * 
      * @param {string} [bodyParameter.name]
      * 
@@ -367,7 +367,7 @@ export interface Explicit {
      * 
      * @param {object} [options.bodyParameter]
      * 
-     * @param {number} [options.bodyParameter.id]
+     * @param {number} options.bodyParameter.id
      * 
      * @param {string} [options.bodyParameter.name]
      * 
@@ -387,7 +387,7 @@ export interface Explicit {
      *
      * @param {object} value
      * 
-     * @param {number} [value.id]
+     * @param {number} value.id
      * 
      * @param {string} [value.name]
      * 
@@ -410,7 +410,7 @@ export interface Explicit {
      * 
      * @param {object} [options.value]
      * 
-     * @param {number} [options.value.id]
+     * @param {number} options.value.id
      * 
      * @param {string} [options.value.name]
      * 

@@ -9,20 +9,20 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .http_failure import HttpFailure
-from .http_success import HttpSuccess
-from .http_redirects import HttpRedirects
-from .http_client_failure import HttpClientFailure
-from .http_server_failure import HttpServerFailure
-from .http_retry import HttpRetry
-from .multiple_responses import MultipleResponses
+from .http_failure_operations import HttpFailureOperations
+from .http_success_operations import HttpSuccessOperations
+from .http_redirects_operations import HttpRedirectsOperations
+from .http_client_failure_operations import HttpClientFailureOperations
+from .http_server_failure_operations import HttpServerFailureOperations
+from .http_retry_operations import HttpRetryOperations
+from .multiple_responses_operations import MultipleResponsesOperations
 
 __all__ = [
-    'HttpFailure',
-    'HttpSuccess',
-    'HttpRedirects',
-    'HttpClientFailure',
-    'HttpServerFailure',
-    'HttpRetry',
-    'MultipleResponses',
+    'HttpFailureOperations',
+    'HttpSuccessOperations',
+    'HttpRedirectsOperations',
+    'HttpClientFailureOperations',
+    'HttpServerFailureOperations',
+    'HttpRetryOperations',
+    'MultipleResponsesOperations',
 ]

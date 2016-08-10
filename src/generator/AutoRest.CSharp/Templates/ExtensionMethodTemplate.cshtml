@@ -36,15 +36,15 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:{
     if (Model.ReturnType.Body != null)
     {
-    @:return Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:return System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
     else if (Model.ReturnType.Headers != null)
     {
-    @:return Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:return System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
     else
     {
-    @:Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+    @:System.Threading.Tasks.Task.Factory.StartNew(s => ((I@(Model.MethodGroupName))s).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
     }
 @:}
 @EmptyLine
@@ -142,7 +142,7 @@ foreach (var parameter in Model.LocalParameters)
 @:/// </param>
 @:public static @Model.OperationResponseReturnTypeString @(Model.Name)WithHttpMessages(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(true)))
 @:{
-@:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
+@:    return operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("customHeaders", "System.Threading.CancellationToken.None"))).ConfigureAwait(false).GetAwaiter().GetResult();
 @:}
 @:
     }

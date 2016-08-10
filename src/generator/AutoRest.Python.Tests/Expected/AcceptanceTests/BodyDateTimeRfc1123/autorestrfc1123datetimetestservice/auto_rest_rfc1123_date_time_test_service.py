@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.datetimerfc1123 import Datetimerfc1123
+from .operations.datetimerfc1123_operations import Datetimerfc1123Operations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestRFC1123DateTimeTestService(object):
     :vartype config: AutoRestRFC1123DateTimeTestServiceConfiguration
 
     :ivar datetimerfc1123: Datetimerfc1123 operations
-    :vartype datetimerfc1123: .operations.Datetimerfc1123
+    :vartype datetimerfc1123: .operations.Datetimerfc1123Operations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestRFC1123DateTimeTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.datetimerfc1123 = Datetimerfc1123(
+        self.datetimerfc1123 = Datetimerfc1123Operations(
             self._client, self.config, self._serialize, self._deserialize)

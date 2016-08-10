@@ -65,7 +65,6 @@ module MsRestAzure
       return if object.nil?
       output_object = AsyncOperationStatus.new
 
-      fail AzureOperationError, "Invalid status was recieved during polling: #{object['status']}" unless ALL_STATUSES.include?(object['status'])
       output_object.status = object['status']
 
       output_object.error = CloudErrorData.deserialize_object(object['error'])

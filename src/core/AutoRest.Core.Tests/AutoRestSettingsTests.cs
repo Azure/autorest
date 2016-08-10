@@ -88,12 +88,14 @@ namespace AutoRest.Core.Tests
             var settings = Settings.Create(new[]
             {
                 "-Help", " -Input", "c:\\input",
-                "-outputDirectory", " c:\\output", "-clientName", "MyClient"
+                "-outputDirectory", " c:\\output", "-clientName", "MyClient",
+                "-ModelsName", "MyModels"
             });
             Assert.True(settings.ShowHelp);
             Assert.Equal("c:\\input", settings.Input);
             Assert.Equal("c:\\output", settings.OutputDirectory);
             Assert.Equal("MyClient", settings.ClientName);
+            Assert.Equal("MyModels", settings.ModelsName);
         }
 
         [Fact]
@@ -102,12 +104,14 @@ namespace AutoRest.Core.Tests
             var settings = Settings.Create(new[]
             {
                 "-h", " --i", "/c/input",
-                "-output", " c:\\output", "-clientName", "MyClient"
+                "-output", " c:\\output", "-clientName", "MyClient",
+                "-mname", "MyModels"
             });
             Assert.True(settings.ShowHelp);
             Assert.Equal("/c/input", settings.Input);
             Assert.Equal("c:\\output", settings.OutputDirectory);
             Assert.Equal("MyClient", settings.ClientName);
+            Assert.Equal("MyModels", settings.ModelsName);
         }
 
         [Fact]

@@ -22,6 +22,7 @@ class ApiVersionLocalOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An objec model deserializer.
+    :ivar api_version: This should appear as a method parameter, use value '2.0'. Constant value: "2.0".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -29,17 +30,15 @@ class ApiVersionLocalOperations(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
+        self.api_version = "2.0"
 
         self.config = config
 
     def get_method_local_valid(
-            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed.
 
-        :param api_version: This should appear as a method parameter, use
-         value '2.0'
-        :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -54,7 +53,7 @@ class ApiVersionLocalOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -124,13 +123,10 @@ class ApiVersionLocalOperations(object):
             return client_raw_response
 
     def get_path_local_valid(
-            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed.
 
-        :param api_version: This should appear as a method parameter, use
-         value '2.0'
-        :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -145,7 +141,7 @@ class ApiVersionLocalOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -169,13 +165,10 @@ class ApiVersionLocalOperations(object):
             return client_raw_response
 
     def get_swagger_local_valid(
-            self, api_version="2.0", custom_headers=None, raw=False, **operation_config):
+            self, custom_headers=None, raw=False, **operation_config):
         """Get method with api-version modeled in the method.  pass in
         api-version = '2.0' to succeed.
 
-        :param api_version: The api version, which appears in the query, the
-         value is always '2.0'
-        :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -190,7 +183,7 @@ class ApiVersionLocalOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}

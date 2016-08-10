@@ -632,25 +632,39 @@ namespace AutoRest.Java.TemplateModels
 
         public virtual string SuccessCallback(bool filterRequired = false)
         {
+            IndentedStringBuilder builder = new IndentedStringBuilder();
             if (ReturnTypeModel.NeedsConversion)
             {
-                IndentedStringBuilder builder = new IndentedStringBuilder();
                 builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
                 builder.AppendLine("{0} body = null;", ReturnTypeModel.BodyClientType)
                     .AppendLine("if (result.getBody() != null) {")
                     .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
-                builder.AppendLine("serviceCallback.success(new ServiceResponse<{0}>(body, result.getResponse()));", ReturnTypeModel.GenericBodyClientTypeString);
-                return builder.ToString();
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
+                    ReturnTypeModel.GenericBodyClientTypeString);
+                builder.AppendLine("if (serviceCallback != null) {")
+                    .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeModel.GenericBodyClientTypeString)
+                    .Outdent().AppendLine("}");
+                builder.AppendLine("serviceCall.success(clientResponse);");
             }
-            return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
+            else
+            {
+                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeModel.WireResponseTypeString, this.Name);
+                builder.AppendLine("if (serviceCallback != null) {")
+                    .Indent().AppendLine("serviceCallback.success(clientResponse);", this.Name)
+                    .Outdent().AppendLine("}");
+                builder.AppendLine("serviceCall.success(clientResponse);");
+            }
+            return builder.ToString();
         }
 
         public virtual string ServiceCallConstruction
         {
             get
             {
-                return "final ServiceCall serviceCall = new ServiceCall(call);";
+                return string.Format(CultureInfo.InvariantCulture,
+                    "final ServiceCall<{0}> serviceCall = new ServiceCall<>(call);",
+                    ReturnTypeModel.GenericBodyClientTypeString);
             }
         }
 

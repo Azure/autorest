@@ -5,9 +5,8 @@ module Petstore
   # A service client - single point of access to the REST API.
   #
   class StorageManagementClient < MsRestAzure::AzureServiceClient
-    include Petstore::Models
-    include MsRest::Serialization
     include MsRestAzure
+    include MsRestAzure::Serialization
 
     # @return [String] the base URI of the service.
     attr_accessor :base_url

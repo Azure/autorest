@@ -8,17 +8,12 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The product documentation.
     /// </summary>
-    [JsonTransformation]
+    [Microsoft.Rest.Serialization.JsonTransformation]
     public partial class SimpleProduct : BaseProduct
     {
         /// <summary>
@@ -56,31 +51,31 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Gets or sets display name of product.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_display_name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_display_name")]
         public string MaxProductDisplayName { get; set; }
 
         /// <summary>
         /// Gets or sets generic URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_image.generic_value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.generic_value")]
         public string GenericValue { get; set; }
 
         /// <summary>
         /// Gets or sets URL value.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_image.@odata\\.value")]
         public string Odatavalue { get; set; }
 
         /// <summary>
         /// Capacity of product. For example, 4 people.
         /// </summary>
-        [JsonProperty(PropertyName = "details.max_product_capacity")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "details.max_product_capacity")]
         public static string Capacity { get; private set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public override void Validate()
@@ -88,7 +83,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             base.Validate();
             if (MaxProductDisplayName == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "MaxProductDisplayName");
             }
         }
     }

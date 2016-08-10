@@ -166,13 +166,13 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/put/201/creating/succeeded/200';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -419,13 +419,13 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/putasync/retry/succeeded';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -638,13 +638,13 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/delete/provisioning/202/accepted/200/succeeded';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -842,13 +842,13 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/delete/202/retry/200';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1012,13 +1012,13 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/deleteasync/retry/succeeded';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1199,13 +1199,13 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/post/202/retry/200';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1402,13 +1402,13 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//lro/retryerror/postasync/retry/succeeded';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

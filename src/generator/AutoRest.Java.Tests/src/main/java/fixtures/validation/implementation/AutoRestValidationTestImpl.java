@@ -192,34 +192,34 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (this.apiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(validationOfMethodParametersDelegate(response));
+                    ServiceResponse<Product> clientResponse = validationOfMethodParametersDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -264,35 +264,35 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (this.apiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         final Product body = null;
         Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(validationOfBodyDelegate(response));
+                    ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -332,35 +332,35 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
         if (this.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
         if (resourceGroupName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (this.apiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(body, serviceCallback);
+        Validator.validate(body);
         Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(validationOfBodyDelegate(response));
+                    ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -389,23 +389,26 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
         final String constantParam = "constant";
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getWithConstantInPathDelegate(response));
+                    ServiceResponse<Void> clientResponse = getWithConstantInPathDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ServiceException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -434,24 +437,27 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
         final String constantParam = "constant";
         final Product body = null;
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postWithConstantInBodyDelegate(response));
+                    ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ServiceException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -476,24 +482,27 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(body, serviceCallback);
+    public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(body);
         final String constantParam = "constant";
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
+        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postWithConstantInBodyDelegate(response));
+                    ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ServiceException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

@@ -32,9 +32,8 @@ namespace AutoRest.Ruby.Azure.TemplateModels
         /// <param name="sdkName">The name of the generated SDK, required for proper folder structuring.</param>
         /// <param name="filesExtension">The files extension.</param>
         /// <param name="ns">The namespace of the SDK.</param>
-        /// <param name="packageVersion">The name of the package version to be used in creating a version.rb file.</param>
-        public AzureRequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string filesExtension, string ns, string packageVersion)
-            : base(serviceClient, sdkName, filesExtension, ns, packageVersion)
+        public AzureRequirementsTemplateModel(ServiceClient serviceClient, string sdkName, string filesExtension, string ns)
+            : base(serviceClient, sdkName, filesExtension, ns)
         {
         }
 

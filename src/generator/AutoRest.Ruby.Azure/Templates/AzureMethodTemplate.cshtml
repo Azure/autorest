@@ -1,19 +1,18 @@
 @using System
-@using AutoRest.Core.ClientModel
 @using AutoRest.Ruby
 @using AutoRest.Ruby.TemplateModels
 @using AutoRest.Ruby.Templates
 @inherits AutoRest.Core.Template<AutoRest.Ruby.Azure.TemplateModels.AzureMethodTemplateModel>
 
-@if (!Model.IsLongRunningOperation)
+@if (!Model.IsLongRunningOperation && !Model.IsPageable)
 {
 @:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
 }
-else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.Delete)
+else if (!Model.IsLongRunningOperation && Model.IsPageable)
 {
 <text>
 #
-@if (!String.IsNullOrEmpty(Model.Summary))
+@if(!String.IsNullOrEmpty(Model.Summary))
 {
   @WrapComment("# ", Model.Summary)@:
 @:#
@@ -27,29 +26,19 @@ else if (Model.HttpMethod == HttpMethod.Post || Model.HttpMethod == HttpMethod.D
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
-@WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
-def @(Model.Name)(@(Model.MethodParameterDeclaration))
-  # Send request
-  promise = begin_@(Model.Name)_async(@(Model.MethodParameterInvocation))
-  @EmptyLine
-
-  promise = promise.then do |response|
-    # Defining deserialization method.
-    deserialize_method = lambda do |parsed_response|
-    @if(Model.ReturnType.Body != null)
-    {
-      @:@(Model.DeserializePollingResponse("parsed_response", Model.ReturnType.Body))
-    }
+@WrapComment("# ", string.Format("@return [{0}] which provide lazy access to pages of the response.", Model.ReturnType))
+#
+def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
+  response = @(Model.Name)_async(@(Model.MethodParameterInvocation)).value!
+  unless response.nil?
+    page = response.body
+    page.next_method = Proc.new do |next_link|
+      @(Model.InvokeNextMethodAsync())
     end
-
-   @EmptyLine
-   # Waiting for response.
-   @(Model.ClientReference).get_long_running_operation_result(response, deserialize_method)
+    page
   end
-
-  @EmptyLine
-  promise
 end
 </text>
 }
@@ -67,14 +56,31 @@ else
   @WrapComment("# ", Model.Description)@:
 @:#
 }
-@foreach (var parameter in Model.Parameters)
+@foreach (var parameter in Model.LocalParameters)
 {
 @:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
 }
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
+#
+@if (Model.ReturnType.Body != null)
+{
+@WrapComment("# ", string.Format("@return [{0}] operation results.", Model.OperationReturnTypeString))@:
+@:#
+}
+def @(Model.Name)(@(Model.MethodParameterDeclaration))
+  @Model.ResponseGeneration()
+end
+@EmptyLine
+#
+@foreach (var parameter in Model.LocalParameters)
+{
+@:@WrapComment("# ", string.Format("@param {0} {1}{2}", parameter.Name, parameter.Type.GetYardDocumentation(), parameter.Documentation))
+}
+@WrapComment("# ", string.Format("@param custom_headers [{0}] A hash of custom headers that will be added to the HTTP request.", "Hash{String => String}"))
 #
 @WrapComment("# ", "@return [Concurrent::Promise] promise which provides async access to http response.")
 #
-def @(Model.Name)(@(Model.MethodParameterDeclaration))
+def @(Model.Name)_async(@(Model.MethodParameterDeclaration))
   # Send request
   promise = begin_@(Model.Name)_async(@(Model.MethodParameterInvocation))
   @EmptyLine
@@ -82,7 +88,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   promise = promise.then do |response|
     # Defining deserialization method.
     deserialize_method = lambda do |parsed_response|
-    @if(Model.ReturnType.Body != null)
+    @if (Model.ReturnType.Body != null)
     {
       @:@(Model.DeserializePollingResponse("parsed_response", Model.ReturnType.Body))
     }

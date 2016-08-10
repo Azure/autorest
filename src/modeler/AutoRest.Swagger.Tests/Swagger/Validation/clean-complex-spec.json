@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pets": {
+      "get": {
+        "summary": "List all pets",
+        "operationId": "listPets",
+        "description": "foo",
+        "tags": [
+          "pets"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many items to return at one time (max 100)",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An paged array of pets",
+            "headers": {
+              "x-next": {
+                "type": "string",
+                "description": "A link to the next page of responses"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Pets"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a pet",
+        "operationId": "createPets",
+        "description": "foo",
+        "tags": [
+          "pets"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/pets/{petId}": {
+      "get": {
+        "summary": "Info for a specific pet",
+        "operationId": "showPetById",
+        "description": "foo",
+        "tags": [
+          "pets"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "required": true,
+            "description": "The id of the pet to retrieve",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "schema": {
+              "$ref": "#/definitions/Pets"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/foo": {
+      "get": {
+        "operationId": "Foo_Get",
+        "description": "foo",
+        "responses": {
+          "default": {
+            "$ref": "#/responses/FooResponse"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Foo_Post",
+        "description": "foo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fooPost",
+            "schema": {
+              "type": "object",
+              "description": "A foo object"
+            },
+            "description": "Foo body parameter"
+          },
+          {
+            "$ref": "#/parameters/FooQueryParam"
+          }
+        ],
+        "responses": {
+          "default": {
+            "$ref": "#/responses/FooResponse"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/foo?overload=true": {
+      "post": {
+        "operationId": "Foo_PostOverload",
+        "description": "foo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fooPost",
+            "schema": {
+              "type": "object",
+              "description": "A foo object"
+            },
+            "description": "Foo body parameter"
+          },
+          {
+            "$ref": "#/parameters/FooQueryParam"
+          }
+        ],
+        "responses": {
+          "default": {
+            "$ref": "#/responses/FooResponse"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FooQueryParam": {
+      "in": "query",
+      "name": "FooQueryParam",
+      "description": "Query parameter for Foo operation",
+      "type": "string"
+    }
+  },
+  "responses": {
+    "FooResponse": {
+      "description": "Response for Foo"
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The pet id"
+        },
+        "name": {
+          "type": "string",
+          "description": "The pet name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "The pet tag"
+        }
+      },
+      "description": "A pet"
+    },
+    "Pets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Pet"
+      },
+      "description": "A set of pets"
+    },
+    "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The code of the error"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the error"
+        }
+      },
+      "description": "An error result"
+    },
+    "Foo": {
+      "description": "foo",
+      "x-ms-external": true,
+      "properties": {
+        "bar": {
+          "description": "bar",
+          "type": "string",
+          "x-ms-client-name": "Baz"
+        }
+      }
+    },
+    "NestedProperties": {
+      "description": "A model with nested properties that uses client flatten",
+      "properties": {
+        "properties": {
+          "foo": {
+            "description": "Foo property"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  }
+}

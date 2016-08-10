@@ -6,6 +6,7 @@
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.TemplateModels
 @using AutoRest.Java.TypeModels
+@using AutoRest.Java.Azure.TypeModels
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodTemplateModel>
 @if (!Model.IsLongRunningOperation)
 {
@@ -87,22 +88,18 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException {
-    if (serviceCallback == null) {
-        throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-    }
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate.Where(p => p.IsRequired))
 {
-@:    Validator.validate(@(param.Name), serviceCallback);
+@:    Validator.validate(@(param.Name));
 }
 
 @foreach (ParameterModel parameter in Model.LocalParameters)
@@ -119,11 +116,14 @@ public ServiceCall @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationW
     @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {
-            serviceCallback.failure(t);
+            if (serviceCallback != null) {
+                serviceCallback.failure(t);
+            }
+            serviceCall.failure(t);
         }
 
         @@Override
@@ -203,22 +203,18 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
-    if (serviceCallback == null) {
-        throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-    }
+public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)
 {
-@:    Validator.validate(@(param.Name), serviceCallback);
+@:    Validator.validate(@(param.Name));
 }
 
 @foreach (ParameterModel parameter in Model.LocalParameters)
@@ -231,11 +227,14 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
     @Model.BuildInputMappings()
     @Model.ParameterConversion
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    final ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new Callback<@Model.CallType>() {
         @@Override
         public void onFailure(Call<@Model.CallType> call, Throwable t) {
-            serviceCallback.failure(t);
+            if (serviceCallback != null) {
+                serviceCallback.failure(t);
+            }
+            serviceCall.failure(t);
         }
 
         @@Override

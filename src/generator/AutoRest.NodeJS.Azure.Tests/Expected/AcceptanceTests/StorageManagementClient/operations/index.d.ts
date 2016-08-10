@@ -27,7 +27,7 @@ export interface StorageAccounts {
      * specified resource group. Storage account names must be between 3 and 24
      * characters in length and use numbers and lower-case letters only.
      * 
-     * @param {string} [accountName.name]
+     * @param {string} accountName.name
      * 
      * @param {string} [accountName.type]
      * 
@@ -63,7 +63,7 @@ export interface StorageAccounts {
      * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      * 'Standard_RAGRS', 'Premium_LRS'
      * 
-     * @param {string} [parameters.location] Resource location
+     * @param {string} parameters.location Resource location
      * 
      * @param {object} [parameters.tags] Resource tags
      * 
@@ -99,7 +99,7 @@ export interface StorageAccounts {
      * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      * 'Standard_RAGRS', 'Premium_LRS'
      * 
-     * @param {string} [parameters.location] Resource location
+     * @param {string} parameters.location Resource location
      * 
      * @param {object} [parameters.tags] Resource tags
      * 
@@ -197,7 +197,7 @@ export interface StorageAccounts {
      * indirect CName validation is enabled. Default value is false. This should
      * only be set on updates
      * 
-     * @param {string} [parameters.location] Resource location
+     * @param {string} parameters.location Resource location
      * 
      * @param {object} [parameters.tags] Resource tags
      * 
@@ -215,7 +215,8 @@ export interface StorageAccounts {
     /**
      * Lists the access keys for the specified storage account.
      *
-     * @param {string} resourceGroupName The name of the resource group.
+     * @param {string} resourceGroupName The name of the resource group within the
+     * user’s subscription.
      * 
      * @param {string} accountName The name of the storage account.
      * 

@@ -8,21 +8,18 @@
 
 namespace Fixtures.AcceptanceTestsBodyString.Models
 {
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Defines values for Colors.
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Colors
     {
-        [EnumMember(Value = "red color")]
+        [System.Runtime.Serialization.EnumMember(Value = "red color")]
         Redcolor,
-        [EnumMember(Value = "green-color")]
+        [System.Runtime.Serialization.EnumMember(Value = "green-color")]
         GreenColor,
-        [EnumMember(Value = "blue_color")]
+        [System.Runtime.Serialization.EnumMember(Value = "blue_color")]
         BlueColor
     }
 }

@@ -38,6 +38,12 @@ namespace AutoRest.Core.ClientModel
         public string Format { get; set; }
 
         /// <summary>
+        /// Returns the KnownFormat of the Format string (provided it matches a KnownFormat)
+        /// Otherwise, returns KnownFormat.none
+        /// </summary>
+        public KnownFormat KnownFormat => KnownFormatExtensions.Parse(Format);
+
+        /// <summary>
         /// Returns a string representation of the PrimaryType object.
         /// </summary>
         /// <returns>

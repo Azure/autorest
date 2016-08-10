@@ -38,6 +38,19 @@ namespace AutoRest.Java.Azure.TypeModels
             }
         }
 
+        public override string ServiceCallGenericParameterString
+        {
+            get
+            {
+                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "List<{0}>", bodySequenceType.ElementType);
+                }
+                return GenericBodyClientTypeString;
+            }
+        }
+
         public override string GenericBodyWireTypeString
         {
             get

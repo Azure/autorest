@@ -20,6 +20,7 @@ module MsRestAzure
     # @param custom_deserialization_block [Proc] custom logic for response deserialization.
     #
     # @return [MsRest::HttpOperationResponse] the response.
+    #
     def get_long_running_operation_result(azure_response, custom_deserialization_block)
       check_for_status_code_failure(azure_response)
 
@@ -75,29 +76,10 @@ module MsRestAzure
       polling_state.get_operation_response
     end
 
-    # @TODO Update name of the method to get_put_or_patch_operation_result when introducing breaking change / updating major version of gem
-    # Retrieves the result of 'PUT' or 'PATCH' operation. Performs polling of required.
-    # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
-    # @param custom_deserialization_block [Proc] custom logic for response deserialization.
-    #
-    # @return [MsRest::HttpOperationResponse] the response.
-    def get_put_operation_result(azure_response, custom_deserialization_block)
-      get_long_running_operation_result(azure_response, custom_deserialization_block)
-    end
-
-    #
-    # Retrieves the result of 'POST' or 'DELETE' operations. Performs polling of required.
-    # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
-    # @param custom_deserialization_block [Proc] custom logic for response deserialization.
-    #
-    # @return [MsRest::HttpOperationResponse] the response.
-    def get_post_or_delete_operation_result(azure_response, custom_deserialization_block)
-      get_long_running_operation_result(azure_response, custom_deserialization_block)
-    end
-
     #
     # Verifies for unexpected polling status code
     # @param azure_response [MsRestAzure::AzureOperationResponse] response from Azure service.
+    #
     def check_for_status_code_failure(azure_response)
       fail MsRest::ValidationError, 'Azure response cannot be nil' if azure_response.nil?
       fail MsRest::ValidationError, 'Azure response cannot have empty response object' if azure_response.response.nil?
@@ -147,6 +129,7 @@ module MsRestAzure
     # @param request [MsRest::HttpOperationRequest] The url retrieve data from.
     # @param polling_state [MsRestAzure::PollingState] polling state to update.
     # @param custom_deserialization_block [Proc] custom deserialization method for parsing response.
+    #
     def update_state_from_location_header(request, polling_state, custom_deserialization_block)
       result = get_async_with_custom_deserialization(request, custom_deserialization_block)
 
@@ -175,6 +158,7 @@ module MsRestAzure
     #
     # Updates polling state from Azure async operation header.
     # @param polling_state [MsRestAzure::PollingState] polling state.
+    #
     def update_state_from_azure_async_operation_header(request, polling_state)
       result = get_async_with_async_operation_deserialization(request)
 
@@ -195,6 +179,7 @@ module MsRestAzure
     # @param custom_deserialization_block [Proc] function to perform deserialization of the HTTP response.
     #
     # @return [MsRest::HttpOperationResponse] the response.
+    #
     def get_async_with_custom_deserialization(request, custom_deserialization_block)
       result = get_async_common(request)
 
@@ -214,6 +199,7 @@ module MsRestAzure
     # @param request [MsRest::HttpOperationRequest] the URL.
     #
     # @return [MsRest::HttpOperationResponse] the response.
+    #
     def get_async_with_async_operation_deserialization(request)
       result = get_async_common(request)
 
@@ -227,6 +213,7 @@ module MsRestAzure
     # @param request [MsRest::HttpOperationRequest] the URL.
     #
     # @return [MsRest::HttpOperationResponse] the response.
+    #
     def get_async_common(request)
       fail ValidationError, 'Request cannot be nil' if request.nil?
 

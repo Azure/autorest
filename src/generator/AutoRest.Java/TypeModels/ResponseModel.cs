@@ -182,6 +182,14 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public virtual string ServiceCallGenericParameterString
+        {
+            get
+            {
+                return GenericBodyClientTypeString;
+            }
+        }
+
         public virtual string GenericHeaderClientTypeString
         {
             get
@@ -203,6 +211,15 @@ namespace AutoRest.Java.TypeModels
             get
             {
                 return HeaderWireType.InstanceType().Name;
+            }
+        }
+
+        public virtual string SequenceElementTypeString
+        {
+            get
+            {
+                SequenceTypeModel sequenceType = (SequenceTypeModel) Body;
+                return sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void";
             }
         }
 

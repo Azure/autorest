@@ -34,7 +34,7 @@ namespace AutoRest.Ruby.TemplateModels
         public bool HasModelTypes { get; private set; }
 
         /// <summary>
-        /// Gets and sets the model template models.
+        /// Gets and sets the method template models.
         /// </summary>
         public List<MethodTemplateModel> MethodTemplateModels { get; set; }
 
@@ -59,6 +59,17 @@ namespace AutoRest.Ruby.TemplateModels
             get
             {
                 return "MsRest::ServiceClient";
+            }
+        }
+
+        /// <summary>
+        /// Gets the serializer type of the client.
+        /// </summary>
+        public virtual string IncludeSerializer
+        {
+            get
+            {
+                return "include MsRest::Serialization";
             }
         }
     }

@@ -234,78 +234,69 @@ namespace AutoRest.CSharp
 
         protected virtual IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == null)
+            switch (primaryType?.Type)
             {
-                return null;
-            }
-
-            if (primaryType.Type == KnownPrimaryType.Base64Url)
-            {
+                case KnownPrimaryType.Base64Url:
                 primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Boolean)
-            {
+                    break;
+                case KnownPrimaryType.Boolean:
                 primaryType.Name = "bool";
-            }
-            else if (primaryType.Type == KnownPrimaryType.ByteArray)
-            {
+                    break;
+                case KnownPrimaryType.ByteArray:
                 primaryType.Name = "byte[]";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Date)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTime)
-            {
-                primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Double)
-            {
+                    break;
+                case KnownPrimaryType.Date:
+                primaryType.Name = "System.DateTime";
+                    break;
+                case KnownPrimaryType.DateTime:
+                primaryType.Name = UseDateTimeOffset ? "System.DateTimeOffset" : "System.DateTime";
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
+                primaryType.Name = "System.DateTime";
+                    break;
+                case KnownPrimaryType.Double:
                 primaryType.Name = "double";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Decimal)
-            {
+                    break;
+                case KnownPrimaryType.Decimal:
                 primaryType.Name = "decimal";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Int)
-            {
+                    break;
+                case KnownPrimaryType.Int:
                 primaryType.Name = "int";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Long)
-            {
+                    break;
+                case KnownPrimaryType.Long:
                 primaryType.Name = "long";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Stream)
-            {
+                    break;
+                case KnownPrimaryType.Stream:
                 primaryType.Name = "System.IO.Stream";
-            }
-            else if (primaryType.Type == KnownPrimaryType.String)
-            {
-                primaryType.Name = "string";
-            }
-            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
-            {
-                primaryType.Name = "TimeSpan";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Object)
-            {
+                    break;
+                case KnownPrimaryType.String:
+                    switch (KnownFormatExtensions.Parse( primaryType.Format ) )
+                    {
+                        case KnownFormat.@char:
+                            primaryType.Name = "char";
+                            break;
+
+                        default:
+                            primaryType.Name = "string";
+                            break;
+                    }
+
+                    break;
+                case KnownPrimaryType.TimeSpan:
+                primaryType.Name = "System.TimeSpan";
+                    break;
+                case KnownPrimaryType.Object:
                 primaryType.Name = "object";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Credentials)
-            {
-                primaryType.Name = "ServiceClientCredentials";
-            }
-            else if (primaryType.Type == KnownPrimaryType.UnixTime)
-            {
-                primaryType.Name = "DateTime";
-            }
-            else if (primaryType.Type == KnownPrimaryType.Uuid)
-            {
-                primaryType.Name = "Guid";
+                    break;
+                case KnownPrimaryType.Credentials:
+                primaryType.Name = "Microsoft.Rest.ServiceClientCredentials";
+                    break;
+                case KnownPrimaryType.UnixTime:
+                primaryType.Name = "System.DateTime";
+                    break;
+                case KnownPrimaryType.Uuid:
+                primaryType.Name = "System.Guid";
+                    break;
             }
 
             return primaryType;
@@ -334,6 +325,15 @@ namespace AutoRest.CSharp
                 property.Type = NormalizeTypeReference(property.Type);
             }
 
+            if (compositeType.BaseModelType != null)
+            {
+                foreach (var property in compositeType.BaseModelType.Properties)
+                {
+                    property.Name = GetPropertyName(property.GetClientName());
+                    property.Type = NormalizeTypeReference(property.Type);
+                }
+            }
+
             return compositeType;
         }
 
@@ -353,11 +353,11 @@ namespace AutoRest.CSharp
             sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
             if (sequenceType.ElementType.IsValueType())
             {
-                sequenceType.NameFormat = "IList<{0}?>";
+                sequenceType.NameFormat = "System.Collections.Generic.IList<{0}?>";
             }
             else
             {
-                sequenceType.NameFormat = "IList<{0}>";
+                sequenceType.NameFormat = "System.Collections.Generic.IList<{0}>";
             }
             return sequenceType;
         }
@@ -367,11 +367,11 @@ namespace AutoRest.CSharp
             dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             if (dictionaryType.ValueType.IsValueType())
             {
-                dictionaryType.NameFormat = "IDictionary<string, {0}?>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}?>";
             }
             else
             {
-                dictionaryType.NameFormat = "IDictionary<string, {0}>";
+                dictionaryType.NameFormat = "System.Collections.Generic.IDictionary<string, {0}>";
             }
             return dictionaryType;
         }
@@ -411,7 +411,7 @@ namespace AutoRest.CSharp
                             primaryType.Type == KnownPrimaryType.UnixTime)
                         {
 
-                            return "SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +
+                            return "Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +
                                 ">(" + CodeNamer.QuoteValue("\"" + defaultValue + "\"") + ", this.Client.SerializationSettings)";
                         }
                     }

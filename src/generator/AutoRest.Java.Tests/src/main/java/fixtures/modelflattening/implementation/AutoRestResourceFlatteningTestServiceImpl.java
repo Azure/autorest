@@ -157,23 +157,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
         final List<Resource> resourceArray = null;
         Call<ResponseBody> call = service.putArray(resourceArray);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putArrayDelegate(response));
+                    ServiceResponse<Void> clientResponse = putArrayDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -199,23 +202,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(resourceArray, serviceCallback);
+    public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putArrayDelegate(response));
+                    ServiceResponse<Void> clientResponse = putArrayDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -245,22 +251,25 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getArray();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
+        final ServiceCall<List<FlattenedProduct>> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayDelegate(response));
+                    ServiceResponse<List<FlattenedProduct>> clientResponse = getArrayDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -291,23 +300,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDictionaryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDictionaryDelegate(response));
+                    ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -333,23 +345,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(resourceDictionary, serviceCallback);
+    public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDictionaryDelegate(response));
+                    ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -379,22 +394,25 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
+        final ServiceCall<Map<String, FlattenedProduct>> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryDelegate(response));
+                    ServiceResponse<Map<String, FlattenedProduct>> clientResponse = getDictionaryDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -425,23 +443,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
         final ResourceCollection resourceComplexObject = null;
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putResourceCollectionDelegate(response));
+                    ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -467,23 +488,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(resourceComplexObject, serviceCallback);
+    public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putResourceCollectionDelegate(response));
+                    ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -513,22 +537,25 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
+        final ServiceCall<ResourceCollection> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getResourceCollectionDelegate(response));
+                    ServiceResponse<ResourceCollection> clientResponse = getResourceCollectionDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -559,23 +586,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Put Simple Product with client flattening true on the model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
         final SimpleProduct simpleBodyProduct = null;
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSimpleProductDelegate(response));
+                    ServiceResponse<SimpleProduct> clientResponse = putSimpleProductDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -601,23 +631,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param simpleBodyProduct Simple body product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
-        Validator.validate(simpleBodyProduct, serviceCallback);
+    public ServiceCall<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+        Validator.validate(simpleBodyProduct);
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSimpleProductDelegate(response));
+                    ServiceResponse<SimpleProduct> clientResponse = putSimpleProductDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -667,20 +700,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
         if (productId == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter productId is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
         if (maxProductDisplayName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
         final String description = null;
         final String genericValue = null;
@@ -692,14 +719,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         simpleBodyProduct.withGenericValue(null);
         simpleBodyProduct.withOdatavalue(null);
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postFlattenedSimpleProductDelegate(response));
+                    ServiceResponse<SimpleProduct> clientResponse = postFlattenedSimpleProductDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -748,20 +782,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
         if (productId == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter productId is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
         if (maxProductDisplayName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
         SimpleProduct simpleBodyProduct = null;
         if (description != null || genericValue != null || odatavalue != null) {
@@ -773,14 +801,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postFlattenedSimpleProductDelegate(response));
+                    ServiceResponse<SimpleProduct> clientResponse = postFlattenedSimpleProductDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -832,18 +867,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param flattenParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
         if (flattenParameterGroup == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
-        Validator.validate(flattenParameterGroup, serviceCallback);
+        Validator.validate(flattenParameterGroup);
         String name = flattenParameterGroup.name();
         String productId = flattenParameterGroup.productId();
         String description = flattenParameterGroup.description();
@@ -860,14 +890,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.withOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+        final ServiceCall<SimpleProduct> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSimpleProductWithGroupingDelegate(response));
+                    ServiceResponse<SimpleProduct> clientResponse = putSimpleProductWithGroupingDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

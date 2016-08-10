@@ -1,5 +1,6 @@
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import org.junit.Assert;
@@ -24,19 +25,8 @@ public class HttpSuccessTests {
 
     @Test
     public void head200() throws Exception {
-        client.httpSuccess().head200Async(new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHeadResponse().code());
-                lock.countDown();
-            }
-        });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        ServiceCall<Void> serviceCall = client.httpSuccess().head200Async(null);
+        Assert.assertEquals(200, serviceCall.get().getHeadResponse().code());
     }
 
     @Test

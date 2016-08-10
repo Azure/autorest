@@ -278,6 +278,108 @@
         }
       }
     },
+    "/string/enum/Referenced": {
+      "get": {
+        "operationId": "enum_getReferenced",
+        "description": "Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The String value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
+            "schema": {
+              "$ref": "#/definitions/RefColors"
+            },
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "enum_putReferenced",
+        "description": "Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'",
+        "parameters": [
+          {
+            "name": "enumStringBody",
+            "in": "body",
+             "schema": {
+              "$ref": "#/definitions/RefColors"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/string/enum/ReferencedConstant": {
+      "get": {
+        "operationId": "enum_getReferencedConstant",
+        "description": "Get value 'green-color' from the constant.",
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The String value 'green-color' from a constant",
+            "schema": {
+              "$ref": "#/definitions/RefColorConstant"
+            },
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "enum_putReferencedConstant",
+        "description": "Sends value 'green-color' from a constant",
+        "parameters": [
+          {
+            "name": "enumStringBody",
+            "in": "body",
+             "schema": {
+              "$ref": "#/definitions/RefColorConstant"
+            },
+            "required": true
+          }
+        ],
+        "tags": [
+          "String Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/string/notProvided": {
       "get": {
         "operationId": "string_getNotProvided",
@@ -414,6 +516,27 @@
           "type": "string"
         }
       }
+    },
+    "RefColors": {
+      "x-ms-enum": { "name": "Colors", "modelAsString": false},
+      "type": "string",
+      "enum": [ "red color", "green-color", "blue_color" ],
+      "description": "Referenced Color Enum Description."
+    },
+    "RefColorConstant": {
+      "properties": {       
+        "ColorConstant": {   
+          "x-ms-enum": { "name": "ColorConstant", "modelAsString": false},
+          "type": "string",
+          "enum": [ "green-color" ],
+          "description": "Referenced Color Constant Description."
+        },
+         "field1": {            
+          "type": "string",          
+          "description": "Sample string."
+        }
+      },
+       "required": [ "ColorConstant" ]
     }
   }
 }

@@ -8,12 +8,7 @@
 
 namespace Fixtures.DateTimeOffset.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Product
     {
@@ -25,7 +20,7 @@ namespace Fixtures.DateTimeOffset.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(DateTime? date = default(DateTime?), DateTimeOffset? dateTime = default(DateTimeOffset?), IList<DateTime?> dateArray = default(IList<DateTime?>), IList<DateTimeOffset?> dateTimeArray = default(IList<DateTimeOffset?>))
+        public Product(System.DateTime? date = default(System.DateTime?), System.DateTimeOffset? dateTime = default(System.DateTimeOffset?), System.Collections.Generic.IList<System.DateTime?> dateArray = default(System.Collections.Generic.IList<System.DateTime?>), System.Collections.Generic.IList<System.DateTimeOffset?> dateTimeArray = default(System.Collections.Generic.IList<System.DateTimeOffset?>))
         {
             Date = date;
             DateTime = dateTime;
@@ -35,24 +30,24 @@ namespace Fixtures.DateTimeOffset.Models
 
         /// <summary>
         /// </summary>
-        [JsonConverter(typeof(DateJsonConverter))]
-        [JsonProperty(PropertyName = "date")]
-        public DateTime? Date { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "date")]
+        public System.DateTime? Date { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateTime")]
-        public DateTimeOffset? DateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateTime")]
+        public System.DateTimeOffset? DateTime { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateArray")]
-        public IList<DateTime?> DateArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateArray")]
+        public System.Collections.Generic.IList<System.DateTime?> DateArray { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateTimeArray")]
-        public IList<DateTimeOffset?> DateTimeArray { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dateTimeArray")]
+        public System.Collections.Generic.IList<System.DateTimeOffset?> DateTimeArray { get; set; }
 
     }
 }

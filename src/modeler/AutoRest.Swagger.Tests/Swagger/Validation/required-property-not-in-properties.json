@@ -41,7 +41,7 @@
       ],
       "properties": {
         "bar": {
-        "description": "bar property",
+          "description": "bar property",
           "type": "string"
         }
       }

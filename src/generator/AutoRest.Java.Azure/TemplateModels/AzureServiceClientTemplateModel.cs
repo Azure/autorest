@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.TemplateModels;
+using System.Globalization;
 
 namespace AutoRest.Java.Azure.TemplateModels
 {

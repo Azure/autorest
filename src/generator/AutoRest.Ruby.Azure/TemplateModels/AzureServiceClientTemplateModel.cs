@@ -34,7 +34,7 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             get
             {
                 return new List<string>
-				{
+                {
                     "MsRestAzure"
                 };
             }
@@ -48,6 +48,17 @@ namespace AutoRest.Ruby.Azure.TemplateModels
             get
             {
                 return "MsRestAzure::AzureServiceClient";
+            }
+        }
+
+        /// <summary>
+        /// Gets the serializer type of the client.
+        /// </summary>
+        public override string IncludeSerializer
+        {
+            get
+            {
+                return "include MsRestAzure::Serialization";
             }
         }
     }

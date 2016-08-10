@@ -222,7 +222,7 @@ class ClientRequest(requests.Request):
 
         try:
             self.data = json.dumps(data)
-            self.headers['Content-Length'] = len(self.data)
+            self.headers['Content-Length'] = str(len(self.data))
         except TypeError:
             self.data = data
 

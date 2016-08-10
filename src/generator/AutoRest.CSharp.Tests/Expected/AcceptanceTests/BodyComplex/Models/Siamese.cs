@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Siamese : Cat
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Siamese class.
         /// </summary>
-        public Siamese(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>), string breed = default(string))
+        public Siamese(int? id = default(int?), string name = default(string), string color = default(string), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>), string breed = default(string))
             : base(id, name, color, hates)
         {
             Breed = breed;
@@ -33,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "breed")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "breed")]
         public string Breed { get; set; }
 
     }

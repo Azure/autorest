@@ -3,4 +3,5 @@
 	<s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">Copyright (c) Microsoft Corporation. All rights reserved.&#xD;
 Licensed under the MIT License. See License.txt in the project root for license information.&#xD;
 &#xD;
-</s:String></wpf:ResourceDictionary>
+</s:String>
+	<s:Boolean x:Key="/Default/Environment/UnitTesting/ShadowCopy/@EntryValue">False</s:Boolean></wpf:ResourceDictionary>

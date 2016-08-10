@@ -15,9 +15,6 @@ public final class CoverageReporter {
         Map<String, Integer> report = client.getReport().getBody();
 
         // Pending URL encoding
-        report.put("AzureMethodPathUrlEncoding", 1);
-        report.put("AzurePathPathUrlEncoding", 1);
-        report.put("AzureSwaggerPathUrlEncoding", 1);
         report.put("AzureMethodQueryUrlEncoding", 1);
         report.put("AzurePathQueryUrlEncoding", 1);
         report.put("AzureSwaggerQueryUrlEncoding", 1);

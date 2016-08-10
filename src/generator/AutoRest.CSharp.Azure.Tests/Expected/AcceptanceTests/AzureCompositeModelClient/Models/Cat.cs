@@ -8,13 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     public partial class Cat : Pet
     {
@@ -26,7 +20,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat(int? id = default(int?), string name = default(string), string color = default(string), IList<Dog> hates = default(IList<Dog>))
+        public Cat(int? id = default(int?), string name = default(string), string color = default(string), System.Collections.Generic.IList<Dog> hates = default(System.Collections.Generic.IList<Dog>))
             : base(id, name)
         {
             Color = color;
@@ -35,13 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "color")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "color")]
         public string Color { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "hates")]
-        public IList<Dog> Hates { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "hates")]
+        public System.Collections.Generic.IList<Dog> Hates { get; set; }
 
     }
 }

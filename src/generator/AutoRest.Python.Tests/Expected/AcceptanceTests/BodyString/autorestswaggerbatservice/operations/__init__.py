@@ -9,10 +9,10 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .string import String
-from .enum import Enum
+from .string_operations import StringOperations
+from .enum_operations import EnumOperations
 
 __all__ = [
-    'String',
-    'Enum',
+    'StringOperations',
+    'EnumOperations',
 ]

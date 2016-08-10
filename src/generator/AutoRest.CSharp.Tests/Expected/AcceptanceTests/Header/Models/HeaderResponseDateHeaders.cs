@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for responseDate operation.
@@ -30,7 +25,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// </summary>
         /// <param name="value">response with header values "2010-01-01" or
         /// "0001-01-01"</param>
-        public HeaderResponseDateHeaders(DateTime? value = default(DateTime?))
+        public HeaderResponseDateHeaders(System.DateTime? value = default(System.DateTime?))
         {
             Value = value;
         }
@@ -39,9 +34,9 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Gets or sets response with header values "2010-01-01" or
         /// "0001-01-01"
         /// </summary>
-        [JsonConverter(typeof(DateJsonConverter))]
-        [JsonProperty(PropertyName = "value")]
-        public DateTime? Value { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Microsoft.Rest.Serialization.DateJsonConverter))]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
+        public System.DateTime? Value { get; set; }
 
     }
 }

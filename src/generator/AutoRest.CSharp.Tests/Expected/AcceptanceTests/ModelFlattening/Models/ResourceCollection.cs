@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class ResourceCollection
     {
@@ -25,7 +20,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
         /// </summary>
-        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), IList<FlattenedProduct> arrayofresources = default(IList<FlattenedProduct>), IDictionary<string, FlattenedProduct> dictionaryofresources = default(IDictionary<string, FlattenedProduct>))
+        public ResourceCollection(FlattenedProduct productresource = default(FlattenedProduct), System.Collections.Generic.IList<FlattenedProduct> arrayofresources = default(System.Collections.Generic.IList<FlattenedProduct>), System.Collections.Generic.IDictionary<string, FlattenedProduct> dictionaryofresources = default(System.Collections.Generic.IDictionary<string, FlattenedProduct>))
         {
             Productresource = productresource;
             Arrayofresources = arrayofresources;
@@ -34,18 +29,18 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "productresource")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "productresource")]
         public FlattenedProduct Productresource { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "arrayofresources")]
-        public IList<FlattenedProduct> Arrayofresources { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "arrayofresources")]
+        public System.Collections.Generic.IList<FlattenedProduct> Arrayofresources { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dictionaryofresources")]
-        public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "dictionaryofresources")]
+        public System.Collections.Generic.IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
 
     }
 }

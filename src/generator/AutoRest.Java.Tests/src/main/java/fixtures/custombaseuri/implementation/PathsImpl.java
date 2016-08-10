@@ -86,31 +86,32 @@ public final class PathsImpl implements Paths {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         if (accountName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         if (this.client.host() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.host() is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
         String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
         Call<ResponseBody> call = service.getEmpty(parameterizedHost);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response));
+                    ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

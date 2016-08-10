@@ -16,8 +16,7 @@ module MsRest
     # @param object_name [String] Name of the deserialized object.
     #
     def deserialize(mapper, response_body, object_name)
-      serialization = Serialization.new(self)
-      serialization.deserialize(mapper, response_body, object_name)
+      build_serializer.deserialize(mapper, response_body, object_name)
     end
 
     #
@@ -28,8 +27,16 @@ module MsRest
     # @param object_name [String] Name of the serialized object.
     #
     def serialize(mapper, object, object_name)
-      serialization = Serialization.new(self)
-      serialization.serialize(mapper, object, object_name)
+      build_serializer.serialize(mapper, object, object_name)
+    end
+
+    private
+
+    #
+    # Builds serializer
+    #
+    def build_serializer
+      Serialization.new(self)
     end
 
     #
@@ -88,9 +95,9 @@ module MsRest
           when 'String', 'Boolean', 'Object', 'Stream'
             result = response_body
           when 'Enum'
-            unless response_body.nil? || response_body.empty?
+            unless response_body.nil?
               unless enum_is_valid(mapper, response_body)
-                warn "Enum #{model} does not contain #{response_body.downcase}, but was received from the server."
+                warn "Enum does not contain #{response_body}, but was received from the server."
               end
             end
             result = response_body
@@ -146,7 +153,9 @@ module MsRest
           parent_class = get_model(mapper[:type][:class_name])
           discriminator = parent_class.class_eval("@@discriminatorMap")
           model_name = response_body["#{mapper[:type][:polymorphic_discriminator]}"]
-          model_class = get_model(discriminator[model_name].capitalize)
+          # In case we do not find model from response body then use the class defined in mapper
+          model_name = mapper[:type][:class_name] if model_name.nil? || model_name.empty?
+          model_class = get_model(discriminator[model_name])
         else
           model_class = get_model(mapper[:type][:class_name])
         end
@@ -248,7 +257,7 @@ module MsRest
           when 'Number', 'Double', 'String', 'Date', 'Boolean', 'Object', 'Stream'
             payload = object != nil ? object : nil
           when  'Enum'
-            unless object.nil? || object.empty?
+            unless object.nil?
               unless enum_is_valid(mapper, object)
                 fail ValidationError, "Enum #{mapper[:type][:module]} does not contain #{object.to_s}, but trying to send it to the server."
               end
@@ -315,7 +324,12 @@ module MsRest
 
         unless model_props.nil?
           model_props.each do |key, value|
-            instance_variable = object.instance_variable_get("@#{key}")
+            begin
+              instance_variable = object.instance_variable_get("@#{key}")
+            rescue NameError
+              warn("Instance variable '#{key}' is expected on '#{object.class}'.")
+            end
+
             if !instance_variable.nil? && instance_variable.respond_to?(:validate)
               instance_variable.validate
             end
@@ -387,8 +401,12 @@ module MsRest
       # @param enum_value [String] Enum value to validate
       #
       def enum_is_valid(mapper, enum_value)
-        model = get_model(mapper[:type][:module])
-        model.constants.any? { |e| model.const_get(e).to_s.downcase == enum_value.downcase }
+        if enum_value.is_a?(String) && !enum_value.empty?
+          model = get_model(mapper[:type][:module])
+          model.constants.any? { |e| model.const_get(e).to_s.downcase == enum_value.downcase }
+        else
+            false
+        end
       end
 
       # Splits serialized_name with '.' to compute levels of object hierarchy

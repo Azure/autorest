@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class DurationWrapper
     {
@@ -25,15 +20,15 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DurationWrapper class.
         /// </summary>
-        public DurationWrapper(TimeSpan? field = default(TimeSpan?))
+        public DurationWrapper(System.TimeSpan? field = default(System.TimeSpan?))
         {
             Field = field;
         }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "field")]
-        public TimeSpan? Field { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "field")]
+        public System.TimeSpan? Field { get; set; }
 
     }
 }

@@ -34,7 +34,9 @@ namespace AutoRest.Core.Logging
         /// <param name="args">Optional arguments to use if message includes formatting.</param>
         public static void LogInfo(string message, params object[] args)
         {
+          lock( typeof( Logger ) ) {
             Entries.Add(new LogEntry(LogEntrySeverity.Info, string.Format(CultureInfo.InvariantCulture, message, args)));
+          }
         }
 
         /// <summary>
@@ -112,6 +114,29 @@ namespace AutoRest.Core.Logging
                 {
                     writer.WriteLine("{0}", logEntry.Exception);
                 }
+            }
+        }
+
+        public static void WriteMessages(TextWriter writer, LogEntrySeverity severity, bool verbose,ConsoleColor color)
+        {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("writer");
+            }
+            foreach (var logEntry in Entries.Where(e => e.Severity == severity))
+            {
+                var original = Console.ForegroundColor;
+                Console.ForegroundColor = color;
+                // Write the severity and message to console
+                writer.WriteLine("{0}: {1}",
+                    logEntry.Severity.ToString().ToUpperInvariant(),
+                    logEntry.Message);
+                // If verbose is on and the entry has an exception, show it
+                if (logEntry.Exception != null && verbose)
+                {
+                    writer.WriteLine("{0}", logEntry.Exception);
+                }
+                Console.ForegroundColor = original;
             }
         }
     }

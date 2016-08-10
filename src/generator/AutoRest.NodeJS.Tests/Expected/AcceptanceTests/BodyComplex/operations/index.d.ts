@@ -41,9 +41,12 @@ export interface BasicOperations {
      * @param {object} complexBody Please put {id: 2, name: 'abc', color:
      * 'Magenta'}
      * 
-     * @param {number} [complexBody.id]
+     * @param {number} [complexBody.id] Basic Id
      * 
-     * @param {string} [complexBody.name]
+     * @param {string} [complexBody.name] Name property with a very
+     * long description that
+     * does not fit on a single line
+     * and a line break.
      * 
      * @param {string} [complexBody.color] Possible values include: 'cyan',
      * 'Magenta', 'YELLOW', 'blacK'
@@ -789,11 +792,11 @@ export interface Polymorphism {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -840,11 +843,11 @@ export interface Polymorphism {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -939,11 +942,11 @@ export interface Polymorphicrecursive {
      * 
      * @param {string} [complexBody.species]
      * 
-     * @param {number} [complexBody.length]
+     * @param {number} complexBody.length
      * 
      * @param {array} [complexBody.siblings]
      * 
-     * @param {string} [complexBody.fishtype] Polymorhpic Discriminator
+     * @param {string} complexBody.fishtype Polymorhpic Discriminator
      * 
      * @param {object} [options] Optional Parameters.
      * 

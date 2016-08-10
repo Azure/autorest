@@ -143,9 +143,12 @@ BasicOperations.prototype.getValid = function (options, callback) {
  * @param {object} complexBody Please put {id: 2, name: 'abc', color:
  * 'Magenta'}
  * 
- * @param {number} [complexBody.id]
+ * @param {number} [complexBody.id] Basic Id
  * 
- * @param {string} [complexBody.name]
+ * @param {string} [complexBody.name] Name property with a very
+ * long description that
+ * does not fit on a single line
+ * and a line break.
  * 
  * @param {string} [complexBody.color] Possible values include: 'cyan',
  * 'Magenta', 'YELLOW', 'blacK'
@@ -188,14 +191,14 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

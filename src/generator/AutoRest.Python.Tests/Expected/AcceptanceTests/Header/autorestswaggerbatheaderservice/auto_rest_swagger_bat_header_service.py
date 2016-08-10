@@ -12,7 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.header import Header
+from .operations.header_operations import HeaderOperations
 from . import models
 
 
@@ -43,7 +43,7 @@ class AutoRestSwaggerBATHeaderService(object):
     :vartype config: AutoRestSwaggerBATHeaderServiceConfiguration
 
     :ivar header: Header operations
-    :vartype header: .operations.Header
+    :vartype header: .operations.HeaderOperations
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -59,5 +59,5 @@ class AutoRestSwaggerBATHeaderService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.header = Header(
+        self.header = HeaderOperations(
             self._client, self.config, self._serialize, self._deserialize)

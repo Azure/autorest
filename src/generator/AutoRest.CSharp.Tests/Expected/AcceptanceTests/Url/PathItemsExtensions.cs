@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsUrl
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for PathItems.
@@ -45,7 +40,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetAllWithValues(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPathItems)s).GetAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -73,7 +68,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetAllWithValuesAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetAllWithValuesAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetAllWithValuesWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -102,7 +97,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetGlobalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -130,7 +125,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetGlobalQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetGlobalQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetGlobalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -158,7 +153,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetGlobalAndLocalQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPathItems)s).GetGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -185,7 +180,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetGlobalAndLocalQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetGlobalAndLocalQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetGlobalAndLocalQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }
@@ -213,7 +208,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static void GetLocalPathItemQueryNull(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string))
             {
-                Task.Factory.StartNew(s => ((IPathItems)s).GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                System.Threading.Tasks.Task.Factory.StartNew(s => ((IPathItems)s).GetLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None,  System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -240,7 +235,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetLocalPathItemQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task GetLocalPathItemQueryNullAsync(this IPathItems operations, string localStringPath, string pathItemStringPath, string localStringQuery = default(string), string pathItemStringQuery = default(string), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 await operations.GetLocalPathItemQueryNullWithHttpMessagesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery, null, cancellationToken).ConfigureAwait(false);
             }

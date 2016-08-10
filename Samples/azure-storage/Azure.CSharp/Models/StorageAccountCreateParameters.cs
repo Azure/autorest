@@ -1,18 +1,12 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The parameters to provide for the account.
     /// </summary>
-    public partial class StorageAccountCreateParameters : IResource
+    public partial class StorageAccountCreateParameters : Microsoft.Rest.Azure.IResource
     {
         /// <summary>
         /// Initializes a new instance of the StorageAccountCreateParameters
@@ -26,7 +20,7 @@ namespace Petstore.Models
         /// </summary>
         /// <param name="location">Resource location</param>
         /// <param name="tags">Resource tags</param>
-        public StorageAccountCreateParameters(string location, IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
+        public StorageAccountCreateParameters(string location, System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountPropertiesCreateParameters properties = default(StorageAccountPropertiesCreateParameters))
         {
             Location = location;
             Tags = tags;
@@ -36,31 +30,31 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets resource location
         /// </summary>
-        [JsonProperty(PropertyName = "location")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
-        [JsonProperty(PropertyName = "tags")]
-        public IDictionary<string, string> Tags { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
         public StorageAccountPropertiesCreateParameters Properties { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (Location == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Location");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "Location");
             }
             if (this.Properties != null)
             {

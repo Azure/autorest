@@ -9,8 +9,8 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from .files import Files
+from .files_operations import FilesOperations
 
 __all__ = [
-    'Files',
+    'FilesOperations',
 ]

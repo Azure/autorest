@@ -12,9 +12,9 @@
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
 from .version import VERSION
-from .operations.paths import Paths
-from .operations.queries import Queries
-from .operations.path_items import PathItems
+from .operations.paths_operations import PathsOperations
+from .operations.queries_operations import QueriesOperations
+from .operations.path_items_operations import PathItemsOperations
 from . import models
 
 
@@ -59,11 +59,11 @@ class AutoRestUrlTestService(object):
     :vartype config: AutoRestUrlTestServiceConfiguration
 
     :ivar paths: Paths operations
-    :vartype paths: .operations.Paths
+    :vartype paths: .operations.PathsOperations
     :ivar queries: Queries operations
-    :vartype queries: .operations.Queries
+    :vartype queries: .operations.QueriesOperations
     :ivar path_items: PathItems operations
-    :vartype path_items: .operations.PathItems
+    :vartype path_items: .operations.PathItemsOperations
 
     :param global_string_path: A string value 'globalItemStringPath' that
      appears in the path
@@ -84,9 +84,9 @@ class AutoRestUrlTestService(object):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
-        self.paths = Paths(
+        self.paths = PathsOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.queries = Queries(
+        self.queries = QueriesOperations(
             self._client, self.config, self._serialize, self._deserialize)
-        self.path_items = PathItems(
+        self.path_items = PathItemsOperations(
             self._client, self.config, self._serialize, self._deserialize)

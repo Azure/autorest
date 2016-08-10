@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Error
     {
@@ -33,12 +28,12 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
         public int? Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
     }

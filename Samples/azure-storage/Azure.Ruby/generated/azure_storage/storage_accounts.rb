@@ -16,7 +16,7 @@ module Petstore
       @client = client
     end
 
-    # @return reference to the StorageManagementClient
+    # @return [StorageManagementClient] reference to the StorageManagementClient
     attr_reader :client
 
     #
@@ -141,17 +141,31 @@ module Petstore
     # characters in length and use numbers and lower-case letters only.
     # @param parameters [StorageAccountCreateParameters] The parameters to provide
     # for the created account.
-    # @param @client.api_version [String] Client Api Version.
-    # @param @client.subscription_id [String] Gets subscription credentials which
-    # uniquely identify Microsoft Azure subscription. The subscription ID forms
-    # part of the URI for every service call.
-    # @param @client.accept_language [String] Gets or sets the preferred language
-    # for the response.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
+    #
+    # @return [StorageAccount] operation results.
+    #
+    def create(resource_group_name, account_name, parameters, custom_headers = nil)
+      response = create_async(resource_group_name, account_name, parameters, custom_headers).value!
+      response.body unless response.nil?
+    end
+
+    #
+    # @param resource_group_name [String] The name of the resource group within
+    # the user's subscription.
+    # @param account_name [String] The name of the storage account within the
+    # specified resource group. Storage account names must be between 3 and 24
+    # characters in length and use numbers and lower-case letters only.
+    # @param parameters [StorageAccountCreateParameters] The parameters to provide
+    # for the created account.
+    # @param custom_headers [Hash{String => String}] A hash of custom headers that
+    # will be added to the HTTP request.
     #
     # @return [Concurrent::Promise] promise which provides async access to http
     # response.
     #
-    def create(resource_group_name, account_name, parameters, custom_headers = nil)
+    def create_async(resource_group_name, account_name, parameters, custom_headers = nil)
       # Send request
       promise = begin_create_async(resource_group_name, account_name, parameters, custom_headers)
 

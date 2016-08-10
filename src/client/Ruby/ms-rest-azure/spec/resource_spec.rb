@@ -5,18 +5,18 @@
 require 'rspec'
 require 'ms_rest_azure'
 
-module MsRestAzure
+module MsRestAzureTest
   class Helper
-    include MsRest::Serialization
+    include MsRestAzure::Serialization
   end
 
-  describe Resource do
+  describe 'Resource' do
     before (:all) do
       @helper = Helper.new
     end
 
     it 'should serialize Resource correctly' do
-      resource = Resource.new
+      resource = MsRestAzure::Resource.new
       resource.id = 'id'
       resource.name = 'name'
       resource.type = 'type'
@@ -26,8 +26,7 @@ module MsRestAzure
         'tag2' => 'tag2_value'
       }
 
-      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(Resource)
-      res = @helper.serialize(Resource.mapper(), resource, 'resource')
+      res = @helper.serialize(MsRestAzure::Resource.mapper(), resource, 'resource')
 
       expect(res).to be_a(Hash)
       expect(res['id']).to eq('id')
@@ -47,10 +46,9 @@ module MsRestAzure
         }
       }
 
-      allow_any_instance_of(MsRest::Serialization::Serialization).to receive(:get_model).and_return(Resource)
-      res = @helper.deserialize(Resource.mapper(), resource_hash, 'resource_hash')
+      res = @helper.deserialize(MsRestAzure::Resource.mapper(), resource_hash, 'resource_hash')
 
-      expect(res).to be_a(Resource)
+      expect(res).to be_a(MsRestAzure::Resource)
       expect(res.id).to eq('id')
       expect(res.name).to eq('name')
       expect(res.type).to eq('type')

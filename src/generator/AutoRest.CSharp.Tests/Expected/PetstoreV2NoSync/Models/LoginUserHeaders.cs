@@ -8,12 +8,7 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// Defines headers for loginUser operation.
@@ -30,7 +25,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// </summary>
         /// <param name="xRateLimit">calls per hour allowed by the user</param>
         /// <param name="xExpiresAfter">date in UTC when toekn expires</param>
-        public LoginUserHeaders(int? xRateLimit = default(int?), DateTime? xExpiresAfter = default(DateTime?))
+        public LoginUserHeaders(int? xRateLimit = default(int?), System.DateTime? xExpiresAfter = default(System.DateTime?))
         {
             XRateLimit = xRateLimit;
             XExpiresAfter = xExpiresAfter;
@@ -39,14 +34,14 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Gets or sets calls per hour allowed by the user
         /// </summary>
-        [JsonProperty(PropertyName = "X-Rate-Limit")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "X-Rate-Limit")]
         public int? XRateLimit { get; set; }
 
         /// <summary>
         /// Gets or sets date in UTC when toekn expires
         /// </summary>
-        [JsonProperty(PropertyName = "X-Expires-After")]
-        public DateTime? XExpiresAfter { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "X-Expires-After")]
+        public System.DateTime? XExpiresAfter { get; set; }
 
     }
 }

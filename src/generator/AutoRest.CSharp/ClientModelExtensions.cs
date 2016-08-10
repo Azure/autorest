@@ -250,7 +250,7 @@ namespace AutoRest.CSharp
         public static string ToString(this IType type, string clientReference, string reference)
         {
             PrimaryType primaryType = type as PrimaryType;
-            if (type == null || primaryType != null && primaryType.Type == KnownPrimaryType.String)
+            if (type == null || primaryType != null && primaryType.Type == KnownPrimaryType.String && primaryType.KnownFormat != KnownFormat.@char)
             {
                 return reference;
             }
@@ -259,24 +259,24 @@ namespace AutoRest.CSharp
             {
                 if (primaryType.Type == KnownPrimaryType.Date)
                 {
-                    serializationSettings = "new DateJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.DateJsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
                 {
-                    serializationSettings = "new DateTimeRfc1123JsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.DateTimeRfc1123JsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.Base64Url)
                 {
-                    serializationSettings = "new Base64UrlJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.Base64UrlJsonConverter()";
                 }
                 else if (primaryType.Type == KnownPrimaryType.UnixTime)
                 {
-                    serializationSettings = "new UnixTimeJsonConverter()";
+                    serializationSettings = "new Microsoft.Rest.Serialization.UnixTimeJsonConverter()";
                 }
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                    "SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
+                    "Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
                     reference,
                     serializationSettings);
         }
@@ -303,21 +303,33 @@ namespace AutoRest.CSharp
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
         public static bool IsValueType(this IType type)
         {
-            PrimaryType primaryType = type as PrimaryType;
-            EnumType enumType = type as EnumType;
-            return enumType != null || 
-                (primaryType != null && 
-                (primaryType.Type == KnownPrimaryType.Boolean 
-                || primaryType.Type == KnownPrimaryType.DateTime 
-                || primaryType.Type == KnownPrimaryType.Date
-                || primaryType.Type == KnownPrimaryType.Decimal 
-                || primaryType.Type == KnownPrimaryType.Double
-                || primaryType.Type == KnownPrimaryType.Int 
-                || primaryType.Type == KnownPrimaryType.Long 
-                || primaryType.Type == KnownPrimaryType.TimeSpan 
-                || primaryType.Type == KnownPrimaryType.DateTimeRfc1123
-                || primaryType.Type == KnownPrimaryType.UnixTime
-                || primaryType.Type == KnownPrimaryType.Uuid));
+            if (type is EnumType)
+            {
+                return true;
+            }
+            
+            switch ((type as PrimaryType)?.Type ) 
+            {
+                case KnownPrimaryType.Boolean:
+                case KnownPrimaryType.DateTime:
+                case KnownPrimaryType.Date:
+                case KnownPrimaryType.Decimal:
+                case KnownPrimaryType.Double:
+                case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
+                case KnownPrimaryType.TimeSpan:
+                case KnownPrimaryType.DateTimeRfc1123:
+                case KnownPrimaryType.UnixTime:
+                case KnownPrimaryType.Uuid:
+                    return true;
+
+                case KnownPrimaryType.String:
+                    return ((PrimaryType) type).KnownFormat == KnownFormat.@char;
+
+                default:
+                    return false;
+            }
+
         }
 
         public static string CheckNull(string valueReference, string executionBlock)
@@ -359,7 +371,7 @@ namespace AutoRest.CSharp
 
             if (constraints != null && constraints.Any())
             {
-                AppendConstraintValidations(valueReference, constraints, sb);
+                AppendConstraintValidations(valueReference, constraints, sb, (type as PrimaryType)?.KnownFormat ?? KnownFormat.none);
             }
 
             if (sequence != null && sequence.ShouldValidateChain())
@@ -403,60 +415,49 @@ namespace AutoRest.CSharp
         }
 
 
-        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb)
+        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
         {
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
-                string constraintValue = constraints[constraint];
+                string constraintValue = (format == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} >= {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} >= {constraintValue}";
                         break;
                     case Constraint.ExclusiveMinimum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} <= {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} <= {constraintValue}";
                         break;
                     case Constraint.InclusiveMaximum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} > {constraintValue}";
                         break;
                     case Constraint.InclusiveMinimum:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} < {constraintValue}";
                         break;
                     case Constraint.MaxItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.Count > {constraintValue}";
                         break;
                     case Constraint.MaxLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length > {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.Length > {constraintValue}";
                         break;
                     case Constraint.MinItems:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Count < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.Count < {constraintValue}";
                         break;
                     case Constraint.MinLength:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0}.Length < {1}", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference}.Length < {constraintValue}";
                         break;
                     case Constraint.MultipleOf:
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture, "{0} % {1} != 0", valueReference,
-                            constraints[constraint]);
+                        constraintCheck = $"{valueReference} % {constraintValue} != 0";
                         break;
                     case Constraint.Pattern:
-                        constraintValue = "\"" + constraintValue.Replace("\\", "\\\\") + "\"";
-                        constraintCheck = string.Format(CultureInfo.InvariantCulture,
-                            "!System.Text.RegularExpressions.Regex.IsMatch({0}, {1})", valueReference, constraintValue);
+                        constraintValue = $"\"{constraintValue.Replace("\\", "\\\\")}\"";
+                        constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
                         break;
                     case Constraint.UniqueItems:
                         if ("true".Equals(constraints[constraint], StringComparison.OrdinalIgnoreCase))
                         {
-                            constraintCheck = string.Format(CultureInfo.InvariantCulture,
-                                "{0}.Count != {0}.Distinct().Count()", valueReference);
+                            constraintCheck = $"{valueReference}.Count != {valueReference}.Distinct().Count()";
                         }
                         else
                         {
@@ -472,7 +473,7 @@ namespace AutoRest.CSharp
                     {
                         sb.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\", {2});",
+                            .AppendLine("throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.{0}, \"{1}\", {2});",
                                 constraint, valueReference.Replace("this.", ""), constraintValue).Outdent()
                             .AppendLine("}");
                     }
@@ -480,7 +481,7 @@ namespace AutoRest.CSharp
                     {
                         sb.AppendLine("if ({0})", constraintCheck)
                             .AppendLine("{").Indent()
-                            .AppendLine("throw new ValidationException(ValidationRules.{0}, \"{1}\");",
+                            .AppendLine("throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.{0}, \"{1}\");",
                                 constraint, valueReference.Replace("this.", "")).Outdent()
                             .AppendLine("}");
                     }

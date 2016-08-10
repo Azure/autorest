@@ -36,7 +36,7 @@ function StorageAccounts(client) {
  * specified resource group. Storage account names must be between 3 and 24
  * characters in length and use numbers and lower-case letters only.
  * 
- * @param {string} [accountName.name]
+ * @param {string} accountName.name
  * 
  * @param {string} [accountName.type]
  * 
@@ -90,14 +90,14 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -212,7 +212,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
@@ -305,7 +305,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
  * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
  * 'Standard_RAGRS', 'Premium_LRS'
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
@@ -366,14 +366,14 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -529,14 +529,14 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -660,14 +660,14 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -785,7 +785,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
  * indirect CName validation is enabled. Default value is false. This should
  * only be set on updates
  * 
- * @param {string} [parameters.location] Resource location
+ * @param {string} parameters.location Resource location
  * 
  * @param {object} [parameters.tags] Resource tags
  * 
@@ -846,14 +846,14 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -949,7 +949,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
 /**
  * Lists the access keys for the specified storage account.
  *
- * @param {string} resourceGroupName The name of the resource group.
+ * @param {string} resourceGroupName The name of the resource group within the
+ * user’s subscription.
  * 
  * @param {string} accountName The name of the storage account.
  * 
@@ -1007,14 +1008,14 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1144,14 +1145,14 @@ StorageAccounts.prototype.list = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1289,14 +1290,14 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
                    '//subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();
@@ -1453,14 +1454,14 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{accountName}', encodeURIComponent(accountName));
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.client.subscriptionId));
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
   var queryParameters = [];
   queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
-  // trim all duplicate forward slashes in the url
-  var regex = /([^:]\/)\/+/gi;
-  requestUrl = requestUrl.replace(regex, '$1');
 
   // Create HTTP transport objects
   var httpRequest = new WebResource();

@@ -8,13 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// Defines headers for customNamedRequestId operation.
@@ -40,7 +34,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Gets the foo-request-id.
         /// </summary>
-        [JsonProperty(PropertyName = "foo-request-id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "foo-request-id")]
         public string FooRequestId { get; set; }
 
     }

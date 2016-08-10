@@ -8,12 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     /// <summary>
     /// The product documentation.
@@ -45,26 +40,26 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// Francisco will have a different product_id than uberX in Los
         /// Angeles.
         /// </summary>
-        [JsonProperty(PropertyName = "base_product_id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "base_product_id")]
         public string ProductId { get; set; }
 
         /// <summary>
         /// Gets or sets description of product.
         /// </summary>
-        [JsonProperty(PropertyName = "base_product_description")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "base_product_description")]
         public string Description { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()
         {
             if (ProductId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "ProductId");
+                throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "ProductId");
             }
         }
     }

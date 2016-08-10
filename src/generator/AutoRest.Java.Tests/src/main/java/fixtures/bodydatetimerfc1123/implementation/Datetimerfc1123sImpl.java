@@ -115,16 +115,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -133,9 +129,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -170,16 +173,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -188,9 +187,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -225,16 +231,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -243,9 +245,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -280,16 +289,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -298,9 +303,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -337,27 +349,29 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBodyConverted);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putUtcMaxDateTimeDelegate(response));
+                    ServiceResponse<Void> clientResponse = putUtcMaxDateTimeDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -392,16 +406,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -410,9 +420,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -447,16 +464,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -465,9 +478,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -504,27 +524,29 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
         DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBodyConverted);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putUtcMinDateTimeDelegate(response));
+                    ServiceResponse<Void> clientResponse = putUtcMinDateTimeDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -559,16 +581,12 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
+        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
@@ -577,9 +595,16 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     if (result.getBody() != null) {
                         body = result.getBody().getDateTime();
                     }
-                    serviceCallback.success(new ServiceResponse<DateTime>(body, result.getResponse()));
+                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

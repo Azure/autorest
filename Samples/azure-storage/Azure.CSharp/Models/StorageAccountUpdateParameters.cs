@@ -1,18 +1,12 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
-    using Microsoft.Rest.Azure;
 
     /// <summary>
     /// The parameters to update on the account.
     /// </summary>
-    public partial class StorageAccountUpdateParameters : IResource
+    public partial class StorageAccountUpdateParameters : Microsoft.Rest.Azure.IResource
     {
         /// <summary>
         /// Initializes a new instance of the StorageAccountUpdateParameters
@@ -25,7 +19,7 @@ namespace Petstore.Models
         /// class.
         /// </summary>
         /// <param name="tags">Resource tags</param>
-        public StorageAccountUpdateParameters(IDictionary<string, string> tags = default(IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
+        public StorageAccountUpdateParameters(System.Collections.Generic.IDictionary<string, string> tags = default(System.Collections.Generic.IDictionary<string, string>), StorageAccountPropertiesUpdateParameters properties = default(StorageAccountPropertiesUpdateParameters))
         {
             Tags = tags;
             Properties = properties;
@@ -34,18 +28,18 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets resource tags
         /// </summary>
-        [JsonProperty(PropertyName = "tags")]
-        public IDictionary<string, string> Tags { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "tags")]
+        public System.Collections.Generic.IDictionary<string, string> Tags { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
         public StorageAccountPropertiesUpdateParameters Properties { get; set; }
 
         /// <summary>
         /// Validate the object.
         /// </summary>
-        /// <exception cref="ValidationException">
+        /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown if validation fails
         /// </exception>
         public virtual void Validate()

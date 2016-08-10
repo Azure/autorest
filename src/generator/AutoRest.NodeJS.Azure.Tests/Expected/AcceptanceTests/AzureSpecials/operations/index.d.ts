@@ -546,7 +546,7 @@ export interface Header {
      * Additional parameters for the operation
      * 
      * @param {string}
-     * [headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId] The
+     * headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId The
      * fooRequestId
      * 
      * @param {object} [options] Optional Parameters.

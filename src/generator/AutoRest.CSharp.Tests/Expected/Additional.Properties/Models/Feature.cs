@@ -8,12 +8,7 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Feature
     {
@@ -33,12 +28,12 @@ namespace Fixtures.AdditionalProperties.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "foo")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "foo")]
         public string Foo { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bar")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "bar")]
         public int? Bar { get; set; }
 
     }

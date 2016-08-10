@@ -8,13 +8,8 @@
 
 namespace Fixtures.AcceptanceTestsBodyFormData
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Rest;
-    using Models;
+   using Models;
 
     /// <summary>
     /// Extension methods for Formdata.
@@ -35,7 +30,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// </param>
             public static System.IO.Stream UploadFile(this IFormdata operations, System.IO.Stream fileContent, string fileName)
             {
-                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileAsync(fileContent, fileName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IFormdata)s).UploadFileAsync(fileContent, fileName), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -53,7 +48,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> UploadFileAsync(this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.IO.Stream> UploadFileAsync(this IFormdata operations, System.IO.Stream fileContent, string fileName, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 var _result = await operations.UploadFileWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
@@ -71,7 +66,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// </param>
             public static System.IO.Stream UploadFileViaBody(this IFormdata operations, System.IO.Stream fileContent)
             {
-                return Task.Factory.StartNew(s => ((IFormdata)s).UploadFileViaBodyAsync(fileContent), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return System.Threading.Tasks.Task.Factory.StartNew(s => ((IFormdata)s).UploadFileViaBodyAsync(fileContent), operations, System.Threading.CancellationToken.None, System.Threading.Tasks.TaskCreationOptions.None, System.Threading.Tasks.TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -86,7 +81,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> UploadFileViaBodyAsync(this IFormdata operations, System.IO.Stream fileContent, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.IO.Stream> UploadFileViaBodyAsync(this IFormdata operations, System.IO.Stream fileContent, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();

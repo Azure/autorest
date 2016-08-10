@@ -86,22 +86,25 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
+        final ServiceCall<Fish> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Fish>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getValidDelegate(response));
+                    ServiceResponse<Fish> clientResponse = getValidDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -202,27 +205,29 @@ public final class PolymorphismsImpl implements Polymorphisms {
              ]
            };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
-        Validator.validate(complexBody, serviceCallback);
+        Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidDelegate(response));
+                    ServiceResponse<Void> clientResponse = putValidDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });
@@ -309,27 +314,29 @@ public final class PolymorphismsImpl implements Polymorphisms {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-            return null;
+            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
-        Validator.validate(complexBody, serviceCallback);
+        Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValidMissingRequired(complexBody);
-        final ServiceCall serviceCall = new ServiceCall(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
+        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
+        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidMissingRequiredDelegate(response));
+                    ServiceResponse<Void> clientResponse = putValidMissingRequiredDelegate(response);
+                    if (serviceCallback != null) {
+                        serviceCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
+                    if (serviceCallback != null) {
+                        serviceCallback.failure(exception);
+                    }
+                    serviceCall.failure(exception);
                 }
             }
         });

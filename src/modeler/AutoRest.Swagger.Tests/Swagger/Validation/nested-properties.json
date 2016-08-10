@@ -1,0 +1,24 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Foo definition has overly nested properties",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "definitions": {
+    "Foo": {
+      "description": "Foo",
+      "properties": {
+        "properties": {
+          "type": "object",        
+          "description": "bar"
+        }
+      }
+    }
+  }
+}

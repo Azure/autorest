@@ -8,12 +8,7 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class User
     {
@@ -40,43 +35,43 @@ namespace Fixtures.PetstoreV2NoSync.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "username")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "firstName")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "firstName")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastName")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "lastName")]
         public string LastName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "email")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "password")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "phone")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
 
         /// <summary>
         /// Gets or sets user Status
         /// </summary>
-        [JsonProperty(PropertyName = "userStatus")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "userStatus")]
         public int? UserStatus { get; set; }
 
     }

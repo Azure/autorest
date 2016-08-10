@@ -20,8 +20,8 @@ namespace AutoRest.Python.Azure.TemplateModels
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
             // Removing all models that contain the extension "x-ms-external", as they will be 
             // generated in python client runtime for azure - "ms-rest-azure".
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
-            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) && (bool)m.Extensions[AzureExtensions.PageableExtension]);
+            ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && (bool)m.Extensions[AzureExtensions.ExternalExtension]);
 
             HasAnyModel = false;
             if (serviceClient.ModelTypes.Any())
@@ -39,7 +39,7 @@ namespace AutoRest.Python.Azure.TemplateModels
 
         public bool HasAnyLongRunOperation
         {
-            get { return MethodTemplateModels.Any(m => m.Extensions.ContainsKey(AzureExtensions.LongRunningExtension)); }
+            get { return MethodTemplateModels.Any(m => m.Extensions.ContainsKey(AzureExtensions.LongRunningExtension) && (bool)m.Extensions[AzureExtensions.LongRunningExtension]); }
         }
 
         public bool HasAnyCloudErrors

@@ -38,7 +38,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types that have readonly properties.
@@ -59,6 +59,6 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

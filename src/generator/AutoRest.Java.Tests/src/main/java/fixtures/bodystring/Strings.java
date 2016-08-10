@@ -37,7 +37,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set string value null.
@@ -55,7 +55,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
     /**
      * Set string value null.
      *
@@ -74,7 +74,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty string value value ''.
@@ -92,7 +92,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set string value empty ''.
@@ -113,7 +113,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -131,7 +131,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -152,7 +152,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -170,7 +170,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -191,7 +191,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -209,7 +209,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get value that is base64 encoded.
@@ -227,7 +227,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get value that is base64url encoded.
@@ -245,7 +245,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put value that is base64url encoded.
@@ -266,7 +266,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -284,6 +284,6 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -1,0 +1,96 @@
+@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Core.ClientModel
+@using AutoRest.Ruby
+@using AutoRest.Ruby.Azure
+@using AutoRest.Ruby.Azure.TemplateModels;
+@using AutoRest.Ruby.Azure.Templates
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<PageTemplateModel>
+# encoding: utf-8
+@Header("# ")
+@EmptyLine
+module @(Settings.Namespace)
+  module Models
+    #
+    @WrapComment("# ", string.IsNullOrEmpty(Model.Documentation) ? "Model object." : Model.Documentation)
+    #
+    class @Model.Name@(Model.GetBaseTypeName())
+    @if (Model.Includes.Any())
+    {
+      @EmptyLine
+      foreach (var include in Model.Includes)
+      {
+      @:include @include
+      }
+      @EmptyLine
+    }
+
+    @if (Model.IsPolymorphic && Model.BaseModelType == null)
+    {
+      @:@@@@discriminatorMap = Hash.new
+      foreach (var derivedType in Model.DerivedTypes)
+        {
+          @:@@@@discriminatorMap["@derivedType.SerializedName"] = "@derivedType.Name"
+      }
+    }
+
+    @foreach (var property in Model.PropertyTemplateModels)
+    {
+      @:@WrapComment("# ", string.Format("@return {0}{1}", property.Type.GetYardDocumentation(), property.Documentation))
+      // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
+      @:attr_accessor :@property.Name
+      @EmptyLine
+      @:
+    }
+    
+      # return [Proc] with next page method call.
+      attr_accessor :next_method
+
+      @EmptyLine
+
+      #
+      # Gets the rest of the items for the request, enabling auto-pagination.
+      #
+      @WrapComment("# ", string.Format("@return [Array<{0}>] operation results.", Model.ItemType))
+      #
+      def get_all_items
+        items = @@@Model.ItemName
+        page = self
+        while page.@(Model.NextLinkName) != nil do
+          page = page.get_next_page
+          items.concat(page.@Model.ItemName)
+        end
+        items
+      end
+
+      @EmptyLine
+
+      #
+      # Gets the next page of results.
+      #
+      @WrapComment("# ", string.Format("@return [{0}] with next page content.", Model.Name))
+      #
+      def get_next_page
+      @{
+        @:response = @@next_method.call(@@@(Model.NextLinkName)).value! unless @@next_method.nil?
+        @:unless response.nil?
+          @:@@@(Model.NextLinkName) = response.body.@(Model.NextLinkName)
+          @:@@@(Model.ItemName) = response.body.@(Model.ItemName)
+          @:self
+        @:end
+      }
+      end
+
+      @EmptyLine
+      #
+      @WrapComment("# ", string.Format("Mapper for {0} class as Ruby Hash.", Model.Name))
+      # This will be used for serialization/deserialization.
+      #
+      def self.mapper()
+        @(Model.ConstructModelMapper())
+      end
+
+    end
+  end
+end

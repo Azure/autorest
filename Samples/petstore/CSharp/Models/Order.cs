@@ -1,12 +1,7 @@
 
 namespace Petstore.Models
 {
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
 
     public partial class Order
     {
@@ -18,8 +13,9 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Order class.
         /// </summary>
-        /// <param name="status">Order Status. Possible values include: 'placed', 'approved', 'delivered'</param>
-        public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), DateTime? shipDate = default(DateTime?), string status = default(string), bool? complete = default(bool?))
+        /// <param name="status">Order Status. Possible values include:
+        /// 'placed', 'approved', 'delivered'</param>
+        public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), System.DateTime? shipDate = default(System.DateTime?), string status = default(string), bool? complete = default(bool?))
         {
             Id = id;
             PetId = petId;
@@ -31,34 +27,34 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long? Id { get; private set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "petId")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "petId")]
         public long? PetId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "quantity")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "quantity")]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "shipDate")]
-        public DateTime? ShipDate { get; set; }
+        [Newtonsoft.Json.JsonProperty(PropertyName = "shipDate")]
+        public System.DateTime? ShipDate { get; set; }
 
         /// <summary>
         /// Gets or sets order Status. Possible values include: 'placed',
         /// 'approved', 'delivered'
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "complete")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "complete")]
         public bool? Complete { get; set; }
 
     }

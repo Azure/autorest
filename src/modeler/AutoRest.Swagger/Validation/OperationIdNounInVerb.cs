@@ -5,6 +5,8 @@ using AutoRest.Core.Validation;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -21,7 +23,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity">The operation id to test</param>
         /// <param name="formatParameters">The noun to be put in the failure message</param>
         /// <returns></returns>
-        public override bool IsValid(string entity, out object[] formatParameters)
+        public override bool IsValid(string entity, RuleContext context, out object[] formatParameters)
         {
             foreach (Match match in Regex.Matches(entity, NOUN_VERB_PATTERN))
             {
@@ -39,7 +41,7 @@ namespace AutoRest.Swagger.Validation
                 var nounSearchPattern = noun + (noun.Last() == 's' ? "?" : string.Empty);
                 if (Regex.IsMatch(verb, nounSearchPattern))
                 {
-                    formatParameters = new string[] { noun };
+                    formatParameters = new object[] { noun };
                     return false;
                 }
             }
@@ -47,6 +49,18 @@ namespace AutoRest.Swagger.Validation
             return true;
         }
 
-        public override ValidationExceptionName Exception => ValidationExceptionName.OperationIdNounsNotInVerbs;
+        /// <summary>
+        /// The template message for this Rule. 
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.OperationIdNounInVerb;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override LogEntrySeverity Severity => LogEntrySeverity.Warning;
+
     }
 }
