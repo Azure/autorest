@@ -923,7 +923,6 @@ public class AzureClient extends AzureServiceClient {
                 } else {
                     ServiceException serviceException = new ServiceException("No async header in response");
                     pollingCallback.failure(serviceException);
-                    serviceCall.failure(serviceException);
                 }
             } else {
                 // Check if operation failed

@@ -63,7 +63,7 @@ public interface TaskGroup<T, U extends TaskItem<T>> {
      * @param callback the callback to call on failure or success
      * @return the handle to the REST call
      */
-    ServiceCall executeAsync(ServiceCallback<Void> callback);
+    ServiceCall executeAsync(ServiceCallback<T> callback);
 
     /**
      * Gets the result of execution of a task in the group.
