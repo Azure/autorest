@@ -144,7 +144,7 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
          */
         public void cancel() {
             for (ServiceCall<?> call : this.serviceCalls) {
-                call.cancel();
+                call.cancel(true);
             }
         }
 
@@ -153,7 +153,7 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
          */
         public boolean isCancelled() {
             for (ServiceCall<?> call : this.serviceCalls) {
-                if (!call.isCanceled()) {
+                if (!call.isCancelled()) {
                     return false;
                 }
             }
