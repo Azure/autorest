@@ -92,15 +92,14 @@ namespace AutoRest.Ruby.Azure
                 {
                     PageableExtension pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
                     if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
-                    {
-                        
-                        if (serviceClient.Methods[i].Extensions.ContainsKey("nextMethodName"))
+                    {            
+                        if (method.Extensions.ContainsKey("nextMethodName"))
                         {
-                            serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
+                            method.Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
                         }
                         else if (!string.IsNullOrWhiteSpace(pageableExtension.OperationName))
                         {
-                            serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName(pageableExtension.OperationName);
+                            method.Extensions["nextMethodName"] = CodeNamer.GetMethodName(pageableExtension.OperationName);
                         }
                         if (!method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
                         {
