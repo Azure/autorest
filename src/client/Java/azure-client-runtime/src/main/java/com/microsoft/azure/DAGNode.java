@@ -10,6 +10,7 @@ package com.microsoft.azure;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * The type representing node in a {@link DAGraph}.
@@ -20,6 +21,7 @@ public class DAGNode<T> extends Node<T> {
     private List<String> dependentKeys;
     private int toBeResolved;
     private boolean isPreparer;
+    private ReentrantLock lock;
 
     /**
      * Creates a DAG node.
@@ -30,6 +32,14 @@ public class DAGNode<T> extends Node<T> {
     public DAGNode(String key, T data) {
         super(key, data);
         dependentKeys = new ArrayList<>();
+        lock = new ReentrantLock();
+    }
+
+    /**
+     * @return the lock to be used while performing thread safe operation on this node.
+     */
+    public ReentrantLock lock() {
+        return this.lock;
     }
 
     /**
