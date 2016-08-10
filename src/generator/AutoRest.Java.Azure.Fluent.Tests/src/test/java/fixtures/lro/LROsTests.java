@@ -38,6 +38,15 @@ public class LROsTests {
     }
 
     @Test
+    public void put200AsyncSucceeded() throws Exception {
+        ProductInner product = new ProductInner();
+        product.withLocation("West US");
+        ServiceResponse<ProductInner> response = client.lROs().put200SucceededAsync(product, null).get();
+        Assert.assertEquals(200, response.getResponse().code());
+        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+    }
+
+    @Test
     public void put200SucceededNoState() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");

@@ -52,18 +52,23 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     }
 
     /**
-     * Cancel the Retrofit call if possible.
+     * Cancel the Retrofit call if possible. Parameter
+     * 'mayInterruptIfRunning is ignored.
+     *
+     * @param mayInterruptIfRunning ignored
      */
-    public void cancel() {
-        call.cancel();
+    @Override
+    public boolean cancel(boolean mayInterruptIfRunning) {
+        if (isCancelled()) {
+            return false;
+        } else {
+            call.cancel();
+            return true;
+        }
     }
 
-    /**
-     * If the Retrofit call has been canceled.
-     *
-     * @return true if the call has been canceled; false otherwise.
-     */
-    public boolean isCanceled() {
+    @Override
+    public boolean isCancelled() {
         return call.isCanceled();
     }
 
