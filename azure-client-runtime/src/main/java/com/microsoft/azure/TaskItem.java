@@ -26,21 +26,17 @@ public interface TaskItem<U> {
      * <p>
      * once executed the result will be available through result getter
      *
-     * @param taskGroup the task group dispatching tasks
-     * @param node the node the task item is associated with
      * @throws Exception exception
      */
-    void execute(TaskGroup<U, TaskItem<U>> taskGroup, DAGNode<TaskItem<U>> node) throws Exception;
+    void execute() throws Exception;
 
     /**
      * Executes the task asynchronously.
      * <p>
      * once executed the result will be available through result getter
-
-     * @param taskGroup the task group dispatching tasks
-     * @param node the node the task item is associated with
+     *
      * @param callback callback to call on success or failure
      * @return the handle of the REST call
      */
-    ServiceCall executeAsync(TaskGroup<U, TaskItem<U>> taskGroup, DAGNode<TaskItem<U>> node, ServiceCallback<Void> callback);
+    ServiceCall executeAsync(ServiceCallback<U> callback);
 }

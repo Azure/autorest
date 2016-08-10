@@ -7,9 +7,8 @@
 
 package com.microsoft.azure;
 
-import java.util.ArrayDeque;
 import java.util.Map;
-import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Type representing a DAG (directed acyclic graph).
@@ -20,7 +19,7 @@ import java.util.Queue;
  * @param <U> the type of the nodes in the graph
  */
 public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
-    private Queue<String> queue;
+    private ConcurrentLinkedQueue<String> queue;
     private boolean hasParent;
     private U rootNode;
 
@@ -31,7 +30,7 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
      */
     public DAGraph(U rootNode) {
         this.rootNode = rootNode;
-        this.queue = new ArrayDeque<>();
+        this.queue = new ConcurrentLinkedQueue<>();
         this.rootNode.setPreparer(true);
         this.addNode(rootNode);
     }
@@ -103,10 +102,14 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
      * Gets next node in the DAG which has no dependency or all of it's dependencies are resolved and
      * ready to be consumed.
      *
-     * @return next node or null if all the nodes have been explored
+     * @return next node or null if all the nodes have been explored or no node is available at this moment.
      */
     public U getNext() {
-        return graph.get(queue.poll());
+        String nextItemKey = queue.poll();
+        if (nextItemKey == null) {
+            return null;
+        }
+        return graph.get(nextItemKey);
     }
 
     /**
@@ -129,9 +132,14 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
         String dependency = completed.key();
         for (String dependentKey : graph.get(dependency).dependentKeys()) {
             DAGNode<T> dependent = graph.get(dependentKey);
-            dependent.reportResolved(dependency);
-            if (dependent.hasAllResolved()) {
-                queue.add(dependent.key());
+            dependent.lock().lock();
+            try {
+                dependent.reportResolved(dependency);
+                if (dependent.hasAllResolved()) {
+                    queue.add(dependent.key());
+                }
+            } finally {
+                dependent.lock().unlock();
             }
         }
     }
@@ -145,9 +153,8 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
      */
     private void initializeDependentKeys() {
         visit(new Visitor<U>() {
-            // This 'visit' will be called only once per each node.
             @Override
-            public void visit(U node) {
+            public void visitNode(U node) {
                 if (node.dependencyKeys().isEmpty()) {
                     return;
                 }
@@ -156,6 +163,13 @@ public class DAGraph<T, U extends DAGNode<T>> extends Graph<T, U> {
                 for (String dependencyKey : node.dependencyKeys()) {
                     graph.get(dependencyKey)
                             .addDependent(dependentKey);
+                }
+            }
+
+            @Override
+            public  void visitEdge(String fromKey, String toKey, EdgeType edgeType) {
+                if (edgeType == EdgeType.BACK) {
+                    throw new IllegalStateException("Detected circular dependency: " + findPath(fromKey, toKey));
                 }
             }
         });
