@@ -92,15 +92,25 @@ namespace AutoRest.Ruby.Azure
                 {
                     PageableExtension pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[AzureExtensions.PageableExtension].ToString());
                     if (pageableExtension != null && !method.Extensions.ContainsKey("nextLinkMethod") && !string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        if (serviceClient.Methods[i].Extensions.ContainsKey("nextMethodName"))
+                    {            
+                        if (method.Extensions.ContainsKey("nextMethodName"))
                         {
-                            serviceClient.Methods[i].Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
+                            method.Extensions["nextMethodName"] = CodeNamer.GetMethodName((string)method.Extensions["nextMethodName"]);
                         }
-                        i++;
+                        else if (!string.IsNullOrWhiteSpace(pageableExtension.OperationName))
+                        {
+                            method.Extensions["nextMethodName"] = CodeNamer.GetMethodName(pageableExtension.OperationName);
+                        }
+                        if (!method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
+                        {
+                            serviceClient.Methods.Insert(i, (Method)method.Clone());
+                            i++;
+                        }
                     }
-                    serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
+                    if (!method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension) || method.Extensions.ContainsKey("nextLinkMethod"))
+                    {
+                        serviceClient.Methods[i].Extensions.Remove(AzureExtensions.PageableExtension);
+                    }
                 }
             }
         }
