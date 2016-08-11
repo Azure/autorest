@@ -22,6 +22,7 @@ namespace Microsoft.Rest
         /// ProductName string to be used to set Framework Version in UserAgent
         /// </summary>
         private const string FXVERSION = "FxVersion";
+        private const string OSINFO = "OS";
 
         /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
@@ -38,11 +39,36 @@ namespace Microsoft.Rest
         /// </summary>
         private string _fxVersion;
 
+#if net45       
         /// <summary>
-        /// Gets the AssemblyInformationalVersion if available
-        /// if not it gets the AssemblyFileVerion
-        /// if neither are available it will default to the Assembly Version of a service client.
+        /// Indicates os version
         /// </summary>
+        private string _osInfo;
+
+        /// <summary>
+        /// Gets Os Information, OSName, OS Major.Minor.Build version
+        /// </summary>
+        private string OsInfo
+        {
+            get
+            {  
+                if(string.IsNullOrEmpty(_osInfo))
+                {
+                    string platform = System.Environment.OSVersion.Platform.ToString();
+                    string OsVersion = System.Environment.OSVersion.VersionString;
+                    _osInfo = string.Format("{0} ({1})", platform, OsVersion);
+                }
+
+                return _osInfo;
+            }
+        }
+#endif
+
+                    /// <summary>
+                    /// Gets the AssemblyInformationalVersion if available
+                    /// if not it gets the AssemblyFileVerion
+                    /// if neither are available it will default to the Assembly Version of a service client.
+                    /// </summary>
         private string ClientVersion
         {
             get
@@ -98,12 +124,12 @@ namespace Microsoft.Rest
             {
                 if (string.IsNullOrEmpty(_fxVersion))
                 {
-                    Assembly assembly = typeof(Object).GetTypeInfo().Assembly;
+                    Assembly assembly = typeof(Object).GetTypeInfo().Assembly;                    
                     AssemblyFileVersionAttribute fvAttribute =
                                 assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
                     _fxVersion = fvAttribute?.Version;
                 }
-
+        
                 return _fxVersion;
             }
         }
@@ -316,6 +342,9 @@ namespace Microsoft.Rest
                 // Clear the old user agent
                 HttpClient.DefaultRequestHeaders.UserAgent.Clear();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
+#if net45
+                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(OSINFO, OsInfo));
+#endif
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
 
                 // Returns true if the user agent was set 
