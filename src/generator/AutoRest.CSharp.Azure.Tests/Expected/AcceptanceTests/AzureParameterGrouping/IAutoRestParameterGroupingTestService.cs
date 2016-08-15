@@ -8,6 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 {
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 

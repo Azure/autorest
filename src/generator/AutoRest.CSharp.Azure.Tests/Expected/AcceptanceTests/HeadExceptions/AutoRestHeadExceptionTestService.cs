@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
 {
     using System.Linq;
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
 
     /// <summary>

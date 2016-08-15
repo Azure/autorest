@@ -8,6 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
