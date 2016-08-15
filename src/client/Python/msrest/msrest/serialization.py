@@ -513,6 +513,8 @@ class Serializer(object):
         :param dict attr: Object to be serialized.
         :rtype: dict or str
         """
+        if attr is None:
+            return None
         obj_type = type(attr)
         if obj_type in self.basic_types:
             return self.serialize_basic(attr, self.basic_types[obj_type])
