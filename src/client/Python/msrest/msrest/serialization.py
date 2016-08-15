@@ -540,6 +540,8 @@ class Serializer(object):
             return serialized
 
         else:
+            if attr is None:
+                return None
             return str(attr)
 
     @staticmethod
