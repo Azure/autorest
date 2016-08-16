@@ -91,7 +91,7 @@ module MsRestAzure
 
       url = URI.parse(token_acquire_url)
 
-      connection = Faraday.new(:url => url) do |builder|
+      connection = Faraday.new(:url => url, :ssl => MsRest.ssl_options) do |builder|
         builder.adapter Faraday.default_adapter
       end
 
