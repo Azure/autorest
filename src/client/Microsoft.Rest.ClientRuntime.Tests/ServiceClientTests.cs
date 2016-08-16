@@ -9,6 +9,7 @@ using Microsoft.Rest.ClientRuntime.Tests.Fakes;
 using Microsoft.Rest.TransientFaultHandling;
 using Xunit;
 using System.Net.Http.Headers;
+using System.Diagnostics;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {
@@ -169,7 +170,7 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             string defaultProductName = "FxVersion";
             string testProductName = "TestProduct";
             Version defaultProductVer, testProductVer;
-
+            
             FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
             fakeClient.SetUserAgent(testProductName);
             HttpResponseMessage response = fakeClient.DoStuffSync();
@@ -214,5 +215,22 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             Assert.True(testProduct.Product.Version.Equals(testProductVersion));
         }
 
+        #if net45
+        [Fact]
+        public void VerifyOsInfoInUserAgent()
+        {
+
+            string osInfoProductName = "OSName";
+
+            FakeServiceClient fakeClient = new FakeServiceClient(new FakeHttpHandler());
+            HttpResponseMessage response = fakeClient.DoStuffSync();
+            HttpHeaderValueCollection<ProductInfoHeaderValue> userAgentValueCollection = fakeClient.HttpClient.DefaultRequestHeaders.UserAgent;
+
+            var osProduct = userAgentValueCollection.Where<ProductInfoHeaderValue>((p) => p.Product.Name.Equals(osInfoProductName)).FirstOrDefault<ProductInfoHeaderValue>();
+
+            Assert.NotEmpty(osProduct.Product.Name);
+            Assert.NotEmpty(osProduct.Product.Version);
+        }
+        #endif
     }
 }

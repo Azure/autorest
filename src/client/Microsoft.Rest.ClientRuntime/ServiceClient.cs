@@ -8,7 +8,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using Microsoft.Rest.TransientFaultHandling;
-
+#if net45
+using Microsoft.Win32;
+#endif
 namespace Microsoft.Rest
 {
     /// <summary>
@@ -22,7 +24,8 @@ namespace Microsoft.Rest
         /// ProductName string to be used to set Framework Version in UserAgent
         /// </summary>
         private const string FXVERSION = "FxVersion";
-        private const string OSINFO = "OS";
+        private const string OSNAME = "OSName";
+        private const string OSVERSION = "OSVersion";
 
         /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
@@ -39,36 +42,84 @@ namespace Microsoft.Rest
         /// </summary>
         private string _fxVersion;
 
-#if net45       
+#if net45
         /// <summary>
-        /// Indicates os version
+        /// Indicates OS Name
         /// </summary>
-        private string _osInfo;
+        private string _osName;
 
         /// <summary>
-        /// Gets Os Information, OSName, OS Major.Minor.Build version
+        /// Indicates OS Version
         /// </summary>
-        private string OsInfo
+        private string _osVersion;
+
+        /// <summary>
+        /// Gets Os Information, OSName - OS Major.Minor.Build version
+        /// e.g. Windows 10 Enterprise - 6.3.14393
+        /// </summary>
+        private string OsName
         {
             get
             {  
-                if(string.IsNullOrEmpty(_osInfo))
+                if(string.IsNullOrEmpty(_osName))
                 {
-                    string platform = System.Environment.OSVersion.Platform.ToString();
-                    string OsVersion = System.Environment.OSVersion.VersionString;
-                    _osInfo = string.Format("{0} ({1})", platform, OsVersion);
+                    _osName = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName");
                 }
 
-                return _osInfo;
+                // If you want to log ProductName in userAgent, it has to be without spaces
+                if (!string.IsNullOrEmpty(_osName))
+                {
+                    _osName = _osName.Replace(" ", "_");
+                }
+
+                return _osName;
             }
+        }
+        
+        /// <summary>
+        /// Gets Os Major.Minor.Build version
+        /// e.g. 6.3.14393
+        /// </summary>
+        private string OsVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_osVersion))
+                {   
+                    string osMajorMinorVersion = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion");
+                    string osBuildNumber = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuild");
+                    _osVersion = string.Format("{0}.{1}", osMajorMinorVersion, osBuildNumber);
+                }
+
+                return _osVersion;
+            }
+        }
+
+        /// <summary>
+        /// Reads HKLM registry key from the provided path/key combination
+        /// </summary>
+        /// <param name="path">Path to HKLM key</param>
+        /// <param name="key">HKLM key name</param>
+        /// <returns>Value for provided HKLM key</returns>
+        private string ReadHKLMRegistry(string path, string key)
+        {
+            try
+            {
+                using (RegistryKey rk = Registry.LocalMachine.OpenSubKey(path))
+                {
+                    if (rk == null) return "";
+                    return (string)rk.GetValue(key);
+                }
+            }
+            catch { return ""; }
         }
 #endif
 
-                    /// <summary>
-                    /// Gets the AssemblyInformationalVersion if available
-                    /// if not it gets the AssemblyFileVerion
-                    /// if neither are available it will default to the Assembly Version of a service client.
-                    /// </summary>
+        /// <summary>
+        /// Gets the AssemblyInformationalVersion if available
+        /// if not it gets the AssemblyFileVerion
+        /// if neither are available it will default to the Assembly Version of a service client.
+        /// </summary>
         private string ClientVersion
         {
             get
@@ -339,20 +390,27 @@ namespace Microsoft.Rest
         {
             if (!_disposed && HttpClient != null)
             {
-                // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
-#if net45
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(OSINFO, OsInfo));
-#endif
+                SetDefaultUserAgentInfo();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
-
-                // Returns true if the user agent was set 
                 return true;
             }
 
             // Returns false if the HttpClient was disposed before invoking the method
             return false;
+        }
+
+        /// <summary>
+        /// Set Default information in User Agent
+        /// </summary>
+        /// <returns></returns>
+        private void SetDefaultUserAgentInfo()
+        {
+            HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
+#if net45
+            // If you want to log ProductName in userAgent, it has to be without spaces
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(OsName, OsVersion));
+#endif
         }
     }
 }
