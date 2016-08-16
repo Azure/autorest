@@ -355,7 +355,8 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regener
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
     'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
     'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
-    'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json'
+    'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json',
+    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
   }, defaultMappings);
 
   regenExpected({
