@@ -46,7 +46,7 @@ module MsRestAzure
       attr_reader :active_directory_graph_api_version
 
       # @return [String] the endpoint suffix for storage accounts
-      attr_reader :storage_endpoing_suffix
+      attr_reader :storage_endpoint_suffix
 
       # @return [String] the KeyVault service dns suffix
       attr_reader :key_vault_dns_suffix
