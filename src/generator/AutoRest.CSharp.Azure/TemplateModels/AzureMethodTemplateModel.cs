@@ -301,10 +301,28 @@ namespace AutoRest.CSharp.Azure.TemplateModels
                     }
 
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
-                        .AppendLine("{").Indent()
-                        .AppendLine(queryParametersAddString,
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference), queryParameter.Name)
-                        .Outdent()
+                        .AppendLine("{").Indent();
+
+                    if (queryParameter.CollectionFormat == CollectionFormat.Multi)
+                    {
+                        builder.AppendLine("if ({0}.Count == 0)", queryParameter.Name)
+                           .AppendLine("{").Indent()
+                           .AppendLine(queryParametersAddString, queryParameter.SerializedName, "string.Empty").Outdent()
+                           .AppendLine("}")
+                           .AppendLine("else")
+                           .AppendLine("{").Indent()
+                           .AppendLine("foreach (var _item in {0})", queryParameter.Name)
+                           .AppendLine("{").Indent()
+                           .AppendLine(queryParametersAddString, queryParameter.SerializedName, "_item ?? string.Empty").Outdent()
+                           .AppendLine("}").Outdent()
+                           .AppendLine("}").Outdent();
+                    }
+                    else
+                    {
+                        builder.AppendLine(queryParametersAddString,
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference), queryParameter.Name);
+                    }
+                    builder.Outdent()
                         .AppendLine("}");
                 }
             }
