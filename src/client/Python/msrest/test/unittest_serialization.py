@@ -158,6 +158,12 @@ class TestRuntimeSerialized(unittest.TestCase):
         self.s = Serializer()
         return super(TestRuntimeSerialized, self).setUp()
 
+    def test_obj_serialize_none(self):
+        """Test that serialize None in object is still None.
+        """
+        obj = self.s.serialize_object({'test': None})
+        self.assertIsNone(obj['test'])
+
     def test_obj_without_attr_map(self):
         """
         Test serializing an object with no attribute_map.
