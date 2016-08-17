@@ -273,9 +273,9 @@ namespace AutoRest.Python.TemplateModels
                 throw new ArgumentNullException("type");
             }
 
-            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            var modelNamespace = ServiceClient.Name.ToPythonCase();
             if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                modelNamespace = ServiceClient.Namespace;
 
             string result = "object";
             var primaryType = type as PrimaryType;
