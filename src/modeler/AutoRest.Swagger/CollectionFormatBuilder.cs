@@ -80,10 +80,15 @@ namespace AutoRest.Swagger
                     break;
 
                 case CollectionFormat.Multi:
-                    // TODO multi is not supported yet: https://github.com/Azure/autorest/issues/717
-                    throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, 
-                        Resources.MultiCollectionFormatNotSupported,
-                        swaggerParameter.Name));
+                    if (swaggerParameter.In != ParameterLocation.Query)
+                    {
+                        throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
+                            Resources.MultiCollectionFormatNotSupported,
+                            swaggerParameter.Name));
+                    }
+                    parameterName.Append("ampersandSeparated");
+                    break;
+
                 default:
                     throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, 
                         Resources.InvalidCollectionFormat,

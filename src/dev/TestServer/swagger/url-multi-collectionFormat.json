@@ -1,0 +1,125 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Url Mutli Collection Format Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+      "/queries/array/multi/string/null": {
+      "get": {
+        "operationId": "queries_ArrayStringMultiNull",
+        "description": "Get a null array of string using the multi-array format",
+        "tags": [
+          "query Operations"
+        ],
+        "parameters": [
+          {
+            "name": "arrayQuery",
+            "in": "query",
+            "description": "a null array of string using the multi-array format",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received no query parameters"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/queries/array/multi/string/empty": {
+      "get": {
+        "operationId": "queries_ArrayStringMultiEmpty",
+        "description": "Get an empty array [] of string using the multi-array format",
+        "tags": [
+          "query Operations"
+        ],
+        "parameters": [
+          {
+            "name": "arrayQuery",
+            "in": "query",
+            "description": "an empty array [] of string using the multi-array format",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received no query parameters"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/queries/array/multi/string/valid": {
+      "get": {
+        "operationId": "queries_ArrayStringMultiValid",
+        "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the mult-array format",
+        "tags": [
+          "query Operations"
+        ],
+        "parameters": [
+          {
+            "name": "arrayQuery",
+            "in": "query",
+            "description": "an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the mult-array format",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received ?arrayQuery=ArrayQuery1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  }, 
+    "definitions": {
+        "Error": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

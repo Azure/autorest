@@ -163,7 +163,7 @@
     <value>'{0}' is not implemented in SwaggerSchema.ToType extension method.</value>
   </data>
   <data name="MultiCollectionFormatNotSupported" xml:space="preserve">
-    <value>Collection format "multi" is not supported (in parameter '{0}').</value>
+    <value>Collection format "multi" is only supported for Query parameters (parameter '{0}').</value>
   </data>
   <data name="NoProduceOperationWithBody" xml:space="preserve">
     <value>Method '{0}' does not declare any MIME type for the return body. Generated code will not deserialize the content.</value>
