@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
@@ -28,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -93,7 +94,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     interface AutoRestReportServiceService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("report")
-        Call<ResponseBody> getReport();
+        Observable<Response<ResponseBody>> getReport();
 
     }
 
@@ -105,8 +106,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getReport();
-        return getReportDelegate(call.execute());
+        return getReportAsync().toBlocking().single();
     }
 
     /**
@@ -116,26 +116,27 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @return the {@link Call} object
      */
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        Call<ResponseBody> call = service.getReport();
-        final ServiceCall<Map<String, Integer>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getReportAsync(), serviceCallback);
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Map<String, Integer>>> getReportAsync() {
+        return service.getReport()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
+                @Override
+                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

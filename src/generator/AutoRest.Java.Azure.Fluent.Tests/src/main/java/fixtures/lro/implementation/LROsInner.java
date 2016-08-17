@@ -31,6 +31,8 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.Observable;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -61,6 +63,10 @@ public final class LROsInner {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/put/200/succeeded")
         Call<ResponseBody> put200Succeeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/succeeded")
+        Observable<ResponseBody> put200SucceededRx(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/put/200/succeeded")

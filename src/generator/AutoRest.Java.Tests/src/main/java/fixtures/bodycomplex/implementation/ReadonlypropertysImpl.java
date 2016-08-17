@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
@@ -29,6 +28,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,11 +59,11 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     interface ReadonlypropertysService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/readonlyproperty/valid")
-        Call<ResponseBody> getValid();
+        Observable<Response<ResponseBody>> getValid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/readonlyproperty/valid")
-        Call<ResponseBody> putValid(@Body ReadonlyObj complexBody);
+        Observable<Response<ResponseBody>> putValid(@Body ReadonlyObj complexBody);
 
     }
 
@@ -74,8 +75,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<ReadonlyObj> getValid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute());
+        return getValidAsync().toBlocking().single();
     }
 
     /**
@@ -85,26 +85,27 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link Call} object
      */
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
-        Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ReadonlyObj> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ReadonlyObj>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ReadonlyObj> clientResponse = getValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<ReadonlyObj>> getValidAsync() {
+        return service.getValid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ReadonlyObj>>>() {
+                @Override
+                public Observable<ServiceResponse<ReadonlyObj>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ReadonlyObj> clientResponse = getValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -124,12 +125,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute());
+        return putValidAsync(complexBody).toBlocking().single();
     }
 
     /**
@@ -140,30 +136,32 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link Call} object
      */
     public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putValid(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

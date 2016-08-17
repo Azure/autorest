@@ -18,7 +18,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -26,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -55,15 +56,15 @@ public final class HttpFailuresImpl implements HttpFailures {
     interface HttpFailuresService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/failure/emptybody/error")
-        Call<ResponseBody> getEmptyError();
+        Observable<Response<ResponseBody>> getEmptyError();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/failure/nomodel/error")
-        Call<ResponseBody> getNoModelError();
+        Observable<Response<ResponseBody>> getNoModelError();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/failure/nomodel/empty")
-        Call<ResponseBody> getNoModelEmpty();
+        Observable<Response<ResponseBody>> getNoModelEmpty();
 
     }
 
@@ -75,8 +76,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getEmptyError() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getEmptyError();
-        return getEmptyErrorDelegate(call.execute());
+        return getEmptyErrorAsync().toBlocking().single();
     }
 
     /**
@@ -86,26 +86,27 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link Call} object
      */
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        Call<ResponseBody> call = service.getEmptyError();
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = getEmptyErrorDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getEmptyErrorAsync(), serviceCallback);
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Boolean>> getEmptyErrorAsync() {
+        return service.getEmptyError()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = getEmptyErrorDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -123,8 +124,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getNoModelError() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getNoModelError();
-        return getNoModelErrorDelegate(call.execute());
+        return getNoModelErrorAsync().toBlocking().single();
     }
 
     /**
@@ -134,26 +134,27 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link Call} object
      */
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        Call<ResponseBody> call = service.getNoModelError();
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = getNoModelErrorDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getNoModelErrorAsync(), serviceCallback);
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Boolean>> getNoModelErrorAsync() {
+        return service.getNoModelError()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = getNoModelErrorDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ServiceException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -170,8 +171,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Boolean> getNoModelEmpty() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getNoModelEmpty();
-        return getNoModelEmptyDelegate(call.execute());
+        return getNoModelEmptyAsync().toBlocking().single();
     }
 
     /**
@@ -181,26 +181,27 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link Call} object
      */
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        Call<ResponseBody> call = service.getNoModelEmpty();
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = getNoModelEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getNoModelEmptyAsync(), serviceCallback);
+    }
+
+    /**
+     * Get empty response from server.
+     *
+     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Boolean>> getNoModelEmptyAsync() {
+        return service.getNoModelEmpty()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = getNoModelEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ServiceException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {

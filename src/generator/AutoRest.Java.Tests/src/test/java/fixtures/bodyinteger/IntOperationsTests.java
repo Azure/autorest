@@ -14,6 +14,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Func1;
 
 import static org.junit.Assert.fail;
 
@@ -29,6 +33,27 @@ public class IntOperationsTests {
     @Test
     public void getNull() throws Exception {
         Assert.assertNull(client.ints().getNull().getBody());
+    }
+
+    @Test
+    public void getNullAsync() throws Exception {
+        Observable.from(client.ints().getNullAsync(null)).subscribe(new Subscriber<ServiceResponse<Integer>>() {
+            @Override
+            public void onCompleted() {
+                System.out.println("completed");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("error" + e);
+            }
+
+            @Override
+            public void onNext(ServiceResponse<Integer> integerServiceResponse) {
+                System.out.println(integerServiceResponse.getBody());
+            }
+        });
+        System.out.println("checkpoint");
     }
 
     @Test

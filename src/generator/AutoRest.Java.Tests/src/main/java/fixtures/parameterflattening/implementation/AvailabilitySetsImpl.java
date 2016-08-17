@@ -18,7 +18,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
@@ -30,6 +29,8 @@ import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -59,7 +60,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
     interface AvailabilitySetsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Call<ResponseBody> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
 
     }
 
@@ -75,20 +76,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> update(String resourceGroupName, String avset, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (avset == null) {
-            throw new IllegalArgumentException("Parameter avset is required and cannot be null.");
-        }
-        if (tags == null) {
-            throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
-        }
-        Validator.validate(tags);
-        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-        tags1.withTags(tags);
-        Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
-        return updateDelegate(call.execute());
+        return updateAsync(resourceGroupName, avset, tags).toBlocking().single();
     }
 
     /**
@@ -101,6 +89,18 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link Call} object
      */
     public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(updateAsync(resourceGroupName, avset, tags), serviceCallback);
+    }
+
+    /**
+     * Updates the tags for an availability set.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
+     * @param tags A set of tags. A description about the set of tags.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -113,26 +113,18 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.withTags(tags);
-        Call<ResponseBody> call = service.update(resourceGroupName, avset, tags1);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = updateDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.update(resourceGroupName, avset, tags1)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = updateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ServiceException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {

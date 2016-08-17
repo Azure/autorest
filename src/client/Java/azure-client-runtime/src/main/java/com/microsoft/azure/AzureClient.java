@@ -19,6 +19,7 @@ import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Url;
+import rx.Observable;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -156,14 +157,10 @@ public class AzureClient extends AzureServiceClient {
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
-    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCall<T> serviceCall, ServiceCallback<T> callback) {
+    public <T> Observable<ServiceResponse<T>> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, Observable<ServiceResponse<T>> observable) {
         if (response == null) {
             CloudException t = new CloudException("response is null.");
-            if (callback != null) {
-                callback.failure(t);
-            }
-            serviceCall.failure(t);
-            return null;
+            return Observable.error(t);
         }
 
         int statusCode = response.code();
@@ -182,29 +179,21 @@ public class AzureClient extends AzureServiceClient {
                     responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
-            if (callback != null) {
-                callback.failure(exception);
-            }
-            serviceCall.failure(exception);
-            return null;
+            return Observable.error(exception);
         }
 
         PollingState<T> pollingState;
         try {
             pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         } catch (IOException e) {
-            if (callback != null) {
-                callback.failure(e);
-            }
-            serviceCall.failure(e);
-            return null;
+            return Observable.error(e);
         }
         String url = response.raw().request().url().toString();
 
         // Task runner will take it from here
         PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, serviceCall, callback);
         executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
-        return task;
+        return Observable.fromCallable(task);
     }
 
     /**

@@ -30,7 +30,7 @@ if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
 @:    @@Streaming
 }
-@:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Observable<Response<@method.CallType>> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }
 }

@@ -384,7 +384,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
                         builder.AppendLine("return {0}({1}).getBody();", 
-                            invocation, filterRequired ? nextMethod.MethodRequiredParameterInvocation : nextMethod.MethodParameterInvocation)
+                            invocation, filterRequired ? nextMethod.MethodDefaultParameterInvocation : nextMethod.MethodParameterInvocation)
                     .Outdent().AppendLine("}")
                 .Outdent().AppendLine("};");
                 return builder.ToString();
@@ -586,7 +586,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     return string.Format(CultureInfo.InvariantCulture,
-                        "final ServiceCall<List<{0}>> serviceCall = new ServiceCall<>(call);",
+                        "final ServiceCall<List<{0}>> serviceCall = ServiceCall.create(call);",
                         sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 return base.ServiceCallConstruction;
