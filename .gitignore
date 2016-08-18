@@ -191,3 +191,10 @@ dnx-coreclr-win-x86*/
 
 # Gemfile.lock
 Gemfile.lock
+
+# go ignore
+src/generator/AutoRest.Go.Tests/pkg/*
+src/generator/AutoRest.Go.Tests/bin/*
+src/generator/AutoRest.Go.Tests/src/github.com/*
+src/generator/AutoRest.Go.Tests/src/test/vendor/*
+src/generator/AutoRest.Go.Tests/src/test/generated/*

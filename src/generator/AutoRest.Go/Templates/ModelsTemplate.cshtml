@@ -1,0 +1,42 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+
+@using AutoRest.Go
+@using AutoRest.Core.ClientModel
+@using AutoRest.Go.TemplateModels
+@using AutoRest.Go.Templates
+@using AutoRest.Core.Utilities
+
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.ModelsTemplateModel>
+@{
+    var imports = Model.Imports;
+}
+package @Model.PackageName
+@EmptyLine
+@Header("// ")
+
+@EmptyLine
+
+@if (!imports.IsNullOrEmpty())
+{
+@:import (
+foreach (var import in imports)
+{
+    @:"@(import)"
+}
+@:)    
+@EmptyLine
+}
+
+@foreach (var enumTemplateModel in Model.EnumTemplateModels) {
+@:@(Include<EnumTemplate, EnumTemplateModel>(new EnumTemplate(), enumTemplateModel))
+@EmptyLine
+@:
+}
+
+@foreach (var modelTemplateModel in Model.ModelTemplateModels) {
+@:@(Include<ModelTemplate, ModelTemplateModel>(new ModelTemplate(), modelTemplateModel))
+@EmptyLine
+@:
+}

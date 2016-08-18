@@ -43,6 +43,7 @@ using Fixtures.AcceptanceTestsReport;
 using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
+using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
 using Fixtures.AcceptanceTestsValidation;
 using Fixtures.AcceptanceTestsValidation.Models;
 using Fixtures.InternalCtors;
@@ -1679,6 +1680,19 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void UrlQueryMultiCollectionFormatTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("url-multi-collectionFormat.json"), ExpectedPath("UrlMultiCollectionFormat"));
+            using (var client = new AutoRestUrlMutliCollectionFormatTestService(Fixture.Uri))
+            {
+                client.Queries.ArrayStringMultiEmpty(new List<string>(0));
+                client.Queries.ArrayStringMultiNull();
+                var testArray = new List<string> { "ArrayQuery1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Queries.ArrayStringMultiValid(testArray);
+            }
+        }
         [Fact]
         public void UrlMixedTests()
         {

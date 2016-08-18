@@ -212,7 +212,7 @@ namespace AutoRest.CSharp
                                   "non-string List parameter {0}", parameter));
             }
 
-            return string.Format(CultureInfo.InvariantCulture, 
+            return string.Format(CultureInfo.InvariantCulture,
                 "string.Join(\"{0}\", {1})", parameter.CollectionFormat.GetSeparator(), parameter.Name);
         }
 

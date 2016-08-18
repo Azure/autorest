@@ -1,0 +1,47 @@
+﻿@using AutoRest.Go
+@using AutoRest.Core.ClientModel
+@using AutoRest.Go.Templates
+@using AutoRest.Go.TemplateModels
+@using AutoRest.Core.Utilities
+@using System.Linq
+
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.VersionTemplateModel>
+@{
+    var imports = Model.Imports;
+    var modelName = GoCodeNamer.CamelCase(Model.Name);
+}
+package @Model.PackageName
+@EmptyLine
+@Header("// ")
+
+@EmptyLine
+import (
+@foreach (var import in imports)
+{
+    @:"@(import)"
+}
+)
+@EmptyLine
+
+const (
+    major = "3"
+    minor = "1"
+    patch = "0"
+    // Always begin a "tag" with a dash (as per http://semver.org)
+    tag   = "-beta"
+
+    semVerFormat = "%s.%s.%s%s"
+    userAgentFormat = "Azure-SDK-for-Go/%s arm-%s/%s"
+)
+
+@EmptyLine
+// UserAgent returns the UserAgent string to use when sending http.Requests.
+func @(Model.UpdateNameIfDuplicate("UserAgent", Model.PackageName))() string {
+    return fmt.Sprintf(userAgentFormat, @(Model.UpdateNameIfDuplicate("Version", Model.PackageName))(), "@(Model.PackageName)", "@(Model.ApiVersion)")
+}
+
+@EmptyLine
+// Version returns the semantic version (see http://semver.org) of the client.
+func @(Model.UpdateNameIfDuplicate("Version", Model.PackageName))() string {
+    return fmt.Sprintf(semVerFormat, major, minor, patch, tag)
+}

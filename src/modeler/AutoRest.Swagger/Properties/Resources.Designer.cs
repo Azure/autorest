@@ -195,7 +195,7 @@ namespace AutoRest.Swagger.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Collection format &quot;multi&quot; is not supported (in parameter &apos;{0}&apos;)..
+        ///    Looks up a localized string similar to Collection format &quot;multi&quot; is only supported for Query parameters (parameter &apos;{0}&apos;)..
         /// </summary>
         public static string MultiCollectionFormatNotSupported {
             get {

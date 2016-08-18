@@ -19,10 +19,7 @@ module MsRestAzure
     #
     # @return [ActiveDirectoryServiceSettings] settings required for authentication.
     def self.get_azure_settings
-      settings = ActiveDirectoryServiceSettings.new
-      settings.authentication_endpoint = 'https://login.windows.net/'
-      settings.token_audience = 'https://management.core.windows.net/'
-      settings
+      get_settings(MsRestAzure::AzureEnvironments::Azure)
     end
 
     #
@@ -30,9 +27,36 @@ module MsRestAzure
     #
     # @return [ActiveDirectoryServiceSettings] settings required for authentication.
     def self.get_azure_china_settings
+      get_settings(MsRestAzure::AzureEnvironments::AzureChina)
+    end
+
+    #
+    # Returns a set of properties required to login into Azure German Cloud.
+    #
+    # @return [ActiveDirectoryServiceSettings] settings required for authentication.
+    def self.get_azure_german_settings
+      get_settings(MsRestAzure::AzureEnvironments::AzureGermanCloud)
+    end
+
+    #
+    # Returns a set of properties required to login into Azure US Government.
+    #
+    # @return [ActiveDirectoryServiceSettings] settings required for authentication.
+    def self.get_azure_us_government_settings
+      get_settings(MsRestAzure::AzureEnvironments::AzureUSGovernment)
+    end
+
+    private
+
+    #
+    # Returns a set of properties required to login into Azure Cloud.
+    #
+    # @param azure_environment [AzureEnvironment] An instance of AzureEnvironment.
+    # @return [ActiveDirectoryServiceSettings] settings required for authentication.
+    def self.get_settings(azure_environment = MsRestAzure::AzureEnvironments::Azure)
       settings = ActiveDirectoryServiceSettings.new
-      settings.authentication_endpoint = 'https://login.chinacloudapi.cn/'
-      settings.token_audience = 'https://management.core.chinacloudapi.cn/'
+      settings.authentication_endpoint = azure_environment.active_directory_endpoint_url
+      settings.token_audience = azure_environment.active_directory_resource_id
       settings
     end
   end

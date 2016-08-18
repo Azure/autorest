@@ -108,6 +108,31 @@ var rubyMappings = {
   'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
 };
 
+var goMappings = {
+  'body-array':['../../dev/TestServer/swagger/body-array.json','arraygroup'],
+  'body-boolean':['../../dev/TestServer/swagger/body-boolean.json', 'booleangroup'],
+  'body-byte':['../../dev/TestServer/swagger/body-byte.json','bytegroup'],
+  'body-complex':['../../dev/TestServer/swagger/body-complex.json','complexgroup'],
+  'body-date':['../../dev/TestServer/swagger/body-date.json','dategroup'],
+  'body-datetime-rfc1123':['../../dev/TestServer/swagger/body-datetime-rfc1123.json','datetimerfc1123group'],
+  'body-datetime':['../../dev/TestServer/swagger/body-datetime.json','datetimegroup'],
+  'body-dictionary':['../../dev/TestServer/swagger/body-dictionary.json','dictionarygroup'],
+  'body-duration':['../../dev/TestServer/swagger/body-duration.json','durationgroup'],  
+  'body-file':['../../dev/TestServer/swagger/body-file.json', 'filegroup'],
+  'body-formdata':['../../dev/TestServer/swagger/body-formdata.json', 'formdatagroup'],
+  'body-integer':['../../dev/TestServer/swagger/body-integer.json','integergroup'],
+  'body-number':['../../dev/TestServer/swagger/body-number.json','numbergroup'],
+  'body-string':['../../dev/TestServer/swagger/body-string.json','stringgroup'],
+  'custom-baseurl':['../../dev/TestServer/swagger/custom-baseUrl.json', 'custombaseurlgroup'],
+  'header':['../../dev/TestServer/swagger/header.json','headergroup'],
+  'httpinfrastructure':['../../dev/TestServer/swagger/httpInfrastructure.json','httpinfrastructuregroup'],
+  'model-flattening':['../../dev/TestServer/swagger/model-flattening.json', 'modelflatteninggroup'],
+  'report':['../../dev/TestServer/swagger/report.json','report'],
+  'required-optional':['../../dev/TestServer/swagger/required-optional.json','optionalgroup'],
+  'url':['../../dev/TestServer/swagger/url.json','urlgroup'],
+  'validation':['../../dev/TestServer/swagger/validation.json', 'validationgroup'],
+};
+
 var defaultAzureMappings = {
   'AcceptanceTests/Lro': '../../dev/TestServer/swagger/lro.json',
   'AcceptanceTests/Paging': '../../dev/TestServer/swagger/paging.json',
@@ -163,7 +188,8 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:javaazurefluent',
       'regenerate:expected:python',
       'regenerate:expected:pythonazure',
-      'regenerate:expected:samples'
+      'regenerate:expected:samples',
+      'regenerate:expected:go'
     ],
     cb);
 });
@@ -178,8 +204,10 @@ gulp.task('regenerate:delete', function(cb){
     'src/generator/AutoRest.Java.Azure.Tests/src/main/java',
     'src/generator/AutoRest.Java.Azure.Fluent.Tests/src/main/java',
     'src/generator/AutoRest.Python.Tests/Expected',
-    'src/generator/AutoRest.Python.Azure.Tests/Expected'
-  ], cb);
+    'src/generator/AutoRest.Python.Azure.Tests/Expected',
+    'src/generator/AutoRest.Go.Tests/src/tests/generated'
+  ], 
+  cb);
 });
 
 gulp.task('regenerate:expected:nodecomposite', function (cb) {
@@ -355,7 +383,8 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regener
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
     'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
     'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
-    'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json'
+    'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json',
+    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
   }, defaultMappings);
 
   regenExpected({
@@ -484,6 +513,18 @@ gulp.task('regenerate:expected:csazurecomposite', function (cb) {
     'flatteningThreshold': '1'
   }, cb);
 });
+
+
+gulp.task('regenerate:expected:go', function(cb){
+  regenExpected({
+    'outputBaseDir': 'src/generator/AutoRest.Go.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.Go.Tests',
+    'mappings': goMappings,
+    'outputDir': 'src/tests/generated',
+    'codeGenerator': 'Go'
+  }, cb);
+  process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests';
+})
 
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
   var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
@@ -660,6 +701,13 @@ gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-cod
 gulp.task('test:python', shell.task('tox', {cwd: './src/generator/AutoRest.Python.Tests/', verbosity: 3}));
 gulp.task('test:python:azure', shell.task('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/', verbosity: 3}));
 
+gulp.task('test:go', ['regenerate:expected:go'], shell.task([
+    'glide up', 
+    'go fmt ./generated/...', 
+    'go run ./runner.go'
+    ], {cwd: './src/generator/AutoRest.Go.Tests/src/tests', verbosity: 3})
+);
+
 var xunitTestsDlls = [
 ];
 
@@ -782,6 +830,7 @@ gulp.task('test', function(cb){
       'test:java:azure',
       'test:python',
       'test:python:azure',
+      'test:go',
       cb);
   } else {
     runSequence(
@@ -795,6 +844,7 @@ gulp.task('test', function(cb){
       'test:java:azure',
       'test:python',
       'test:python:azure',
+      'test:go',
       cb);
   }
 });

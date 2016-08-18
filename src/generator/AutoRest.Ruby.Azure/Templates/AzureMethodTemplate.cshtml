@@ -8,7 +8,7 @@
 {
 @:@(Include(new MethodTemplate(), (MethodTemplateModel)Model))
 }
-else if (!Model.IsLongRunningOperation && Model.IsPageable)
+@if (Model.IsPageable) 
 {
 <text>
 #
@@ -42,7 +42,7 @@ def @(Model.Name)_as_lazy(@(Model.MethodParameterDeclaration))
 end
 </text>
 }
-else
+@if (Model.IsLongRunningOperation)
 {
 <text>
 #

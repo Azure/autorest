@@ -9,6 +9,7 @@
 namespace Fixtures.Azure.AcceptanceTestsAzureResource
 {
     using System.Linq;
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 
