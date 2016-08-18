@@ -1,0 +1,50 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+
+@using AutoRest.Go
+@using AutoRest.Go.TemplateModels
+@using AutoRest.Go.Templates
+
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.MethodGroupTemplateModel>
+@{
+    var imports = Model.Imports;
+    var modelName = GoCodeNamer.CamelCase(Model.Name);
+}
+
+package @Model.PackageName
+@EmptyLine
+@Header("// ")
+
+@EmptyLine
+
+import (
+@foreach (var import in imports)
+{
+    @:"@(import)"
+}
+)
+@EmptyLine
+
+@WrapComment("// ", Model.Documentation)
+type @(Model.ClientName) struct {
+    @(Model.BaseClient)
+}
+
+@WrapComment("// ", string.Format("New{0} creates an instance of the {0} client.", Model.ClientName))
+func New@(Model.ClientName)(@(Model.GlobalParameters)) @(Model.ClientName) {
+    return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+}
+@EmptyLine
+
+@WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
+func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
+    return @(Model.ClientName){NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
+}
+@EmptyLine
+
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include<MethodTemplate, MethodTemplateModel>(new MethodTemplate(), method))
+@:@EmptyLine
+}
