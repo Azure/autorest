@@ -385,9 +385,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200Succeeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -397,23 +395,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200SucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -425,9 +418,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200Succeeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200SucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -438,23 +429,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200SucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200SucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -560,9 +547,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200SucceededNoState() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200SucceededNoStateAsync().toBlocking().last();
     }
 
     /**
@@ -572,23 +557,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200SucceededNoStateAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200SucceededNoStateAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -600,9 +580,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200SucceededNoState(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200SucceededNoStateAsync(product).toBlocking().last();
     }
 
     /**
@@ -613,23 +591,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200SucceededNoStateAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200SucceededNoStateAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -734,9 +708,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put202Retry200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -746,23 +718,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put202Retry200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put202Retry200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -774,9 +741,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put202Retry200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -787,23 +752,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put202Retry200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -908,9 +869,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingSucceeded200Async().toBlocking().last();
     }
 
     /**
@@ -920,23 +879,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -948,9 +902,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingSucceeded200Async(product).toBlocking().last();
     }
 
     /**
@@ -961,23 +913,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -1083,9 +1031,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200UpdatingSucceeded204() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200UpdatingSucceeded204Async().toBlocking().last();
     }
 
     /**
@@ -1095,23 +1041,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200UpdatingSucceeded204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200UpdatingSucceeded204Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1123,9 +1064,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200UpdatingSucceeded204(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200UpdatingSucceeded204Async(product).toBlocking().last();
     }
 
     /**
@@ -1136,23 +1075,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200UpdatingSucceeded204Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200UpdatingSucceeded204Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -1257,9 +1192,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingFailed200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingFailed200Async().toBlocking().last();
     }
 
     /**
@@ -1269,23 +1202,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingFailed200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingFailed200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1297,9 +1225,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingFailed200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingFailed200Async(product).toBlocking().last();
     }
 
     /**
@@ -1310,23 +1236,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingFailed200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingFailed200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -1432,9 +1354,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200Acceptedcanceled200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200Acceptedcanceled200Async().toBlocking().last();
     }
 
     /**
@@ -1444,23 +1364,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200Acceptedcanceled200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200Acceptedcanceled200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1472,9 +1387,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200Acceptedcanceled200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200Acceptedcanceled200Async(product).toBlocking().last();
     }
 
     /**
@@ -1485,23 +1398,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200Acceptedcanceled200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200Acceptedcanceled200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -1606,9 +1515,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> putNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
+        return putNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -1618,23 +1525,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> putNoHeaderInRetryAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1646,9 +1548,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
+        return putNoHeaderInRetryAsync(product).toBlocking().last();
     }
 
     /**
@@ -1659,23 +1559,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putNoHeaderInRetryAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> putNoHeaderInRetryAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -1780,9 +1676,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
+        return putAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -1792,23 +1686,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1820,9 +1709,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
+        return putAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -1833,23 +1720,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -1954,9 +1837,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> putAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
+        return putAsyncNoRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -1966,23 +1847,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> putAsyncNoRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1994,9 +1870,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
+        return putAsyncNoRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -2007,23 +1881,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> putAsyncNoRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -2128,9 +1998,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> putAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
+        return putAsyncRetryFailedAsync().toBlocking().last();
     }
 
     /**
@@ -2140,23 +2008,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> putAsyncRetryFailedAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2168,9 +2031,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
+        return putAsyncRetryFailedAsync(product).toBlocking().last();
     }
 
     /**
@@ -2181,23 +2042,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetryFailedAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> putAsyncRetryFailedAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -2302,9 +2159,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> putAsyncNoRetrycanceled() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
+        return putAsyncNoRetrycanceledAsync().toBlocking().last();
     }
 
     /**
@@ -2314,23 +2169,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> putAsyncNoRetrycanceledAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2342,9 +2192,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
+        return putAsyncNoRetrycanceledAsync(product).toBlocking().last();
     }
 
     /**
@@ -2355,23 +2203,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> putAsyncNoRetrycanceledAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
 
     /**
@@ -2476,9 +2320,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> putAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
+        return putAsyncNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -2488,23 +2330,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> putAsyncNoHeaderInRetryAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -2516,9 +2353,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
+        return putAsyncNoHeaderInRetryAsync(product).toBlocking().last();
     }
 
     /**
@@ -2529,23 +2364,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> putAsyncNoHeaderInRetryAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -2650,9 +2481,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Sku> putNonResource() throws CloudException, IOException, InterruptedException {
-        final Sku sku = null;
-        Response<ResponseBody> result = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
+        return putNonResourceAsync().toBlocking().last();
     }
 
     /**
@@ -2662,23 +2491,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
+        return ServiceCall.create(putNonResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Sku>> putNonResourceAsync() {
         final Sku sku = null;
-        Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Sku> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Sku>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Sku>() { }.getType());
     }
     /**
      * Long running put request with non resource.
@@ -2690,9 +2514,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Sku> putNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
-        Validator.validate(sku);
-        Response<ResponseBody> result = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
+        return putNonResourceAsync(sku).toBlocking().last();
     }
 
     /**
@@ -2703,23 +2525,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
+        return ServiceCall.create(putNonResourceAsync(sku), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Sku>> putNonResourceAsync(Sku sku) {
         Validator.validate(sku);
-        Call<ResponseBody> call = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Sku> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Sku>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Sku>() { }.getType());
     }
 
     /**
@@ -2824,9 +2642,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Sku> putAsyncNonResource() throws CloudException, IOException, InterruptedException {
-        final Sku sku = null;
-        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
+        return putAsyncNonResourceAsync().toBlocking().last();
     }
 
     /**
@@ -2836,23 +2652,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
+        return ServiceCall.create(putAsyncNonResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Sku>> putAsyncNonResourceAsync() {
         final Sku sku = null;
-        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Sku> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Sku>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Sku>() { }.getType());
     }
     /**
      * Long running put request with non resource.
@@ -2864,9 +2675,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Sku> putAsyncNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
-        Validator.validate(sku);
-        Response<ResponseBody> result = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Sku>() { }.getType());
+        return putAsyncNonResourceAsync(sku).toBlocking().last();
     }
 
     /**
@@ -2877,23 +2686,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> putAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
+        return ServiceCall.create(putAsyncNonResourceAsync(sku), serviceCallback);
+    }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Sku>> putAsyncNonResourceAsync(Sku sku) {
         Validator.validate(sku);
-        Call<ResponseBody> call = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Sku> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Sku>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Sku>() { }.getType());
     }
 
     /**
@@ -2998,9 +2803,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<SubProduct> putSubResource() throws CloudException, IOException, InterruptedException {
-        final SubProduct product = null;
-        Response<ResponseBody> result = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
+        return putSubResourceAsync().toBlocking().last();
     }
 
     /**
@@ -3010,23 +2813,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
+        return ServiceCall.create(putSubResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<SubProduct>> putSubResourceAsync() {
         final SubProduct product = null;
-        Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<SubProduct> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<SubProduct>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SubProduct>() { }.getType());
     }
     /**
      * Long running put request with sub resource.
@@ -3038,9 +2836,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<SubProduct> putSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
+        return putSubResourceAsync(product).toBlocking().last();
     }
 
     /**
@@ -3051,23 +2847,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
+        return ServiceCall.create(putSubResourceAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<SubProduct>> putSubResourceAsync(SubProduct product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<SubProduct> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<SubProduct>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SubProduct>() { }.getType());
     }
 
     /**
@@ -3172,9 +2964,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<SubProduct> putAsyncSubResource() throws CloudException, IOException, InterruptedException {
-        final SubProduct product = null;
-        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
+        return putAsyncSubResourceAsync().toBlocking().last();
     }
 
     /**
@@ -3184,23 +2974,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
+        return ServiceCall.create(putAsyncSubResourceAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<SubProduct>> putAsyncSubResourceAsync() {
         final SubProduct product = null;
-        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<SubProduct> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<SubProduct>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SubProduct>() { }.getType());
     }
     /**
      * Long running put request with sub resource.
@@ -3212,9 +2997,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<SubProduct> putAsyncSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<SubProduct>() { }.getType());
+        return putAsyncSubResourceAsync(product).toBlocking().last();
     }
 
     /**
@@ -3225,23 +3008,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> putAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
+        return ServiceCall.create(putAsyncSubResourceAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<SubProduct>> putAsyncSubResourceAsync(SubProduct product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<SubProduct> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<SubProduct>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<SubProduct>() { }.getType());
     }
 
     /**
@@ -3346,8 +3125,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class);
+        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -3357,22 +3135,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
 
     /**
@@ -3433,8 +3206,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class);
+        return deleteProvisioning202DeletingFailed200Async().toBlocking().last();
     }
 
     /**
@@ -3444,22 +3216,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> deleteProvisioning202DeletingFailed200Async() {
+        Observable<Response<ResponseBody>> observable = service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class);
     }
 
     /**
@@ -3520,8 +3287,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class);
+        return deleteProvisioning202Deletingcanceled200Async().toBlocking().last();
     }
 
     /**
@@ -3531,22 +3297,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> deleteProvisioning202Deletingcanceled200Async() {
+        Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class);
     }
 
     /**
@@ -3607,8 +3368,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponse object if successful.
      */
     public ServiceResponse<Void> delete204Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return delete204SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -3618,22 +3378,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.create(delete204SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Void>> delete204SucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -3693,8 +3448,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> delete202Retry200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDelete202Retry200Headers.class);
+        return delete202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -3704,22 +3458,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> delete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDelete202Retry200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(delete202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> delete202Retry200Async() {
+        Observable<Response<ResponseBody>> observable = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsDelete202Retry200Headers.class);
     }
 
     /**
@@ -3780,8 +3529,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> delete202NoRetry204() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDelete202NoRetry204Headers.class);
+        return delete202NoRetry204Async().toBlocking().last();
     }
 
     /**
@@ -3791,22 +3539,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> delete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
-        Call<ResponseBody> call = service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDelete202NoRetry204Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(delete202NoRetry204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> delete202NoRetry204Async() {
+        Observable<Response<ResponseBody>> observable = service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsDelete202NoRetry204Headers.class);
     }
 
     /**
@@ -3867,8 +3610,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class);
+        return deleteNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -3878,22 +3620,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> deleteNoHeaderInRetryAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -3954,8 +3691,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class);
+        return deleteAsyncNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -3965,22 +3701,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> deleteAsyncNoHeaderInRetryAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -4041,8 +3772,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class);
+        return deleteAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -4052,22 +3782,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> deleteAsyncRetrySucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -4127,8 +3852,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class);
+        return deleteAsyncNoRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -4138,22 +3862,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> deleteAsyncNoRetrySucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -4213,8 +3932,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class);
+        return deleteAsyncRetryFailedAsync().toBlocking().last();
     }
 
     /**
@@ -4224,22 +3942,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> deleteAsyncRetryFailedAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -4299,8 +4012,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class);
+        return deleteAsyncRetrycanceledAsync().toBlocking().last();
     }
 
     /**
@@ -4310,22 +4022,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> deleteAsyncRetrycanceledAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -4385,8 +4092,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Sku> post200WithPayload() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Sku>() { }.getType());
+        return post200WithPayloadAsync().toBlocking().last();
     }
 
     /**
@@ -4396,22 +4102,17 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> post200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
-        Call<ResponseBody> call = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Sku> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Sku>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.create(post200WithPayloadAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Sku>> post200WithPayloadAsync() {
+        Observable<Response<ResponseBody>> observable = service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Sku>() { }.getType());
     }
 
     /**
@@ -4472,9 +4173,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> post202Retry200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return post202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -4484,23 +4183,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -4512,9 +4206,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
+        return post202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -4525,23 +4217,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -4646,9 +4334,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> post202NoRetry204() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return post202NoRetry204Async().toBlocking().last();
     }
 
     /**
@@ -4658,23 +4344,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> post202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NoRetry204Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> post202NoRetry204Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -4686,9 +4367,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
+        return post202NoRetry204Async(product).toBlocking().last();
     }
 
     /**
@@ -4699,23 +4378,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> post202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NoRetry204Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> post202NoRetry204Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -4820,9 +4495,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return postAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -4832,23 +4505,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -4860,9 +4528,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
+        return postAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -4873,23 +4539,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -4995,9 +4657,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> postAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return postAsyncNoRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -5007,23 +4667,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5035,9 +4690,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
+        return postAsyncNoRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -5048,23 +4701,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -5170,9 +4819,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> postAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return postAsyncRetryFailedAsync().toBlocking().last();
     }
 
     /**
@@ -5182,23 +4829,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetryFailedAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5210,9 +4852,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
+        return postAsyncRetryFailedAsync(product).toBlocking().last();
     }
 
     /**
@@ -5223,23 +4863,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetryFailedAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -5344,9 +4980,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> postAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return postAsyncRetrycanceledAsync().toBlocking().last();
     }
 
     /**
@@ -5356,23 +4990,18 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrycanceledAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5384,9 +5013,7 @@ public final class LROsImpl implements LROs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
+        return postAsyncRetrycanceledAsync(product).toBlocking().last();
     }
 
     /**
@@ -5397,23 +5024,19 @@ public final class LROsImpl implements LROs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrycanceledAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
     /**

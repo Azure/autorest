@@ -45,32 +45,7 @@ else
 }
  */
 public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
-@foreach (var param in Model.RequiredNullableParameters)
-{
-@:    if (@param.Name == null) {
-@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
-@:    }
-}
-@foreach (var param in Model.ParametersToValidate.Where(p => p.IsRequired))
-{
-@:    Validator.validate(@(param.Name));
-}
-
-@foreach (ParameterModel parameter in Model.LocalParameters)
-{
-    if (!parameter.IsRequired)
-    {
-@:    final @(parameter.WireType.Name) @(parameter.WireName) = @(parameter.WireType.DefaultValue(Model));
-    }
-    if (parameter.IsConstant)
-    {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
-    }
-}
-    @Model.BuildInputMappings(true)
-    @Model.RequiredParameterConversion
-    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).execute();
-    return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
+    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().last();
 }
 @EmptyLine
 /**
@@ -91,6 +66,26 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)Async(@Model.MethodRequiredParameterInvocation), serviceCallback);
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
+}
+ * @@return the observable for the request
+ */
+public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -115,23 +110,8 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
     @Model.BuildInputMappings(true)
     @Model.RequiredParameterConversion
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    @Model.ServiceCallConstruction
-    call.enqueue(new Callback<@Model.CallType>() {
-        @@Override
-        public void onFailure(Call<@Model.CallType> call, Throwable t) {
-            if (serviceCallback != null) {
-                serviceCallback.failure(t);
-            }
-            serviceCall.failure(t);
-        }
-
-        @@Override
-        public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
-            client.getAzureClient().@(Model.PollingMethod)Async(response, @Model.PollingResourceTypeArgs, serviceCall, serviceCallback);
-        }
-    });
-    return serviceCall;
+    Observable<Response<@Model.CallType>> observable = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
+    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
 }
 </text>
 }
@@ -164,28 +144,7 @@ else
 }
  */
 public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
-@foreach (var param in Model.RequiredNullableParameters)
-{
-@:    if (@param.Name == null) {
-@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
-@:    }
-}
-@foreach (var param in Model.ParametersToValidate)
-{
-@:    Validator.validate(@(param.Name));
-}
-
-@foreach (ParameterModel parameter in Model.LocalParameters)
-{
-    if (parameter.IsConstant)
-    {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
-    }
-}
-    @Model.BuildInputMappings()
-    @Model.ParameterConversion
-    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
-    return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
+    return @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last();
 }
 @EmptyLine
 /**
@@ -206,6 +165,26 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)Async(@Model.MethodParameterInvocation), serviceCallback);
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
+}
+ * @@return the observable for the request
+ */
+public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -226,23 +205,8 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
     @Model.BuildInputMappings()
     @Model.ParameterConversion
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    @Model.ServiceCallConstruction
-    call.enqueue(new Callback<@Model.CallType>() {
-        @@Override
-        public void onFailure(Call<@Model.CallType> call, Throwable t) {
-            if (serviceCallback != null) {
-                serviceCallback.failure(t);
-            }
-            serviceCall.failure(t);
-        }
-
-        @@Override
-        public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
-            client.getAzureClient().@(Model.PollingMethod)Async(response, @Model.PollingResourceTypeArgs, serviceCall, serviceCallback);
-        }
-    });
-    return serviceCall;
+    Observable<Response<@Model.CallType>> observable = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
 }
 </text>
 }

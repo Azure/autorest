@@ -106,9 +106,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
+        return putAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -118,23 +116,18 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -146,9 +139,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
+        return putAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -159,23 +150,19 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -280,9 +267,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingSucceeded200Async().toBlocking().last();
     }
 
     /**
@@ -292,23 +277,18 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -320,9 +300,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put201CreatingSucceeded200Async(product).toBlocking().last();
     }
 
     /**
@@ -333,23 +311,19 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(product), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -455,9 +429,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> post202Retry200() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
+        return post202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -467,23 +439,18 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>> post202Retry200Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -495,9 +462,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
+        return post202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -508,23 +473,19 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>> post202Retry200Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200Headers.class);
     }
 
     /**
@@ -629,9 +590,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
+        return postAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -641,23 +600,18 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -669,9 +623,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
+        return postAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -682,23 +634,19 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
     }
 
     /**

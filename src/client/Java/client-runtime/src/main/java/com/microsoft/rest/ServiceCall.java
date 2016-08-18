@@ -32,23 +32,25 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     public static <T> ServiceCall<T> create(final Observable<ServiceResponse<T>> observable) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
+            .last()
             .subscribe(new Action1<ServiceResponse<T>>() {
-            @Override
-            public void call(ServiceResponse<T> t) {
-                serviceCall.set(t);
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
-                serviceCall.setException(throwable);
-            }
-        });
+                @Override
+                public void call(ServiceResponse<T> t) {
+                    serviceCall.set(t);
+                }
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    serviceCall.setException(throwable);
+                }
+            });
         return serviceCall;
     }
 
     public static <T> ServiceCall<T> create(final Observable<ServiceResponse<T>> observable, final ServiceCallback<T> callback) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
+            .last()
             .subscribe(new Action1<ServiceResponse<T>>() {
                 @Override
                 public void call(ServiceResponse<T> t) {
@@ -72,6 +74,7 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     public static <T, V> ServiceCall<T> createWithHeaders(final Observable<ServiceResponseWithHeaders<T, V>> observable, final ServiceCallback<T> callback) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
+            .last()
             .subscribe(new Action1<ServiceResponse<T>>() {
                 @Override
                 public void call(ServiceResponse<T> t) {

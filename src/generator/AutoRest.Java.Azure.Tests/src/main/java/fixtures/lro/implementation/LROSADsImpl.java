@@ -300,9 +300,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -312,23 +310,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry400Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 400 to the initial request.
@@ -340,9 +333,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -353,23 +344,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -475,9 +462,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry201Creating400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry201Creating400Async().toBlocking().last();
     }
 
     /**
@@ -487,23 +472,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry201Creating400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry201Creating400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -515,9 +495,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry201Creating400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry201Creating400Async(product).toBlocking().last();
     }
 
     /**
@@ -528,23 +506,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry201Creating400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry201Creating400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -650,9 +624,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry201Creating400InvalidJson() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry201Creating400InvalidJsonAsync().toBlocking().last();
     }
 
     /**
@@ -662,23 +634,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry201Creating400InvalidJsonAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry201Creating400InvalidJsonAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -690,9 +657,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putNonRetry201Creating400InvalidJson(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putNonRetry201Creating400InvalidJsonAsync(product).toBlocking().last();
     }
 
     /**
@@ -703,23 +668,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putNonRetry201Creating400InvalidJsonAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putNonRetry201Creating400InvalidJsonAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -825,9 +786,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> putAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
+        return putAsyncRelativeRetry400Async().toBlocking().last();
     }
 
     /**
@@ -837,23 +796,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> putAsyncRelativeRetry400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
     }
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -865,9 +819,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
+        return putAsyncRelativeRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -878,23 +830,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetry400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> putAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -999,8 +947,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> deleteNonRetry400() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteNonRetry400Headers.class);
+        return deleteNonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1010,22 +957,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteNonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteNonRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>> deleteNonRetry400Async() {
+        Observable<Response<ResponseBody>> observable = service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDeleteNonRetry400Headers.class);
     }
 
     /**
@@ -1085,8 +1027,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> delete202NonRetry400() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDelete202NonRetry400Headers.class);
+        return delete202NonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1096,22 +1037,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDelete202NonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(delete202NonRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>> delete202NonRetry400Async() {
+        Observable<Response<ResponseBody>> observable = service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDelete202NonRetry400Headers.class);
     }
 
     /**
@@ -1171,8 +1107,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetry400Headers.class);
+        return deleteAsyncRelativeRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1182,22 +1117,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>> deleteAsyncRelativeRetry400Async() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -1257,9 +1187,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> postNonRetry400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
+        return postNonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1269,23 +1197,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postNonRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> postNonRetry400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
     }
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -1297,9 +1220,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
+        return postNonRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1310,23 +1231,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postNonRetry400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> postNonRetry400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
     }
 
     /**
@@ -1431,9 +1348,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> post202NonRetry400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
+        return post202NonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1443,23 +1358,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NonRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> post202NonRetry400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
     }
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -1471,9 +1381,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
+        return post202NonRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1484,23 +1392,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NonRetry400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> post202NonRetry400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
     }
 
     /**
@@ -1605,9 +1509,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> postAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
+        return postAsyncRelativeRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1617,23 +1519,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetry400Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> postAsyncRelativeRetry400Async() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1645,9 +1542,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
+        return postAsyncRelativeRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1658,23 +1553,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetry400Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> postAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -1779,9 +1670,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putError201NoProvisioningStatePayload() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putError201NoProvisioningStatePayloadAsync().toBlocking().last();
     }
 
     /**
@@ -1791,23 +1680,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putError201NoProvisioningStatePayloadAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putError201NoProvisioningStatePayloadAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -1819,9 +1703,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> putError201NoProvisioningStatePayload(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return putError201NoProvisioningStatePayloadAsync(product).toBlocking().last();
     }
 
     /**
@@ -1832,23 +1714,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(putError201NoProvisioningStatePayloadAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> putError201NoProvisioningStatePayloadAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -1954,9 +1832,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> putAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
+        return putAsyncRelativeRetryNoStatusAsync().toBlocking().last();
     }
 
     /**
@@ -1966,23 +1842,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> putAsyncRelativeRetryNoStatusAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1994,9 +1865,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
+        return putAsyncRelativeRetryNoStatusAsync(product).toBlocking().last();
     }
 
     /**
@@ -2007,23 +1876,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> putAsyncRelativeRetryNoStatusAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
     }
 
     /**
@@ -2128,9 +1993,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> putAsyncRelativeRetryNoStatusPayload() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
+        return putAsyncRelativeRetryNoStatusPayloadAsync().toBlocking().last();
     }
 
     /**
@@ -2140,23 +2003,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusPayloadAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> putAsyncRelativeRetryNoStatusPayloadAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2168,9 +2026,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
+        return putAsyncRelativeRetryNoStatusPayloadAsync(product).toBlocking().last();
     }
 
     /**
@@ -2181,23 +2037,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryNoStatusPayloadAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> putAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
     }
 
     /**
@@ -2302,8 +2154,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponse object if successful.
      */
     public ServiceResponse<Void> delete204Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return delete204SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -2313,22 +2164,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.create(delete204SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Void>> delete204SucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultAsync(observable, new TypeToken<Void>() { }.getType());
     }
 
     /**
@@ -2388,8 +2234,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class);
+        return deleteAsyncRelativeRetryNoStatusAsync().toBlocking().last();
     }
 
     /**
@@ -2399,22 +2244,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryNoStatusAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>> deleteAsyncRelativeRetryNoStatusAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class);
     }
 
     /**
@@ -2474,9 +2314,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> post202NoLocation() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
+        return post202NoLocationAsync().toBlocking().last();
     }
 
     /**
@@ -2486,23 +2324,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NoLocationAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> post202NoLocationAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -2514,9 +2347,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
+        return post202NoLocationAsync(product).toBlocking().last();
     }
 
     /**
@@ -2527,23 +2358,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202NoLocationAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> post202NoLocationAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
     }
 
     /**
@@ -2648,9 +2475,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> postAsyncRelativeRetryNoPayload() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
+        return postAsyncRelativeRetryNoPayloadAsync().toBlocking().last();
     }
 
     /**
@@ -2660,23 +2485,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryNoPayloadAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> postAsyncRelativeRetryNoPayloadAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2688,9 +2508,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
+        return postAsyncRelativeRetryNoPayloadAsync(product).toBlocking().last();
     }
 
     /**
@@ -2701,23 +2519,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryNoPayloadAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> postAsyncRelativeRetryNoPayloadAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
     }
 
     /**
@@ -2822,9 +2636,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200InvalidJson() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200InvalidJsonAsync().toBlocking().last();
     }
 
     /**
@@ -2834,23 +2646,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200InvalidJsonAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200InvalidJsonAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -2862,9 +2669,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put200InvalidJson(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return put200InvalidJsonAsync(product).toBlocking().last();
     }
 
     /**
@@ -2875,23 +2680,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(put200InvalidJsonAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<Product>> put200InvalidJsonAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.create(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
     }
 
     /**
@@ -2997,9 +2798,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> putAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
+        return putAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3009,23 +2808,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> putAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -3037,9 +2831,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
+        return putAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last();
     }
 
     /**
@@ -3050,23 +2842,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> putAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -3171,9 +2959,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> putAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
+        return putAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last();
     }
 
     /**
@@ -3183,23 +2969,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> putAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3211,9 +2992,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
+        return putAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last();
     }
 
     /**
@@ -3224,23 +3003,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Product> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
@@ -3345,8 +3120,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDelete202RetryInvalidHeaderHeaders.class);
+        return delete202RetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3356,22 +3130,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDelete202RetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(delete202RetryInvalidHeaderAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>> delete202RetryInvalidHeaderAsync() {
+        Observable<Response<ResponseBody>> observable = service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDelete202RetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -3431,8 +3200,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class);
+        return deleteAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3442,22 +3210,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> deleteAsyncRelativeRetryInvalidHeaderAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -3517,8 +3280,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class);
+        return deleteAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last();
     }
 
     /**
@@ -3528,22 +3290,17 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
@@ -3603,9 +3360,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> post202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
+        return post202RetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3615,23 +3370,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202RetryInvalidHeaderAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> post202RetryInvalidHeaderAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -3643,9 +3393,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
+        return post202RetryInvalidHeaderAsync(product).toBlocking().last();
     }
 
     /**
@@ -3656,23 +3404,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202RetryInvalidHeaderAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> post202RetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -3777,9 +3521,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> postAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
+        return postAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3789,23 +3531,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> postAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -3817,9 +3554,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
+        return postAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last();
     }
 
     /**
@@ -3830,23 +3565,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidHeaderAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -3951,9 +3682,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> postAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
-        final Product product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
+        return postAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last();
     }
 
     /**
@@ -3963,23 +3692,18 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> postAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3991,9 +3715,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
+        return postAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last();
     }
 
     /**
@@ -4004,23 +3726,19 @@ public final class LROSADsImpl implements LROSADs {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetryInvalidJsonPollingAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = ServiceCall.createWithHeaders(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
