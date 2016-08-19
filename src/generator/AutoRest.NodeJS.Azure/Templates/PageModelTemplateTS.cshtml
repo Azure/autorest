@@ -1,16 +1,10 @@
 @using System
 @using System.Linq
 @using System.Collections.Generic
+@using AutoRest.Core.ClientModel
 @using AutoRest.NodeJS.Azure.TemplateModels
 @inherits AutoRest.Core.Template<PageTemplateModel>
-/*
-@Header(" * ")
- */
-@EmptyLine
-'use strict';
-@EmptyLine
-var util = require('util');
-@EmptyLine
+
 /**
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
@@ -29,6 +23,7 @@ var util = require('util');
 {
     if (property.Name.ToLowerInvariant() != "value")
     {
+
     @PageTemplateModel.ConstructPropertyDocumentation(
                                 WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
                                                                 + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
@@ -36,19 +31,12 @@ var util = require('util');
     }
 }
  */
-function @(Model.Name)() {
+export interface @(Model.Name) extends Array@(Model.ConstructTSItemTypeName()) {
+@{
+    Property prop = Model.Properties.Where(p => p.Name.ToLowerInvariant().Contains("nextlink")).FirstOrDefault();
+    if (prop != null)
+    {
+  @:@(PageTemplateModel.PropertyTS(prop, true));
+    }
+ }
 }
-@EmptyLine
-util.inherits(@(Model.Name), Array);
-@EmptyLine
-/**
- * Defines the metadata of @Model.Name
- *
- * @@returns {object} metadata of @Model.Name
- *
- */
-@(Model.Name).prototype.mapper = function () {
-  @(Model.ConstructModelMapper())
-};
-@EmptyLine
-module.exports = @(Model.Name);

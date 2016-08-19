@@ -19,8 +19,8 @@
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }
 
 /**
@@ -31,5 +31,5 @@ export interface ErrorModel {
  * 
  */
 export interface RefColorConstant {
-    field1?: string;
+  field1?: string;
 }

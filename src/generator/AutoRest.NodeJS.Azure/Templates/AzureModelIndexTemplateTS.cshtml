@@ -1,12 +1,19 @@
 ﻿@using System.Linq
 @using AutoRest.NodeJS.Templates
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.TemplateModels.ServiceClientTemplateModel>
+@using AutoRest.NodeJS.Azure.Templates
+@using AutoRest.NodeJS.Azure.TemplateModels
+@inherits AutoRest.Core.Template<AzureServiceClientTemplateModel>
 /*
 @Header(" * ")
-// TODO: Include PageTemplateModels here too?? Probably
  */
 @EmptyLine
 @foreach (var model in Model.OrderedModelTemplateModels) {
 @EmptyLine
 @:@(Include(new ModelTemplateTS(), model))
+}
+@EmptyLine
+@foreach (var model in Model.PageTemplateModels)
+{
+@EmptyLine
+@:@(Include(new PageModelTemplateTS(), model))
 }

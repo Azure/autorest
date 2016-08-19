@@ -31,11 +31,11 @@
  * 
  */
 export interface Product {
-    displayNames?: string[];
-    capacity?: number;
-    image?: string;
-    child: ChildProduct;
-    constStringAsEnum?: string;
+  displayNames?: string[];
+  capacity?: number;
+  image?: string;
+  child: ChildProduct;
+  constStringAsEnum?: string;
 }
 
 /**
@@ -48,7 +48,7 @@ export interface Product {
  * 
  */
 export interface ChildProduct {
-    count?: number;
+  count?: number;
 }
 
 /**
@@ -73,7 +73,7 @@ export interface ConstantProduct {
  * 
  */
 export interface ErrorModel {
-    code?: number;
-    message?: string;
-    fields?: string;
+  code?: number;
+  message?: string;
+  fields?: string;
 }

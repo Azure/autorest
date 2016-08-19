@@ -1,5 +1,4 @@
 /*
-// TODO: Include PageTemplateModels here too?? Probably
  */
 
 
@@ -14,8 +13,8 @@
  * 
  */
 export interface StorageAccountCheckNameAvailabilityParameters {
-    name: string;
-    type?: string;
+  name: string;
+  type?: string;
 }
 
 /**
@@ -38,9 +37,9 @@ export interface StorageAccountCheckNameAvailabilityParameters {
  * 
  */
 export interface CheckNameAvailabilityResult {
-    nameAvailable?: boolean;
-    reason?: string;
-    message?: string;
+  nameAvailable?: boolean;
+  reason?: string;
+  message?: string;
 }
 
 /**
@@ -53,7 +52,7 @@ export interface CheckNameAvailabilityResult {
  * 
  */
 export interface StorageAccountPropertiesCreateParameters {
-    accountType: string;
+  accountType: string;
 }
 
 /**
@@ -74,9 +73,9 @@ export interface StorageAccountPropertiesCreateParameters {
  * 
  */
 export interface StorageAccountCreateParameters extends BaseResource {
-    location: string;
-    tags?: { [propertyName: string]: string };
-    properties?: StorageAccountPropertiesCreateParameters;
+  location: string;
+  tags?: { [propertyName: string]: string };
+  properties?: StorageAccountPropertiesCreateParameters;
 }
 
 /**
@@ -96,10 +95,10 @@ export interface StorageAccountCreateParameters extends BaseResource {
  * 
  */
 export interface Endpoints {
-    blob?: string;
-    queue?: string;
-    table?: string;
-    file?: string;
+  blob?: string;
+  queue?: string;
+  table?: string;
+  file?: string;
 }
 
 /**
@@ -118,8 +117,8 @@ export interface Endpoints {
  * 
  */
 export interface CustomDomain {
-    name: string;
-    useSubDomain?: boolean;
+  name: string;
+  useSubDomain?: boolean;
 }
 
 /**
@@ -196,17 +195,17 @@ export interface CustomDomain {
  * 
  */
 export interface StorageAccountProperties {
-    provisioningState?: string;
-    accountType?: string;
-    primaryEndpoints?: Endpoints;
-    primaryLocation?: string;
-    statusOfPrimary?: string;
-    lastGeoFailoverTime?: Date;
-    secondaryLocation?: string;
-    statusOfSecondary?: string;
-    creationTime?: Date;
-    customDomain?: CustomDomain;
-    secondaryEndpoints?: Endpoints;
+  provisioningState?: string;
+  accountType?: string;
+  primaryEndpoints?: Endpoints;
+  primaryLocation?: string;
+  statusOfPrimary?: string;
+  lastGeoFailoverTime?: Date;
+  secondaryLocation?: string;
+  statusOfSecondary?: string;
+  creationTime?: Date;
+  customDomain?: CustomDomain;
+  secondaryEndpoints?: Endpoints;
 }
 
 /**
@@ -225,11 +224,11 @@ export interface StorageAccountProperties {
  * 
  */
 export interface Resource extends BaseResource {
-    id?: string;
-    name?: string;
-    type?: string;
-    location?: string;
-    tags?: { [propertyName: string]: string };
+  id?: string;
+  name?: string;
+  type?: string;
+  location?: string;
+  tags?: { [propertyName: string]: string };
 }
 
 /**
@@ -316,7 +315,7 @@ export interface Resource extends BaseResource {
  * 
  */
 export interface StorageAccount extends Resource {
-    properties?: StorageAccountProperties;
+  properties?: StorageAccountProperties;
 }
 
 /**
@@ -331,8 +330,8 @@ export interface StorageAccount extends Resource {
  * 
  */
 export interface StorageAccountKeys {
-    key1?: string;
-    key2?: string;
+  key1?: string;
+  key2?: string;
 }
 
 /**
@@ -359,8 +358,8 @@ export interface StorageAccountKeys {
  * 
  */
 export interface StorageAccountPropertiesUpdateParameters {
-    accountType?: string;
-    customDomain?: CustomDomain;
+  accountType?: string;
+  customDomain?: CustomDomain;
 }
 
 /**
@@ -393,8 +392,8 @@ export interface StorageAccountPropertiesUpdateParameters {
  * 
  */
 export interface StorageAccountUpdateParameters extends BaseResource {
-    tags?: { [propertyName: string]: string };
-    properties?: StorageAccountPropertiesUpdateParameters;
+  tags?: { [propertyName: string]: string };
+  properties?: StorageAccountPropertiesUpdateParameters;
 }
 
 /**
@@ -405,7 +404,7 @@ export interface StorageAccountUpdateParameters extends BaseResource {
  * 
  */
 export interface StorageAccountRegenerateKeyParameters {
-    keyName: string;
+  keyName: string;
 }
 
 /**
@@ -421,8 +420,8 @@ export interface StorageAccountRegenerateKeyParameters {
  * 
  */
 export interface UsageName {
-    value?: string;
-    localizedValue?: string;
+  value?: string;
+  localizedValue?: string;
 }
 
 /**
@@ -450,8 +449,29 @@ export interface UsageName {
  * 
  */
 export interface Usage {
-    unit: string;
-    currentValue: number;
-    limit: number;
-    name: UsageName;
+  unit: string;
+  currentValue: number;
+  limit: number;
+  name: UsageName;
+}
+
+
+/**
+ * @class
+ * Initializes a new instance of the StorageAccountListResult class.
+ * @constructor
+ * The list storage accounts operation response.
+ *
+ */
+export interface StorageAccountListResult extends Array<StorageAccount> {
+}
+
+/**
+ * @class
+ * Initializes a new instance of the UsageListResult class.
+ * @constructor
+ * The List Usages operation response.
+ *
+ */
+export interface UsageListResult extends Array<Usage> {
 }
