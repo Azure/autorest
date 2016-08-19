@@ -19,8 +19,8 @@
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface ErrorModel {
  * 
  */
 export interface A {
-    statusCode?: string;
+  statusCode?: string;
 }
 
 /**
@@ -42,7 +42,7 @@ export interface A {
  * 
  */
 export interface B extends A {
-    textStatusCode?: string;
+  textStatusCode?: string;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface B extends A {
  * 
  */
 export interface C {
-    httpCode?: string;
+  httpCode?: string;
 }
 
 /**
@@ -64,5 +64,5 @@ export interface C {
  * 
  */
 export interface D {
-    httpStatusCode?: string;
+  httpStatusCode?: string;
 }

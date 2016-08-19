@@ -19,8 +19,8 @@
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface ErrorModel {
  * 
  */
 export interface IntWrapper {
-    value: number;
+  value: number;
 }
 
 /**
@@ -42,7 +42,7 @@ export interface IntWrapper {
  * 
  */
 export interface IntOptionalWrapper {
-    value?: number;
+  value?: number;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface IntOptionalWrapper {
  * 
  */
 export interface StringWrapper {
-    value: string;
+  value: string;
 }
 
 /**
@@ -64,7 +64,7 @@ export interface StringWrapper {
  * 
  */
 export interface StringOptionalWrapper {
-    value?: string;
+  value?: string;
 }
 
 /**
@@ -75,7 +75,7 @@ export interface StringOptionalWrapper {
  * 
  */
 export interface ArrayWrapper {
-    value: string[];
+  value: string[];
 }
 
 /**
@@ -86,7 +86,7 @@ export interface ArrayWrapper {
  * 
  */
 export interface ArrayOptionalWrapper {
-    value?: string[];
+  value?: string[];
 }
 
 /**
@@ -101,7 +101,7 @@ export interface ArrayOptionalWrapper {
  * 
  */
 export interface ClassWrapper {
-    value: Product;
+  value: Product;
 }
 
 /**
@@ -114,8 +114,8 @@ export interface ClassWrapper {
  * 
  */
 export interface Product {
-    id: number;
-    name?: string;
+  id: number;
+  name?: string;
 }
 
 /**
@@ -130,5 +130,5 @@ export interface Product {
  * 
  */
 export interface ClassOptionalWrapper {
-    value?: Product;
+  value?: Product;
 }

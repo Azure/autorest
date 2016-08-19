@@ -1,6 +1,7 @@
 
 namespace Petstore
 {
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 

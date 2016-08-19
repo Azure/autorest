@@ -30,11 +30,11 @@
  * 
  */
 export interface Product {
-    productId?: string;
-    description?: string;
-    displayName?: string;
-    capacity?: string;
-    image?: string;
+  productId?: string;
+  description?: string;
+  displayName?: string;
+  capacity?: string;
+  image?: string;
 }
 
 /**
@@ -45,7 +45,7 @@ export interface Product {
  * 
  */
 export interface CatalogDictionary {
-    productDictionary?: { [propertyName: string]: Product };
+  productDictionary?: { [propertyName: string]: Product };
 }
 
 /**
@@ -56,7 +56,7 @@ export interface CatalogDictionary {
  * 
  */
 export interface CatalogArray {
-    productArray?: Product[];
+  productArray?: Product[];
 }
 
 /**
@@ -67,7 +67,7 @@ export interface CatalogArray {
  * 
  */
 export interface CatalogArrayOfDictionary {
-    productArrayOfDictionary?: { [propertyName: string]: Product }[];
+  productArrayOfDictionary?: { [propertyName: string]: Product }[];
 }
 
 /**
@@ -78,7 +78,7 @@ export interface CatalogArrayOfDictionary {
  * 
  */
 export interface CatalogDictionaryOfArray {
-    productDictionaryOfArray?: { [propertyName: string]: Product[] };
+  productDictionaryOfArray?: { [propertyName: string]: Product[] };
 }
 
 /**
@@ -91,6 +91,6 @@ export interface CatalogDictionaryOfArray {
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }
