@@ -74,10 +74,11 @@ namespace AutoRest.Extensions.Azure
 
             // This extension from general extensions must be run prior to Azure specific extensions.
             ProcessParameterizedHost(serviceClient, settings);
-
+            
             ProcessClientRequestIdExtension(serviceClient);
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
+            ProcessGlobalParameters(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
             ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
