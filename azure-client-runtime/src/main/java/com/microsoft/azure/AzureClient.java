@@ -158,7 +158,11 @@ public class AzureClient extends AzureServiceClient {
      */
     public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCall<T> serviceCall, ServiceCallback<T> callback) {
         if (response == null) {
-            callback.failure(new ServiceException("response is null."));
+            CloudException t = new CloudException("response is null.");
+            if (callback != null) {
+                callback.failure(t);
+            }
+            serviceCall.failure(t);
             return null;
         }
 
@@ -178,7 +182,10 @@ public class AzureClient extends AzureServiceClient {
                     responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
-            callback.failure(exception);
+            if (callback != null) {
+                callback.failure(exception);
+            }
+            serviceCall.failure(exception);
             return null;
         }
 
@@ -186,7 +193,10 @@ public class AzureClient extends AzureServiceClient {
         try {
             pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         } catch (IOException e) {
-            callback.failure(e);
+            if (callback != null) {
+                callback.failure(e);
+            }
+            serviceCall.failure(e);
             return null;
         }
         String url = response.raw().request().url().toString();
@@ -215,17 +225,24 @@ public class AzureClient extends AzureServiceClient {
         return this.getPutOrPatchResultAsync(response, resourceType, serviceCall, new ServiceCallback<T>() {
             @Override
             public void failure(Throwable t) {
-                callback.failure(t);
+                if (callback != null) {
+                    callback.failure(t);
+                }
+                serviceCall.failure(t);
             }
 
             @Override
             public void success(ServiceResponse<T> result) {
                 try {
-                    callback.success(new ServiceResponseWithHeaders<>(
+                    ServiceResponseWithHeaders<T, THeader> clientResponse = new ServiceResponseWithHeaders<>(
                             result.getBody(),
                             restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
-                    ));
+                    );
+                    if (callback != null) {
+                        callback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (IOException e) {
                     failure(e);
                 }
@@ -331,7 +348,11 @@ public class AzureClient extends AzureServiceClient {
      */
     public <T> AsyncPollingTask<T> getPostOrDeleteResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCall<T> serviceCall, ServiceCallback<T> callback) {
         if (response == null) {
-            callback.failure(new ServiceException("response is null."));
+            CloudException t = new CloudException("response is null.");
+            if (callback != null) {
+                callback.failure(t);
+            }
+            serviceCall.failure(t);
             return null;
         }
 
@@ -351,7 +372,10 @@ public class AzureClient extends AzureServiceClient {
                     responseBody.close();
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
-            callback.failure(exception);
+            if (callback != null) {
+                callback.failure(exception);
+            }
+            serviceCall.failure(exception);
             return null;
         }
 
@@ -359,7 +383,10 @@ public class AzureClient extends AzureServiceClient {
         try {
             pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, restClient().mapperAdapter());
         } catch (IOException e) {
-            callback.failure(e);
+            if (callback != null) {
+                callback.failure(e);
+            }
+            serviceCall.failure(e);
             return null;
         }
 
@@ -387,17 +414,24 @@ public class AzureClient extends AzureServiceClient {
         return this.getPostOrDeleteResultAsync(response, resourceType, serviceCall, new ServiceCallback<T>() {
             @Override
             public void failure(Throwable t) {
-                callback.failure(t);
+                if (callback != null) {
+                    callback.failure(t);
+                }
+                serviceCall.failure(t);
             }
 
             @Override
             public void success(ServiceResponse<T> result) {
                 try {
-                    callback.success(new ServiceResponseWithHeaders<>(
+                    ServiceResponseWithHeaders<T, THeader> clientResponse = new ServiceResponseWithHeaders<>(
                             result.getBody(),
                             restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
-                    ));
+                    );
+                    if (callback != null) {
+                        callback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 } catch (IOException e) {
                     failure(e);
                 }
@@ -534,22 +568,34 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param pollingState the polling state for the current operation.
      * @param url the url to poll from
+     * @param serviceCall the future based service call
      * @param callback  the user callback to call when operation terminates.
      * @param <T> the return type of the caller.
      * @return the task describing the asynchronous polling.
      */
-    private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCallback<T> callback) {
+    private <T> Call<ResponseBody> updateStateFromGetResourceOperationAsync(final PollingState<T> pollingState, String url, final ServiceCall<T> serviceCall, final ServiceCallback<T> callback) {
         return pollAsync(url, new ServiceCallback<ResponseBody>() {
             @Override
             public void failure(Throwable t) {
-                callback.failure(t);
+                if (callback != null) {
+                    callback.failure(t);
+                }
+                if (serviceCall != null) {
+                    serviceCall.failure(t);
+                }
             }
 
             @Override
             public void success(ServiceResponse<ResponseBody> result) {
                 try {
                     pollingState.updateFromResponseOnPutPatch(result.getResponse());
-                    callback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
+                    ServiceResponse<T> clientResponse = new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse());
+                    if (callback != null) {
+                        callback.success(clientResponse);
+                    }
+                    if (serviceCall != null) {
+                        serviceCall.success(clientResponse);
+                    }
                 } catch (Throwable t) {
                     failure(t);
                 }
@@ -784,7 +830,10 @@ public class AzureClient extends AzureServiceClient {
             this.pollingCallback = new ServiceCallback<T>() {
                 @Override
                 public void failure(Throwable t) {
-                    clientCallback.failure(t);
+                    if (clientCallback != null) {
+                        clientCallback.failure(t);
+                    }
+                    serviceCall.failure(t);
                 }
 
                 @Override
@@ -806,15 +855,23 @@ public class AzureClient extends AzureServiceClient {
                         && !pollingState.getLocationHeaderLink().isEmpty()) {
                     this.serviceCall.newCall(updateStateFromLocationHeaderOnPutAsync(pollingState, pollingCallback));
                 } else {
-                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, pollingCallback));
+                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, null, pollingCallback));
                 }
             } else {
                 if (AzureAsyncOperation.SUCCESS_STATUS.equals(pollingState.getStatus()) && pollingState.getResource() == null) {
-                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, clientCallback));
+                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, serviceCall, clientCallback));
                 } else if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
-                    clientCallback.failure(new ServiceException("Async operation failed"));
+                    ServiceException t = new ServiceException("Async operation failed");
+                    if (clientCallback != null) {
+                        clientCallback.failure(t);
+                    }
+                    serviceCall.failure(t);
                 } else {
-                    clientCallback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
+                    ServiceResponse<T> clientResponse = new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse());
+                    if (clientCallback != null) {
+                        clientCallback.success(clientResponse);
+                    }
+                    serviceCall.success(clientResponse);
                 }
             }
         }

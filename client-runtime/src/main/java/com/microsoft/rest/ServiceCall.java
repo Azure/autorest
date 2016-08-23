@@ -10,6 +10,9 @@ package com.microsoft.rest;
 import com.google.common.util.concurrent.AbstractFuture;
 
 import retrofit2.Call;
+import rx.Observable;
+import rx.Scheduler;
+import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to the underlying REST call invocation.
@@ -52,19 +55,49 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     }
 
     /**
-     * Cancel the Retrofit call if possible.
+     * Cancel the Retrofit call if possible. Parameter
+     * 'mayInterruptIfRunning is ignored.
+     *
+     * @param mayInterruptIfRunning ignored
      */
-    public void cancel() {
-        call.cancel();
+    @Override
+    public boolean cancel(boolean mayInterruptIfRunning) {
+        if (isCancelled()) {
+            return false;
+        } else {
+            call.cancel();
+            return true;
+        }
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return call.isCanceled();
     }
 
     /**
-     * If the Retrofit call has been canceled.
+     * Get an RxJava Observable object for the response.
      *
-     * @return true if the call has been canceled; false otherwise.
+     * @return the Observable
      */
-    public boolean isCanceled() {
-        return call.isCanceled();
+    public Observable<T> observable() {
+        return Observable.from(this)
+                .map(new Func1<ServiceResponse<T>, T>() {
+                    @Override
+                    public T call(ServiceResponse<T> tServiceResponse) {
+                        return tServiceResponse.getBody();
+                    }
+                });
+    }
+
+    /**
+     * Get an RxJava Observable object for the response bound on a scheduler.
+     *
+     * @param scheduler the scheduler to bind to
+     * @return the Observable
+     */
+    public Observable<T> observable(Scheduler scheduler) {
+        return observable().subscribeOn(scheduler);
     }
 
     /**
