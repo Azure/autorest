@@ -112,7 +112,7 @@ public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; pri
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
 @:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
@@ -278,7 +278,7 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:/// <exception cref="ArgumentNullException">
+@:/// <exception cref="System.ArgumentNullException">
 @:/// Thrown when a required parameter is null
 @:/// </exception>
 @:@(Model.ConstructorVisibility) @(Model.Name)(System.Uri baseUri, @(Model.RequiredConstructorParameters), System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
