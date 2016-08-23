@@ -108,9 +108,9 @@ public class AzureClient extends AzureServiceClient {
     public <T, THeader> ServiceResponseWithHeaders<T, THeader> getPutOrPatchResultWithHeaders(Observable<Response<ResponseBody>> observable, Type resourceType, Class<THeader> headerType) throws CloudException, InterruptedException, IOException {
         ServiceResponse<T> bodyResponse = getPutOrPatchResult(observable, resourceType);
         return new ServiceResponseWithHeaders<>(
-                bodyResponse.getBody(),
-                restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
-                bodyResponse.getResponse()
+            bodyResponse.getBody(),
+            restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
+            bodyResponse.getResponse()
         );
     }
 
@@ -232,9 +232,9 @@ public class AzureClient extends AzureServiceClient {
     public <T, THeader> ServiceResponseWithHeaders<T, THeader> getPostOrDeleteResultWithHeaders(Observable<Response<ResponseBody>> observable, Type resourceType, Class<THeader> headerType) throws CloudException, InterruptedException, IOException {
         ServiceResponse<T> bodyResponse = getPostOrDeleteResult(observable, resourceType);
         return new ServiceResponseWithHeaders<>(
-                bodyResponse.getBody(),
-                restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
-                bodyResponse.getResponse()
+            bodyResponse.getBody(),
+            restClient().mapperAdapter().<THeader>deserialize(restClient().mapperAdapter().serialize(bodyResponse.getResponse().headers()), headerType),
+            bodyResponse.getResponse()
         );
     }
 

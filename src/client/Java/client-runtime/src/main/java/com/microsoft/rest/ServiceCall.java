@@ -9,10 +9,7 @@ package com.microsoft.rest;
 
 import com.google.common.util.concurrent.AbstractFuture;
 
-import java.util.List;
-
 import rx.Observable;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 
