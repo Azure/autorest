@@ -17,7 +17,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -26,6 +25,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -55,11 +56,11 @@ public final class XMsClientRequestIdsInner {
     interface XMsClientRequestIdsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
-        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> get(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
-        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -71,8 +72,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get() throws CloudException, IOException {
-        Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
-        return getDelegate(call.execute());
+        return getAsync().toBlocking().single();
     }
 
     /**
@@ -82,26 +82,27 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link Call} object
      */
     public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getAsync(), serviceCallback);
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getAsync() {
+        return service.get(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (CloudException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -120,11 +121,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
-        if (xMsClientRequestId == null) {
-            throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
-        return paramGetDelegate(call.execute());
+        return paramGetAsync(xMsClientRequestId).toBlocking().single();
     }
 
     /**
@@ -135,29 +132,31 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link Call} object
      */
     public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(paramGetAsync(xMsClientRequestId), serviceCallback);
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> paramGetAsync(String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = paramGetDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = paramGetDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

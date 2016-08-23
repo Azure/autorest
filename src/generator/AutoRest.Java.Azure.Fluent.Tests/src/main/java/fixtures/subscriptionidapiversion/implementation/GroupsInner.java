@@ -16,7 +16,6 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -27,6 +26,8 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -56,7 +57,7 @@ public final class GroupsInner {
     interface GroupsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        Call<ResponseBody> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -70,17 +71,7 @@ public final class GroupsInner {
      * @return the SampleResourceGroupInner object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SampleResourceGroupInner> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return getSampleResourceGroupDelegate(call.execute());
+        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().single();
     }
 
     /**
@@ -91,6 +82,16 @@ public final class GroupsInner {
      * @return the {@link Call} object
      */
     public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+        return ServiceCall.create(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
+    }
+
+    /**
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     *
+     * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @return the SampleResourceGroupInner object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -100,26 +101,18 @@ public final class GroupsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<SampleResourceGroupInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<SampleResourceGroupInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<SampleResourceGroupInner> clientResponse = getSampleResourceGroupDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SampleResourceGroupInner>>>() {
+                @Override
+                public Observable<ServiceResponse<SampleResourceGroupInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<SampleResourceGroupInner> clientResponse = getSampleResourceGroupDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (ErrorException | IOException exception) {
+                        return Observable.error(exception);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
