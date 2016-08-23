@@ -34,10 +34,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -52,10 +51,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
@@ -71,10 +69,9 @@ public interface ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -89,10 +86,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -107,9 +103,8 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
 }

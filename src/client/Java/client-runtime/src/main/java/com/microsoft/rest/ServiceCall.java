@@ -9,7 +9,10 @@ package com.microsoft.rest;
 
 import com.google.common.util.concurrent.AbstractFuture;
 
+import java.util.List;
+
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action1;
 
@@ -26,7 +29,7 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
      */
     private Subscription subscription;
 
-    private ServiceCall() {
+    protected ServiceCall() {
     }
 
     public static <T> ServiceCall<T> create(final Observable<ServiceResponse<T>> observable) {
@@ -93,6 +96,14 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
                 }
             });
         return serviceCall;
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    protected void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
     }
 
     /**

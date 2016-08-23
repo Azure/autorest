@@ -37,9 +37,8 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
 
 }

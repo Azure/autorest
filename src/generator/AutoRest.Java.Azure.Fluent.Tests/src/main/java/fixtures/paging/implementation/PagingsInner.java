@@ -167,7 +167,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -236,7 +236,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -312,7 +312,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -381,7 +381,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -457,7 +457,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetOdataMultiplePagesOptions, serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -540,7 +540,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                             pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                             pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
@@ -619,7 +619,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                             pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                             pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
@@ -683,7 +683,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -744,7 +744,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -805,7 +805,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -866,7 +866,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -927,7 +927,7 @@ public final class PagingsInner {
                     if (serviceCallback != null) {
                         serviceCallback.load(result.getBody().getItems());
                         if (result.getBody().getNextPageLink() != null
-                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                                && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                             getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                         } else {
                             serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -990,7 +990,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1059,7 +1059,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1135,7 +1135,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1204,7 +1204,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1280,7 +1280,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getOdataMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetOdataMultiplePagesOptions, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1349,7 +1349,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), null, null, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1413,7 +1413,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1474,7 +1474,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetryFirstNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1535,7 +1535,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetrySecondNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1596,7 +1596,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesFailureNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1657,7 +1657,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));
@@ -1718,7 +1718,7 @@ public final class PagingsInner {
                     ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureUriNextDelegate(response);
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null
-                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBehavior.CONTINUE) {
                         getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCall, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), result.getResponse()));

@@ -26,13 +26,9 @@ namespace AutoRest.Java.Azure.TypeModels
             get
             {
                 var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
-                if (bodySequenceType != null && _method.IsPagingNextOperation)
+                if (bodySequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", bodySequenceType.PageImplType, bodySequenceType.ElementType);
-                }
-                else if (BodyClientType is SequenceType && _method.IsPagingOperation)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", ((SequenceType)BodyClientType).ElementType);
+                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", bodySequenceType.ElementType);
                 }
                 return base.GenericBodyClientTypeString;
             }
@@ -45,7 +41,7 @@ namespace AutoRest.Java.Azure.TypeModels
                 var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
                 if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "List<{0}>", bodySequenceType.ElementType);
+                    return string.Format(CultureInfo.InvariantCulture, "Page<{0}>", bodySequenceType.ElementType);
                 }
                 return GenericBodyClientTypeString;
             }
@@ -63,6 +59,7 @@ namespace AutoRest.Java.Azure.TypeModels
                 return base.GenericBodyWireTypeString;
             }
         }
+
         public override string ClientCallbackTypeString
         {
             get

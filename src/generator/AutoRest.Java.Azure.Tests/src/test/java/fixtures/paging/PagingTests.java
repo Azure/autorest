@@ -81,16 +81,16 @@ public class PagingTests {
             }
 
             @Override
-            public void success(ServiceResponse<List<Product>> result) {
+            public void success() {
                 lock.countDown();
             }
 
             @Override
-            public PagingBahavior progress(List<Product> partial) {
+            public PagingBehavior progress(List<Product> partial) {
                 if (pageCount() == 7) {
-                    return PagingBahavior.STOP;
+                    return PagingBehavior.STOP;
                 } else {
-                    return PagingBahavior.CONTINUE;
+                    return PagingBehavior.CONTINUE;
                 }
             }
         });

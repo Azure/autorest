@@ -49,10 +49,9 @@ else
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) throws IllegalArgumentException;
+ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
 </text>
 }
 /**
@@ -99,7 +98,6 @@ else
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link ServiceCall} object
  */
-ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException;
+ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);

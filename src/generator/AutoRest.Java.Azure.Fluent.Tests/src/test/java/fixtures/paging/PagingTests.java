@@ -80,11 +80,11 @@ public class PagingTests {
             }
 
             @Override
-            public PagingBahavior progress(List<ProductInner> partial) {
+            public PagingBehavior progress(List<ProductInner> partial) {
                 if (pageCount() == 7) {
-                    return PagingBahavior.STOP;
+                    return PagingBehavior.STOP;
                 } else {
-                    return PagingBahavior.CONTINUE;
+                    return PagingBehavior.CONTINUE;
                 }
             }
         });

@@ -105,10 +105,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Put External Resource as an Array.
      *
@@ -124,10 +123,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as an Array.
@@ -142,10 +140,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
@@ -160,10 +157,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Put External Resource as a Dictionary.
      *
@@ -179,10 +175,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as a Dictionary.
@@ -197,10 +192,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -215,10 +209,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -234,10 +227,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -252,9 +244,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
 
 }
