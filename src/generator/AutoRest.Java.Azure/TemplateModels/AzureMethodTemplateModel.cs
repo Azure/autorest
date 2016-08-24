@@ -516,7 +516,7 @@ namespace AutoRest.Java.Azure.TemplateModels
         {
             if (IsPagingNextOperation)
             {
-                invocation = Name + (async ? "Async" : "");
+                invocation = Name + "SinglePage" + (async ? "Async" : "");
                 return this;
             }
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
@@ -526,6 +526,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
+            name = name + "SinglePage";
             if (async)
             {
                 name = name + "Async";

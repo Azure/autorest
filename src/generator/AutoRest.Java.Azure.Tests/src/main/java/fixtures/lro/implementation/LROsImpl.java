@@ -479,8 +479,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -523,8 +523,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -641,8 +641,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200SucceededNoStateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -685,8 +685,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200SucceededNoStateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -802,8 +802,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -846,8 +846,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -963,8 +963,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1007,8 +1007,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1125,8 +1125,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200UpdatingSucceeded204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1169,8 +1169,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200UpdatingSucceeded204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1286,8 +1286,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1330,8 +1330,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1448,8 +1448,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200Acceptedcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1492,8 +1492,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200Acceptedcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1609,8 +1609,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1653,8 +1653,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1770,8 +1770,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1814,8 +1814,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1931,8 +1931,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1975,8 +1975,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2092,8 +2092,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2136,8 +2136,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2253,8 +2253,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2297,8 +2297,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2414,8 +2414,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2458,8 +2458,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2575,8 +2575,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Sku> clientResponse = beginPutNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2619,8 +2619,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Sku> clientResponse = beginPutNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2736,8 +2736,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Sku> clientResponse = beginPutAsyncNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2780,8 +2780,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Sku> clientResponse = beginPutAsyncNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2897,8 +2897,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<SubProduct> clientResponse = beginPutSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2941,8 +2941,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<SubProduct> clientResponse = beginPutSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3058,8 +3058,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<SubProduct> clientResponse = beginPutAsyncSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3102,8 +3102,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<SubProduct> clientResponse = beginPutAsyncSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3182,8 +3182,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3263,8 +3263,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> clientResponse = beginDeleteProvisioning202DeletingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3344,8 +3344,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> clientResponse = beginDeleteProvisioning202Deletingcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3425,8 +3425,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Void> clientResponse = beginDelete204SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3505,8 +3505,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> clientResponse = beginDelete202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3586,8 +3586,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> clientResponse = beginDelete202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3667,8 +3667,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> clientResponse = beginDeleteNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3748,8 +3748,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> clientResponse = beginDeleteAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3829,8 +3829,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> clientResponse = beginDeleteAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3909,8 +3909,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> clientResponse = beginDeleteAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3989,8 +3989,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> clientResponse = beginDeleteAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4069,8 +4069,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> clientResponse = beginDeleteAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4149,8 +4149,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponse<Sku> clientResponse = beginPost200WithPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4267,8 +4267,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4311,8 +4311,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4428,8 +4428,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4472,8 +4472,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4589,8 +4589,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4633,8 +4633,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4751,8 +4751,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4795,8 +4795,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4913,8 +4913,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4957,8 +4957,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -5074,8 +5074,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -5118,8 +5118,8 @@ public final class LROsImpl implements LROs {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

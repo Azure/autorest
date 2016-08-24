@@ -101,8 +101,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
                     try {
                         ServiceResponse<Void> clientResponse = head200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -148,8 +148,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
                     try {
                         ServiceResponse<Void> clientResponse = head204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -195,8 +195,8 @@ public final class HeadExceptionsImpl implements HeadExceptions {
                     try {
                         ServiceResponse<Void> clientResponse = head404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -98,8 +98,8 @@ public final class OdatasImpl implements Odatas {
                     try {
                         ServiceResponse<Void> clientResponse = getWithFilterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -145,8 +145,8 @@ public final class OdatasImpl implements Odatas {
                     try {
                         ServiceResponse<Void> clientResponse = getWithFilterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -108,8 +108,8 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -157,8 +157,8 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -200,8 +200,8 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -249,8 +249,8 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
                     try {
                         ServiceResponse<Void> clientResponse = getPathLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -298,8 +298,8 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

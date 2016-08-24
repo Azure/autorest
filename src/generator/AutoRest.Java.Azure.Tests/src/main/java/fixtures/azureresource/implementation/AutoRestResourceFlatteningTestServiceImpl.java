@@ -247,8 +247,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -291,8 +291,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -339,8 +339,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<List<FlattenedProduct>> clientResponse = getArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -388,8 +388,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -432,8 +432,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -480,8 +480,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Map<String, FlattenedProduct>> clientResponse = getDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -529,8 +529,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -573,8 +573,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -621,8 +621,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
                     try {
                         ServiceResponse<ResourceCollection> clientResponse = getResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -110,8 +110,8 @@ public final class GroupsImpl implements Groups {
                     try {
                         ServiceResponse<SampleResourceGroup> clientResponse = getSampleResourceGroupDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

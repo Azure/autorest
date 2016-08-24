@@ -126,8 +126,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postRequiredDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -177,8 +177,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -229,8 +229,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -283,8 +283,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -346,8 +346,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -397,8 +397,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -449,8 +449,8 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
                     try {
                         ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

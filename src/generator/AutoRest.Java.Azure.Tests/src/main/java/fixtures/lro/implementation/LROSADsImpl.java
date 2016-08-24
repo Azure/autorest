@@ -394,8 +394,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -438,8 +438,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -556,8 +556,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -600,8 +600,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -718,8 +718,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400InvalidJsonDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -762,8 +762,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutNonRetry201Creating400InvalidJsonDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -880,8 +880,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> clientResponse = beginPutAsyncRelativeRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -924,8 +924,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> clientResponse = beginPutAsyncRelativeRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1004,8 +1004,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> clientResponse = beginDeleteNonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1084,8 +1084,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> clientResponse = beginDelete202NonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1164,8 +1164,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> clientResponse = beginDeleteAsyncRelativeRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1281,8 +1281,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> clientResponse = beginPostNonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1325,8 +1325,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> clientResponse = beginPostNonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1442,8 +1442,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> clientResponse = beginPost202NonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1486,8 +1486,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> clientResponse = beginPost202NonRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1603,8 +1603,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> clientResponse = beginPostAsyncRelativeRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1647,8 +1647,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> clientResponse = beginPostAsyncRelativeRetry400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1764,8 +1764,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutError201NoProvisioningStatePayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1808,8 +1808,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPutError201NoProvisioningStatePayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1926,8 +1926,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1970,8 +1970,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2087,8 +2087,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2131,8 +2131,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> clientResponse = beginPutAsyncRelativeRetryNoStatusPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2211,8 +2211,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Void> clientResponse = beginDelete204SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2291,8 +2291,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> clientResponse = beginDeleteAsyncRelativeRetryNoStatusDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2408,8 +2408,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> clientResponse = beginPost202NoLocationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2452,8 +2452,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> clientResponse = beginPost202NoLocationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2569,8 +2569,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> clientResponse = beginPostAsyncRelativeRetryNoPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2613,8 +2613,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> clientResponse = beginPostAsyncRelativeRetryNoPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2730,8 +2730,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200InvalidJsonDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2774,8 +2774,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut200InvalidJsonDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2892,8 +2892,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2936,8 +2936,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3053,8 +3053,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3097,8 +3097,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPutAsyncRelativeRetryInvalidJsonPollingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3177,8 +3177,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> clientResponse = beginDelete202RetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3257,8 +3257,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginDeleteAsyncRelativeRetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3337,8 +3337,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginDeleteAsyncRelativeRetryInvalidJsonPollingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3454,8 +3454,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> clientResponse = beginPost202RetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3498,8 +3498,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> clientResponse = beginPost202RetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3615,8 +3615,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3659,8 +3659,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3776,8 +3776,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3820,8 +3820,8 @@ public final class LROSADsImpl implements LROSADs {
                     try {
                         ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> clientResponse = beginPostAsyncRelativeRetryInvalidJsonPollingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

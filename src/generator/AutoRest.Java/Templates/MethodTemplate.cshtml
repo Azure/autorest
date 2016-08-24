@@ -35,13 +35,7 @@ else
 }
  */
 public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
-    try {
-        return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().single();
-    } catch (RuntimeException e) {
-        if (e.getCause() instanceof IOException) {
-            
-        }
-    }
+    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().single();
 }
 @EmptyLine
 /**

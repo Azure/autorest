@@ -101,8 +101,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Boolean> clientResponse = head200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -150,8 +150,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Boolean> clientResponse = head204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -199,8 +199,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Boolean> clientResponse = head404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

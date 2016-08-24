@@ -228,8 +228,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -272,8 +272,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -390,8 +390,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -434,8 +434,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -514,8 +514,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -595,8 +595,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> clientResponse = beginDelete202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -675,8 +675,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> clientResponse = beginDeleteAsyncRelativeRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -792,8 +792,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -836,8 +836,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -953,8 +953,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -997,8 +997,8 @@ public final class LRORetrysImpl implements LRORetrys {
                     try {
                         ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

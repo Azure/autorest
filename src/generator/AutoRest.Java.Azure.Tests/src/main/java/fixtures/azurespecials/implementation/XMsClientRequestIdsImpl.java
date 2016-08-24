@@ -99,8 +99,8 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
                     try {
                         ServiceResponse<Void> clientResponse = getDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -153,8 +153,8 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
                     try {
                         ServiceResponse<Void> clientResponse = paramGetDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

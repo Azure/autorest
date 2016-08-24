@@ -200,8 +200,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -244,8 +244,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -361,8 +361,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -405,8 +405,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -523,8 +523,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -567,8 +567,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -684,8 +684,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -728,8 +728,8 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
                     try {
                         ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

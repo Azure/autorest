@@ -127,8 +127,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodPathValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -182,8 +182,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getPathPathValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -231,8 +231,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerPathValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -286,8 +286,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodQueryValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -335,8 +335,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -378,8 +378,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -433,8 +433,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getPathQueryValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -482,8 +482,8 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerQueryValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

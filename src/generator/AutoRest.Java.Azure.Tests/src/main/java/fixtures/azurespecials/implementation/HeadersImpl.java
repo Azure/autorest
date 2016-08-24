@@ -108,8 +108,8 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> clientResponse = customNamedRequestIdDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -165,8 +165,8 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> clientResponse = customNamedRequestIdParamGroupingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

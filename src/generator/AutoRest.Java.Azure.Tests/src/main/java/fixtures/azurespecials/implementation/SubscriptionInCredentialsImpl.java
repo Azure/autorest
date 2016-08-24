@@ -116,8 +116,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -168,8 +168,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -223,8 +223,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalNotProvidedValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -275,8 +275,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
                     try {
                         ServiceResponse<Void> clientResponse = postPathGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -327,8 +327,8 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
                     try {
                         ServiceResponse<Void> clientResponse = postSwaggerGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

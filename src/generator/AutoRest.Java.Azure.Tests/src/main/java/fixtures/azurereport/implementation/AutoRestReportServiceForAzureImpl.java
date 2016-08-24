@@ -219,8 +219,8 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
                     try {
                         ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

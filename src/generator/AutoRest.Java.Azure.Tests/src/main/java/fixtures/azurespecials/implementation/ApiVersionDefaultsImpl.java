@@ -111,8 +111,8 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -163,8 +163,8 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodGlobalNotProvidedValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -215,8 +215,8 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
                     try {
                         ServiceResponse<Void> clientResponse = getPathGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -267,8 +267,8 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

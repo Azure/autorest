@@ -114,8 +114,8 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -169,8 +169,8 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -224,8 +224,8 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
                     try {
                         ServiceResponse<Void> clientResponse = postPathLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -279,8 +279,8 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
                     try {
                         ServiceResponse<Void> clientResponse = postSwaggerLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

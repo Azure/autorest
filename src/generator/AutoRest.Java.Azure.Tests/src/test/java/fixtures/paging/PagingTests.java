@@ -50,7 +50,6 @@ public class PagingTests {
                 break;
             }
         }
-        System.out.println("Asserting...");
         Assert.assertEquals(12, response.size());
         Assert.assertEquals(1, response.indexOf(p1));
         Assert.assertEquals(4, response.indexOf(p4));
@@ -125,7 +124,7 @@ public class PagingTests {
             List<Product> response = client.pagings().getMultiplePagesFailure().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertNotNull(ex.getCause());
         }
     }
@@ -136,7 +135,7 @@ public class PagingTests {
             List<Product> response = client.pagings().getMultiplePagesFailureUri().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertNotNull(ex.getCause());
         }
     }
