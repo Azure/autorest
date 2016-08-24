@@ -32,6 +32,10 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
     }
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
 @:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
 @:{
     if (Model.ReturnType.Body != null)
