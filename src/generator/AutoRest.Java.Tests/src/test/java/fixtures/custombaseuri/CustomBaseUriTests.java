@@ -38,7 +38,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
     }
@@ -50,7 +50,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
         finally {
@@ -92,7 +92,7 @@ public class CustomBaseUriTests {
                 try {
                     client1.paths().getEmpty("badlocal");
                     fail();
-                } catch (UnknownHostException e) {
+                } catch (RuntimeException e) {
                     latch.countDown();
                 } catch (Exception e) {
                     fail();

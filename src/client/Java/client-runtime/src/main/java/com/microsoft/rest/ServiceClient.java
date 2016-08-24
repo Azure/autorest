@@ -16,6 +16,7 @@ import java.net.CookiePolicy;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
@@ -65,6 +66,7 @@ public abstract class ServiceClient {
                 .baseUrl(baseUrl)
                 .client(httpClient)
                 .addConverterFactory(mapperAdapter.getConverterFactory())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
 

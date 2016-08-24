@@ -52,7 +52,7 @@ public class ByteOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 }

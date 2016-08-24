@@ -35,7 +35,13 @@ else
 }
  */
 public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
-    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().single();
+    try {
+        return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().single();
+    } catch (RuntimeException e) {
+        if (e.getCause() instanceof IOException) {
+            
+        }
+    }
 }
 @EmptyLine
 /**
@@ -119,8 +125,8 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
                 try {
                     @Model.ClientResponse()
                     return Observable.just(clientResponse);
-                } catch (@Model.OperationExceptionTypeString | IOException exception) {
-                    return Observable.error(exception);
+                } catch (Throwable t) {
+                    return Observable.error(t);
                 }
             }
         });
@@ -235,8 +241,8 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
                 try {
                     @Model.ClientResponse()
                     return Observable.just(clientResponse);
-                } catch (@Model.OperationExceptionTypeString | IOException exception) {
-                    return Observable.error(exception);
+                } catch (Throwable t) {
+                    return Observable.error(t);
                 }
             }
         });

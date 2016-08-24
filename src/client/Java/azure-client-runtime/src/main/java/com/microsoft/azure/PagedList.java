@@ -81,8 +81,6 @@ public abstract class PagedList<E> implements List<E> {
             this.nextPageLink = nextPage.getNextPageLink();
             this.items.addAll(nextPage.getItems());
             this.currentPage = nextPage;
-        } catch (RestException e) {
-            throw new WebServiceException(e.toString(), e);
         } catch (IOException e) {
             throw new DataBindingException(e.getMessage(), e);
         }

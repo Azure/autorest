@@ -36,10 +36,9 @@ public interface Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -57,10 +56,9 @@ public interface Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -75,10 +73,9 @@ public interface Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -96,10 +93,9 @@ public interface Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get value 'green-color' from the constant.
@@ -114,10 +110,9 @@ public interface Enums {
      * Get value 'green-color' from the constant.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback);
 
     /**
      * Sends value 'green-color' from a constant.
@@ -135,9 +130,8 @@ public interface Enums {
      *
      * @param enumStringBody the RefColorConstant value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback);
 
 }

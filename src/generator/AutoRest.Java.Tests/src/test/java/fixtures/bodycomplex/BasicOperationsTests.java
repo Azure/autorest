@@ -48,7 +48,7 @@ public class BasicOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(InvalidFormatException.class, exception.getClass());
+            Assert.assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 

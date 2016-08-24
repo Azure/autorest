@@ -103,9 +103,9 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Observable<ServiceResponse<Error>> head501Async() {
         return service.head501()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Error>> call(Response<Void> response) {
                     try {
                         ServiceResponse<Error> clientResponse = head501Delegate(response);
                         return Observable.just(clientResponse);

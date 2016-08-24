@@ -121,9 +121,9 @@ public final class HttpRetrysImpl implements HttpRetrys {
      */
     public Observable<ServiceResponse<Void>> head408Async() {
         return service.head408()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
                     try {
                         ServiceResponse<Void> clientResponse = head408Delegate(response);
                         return Observable.just(clientResponse);

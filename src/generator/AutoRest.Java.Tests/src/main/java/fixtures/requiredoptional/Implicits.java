@@ -38,10 +38,9 @@ public interface Implicits {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -56,10 +55,9 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Test implicitly optional query parameter.
      *
@@ -75,10 +73,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -93,10 +90,9 @@ public interface Implicits {
      * Test implicitly optional header parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Test implicitly optional header parameter.
      *
@@ -112,10 +108,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -130,10 +125,9 @@ public interface Implicits {
      * Test implicitly optional body parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Test implicitly optional body parameter.
      *
@@ -149,10 +143,9 @@ public interface Implicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -168,10 +161,9 @@ public interface Implicits {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter.
@@ -187,10 +179,9 @@ public interface Implicits {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -205,9 +196,8 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
 }

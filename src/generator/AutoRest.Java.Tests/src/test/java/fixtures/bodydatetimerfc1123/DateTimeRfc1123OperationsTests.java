@@ -30,7 +30,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 
@@ -49,7 +49,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 

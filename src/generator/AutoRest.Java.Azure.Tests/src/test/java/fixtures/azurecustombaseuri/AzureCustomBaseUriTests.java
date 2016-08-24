@@ -32,7 +32,7 @@ public class AzureCustomBaseUriTests {
             client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
     }
@@ -44,7 +44,7 @@ public class AzureCustomBaseUriTests {
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
         finally {

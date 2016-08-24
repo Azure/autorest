@@ -35,10 +35,9 @@ public interface Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get a large file.
@@ -53,10 +52,9 @@ public interface Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file.
@@ -71,9 +69,8 @@ public interface Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

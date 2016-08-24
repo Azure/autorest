@@ -168,8 +168,8 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
                 try {
                     ServiceResponse<@Model.ReturnTypeModel.GenericBodyWireTypeString> result = @(Model.Name)Delegate(response);
                     return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>(result.getBody(), result.getResponse()));
-                } catch (@Model.OperationExceptionTypeString | IOException exception) {
-                    return Observable.error(exception);
+                } catch (Throwable t) {
+                    return Observable.error(t);
                 }
             }
         });
@@ -332,8 +332,8 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
                 try {
                     ServiceResponse<@Model.ReturnTypeModel.GenericBodyWireTypeString> result = @(Model.Name)Delegate(response);
                     return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>(result.getBody(), result.getResponse()));
-                } catch (@Model.OperationExceptionTypeString | IOException exception) {
-                    return Observable.error(exception);
+                } catch (Throwable t) {
+                    return Observable.error(t);
                 }
             }
         });

@@ -34,10 +34,9 @@ public interface Bytes {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
@@ -52,10 +51,9 @@ public interface Bytes {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -70,10 +68,9 @@ public interface Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -91,10 +88,9 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -109,9 +105,8 @@ public interface Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
 
 }

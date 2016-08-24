@@ -10,7 +10,7 @@ package com.microsoft.rest;
 /**
  * Exception thrown for an invalid response with custom error information.
  */
-public abstract class RestException extends Exception {
+public abstract class RestException extends RuntimeException {
     /**
      * Initializes a new instance of the AutoRestException class.
      */

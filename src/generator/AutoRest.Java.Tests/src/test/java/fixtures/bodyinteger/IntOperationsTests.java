@@ -62,7 +62,7 @@ public class IntOperationsTests {
             client.ints().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -72,7 +72,7 @@ public class IntOperationsTests {
             client.ints().getOverflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -82,7 +82,7 @@ public class IntOperationsTests {
             client.ints().getUnderflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -92,7 +92,7 @@ public class IntOperationsTests {
             long value = client.ints().getOverflowInt64().getBody();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -102,7 +102,7 @@ public class IntOperationsTests {
             long value = client.ints().getUnderflowInt64().getBody();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -186,7 +186,7 @@ public class IntOperationsTests {
         try {
             client.ints().getInvalidUnixTime();
             fail();
-        } catch (JsonParseException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Unexpected character"));
         }
     }
