@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -88,7 +87,7 @@ public final class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodGlobalValidAsync(), serviceCallback);
@@ -110,8 +109,8 @@ public final class ApiVersionDefaultsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -140,7 +139,7 @@ public final class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
@@ -162,8 +161,8 @@ public final class ApiVersionDefaultsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodGlobalNotProvidedValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -192,7 +191,7 @@ public final class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getPathGlobalValidAsync(), serviceCallback);
@@ -214,8 +213,8 @@ public final class ApiVersionDefaultsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getPathGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -244,7 +243,7 @@ public final class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getSwaggerGlobalValidAsync(), serviceCallback);
@@ -266,8 +265,8 @@ public final class ApiVersionDefaultsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

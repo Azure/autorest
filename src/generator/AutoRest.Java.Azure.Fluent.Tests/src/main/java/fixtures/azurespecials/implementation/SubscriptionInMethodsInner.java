@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
@@ -90,7 +89,7 @@ public final class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMethodLocalValidAsync(subscriptionId), serviceCallback);
@@ -113,8 +112,8 @@ public final class SubscriptionInMethodsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -145,7 +144,7 @@ public final class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMethodLocalNullAsync(subscriptionId), serviceCallback);
@@ -168,8 +167,8 @@ public final class SubscriptionInMethodsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -200,7 +199,7 @@ public final class SubscriptionInMethodsInner {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postPathLocalValidAsync(subscriptionId), serviceCallback);
@@ -223,8 +222,8 @@ public final class SubscriptionInMethodsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postPathLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -255,7 +254,7 @@ public final class SubscriptionInMethodsInner {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postSwaggerLocalValidAsync(subscriptionId), serviceCallback);
@@ -278,8 +277,8 @@ public final class SubscriptionInMethodsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postSwaggerLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

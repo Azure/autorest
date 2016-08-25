@@ -50,7 +50,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                 return;
             }
             var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name) + "Inner";
-            if (filterRequired && !nextGroupType.IsRequired)
+            if (filterRequired && !groupedType.IsRequired)
             {
                 return;
             }
@@ -85,7 +85,6 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.Remove("java.util.List");
                     imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel) ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
                 }
                 return imports;
@@ -107,7 +106,6 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))

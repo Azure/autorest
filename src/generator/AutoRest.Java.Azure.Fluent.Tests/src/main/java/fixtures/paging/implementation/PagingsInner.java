@@ -23,9 +23,7 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
-import java.util.List;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -145,8 +143,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getSinglePagesSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getSinglePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -156,15 +154,15 @@ public final class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getSinglePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getSinglePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getSinglePagesNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -173,14 +171,15 @@ public final class PagingsInner {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesAsync() {
         return getSinglePagesSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getSinglePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getSinglePagesNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -198,8 +197,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -223,8 +222,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -234,15 +233,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -251,14 +250,15 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesAsync() {
         return getMultiplePagesSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             });
     }
@@ -280,8 +280,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -300,8 +300,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -313,15 +313,15 @@ public final class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions);
                 }
             },
             serviceCallback);
@@ -332,14 +332,15 @@ public final class PagingsInner {
      *
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         return getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions);
                 }
             });
     }
@@ -368,8 +369,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -393,8 +394,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getOdataMultiplePagesSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getOdataMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -404,15 +405,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getOdataMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getOdataMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -421,14 +422,15 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesAsync() {
         return getOdataMultiplePagesSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getOdataMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             });
     }
@@ -450,8 +452,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -470,8 +472,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getOdataMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -483,15 +485,15 @@ public final class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getOdataMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 }
             },
             serviceCallback);
@@ -502,14 +504,15 @@ public final class PagingsInner {
      *
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getOdataMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 }
             });
     }
@@ -538,8 +541,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -565,8 +568,11 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesWithOffsetNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -577,15 +583,18 @@ public final class PagingsInner {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesWithOffsetNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                    pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                    pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             },
             serviceCallback);
@@ -595,14 +604,18 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesWithOffsetNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                    pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                    pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             });
     }
@@ -629,8 +642,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -650,8 +663,11 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesWithOffsetNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -663,15 +679,18 @@ public final class PagingsInner {
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesWithOffsetNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                    pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                    pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             },
             serviceCallback);
@@ -682,14 +701,18 @@ public final class PagingsInner {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesWithOffsetNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
+                    pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
+                    pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             });
     }
@@ -716,8 +739,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -741,8 +764,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesRetryFirstSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesRetryFirstNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -752,15 +775,15 @@ public final class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetryFirstSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesRetryFirstNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -769,14 +792,15 @@ public final class PagingsInner {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetryFirstAsync() {
         return getMultiplePagesRetryFirstSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesRetryFirstNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -794,8 +818,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetryFirstDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -819,8 +843,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesRetrySecondSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesRetrySecondNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -830,15 +854,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetrySecondSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesRetrySecondNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -847,14 +871,15 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetrySecondAsync() {
         return getMultiplePagesRetrySecondSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesRetrySecondNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -872,8 +897,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetrySecondDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -897,8 +922,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getSinglePagesFailureSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getSinglePagesFailureNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -908,15 +933,15 @@ public final class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getSinglePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getSinglePagesFailureNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getSinglePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -925,14 +950,15 @@ public final class PagingsInner {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesFailureAsync() {
         return getSinglePagesFailureSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getSinglePagesFailureNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getSinglePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -950,8 +976,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesFailureDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -975,8 +1001,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesFailureSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesFailureNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -986,15 +1012,15 @@ public final class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesFailureNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1003,14 +1029,15 @@ public final class PagingsInner {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureAsync() {
         return getMultiplePagesFailureSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesFailureNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -1028,8 +1055,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1053,8 +1080,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesFailureUriSinglePageAsync().toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesFailureUriNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1064,15 +1091,15 @@ public final class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesFailureUriAsync(final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureUriSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesFailureUriNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1081,14 +1108,15 @@ public final class PagingsInner {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureUriAsync() {
         return getMultiplePagesFailureUriSinglePageAsync()
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesFailureUriNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -1106,8 +1134,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureUriDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1133,8 +1161,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getSinglePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1146,15 +1174,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getSinglePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getSinglePagesNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1164,14 +1192,15 @@ public final class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesNextAsync(final String nextPageLink) {
         return getSinglePagesNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getSinglePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getSinglePagesNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -1193,8 +1222,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1220,8 +1249,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1233,15 +1262,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -1251,14 +1280,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesNextAsync(final String nextPageLink) {
         return getMultiplePagesNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             });
     }
@@ -1284,8 +1314,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1306,8 +1336,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1321,15 +1351,15 @@ public final class PagingsInner {
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions);
                 }
             },
             serviceCallback);
@@ -1341,14 +1371,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions);
                 }
             });
     }
@@ -1381,8 +1412,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1408,8 +1439,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getOdataMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1421,15 +1452,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getOdataMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -1439,14 +1470,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesNextAsync(final String nextPageLink) {
         return getOdataMultiplePagesNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getOdataMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null);
                 }
             });
     }
@@ -1472,8 +1504,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1494,8 +1526,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getOdataMultiplePagesNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1509,15 +1541,15 @@ public final class PagingsInner {
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getOdataMultiplePagesNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 }
             },
             serviceCallback);
@@ -1529,14 +1561,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getOdataMultiplePagesNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions);
                 }
             });
     }
@@ -1569,8 +1602,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl1<ProductInner>> result = getOdataMultiplePagesNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1596,8 +1629,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesWithOffsetNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1609,15 +1642,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesWithOffsetNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null);
                 }
             },
             serviceCallback);
@@ -1627,14 +1660,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink) {
         return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesWithOffsetNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null);
                 }
             });
     }
@@ -1651,8 +1685,8 @@ public final class PagingsInner {
         }
         final String clientRequestId = null;
         final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = null;
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
+        Integer maxresults = null;
+        Integer timeout = null;
         return service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1660,8 +1694,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1682,8 +1716,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesWithOffsetNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1697,15 +1731,15 @@ public final class PagingsInner {
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesWithOffsetNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             },
             serviceCallback);
@@ -1717,14 +1751,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions) {
         return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesWithOffsetNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
                 }
             });
     }
@@ -1742,8 +1777,14 @@ public final class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
+        Integer maxresults = null;
+        if (pagingGetMultiplePagesWithOffsetNextOptions != null) {
+            maxresults = pagingGetMultiplePagesWithOffsetNextOptions.maxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesWithOffsetNextOptions != null) {
+            timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
+        }
         return service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1751,8 +1792,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesWithOffsetNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1778,8 +1819,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesRetryFirstNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1791,15 +1832,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesRetryFirstNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1809,14 +1850,15 @@ public final class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink) {
         return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesRetryFirstNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -1838,8 +1880,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetryFirstNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1865,8 +1907,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesRetrySecondNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1878,15 +1920,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesRetrySecondNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1896,14 +1938,15 @@ public final class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink) {
         return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesRetrySecondNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -1925,8 +1968,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesRetrySecondNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1952,8 +1995,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getSinglePagesFailureNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -1965,15 +2008,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getSinglePagesFailureNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getSinglePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -1983,14 +2026,15 @@ public final class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesFailureNextAsync(final String nextPageLink) {
         return getSinglePagesFailureNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getSinglePagesFailureNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getSinglePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -2012,8 +2056,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getSinglePagesFailureNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2039,8 +2083,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesFailureNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -2052,15 +2096,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesFailureNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -2070,14 +2114,15 @@ public final class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesFailureNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesFailureNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -2099,8 +2144,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2126,8 +2171,8 @@ public final class PagingsInner {
         ServiceResponse<Page<ProductInner>> response = getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single();
         PagedList<ProductInner> pagedList = new PagedList<ProductInner>(response.getBody()) {
             @Override
-            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
-                return getMultiplePagesFailureUriNextAsync(nextLink).toBlocking().single().getBody();
+            public Page<ProductInner> nextPage(String nextPageLink) throws RestException, IOException {
+                return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
         return new ServiceResponse<>(pagedList, response.getResponse());
@@ -2139,15 +2184,15 @@ public final class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Page<ProductInner>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<Page<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
-                public Observable<ServiceResponse<Page<ProductInner>>> call(String s) {
-                    return getMultiplePagesFailureUriNextAsync(s);
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextPageLink) {
+                    return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink);
                 }
             },
             serviceCallback);
@@ -2157,14 +2202,15 @@ public final class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;ProductInner&gt; object
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureUriNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink)
             .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
                 public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
-                    return getMultiplePagesFailureUriNextAsync(page.getBody().getNextPageLink());
+                    String nextPageLink = page.getBody().getNextPageLink();
+                    return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink);
                 }
             });
     }
@@ -2186,8 +2232,8 @@ public final class PagingsInner {
                     try {
                         ServiceResponse<PageImpl<ProductInner>> result = getMultiplePagesFailureUriNextDelegate(response);
                         return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

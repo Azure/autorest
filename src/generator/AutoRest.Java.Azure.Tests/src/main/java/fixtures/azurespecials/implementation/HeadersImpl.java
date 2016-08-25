@@ -23,7 +23,6 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHead
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -85,7 +84,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
@@ -140,7 +139,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);

@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -78,7 +77,7 @@ public final class PathsInner {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(accountName), serviceCallback);
@@ -105,8 +104,8 @@ public final class PathsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

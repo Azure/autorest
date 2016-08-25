@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.UnknownHostException;
 import java.util.UUID;
 
 import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;

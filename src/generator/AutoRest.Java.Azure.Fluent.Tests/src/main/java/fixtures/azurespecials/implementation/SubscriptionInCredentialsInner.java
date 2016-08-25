@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
@@ -93,7 +92,7 @@ public final class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMethodGlobalValidAsync(), serviceCallback);
@@ -115,8 +114,8 @@ public final class SubscriptionInCredentialsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -145,7 +144,7 @@ public final class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMethodGlobalNullAsync(), serviceCallback);
@@ -167,8 +166,8 @@ public final class SubscriptionInCredentialsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -197,7 +196,7 @@ public final class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMethodGlobalNotProvidedValidAsync(), serviceCallback);
@@ -222,8 +221,8 @@ public final class SubscriptionInCredentialsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMethodGlobalNotProvidedValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -252,7 +251,7 @@ public final class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postPathGlobalValidAsync(), serviceCallback);
@@ -274,8 +273,8 @@ public final class SubscriptionInCredentialsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postPathGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -304,7 +303,7 @@ public final class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postSwaggerGlobalValidAsync(), serviceCallback);
@@ -326,8 +325,8 @@ public final class SubscriptionInCredentialsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postSwaggerGlobalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

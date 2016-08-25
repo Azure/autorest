@@ -48,8 +48,6 @@ import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -459,7 +457,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededAsync(), serviceCallback);
@@ -468,7 +466,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200SucceededAsync() {
         final Product product = null;
@@ -503,7 +501,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededAsync(product), serviceCallback);
@@ -512,7 +510,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200SucceededAsync(Product product) {
         Validator.validate(product);
@@ -621,7 +620,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededNoStateAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededNoStateAsync(), serviceCallback);
@@ -630,7 +629,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200SucceededNoStateAsync() {
         final Product product = null;
@@ -665,7 +664,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededNoStateAsync(product), serviceCallback);
@@ -674,7 +673,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200SucceededNoStateAsync(Product product) {
         Validator.validate(product);
@@ -782,7 +782,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut202Retry200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut202Retry200Async(), serviceCallback);
@@ -791,7 +791,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut202Retry200Async() {
         final Product product = null;
@@ -826,7 +826,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut202Retry200Async(product), serviceCallback);
@@ -835,7 +835,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut202Retry200Async(Product product) {
         Validator.validate(product);
@@ -943,7 +944,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingSucceeded200Async(), serviceCallback);
@@ -952,7 +953,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async() {
         final Product product = null;
@@ -987,7 +988,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingSucceeded200Async(product), serviceCallback);
@@ -996,7 +997,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
@@ -1105,7 +1107,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200UpdatingSucceeded204Async(), serviceCallback);
@@ -1114,7 +1116,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200UpdatingSucceeded204Async() {
         final Product product = null;
@@ -1149,7 +1151,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1158,7 +1160,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200UpdatingSucceeded204Async(Product product) {
         Validator.validate(product);
@@ -1266,7 +1269,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingFailed200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingFailed200Async(), serviceCallback);
@@ -1275,7 +1278,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut201CreatingFailed200Async() {
         final Product product = null;
@@ -1310,7 +1313,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingFailed200Async(product), serviceCallback);
@@ -1319,7 +1322,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut201CreatingFailed200Async(Product product) {
         Validator.validate(product);
@@ -1428,7 +1432,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200Acceptedcanceled200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200Acceptedcanceled200Async(), serviceCallback);
@@ -1437,7 +1441,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200Acceptedcanceled200Async() {
         final Product product = null;
@@ -1472,7 +1476,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(beginPut200Acceptedcanceled200Async(product), serviceCallback);
@@ -1481,7 +1485,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> beginPut200Acceptedcanceled200Async(Product product) {
         Validator.validate(product);
@@ -1589,7 +1594,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryAsync(), serviceCallback);
@@ -1598,7 +1603,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryAsync() {
         final Product product = null;
@@ -1633,7 +1638,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryAsync(product), serviceCallback);
@@ -1642,7 +1647,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryAsync(Product product) {
         Validator.validate(product);
@@ -1750,7 +1756,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededAsync(), serviceCallback);
@@ -1759,7 +1765,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededAsync() {
         final Product product = null;
@@ -1794,7 +1800,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
@@ -1803,7 +1809,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
@@ -1911,7 +1918,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -1920,7 +1927,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededAsync() {
         final Product product = null;
@@ -1955,7 +1962,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -1964,7 +1971,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededAsync(Product product) {
         Validator.validate(product);
@@ -2072,7 +2080,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetryFailedAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedAsync(), serviceCallback);
@@ -2081,7 +2089,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedAsync() {
         final Product product = null;
@@ -2116,7 +2124,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedAsync(product), serviceCallback);
@@ -2125,7 +2133,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedAsync(Product product) {
         Validator.validate(product);
@@ -2233,7 +2242,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2242,7 +2251,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledAsync() {
         final Product product = null;
@@ -2277,7 +2286,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2286,7 +2295,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledAsync(Product product) {
         Validator.validate(product);
@@ -2394,7 +2404,7 @@ public final class LROsImpl implements LROs {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2403,7 +2413,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryAsync() {
         final Product product = null;
@@ -2438,7 +2448,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2447,7 +2457,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryAsync(Product product) {
         Validator.validate(product);
@@ -2555,7 +2566,7 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
         return ServiceCall.create(beginPutNonResourceAsync(), serviceCallback);
@@ -2564,7 +2575,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Sku object
      */
     public Observable<ServiceResponse<Sku>> beginPutNonResourceAsync() {
         final Sku sku = null;
@@ -2599,7 +2610,7 @@ public final class LROsImpl implements LROs {
      *
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         return ServiceCall.create(beginPutNonResourceAsync(sku), serviceCallback);
@@ -2608,7 +2619,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
+     * @param sku sku to put
+     * @return the observable to the Sku object
      */
     public Observable<ServiceResponse<Sku>> beginPutNonResourceAsync(Sku sku) {
         Validator.validate(sku);
@@ -2716,7 +2728,7 @@ public final class LROsImpl implements LROs {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutAsyncNonResourceAsync(final ServiceCallback<Sku> serviceCallback) {
         return ServiceCall.create(beginPutAsyncNonResourceAsync(), serviceCallback);
@@ -2725,7 +2737,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Sku object
      */
     public Observable<ServiceResponse<Sku>> beginPutAsyncNonResourceAsync() {
         final Sku sku = null;
@@ -2760,7 +2772,7 @@ public final class LROsImpl implements LROs {
      *
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         return ServiceCall.create(beginPutAsyncNonResourceAsync(sku), serviceCallback);
@@ -2769,7 +2781,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
-     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
+     * @param sku Sku to put
+     * @return the observable to the Sku object
      */
     public Observable<ServiceResponse<Sku>> beginPutAsyncNonResourceAsync(Sku sku) {
         Validator.validate(sku);
@@ -2877,7 +2890,7 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
         return ServiceCall.create(beginPutSubResourceAsync(), serviceCallback);
@@ -2886,7 +2899,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SubProduct object
      */
     public Observable<ServiceResponse<SubProduct>> beginPutSubResourceAsync() {
         final SubProduct product = null;
@@ -2921,7 +2934,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         return ServiceCall.create(beginPutSubResourceAsync(product), serviceCallback);
@@ -2930,7 +2943,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
      */
     public Observable<ServiceResponse<SubProduct>> beginPutSubResourceAsync(SubProduct product) {
         Validator.validate(product);
@@ -3038,7 +3052,7 @@ public final class LROsImpl implements LROs {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProduct> serviceCallback) {
         return ServiceCall.create(beginPutAsyncSubResourceAsync(), serviceCallback);
@@ -3047,7 +3061,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SubProduct object
      */
     public Observable<ServiceResponse<SubProduct>> beginPutAsyncSubResourceAsync() {
         final SubProduct product = null;
@@ -3082,7 +3096,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         return ServiceCall.create(beginPutAsyncSubResourceAsync(product), serviceCallback);
@@ -3091,7 +3105,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
      */
     public Observable<ServiceResponse<SubProduct>> beginPutAsyncSubResourceAsync(SubProduct product) {
         Validator.validate(product);
@@ -3163,7 +3178,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3172,7 +3187,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
@@ -3244,7 +3259,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3253,7 +3268,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> beginDeleteProvisioning202DeletingFailed200Async() {
         return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3325,7 +3340,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3334,7 +3349,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> beginDeleteProvisioning202Deletingcanceled200Async() {
         return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3406,7 +3421,7 @@ public final class LROsImpl implements LROs {
      * Long running delete succeeds and returns right away.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(beginDelete204SucceededAsync(), serviceCallback);
@@ -3486,7 +3501,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDelete202Retry200Async(), serviceCallback);
@@ -3495,7 +3510,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> beginDelete202Retry200Async() {
         return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3567,7 +3582,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDelete202NoRetry204Async(), serviceCallback);
@@ -3576,7 +3591,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> beginDelete202NoRetry204Async() {
         return service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent())
@@ -3648,7 +3663,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteNoHeaderInRetryAsync(), serviceCallback);
@@ -3729,7 +3744,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -3810,7 +3825,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -3890,7 +3905,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -3970,7 +3985,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetryFailedAsync(), serviceCallback);
@@ -4050,7 +4065,7 @@ public final class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4130,7 +4145,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Sku> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
         return ServiceCall.create(beginPost200WithPayloadAsync(), serviceCallback);
@@ -4139,7 +4154,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Sku object
      */
     public Observable<ServiceResponse<Sku>> beginPost200WithPayloadAsync() {
         return service.beginPost200WithPayload(this.client.acceptLanguage(), this.client.userAgent())
@@ -4247,7 +4262,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202Retry200Async(), serviceCallback);
@@ -4291,7 +4306,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202Retry200Async(product), serviceCallback);
@@ -4300,6 +4315,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200Async(Product product) {
@@ -4408,7 +4424,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPost202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202NoRetry204Async(), serviceCallback);
@@ -4417,7 +4433,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> beginPost202NoRetry204Async() {
         final Product product = null;
@@ -4452,7 +4468,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202NoRetry204Async(product), serviceCallback);
@@ -4461,7 +4477,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> beginPost202NoRetry204Async(Product product) {
         Validator.validate(product);
@@ -4569,7 +4586,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededAsync(), serviceCallback);
@@ -4578,7 +4595,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededAsync() {
         final Product product = null;
@@ -4613,7 +4630,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
@@ -4622,7 +4639,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
@@ -4731,7 +4749,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4740,7 +4758,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededAsync() {
         final Product product = null;
@@ -4775,7 +4793,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -4784,7 +4802,8 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededAsync(Product product) {
         Validator.validate(product);
@@ -4893,7 +4912,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedAsync(), serviceCallback);
@@ -4937,7 +4956,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedAsync(product), serviceCallback);
@@ -4946,6 +4965,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedAsync(Product product) {
@@ -5054,7 +5074,7 @@ public final class LROsImpl implements LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledAsync(), serviceCallback);
@@ -5098,7 +5118,7 @@ public final class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5107,6 +5127,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledAsync(Product product) {

@@ -18,7 +18,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
-import retrofit2.Call;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -81,7 +80,7 @@ public final class HeadExceptionsInner {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head200Async(), serviceCallback);
@@ -100,8 +99,8 @@ public final class HeadExceptionsInner {
                     try {
                         ServiceResponse<Void> clientResponse = head200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -128,7 +127,7 @@ public final class HeadExceptionsInner {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head204Async(), serviceCallback);
@@ -147,8 +146,8 @@ public final class HeadExceptionsInner {
                     try {
                         ServiceResponse<Void> clientResponse = head204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -175,7 +174,7 @@ public final class HeadExceptionsInner {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head404Async(), serviceCallback);
@@ -194,8 +193,8 @@ public final class HeadExceptionsInner {
                     try {
                         ServiceResponse<Void> clientResponse = head404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

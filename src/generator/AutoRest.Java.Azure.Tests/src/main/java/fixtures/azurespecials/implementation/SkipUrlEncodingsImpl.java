@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -104,7 +103,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodPathValidAsync(unencodedPathParam), serviceCallback);
@@ -159,7 +158,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getPathPathValidAsync(unencodedPathParam), serviceCallback);
@@ -211,7 +210,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getSwaggerPathValidAsync(), serviceCallback);
@@ -263,7 +262,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodQueryValidAsync(q1), serviceCallback);
@@ -315,7 +314,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodQueryNullAsync(), serviceCallback);
@@ -359,7 +358,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodQueryNullAsync(q1), serviceCallback);
@@ -368,6 +367,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
+     * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getMethodQueryNullAsync(String q1) {
@@ -410,7 +410,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getPathQueryValidAsync(q1), serviceCallback);
@@ -462,7 +462,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getSwaggerQueryValidAsync(), serviceCallback);

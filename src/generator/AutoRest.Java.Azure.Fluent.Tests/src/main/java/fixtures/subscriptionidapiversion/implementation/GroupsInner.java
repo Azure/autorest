@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -79,7 +78,7 @@ public final class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
         return ServiceCall.create(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
@@ -89,7 +88,7 @@ public final class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @return the SampleResourceGroupInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SampleResourceGroupInner object
      */
     public Observable<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
@@ -108,8 +107,8 @@ public final class GroupsInner {
                     try {
                         ServiceResponse<SampleResourceGroupInner> clientResponse = getSampleResourceGroupDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

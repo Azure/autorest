@@ -2,7 +2,6 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.rest.ServiceResponse;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -75,7 +74,7 @@ public class PagingTests {
             }
 
             @Override
-            public void success(ServiceResponse<List<ProductInner>> result) {
+            public void success() {
                 lock.countDown();
             }
 

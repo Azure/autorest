@@ -2,12 +2,7 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.rest.ServiceResponse;
 
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.models.ProductProperties;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +11,10 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.ws.WebServiceException;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
 
 import static org.junit.Assert.fail;
 

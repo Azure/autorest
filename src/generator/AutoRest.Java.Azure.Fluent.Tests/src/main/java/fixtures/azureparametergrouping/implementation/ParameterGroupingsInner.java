@@ -20,7 +20,6 @@ import com.microsoft.rest.Validator;
 import fixtures.azureparametergrouping.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -93,7 +92,7 @@ public final class ParameterGroupingsInner {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
@@ -121,8 +120,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postRequiredDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -150,7 +149,7 @@ public final class ParameterGroupingsInner {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postOptionalAsync(), serviceCallback);
@@ -172,8 +171,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -196,7 +195,7 @@ public final class ParameterGroupingsInner {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
@@ -205,6 +204,7 @@ public final class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
@@ -224,8 +224,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -253,7 +253,7 @@ public final class ParameterGroupingsInner {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMultiParamGroupsAsync(), serviceCallback);
@@ -278,8 +278,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -304,7 +304,7 @@ public final class ParameterGroupingsInner {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
@@ -313,6 +313,8 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
@@ -341,8 +343,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -370,7 +372,7 @@ public final class ParameterGroupingsInner {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postSharedParameterGroupObjectAsync(), serviceCallback);
@@ -392,8 +394,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -416,7 +418,7 @@ public final class ParameterGroupingsInner {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
@@ -425,6 +427,7 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
@@ -444,8 +447,8 @@ public final class ParameterGroupingsInner {
                     try {
                         ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

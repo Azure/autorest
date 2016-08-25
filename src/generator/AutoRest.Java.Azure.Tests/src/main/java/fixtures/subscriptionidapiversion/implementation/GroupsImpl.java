@@ -21,7 +21,6 @@ import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -81,7 +80,7 @@ public final class GroupsImpl implements Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceCall.create(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
@@ -91,7 +90,7 @@ public final class GroupsImpl implements Groups {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @return the SampleResourceGroup object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SampleResourceGroup object
      */
     public Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {

@@ -23,7 +23,6 @@ import fixtures.azurereport.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -199,7 +198,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getReportAsync(), serviceCallback);
@@ -208,7 +207,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Get test coverage report.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getReportAsync() {
         return service.getReport(this.acceptLanguage(), this.userAgent())
@@ -218,8 +217,8 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
                     try {
                         ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

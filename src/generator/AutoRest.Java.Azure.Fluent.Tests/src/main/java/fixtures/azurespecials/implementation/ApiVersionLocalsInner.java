@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -87,7 +86,7 @@ public final class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodLocalValidAsync(), serviceCallback);
@@ -107,8 +106,8 @@ public final class ApiVersionLocalsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -136,7 +135,7 @@ public final class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodLocalNullAsync(), serviceCallback);
@@ -156,8 +155,8 @@ public final class ApiVersionLocalsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -180,7 +179,7 @@ public final class ApiVersionLocalsInner {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getMethodLocalNullAsync(apiVersion), serviceCallback);
@@ -189,6 +188,7 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getMethodLocalNullAsync(String apiVersion) {
@@ -199,8 +199,8 @@ public final class ApiVersionLocalsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -228,7 +228,7 @@ public final class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getPathLocalValidAsync(), serviceCallback);
@@ -248,8 +248,8 @@ public final class ApiVersionLocalsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getPathLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -277,7 +277,7 @@ public final class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getSwaggerLocalValidAsync(), serviceCallback);
@@ -297,8 +297,8 @@ public final class ApiVersionLocalsInner {
                     try {
                         ServiceResponse<Void> clientResponse = getSwaggerLocalValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

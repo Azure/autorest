@@ -18,7 +18,6 @@ import fixtures.lro.implementation.SkuInner;
 import fixtures.lro.implementation.SubProductInner;
 import rx.Observable;
 import rx.Subscriber;
-import rx.schedulers.Schedulers;
 
 import static org.junit.Assert.fail;
 

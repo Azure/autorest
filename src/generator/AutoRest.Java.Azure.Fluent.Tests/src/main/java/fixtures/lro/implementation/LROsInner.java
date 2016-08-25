@@ -21,8 +21,6 @@ import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -432,7 +430,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededAsync(), serviceCallback);
@@ -441,7 +439,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200SucceededAsync() {
         final ProductInner product = null;
@@ -452,8 +450,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -476,7 +474,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededAsync(product), serviceCallback);
@@ -485,7 +483,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200SucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -496,8 +495,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -594,7 +593,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededNoStateAsync(), serviceCallback);
@@ -603,7 +602,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200SucceededNoStateAsync() {
         final ProductInner product = null;
@@ -614,8 +613,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200SucceededNoStateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -638,7 +637,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200SucceededNoStateAsync(product), serviceCallback);
@@ -647,7 +646,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200SucceededNoStateAsync(ProductInner product) {
         Validator.validate(product);
@@ -658,8 +658,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200SucceededNoStateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -755,7 +755,7 @@ public final class LROsInner {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut202Retry200Async(), serviceCallback);
@@ -764,7 +764,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut202Retry200Async() {
         final ProductInner product = null;
@@ -775,8 +775,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -799,7 +799,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut202Retry200Async(product), serviceCallback);
@@ -808,7 +808,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut202Retry200Async(ProductInner product) {
         Validator.validate(product);
@@ -819,8 +820,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -916,7 +917,7 @@ public final class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingSucceeded200Async(), serviceCallback);
@@ -925,7 +926,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
@@ -936,8 +937,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -960,7 +961,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingSucceeded200Async(product), serviceCallback);
@@ -969,7 +970,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
@@ -980,8 +982,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1078,7 +1080,7 @@ public final class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200UpdatingSucceeded204Async(), serviceCallback);
@@ -1087,7 +1089,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200UpdatingSucceeded204Async() {
         final ProductInner product = null;
@@ -1098,8 +1100,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200UpdatingSucceeded204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1122,7 +1124,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200UpdatingSucceeded204Async(product), serviceCallback);
@@ -1131,7 +1133,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200UpdatingSucceeded204Async(ProductInner product) {
         Validator.validate(product);
@@ -1142,8 +1145,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200UpdatingSucceeded204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1239,7 +1242,7 @@ public final class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingFailed200Async(), serviceCallback);
@@ -1248,7 +1251,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingFailed200Async() {
         final ProductInner product = null;
@@ -1259,8 +1262,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut201CreatingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1283,7 +1286,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut201CreatingFailed200Async(product), serviceCallback);
@@ -1292,7 +1295,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingFailed200Async(ProductInner product) {
         Validator.validate(product);
@@ -1303,8 +1307,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut201CreatingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1401,7 +1405,7 @@ public final class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200Acceptedcanceled200Async(), serviceCallback);
@@ -1410,7 +1414,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200Acceptedcanceled200Async() {
         final ProductInner product = null;
@@ -1421,8 +1425,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200Acceptedcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1445,7 +1449,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.create(beginPut200Acceptedcanceled200Async(product), serviceCallback);
@@ -1454,7 +1458,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut200Acceptedcanceled200Async(ProductInner product) {
         Validator.validate(product);
@@ -1465,8 +1470,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<ProductInner> clientResponse = beginPut200Acceptedcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1562,7 +1567,7 @@ public final class LROsInner {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryAsync(), serviceCallback);
@@ -1571,7 +1576,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> beginPutNoHeaderInRetryAsync() {
         final ProductInner product = null;
@@ -1582,8 +1587,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1606,7 +1611,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryAsync(product), serviceCallback);
@@ -1615,7 +1620,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>> beginPutNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
@@ -1626,8 +1632,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> clientResponse = beginPutNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1723,7 +1729,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededAsync(), serviceCallback);
@@ -1732,7 +1738,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededAsync() {
         final ProductInner product = null;
@@ -1743,8 +1749,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1767,7 +1773,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
@@ -1776,7 +1782,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -1787,8 +1794,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1884,7 +1891,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -1893,7 +1900,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> beginPutAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
@@ -1904,8 +1911,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1928,7 +1935,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -1937,7 +1944,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>> beginPutAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -1948,8 +1956,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> clientResponse = beginPutAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2045,7 +2053,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedAsync(), serviceCallback);
@@ -2054,7 +2062,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> beginPutAsyncRetryFailedAsync() {
         final ProductInner product = null;
@@ -2065,8 +2073,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2089,7 +2097,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedAsync(product), serviceCallback);
@@ -2098,7 +2106,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>> beginPutAsyncRetryFailedAsync(ProductInner product) {
         Validator.validate(product);
@@ -2109,8 +2118,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> clientResponse = beginPutAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2206,7 +2215,7 @@ public final class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
@@ -2215,7 +2224,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> beginPutAsyncNoRetrycanceledAsync() {
         final ProductInner product = null;
@@ -2226,8 +2235,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2250,7 +2259,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledAsync(product), serviceCallback);
@@ -2259,7 +2268,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>> beginPutAsyncNoRetrycanceledAsync(ProductInner product) {
         Validator.validate(product);
@@ -2270,8 +2280,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> clientResponse = beginPutAsyncNoRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2367,7 +2377,7 @@ public final class LROsInner {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -2376,7 +2386,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> beginPutAsyncNoHeaderInRetryAsync() {
         final ProductInner product = null;
@@ -2387,8 +2397,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2411,7 +2421,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryAsync(product), serviceCallback);
@@ -2420,7 +2430,8 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>> beginPutAsyncNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
@@ -2431,8 +2442,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> clientResponse = beginPutAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2528,7 +2539,7 @@ public final class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceCall.create(beginPutNonResourceAsync(), serviceCallback);
@@ -2537,7 +2548,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SkuInner object
      */
     public Observable<ServiceResponse<SkuInner>> beginPutNonResourceAsync() {
         final SkuInner sku = null;
@@ -2548,8 +2559,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SkuInner> clientResponse = beginPutNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2572,7 +2583,7 @@ public final class LROsInner {
      *
      * @param sku sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceCall.create(beginPutNonResourceAsync(sku), serviceCallback);
@@ -2581,7 +2592,8 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
+     * @param sku sku to put
+     * @return the observable to the SkuInner object
      */
     public Observable<ServiceResponse<SkuInner>> beginPutNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
@@ -2592,8 +2604,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SkuInner> clientResponse = beginPutNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2689,7 +2701,7 @@ public final class LROsInner {
      * Long running put request with non resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceCall.create(beginPutAsyncNonResourceAsync(), serviceCallback);
@@ -2698,7 +2710,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SkuInner object
      */
     public Observable<ServiceResponse<SkuInner>> beginPutAsyncNonResourceAsync() {
         final SkuInner sku = null;
@@ -2709,8 +2721,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SkuInner> clientResponse = beginPutAsyncNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2733,7 +2745,7 @@ public final class LROsInner {
      *
      * @param sku Sku to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceCall.create(beginPutAsyncNonResourceAsync(sku), serviceCallback);
@@ -2742,7 +2754,8 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
+     * @param sku Sku to put
+     * @return the observable to the SkuInner object
      */
     public Observable<ServiceResponse<SkuInner>> beginPutAsyncNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
@@ -2753,8 +2766,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SkuInner> clientResponse = beginPutAsyncNonResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2850,7 +2863,7 @@ public final class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceCall.create(beginPutSubResourceAsync(), serviceCallback);
@@ -2859,7 +2872,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SubProductInner object
      */
     public Observable<ServiceResponse<SubProductInner>> beginPutSubResourceAsync() {
         final SubProductInner product = null;
@@ -2870,8 +2883,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SubProductInner> clientResponse = beginPutSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2894,7 +2907,7 @@ public final class LROsInner {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceCall.create(beginPutSubResourceAsync(product), serviceCallback);
@@ -2903,7 +2916,8 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Sub Product to put
+     * @return the observable to the SubProductInner object
      */
     public Observable<ServiceResponse<SubProductInner>> beginPutSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
@@ -2914,8 +2928,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SubProductInner> clientResponse = beginPutSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3011,7 +3025,7 @@ public final class LROsInner {
      * Long running put request with sub resource.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceCall.create(beginPutAsyncSubResourceAsync(), serviceCallback);
@@ -3020,7 +3034,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SubProductInner object
      */
     public Observable<ServiceResponse<SubProductInner>> beginPutAsyncSubResourceAsync() {
         final SubProductInner product = null;
@@ -3031,8 +3045,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SubProductInner> clientResponse = beginPutAsyncSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3055,7 +3069,7 @@ public final class LROsInner {
      *
      * @param product Sub Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceCall.create(beginPutAsyncSubResourceAsync(product), serviceCallback);
@@ -3064,7 +3078,8 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @param product Sub Product to put
+     * @return the observable to the SubProductInner object
      */
     public Observable<ServiceResponse<SubProductInner>> beginPutAsyncSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
@@ -3075,8 +3090,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SubProductInner> clientResponse = beginPutAsyncSubResourceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3136,7 +3151,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
@@ -3145,7 +3160,7 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
@@ -3155,8 +3170,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3217,7 +3232,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202DeletingFailed200Async(), serviceCallback);
@@ -3226,7 +3241,7 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>> beginDeleteProvisioning202DeletingFailed200Async() {
         return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3236,8 +3251,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> clientResponse = beginDeleteProvisioning202DeletingFailed200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3298,7 +3313,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteProvisioning202Deletingcanceled200Async(), serviceCallback);
@@ -3307,7 +3322,7 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>> beginDeleteProvisioning202Deletingcanceled200Async() {
         return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3317,8 +3332,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> clientResponse = beginDeleteProvisioning202Deletingcanceled200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3379,7 +3394,7 @@ public final class LROsInner {
      * Long running delete succeeds and returns right away.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(beginDelete204SucceededAsync(), serviceCallback);
@@ -3398,8 +3413,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<Void> clientResponse = beginDelete204SucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3459,7 +3474,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDelete202Retry200Async(), serviceCallback);
@@ -3468,7 +3483,7 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>> beginDelete202Retry200Async() {
         return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
@@ -3478,8 +3493,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> clientResponse = beginDelete202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3540,7 +3555,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDelete202NoRetry204Async(), serviceCallback);
@@ -3549,7 +3564,7 @@ public final class LROsInner {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>> beginDelete202NoRetry204Async() {
         return service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent())
@@ -3559,8 +3574,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> clientResponse = beginDelete202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3621,7 +3636,7 @@ public final class LROsInner {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteNoHeaderInRetryAsync(), serviceCallback);
@@ -3640,8 +3655,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> clientResponse = beginDeleteNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3702,7 +3717,7 @@ public final class LROsInner {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncNoHeaderInRetryAsync(), serviceCallback);
@@ -3721,8 +3736,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> clientResponse = beginDeleteAsyncNoHeaderInRetryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3783,7 +3798,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetrySucceededAsync(), serviceCallback);
@@ -3802,8 +3817,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3863,7 +3878,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -3882,8 +3897,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3943,7 +3958,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetryFailedAsync(), serviceCallback);
@@ -3962,8 +3977,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> clientResponse = beginDeleteAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4023,7 +4038,7 @@ public final class LROsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginDeleteAsyncRetrycanceledAsync(), serviceCallback);
@@ -4042,8 +4057,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> clientResponse = beginDeleteAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4103,7 +4118,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPost200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceCall.create(beginPost200WithPayloadAsync(), serviceCallback);
@@ -4112,7 +4127,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
-     * @return the SkuInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the SkuInner object
      */
     public Observable<ServiceResponse<SkuInner>> beginPost200WithPayloadAsync() {
         return service.beginPost200WithPayload(this.client.acceptLanguage(), this.client.userAgent())
@@ -4122,8 +4137,8 @@ public final class LROsInner {
                     try {
                         ServiceResponse<SkuInner> clientResponse = beginPost200WithPayloadDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4220,7 +4235,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202Retry200Async(), serviceCallback);
@@ -4240,8 +4255,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4264,7 +4279,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202Retry200Async(product), serviceCallback);
@@ -4273,6 +4288,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>> beginPost202Retry200Async(ProductInner product) {
@@ -4284,8 +4300,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4381,7 +4397,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202NoRetry204Async(), serviceCallback);
@@ -4390,7 +4406,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> beginPost202NoRetry204Async() {
         final ProductInner product = null;
@@ -4401,8 +4417,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4425,7 +4441,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPost202NoRetry204Async(product), serviceCallback);
@@ -4434,7 +4450,8 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>> beginPost202NoRetry204Async(ProductInner product) {
         Validator.validate(product);
@@ -4445,8 +4462,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> clientResponse = beginPost202NoRetry204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4542,7 +4559,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededAsync(), serviceCallback);
@@ -4551,7 +4568,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededAsync() {
         final ProductInner product = null;
@@ -4562,8 +4579,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4586,7 +4603,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
@@ -4595,7 +4612,8 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -4606,8 +4624,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4704,7 +4722,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
@@ -4713,7 +4731,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> beginPostAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
@@ -4724,8 +4742,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4748,7 +4766,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededAsync(product), serviceCallback);
@@ -4757,7 +4775,8 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @param product Product to put
+     * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>> beginPostAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
@@ -4768,8 +4787,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> clientResponse = beginPostAsyncNoRetrySucceededDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4866,7 +4885,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedAsync(), serviceCallback);
@@ -4886,8 +4905,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -4910,7 +4929,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedAsync(product), serviceCallback);
@@ -4919,6 +4938,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>> beginPostAsyncRetryFailedAsync(ProductInner product) {
@@ -4930,8 +4950,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> clientResponse = beginPostAsyncRetryFailedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -5027,7 +5047,7 @@ public final class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledAsync(), serviceCallback);
@@ -5047,8 +5067,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -5071,7 +5091,7 @@ public final class LROsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledAsync(product), serviceCallback);
@@ -5080,6 +5100,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>> beginPostAsyncRetrycanceledAsync(ProductInner product) {
@@ -5091,8 +5112,8 @@ public final class LROsInner {
                     try {
                         ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> clientResponse = beginPostAsyncRetrycanceledDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (CloudException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
