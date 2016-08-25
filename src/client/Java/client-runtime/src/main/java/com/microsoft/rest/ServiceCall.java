@@ -99,7 +99,7 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
         return subscription;
     }
 
-    protected void setSubscription(Subscription subscription) {
+    public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
 

@@ -9,8 +9,6 @@ package com.microsoft.azure;
 
 import com.microsoft.rest.RestException;
 
-import javax.xml.bind.DataBindingException;
-import javax.xml.ws.WebServiceException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+
+import javax.xml.bind.DataBindingException;
 
 /**
  * Defines a list response from a paging operation. The pages are

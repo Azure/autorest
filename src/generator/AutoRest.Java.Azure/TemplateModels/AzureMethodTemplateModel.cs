@@ -707,7 +707,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;
             }
@@ -723,7 +722,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))

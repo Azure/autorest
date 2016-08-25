@@ -75,6 +75,9 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
         success();
     }
 
+    /**
+     * Override this method to handle successful REST call results.
+     */
     public abstract void success();
 
     /**

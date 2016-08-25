@@ -756,7 +756,6 @@ namespace AutoRest.Java.TemplateModels
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit2.Call");
                 imports.Add("rx.Observable");
                 imports.Add("rx.functions.Func1");
                 if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")

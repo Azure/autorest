@@ -62,7 +62,7 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link Call} object
+ * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
@@ -93,7 +93,7 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
+@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
 }
 else
 {
@@ -235,7 +235,7 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link Call} object
+ * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
@@ -266,7 +266,7 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
+@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
 }
 else
 {

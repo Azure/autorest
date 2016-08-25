@@ -39,6 +39,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.Response;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.Observable;
 
