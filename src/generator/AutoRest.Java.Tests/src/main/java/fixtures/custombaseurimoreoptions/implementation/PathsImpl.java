@@ -124,8 +124,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -193,8 +193,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

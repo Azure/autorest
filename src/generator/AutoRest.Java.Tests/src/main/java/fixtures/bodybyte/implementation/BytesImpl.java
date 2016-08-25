@@ -111,8 +111,8 @@ public final class BytesImpl implements Bytes {
                     try {
                         ServiceResponse<byte[]> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -159,8 +159,8 @@ public final class BytesImpl implements Bytes {
                     try {
                         ServiceResponse<byte[]> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -207,8 +207,8 @@ public final class BytesImpl implements Bytes {
                     try {
                         ServiceResponse<byte[]> clientResponse = getNonAsciiDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -262,8 +262,8 @@ public final class BytesImpl implements Bytes {
                     try {
                         ServiceResponse<Void> clientResponse = putNonAsciiDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -310,8 +310,8 @@ public final class BytesImpl implements Bytes {
                     try {
                         ServiceResponse<byte[]> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

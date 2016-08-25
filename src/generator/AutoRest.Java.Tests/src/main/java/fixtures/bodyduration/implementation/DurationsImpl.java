@@ -108,8 +108,8 @@ public final class DurationsImpl implements Durations {
                     try {
                         ServiceResponse<Period> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -163,8 +163,8 @@ public final class DurationsImpl implements Durations {
                     try {
                         ServiceResponse<Void> clientResponse = putPositiveDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -211,8 +211,8 @@ public final class DurationsImpl implements Durations {
                     try {
                         ServiceResponse<Period> clientResponse = getPositiveDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -259,8 +259,8 @@ public final class DurationsImpl implements Durations {
                     try {
                         ServiceResponse<Period> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

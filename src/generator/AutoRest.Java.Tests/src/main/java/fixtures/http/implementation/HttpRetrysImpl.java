@@ -127,8 +127,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = head408Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -176,8 +176,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = put500Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -219,8 +219,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = put500Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -268,8 +268,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = patch500Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -311,8 +311,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = patch500Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -359,8 +359,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = get502Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -408,8 +408,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = post503Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -451,8 +451,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = post503Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -500,8 +500,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = delete503Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -543,8 +543,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = delete503Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -592,8 +592,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = put504Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -635,8 +635,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = put504Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -684,8 +684,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = patch504Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -727,8 +727,8 @@ public final class HttpRetrysImpl implements HttpRetrys {
                     try {
                         ServiceResponse<Void> clientResponse = patch504Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

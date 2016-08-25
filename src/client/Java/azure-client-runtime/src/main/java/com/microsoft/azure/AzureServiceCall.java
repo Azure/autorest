@@ -28,7 +28,7 @@ public class AzureServiceCall<T> extends ServiceCall<T> {
 
     public static <T extends Page<V>, V> ServiceCall<T> create(Observable<ServiceResponse<T>> first, final Func1<String, Observable<ServiceResponse<T>>> next, final ListOperationCallback<V> callback) {
         final AzureServiceCall<T> serviceCall = new AzureServiceCall<>();
-        Subscriber<ServiceResponse<T>> subscriber = new Subscriber<ServiceResponse<T>>() {
+        final Subscriber<ServiceResponse<T>> subscriber = new Subscriber<ServiceResponse<T>>() {
             private ServiceResponse<T> lastResponse;
 
             @Override
@@ -57,7 +57,7 @@ public class AzureServiceCall<T> extends ServiceCall<T> {
                 if (behavior == ListOperationCallback.PagingBehavior.STOP || serviceResponse.getBody().getNextPageLink() == null) {
                     serviceCall.set(lastResponse);
                 } else {
-                    serviceCall.setSubscription(next.call(serviceResponse.getBody().getNextPageLink()).single().subscribe());
+                    serviceCall.setSubscription(next.call(serviceResponse.getBody().getNextPageLink()).single().subscribe(subscriber));
                 }
             }
         };

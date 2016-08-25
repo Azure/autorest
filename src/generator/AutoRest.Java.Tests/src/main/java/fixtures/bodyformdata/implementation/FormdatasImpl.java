@@ -121,8 +121,8 @@ public final class FormdatasImpl implements Formdatas {
                     try {
                         ServiceResponse<InputStream> clientResponse = uploadFileDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -177,8 +177,8 @@ public final class FormdatasImpl implements Formdatas {
                     try {
                         ServiceResponse<InputStream> clientResponse = uploadFileViaBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -115,8 +115,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Boolean> clientResponse = getTrueDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -166,8 +166,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Void> clientResponse = putTrueDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -214,8 +214,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Boolean> clientResponse = getFalseDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -265,8 +265,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Void> clientResponse = putFalseDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -313,8 +313,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Boolean> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -361,8 +361,8 @@ public final class BoolsImpl implements Bools {
                     try {
                         ServiceResponse<Boolean> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

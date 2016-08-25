@@ -102,8 +102,8 @@ public final class HttpFailuresImpl implements HttpFailures {
                     try {
                         ServiceResponse<Boolean> clientResponse = getEmptyErrorDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -150,8 +150,8 @@ public final class HttpFailuresImpl implements HttpFailures {
                     try {
                         ServiceResponse<Boolean> clientResponse = getNoModelErrorDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -197,8 +197,8 @@ public final class HttpFailuresImpl implements HttpFailures {
                     try {
                         ServiceResponse<Boolean> clientResponse = getNoModelEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -364,6 +364,54 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
+        public string PagingGroupedParameterTransformation(bool filterRequired = false)
+        {
+            var builder = new IndentedStringBuilder();
+            if (IsPagingOperation)
+            {
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
+            }
+            return builder.ToString();
+        }
+
+        public string NextMethodParameterInvocation(bool filterRequired = false)
+        {
+            string invocation;
+            AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+            if (filterRequired)
+            {
+                if (this.InputParameterTransformation.IsNullOrEmpty())
+                {
+                    return nextMethod.MethodDefaultParameterInvocation;
+                }
+                var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                List<string> invocations = new List<string>();
+                foreach (var parameter in nextMethod.LocalParameters)
+                {
+                    if (parameter.IsRequired)
+                    {
+                        invocations.Add(parameter.Name);
+                    }
+                    else if (parameter.Name == nextGroupType.Name && groupedType.IsRequired)
+                    {
+                        invocations.Add(parameter.Name);
+                    }
+                    else
+                    {
+                        invocations.Add("null");
+                    }
+                }
+                return string.Join(", ", invocations);
+            }
+            else
+            {
+                return nextMethod.MethodParameterInvocation;
+            }
+        }
+
         public override string ResponseGeneration(bool filterRequired = false)
         {
             if (this.IsPagingOperation && !this.IsPagingNextOperation)
@@ -562,7 +610,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                 return;
             }
             var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
-            if (filterRequired && !nextGroupType.IsRequired)
+            if (filterRequired && !groupedType.IsRequired)
             {
                 return;
             }

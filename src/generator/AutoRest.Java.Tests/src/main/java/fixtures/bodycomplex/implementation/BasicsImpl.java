@@ -118,8 +118,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Basic> clientResponse = getValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -174,8 +174,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Void> clientResponse = putValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -222,8 +222,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Basic> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -270,8 +270,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Basic> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -318,8 +318,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Basic> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -366,8 +366,8 @@ public final class BasicsImpl implements Basics {
                     try {
                         ServiceResponse<Basic> clientResponse = getNotProvidedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

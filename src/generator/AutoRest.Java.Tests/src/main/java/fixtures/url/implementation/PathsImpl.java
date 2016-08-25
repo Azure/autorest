@@ -204,8 +204,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanTrueDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -253,8 +253,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanFalseDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -302,8 +302,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getIntOneMillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -351,8 +351,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getIntNegativeOneMillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -400,8 +400,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getTenBillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -449,8 +449,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = getNegativeTenBillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -498,8 +498,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = floatScientificPositiveDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -547,8 +547,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = floatScientificNegativeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -596,8 +596,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = doubleDecimalPositiveDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -645,8 +645,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = doubleDecimalNegativeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -694,8 +694,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = stringUnicodeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -743,8 +743,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = stringUrlEncodedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -792,8 +792,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = stringEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -847,8 +847,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = stringNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -902,8 +902,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = enumValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -957,8 +957,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = enumNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1013,8 +1013,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1063,8 +1063,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = byteEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1119,8 +1119,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = byteNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1168,8 +1168,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = dateValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1223,8 +1223,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = dateNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1272,8 +1272,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = dateTimeValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1327,8 +1327,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1383,8 +1383,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = base64UrlDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1440,8 +1440,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = arrayCsvInPathDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1492,8 +1492,8 @@ public final class PathsImpl implements Paths {
                     try {
                         ServiceResponse<Void> clientResponse = unixTimeUrlDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

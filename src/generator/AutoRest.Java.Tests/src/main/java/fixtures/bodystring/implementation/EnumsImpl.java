@@ -118,8 +118,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<Colors> clientResponse = getNotExpandableDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -173,8 +173,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<Void> clientResponse = putNotExpandableDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -221,8 +221,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<Colors> clientResponse = getReferencedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -276,8 +276,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<Void> clientResponse = putReferencedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -324,8 +324,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<RefColorConstant> clientResponse = getReferencedConstantDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -380,8 +380,8 @@ public final class EnumsImpl implements Enums {
                     try {
                         ServiceResponse<Void> clientResponse = putReferencedConstantDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

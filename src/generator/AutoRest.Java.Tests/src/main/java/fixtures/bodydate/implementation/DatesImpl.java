@@ -124,8 +124,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -172,8 +172,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getInvalidDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -220,8 +220,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getOverflowDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -268,8 +268,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getUnderflowDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -323,8 +323,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<Void> clientResponse = putMaxDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -371,8 +371,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getMaxDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -426,8 +426,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<Void> clientResponse = putMinDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -474,8 +474,8 @@ public final class DatesImpl implements Dates {
                     try {
                         ServiceResponse<LocalDate> clientResponse = getMinDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -130,8 +130,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Error> clientResponse = getRequiredPathDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -178,8 +178,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalQueryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -221,8 +221,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalQueryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -270,8 +270,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -313,8 +313,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -362,8 +362,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -405,8 +405,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Void> clientResponse = putOptionalBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -457,8 +457,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Error> clientResponse = getRequiredGlobalPathDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -508,8 +508,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Error> clientResponse = getRequiredGlobalQueryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -555,8 +555,8 @@ public final class ImplicitsImpl implements Implicits {
                     try {
                         ServiceResponse<Error> clientResponse = getOptionalGlobalQueryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

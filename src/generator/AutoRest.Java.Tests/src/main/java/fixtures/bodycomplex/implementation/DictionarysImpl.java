@@ -117,8 +117,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<DictionaryWrapper> clientResponse = getValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -173,8 +173,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<Void> clientResponse = putValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -221,8 +221,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<DictionaryWrapper> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -277,8 +277,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -325,8 +325,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<DictionaryWrapper> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -373,8 +373,8 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<DictionaryWrapper> clientResponse = getNotProvidedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

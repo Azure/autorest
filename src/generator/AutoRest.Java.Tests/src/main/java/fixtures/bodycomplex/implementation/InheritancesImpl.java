@@ -101,8 +101,8 @@ public final class InheritancesImpl implements Inheritances {
                     try {
                         ServiceResponse<Siamese> clientResponse = getValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -157,8 +157,8 @@ public final class InheritancesImpl implements Inheritances {
                     try {
                         ServiceResponse<Void> clientResponse = putValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

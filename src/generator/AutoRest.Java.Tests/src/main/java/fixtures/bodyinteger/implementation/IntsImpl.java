@@ -149,8 +149,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Integer> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -197,8 +197,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Integer> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -245,8 +245,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Integer> clientResponse = getOverflowInt32Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -293,8 +293,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Integer> clientResponse = getUnderflowInt32Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -341,8 +341,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Long> clientResponse = getOverflowInt64Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -389,8 +389,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Long> clientResponse = getUnderflowInt64Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -440,8 +440,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Void> clientResponse = putMax32Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -491,8 +491,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Void> clientResponse = putMax64Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -542,8 +542,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Void> clientResponse = putMin32Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -593,8 +593,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Void> clientResponse = putMin64Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -646,8 +646,8 @@ public final class IntsImpl implements Ints {
                         }
                         ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -698,8 +698,8 @@ public final class IntsImpl implements Ints {
                     try {
                         ServiceResponse<Void> clientResponse = putUnixTimeDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -751,8 +751,8 @@ public final class IntsImpl implements Ints {
                         }
                         ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -804,8 +804,8 @@ public final class IntsImpl implements Ints {
                         }
                         ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -113,8 +113,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<ArrayWrapper> clientResponse = getValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -169,8 +169,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -217,8 +217,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<ArrayWrapper> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -273,8 +273,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -321,8 +321,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<ArrayWrapper> clientResponse = getNotProvidedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

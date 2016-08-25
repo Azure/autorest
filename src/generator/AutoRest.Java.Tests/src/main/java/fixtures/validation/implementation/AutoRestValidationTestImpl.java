@@ -213,8 +213,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Product> clientResponse = validationOfMethodParametersDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -278,8 +278,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -338,8 +338,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -384,8 +384,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Void> clientResponse = getWithConstantInPathDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -430,8 +430,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -472,8 +472,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                     try {
                         ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -125,7 +125,7 @@ public class PagingTests {
             response.size();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getCause());
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 
@@ -136,7 +136,7 @@ public class PagingTests {
             response.size();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getCause());
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 }

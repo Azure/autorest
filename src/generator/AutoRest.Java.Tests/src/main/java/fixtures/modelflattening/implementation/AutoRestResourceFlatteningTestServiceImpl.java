@@ -176,8 +176,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -220,8 +220,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -268,8 +268,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<List<FlattenedProduct>> clientResponse = getArrayDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -317,8 +317,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -361,8 +361,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -409,8 +409,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Map<String, FlattenedProduct>> clientResponse = getDictionaryDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -458,8 +458,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -502,8 +502,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<Void> clientResponse = putResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -550,8 +550,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<ResourceCollection> clientResponse = getResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -599,8 +599,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<SimpleProduct> clientResponse = putSimpleProductDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -643,8 +643,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<SimpleProduct> clientResponse = putSimpleProductDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -700,12 +700,15 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
-        SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.withProductId(productId);
-        simpleBodyProduct.withDescription(null);
-        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.withGenericValue(null);
-        simpleBodyProduct.withOdatavalue(null);
+        SimpleProduct simpleBodyProduct = null;
+        if (description != null || genericValue != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(null);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(null);
+            simpleBodyProduct.withOdatavalue(null);
+        }
         return service.postFlattenedSimpleProduct(simpleBodyProduct)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SimpleProduct>>>() {
                 @Override
@@ -713,8 +716,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<SimpleProduct> clientResponse = postFlattenedSimpleProductDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -782,8 +785,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<SimpleProduct> clientResponse = postFlattenedSimpleProductDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -853,8 +856,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                     try {
                         ServiceResponse<SimpleProduct> clientResponse = putSimpleProductWithGroupingDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

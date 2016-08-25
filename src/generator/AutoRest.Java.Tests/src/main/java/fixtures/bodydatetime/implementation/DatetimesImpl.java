@@ -168,8 +168,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -216,8 +216,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -264,8 +264,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getOverflowDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -312,8 +312,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getUnderflowDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -367,8 +367,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putUtcMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -415,8 +415,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getUtcLowercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -463,8 +463,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getUtcUppercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -518,8 +518,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putLocalPositiveOffsetMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -566,8 +566,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -614,8 +614,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -669,8 +669,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putLocalNegativeOffsetMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -717,8 +717,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -765,8 +765,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -820,8 +820,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putUtcMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -868,8 +868,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getUtcMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -923,8 +923,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putLocalPositiveOffsetMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -971,8 +971,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalPositiveOffsetMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1026,8 +1026,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<Void> clientResponse = putLocalNegativeOffsetMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1074,8 +1074,8 @@ public final class DatetimesImpl implements Datetimes {
                     try {
                         ServiceResponse<DateTime> clientResponse = getLocalNegativeOffsetMinDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -195,8 +195,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredIntegerParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -243,8 +243,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -286,8 +286,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -342,8 +342,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredIntegerPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -390,8 +390,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -434,8 +434,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -485,8 +485,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredIntegerHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -533,8 +533,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -576,8 +576,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalIntegerHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -631,8 +631,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredStringParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -679,8 +679,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -722,8 +722,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -778,8 +778,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredStringPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -826,8 +826,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -870,8 +870,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -925,8 +925,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredStringHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -973,8 +973,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1016,8 +1016,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalStringHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1072,8 +1072,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredClassParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1120,8 +1120,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalClassParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1164,8 +1164,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalClassParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1220,8 +1220,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredClassPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1268,8 +1268,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalClassPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1312,8 +1312,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalClassPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1368,8 +1368,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredArrayParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1416,8 +1416,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1460,8 +1460,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayParameterDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1516,8 +1516,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredArrayPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1564,8 +1564,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1608,8 +1608,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayPropertyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1665,8 +1665,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Error> clientResponse = postRequiredArrayHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1714,8 +1714,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1759,8 +1759,8 @@ public final class ExplicitsImpl implements Explicits {
                     try {
                         ServiceResponse<Void> clientResponse = postOptionalArrayHeaderDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

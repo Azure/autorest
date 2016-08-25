@@ -362,8 +362,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -410,8 +410,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -458,8 +458,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -514,8 +514,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -562,8 +562,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Boolean>> clientResponse = getBooleanTfftDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -618,8 +618,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putBooleanTfftDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -666,8 +666,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Boolean>> clientResponse = getBooleanInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -714,8 +714,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Boolean>> clientResponse = getBooleanInvalidStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -762,8 +762,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getIntegerValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -818,8 +818,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putIntegerValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -866,8 +866,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getIntInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -914,8 +914,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Integer>> clientResponse = getIntInvalidStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -962,8 +962,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Long>> clientResponse = getLongValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1018,8 +1018,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putLongValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1066,8 +1066,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Long>> clientResponse = getLongInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1114,8 +1114,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Long>> clientResponse = getLongInvalidStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1162,8 +1162,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getFloatValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1218,8 +1218,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putFloatValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1266,8 +1266,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getFloatInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1314,8 +1314,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getFloatInvalidStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1362,8 +1362,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getDoubleValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1418,8 +1418,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDoubleValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1466,8 +1466,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getDoubleInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1514,8 +1514,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Double>> clientResponse = getDoubleInvalidStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1562,8 +1562,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<String>> clientResponse = getStringValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1618,8 +1618,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putStringValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1666,8 +1666,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<String>> clientResponse = getStringWithNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1714,8 +1714,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<String>> clientResponse = getStringWithInvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1762,8 +1762,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<UUID>> clientResponse = getUuidValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1818,8 +1818,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putUuidValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1866,8 +1866,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<UUID>> clientResponse = getUuidInvalidCharsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1914,8 +1914,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<LocalDate>> clientResponse = getDateValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1970,8 +1970,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDateValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2018,8 +2018,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<LocalDate>> clientResponse = getDateInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2066,8 +2066,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<LocalDate>> clientResponse = getDateInvalidCharsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2114,8 +2114,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<DateTime>> clientResponse = getDateTimeValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2170,8 +2170,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDateTimeValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2218,8 +2218,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<DateTime>> clientResponse = getDateTimeInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2266,8 +2266,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<DateTime>> clientResponse = getDateTimeInvalidCharsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2324,8 +2324,8 @@ public final class ArraysImpl implements Arrays {
                         }
                         ServiceResponse<List<DateTime>> clientResponse = new ServiceResponse<List<DateTime>>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2385,8 +2385,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDateTimeRfc1123ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2433,8 +2433,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Period>> clientResponse = getDurationValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2489,8 +2489,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDurationValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2537,8 +2537,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<byte[]>> clientResponse = getByteValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2593,8 +2593,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putByteValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2641,8 +2641,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<byte[]>> clientResponse = getByteInvalidNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2699,8 +2699,8 @@ public final class ArraysImpl implements Arrays {
                         }
                         ServiceResponse<List<byte[]>> clientResponse = new ServiceResponse<List<byte[]>>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2747,8 +2747,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Product>> clientResponse = getComplexNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2795,8 +2795,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Product>> clientResponse = getComplexEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2843,8 +2843,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Product>> clientResponse = getComplexItemNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2891,8 +2891,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Product>> clientResponse = getComplexItemEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2939,8 +2939,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Product>> clientResponse = getComplexValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2995,8 +2995,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putComplexValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3043,8 +3043,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<List<String>>> clientResponse = getArrayNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3091,8 +3091,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<List<String>>> clientResponse = getArrayEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3139,8 +3139,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<List<String>>> clientResponse = getArrayItemNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3187,8 +3187,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<List<String>>> clientResponse = getArrayItemEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3235,8 +3235,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<List<String>>> clientResponse = getArrayValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3291,8 +3291,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putArrayValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3339,8 +3339,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Map<String, String>>> clientResponse = getDictionaryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3387,8 +3387,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Map<String, String>>> clientResponse = getDictionaryEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3435,8 +3435,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Map<String, String>>> clientResponse = getDictionaryItemNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3483,8 +3483,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Map<String, String>>> clientResponse = getDictionaryItemEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3531,8 +3531,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Map<String, String>>> clientResponse = getDictionaryValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -3587,8 +3587,8 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<Void> clientResponse = putDictionaryValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

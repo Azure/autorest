@@ -234,8 +234,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanTrueDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -283,8 +283,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanFalseDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -332,8 +332,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -375,8 +375,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getBooleanNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -424,8 +424,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getIntOneMillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -473,8 +473,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getIntNegativeOneMillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -522,8 +522,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getIntNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -565,8 +565,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getIntNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -614,8 +614,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getTenBillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -663,8 +663,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getNegativeTenBillionDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -712,8 +712,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getLongNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -755,8 +755,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = getLongNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -804,8 +804,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = floatScientificPositiveDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -853,8 +853,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = floatScientificNegativeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -902,8 +902,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = floatNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -945,8 +945,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = floatNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -994,8 +994,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = doubleDecimalPositiveDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1043,8 +1043,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = doubleDecimalNegativeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1092,8 +1092,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = doubleNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1135,8 +1135,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = doubleNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1184,8 +1184,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = stringUnicodeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1233,8 +1233,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = stringUrlEncodedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1282,8 +1282,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = stringEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1331,8 +1331,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = stringNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1374,8 +1374,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = stringNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1423,8 +1423,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = enumValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1466,8 +1466,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = enumValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1515,8 +1515,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = enumNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1558,8 +1558,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = enumNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1608,8 +1608,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1652,8 +1652,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1702,8 +1702,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = byteEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1752,8 +1752,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = byteNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1796,8 +1796,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = byteNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1845,8 +1845,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1894,8 +1894,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1937,8 +1937,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1986,8 +1986,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateTimeValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2035,8 +2035,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2078,8 +2078,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2128,8 +2128,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2173,8 +2173,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2223,8 +2223,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2268,8 +2268,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2318,8 +2318,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2363,8 +2363,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringCsvEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2413,8 +2413,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringSsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2458,8 +2458,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringSsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2508,8 +2508,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringTsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2553,8 +2553,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringTsvValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2603,8 +2603,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringPipesValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -2648,8 +2648,8 @@ public final class QueriesImpl implements Queries {
                     try {
                         ServiceResponse<Void> clientResponse = arrayStringPipesValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -171,8 +171,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> clientResponse = head300Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -220,8 +220,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> clientResponse = get300Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -269,8 +269,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> clientResponse = head301Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -318,8 +318,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> clientResponse = get301Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -368,8 +368,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> clientResponse = put301Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -411,8 +411,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> clientResponse = put301Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -459,8 +459,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> clientResponse = head302Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -508,8 +508,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> clientResponse = get302Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -558,8 +558,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> clientResponse = patch302Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -601,8 +601,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> clientResponse = patch302Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -650,8 +650,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> clientResponse = post303Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -693,8 +693,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> clientResponse = post303Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -742,8 +742,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> clientResponse = head307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -791,8 +791,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> clientResponse = get307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -841,8 +841,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> clientResponse = put307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -884,8 +884,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> clientResponse = put307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -934,8 +934,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> clientResponse = patch307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -977,8 +977,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> clientResponse = patch307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1027,8 +1027,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> clientResponse = post307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1070,8 +1070,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> clientResponse = post307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1120,8 +1120,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> clientResponse = delete307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1163,8 +1163,8 @@ public final class HttpRedirectsImpl implements HttpRedirects {
                     try {
                         ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> clientResponse = delete307Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

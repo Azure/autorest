@@ -39,8 +39,9 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
     ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
     @Model.ReturnTypeModel.GenericBodyClientTypeString pagedList = new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextLink) throws RestException, IOException {
-            return @(Model.GetPagingNextMethodInvocation(true))(nextLink).toBlocking().single().getBody();
+        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
+            @Model.PagingGroupedParameterTransformation(true)
+            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true)).toBlocking().single().getBody();
         }
     };
     return new ServiceResponse<>(pagedList, response.getResponse());
@@ -68,8 +69,9 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
         @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation),
         new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String s) {
-                return @(Model.GetPagingNextMethodInvocation(true))(s);
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String nextPageLink) {
+                @Model.PagingGroupedParameterTransformation(true)
+                return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
             }
         },
         serviceCallback);
@@ -103,7 +105,9 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
         .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
             @@Override
             public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> page) {
-                return @(Model.GetPagingNextMethodInvocation(true))(page.getBody().getNextPageLink());
+                String nextPageLink = page.getBody().getNextPageLink();
+                @Model.PagingGroupedParameterTransformation(true)
+                return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
             }
         });
 }
@@ -208,8 +212,9 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
     ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
     @Model.ReturnTypeModel.GenericBodyClientTypeString pagedList = new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextLink) throws RestException, IOException {
-            return @(Model.GetPagingNextMethodInvocation(true))(nextLink).toBlocking().single().getBody();
+        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
+            @Model.PagingGroupedParameterTransformation()
+            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation()).toBlocking().single().getBody();
         }
     };
     return new ServiceResponse<>(pagedList, response.getResponse());
@@ -237,8 +242,9 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
         @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation),
         new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String s) {
-                return @(Model.GetPagingNextMethodInvocation(true))(s);
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String nextPageLink) {
+                @Model.PagingGroupedParameterTransformation()
+                return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
             }
         },
         serviceCallback);
@@ -272,7 +278,9 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
         .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
             @@Override
             public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> page) {
-                return @(Model.GetPagingNextMethodInvocation(true))(page.getBody().getNextPageLink());
+                String nextPageLink = page.getBody().getNextPageLink();
+                @Model.PagingGroupedParameterTransformation()
+                return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
             }
         });
 }

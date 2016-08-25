@@ -125,8 +125,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getAllWithValuesDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -186,8 +186,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getAllWithValuesDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -252,8 +252,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getGlobalQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -313,8 +313,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getGlobalQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -379,8 +379,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getGlobalAndLocalQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -440,8 +440,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getGlobalAndLocalQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -506,8 +506,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getLocalPathItemQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -567,8 +567,8 @@ public final class PathItemsImpl implements PathItems {
                     try {
                         ServiceResponse<Void> clientResponse = getLocalPathItemQueryNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

@@ -105,8 +105,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
                     try {
                         ServiceResponse<Fish> clientResponse = getValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -257,8 +257,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
                     try {
                         ServiceResponse<Void> clientResponse = putValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -388,8 +388,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
                     try {
                         ServiceResponse<Void> clientResponse = putValidMissingRequiredDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

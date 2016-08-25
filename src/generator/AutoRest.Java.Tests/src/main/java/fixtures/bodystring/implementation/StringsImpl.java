@@ -144,8 +144,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<String> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -193,8 +193,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -236,8 +236,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -284,8 +284,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<String> clientResponse = getEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -339,8 +339,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -387,8 +387,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<String> clientResponse = getMbcsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -442,8 +442,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putMbcsDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -490,8 +490,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<String> clientResponse = getWhitespaceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -545,8 +545,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putWhitespaceDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -593,8 +593,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<String> clientResponse = getNotProvidedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -646,8 +646,8 @@ public final class StringsImpl implements Strings {
                         }
                         ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -699,8 +699,8 @@ public final class StringsImpl implements Strings {
                         }
                         ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -755,8 +755,8 @@ public final class StringsImpl implements Strings {
                     try {
                         ServiceResponse<Void> clientResponse = putBase64UrlEncodedDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -808,8 +808,8 @@ public final class StringsImpl implements Strings {
                         }
                         ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

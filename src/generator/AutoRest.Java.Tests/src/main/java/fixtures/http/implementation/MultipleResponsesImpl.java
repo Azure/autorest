@@ -231,8 +231,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError200ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -280,8 +280,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError204ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -329,8 +329,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError201InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -378,8 +378,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError202NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -427,8 +427,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -476,8 +476,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model201ModelDefaultError200ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -525,8 +525,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model201ModelDefaultError201ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -574,8 +574,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200Model201ModelDefaultError400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -623,8 +623,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -673,8 +673,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -723,8 +723,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -773,8 +773,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -823,8 +823,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultError202NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -872,8 +872,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultError204NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -921,8 +921,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultError400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -970,8 +970,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone202InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1018,8 +1018,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone204NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1066,8 +1066,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1114,8 +1114,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1162,8 +1162,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = getDefaultModelA200ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (MyException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1209,8 +1209,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = getDefaultModelA200NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (MyException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1256,8 +1256,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = getDefaultModelA400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (MyException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1303,8 +1303,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = getDefaultModelA400NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (MyException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1350,8 +1350,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = getDefaultNone200InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1396,8 +1396,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = getDefaultNone200NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1442,8 +1442,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = getDefaultNone400InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1488,8 +1488,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<Void> clientResponse = getDefaultNone400NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1534,8 +1534,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA200NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1581,8 +1581,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA200ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1628,8 +1628,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA200InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1675,8 +1675,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA400NoneDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1722,8 +1722,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA400ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1769,8 +1769,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA400InvalidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1816,8 +1816,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
                     try {
                         ServiceResponse<A> clientResponse = get200ModelA202ValidDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

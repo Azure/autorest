@@ -187,8 +187,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = head400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -234,8 +234,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -282,8 +282,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -325,8 +325,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -373,8 +373,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -416,8 +416,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -464,8 +464,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -507,8 +507,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -555,8 +555,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -598,8 +598,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete400Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -645,8 +645,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = head401Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -692,8 +692,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get402Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -739,8 +739,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get403Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -787,8 +787,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -830,8 +830,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -878,8 +878,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch405Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -921,8 +921,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch405Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -969,8 +969,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post406Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1012,8 +1012,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post406Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1060,8 +1060,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete407Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1103,8 +1103,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete407Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1151,8 +1151,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put409Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1194,8 +1194,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put409Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1241,8 +1241,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = head410Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1288,8 +1288,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get411Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1335,8 +1335,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get412Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1383,8 +1383,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put413Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1426,8 +1426,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = put413Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1474,8 +1474,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch414Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1517,8 +1517,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = patch414Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1565,8 +1565,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post415Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1608,8 +1608,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post415Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1655,8 +1655,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get416Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1703,8 +1703,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete417Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1746,8 +1746,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete417Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1793,8 +1793,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
                     try {
                         ServiceResponse<Error> clientResponse = head429Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

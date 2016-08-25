@@ -191,8 +191,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<IntWrapper> clientResponse = getIntDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -247,8 +247,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putIntDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -295,8 +295,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<LongWrapper> clientResponse = getLongDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -351,8 +351,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putLongDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -399,8 +399,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<FloatWrapper> clientResponse = getFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -455,8 +455,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -503,8 +503,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<DoubleWrapper> clientResponse = getDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -559,8 +559,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -607,8 +607,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<BooleanWrapper> clientResponse = getBoolDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -663,8 +663,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putBoolDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -711,8 +711,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<StringWrapper> clientResponse = getStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -767,8 +767,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -815,8 +815,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<DateWrapper> clientResponse = getDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -871,8 +871,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -919,8 +919,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<DatetimeWrapper> clientResponse = getDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -975,8 +975,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putDateTimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1023,8 +1023,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Datetimerfc1123Wrapper> clientResponse = getDateTimeRfc1123Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1079,8 +1079,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putDateTimeRfc1123Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1127,8 +1127,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<DurationWrapper> clientResponse = getDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1183,8 +1183,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1231,8 +1231,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<ByteWrapper> clientResponse = getByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1287,8 +1287,8 @@ public final class PrimitivesImpl implements Primitives {
                     try {
                         ServiceResponse<Void> clientResponse = putByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

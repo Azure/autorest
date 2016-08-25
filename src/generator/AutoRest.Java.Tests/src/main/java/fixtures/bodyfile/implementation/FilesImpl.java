@@ -106,8 +106,8 @@ public final class FilesImpl implements Files {
                     try {
                         ServiceResponse<InputStream> clientResponse = getFileDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -154,8 +154,8 @@ public final class FilesImpl implements Files {
                     try {
                         ServiceResponse<InputStream> clientResponse = getFileLargeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -202,8 +202,8 @@ public final class FilesImpl implements Files {
                     try {
                         ServiceResponse<InputStream> clientResponse = getEmptyFileDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

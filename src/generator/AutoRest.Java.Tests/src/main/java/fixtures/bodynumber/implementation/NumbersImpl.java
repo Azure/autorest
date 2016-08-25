@@ -188,8 +188,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getNullDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -236,8 +236,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getInvalidFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -284,8 +284,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getInvalidDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -332,8 +332,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<BigDecimal> clientResponse = getInvalidDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -383,8 +383,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -431,8 +431,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getBigFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -482,8 +482,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -530,8 +530,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getBigDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -581,8 +581,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDoublePositiveDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -629,8 +629,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getBigDoublePositiveDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -680,8 +680,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDoubleNegativeDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -728,8 +728,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getBigDoubleNegativeDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -783,8 +783,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -831,8 +831,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<BigDecimal> clientResponse = getBigDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -886,8 +886,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDecimalPositiveDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -934,8 +934,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<BigDecimal> clientResponse = getBigDecimalPositiveDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -989,8 +989,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putBigDecimalNegativeDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1037,8 +1037,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<BigDecimal> clientResponse = getBigDecimalNegativeDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1088,8 +1088,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putSmallFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1136,8 +1136,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getSmallFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1187,8 +1187,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putSmallDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1235,8 +1235,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Double> clientResponse = getSmallDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1290,8 +1290,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<Void> clientResponse = putSmallDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1338,8 +1338,8 @@ public final class NumbersImpl implements Numbers {
                     try {
                         ServiceResponse<BigDecimal> clientResponse = getSmallDecimalDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

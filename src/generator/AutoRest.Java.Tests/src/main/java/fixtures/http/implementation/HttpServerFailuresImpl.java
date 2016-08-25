@@ -109,8 +109,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = head501Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -156,8 +156,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = get501Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -204,8 +204,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post505Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -247,8 +247,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = post505Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -295,8 +295,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete505Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -338,8 +338,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
                     try {
                         ServiceResponse<Error> clientResponse = delete505Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

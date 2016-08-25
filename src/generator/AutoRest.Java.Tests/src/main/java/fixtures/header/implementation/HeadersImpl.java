@@ -233,8 +233,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramExistingKeyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -281,8 +281,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> clientResponse = responseExistingKeyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -336,8 +336,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramProtectedKeyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -384,8 +384,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> clientResponse = responseProtectedKeyDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -442,8 +442,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramIntegerDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -497,8 +497,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> clientResponse = responseIntegerDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -555,8 +555,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramLongDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -610,8 +610,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> clientResponse = responseLongDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -668,8 +668,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -723,8 +723,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> clientResponse = responseFloatDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -781,8 +781,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -836,8 +836,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> clientResponse = responseDoubleDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -894,8 +894,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramBoolDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -949,8 +949,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> clientResponse = responseBoolDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1005,8 +1005,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1055,8 +1055,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1110,8 +1110,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> clientResponse = responseStringDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1171,8 +1171,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1226,8 +1226,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> clientResponse = responseDateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1287,8 +1287,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDatetimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1342,8 +1342,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> clientResponse = responseDatetimeDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1402,8 +1402,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDatetimeRfc1123Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1456,8 +1456,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDatetimeRfc1123Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1511,8 +1511,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> clientResponse = responseDatetimeRfc1123Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1572,8 +1572,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1627,8 +1627,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> clientResponse = responseDurationDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1689,8 +1689,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1744,8 +1744,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> clientResponse = responseByteDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1800,8 +1800,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramEnumDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1850,8 +1850,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = paramEnumDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1905,8 +1905,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> clientResponse = responseEnumDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1953,8 +1953,8 @@ public final class HeadersImpl implements fixtures.header.Headers {
                     try {
                         ServiceResponse<Void> clientResponse = customRequestIdDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

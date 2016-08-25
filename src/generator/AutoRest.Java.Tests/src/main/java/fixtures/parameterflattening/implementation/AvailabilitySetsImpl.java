@@ -120,8 +120,8 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
                     try {
                         ServiceResponse<Void> clientResponse = updateDelegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ServiceException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });

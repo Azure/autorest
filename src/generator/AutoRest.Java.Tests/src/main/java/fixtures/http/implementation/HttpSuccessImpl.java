@@ -167,8 +167,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = head200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -215,8 +215,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Boolean> clientResponse = get200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -264,8 +264,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -307,8 +307,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -356,8 +356,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -399,8 +399,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -448,8 +448,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -491,8 +491,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -540,8 +540,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -583,8 +583,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete200Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -632,8 +632,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put201Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -675,8 +675,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put201Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -724,8 +724,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post201Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -767,8 +767,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post201Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -816,8 +816,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -859,8 +859,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -908,8 +908,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -951,8 +951,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1000,8 +1000,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1043,8 +1043,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1092,8 +1092,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1135,8 +1135,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete202Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1183,8 +1183,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = head204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1232,8 +1232,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1275,8 +1275,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = put204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1324,8 +1324,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1367,8 +1367,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = patch204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1416,8 +1416,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1459,8 +1459,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = post204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1508,8 +1508,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1551,8 +1551,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = delete204Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
@@ -1599,8 +1599,8 @@ public final class HttpSuccessImpl implements HttpSuccess {
                     try {
                         ServiceResponse<Void> clientResponse = head404Delegate(response);
                         return Observable.just(clientResponse);
-                    } catch (ErrorException | IOException exception) {
-                        return Observable.error(exception);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
                 }
             });
