@@ -132,7 +132,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 

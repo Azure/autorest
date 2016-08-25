@@ -100,7 +100,7 @@ public class PollingState<T> {
         }
 
         if (responseContent == null || responseContent.isEmpty()) {
-            CloudException exception = new CloudException("no body");
+            CloudException exception = new CloudException("polling response does not contain a valid body");
             exception.setResponse(response);
             throw exception;
         }

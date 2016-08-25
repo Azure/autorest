@@ -29,6 +29,13 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
     protected ServiceCall() {
     }
 
+    /**
+     * Creates a ServiceCall from an observable object.
+     *
+     * @param observable the observable to create from
+     * @param <T> the type of the response
+     * @return the created ServiceCall
+     */
     public static <T> ServiceCall<T> create(final Observable<ServiceResponse<T>> observable) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
@@ -47,6 +54,14 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
         return serviceCall;
     }
 
+    /**
+     * Creates a ServiceCall from an observable object and a callback.
+     *
+     * @param observable the observable to create from
+     * @param callback the callback to call when events happen
+     * @param <T> the type of the response
+     * @return the created ServiceCall
+     */
     public static <T> ServiceCall<T> create(final Observable<ServiceResponse<T>> observable, final ServiceCallback<T> callback) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
@@ -71,6 +86,15 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
         return serviceCall;
     }
 
+    /**
+     * Creates a ServiceCall from an observable and a callback for a header response.
+     *
+     * @param observable the observable of a REST call that returns JSON in a header
+     * @param callback the callback to call when events happen
+     * @param <T> the type of the response body
+     * @param <V> the type of the response header
+     * @return the created ServiceCall
+     */
     public static <T, V> ServiceCall<T> createWithHeaders(final Observable<ServiceResponseWithHeaders<T, V>> observable, final ServiceCallback<T> callback) {
         final ServiceCall<T> serviceCall = new ServiceCall<>();
         serviceCall.subscription = observable
@@ -95,20 +119,17 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
         return serviceCall;
     }
 
+    /**
+     * @return the current Rx subscription associated with the ServiceCall.
+     */
     public Subscription getSubscription() {
         return subscription;
     }
 
-    public void setSubscription(Subscription subscription) {
+    protected void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
 
-    /**
-     * Cancel the Retrofit call if possible. Parameter
-     * 'mayInterruptIfRunning is ignored.
-     *
-     * @param mayInterruptIfRunning ignored
-     */
     @Override
     public boolean cancel(boolean mayInterruptIfRunning) {
         subscription.unsubscribe();

@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.ws.WebServiceException;
-
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;
@@ -118,8 +116,8 @@ public class PagingTests {
             List<ProductInner> response = client.pagings().getMultiplePagesFailure().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 
@@ -129,8 +127,8 @@ public class PagingTests {
             List<ProductInner> response = client.pagings().getMultiplePagesFailureUri().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 }

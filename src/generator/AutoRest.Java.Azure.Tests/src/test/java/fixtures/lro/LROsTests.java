@@ -5,12 +5,6 @@ import com.microsoft.azure.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
-import fixtures.lro.models.Sku;
-import fixtures.lro.models.SubProduct;
-import okhttp3.logging.HttpLoggingInterceptor;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -18,6 +12,12 @@ import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.Product;
+import fixtures.lro.models.Sku;
+import fixtures.lro.models.SubProduct;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.junit.Assert.fail;
 
