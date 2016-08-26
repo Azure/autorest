@@ -111,7 +111,7 @@ namespace AutoRest.Swagger.Model
 
             if (!OperationId.Equals(priorOperation.OperationId))
             {
-                context.LogBreakingChange(MessageTemplate.ModifiedOperationId);
+                context.LogBreakingChange(ComparisonMessages.ModifiedOperationId);
             }
 
             CheckParameters(context, priorOperation);
@@ -124,11 +124,11 @@ namespace AutoRest.Swagger.Model
 
                     if (oldResponse == null)
                     {
-                        context.LogBreakingChange(MessageTemplate.AddingResponseCode, response.Key);
+                        context.LogBreakingChange(ComparisonMessages.AddingResponseCode, response.Key);
                     }
                     else
                     {
-                        context.Push(context.Path + "/" + response.Key);
+                        context.Push(response.Key);
                         response.Value.Compare(context, oldResponse);
                         context.Pop();
                     }
@@ -140,7 +140,7 @@ namespace AutoRest.Swagger.Model
 
                     if (newResponse == null)
                     {
-                        context.LogBreakingChange(MessageTemplate.RemovedResponseCode, response.Key);
+                        context.LogBreakingChange(ComparisonMessages.RemovedResponseCode, response.Key);
                     }
                 }
             }
@@ -162,13 +162,13 @@ namespace AutoRest.Swagger.Model
 
                 if (newParam != null)
                 {
-                    context.Push(context.Path + "/" + oldParam.Name);
+                    context.Push(oldParam.Name);
                     newParam.Compare(context, oldParam);
                     context.Pop();
                 }
                 else if (oldParam.IsRequired)
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedRequiredParameter, oldParam.Name);
+                    context.LogBreakingChange(ComparisonMessages.RemovedRequiredParameter, oldParam.Name);
                 }
             }
 
@@ -184,7 +184,7 @@ namespace AutoRest.Swagger.Model
 
                 if (oldParam == null)
                 {
-                    context.LogBreakingChange(MessageTemplate.AddingRequiredParameter, newParam.Name);
+                    context.LogBreakingChange(ComparisonMessages.AddingRequiredParameter, newParam.Name);
                 }
             }
         }

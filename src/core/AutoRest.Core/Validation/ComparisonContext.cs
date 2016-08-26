@@ -36,7 +36,7 @@ namespace AutoRest.Core.Validation
 
         public DataDirection Direction { get; set; } = DataDirection.None;
 
-        public string Path { get { return _path.Peek(); } }
+        public string Path { get { return string.Join("/", _path.Reverse()); } }
 
         public void Push(string element) { _path.Push(element); }
         public void Pop() { _path.Pop(); }

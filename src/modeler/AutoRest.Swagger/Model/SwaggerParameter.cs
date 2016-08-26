@@ -60,17 +60,17 @@ namespace AutoRest.Swagger.Model
 
             if (In != priorParameter.In)
             {
-                context.LogBreakingChange(MessageTemplate.ParameterInHasChanged, priorParameter.In.ToString().ToLower(CultureInfo.CurrentCulture), In.ToString().ToLower(CultureInfo.CurrentCulture));
+                context.LogBreakingChange(ComparisonMessages.ParameterInHasChanged, priorParameter.In.ToString().ToLower(CultureInfo.CurrentCulture), In.ToString().ToLower(CultureInfo.CurrentCulture));
             }
 
             if (this.IsConstant != priorParameter.IsConstant)
             {
-                context.LogBreakingChange(MessageTemplate.ConstantStatusHasChanged);
+                context.LogBreakingChange(ComparisonMessages.ConstantStatusHasChanged);
             }
 
             if (Reference != null && !Reference.Equals(priorParameter.Reference))
             {
-                context.LogBreakingChange(MessageTemplate.ReferenceRedirection);
+                context.LogBreakingChange(ComparisonMessages.ReferenceRedirection);
             }
 
             if (Schema != null && priorParameter.Schema != null)

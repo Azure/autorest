@@ -60,7 +60,7 @@ namespace AutoRest.Swagger.Model
                 Header oldHeader = null;
                 if (!priorHeaders.TryGetValue(header.Key, out oldHeader) && header.Value.IsRequired)
                 {
-                    context.LogBreakingChange(MessageTemplate.AddingRequiredHeader, header.Key);
+                    context.LogBreakingChange(ComparisonMessages.AddingRequiredHeader, header.Key);
                 }
                 else
                 {
@@ -73,7 +73,7 @@ namespace AutoRest.Swagger.Model
                 Header newHeader = null;
                 if (!headers.TryGetValue(header.Key, out newHeader) && header.Value.IsRequired)
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovingRequiredHeader, header.Key);
+                    context.LogBreakingChange(ComparisonMessages.RemovingRequiredHeader, header.Key);
                 }
                 else
                 {

@@ -83,32 +83,34 @@ namespace AutoRest.Swagger.Model
 
             if (priorSchema.ReadOnly != ReadOnly)
             {
-                context.LogBreakingChange(MessageTemplate.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture));
+                context.LogBreakingChange(ComparisonMessages.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture));
             }
 
             if ((priorSchema.Discriminator == null && Discriminator != null) ||
                 (priorSchema.Discriminator != null && !priorSchema.Discriminator.Equals(Discriminator)))
             {
-                context.LogBreakingChange(MessageTemplate.DifferentDiscriminator);
+                context.LogBreakingChange(ComparisonMessages.DifferentDiscriminator);
             }
 
             if ((priorSchema.Extends == null && Extends != null) ||
                 (priorSchema.Extends != null && !priorSchema.Extends.Equals(Extends)))
             {
-                context.LogBreakingChange(MessageTemplate.DifferentExtends);
+                context.LogBreakingChange(ComparisonMessages.DifferentExtends);
             }
 
             if ((priorSchema.AllOf == null && AllOf != null) ||
                 (priorSchema.AllOf != null && AllOf == null))
             {
-                context.LogBreakingChange(MessageTemplate.DifferentAllOf);
+                context.LogBreakingChange(ComparisonMessages.DifferentAllOf);
             }
             else if (priorSchema.AllOf != null)
             {
                 CompareAllOfs(context, priorSchema);
             }
 
+            context.Push("properties");
             CompareProperties(context, priorSchema);
+            context.Pop();
 
             return context.Messages;
         }
@@ -134,7 +136,7 @@ namespace AutoRest.Swagger.Model
 
             if (different > 0)
             {
-                context.LogBreakingChange(MessageTemplate.DifferentAllOf);
+                context.LogBreakingChange(ComparisonMessages.DifferentAllOf);
             }
         }
 
@@ -149,11 +151,11 @@ namespace AutoRest.Swagger.Model
                     Schema model = null;
                     if (Properties == null || !Properties.TryGetValue(def.Key, out model))
                     {
-                        context.LogBreakingChange(MessageTemplate.RemovedProperty1, def.Key);
+                        context.LogBreakingChange(ComparisonMessages.RemovedProperty1, def.Key);
                     }
                     else
                     {
-                        context.Push(context.Path + "/" + def.Key);
+                        context.Push(def.Key);
                         model.Compare(context, def.Value);
                         context.Pop();
                     }
@@ -169,7 +171,7 @@ namespace AutoRest.Swagger.Model
                     Schema model = null;
                     if (priorSchema.Properties == null || !priorSchema.Properties.TryGetValue(def, out model) && Required.Contains(def))
                     {
-                        context.LogBreakingChange(MessageTemplate.AddedRequiredProperty1, def);
+                        context.LogBreakingChange(ComparisonMessages.AddedRequiredProperty1, def);
                     }
                 }
             }

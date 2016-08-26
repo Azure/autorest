@@ -21,12 +21,14 @@ namespace AutoRest.Core.Validation
 
             Severity = severity;
             Id = template.Id;
+            Path = path;
             Message = template.Message;
         }
         public ComparisonMessage(MessageTemplate template, string path, LogEntrySeverity severity, params object[] formatArguments)
         {
             Severity = severity;
             Id = template.Id;
+            Path = path;
             Message = string.Format(CultureInfo.CurrentCulture, template.Message, formatArguments);
         }
 

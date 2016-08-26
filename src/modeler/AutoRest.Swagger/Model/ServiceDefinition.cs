@@ -161,7 +161,7 @@ namespace AutoRest.Swagger.Model
             if (context.Strict)
             {
                 // There was no version change between the documents. This is not an error, but noteworthy.
-                context.LogMessage(MessageTemplate.NoVersionChange, LogEntrySeverity.Info);
+                context.LogMessage(ComparisonMessages.NoVersionChange, LogEntrySeverity.Info);
             }
 
             // Check that all the HTTP schemes of the old version are supported by the new version.
@@ -171,7 +171,7 @@ namespace AutoRest.Swagger.Model
             {
                 if (!Schemes.Contains(scheme))
                 {
-                    context.LogBreakingChange(MessageTemplate.ProtocolNoLongerSupported, scheme);
+                    context.LogBreakingChange(ComparisonMessages.ProtocolNoLongerSupported, scheme);
                 }
             }
             context.Pop();
@@ -183,7 +183,7 @@ namespace AutoRest.Swagger.Model
             {
                 if (!Consumes.Contains(format))
                 {
-                    context.LogBreakingChange(MessageTemplate.RequestBodyFormatNoLongerSupported, format);
+                    context.LogBreakingChange(ComparisonMessages.RequestBodyFormatNoLongerSupported, format);
                 }
             }
             context.Pop();
@@ -195,7 +195,7 @@ namespace AutoRest.Swagger.Model
             {
                 if (!previousDefinition.Produces.Contains(format))
                 {
-                    context.LogBreakingChange(MessageTemplate.ResponseBodyFormatNoLongerSupported, format);
+                    context.LogBreakingChange(ComparisonMessages.ResponseBodyFormatNowSupported, format);
                 }
             }
             context.Pop();
@@ -208,18 +208,33 @@ namespace AutoRest.Swagger.Model
                 Dictionary<string, Operation> operations = null;
                 if (!Paths.TryGetValue(path, out operations))
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedPath, path);
+                    context.LogBreakingChange(ComparisonMessages.RemovedPath, path);
                 }
                 else
                 {
-                    // TODO: check that no operations were removed.
+                    context.Push(path);
+
+                    Dictionary<string, Operation> previousOperations = previousDefinition.Paths[path];
+                    foreach (var previousOperation in previousOperations)
+                    {
+                        Operation newOperation = null;
+                        if (!operations.TryGetValue(previousOperation.Key, out newOperation))
+                        {
+                            context.LogBreakingChange(ComparisonMessages.RemovedOperation, previousOperation.Value.OperationId);
+                        }
+                    }
 
                     foreach (var operation in operations)
                     {
-                        context.Push(operation.Value.OperationId);
-                        operation.Value.Compare(context, previousDefinition.Paths[path][operation.Key]);
-                        context.Pop();
+                        Operation previousOperation = null;
+                        if (previousDefinition.Paths[path].TryGetValue(operation.Key, out previousOperation))
+                        {
+                            context.Push(operation.Key);
+                            operation.Value.Compare(context, previousOperation);
+                            context.Pop();
+                        }
                     }
+                    context.Pop();
                 }
             }
             context.Pop();
@@ -230,18 +245,33 @@ namespace AutoRest.Swagger.Model
                 Dictionary<string, Operation> operations = null;
                 if (!Paths.TryGetValue(path, out operations))
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedPath, path);
+                    context.LogBreakingChange(ComparisonMessages.RemovedPath, path);
                 }
                 else
                 {
-                    // TODO: check that no operations were removed.
+                    context.Push(path);
+
+                    Dictionary<string, Operation> previousOperations = previousDefinition.CustomPaths[path];
+                    foreach (var previousOperation in previousOperations)
+                    {
+                        Operation newOperation = null;
+                        if (!operations.TryGetValue(previousOperation.Key, out newOperation))
+                        {
+                            context.LogBreakingChange(ComparisonMessages.RemovedOperation, previousOperation.Value.OperationId);
+                        }
+                    }
 
                     foreach (var operation in operations)
                     {
-                        context.Push(operation.Value.OperationId);
-                        operation.Value.Compare(context, previousDefinition.Paths[path][operation.Key]);
-                        context.Pop();
+                        Operation previousOperation = null;
+                        if (previousDefinition.CustomPaths[path].TryGetValue(operation.Key, out previousOperation))
+                        {
+                            context.Push(operation.Key);
+                            operation.Value.Compare(context, previousDefinition.CustomPaths[path][operation.Key]);
+                            context.Pop();
+                        }
                     }
+                    context.Pop();
                 }
             }
             context.Pop();
@@ -252,11 +282,11 @@ namespace AutoRest.Swagger.Model
                 Schema schema = null;
                 if (!Definitions.TryGetValue(def, out schema))
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedDefinition, def);
+                    context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
                 }
                 else
                 {
-                    context.Push("definitions/" + def);
+                    context.Push(def);
                     schema.Compare(context, previousDefinition.Definitions[def]);
                     context.Pop();
                 }
@@ -269,11 +299,11 @@ namespace AutoRest.Swagger.Model
                 SwaggerParameter parameter = null;
                 if (!Parameters.TryGetValue(def, out parameter))
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedClientParameter, def);
+                    context.LogBreakingChange(ComparisonMessages.RemovedClientParameter, def);
                 }
                 else
                 {
-                    context.Push("parameters/" + def);
+                    context.Push(def);
                     parameter.Compare(context, previousDefinition.Parameters[def]);
                     context.Pop();
                 }
@@ -286,11 +316,11 @@ namespace AutoRest.Swagger.Model
                 OperationResponse response = null;
                 if (!Responses.TryGetValue(def, out response))
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedDefinition, def);
+                    context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
                 }
                 else
                 {
-                    context.Push("responses/" + def);
+                    context.Push(def);
                     response.Compare(context, previousDefinition.Responses[def]);
                     context.Pop();
                 }
@@ -324,7 +354,7 @@ namespace AutoRest.Swagger.Model
 
                     if (oldMajor > newMajor)
                     {
-                        context.LogMessage(MessageTemplate.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                        context.LogMessage(ComparisonMessages.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
                     }
                 }
 
@@ -339,7 +369,7 @@ namespace AutoRest.Swagger.Model
 
                         if (oldMinor > newMinor)
                         {
-                            context.LogMessage(MessageTemplate.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                            context.LogMessage(ComparisonMessages.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
                         }
                     }
                 }

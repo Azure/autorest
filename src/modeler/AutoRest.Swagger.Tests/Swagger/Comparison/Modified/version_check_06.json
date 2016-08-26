@@ -1,0 +1,31 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "version_check_06",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Greetings": {
+      "put": {
+        "tag": [ "A" ],
+        "operationId": "A_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tag": [ "A" ],
+        "operationId": "A_Port",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  }
+}

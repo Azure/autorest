@@ -216,19 +216,19 @@ namespace AutoRest.Swagger.Model
 
             if (Reference != null && !Reference.Equals(prior.Reference))
             {
-                context.LogBreakingChange(MessageTemplate.ReferenceRedirection);
+                context.LogBreakingChange(ComparisonMessages.ReferenceRedirection);
             }
 
             if (IsRequired != prior.IsRequired)
             {
-                context.LogBreakingChange(MessageTemplate.RequiredStatusChange);
+                context.LogBreakingChange(ComparisonMessages.RequiredStatusChange);
             }
 
             // Are the types the same?
 
             if (prior.Type.HasValue != Type.HasValue || (Type.HasValue && prior.Type.Value != Type.Value))
             {
-                context.LogBreakingChange(MessageTemplate.TypeChanged);
+                context.LogBreakingChange(ComparisonMessages.TypeChanged);
             }
 
             // What about the formats?
@@ -239,12 +239,12 @@ namespace AutoRest.Swagger.Model
 
             if (Default != null && !Default.Equals(prior.Default) || (Default == null && !string.IsNullOrEmpty(prior.Default)))
             {
-                context.LogBreakingChange(MessageTemplate.DefaultValueChanged);
+                context.LogBreakingChange(ComparisonMessages.DefaultValueChanged);
             }
 
             if (Type.HasValue && Type.Value == DataType.Array && prior.CollectionFormat != CollectionFormat)
             {
-                context.LogBreakingChange(MessageTemplate.ArrayCollectionFormatChanged);
+                context.LogBreakingChange(ComparisonMessages.ArrayCollectionFormatChanged);
             }
 
             CompareProperties(context, prior);
@@ -262,7 +262,7 @@ namespace AutoRest.Swagger.Model
             {
                 if (this.Enum == null)
                 {
-                    context.LogBreakingChange(MessageTemplate.RemovedEnumValues);
+                    context.LogBreakingChange(ComparisonMessages.RemovedEnumValues);
                 }
                 else
                 {
@@ -270,7 +270,7 @@ namespace AutoRest.Swagger.Model
                     {
                         if (!this.Enum.Contains(e))
                         {
-                            context.LogBreakingChange(MessageTemplate.RemovedEnumValue, e);
+                            context.LogBreakingChange(ComparisonMessages.RemovedEnumValue, e);
 
                         }
                     }
@@ -278,7 +278,7 @@ namespace AutoRest.Swagger.Model
             }
             else if (this.Enum != null)
             {
-                context.LogBreakingChange(MessageTemplate.AddedEnumValues);
+                context.LogBreakingChange(ComparisonMessages.AddedEnumValues);
             }
         }
 
@@ -288,15 +288,15 @@ namespace AutoRest.Swagger.Model
 
             if (prior.AdditionalProperties == null && AdditionalProperties != null)
             {
-                context.LogBreakingChange(MessageTemplate.AddedAdditionalProperties);
+                context.LogBreakingChange(ComparisonMessages.AddedAdditionalProperties);
             }
             else if (prior.AdditionalProperties != null && AdditionalProperties == null)
             {
-                context.LogBreakingChange(MessageTemplate.RemovedAdditionalProperties);
+                context.LogBreakingChange(ComparisonMessages.RemovedAdditionalProperties);
             }
             else if (AdditionalProperties != null)
             {
-                context.Push(context.Path + "/additionalProperties");
+                context.Push("additionalProperties");
                 AdditionalProperties.Compare(context, prior.AdditionalProperties);
                 context.Pop();
             }
@@ -313,9 +313,11 @@ namespace AutoRest.Swagger.Model
                 throw new ArgumentNullException("context");
             }
 
-            if (prior.Format == null && Format != null || prior.Format != null && Format == null)
+            if (prior.Format == null && Format != null || 
+                prior.Format != null && Format == null ||
+                prior.Format != null && Format != null && !prior.Format.Equals(Format))
             {
-                context.LogBreakingChange(MessageTemplate.TypeFormatChanged);
+                context.LogBreakingChange(ComparisonMessages.TypeFormatChanged);
             }
         }
 
@@ -334,48 +336,48 @@ namespace AutoRest.Swagger.Model
             if ((prior.MultipleOf == null && MultipleOf != null) ||
                 (prior.MultipleOf != null && !prior.MultipleOf.Equals(MultipleOf)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "multipleOf");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "multipleOf");
             }
             if ((prior.Maximum == null && Maximum != null) ||
                 (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) ||
                 prior.ExclusiveMaximum != ExclusiveMaximum)
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maximum");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "maximum");
             }
             if ((prior.Minimum == null && Minimum != null) ||
                 (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) ||
                 prior.ExclusiveMinimum != ExclusiveMinimum)
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minimum");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "minimum");
             }
             if ((prior.MaxLength == null && MaxLength != null) ||
                 (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maxLength");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "maxLength");
             }
             if ((prior.MinLength == null && MinLength != null) ||
                 (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minLength");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "minLength");
             }
             if ((prior.Pattern == null && Pattern != null) ||
                 (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "pattern");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "pattern");
             }
             if ((prior.MaxItems == null && MaxItems != null) ||
                 (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maxItems");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "maxItems");
             }
             if ((prior.MinItems == null && MinItems != null) ||
                 (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minItems");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "minItems");
             }
             if (prior.UniqueItems != UniqueItems)
             {
-                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "uniqueItems");
+                context.LogBreakingChange(ComparisonMessages.PropertyValueChanged, "uniqueItems");
             }
         }
 
@@ -392,7 +394,7 @@ namespace AutoRest.Swagger.Model
 
             if (prior.Items != null && Items != null)
             {
-                context.Push(context.Path + "/items");
+                context.Push("items");
                 Items.Compare(context, prior.Items);
                 context.Pop();
             }

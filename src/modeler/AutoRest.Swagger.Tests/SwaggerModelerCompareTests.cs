@@ -36,14 +36,149 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that raising the version number results in a non-strict comparison.
+        /// Verifies that raising the version number does not result in a strict comparison.
         /// </summary>
         [Fact]
-        public void UpdatedVersionNumberNotStrict()
+        public void UpdatedMajorVersionNumberNotStrict()
         {
             var messages = CompareSwagger("version_check_01.json").ToArray();
             Assert.NotEmpty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
             Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+        }
+
+        [Fact]
+        public void UpdatedMinorVersionNumberNotStrict()
+        {
+            var messages = CompareSwagger("version_check_03.json").ToArray();
+            Assert.NotEmpty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+        }
+
+        /// <summary>
+        /// Verifies that not raising the version number results in a strict comparison.
+        /// </summary>
+        [Fact]
+        public void SameMajorVersionNumberStrict()
+        {
+            var messages = CompareSwagger("version_check_02.json").ToArray();
+            Assert.Empty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
+            Assert.NotEmpty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+        }
+
+        /// <summary>
+        /// Verifies that lowering the version number results in an error.
+        /// </summary>
+        [Fact]
+        public void ReversedVersionNumberChange()
+        {
+            var messages = CompareSwagger("version_check_04.json").ToArray();
+            Assert.NotEmpty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+            var reversed = messages.Where(m => m.Id == ComparisonMessages.VersionsReversed.Id);
+            Assert.NotEmpty(reversed);
+            Assert.Equal(LogEntrySeverity.Error, reversed.First().Severity);
+        }
+
+        /// <summary>
+        /// Verifies that if you remove a supported protocol when updating the specification, it's caught.
+        /// </summary>
+        [Fact]
+        public void ProtocolMissing()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.ProtocolNoLongerSupported.Id);
+            Assert.NotEmpty(missing);
+            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+        }
+
+        /// <summary>
+        /// Verifies that if you remove a supported request body format, it's caught.
+        /// </summary>
+        [Fact]
+        public void RequestFormatMissing()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RequestBodyFormatNoLongerSupported.Id);
+            Assert.NotEmpty(missing);
+            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+        }
+
+        /// <summary>
+        /// Verifies that if you add an expected response body format, it's caught.
+        /// </summary>
+        [Fact]
+        public void ResponseFormatAdded()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var added = messages.Where(m => m.Id == ComparisonMessages.ResponseBodyFormatNowSupported.Id);
+            Assert.NotEmpty(added);
+            Assert.Equal(LogEntrySeverity.Error, added.First().Severity);
+        }
+
+        /// <summary>
+        /// Verifies that if you remove a schema, it's caught.
+        /// </summary>
+        [Fact]
+        public void DefinitionRemoved()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedDefinition.Id);
+            Assert.NotEmpty(missing);
+            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+        }
+
+        /// <summary>
+        /// Verifies that if you change the type of a schema property, it's caught.
+        /// </summary>
+        [Fact]
+        public void PropertyTypeChanged()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/definitions/Database/properties/b", error.Path);
+        }
+
+        /// <summary>
+        /// Verifies that if you change the type format of a schema property, it's caught.
+        /// </summary>
+        [Fact]
+        public void PropertyTypeFormatChanged()
+        {
+            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.TypeFormatChanged.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/definitions/Database/properties/c", error.Path);
+        }
+
+        /// <summary>
+        /// Verifies that if you remove an operation, it's caught.
+        /// </summary>
+        [Fact]
+        public void OperationRemoved()
+        {
+            var messages = CompareSwagger("version_check_06.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedOperation.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Greetings", error.Path);
+        }
+
+        /// <summary>
+        /// Verifies that if you change the operations id for a path, it's caught.
+        /// </summary>
+        [Fact]
+        public void OperationIdChanged()
+        {
+            var messages = CompareSwagger("version_check_06.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.ModifiedOperationId.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Greetings/post", error.Path);
         }
     }
 }
