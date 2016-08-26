@@ -395,6 +395,7 @@ class AzureOperationPoller(object):
         self._done = threading.Event()
         self._thread = threading.Thread(
             target=self._start, args=(send_cmd, update_cmd, output_cmd))
+        self._thread.daemon = True
         self._thread.start()
 
     def _start(self, send_cmd, update_cmd, output_cmd):
