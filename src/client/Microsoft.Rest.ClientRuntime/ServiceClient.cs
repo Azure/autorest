@@ -66,7 +66,7 @@ namespace Microsoft.Rest
                     _osName = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName");
                 }
 
-                // If you want to log ProductName in userAgent, it has to be without spaces
+                // If you want to log OsName in userAgent, it has to be without spaces
                 if (!string.IsNullOrEmpty(_osName))
                 {
                     _osName = _osName.Replace(" ", "_");
