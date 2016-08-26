@@ -36,10 +36,10 @@ else
 }
  */
 public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
-    ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
+    ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
     @Model.ReturnTypeModel.GenericBodyClientTypeString pagedList = new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
+        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
             @Model.PagingGroupedParameterTransformation(true)
             return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true)).toBlocking().single().getBody();
         }
@@ -67,9 +67,9 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation),
-        new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String nextPageLink) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(String nextPageLink) {
                 @Model.PagingGroupedParameterTransformation(true)
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
             }
@@ -100,11 +100,11 @@ else
 @: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation)
-        .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> page) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> page) {
                 String nextPageLink = page.getBody().getNextPageLink();
                 @Model.PagingGroupedParameterTransformation(true)
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
@@ -135,7 +135,7 @@ else
 @: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterDeclaration) {
+public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterDeclaration) {
     @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -166,12 +166,12 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
 }
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation)
-        .flatMap(new Func1<Response<@Model.CallType>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(Response<@Model.CallType> response) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(Response<@Model.CallType> response) {
                 try {
                     ServiceResponse<@Model.ReturnTypeModel.GenericBodyWireTypeString> result = @(Model.Name)Delegate(response);
-                    return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>(result.getBody(), result.getResponse()));
+                    return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>(result.getBody(), result.getResponse()));
                 } catch (Throwable t) {
                     return Observable.error(t);
                 }
@@ -209,10 +209,10 @@ else
 }
  */
 public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
-    ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
+    ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
     @Model.ReturnTypeModel.GenericBodyClientTypeString pagedList = new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceCallGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
+        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String nextPageLink) throws RestException, IOException {
             @Model.PagingGroupedParameterTransformation()
             return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation()).toBlocking().single().getBody();
         }
@@ -240,9 +240,9 @@ public ServiceResponse<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Mod
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation),
-        new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        new Func1<String, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(String nextPageLink) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(String nextPageLink) {
                 @Model.PagingGroupedParameterTransformation()
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
             }
@@ -273,11 +273,11 @@ else
 @: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
-        .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        .concatMap(new Func1<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString> page) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> page) {
                 String nextPageLink = page.getBody().getNextPageLink();
                 @Model.PagingGroupedParameterTransformation()
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
@@ -308,7 +308,7 @@ else
 @: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
+public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
     @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -334,12 +334,12 @@ public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParam
 }
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation)
-        .flatMap(new Func1<Response<@Model.CallType>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>>>() {
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>>>() {
             @@Override
-            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>> call(Response<@Model.CallType> response) {
+            public Observable<ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>> call(Response<@Model.CallType> response) {
                 try {
                     ServiceResponse<@Model.ReturnTypeModel.GenericBodyWireTypeString> result = @(Model.Name)Delegate(response);
-                    return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceCallGenericParameterString>(result.getBody(), result.getResponse()));
+                    return Observable.just(new ServiceResponse<@Model.ReturnTypeModel.ServiceResponseGenericParameterString>(result.getBody(), result.getResponse()));
                 } catch (Throwable t) {
                     return Observable.error(t);
                 }

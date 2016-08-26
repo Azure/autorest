@@ -45,10 +45,13 @@ public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
 
     @foreach (var method in Model.MethodTemplateModels)
     {
-    var methodModel = (AzureMethodTemplateModel) method;
-    if (methodModel.IsPagingOperation || methodModel.IsPagingNextOperation) {
+    var methodModel = (AzureMethodTemplateModel)method;
+    if (methodModel.IsPagingOperation || methodModel.IsPagingNextOperation)
+    {
     @:@(Include(new PagingMethodTemplate(), methodModel))
-    } else {
+    }
+    else
+    {
     @:@(Include(new AzureMethodTemplate(), methodModel))
     }
     @EmptyLine

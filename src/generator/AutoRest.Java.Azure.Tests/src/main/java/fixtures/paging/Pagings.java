@@ -22,6 +22,7 @@ import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -44,7 +45,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -68,7 +69,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -88,7 +89,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -114,7 +115,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -134,7 +135,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
@@ -163,7 +164,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -184,7 +185,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -210,7 +211,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -234,7 +235,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -258,7 +259,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -282,7 +283,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -306,7 +307,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -334,7 +335,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -363,7 +364,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -387,7 +388,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -418,7 +419,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -442,7 +443,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
@@ -473,7 +474,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -497,7 +498,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -528,7 +529,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -557,7 +558,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -586,7 +587,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -615,7 +616,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -644,7 +645,7 @@ public interface Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Page<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall<List<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that receives an invalid nextLink.

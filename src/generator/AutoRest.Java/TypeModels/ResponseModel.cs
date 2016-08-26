@@ -198,6 +198,14 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public virtual string ServiceResponseGenericParameterString
+        {
+            get
+            {
+                return ServiceCallGenericParameterString;
+            }
+        }
+
         public virtual string GenericHeaderClientTypeString
         {
             get

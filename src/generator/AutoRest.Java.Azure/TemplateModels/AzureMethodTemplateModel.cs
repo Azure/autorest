@@ -704,7 +704,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Remove("java.util.List");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
@@ -733,7 +732,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Remove("java.util.List");
                     imports.Add("com.microsoft.rest.RestException");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");

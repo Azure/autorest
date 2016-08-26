@@ -41,6 +41,19 @@ namespace AutoRest.Java.Azure.TypeModels
                 var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
                 if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
                 {
+                    return string.Format(CultureInfo.InvariantCulture, "List<{0}>", bodySequenceType.ElementType);
+                }
+                return GenericBodyClientTypeString;
+            }
+        }
+
+        public override string ServiceResponseGenericParameterString
+        {
+            get
+            {
+                var bodySequenceType = BodyClientType as AzureSequenceTypeModel;
+                if (bodySequenceType != null && (_method.IsPagingNextOperation || _method.IsPagingOperation))
+                {
                     return string.Format(CultureInfo.InvariantCulture, "Page<{0}>", bodySequenceType.ElementType);
                 }
                 return GenericBodyClientTypeString;
@@ -87,7 +100,7 @@ namespace AutoRest.Java.Azure.TypeModels
             {
                 if (_method.IsPagingOperation || _method.IsPagingNextOperation)
                 {
-                    return "ServiceResponse<" + ServiceCallGenericParameterString + ">";
+                    return "ServiceResponse<" + ServiceResponseGenericParameterString + ">";
                 }
                 return base.ObservableClientResponseTypeString;
             }

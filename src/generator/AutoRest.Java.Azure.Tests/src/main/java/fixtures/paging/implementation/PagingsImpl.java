@@ -31,6 +31,7 @@ import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -164,7 +165,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -243,7 +244,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -323,7 +324,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -415,7 +416,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getOdataMultiplePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -495,7 +496,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -593,7 +594,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -689,7 +690,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -785,7 +786,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetryFirstSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -864,7 +865,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetrySecondSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -943,7 +944,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1022,7 +1023,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1101,7 +1102,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureUriSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1184,7 +1185,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1272,7 +1273,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1361,7 +1362,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1462,7 +1463,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1551,7 +1552,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1652,7 +1653,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1741,7 +1742,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1842,7 +1843,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -1930,7 +1931,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -2018,7 +2019,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getSinglePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -2106,7 +2107,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
@@ -2194,7 +2195,7 @@ public final class PagingsImpl implements Pagings {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Page<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<Page<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
+    public ServiceCall<List<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback) {
         return AzureServiceCall.create(
             getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<Product>>>>() {
