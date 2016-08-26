@@ -1,9 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Linq;
+using System.Globalization;
+
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
-using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Model
@@ -61,5 +64,115 @@ namespace AutoRest.Swagger.Model
         /// Defines the set of schemas this shema is composed of
         /// </summary>
         public IList<Schema> AllOf { get; set; }
+
+        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        {
+            var priorSchema = previous as Schema;
+
+            if (priorSchema == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+
+            base.Compare(context, previous);
+
+            if (priorSchema.ReadOnly != ReadOnly)
+            {
+                context.LogBreakingChange(MessageTemplate.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture));
+            }
+
+            if ((priorSchema.Discriminator == null && Discriminator != null) ||
+                (priorSchema.Discriminator != null && !priorSchema.Discriminator.Equals(Discriminator)))
+            {
+                context.LogBreakingChange(MessageTemplate.DifferentDiscriminator);
+            }
+
+            if ((priorSchema.Extends == null && Extends != null) ||
+                (priorSchema.Extends != null && !priorSchema.Extends.Equals(Extends)))
+            {
+                context.LogBreakingChange(MessageTemplate.DifferentExtends);
+            }
+
+            if ((priorSchema.AllOf == null && AllOf != null) ||
+                (priorSchema.AllOf != null && AllOf == null))
+            {
+                context.LogBreakingChange(MessageTemplate.DifferentAllOf);
+            }
+            else if (priorSchema.AllOf != null)
+            {
+                CompareAllOfs(context, priorSchema);
+            }
+
+            CompareProperties(context, priorSchema);
+
+            return context.Messages;
+        }
+
+
+        private void CompareAllOfs(ComparisonContext context, Schema priorSchema)
+        {
+            var different = 0;
+            foreach (var schema in priorSchema.AllOf)
+            {
+                if (!AllOf.Select(s => s.Reference).ToArray().Contains(schema.Reference))
+                {
+                    different += 1;
+                }
+            }
+            foreach (var schema in AllOf)
+            {
+                if (!priorSchema.AllOf.Select(s => s.Reference).ToArray().Contains(schema.Reference))
+                {
+                    different += 1;
+                }
+            }
+
+            if (different > 0)
+            {
+                context.LogBreakingChange(MessageTemplate.DifferentAllOf);
+            }
+        }
+
+        private void CompareProperties(ComparisonContext context, Schema priorSchema)
+        {
+            // Were any properties removed?
+
+            if (priorSchema.Properties != null)
+            {
+                foreach (var def in priorSchema.Properties)
+                {
+                    Schema model = null;
+                    if (Properties == null || !Properties.TryGetValue(def.Key, out model))
+                    {
+                        context.LogBreakingChange(MessageTemplate.RemovedProperty1, def.Key);
+                    }
+                    else
+                    {
+                        context.Push(context.Path + "/" + def.Key);
+                        model.Compare(context, def.Value);
+                        context.Pop();
+                    }
+                }
+            }
+
+            // Were any required properties added?
+
+            if (Properties != null)
+            {
+                foreach (var def in Properties.Keys)
+                {
+                    Schema model = null;
+                    if (priorSchema.Properties == null || !priorSchema.Properties.TryGetValue(def, out model) && Required.Contains(def))
+                    {
+                        context.LogBreakingChange(MessageTemplate.AddedRequiredProperty1, def);
+                    }
+                }
+            }
+        }
     }
 }

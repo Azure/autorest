@@ -21,5 +21,7 @@ namespace AutoRest.Core
         public abstract ServiceClient Build();
 
         public abstract ServiceClient Build(out IEnumerable<ValidationMessage> messages);
+
+        public abstract IEnumerable<ComparisonMessage> Compare();
     }
 }

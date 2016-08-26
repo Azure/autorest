@@ -82,6 +82,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string Input { get; set; }
 
         /// <summary>
+        /// Gets of sets the path to a previous version of the input specification file. This will cause
+        /// Autorest to compare the two versions rather than generate code.
+        /// </summary>
+        public string Previous { get; set; }
+
+        /// <summary>
         /// Gets or sets a name for the generated client models Namespace and Models output folder
         /// </summary>
         [SettingsInfo("Name to use for the generated client models namespace and folder name. Not supported by all code generators.")]

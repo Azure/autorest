@@ -30,6 +30,10 @@ namespace AutoRest
                     {
                         Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
                     }
+                    else if (!string.IsNullOrEmpty(settings.Previous))
+                    {
+                        Core.AutoRest.Compare(settings);
+                    }
                     else
                     {
                         Core.AutoRest.Generate(settings);

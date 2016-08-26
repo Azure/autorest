@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Diagnostics.CodeAnalysis;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Properties;
@@ -194,6 +195,206 @@ namespace AutoRest.Swagger.Model
                         string.Format(CultureInfo.InvariantCulture,
                            Resources.InvalidTypeInSwaggerSchema,
                             Type));
+            }
+        }
+
+        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        {
+
+            var prior = previous as SwaggerObject;
+
+            if (prior == null)
+            {
+                throw new ArgumentNullException("priorVersion");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            base.Compare(context, previous);
+
+            if (Reference != null && !Reference.Equals(prior.Reference))
+            {
+                context.LogBreakingChange(MessageTemplate.ReferenceRedirection);
+            }
+
+            if (IsRequired != prior.IsRequired)
+            {
+                context.LogBreakingChange(MessageTemplate.RequiredStatusChange);
+            }
+
+            // Are the types the same?
+
+            if (prior.Type.HasValue != Type.HasValue || (Type.HasValue && prior.Type.Value != Type.Value))
+            {
+                context.LogBreakingChange(MessageTemplate.TypeChanged);
+            }
+
+            // What about the formats?
+
+            CompareFormats(context, prior);
+
+            CompareItems(context, prior);
+
+            if (Default != null && !Default.Equals(prior.Default) || (Default == null && !string.IsNullOrEmpty(prior.Default)))
+            {
+                context.LogBreakingChange(MessageTemplate.DefaultValueChanged);
+            }
+
+            if (Type.HasValue && Type.Value == DataType.Array && prior.CollectionFormat != CollectionFormat)
+            {
+                context.LogBreakingChange(MessageTemplate.ArrayCollectionFormatChanged);
+            }
+
+            CompareProperties(context, prior);
+
+            CompareEnums(context, prior);
+
+            return context.Messages;
+        }
+
+        private void CompareEnums(ComparisonContext context, SwaggerObject prior)
+        {
+            // Was an enum value removed?
+
+            if (prior.Enum != null)
+            {
+                if (this.Enum == null)
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedEnumValues);
+                }
+                else
+                {
+                    foreach (var e in prior.Enum)
+                    {
+                        if (!this.Enum.Contains(e))
+                        {
+                            context.LogBreakingChange(MessageTemplate.RemovedEnumValue, e);
+
+                        }
+                    }
+                }
+            }
+            else if (this.Enum != null)
+            {
+                context.LogBreakingChange(MessageTemplate.AddedEnumValues);
+            }
+        }
+
+        private void CompareProperties(ComparisonContext context, SwaggerObject prior)
+        {
+            // Additional properties
+
+            if (prior.AdditionalProperties == null && AdditionalProperties != null)
+            {
+                context.LogBreakingChange(MessageTemplate.AddedAdditionalProperties);
+            }
+            else if (prior.AdditionalProperties != null && AdditionalProperties == null)
+            {
+                context.LogBreakingChange(MessageTemplate.RemovedAdditionalProperties);
+            }
+            else if (AdditionalProperties != null)
+            {
+                context.Push(context.Path + "/additionalProperties");
+                AdditionalProperties.Compare(context, prior.AdditionalProperties);
+                context.Pop();
+            }
+        }
+
+        protected void CompareFormats(ComparisonContext context, SwaggerObject prior)
+        {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (prior.Format == null && Format != null || prior.Format != null && Format == null)
+            {
+                context.LogBreakingChange(MessageTemplate.TypeFormatChanged);
+            }
+        }
+
+        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "It may look complex, but it really isn't.")]
+        protected void CompareConstraints(ComparisonContext context, SwaggerObject prior)
+        {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if ((prior.MultipleOf == null && MultipleOf != null) ||
+                (prior.MultipleOf != null && !prior.MultipleOf.Equals(MultipleOf)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "multipleOf");
+            }
+            if ((prior.Maximum == null && Maximum != null) ||
+                (prior.Maximum != null && !prior.Maximum.Equals(Maximum)) ||
+                prior.ExclusiveMaximum != ExclusiveMaximum)
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maximum");
+            }
+            if ((prior.Minimum == null && Minimum != null) ||
+                (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) ||
+                prior.ExclusiveMinimum != ExclusiveMinimum)
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minimum");
+            }
+            if ((prior.MaxLength == null && MaxLength != null) ||
+                (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maxLength");
+            }
+            if ((prior.MinLength == null && MinLength != null) ||
+                (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minLength");
+            }
+            if ((prior.Pattern == null && Pattern != null) ||
+                (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "pattern");
+            }
+            if ((prior.MaxItems == null && MaxItems != null) ||
+                (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "maxItems");
+            }
+            if ((prior.MinItems == null && MinItems != null) ||
+                (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "minItems");
+            }
+            if (prior.UniqueItems != UniqueItems)
+            {
+                context.LogBreakingChange(MessageTemplate.PropertyValueChanged, "uniqueItems");
+            }
+        }
+
+        protected void CompareItems(ComparisonContext context, SwaggerObject prior)
+        {
+            if (prior == null)
+            {
+                throw new ArgumentNullException("prior");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (prior.Items != null && Items != null)
+            {
+                context.Push(context.Path + "/items");
+                Items.Compare(context, prior.Items);
+                context.Pop();
             }
         }
     }

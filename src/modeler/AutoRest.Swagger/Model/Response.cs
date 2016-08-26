@@ -29,5 +29,61 @@ namespace AutoRest.Swagger.Model
         public Dictionary<string, Header> Headers { get; set; }
 
         public Dictionary<string, object> Examples { get; set; }
+
+        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        {
+            var priorResponse = previous as OperationResponse;
+
+            if (priorResponse == null)
+            {
+                throw new ArgumentNullException("previous");
+            }
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            context.Direction = DataDirection.Response;
+
+            base.Compare(context, previous);
+
+            if (Schema != null && priorResponse.Schema != null)
+            {
+                Schema.Compare(context, priorResponse.Schema);
+            }
+
+            var headers = Headers != null ? Headers : new Dictionary<string, Header>();
+            var priorHeaders = priorResponse.Headers != null ? priorResponse.Headers : new Dictionary<string, Header>();
+
+            foreach (var header in headers)
+            {
+                Header oldHeader = null;
+                if (!priorHeaders.TryGetValue(header.Key, out oldHeader) && header.Value.IsRequired)
+                {
+                    context.LogBreakingChange(MessageTemplate.AddingRequiredHeader, header.Key);
+                }
+                else
+                {
+                    header.Value.Compare(context, oldHeader);
+                }
+            }
+
+            foreach (var header in priorHeaders)
+            {
+                Header newHeader = null;
+                if (!headers.TryGetValue(header.Key, out newHeader) && header.Value.IsRequired)
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovingRequiredHeader, header.Key);
+                }
+                else
+                {
+                    header.Value.Compare(context, newHeader);
+                }
+            }
+
+            context.Direction = DataDirection.None;
+
+            return context.Messages;
+        }
     }
 }

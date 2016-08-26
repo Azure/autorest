@@ -281,5 +281,10 @@ namespace AutoRest.CompositeSwagger
             messages = new List<ValidationMessage>();
             return Build();
         }
+
+        public override IEnumerable<ComparisonMessage> Compare()
+        {
+            throw new NotImplementedException("Version comparison of composite Swagger documents." );
+        }
     }
 }

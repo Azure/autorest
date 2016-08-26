@@ -3,8 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Newtonsoft.Json;
 using AutoRest.Core.Validation;
+using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model
@@ -128,5 +131,229 @@ namespace AutoRest.Swagger.Model
         /// A list of all external references listed in the service.
         /// </summary>
         public IList<string> ExternalReferences { get; set; }
+
+        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        {
+            if (previous == null)
+                throw new ArgumentNullException("previous");
+
+            context.CurrentRoot = this;
+            context.PreviousRoot = previous;
+
+            context.Push("#");
+
+            base.Compare(context, previous);
+
+            var previousDefinition = previous as ServiceDefinition;
+
+            if (previousDefinition == null)
+                throw new ArgumentException("Comparing a service definition with something else.");
+
+            if (Info != null && previousDefinition.Info != null)
+            {
+                context.Push("info/version");
+
+               CompareVersions(context, Info.Version, previousDefinition.Info.Version);
+
+                context.Pop();
+            }
+
+            if (context.Strict)
+            {
+                // There was no version change between the documents. This is not an error, but noteworthy.
+                context.LogMessage(MessageTemplate.NoVersionChange, LogEntrySeverity.Info);
+            }
+
+            // Check that all the HTTP schemes of the old version are supported by the new version.
+
+            context.Push("schemes");
+            foreach (var scheme in previousDefinition.Schemes)
+            {
+                if (!Schemes.Contains(scheme))
+                {
+                    context.LogBreakingChange(MessageTemplate.ProtocolNoLongerSupported, scheme);
+                }
+            }
+            context.Pop();
+
+            // Check that all the request body formats that were accepted still are.
+
+            context.Push("consumes");
+            foreach (var format in previousDefinition.Consumes)
+            {
+                if (!Consumes.Contains(format))
+                {
+                    context.LogBreakingChange(MessageTemplate.RequestBodyFormatNoLongerSupported, format);
+                }
+            }
+            context.Pop();
+
+            // Check that all the response body formats were also supported by the old version.
+
+            context.Push("produces");
+            foreach (var format in Produces)
+            {
+                if (!previousDefinition.Produces.Contains(format))
+                {
+                    context.LogBreakingChange(MessageTemplate.ResponseBodyFormatNoLongerSupported, format);
+                }
+            }
+            context.Pop();
+
+            // Check that no paths were removed, and compare the paths that are still there.
+
+            context.Push("paths");
+            foreach (var path in previousDefinition.Paths.Keys)
+            {
+                Dictionary<string, Operation> operations = null;
+                if (!Paths.TryGetValue(path, out operations))
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedPath, path);
+                }
+                else
+                {
+                    // TODO: check that no operations were removed.
+
+                    foreach (var operation in operations)
+                    {
+                        context.Push(operation.Value.OperationId);
+                        operation.Value.Compare(context, previousDefinition.Paths[path][operation.Key]);
+                        context.Pop();
+                    }
+                }
+            }
+            context.Pop();
+
+            context.Push("x-ms-paths");
+            foreach (var path in previousDefinition.CustomPaths.Keys)
+            {
+                Dictionary<string, Operation> operations = null;
+                if (!Paths.TryGetValue(path, out operations))
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedPath, path);
+                }
+                else
+                {
+                    // TODO: check that no operations were removed.
+
+                    foreach (var operation in operations)
+                    {
+                        context.Push(operation.Value.OperationId);
+                        operation.Value.Compare(context, previousDefinition.Paths[path][operation.Key]);
+                        context.Pop();
+                    }
+                }
+            }
+            context.Pop();
+
+            context.Push("definitions");
+            foreach (var def in previousDefinition.Definitions.Keys)
+            {
+                Schema schema = null;
+                if (!Definitions.TryGetValue(def, out schema))
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedDefinition, def);
+                }
+                else
+                {
+                    context.Push("definitions/" + def);
+                    schema.Compare(context, previousDefinition.Definitions[def]);
+                    context.Pop();
+                }
+            }
+            context.Pop();
+
+            context.Push("parameters");
+            foreach (var def in previousDefinition.Parameters.Keys)
+            {
+                SwaggerParameter parameter = null;
+                if (!Parameters.TryGetValue(def, out parameter))
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedClientParameter, def);
+                }
+                else
+                {
+                    context.Push("parameters/" + def);
+                    parameter.Compare(context, previousDefinition.Parameters[def]);
+                    context.Pop();
+                }
+            }
+            context.Pop();
+
+            context.Push("responses");
+            foreach (var def in previousDefinition.Responses.Keys)
+            {
+                OperationResponse response = null;
+                if (!Responses.TryGetValue(def, out response))
+                {
+                    context.LogBreakingChange(MessageTemplate.RemovedDefinition, def);
+                }
+                else
+                {
+                    context.Push("responses/" + def);
+                    response.Compare(context, previousDefinition.Responses[def]);
+                    context.Pop();
+                }
+            }
+            context.Pop();
+
+            context.Pop();
+
+            return context.Messages;
+        }
+
+        private void CompareVersions(ComparisonContext context, string newVer, string oldVer)
+        {
+            var oldVersion = oldVer.Split('.');
+            var newVersion = newVer.Split('.');
+
+            if (!context.Strict && oldVersion.Length > 0 && newVersion.Length > 0)
+            {
+                bool versionChanged = false;
+
+                // Situation 1: The versioning scheme is semantic, i.e. it uses a major.minr.build-number scheme, where each component is an integer.
+                //              In this case, we care about the major/minor numbers, but not the build number. In othe words, ifall that is different
+                //              is the build number, it will not be treated as a version change.
+
+                int oldMajor = 0, newMajor = 0;
+                bool integers = int.TryParse(oldVersion[0], out oldMajor) && int.TryParse(newVersion[0], out newMajor);
+
+                if (integers && oldMajor != newMajor)
+                {
+                    versionChanged = true;
+
+                    if (oldMajor > newMajor)
+                    {
+                        context.LogMessage(MessageTemplate.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                    }
+                }
+
+                if (!versionChanged && integers && oldVersion.Length > 1 && newVersion.Length > 1)
+                {
+                    int oldMinor = 0, newMinor = 0;
+                    integers = int.TryParse(oldVersion[1], out oldMinor) && int.TryParse(newVersion[1], out newMinor);
+
+                    if (integers && oldMinor != newMinor)
+                    {
+                        versionChanged = true;
+
+                        if (oldMinor > newMinor)
+                        {
+                            context.LogMessage(MessageTemplate.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                        }
+                    }
+                }
+
+                // Situation 2: The versioning scheme is something else, maybe a date or just a label?
+                //              Regardless of what it is, we just check whether the two strings are equal or not.
+
+                if (!versionChanged && !integers)
+                {
+                    versionChanged = !oldVer.ToLower(CultureInfo.CurrentCulture).Equals(newVer.ToLower(CultureInfo.CurrentCulture));
+                }
+
+                context.Strict = !versionChanged;
+            }
+        }
     }
 }
