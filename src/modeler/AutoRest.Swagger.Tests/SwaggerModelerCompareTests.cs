@@ -213,5 +213,27 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
             Assert.Equal("#/paths//api/Parameters/get/b", error.Path);
         }
+
+        [Fact]
+        public void ParameterStatusLess()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RequiredStatusChange.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Info, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/d", error.Path);
+        }
+
+        [Fact]
+        public void ParameterStatusMore()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RequiredStatusChange.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.Skip(1).First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/e", error.Path);
+        }
     }
 }

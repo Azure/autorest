@@ -221,7 +221,17 @@ namespace AutoRest.Swagger.Model
 
             if (IsRequired != prior.IsRequired)
             {
-                context.LogBreakingChange(ComparisonMessages.RequiredStatusChange);
+                if (context.Direction != DataDirection.Response)
+                {
+                    if (IsRequired && !prior.IsRequired)
+                    {
+                        context.LogBreakingChange(ComparisonMessages.RequiredStatusChange);
+                    }
+                    else
+                    {
+                        context.LogMessage(ComparisonMessages.RequiredStatusChange, Core.Logging.LogEntrySeverity.Info);
+                    }
+                }
             }
 
             // Are the types the same?

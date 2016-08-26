@@ -46,6 +46,18 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "d",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "e",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ]
       }
