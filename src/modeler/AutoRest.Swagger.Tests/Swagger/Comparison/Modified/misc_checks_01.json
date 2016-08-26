@@ -1,35 +1,14 @@
 ﻿{
   "swagger": 2.0,
   "info": {
-    "title": "version_check_05",
+    "title": "misc_checks_01",
     "version": "1.0"
   },
   "host": "localhost:8000",
-  "schemes": [ "http", "https" ],
-  "consumes": [ "text/plain", "text/json" ],
-  "produces": [ "text/plain" ],
+  "schemes": [ "http" ],
+  "consumes": [ "text/plain" ],
+  "produces": [ "text/plain", "text/json" ],
   "definitions": {
-    "DatabaseList": {
-      "properties": {
-        "a": {
-          "type": "string",
-          "readOnly": true,
-          "description": "This is a system generated property.\nThe _rid value is empty for this operation."
-        },
-        "b": {
-          "type": "integer",
-          "readOnly": true,
-          "default": 0,
-          "description": "This property shows the number of databases returned."
-        },
-        "c": {
-          "type": "array",
-          "readOnly": true,
-          "description": "A list of databases.",
-          "items": { "$ref": "#/definitions/Database" }
-        }
-      }
-    },
     "Database": {
       "required": [ "id" ],
       "properties": {
@@ -38,13 +17,13 @@
           "description": "The user generated unique name for the database, a string that\n must not be more than 255 characters."
         },
         "b": {
-          "type": "string",
+          "type": "integer",
           "readOnly": true,
           "description": "This is a system generated property.\nThe resource id (_rid) is a unique identifier that is also hierarchical per the resource stack on the resource model. It is used internally for placement of and navigation to the database resource."
         },
         "c": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "readOnly": true,
           "description": "This is a system generated property.\nIt specifies the last updated timestamp of the resource. The value is a timestamp."
         },

@@ -158,18 +158,20 @@ namespace AutoRest.Swagger.Model
             foreach (var oldParam in priorOperation.Parameters
                 .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, previousRoot.Parameters)))
             {
-                SwaggerParameter newParam = FindParameter(oldParam.Name, currentRoot.Parameters);
+                SwaggerParameter newParam = FindParameter(oldParam.Name, Parameters, currentRoot.Parameters);
+
+                context.Push(oldParam.Name);
 
                 if (newParam != null)
                 {
-                    context.Push(oldParam.Name);
                     newParam.Compare(context, oldParam);
-                    context.Pop();
                 }
                 else if (oldParam.IsRequired)
                 {
                     context.LogBreakingChange(ComparisonMessages.RemovedRequiredParameter, oldParam.Name);
                 }
+
+                context.Pop();
             }
 
             // Check that no required parameters were added.
@@ -180,25 +182,27 @@ namespace AutoRest.Swagger.Model
             {
                 if (newParam == null) continue;
 
-                SwaggerParameter oldParam = FindParameter(newParam.Name, previousRoot.Parameters);
+                SwaggerParameter oldParam = FindParameter(newParam.Name, priorOperation.Parameters, previousRoot.Parameters);
 
                 if (oldParam == null)
                 {
+                    context.Push(newParam.Name);
                     context.LogBreakingChange(ComparisonMessages.AddingRequiredParameter, newParam.Name);
+                    context.Pop();
                 }
             }
         }
 
-        private SwaggerParameter FindParameter(string name, IDictionary<string, SwaggerParameter> parameters)
+        private SwaggerParameter FindParameter(string name, IEnumerable<SwaggerParameter> operationParameters, IDictionary<string, SwaggerParameter> clientParameters)
         {
             if (Parameters != null)
             {
-                foreach (var param in Parameters)
+                foreach (var param in operationParameters)
                 {
                     if (name.Equals(param.Name))
                         return param;
 
-                    var pRef = FindReferencedParameter(param.Reference, parameters);
+                    var pRef = FindReferencedParameter(param.Reference, clientParameters);
 
                     if (pRef != null && name.Equals(pRef.Name))
                     {

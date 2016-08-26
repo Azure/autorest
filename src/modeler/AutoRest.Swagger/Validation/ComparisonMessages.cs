@@ -14,11 +14,11 @@ namespace AutoRest.Swagger.Validation
 
         public static MessageTemplate ResponseBodyFormatNowSupported = new MessageTemplate { Id = 1004, Message = "The old version did not support '{0}' as a response body format." };
 
-        public static MessageTemplate RemovedPath = new MessageTemplate { Id = 1005, Message = "The new version is misting a path that was found in the old version. Was '{0}' removed or restructured?" };
+        public static MessageTemplate RemovedPath = new MessageTemplate { Id = 1005, Message = "The new version is missing a path that was found in the old version. Was '{0}' removed or restructured?" };
 
-        public static MessageTemplate RemovedDefinition = new MessageTemplate { Id = 1006, Message = "The new version is misting a definition that was found in the old version. Was '{0}' removed or renamed?" };
+        public static MessageTemplate RemovedDefinition = new MessageTemplate { Id = 1006, Message = "The new version is missing a definition that was found in the old version. Was '{0}' removed or renamed?" };
 
-        public static MessageTemplate RemovedClientParameter = new MessageTemplate { Id = 1007, Message = "The new version is misting a client parameter that was found in the old version. Was '{0}' removed or renamed?" };
+        public static MessageTemplate RemovedClientParameter = new MessageTemplate { Id = 1007, Message = "The new version is missing a client parameter that was found in the old version. Was '{0}' removed or renamed?" };
 
         public static MessageTemplate ModifiedOperationId = new MessageTemplate { Id = 1008, Message = "The operation id has been changed. This will impact generated code." };
 

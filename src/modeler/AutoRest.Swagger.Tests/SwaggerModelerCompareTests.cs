@@ -84,7 +84,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ProtocolMissing()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.ProtocolNoLongerSupported.Id);
             Assert.NotEmpty(missing);
             Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
@@ -96,7 +96,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void RequestFormatMissing()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RequestBodyFormatNoLongerSupported.Id);
             Assert.NotEmpty(missing);
             Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
@@ -108,7 +108,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ResponseFormatAdded()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var added = messages.Where(m => m.Id == ComparisonMessages.ResponseBodyFormatNowSupported.Id);
             Assert.NotEmpty(added);
             Assert.Equal(LogEntrySeverity.Error, added.First().Severity);
@@ -120,7 +120,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void DefinitionRemoved()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedDefinition.Id);
             Assert.NotEmpty(missing);
             Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
@@ -132,7 +132,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void PropertyTypeChanged()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
@@ -145,7 +145,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void PropertyTypeFormatChanged()
         {
-            var messages = CompareSwagger("version_check_05.json").ToArray();
+            var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeFormatChanged.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
@@ -159,12 +159,12 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationRemoved()
         {
-            var messages = CompareSwagger("version_check_06.json").ToArray();
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedOperation.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Greetings", error.Path);
+            Assert.Equal("#/paths//api/Operations", error.Path);
         }
 
         /// <summary>
@@ -173,12 +173,45 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationIdChanged()
         {
-            var messages = CompareSwagger("version_check_06.json").ToArray();
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.ModifiedOperationId.Id);
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Greetings/post", error.Path);
+            Assert.Equal("#/paths//api/Operations/post", error.Path);
+        }
+
+        [Fact]
+        public void RequiredParameterRemoved()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedRequiredParameter.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/a", error.Path);
+        }
+
+        [Fact]
+        public void RequiredParameterAdded()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.AddingRequiredParameter.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/c", error.Path);
+        }
+
+        [Fact]
+        public void ParameterMoved()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.ParameterInHasChanged.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/b", error.Path);
         }
     }
 }
