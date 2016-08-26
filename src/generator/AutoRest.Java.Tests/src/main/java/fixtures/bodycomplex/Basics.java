@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Basics {
     ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
+     *
+     * @return the observable to the Basic object
+     */
+    Observable<ServiceResponse<Basic>> getValidAsync();
+
+    /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -60,6 +68,14 @@ public interface Basics {
     ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(Basic complexBody);
+
+    /**
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @throws ErrorException exception thrown from REST call
@@ -75,6 +91,13 @@ public interface Basics {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
+
+    /**
+     * Get a basic complex type that is invalid for the local strong type.
+     *
+     * @return the observable to the Basic object
+     */
+    Observable<ServiceResponse<Basic>> getInvalidAsync();
 
     /**
      * Get a basic complex type that is empty.
@@ -94,6 +117,13 @@ public interface Basics {
     ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get a basic complex type that is empty.
+     *
+     * @return the observable to the Basic object
+     */
+    Observable<ServiceResponse<Basic>> getEmptyAsync();
+
+    /**
      * Get a basic complex type whose properties are null.
      *
      * @throws ErrorException exception thrown from REST call
@@ -111,6 +141,13 @@ public interface Basics {
     ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
+     * Get a basic complex type whose properties are null.
+     *
+     * @return the observable to the Basic object
+     */
+    Observable<ServiceResponse<Basic>> getNullAsync();
+
+    /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -126,5 +163,12 @@ public interface Basics {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
+
+    /**
+     * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * @return the observable to the Basic object
+     */
+    Observable<ServiceResponse<Basic>> getNotProvidedAsync();
 
 }

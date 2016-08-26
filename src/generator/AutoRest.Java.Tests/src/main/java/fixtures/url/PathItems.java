@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.url.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -69,6 +70,17 @@ public interface PathItems {
     ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+
+    /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
      * @param localStringPath should contain value 'localStringPath'
@@ -114,6 +126,17 @@ public interface PathItems {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
@@ -163,6 +186,17 @@ public interface PathItems {
     ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain null value
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+
+    /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
      * @param localStringPath should contain value 'localStringPath'
@@ -208,5 +242,16 @@ public interface PathItems {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value null
+     * @param pathItemStringQuery should contain value null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 }

@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,5 +41,13 @@ public interface Paths {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyAsync(String accountName);
 
 }

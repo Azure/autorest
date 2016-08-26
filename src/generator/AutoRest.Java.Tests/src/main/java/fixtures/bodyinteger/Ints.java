@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Ints {
     ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get null Int value.
+     *
+     * @return the observable to the int object
+     */
+    Observable<ServiceResponse<Integer>> getNullAsync();
+
+    /**
      * Get invalid Int value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -55,6 +63,13 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
+
+    /**
+     * Get invalid Int value.
+     *
+     * @return the observable to the int object
+     */
+    Observable<ServiceResponse<Integer>> getInvalidAsync();
 
     /**
      * Get overflow Int32 value.
@@ -74,6 +89,13 @@ public interface Ints {
     ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
+     * Get overflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    Observable<ServiceResponse<Integer>> getOverflowInt32Async();
+
+    /**
      * Get underflow Int32 value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -89,6 +111,13 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+
+    /**
+     * Get underflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    Observable<ServiceResponse<Integer>> getUnderflowInt32Async();
 
     /**
      * Get overflow Int64 value.
@@ -108,6 +137,13 @@ public interface Ints {
     ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
+     * Get overflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    Observable<ServiceResponse<Long>> getOverflowInt64Async();
+
+    /**
      * Get underflow Int64 value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -123,6 +159,13 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
+
+    /**
+     * Get underflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    Observable<ServiceResponse<Long>> getUnderflowInt64Async();
 
     /**
      * Put max int32 value.
@@ -144,6 +187,14 @@ public interface Ints {
     ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put max int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMax32Async(int intBody);
+
+    /**
      * Put max int64 value.
      *
      * @param intBody the long value
@@ -161,6 +212,14 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMax64Async(long intBody);
 
     /**
      * Put min int32 value.
@@ -182,6 +241,14 @@ public interface Ints {
     ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put min int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMin32Async(int intBody);
+
+    /**
      * Put min int64 value.
      *
      * @param intBody the long value
@@ -201,6 +268,14 @@ public interface Ints {
     ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put min int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMin64Async(long intBody);
+
+    /**
      * Get datetime encoded as Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -216,6 +291,13 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUnixTimeAsync();
 
     /**
      * Put datetime encoded as Unix time.
@@ -237,6 +319,14 @@ public interface Ints {
     ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUnixTimeDateAsync(DateTime intBody);
+
+    /**
      * Get invalid Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -254,6 +344,13 @@ public interface Ints {
     ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
+     * Get invalid Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getInvalidUnixTimeAsync();
+
+    /**
      * Get null Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -269,5 +366,12 @@ public interface Ints {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+
+    /**
+     * Get null Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getNullUnixTimeAsync();
 
 }

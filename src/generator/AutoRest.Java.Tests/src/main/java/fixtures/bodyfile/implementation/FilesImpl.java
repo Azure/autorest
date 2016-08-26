@@ -21,7 +21,6 @@ import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Streaming;
@@ -87,7 +86,7 @@ public final class FilesImpl implements Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         return ServiceCall.create(getFileAsync(), serviceCallback);
@@ -96,7 +95,7 @@ public final class FilesImpl implements Files {
     /**
      * Get file.
      *
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> getFileAsync() {
         return service.getFile()
@@ -135,7 +134,7 @@ public final class FilesImpl implements Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
         return ServiceCall.create(getFileLargeAsync(), serviceCallback);
@@ -144,7 +143,7 @@ public final class FilesImpl implements Files {
     /**
      * Get a large file.
      *
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> getFileLargeAsync() {
         return service.getFileLarge()
@@ -183,7 +182,7 @@ public final class FilesImpl implements Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         return ServiceCall.create(getEmptyFileAsync(), serviceCallback);
@@ -192,7 +191,7 @@ public final class FilesImpl implements Files {
     /**
      * Get empty file.
      *
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> getEmptyFileAsync() {
         return service.getEmptyFile()

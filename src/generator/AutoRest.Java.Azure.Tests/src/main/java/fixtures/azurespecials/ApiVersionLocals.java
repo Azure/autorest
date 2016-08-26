@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -37,6 +38,13 @@ public interface ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodLocalValidAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -74,6 +82,14 @@ public interface ApiVersionLocals {
     ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodLocalNullAsync(String apiVersion);
+
+    /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws ErrorException exception thrown from REST call
@@ -93,6 +109,13 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathLocalValidAsync();
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
@@ -106,5 +129,12 @@ public interface ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerLocalValidAsync();
 
 }

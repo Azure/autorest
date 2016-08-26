@@ -42,6 +42,7 @@ import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -88,6 +89,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put200SucceededAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -119,6 +128,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut200SucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -160,6 +177,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put200SucceededNoStateAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -191,6 +216,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut200SucceededNoStateAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -232,6 +265,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put202Retry200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -263,6 +304,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut202Retry200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -304,6 +353,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put201CreatingSucceeded200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -335,6 +392,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -376,6 +441,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put200UpdatingSucceeded204Async(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -407,6 +480,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut200UpdatingSucceeded204Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -448,6 +529,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put201CreatingFailed200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -479,6 +568,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut201CreatingFailed200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -520,6 +617,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put200Acceptedcanceled200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
@@ -551,6 +656,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut200Acceptedcanceled200Async(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -592,6 +705,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> putNoHeaderInRetryAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -623,6 +744,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders>> beginPutNoHeaderInRetryAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -664,6 +793,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> putAsyncRetrySucceededAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -695,6 +832,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders>> beginPutAsyncRetrySucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -736,6 +881,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> putAsyncNoRetrySucceededAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -767,6 +920,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders>> beginPutAsyncNoRetrySucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -808,6 +969,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> putAsyncRetryFailedAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -839,6 +1008,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders>> beginPutAsyncRetryFailedAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -880,6 +1057,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> putAsyncNoRetrycanceledAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -911,6 +1096,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders>> beginPutAsyncNoRetrycanceledAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -952,6 +1145,14 @@ public interface LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> putAsyncNoHeaderInRetryAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -983,6 +1184,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders>> beginPutAsyncNoHeaderInRetryAsync(Product product);
 
     /**
      * Long running put request with non resource.
@@ -1024,6 +1233,14 @@ public interface LROs {
     /**
      * Long running put request with non resource.
      *
+     * @param sku sku to put
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> putNonResourceAsync(Sku sku);
+
+    /**
+     * Long running put request with non resource.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
@@ -1055,6 +1272,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Sku> beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> beginPutNonResourceAsync(Sku sku);
 
     /**
      * Long running put request with non resource.
@@ -1096,6 +1321,14 @@ public interface LROs {
     /**
      * Long running put request with non resource.
      *
+     * @param sku Sku to put
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> putAsyncNonResourceAsync(Sku sku);
+
+    /**
+     * Long running put request with non resource.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
@@ -1127,6 +1360,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Sku> beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback);
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> beginPutAsyncNonResourceAsync(Sku sku);
 
     /**
      * Long running put request with sub resource.
@@ -1168,6 +1409,14 @@ public interface LROs {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
+     */
+    Observable<ServiceResponse<SubProduct>> putSubResourceAsync(SubProduct product);
+
+    /**
+     * Long running put request with sub resource.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
@@ -1199,6 +1448,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<SubProduct> beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
+     */
+    Observable<ServiceResponse<SubProduct>> beginPutSubResourceAsync(SubProduct product);
 
     /**
      * Long running put request with sub resource.
@@ -1240,6 +1497,14 @@ public interface LROs {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
+     */
+    Observable<ServiceResponse<SubProduct>> putAsyncSubResourceAsync(SubProduct product);
+
+    /**
+     * Long running put request with sub resource.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
@@ -1273,6 +1538,14 @@ public interface LROs {
     ServiceCall<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback);
 
     /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @return the observable to the SubProduct object
+     */
+    Observable<ServiceResponse<SubProduct>> beginPutAsyncSubResourceAsync(SubProduct product);
+
+    /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException exception thrown from REST call
@@ -1293,6 +1566,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1306,6 +1586,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1328,6 +1615,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> deleteProvisioning202DeletingFailed200Async();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1341,6 +1635,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers>> beginDeleteProvisioning202DeletingFailed200Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1363,6 +1664,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> deleteProvisioning202Deletingcanceled200Async();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1376,6 +1684,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers>> beginDeleteProvisioning202Deletingcanceled200Async();
 
     /**
      * Long running delete succeeds and returns right away.
@@ -1398,6 +1713,13 @@ public interface LROs {
     /**
      * Long running delete succeeds and returns right away.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete204SucceededAsync();
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
@@ -1411,6 +1733,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> beginDelete204SucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1433,6 +1762,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> delete202Retry200Async();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1446,6 +1782,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers>> beginDelete202Retry200Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1468,6 +1811,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> delete202NoRetry204Async();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1481,6 +1831,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers>> beginDelete202NoRetry204Async();
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -1503,6 +1860,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> deleteNoHeaderInRetryAsync();
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1516,6 +1880,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders>> beginDeleteNoHeaderInRetryAsync();
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1538,6 +1909,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> deleteAsyncNoHeaderInRetryAsync();
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1551,6 +1929,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders>> beginDeleteAsyncNoHeaderInRetryAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1573,6 +1958,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> deleteAsyncRetrySucceededAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1586,6 +1978,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders>> beginDeleteAsyncRetrySucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1608,6 +2007,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> deleteAsyncNoRetrySucceededAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1621,6 +2027,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders>> beginDeleteAsyncNoRetrySucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1643,6 +2056,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> deleteAsyncRetryFailedAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1656,6 +2076,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders>> beginDeleteAsyncRetryFailedAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1678,6 +2105,13 @@ public interface LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> deleteAsyncRetrycanceledAsync();
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1691,6 +2125,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders>> beginDeleteAsyncRetrycanceledAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -1713,6 +2154,13 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> post200WithPayloadAsync();
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Sku object wrapped in {@link ServiceResponse} if successful.
@@ -1726,6 +2174,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Sku> beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @return the observable to the Sku object
+     */
+    Observable<ServiceResponse<Sku>> beginPost200WithPayloadAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -1767,6 +2222,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> post202Retry200Async(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -1798,6 +2261,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers>> beginPost202Retry200Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -1839,6 +2310,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> post202NoRetry204Async(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1870,6 +2349,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers>> beginPost202NoRetry204Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1911,6 +2398,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> postAsyncRetrySucceededAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -1942,6 +2437,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders>> beginPostAsyncRetrySucceededAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1983,6 +2486,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> postAsyncNoRetrySucceededAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -2014,6 +2525,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Product> beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders>> beginPostAsyncNoRetrySucceededAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2055,6 +2574,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> postAsyncRetryFailedAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -2086,6 +2613,14 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders>> beginPostAsyncRetryFailedAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2127,6 +2662,14 @@ public interface LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> postAsyncRetrycanceledAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -2158,5 +2701,13 @@ public interface LROs {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders>> beginPostAsyncRetrycanceledAsync(Product product);
 
 }

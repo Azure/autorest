@@ -1,12 +1,11 @@
 package fixtures.http;
 
-import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.ProtocolException;
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+import fixtures.http.models.ErrorException;
 
 import static org.junit.Assert.fail;
 

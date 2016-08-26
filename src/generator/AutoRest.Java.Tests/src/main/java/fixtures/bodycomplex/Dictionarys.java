@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Dictionarys {
     ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
+     * Get complex types with dictionary property.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getValidAsync();
+
+    /**
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
@@ -60,6 +68,14 @@ public interface Dictionarys {
     ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(DictionaryWrapper complexBody);
+
+    /**
      * Get complex types with dictionary property which is empty.
      *
      * @throws ErrorException exception thrown from REST call
@@ -75,6 +91,13 @@ public interface Dictionarys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getEmptyAsync();
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -97,6 +120,14 @@ public interface Dictionarys {
     ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyAsync(DictionaryWrapper complexBody);
+
+    /**
      * Get complex types with dictionary property which is null.
      *
      * @throws ErrorException exception thrown from REST call
@@ -114,6 +145,13 @@ public interface Dictionarys {
     ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
+     * Get complex types with dictionary property which is null.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getNullAsync();
+
+    /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -129,5 +167,12 @@ public interface Dictionarys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedAsync();
 
 }

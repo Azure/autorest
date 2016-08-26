@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -108,7 +107,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head408Async(), serviceCallback);
@@ -156,7 +155,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put500Async(), serviceCallback);
@@ -200,7 +199,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put500Async(booleanValue), serviceCallback);
@@ -209,6 +208,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put500Async(Boolean booleanValue) {
@@ -248,7 +248,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch500Async(), serviceCallback);
@@ -292,7 +292,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch500Async(booleanValue), serviceCallback);
@@ -301,6 +301,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> patch500Async(Boolean booleanValue) {
@@ -340,7 +341,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get502Async(), serviceCallback);
@@ -388,7 +389,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post503Async(), serviceCallback);
@@ -432,7 +433,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post503Async(booleanValue), serviceCallback);
@@ -441,6 +442,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> post503Async(Boolean booleanValue) {
@@ -480,7 +482,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete503Async(), serviceCallback);
@@ -524,7 +526,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete503Async(booleanValue), serviceCallback);
@@ -533,6 +535,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> delete503Async(Boolean booleanValue) {
@@ -572,7 +575,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put504Async(), serviceCallback);
@@ -616,7 +619,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put504Async(booleanValue), serviceCallback);
@@ -625,6 +628,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put504Async(Boolean booleanValue) {
@@ -664,7 +668,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch504Async(), serviceCallback);
@@ -708,7 +712,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch504Async(booleanValue), serviceCallback);
@@ -717,6 +721,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> patch504Async(Boolean booleanValue) {

@@ -31,6 +31,7 @@ import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 import java.io.IOException;
 import java.util.List;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,6 +58,13 @@ public interface HttpRedirects {
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers>> head300Async();
+
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponseWithHeaders} if successful.
@@ -70,6 +78,13 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback);
+
+    /**
+     * Return 300 status code and redirect to /http/success/200.
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers>> get300Async();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -91,6 +106,13 @@ public interface HttpRedirects {
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers>> head301Async();
+
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -104,6 +126,13 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get301Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 301 status code and redirect to /http/success/200.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers>> get301Async();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -141,6 +170,14 @@ public interface HttpRedirects {
     ServiceCall<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>> put301Async(Boolean booleanValue);
+
+    /**
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws ErrorException exception thrown from REST call
@@ -160,6 +197,13 @@ public interface HttpRedirects {
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers>> head302Async();
+
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponseWithHeaders} object if successful.
@@ -173,6 +217,13 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get302Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 302 status code and redirect to /http/success/200.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers>> get302Async();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -210,6 +261,14 @@ public interface HttpRedirects {
     ServiceCall<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>> patch302Async(Boolean booleanValue);
+
+    /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @throws ErrorException exception thrown from REST call
@@ -245,6 +304,14 @@ public interface HttpRedirects {
     ServiceCall<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>> post303Async(Boolean booleanValue);
+
+    /**
      * Redirect with 307, resulting in a 200 success.
      *
      * @throws ErrorException exception thrown from REST call
@@ -262,6 +329,13 @@ public interface HttpRedirects {
     ServiceCall<Void> head307Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Redirect with 307, resulting in a 200 success.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers>> head307Async();
+
+    /**
      * Redirect get with 307, resulting in a 200 success.
      *
      * @throws ErrorException exception thrown from REST call
@@ -277,6 +351,13 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get307Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Redirect get with 307, resulting in a 200 success.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers>> get307Async();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -314,6 +395,14 @@ public interface HttpRedirects {
     ServiceCall<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>> put307Async(Boolean booleanValue);
+
+    /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @throws ErrorException exception thrown from REST call
@@ -347,6 +436,14 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Patch redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>> patch307Async(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -384,6 +481,14 @@ public interface HttpRedirects {
     ServiceCall<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>> post307Async(Boolean booleanValue);
+
+    /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @throws ErrorException exception thrown from REST call
@@ -417,5 +522,13 @@ public interface HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Delete redirected with 307, resulting in a 200 after redirect.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>> delete307Async(Boolean booleanValue);
 
 }

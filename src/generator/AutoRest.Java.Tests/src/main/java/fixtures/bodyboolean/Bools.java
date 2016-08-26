@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -39,6 +40,13 @@ public interface Bools {
     ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
+     * Get true Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getTrueAsync();
+
+    /**
      * Set Boolean value true.
      *
      * @param boolBody the boolean value
@@ -58,6 +66,14 @@ public interface Bools {
     ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set Boolean value true.
+     *
+     * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putTrueAsync(boolean boolBody);
+
+    /**
      * Get false Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -73,6 +89,13 @@ public interface Bools {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get false Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getFalseAsync();
 
     /**
      * Set Boolean value false.
@@ -94,6 +117,14 @@ public interface Bools {
     ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set Boolean value false.
+     *
+     * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFalseAsync(boolean boolBody);
+
+    /**
      * Get null Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -111,6 +142,13 @@ public interface Bools {
     ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
+     * Get null Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNullAsync();
+
+    /**
      * Get invalid Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -126,5 +164,12 @@ public interface Bools {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getInvalidAsync();
 
 }

@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -99,7 +98,7 @@ public final class BasicsImpl implements Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -108,7 +107,7 @@ public final class BasicsImpl implements Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Basic object
      */
     public Observable<ServiceResponse<Basic>> getValidAsync() {
         return service.getValid()
@@ -150,7 +149,7 @@ public final class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
@@ -203,7 +202,7 @@ public final class BasicsImpl implements Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -212,7 +211,7 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Basic object
      */
     public Observable<ServiceResponse<Basic>> getInvalidAsync() {
         return service.getInvalid()
@@ -251,7 +250,7 @@ public final class BasicsImpl implements Basics {
      * Get a basic complex type that is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -260,7 +259,7 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type that is empty.
      *
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Basic object
      */
     public Observable<ServiceResponse<Basic>> getEmptyAsync() {
         return service.getEmpty()
@@ -299,7 +298,7 @@ public final class BasicsImpl implements Basics {
      * Get a basic complex type whose properties are null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -308,7 +307,7 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Basic object
      */
     public Observable<ServiceResponse<Basic>> getNullAsync() {
         return service.getNull()
@@ -347,7 +346,7 @@ public final class BasicsImpl implements Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
@@ -356,7 +355,7 @@ public final class BasicsImpl implements Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Basic object
      */
     public Observable<ServiceResponse<Basic>> getNotProvidedAsync() {
         return service.getNotProvided()

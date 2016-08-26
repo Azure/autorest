@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -82,7 +81,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -91,7 +90,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ReadonlyObj object
      */
     public Observable<ServiceResponse<ReadonlyObj>> getValidAsync() {
         return service.getValid()
@@ -133,7 +132,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);

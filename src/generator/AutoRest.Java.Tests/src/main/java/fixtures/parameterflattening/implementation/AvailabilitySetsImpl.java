@@ -23,7 +23,6 @@ import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
 import java.util.Map;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
@@ -86,7 +85,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(updateAsync(resourceGroupName, avset, tags), serviceCallback);

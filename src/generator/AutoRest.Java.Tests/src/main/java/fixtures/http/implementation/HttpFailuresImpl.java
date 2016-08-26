@@ -21,7 +21,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
@@ -83,7 +82,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getEmptyErrorAsync(), serviceCallback);
@@ -92,7 +91,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getEmptyErrorAsync() {
         return service.getEmptyError()
@@ -131,7 +130,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getNoModelErrorAsync(), serviceCallback);
@@ -140,7 +139,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelErrorAsync() {
         return service.getNoModelError()
@@ -178,7 +177,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * Get empty response from server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getNoModelEmptyAsync(), serviceCallback);
@@ -187,7 +186,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelEmptyAsync() {
         return service.getNoModelEmpty()

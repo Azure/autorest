@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -96,7 +95,7 @@ public final class BoolsImpl implements Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getTrueAsync(), serviceCallback);
@@ -105,7 +104,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getTrueAsync() {
         return service.getTrue()
@@ -146,7 +145,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putTrueAsync(boolBody), serviceCallback);
@@ -195,7 +194,7 @@ public final class BoolsImpl implements Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getFalseAsync(), serviceCallback);
@@ -204,7 +203,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getFalseAsync() {
         return service.getFalse()
@@ -245,7 +244,7 @@ public final class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putFalseAsync(boolBody), serviceCallback);
@@ -294,7 +293,7 @@ public final class BoolsImpl implements Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -303,7 +302,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNullAsync() {
         return service.getNull()
@@ -342,7 +341,7 @@ public final class BoolsImpl implements Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -351,7 +350,7 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> getInvalidAsync() {
         return service.getInvalid()

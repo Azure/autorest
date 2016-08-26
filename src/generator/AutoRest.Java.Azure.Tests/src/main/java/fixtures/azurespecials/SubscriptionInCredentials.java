@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface SubscriptionInCredentials {
     ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postMethodGlobalValidAsync();
+
+    /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @throws ErrorException exception thrown from REST call
@@ -56,6 +64,13 @@ public interface SubscriptionInCredentials {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postMethodGlobalNullAsync();
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -78,6 +93,13 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postMethodGlobalNotProvidedValidAsync();
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -96,6 +118,13 @@ public interface SubscriptionInCredentials {
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postPathGlobalValidAsync();
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -110,5 +139,12 @@ public interface SubscriptionInCredentials {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postSwaggerGlobalValidAsync();
 
 }

@@ -40,7 +40,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -210,7 +209,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramExistingKeyAsync(userAgent), serviceCallback);
@@ -262,7 +261,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseExistingKeyAsync(), serviceCallback);
@@ -313,7 +312,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramProtectedKeyAsync(contentType), serviceCallback);
@@ -365,7 +364,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseProtectedKeyAsync(), serviceCallback);
@@ -418,7 +417,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramIntegerAsync(scenario, value), serviceCallback);
@@ -474,7 +473,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseIntegerAsync(scenario), serviceCallback);
@@ -531,7 +530,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramLongAsync(scenario, value), serviceCallback);
@@ -587,7 +586,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseLongAsync(scenario), serviceCallback);
@@ -644,7 +643,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramFloatAsync(scenario, value), serviceCallback);
@@ -700,7 +699,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseFloatAsync(scenario), serviceCallback);
@@ -757,7 +756,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDoubleAsync(scenario, value), serviceCallback);
@@ -813,7 +812,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseDoubleAsync(scenario), serviceCallback);
@@ -870,7 +869,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramBoolAsync(scenario, value), serviceCallback);
@@ -926,7 +925,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseBoolAsync(scenario), serviceCallback);
@@ -981,7 +980,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramStringAsync(scenario), serviceCallback);
@@ -1032,7 +1031,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramStringAsync(scenario, value), serviceCallback);
@@ -1042,6 +1041,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramStringAsync(String scenario, String value) {
@@ -1087,7 +1087,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseStringAsync(scenario), serviceCallback);
@@ -1144,7 +1144,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDateAsync(scenario, value), serviceCallback);
@@ -1203,7 +1203,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseDateAsync(scenario), serviceCallback);
@@ -1260,7 +1260,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDatetimeAsync(scenario, value), serviceCallback);
@@ -1319,7 +1319,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseDatetimeAsync(scenario), serviceCallback);
@@ -1374,7 +1374,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDatetimeRfc1123Async(scenario), serviceCallback);
@@ -1429,7 +1429,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDatetimeRfc1123Async(scenario, value), serviceCallback);
@@ -1439,6 +1439,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDatetimeRfc1123Async(String scenario, DateTime value) {
@@ -1488,7 +1489,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseDatetimeRfc1123Async(scenario), serviceCallback);
@@ -1545,7 +1546,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramDurationAsync(scenario, value), serviceCallback);
@@ -1604,7 +1605,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseDurationAsync(scenario), serviceCallback);
@@ -1661,7 +1662,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramByteAsync(scenario, value), serviceCallback);
@@ -1721,7 +1722,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseByteAsync(scenario), serviceCallback);
@@ -1776,7 +1777,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramEnumAsync(scenario), serviceCallback);
@@ -1827,7 +1828,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(paramEnumAsync(scenario, value), serviceCallback);
@@ -1837,6 +1838,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramEnumAsync(String scenario, GreyscaleColors value) {
@@ -1882,7 +1884,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.createWithHeaders(responseEnumAsync(scenario), serviceCallback);
@@ -1934,7 +1936,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(customRequestIdAsync(), serviceCallback);

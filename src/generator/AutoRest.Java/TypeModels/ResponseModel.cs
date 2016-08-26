@@ -151,6 +151,14 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public virtual string ObservableClientResponseTypeString
+        {
+            get
+            {
+                return ClientResponseTypeString;
+            }
+        }
+
         public virtual string ClientCallbackTypeString
         {
             get

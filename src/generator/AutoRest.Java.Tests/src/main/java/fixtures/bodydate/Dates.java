@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.LocalDate;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Dates {
     ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
+     * Get null date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getNullAsync();
+
+    /**
      * Get invalid date value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -55,6 +63,13 @@ public interface Dates {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get invalid date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getInvalidDateAsync();
 
     /**
      * Get overflow date value.
@@ -74,6 +89,13 @@ public interface Dates {
     ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
+     * Get overflow date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getOverflowDateAsync();
+
+    /**
      * Get underflow date value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -89,6 +111,13 @@ public interface Dates {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get underflow date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getUnderflowDateAsync();
 
     /**
      * Put max date value 9999-12-31.
@@ -111,6 +140,14 @@ public interface Dates {
     ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMaxDateAsync(LocalDate dateBody);
+
+    /**
      * Get max date value 9999-12-31.
      *
      * @throws ErrorException exception thrown from REST call
@@ -126,6 +163,13 @@ public interface Dates {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get max date value 9999-12-31.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getMaxDateAsync();
 
     /**
      * Put min date value 0000-01-01.
@@ -148,6 +192,14 @@ public interface Dates {
     ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMinDateAsync(LocalDate dateBody);
+
+    /**
      * Get min date value 0000-01-01.
      *
      * @throws ErrorException exception thrown from REST call
@@ -163,5 +215,12 @@ public interface Dates {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get min date value 0000-01-01.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getMinDateAsync();
 
 }

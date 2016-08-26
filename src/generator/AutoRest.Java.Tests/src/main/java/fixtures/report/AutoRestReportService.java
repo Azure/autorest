@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
+import rx.Observable;
 
 /**
  * The interface for AutoRestReportService class.
@@ -42,5 +43,12 @@ public interface AutoRestReportService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    /**
+     * Get test coverage report.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getReportAsync();
 
 }

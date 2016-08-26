@@ -20,7 +20,6 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -90,7 +89,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(head501Async(), serviceCallback);
@@ -99,7 +98,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> head501Async() {
         return service.head501()
@@ -137,7 +136,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(get501Async(), serviceCallback);
@@ -146,7 +145,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> get501Async() {
         return service.get501()
@@ -184,7 +183,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(post505Async(), serviceCallback);
@@ -193,7 +192,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> post505Async() {
         final Boolean booleanValue = null;
@@ -228,7 +227,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(post505Async(booleanValue), serviceCallback);
@@ -237,7 +236,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> post505Async(Boolean booleanValue) {
         return service.post505(booleanValue)
@@ -275,7 +275,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(delete505Async(), serviceCallback);
@@ -284,7 +284,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> delete505Async() {
         final Boolean booleanValue = null;
@@ -319,7 +319,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(delete505Async(booleanValue), serviceCallback);
@@ -328,7 +328,8 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> delete505Async(Boolean booleanValue) {
         return service.delete505(booleanValue)

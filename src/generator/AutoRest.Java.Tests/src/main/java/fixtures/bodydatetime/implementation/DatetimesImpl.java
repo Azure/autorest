@@ -21,7 +21,6 @@ import fixtures.bodydatetime.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -149,7 +148,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -158,7 +157,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get null datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getNullAsync() {
         return service.getNull()
@@ -197,7 +196,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -206,7 +205,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get invalid datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getInvalidAsync() {
         return service.getInvalid()
@@ -245,7 +244,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getOverflowAsync(), serviceCallback);
@@ -254,7 +253,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get overflow datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getOverflowAsync() {
         return service.getOverflow()
@@ -293,7 +292,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUnderflowAsync(), serviceCallback);
@@ -302,7 +301,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get underflow datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUnderflowAsync() {
         return service.getUnderflow()
@@ -344,7 +343,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -396,7 +395,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -405,7 +404,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync() {
         return service.getUtcLowercaseMaxDateTime()
@@ -444,7 +443,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -453,7 +452,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync() {
         return service.getUtcUppercaseMaxDateTime()
@@ -495,7 +494,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -547,7 +546,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalPositiveOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -556,7 +555,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return service.getLocalPositiveOffsetLowercaseMaxDateTime()
@@ -595,7 +594,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalPositiveOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -604,7 +603,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return service.getLocalPositiveOffsetUppercaseMaxDateTime()
@@ -646,7 +645,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -698,7 +697,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalNegativeOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -707,7 +706,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return service.getLocalNegativeOffsetUppercaseMaxDateTime()
@@ -746,7 +745,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalNegativeOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -755,7 +754,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return service.getLocalNegativeOffsetLowercaseMaxDateTime()
@@ -797,7 +796,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -849,7 +848,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcMinDateTimeAsync(), serviceCallback);
@@ -858,7 +857,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync() {
         return service.getUtcMinDateTime()
@@ -900,7 +899,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLocalPositiveOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -952,7 +951,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalPositiveOffsetMinDateTimeAsync(), serviceCallback);
@@ -961,7 +960,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeAsync() {
         return service.getLocalPositiveOffsetMinDateTime()
@@ -1003,7 +1002,7 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLocalNegativeOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -1055,7 +1054,7 @@ public final class DatetimesImpl implements Datetimes {
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getLocalNegativeOffsetMinDateTimeAsync(), serviceCallback);
@@ -1064,7 +1063,7 @@ public final class DatetimesImpl implements Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeAsync() {
         return service.getLocalNegativeOffsetMinDateTime()

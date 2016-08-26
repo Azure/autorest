@@ -25,7 +25,6 @@ import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -183,7 +182,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(validationOfMethodParametersAsync(resourceGroupName, id), serviceCallback);
@@ -194,7 +193,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfMethodParametersAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
@@ -247,7 +246,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(validationOfBodyAsync(resourceGroupName, id), serviceCallback);
@@ -258,7 +257,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
@@ -307,7 +306,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(validationOfBodyAsync(resourceGroupName, id, body), serviceCallback);
@@ -318,7 +317,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param body the Product value
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
         if (this.subscriptionId() == null) {
@@ -365,7 +365,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getWithConstantInPathAsync(), serviceCallback);
@@ -410,7 +410,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(postWithConstantInBodyAsync(), serviceCallback);
@@ -418,7 +418,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> postWithConstantInBodyAsync() {
         final String constantParam = "constant";
@@ -452,7 +452,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
         return ServiceCall.create(postWithConstantInBodyAsync(body), serviceCallback);
@@ -460,7 +460,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
 
     /**
      *
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @param body the Product value
+     * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> postWithConstantInBodyAsync(Product body) {
         Validator.validate(body);

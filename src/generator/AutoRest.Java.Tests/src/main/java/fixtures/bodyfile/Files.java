@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Files {
     ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileAsync();
+
+    /**
      * Get a large file.
      *
      * @throws ErrorException exception thrown from REST call
@@ -57,6 +65,13 @@ public interface Files {
     ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileLargeAsync();
+
+    /**
      * Get empty file.
      *
      * @throws ErrorException exception thrown from REST call
@@ -72,5 +87,12 @@ public interface Files {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getEmptyFileAsync();
 
 }

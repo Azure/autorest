@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -92,7 +91,7 @@ public final class BytesImpl implements Bytes {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -101,7 +100,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get null byte value.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getNullAsync() {
         return service.getNull()
@@ -140,7 +139,7 @@ public final class BytesImpl implements Bytes {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -149,7 +148,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getEmptyAsync() {
         return service.getEmpty()
@@ -188,7 +187,7 @@ public final class BytesImpl implements Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getNonAsciiAsync(), serviceCallback);
@@ -197,7 +196,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getNonAsciiAsync() {
         return service.getNonAscii()
@@ -239,7 +238,7 @@ public final class BytesImpl implements Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putNonAsciiAsync(byteBody), serviceCallback);
@@ -291,7 +290,7 @@ public final class BytesImpl implements Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -300,7 +299,7 @@ public final class BytesImpl implements Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getInvalidAsync() {
         return service.getInvalid()

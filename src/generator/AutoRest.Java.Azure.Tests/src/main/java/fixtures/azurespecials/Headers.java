@@ -18,6 +18,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,6 +46,14 @@ public interface Headers {
     ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdAsync(String fooClientRequestId);
+
+    /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
@@ -63,5 +72,13 @@ public interface Headers {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
 }

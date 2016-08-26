@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -82,7 +81,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -91,7 +90,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @return the Fish object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Fish object
      */
     public Observable<ServiceResponse<Fish>> getValidAsync() {
         return service.getValid()
@@ -237,7 +236,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);

@@ -80,5 +80,17 @@ namespace AutoRest.Java.Azure.TypeModels
                 return HeaderWireType.InstanceType().Name;
             }
         }
+
+        public override string ObservableClientResponseTypeString
+        {
+            get
+            {
+                if (_method.IsPagingOperation || _method.IsPagingNextOperation)
+                {
+                    return "ServiceResponse<" + ServiceCallGenericParameterString + ">";
+                }
+                return base.ObservableClientResponseTypeString;
+            }
+        }
     }
 }

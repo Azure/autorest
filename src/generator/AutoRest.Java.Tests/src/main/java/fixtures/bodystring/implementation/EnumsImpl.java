@@ -23,7 +23,6 @@ import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -99,7 +98,7 @@ public final class EnumsImpl implements Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         return ServiceCall.create(getNotExpandableAsync(), serviceCallback);
@@ -108,7 +107,7 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Colors object
      */
     public Observable<ServiceResponse<Colors>> getNotExpandableAsync() {
         return service.getNotExpandable()
@@ -150,7 +149,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putNotExpandableAsync(stringBody), serviceCallback);
@@ -202,7 +201,7 @@ public final class EnumsImpl implements Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Colors> getReferencedAsync(final ServiceCallback<Colors> serviceCallback) {
         return ServiceCall.create(getReferencedAsync(), serviceCallback);
@@ -211,7 +210,7 @@ public final class EnumsImpl implements Enums {
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @return the Colors object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Colors object
      */
     public Observable<ServiceResponse<Colors>> getReferencedAsync() {
         return service.getReferenced()
@@ -253,7 +252,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedAsync(Colors enumStringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putReferencedAsync(enumStringBody), serviceCallback);
@@ -305,7 +304,7 @@ public final class EnumsImpl implements Enums {
      * Get value 'green-color' from the constant.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<RefColorConstant> getReferencedConstantAsync(final ServiceCallback<RefColorConstant> serviceCallback) {
         return ServiceCall.create(getReferencedConstantAsync(), serviceCallback);
@@ -314,7 +313,7 @@ public final class EnumsImpl implements Enums {
     /**
      * Get value 'green-color' from the constant.
      *
-     * @return the RefColorConstant object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the RefColorConstant object
      */
     public Observable<ServiceResponse<RefColorConstant>> getReferencedConstantAsync() {
         return service.getReferencedConstant()
@@ -356,7 +355,7 @@ public final class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putReferencedConstantAsync(enumStringBody), serviceCallback);

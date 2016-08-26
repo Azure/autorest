@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -82,7 +81,7 @@ public final class InheritancesImpl implements Inheritances {
      * Get complex types that extend others.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -91,7 +90,7 @@ public final class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Siamese object
      */
     public Observable<ServiceResponse<Siamese>> getValidAsync() {
         return service.getValid()
@@ -133,7 +132,7 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);

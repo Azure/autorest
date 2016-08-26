@@ -21,7 +21,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -125,7 +124,7 @@ public final class StringsImpl implements Strings {
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -134,7 +133,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getNullAsync() {
         return service.getNull()
@@ -173,7 +172,7 @@ public final class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putNullAsync(), serviceCallback);
@@ -217,7 +216,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putNullAsync(stringBody), serviceCallback);
@@ -226,6 +225,7 @@ public final class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
+     * @param stringBody Possible values include: ''
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putNullAsync(String stringBody) {
@@ -265,7 +265,7 @@ public final class StringsImpl implements Strings {
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -274,7 +274,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getEmptyAsync() {
         return service.getEmpty()
@@ -316,7 +316,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putEmptyAsync(stringBody), serviceCallback);
@@ -368,7 +368,7 @@ public final class StringsImpl implements Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         return ServiceCall.create(getMbcsAsync(), serviceCallback);
@@ -377,7 +377,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getMbcsAsync() {
         return service.getMbcs()
@@ -419,7 +419,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putMbcsAsync(stringBody), serviceCallback);
@@ -471,7 +471,7 @@ public final class StringsImpl implements Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         return ServiceCall.create(getWhitespaceAsync(), serviceCallback);
@@ -480,7 +480,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getWhitespaceAsync() {
         return service.getWhitespace()
@@ -522,7 +522,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putWhitespaceAsync(stringBody), serviceCallback);
@@ -574,7 +574,7 @@ public final class StringsImpl implements Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
@@ -583,7 +583,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getNotProvidedAsync() {
         return service.getNotProvided()
@@ -622,7 +622,7 @@ public final class StringsImpl implements Strings {
      * Get value that is base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getBase64EncodedAsync(), serviceCallback);
@@ -631,7 +631,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getBase64EncodedAsync() {
         return service.getBase64Encoded()
@@ -675,7 +675,7 @@ public final class StringsImpl implements Strings {
      * Get value that is base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getBase64UrlEncodedAsync(), serviceCallback);
@@ -684,7 +684,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getBase64UrlEncodedAsync() {
         return service.getBase64UrlEncoded()
@@ -731,7 +731,7 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putBase64UrlEncodedAsync(stringBody), serviceCallback);
@@ -784,7 +784,7 @@ public final class StringsImpl implements Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
         return ServiceCall.create(getNullBase64UrlEncodedAsync(), serviceCallback);
@@ -793,7 +793,7 @@ public final class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedAsync() {
         return service.getNullBase64UrlEncoded()

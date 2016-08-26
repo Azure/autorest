@@ -26,7 +26,6 @@ import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
@@ -212,7 +211,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model204NoModelDefaultError200ValidAsync(), serviceCallback);
@@ -221,7 +220,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidAsync() {
         return service.get200Model204NoModelDefaultError200Valid()
@@ -261,7 +260,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model204NoModelDefaultError204ValidAsync(), serviceCallback);
@@ -270,7 +269,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 204 response with no payload.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidAsync() {
         return service.get200Model204NoModelDefaultError204Valid()
@@ -310,7 +309,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model204NoModelDefaultError201InvalidAsync(), serviceCallback);
@@ -319,7 +318,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidAsync() {
         return service.get200Model204NoModelDefaultError201Invalid()
@@ -359,7 +358,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with no payload:.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model204NoModelDefaultError202NoneAsync(), serviceCallback);
@@ -368,7 +367,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with no payload:.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneAsync() {
         return service.get200Model204NoModelDefaultError202None()
@@ -408,7 +407,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model204NoModelDefaultError400ValidAsync(), serviceCallback);
@@ -417,7 +416,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidAsync() {
         return service.get200Model204NoModelDefaultError400Valid()
@@ -457,7 +456,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model201ModelDefaultError200ValidAsync(), serviceCallback);
@@ -466,7 +465,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidAsync() {
         return service.get200Model201ModelDefaultError200Valid()
@@ -506,7 +505,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model201ModelDefaultError201ValidAsync(), serviceCallback);
@@ -515,7 +514,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidAsync() {
         return service.get200Model201ModelDefaultError201Valid()
@@ -555,7 +554,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200Model201ModelDefaultError400ValidAsync(), serviceCallback);
@@ -564,7 +563,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidAsync() {
         return service.get200Model201ModelDefaultError400Valid()
@@ -604,7 +603,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), serviceCallback);
@@ -613,7 +612,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Object object
      */
     public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError200Valid()
@@ -654,7 +653,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), serviceCallback);
@@ -663,7 +662,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Object object
      */
     public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid()
@@ -704,7 +703,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), serviceCallback);
@@ -713,7 +712,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Object object
      */
     public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError404Valid()
@@ -754,7 +753,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
         return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), serviceCallback);
@@ -763,7 +762,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Object object
      */
     public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError400Valid()
@@ -804,7 +803,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultError202NoneAsync(), serviceCallback);
@@ -853,7 +852,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultError204NoneAsync(), serviceCallback);
@@ -902,7 +901,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultError400ValidAsync(), serviceCallback);
@@ -951,7 +950,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultNone202InvalidAsync(), serviceCallback);
@@ -999,7 +998,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultNone204NoneAsync(), serviceCallback);
@@ -1047,7 +1046,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultNone400NoneAsync(), serviceCallback);
@@ -1095,7 +1094,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(get202None204NoneDefaultNone400InvalidAsync(), serviceCallback);
@@ -1143,7 +1142,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(getDefaultModelA200ValidAsync(), serviceCallback);
@@ -1152,7 +1151,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> getDefaultModelA200ValidAsync() {
         return service.getDefaultModelA200Valid()
@@ -1190,7 +1189,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(getDefaultModelA200NoneAsync(), serviceCallback);
@@ -1199,7 +1198,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> getDefaultModelA200NoneAsync() {
         return service.getDefaultModelA200None()
@@ -1237,7 +1236,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(getDefaultModelA400ValidAsync(), serviceCallback);
@@ -1246,7 +1245,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> getDefaultModelA400ValidAsync() {
         return service.getDefaultModelA400Valid()
@@ -1284,7 +1283,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(getDefaultModelA400NoneAsync(), serviceCallback);
@@ -1293,7 +1292,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> getDefaultModelA400NoneAsync() {
         return service.getDefaultModelA400None()
@@ -1331,7 +1330,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getDefaultNone200InvalidAsync(), serviceCallback);
@@ -1377,7 +1376,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getDefaultNone200NoneAsync(), serviceCallback);
@@ -1423,7 +1422,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getDefaultNone400InvalidAsync(), serviceCallback);
@@ -1469,7 +1468,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getDefaultNone400NoneAsync(), serviceCallback);
@@ -1515,7 +1514,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA200NoneAsync(), serviceCallback);
@@ -1524,7 +1523,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA200NoneAsync() {
         return service.get200ModelA200None()
@@ -1562,7 +1561,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with payload {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA200ValidAsync(), serviceCallback);
@@ -1571,7 +1570,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA200ValidAsync() {
         return service.get200ModelA200Valid()
@@ -1609,7 +1608,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA200InvalidAsync(), serviceCallback);
@@ -1618,7 +1617,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA200InvalidAsync() {
         return service.get200ModelA200Invalid()
@@ -1656,7 +1655,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA400NoneAsync(), serviceCallback);
@@ -1665,7 +1664,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA400NoneAsync() {
         return service.get200ModelA400None()
@@ -1703,7 +1702,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with payload {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA400ValidAsync(), serviceCallback);
@@ -1712,7 +1711,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA400ValidAsync() {
         return service.get200ModelA400Valid()
@@ -1750,7 +1749,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA400InvalidAsync(), serviceCallback);
@@ -1759,7 +1758,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA400InvalidAsync() {
         return service.get200ModelA400Invalid()
@@ -1797,7 +1796,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * Send a 202 response with payload {'statusCode': '202'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
         return ServiceCall.create(get200ModelA202ValidAsync(), serviceCallback);
@@ -1806,7 +1805,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the A object
      */
     public Observable<ServiceResponse<A>> get200ModelA202ValidAsync() {
         return service.get200ModelA202Valid()

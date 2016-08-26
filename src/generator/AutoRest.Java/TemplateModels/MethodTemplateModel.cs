@@ -733,6 +733,7 @@ namespace AutoRest.Java.TemplateModels
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
+                imports.Add("rx.Observable");
                 imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + ReturnTypeModel.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");

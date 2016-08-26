@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -38,6 +39,13 @@ public interface Polymorphicrecursives {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @return the observable to the Fish object
+     */
+    Observable<ServiceResponse<Fish>> getValidAsync();
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -162,5 +170,65 @@ public interface Polymorphicrecursives {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+     {
+         "fishtype": "salmon",
+         "species": "king",
+         "length": 1,
+         "age": 1,
+         "location": "alaska",
+         "iswild": true,
+         "siblings": [
+             {
+                 "fishtype": "shark",
+                 "species": "predator",
+                 "length": 20,
+                 "age": 6,
+                 "siblings": [
+                     {
+                         "fishtype": "salmon",
+                         "species": "coho",
+                         "length": 2,
+                         "age": 2,
+                         "location": "atlantic",
+                         "iswild": true,
+                         "siblings": [
+                             {
+                                 "fishtype": "shark",
+                                 "species": "predator",
+                                 "length": 20,
+                                 "age": 6
+                             },
+                             {
+                                 "fishtype": "sawshark",
+                                 "species": "dangerous",
+                                 "length": 10,
+                                 "age": 105
+                             }
+                         ]
+                     },
+                     {
+                         "fishtype": "sawshark",
+                         "species": "dangerous",
+                         "length": 10,
+                         "age": 105
+                     }
+                 ]
+             },
+             {
+                 "fishtype": "sawshark",
+                 "species": "dangerous",
+                 "length": 10,
+                 "age": 105
+             }
+         ]
+     }
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(Fish complexBody);
 
 }

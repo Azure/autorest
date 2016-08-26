@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -39,6 +40,13 @@ public interface HttpSuccess {
     ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
+     * Return 200 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head200Async();
+
+    /**
      * Return 204 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
@@ -56,6 +64,13 @@ public interface HttpSuccess {
     ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
+     * Return 204 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head204Async();
+
+    /**
      * Return 404 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
@@ -71,5 +86,12 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> head404Async();
 
 }

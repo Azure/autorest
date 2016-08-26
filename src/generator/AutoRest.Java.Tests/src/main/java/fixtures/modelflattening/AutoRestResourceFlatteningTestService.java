@@ -22,6 +22,7 @@ import fixtures.modelflattening.models.SimpleProduct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import rx.Observable;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -68,6 +69,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayAsync(List<Resource> resourceArray);
+
+    /**
      * Get External Resource as an Array.
      *
      * @throws ErrorException exception thrown from REST call
@@ -83,6 +92,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -120,6 +136,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+
+    /**
      * Get External Resource as a Dictionary.
      *
      * @throws ErrorException exception thrown from REST call
@@ -135,6 +159,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -172,6 +203,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+
+    /**
      * Get External Resource as a ResourceCollection.
      *
      * @throws ErrorException exception thrown from REST call
@@ -187,6 +226,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @return the observable to the ResourceCollection object
+     */
+    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionAsync();
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -222,6 +268,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback);
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @return the observable to the SimpleProduct object
+     */
+    Observable<ServiceResponse<SimpleProduct>> putSimpleProductAsync(SimpleProduct simpleBodyProduct);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -273,6 +327,18 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback);
 
     /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param description Description of product.
+     * @param genericValue Generic URL value.
+     * @param odatavalue URL value.
+     * @return the observable to the SimpleProduct object
+     */
+    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
+
+    /**
      * Put Simple Product with client flattening true on the model.
      *
      * @param flattenParameterGroup Additional parameters for the operation
@@ -291,5 +357,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @return the observable to the SimpleProduct object
+     */
+    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup);
 
 }

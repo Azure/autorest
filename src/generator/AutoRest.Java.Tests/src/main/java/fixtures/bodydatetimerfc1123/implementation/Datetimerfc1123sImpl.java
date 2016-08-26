@@ -22,7 +22,6 @@ import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -110,7 +109,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -119,7 +118,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getNullAsync() {
         return service.getNull()
@@ -163,7 +162,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -172,7 +171,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getInvalidAsync() {
         return service.getInvalid()
@@ -216,7 +215,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getOverflowAsync(), serviceCallback);
@@ -225,7 +224,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getOverflowAsync() {
         return service.getOverflow()
@@ -269,7 +268,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUnderflowAsync(), serviceCallback);
@@ -278,7 +277,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUnderflowAsync() {
         return service.getUnderflow()
@@ -325,7 +324,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
@@ -378,7 +377,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
@@ -387,7 +386,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync() {
         return service.getUtcLowercaseMaxDateTime()
@@ -431,7 +430,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
@@ -440,7 +439,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync() {
         return service.getUtcUppercaseMaxDateTime()
@@ -487,7 +486,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
@@ -540,7 +539,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         return ServiceCall.create(getUtcMinDateTimeAsync(), serviceCallback);
@@ -549,7 +548,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync() {
         return service.getUtcMinDateTime()

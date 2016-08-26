@@ -21,7 +21,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -85,7 +84,7 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(vault, secret, keyName), serviceCallback);
@@ -155,7 +154,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
@@ -167,6 +166,7 @@ public final class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {

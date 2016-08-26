@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -94,7 +93,7 @@ public final class ArraysImpl implements Arrays {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -103,7 +102,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getValidAsync() {
         return service.getValid()
@@ -145,7 +144,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
@@ -198,7 +197,7 @@ public final class ArraysImpl implements Arrays {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -207,7 +206,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getEmptyAsync() {
         return service.getEmpty()
@@ -249,7 +248,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putEmptyAsync(complexBody), serviceCallback);
@@ -302,7 +301,7 @@ public final class ArraysImpl implements Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
@@ -311,7 +310,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getNotProvidedAsync() {
         return service.getNotProvided()

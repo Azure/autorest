@@ -23,7 +23,6 @@ import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -93,7 +92,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         return ServiceCall.create(uploadFileAsync(fileContent, fileName), serviceCallback);
@@ -104,7 +103,7 @@ public final class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> uploadFileAsync(byte[] fileContent, String fileName) {
         if (fileContent == null) {
@@ -153,7 +152,7 @@ public final class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
         return ServiceCall.create(uploadFileViaBodyAsync(fileContent), serviceCallback);
@@ -163,7 +162,7 @@ public final class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsync(byte[] fileContent) {
         if (fileContent == null) {

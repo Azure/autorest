@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -37,6 +38,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get null string value value.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getNullAsync();
 
     /**
      * Set string value null.
@@ -74,6 +82,14 @@ public interface Strings {
     ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set string value null.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putNullAsync(String stringBody);
+
+    /**
      * Get empty string value value ''.
      *
      * @throws ErrorException exception thrown from REST call
@@ -89,6 +105,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getEmptyAsync();
 
     /**
      * Set string value empty ''.
@@ -111,6 +134,14 @@ public interface Strings {
     ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set string value empty ''.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyAsync(String stringBody);
+
+    /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @throws ErrorException exception thrown from REST call
@@ -126,6 +157,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getMbcsAsync();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -148,6 +186,14 @@ public interface Strings {
     ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMbcsAsync(String stringBody);
+
+    /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @throws ErrorException exception thrown from REST call
@@ -163,6 +209,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getWhitespaceAsync();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -185,6 +238,14 @@ public interface Strings {
     ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putWhitespaceAsync(String stringBody);
+
+    /**
      * Get String value when no string value is sent in response payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -200,6 +261,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getNotProvidedAsync();
 
     /**
      * Get value that is base64 encoded.
@@ -219,6 +287,13 @@ public interface Strings {
     ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Get value that is base64 encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getBase64EncodedAsync();
+
+    /**
      * Get value that is base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
@@ -234,6 +309,13 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getBase64UrlEncodedAsync();
 
     /**
      * Put value that is base64url encoded.
@@ -256,6 +338,14 @@ public interface Strings {
     ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody the Base64Url value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBase64UrlEncodedAsync(byte[] stringBody);
+
+    /**
      * Get null value that is expected to be base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
@@ -271,5 +361,12 @@ public interface Strings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedAsync();
 
 }

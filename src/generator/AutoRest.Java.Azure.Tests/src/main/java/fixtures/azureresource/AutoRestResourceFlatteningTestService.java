@@ -22,6 +22,7 @@ import fixtures.azureresource.models.ResourceCollection;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import rx.Observable;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -128,6 +129,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayAsync(List<Resource> resourceArray);
+
+    /**
      * Get External Resource as an Array.
      *
      * @throws ErrorException exception thrown from REST call
@@ -143,6 +152,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -180,6 +196,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+
+    /**
      * Get External Resource as a Dictionary.
      *
      * @throws ErrorException exception thrown from REST call
@@ -195,6 +219,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -232,6 +263,14 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+
+    /**
      * Get External Resource as a ResourceCollection.
      *
      * @throws ErrorException exception thrown from REST call
@@ -247,5 +286,12 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @return the observable to the ResourceCollection object
+     */
+    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionAsync();
 
 }

@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -41,6 +42,14 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @param pathParameter the String value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredPathAsync(String pathParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -78,6 +87,14 @@ public interface Implicits {
     ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Test implicitly optional query parameter.
+     *
+     * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalQueryAsync(String queryParameter);
+
+    /**
      * Test implicitly optional header parameter.
      *
      * @throws ErrorException exception thrown from REST call
@@ -111,6 +128,14 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalHeaderAsync(String queryParameter);
 
     /**
      * Test implicitly optional body parameter.
@@ -148,6 +173,14 @@ public interface Implicits {
     ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalBodyAsync(String bodyParameter);
+
+    /**
      * Test implicitly required path parameter.
      *
      * @throws ErrorException exception thrown from REST call
@@ -164,6 +197,13 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredGlobalPathAsync();
 
     /**
      * Test implicitly required query parameter.
@@ -184,6 +224,13 @@ public interface Implicits {
     ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
+     * Test implicitly required query parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredGlobalQueryAsync();
+
+    /**
      * Test implicitly optional query parameter.
      *
      * @throws ErrorException exception thrown from REST call
@@ -199,5 +246,12 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getOptionalGlobalQueryAsync();
 
 }

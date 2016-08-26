@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -39,6 +40,13 @@ public interface Bytes {
     ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Get null byte value.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNullAsync();
+
+    /**
      * Get empty byte value ''.
      *
      * @throws ErrorException exception thrown from REST call
@@ -56,6 +64,13 @@ public interface Bytes {
     ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
+     * Get empty byte value ''.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getEmptyAsync();
+
+    /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @throws ErrorException exception thrown from REST call
@@ -71,6 +86,13 @@ public interface Bytes {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNonAsciiAsync();
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -93,6 +115,14 @@ public interface Bytes {
     ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putNonAsciiAsync(byte[] byteBody);
+
+    /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @throws ErrorException exception thrown from REST call
@@ -108,5 +138,12 @@ public interface Bytes {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getInvalidAsync();
 
 }

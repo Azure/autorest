@@ -18,6 +18,7 @@ import fixtures.http.models.A;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -42,6 +43,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidAsync();
+
+    /**
      * Send a 204 response with no payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -57,6 +65,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -76,6 +91,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidAsync();
+
+    /**
      * Send a 202 response with no payload:.
      *
      * @throws ErrorException exception thrown from REST call
@@ -91,6 +113,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 202 response with no payload:.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -110,6 +139,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidAsync();
+
+    /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws ErrorException exception thrown from REST call
@@ -125,6 +161,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -144,6 +187,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidAsync();
+
+    /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @throws ErrorException exception thrown from REST call
@@ -159,6 +209,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -178,6 +235,13 @@ public interface MultipleResponses {
     ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the Object object
+     */
+    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+
+    /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
      * @throws ErrorException exception thrown from REST call
@@ -193,6 +257,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback);
+
+    /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}.
+     *
+     * @return the observable to the Object object
+     */
+    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -212,6 +283,13 @@ public interface MultipleResponses {
     ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
 
     /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
+     *
+     * @return the observable to the Object object
+     */
+    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+
+    /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @throws ErrorException exception thrown from REST call
@@ -227,6 +305,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback);
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the observable to the Object object
+     */
+    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
 
     /**
      * Send a 202 response with no payload.
@@ -246,6 +331,13 @@ public interface MultipleResponses {
     ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 202 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultError202NoneAsync();
+
+    /**
      * Send a 204 response with no payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -261,6 +353,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultError204NoneAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -280,6 +379,13 @@ public interface MultipleResponses {
     ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultError400ValidAsync();
+
+    /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -295,6 +401,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone202InvalidAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -314,6 +427,13 @@ public interface MultipleResponses {
     ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 204 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone204NoneAsync();
+
+    /**
      * Send a 400 response with no payload.
      *
      * @throws ServiceException exception thrown from REST call
@@ -329,6 +449,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400NoneAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -348,6 +475,13 @@ public interface MultipleResponses {
     ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400InvalidAsync();
+
+    /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws MyException exception thrown from REST call
@@ -363,6 +497,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> getDefaultModelA200ValidAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -382,6 +523,13 @@ public interface MultipleResponses {
     ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 200 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> getDefaultModelA200NoneAsync();
+
+    /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws MyException exception thrown from REST call
@@ -397,6 +545,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> getDefaultModelA400ValidAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -416,6 +571,13 @@ public interface MultipleResponses {
     ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 400 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> getDefaultModelA400NoneAsync();
+
+    /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -431,6 +593,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getDefaultNone200InvalidAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -450,6 +619,13 @@ public interface MultipleResponses {
     ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 200 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getDefaultNone200NoneAsync();
+
+    /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -465,6 +641,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getDefaultNone400InvalidAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -484,6 +667,13 @@ public interface MultipleResponses {
     ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Send a 400 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getDefaultNone400NoneAsync();
+
+    /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
      * @throws ServiceException exception thrown from REST call
@@ -499,6 +689,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA200NoneAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -518,6 +715,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 200 response with payload {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA200ValidAsync();
+
+    /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -533,6 +737,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA200InvalidAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -552,6 +763,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 400 response with no payload client should treat as an http error with no error model.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA400NoneAsync();
+
+    /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -567,6 +785,13 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 200 response with payload {'statusCode': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA400ValidAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -586,6 +811,13 @@ public interface MultipleResponses {
     ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback);
 
     /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA400InvalidAsync();
+
+    /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
      * @throws ServiceException exception thrown from REST call
@@ -601,5 +833,12 @@ public interface MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback);
+
+    /**
+     * Send a 202 response with payload {'statusCode': '202'}.
+     *
+     * @return the observable to the A object
+     */
+    Observable<ServiceResponse<A>> get200ModelA202ValidAsync();
 
 }

@@ -30,7 +30,6 @@ import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -342,7 +341,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get null dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -351,7 +350,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getNullAsync() {
         return service.getNull()
@@ -390,7 +389,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get empty dictionary value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -399,7 +398,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getEmptyAsync() {
         return service.getEmpty()
@@ -441,7 +440,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putEmptyAsync(arrayBody), serviceCallback);
@@ -494,7 +493,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get Dictionary with null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getNullValueAsync(), serviceCallback);
@@ -503,7 +502,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getNullValueAsync() {
         return service.getNullValue()
@@ -542,7 +541,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get Dictionary with null key.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getNullKeyAsync(), serviceCallback);
@@ -551,7 +550,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getNullKeyAsync() {
         return service.getNullKey()
@@ -590,7 +589,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get Dictionary with key as empty string.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getEmptyStringKeyAsync(), serviceCallback);
@@ -599,7 +598,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyAsync() {
         return service.getEmptyStringKey()
@@ -638,7 +637,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get invalid Dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -647,7 +646,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getInvalidAsync() {
         return service.getInvalid()
@@ -686,7 +685,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanTfftAsync(), serviceCallback);
@@ -695,7 +694,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftAsync() {
         return service.getBooleanTfft()
@@ -737,7 +736,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putBooleanTfftAsync(arrayBody), serviceCallback);
@@ -790,7 +789,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanInvalidNullAsync(), serviceCallback);
@@ -799,7 +798,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullAsync() {
         return service.getBooleanInvalidNull()
@@ -838,7 +837,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanInvalidStringAsync(), serviceCallback);
@@ -847,7 +846,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringAsync() {
         return service.getBooleanInvalidString()
@@ -886,7 +885,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getIntegerValidAsync(), serviceCallback);
@@ -895,7 +894,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidAsync() {
         return service.getIntegerValid()
@@ -937,7 +936,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putIntegerValidAsync(arrayBody), serviceCallback);
@@ -990,7 +989,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getIntInvalidNullAsync(), serviceCallback);
@@ -999,7 +998,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullAsync() {
         return service.getIntInvalidNull()
@@ -1038,7 +1037,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceCall.create(getIntInvalidStringAsync(), serviceCallback);
@@ -1047,7 +1046,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringAsync() {
         return service.getIntInvalidString()
@@ -1086,7 +1085,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceCall.create(getLongValidAsync(), serviceCallback);
@@ -1095,7 +1094,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<ServiceResponse<Map<String, Long>>> getLongValidAsync() {
         return service.getLongValid()
@@ -1137,7 +1136,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLongValidAsync(arrayBody), serviceCallback);
@@ -1190,7 +1189,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceCall.create(getLongInvalidNullAsync(), serviceCallback);
@@ -1199,7 +1198,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullAsync() {
         return service.getLongInvalidNull()
@@ -1238,7 +1237,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         return ServiceCall.create(getLongInvalidStringAsync(), serviceCallback);
@@ -1247,7 +1246,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringAsync() {
         return service.getLongInvalidString()
@@ -1286,7 +1285,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getFloatValidAsync(), serviceCallback);
@@ -1295,7 +1294,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getFloatValidAsync() {
         return service.getFloatValid()
@@ -1337,7 +1336,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putFloatValidAsync(arrayBody), serviceCallback);
@@ -1390,7 +1389,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getFloatInvalidNullAsync(), serviceCallback);
@@ -1399,7 +1398,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullAsync() {
         return service.getFloatInvalidNull()
@@ -1438,7 +1437,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getFloatInvalidStringAsync(), serviceCallback);
@@ -1447,7 +1446,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringAsync() {
         return service.getFloatInvalidString()
@@ -1486,7 +1485,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getDoubleValidAsync(), serviceCallback);
@@ -1495,7 +1494,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getDoubleValidAsync() {
         return service.getDoubleValid()
@@ -1537,7 +1536,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDoubleValidAsync(arrayBody), serviceCallback);
@@ -1590,7 +1589,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getDoubleInvalidNullAsync(), serviceCallback);
@@ -1599,7 +1598,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullAsync() {
         return service.getDoubleInvalidNull()
@@ -1638,7 +1637,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         return ServiceCall.create(getDoubleInvalidStringAsync(), serviceCallback);
@@ -1647,7 +1646,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringAsync() {
         return service.getDoubleInvalidString()
@@ -1686,7 +1685,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getStringValidAsync(), serviceCallback);
@@ -1695,7 +1694,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getStringValidAsync() {
         return service.getStringValid()
@@ -1737,7 +1736,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putStringValidAsync(arrayBody), serviceCallback);
@@ -1790,7 +1789,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getStringWithNullAsync(), serviceCallback);
@@ -1799,7 +1798,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getStringWithNullAsync() {
         return service.getStringWithNull()
@@ -1838,7 +1837,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         return ServiceCall.create(getStringWithInvalidAsync(), serviceCallback);
@@ -1847,7 +1846,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidAsync() {
         return service.getStringWithInvalid()
@@ -1886,7 +1885,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateValidAsync(), serviceCallback);
@@ -1895,7 +1894,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidAsync() {
         return service.getDateValid()
@@ -1937,7 +1936,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateValidAsync(arrayBody), serviceCallback);
@@ -1990,7 +1989,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateInvalidNullAsync(), serviceCallback);
@@ -1999,7 +1998,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullAsync() {
         return service.getDateInvalidNull()
@@ -2038,7 +2037,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateInvalidCharsAsync(), serviceCallback);
@@ -2047,7 +2046,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsAsync() {
         return service.getDateInvalidChars()
@@ -2086,7 +2085,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeValidAsync(), serviceCallback);
@@ -2095,7 +2094,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidAsync() {
         return service.getDateTimeValid()
@@ -2137,7 +2136,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeValidAsync(arrayBody), serviceCallback);
@@ -2190,7 +2189,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeInvalidNullAsync(), serviceCallback);
@@ -2199,7 +2198,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullAsync() {
         return service.getDateTimeInvalidNull()
@@ -2238,7 +2237,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeInvalidCharsAsync(), serviceCallback);
@@ -2247,7 +2246,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsAsync() {
         return service.getDateTimeInvalidChars()
@@ -2286,7 +2285,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeRfc1123ValidAsync(), serviceCallback);
@@ -2295,7 +2294,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidAsync() {
         return service.getDateTimeRfc1123Valid()
@@ -2347,7 +2346,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
@@ -2405,7 +2404,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Period>> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
         return ServiceCall.create(getDurationValidAsync(), serviceCallback);
@@ -2414,7 +2413,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @return the Map&lt;String, Period&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Period&gt; object
      */
     public Observable<ServiceResponse<Map<String, Period>>> getDurationValidAsync() {
         return service.getDurationValid()
@@ -2456,7 +2455,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDurationValidAsync(arrayBody), serviceCallback);
@@ -2509,7 +2508,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceCall.create(getByteValidAsync(), serviceCallback);
@@ -2518,7 +2517,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<ServiceResponse<Map<String, byte[]>>> getByteValidAsync() {
         return service.getByteValid()
@@ -2560,7 +2559,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putByteValidAsync(arrayBody), serviceCallback);
@@ -2613,7 +2612,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceCall.create(getByteInvalidNullAsync(), serviceCallback);
@@ -2622,7 +2621,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullAsync() {
         return service.getByteInvalidNull()
@@ -2661,7 +2660,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         return ServiceCall.create(getBase64UrlAsync(), serviceCallback);
@@ -2670,7 +2669,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlAsync() {
         return service.getBase64Url()
@@ -2719,7 +2718,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get dictionary of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceCall.create(getComplexNullAsync(), serviceCallback);
@@ -2728,7 +2727,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<ServiceResponse<Map<String, Widget>>> getComplexNullAsync() {
         return service.getComplexNull()
@@ -2767,7 +2766,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get empty dictionary of complex type {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceCall.create(getComplexEmptyAsync(), serviceCallback);
@@ -2776,7 +2775,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyAsync() {
         return service.getComplexEmpty()
@@ -2815,7 +2814,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceCall.create(getComplexItemNullAsync(), serviceCallback);
@@ -2824,7 +2823,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullAsync() {
         return service.getComplexItemNull()
@@ -2863,7 +2862,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceCall.create(getComplexItemEmptyAsync(), serviceCallback);
@@ -2872,7 +2871,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyAsync() {
         return service.getComplexItemEmpty()
@@ -2911,7 +2910,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         return ServiceCall.create(getComplexValidAsync(), serviceCallback);
@@ -2920,7 +2919,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<ServiceResponse<Map<String, Widget>>> getComplexValidAsync() {
         return service.getComplexValid()
@@ -2962,7 +2961,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putComplexValidAsync(arrayBody), serviceCallback);
@@ -3015,7 +3014,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayNullAsync(), serviceCallback);
@@ -3024,7 +3023,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get a null array.
      *
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullAsync() {
         return service.getArrayNull()
@@ -3063,7 +3062,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an empty dictionary {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayEmptyAsync(), serviceCallback);
@@ -3072,7 +3071,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyAsync() {
         return service.getArrayEmpty()
@@ -3111,7 +3110,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayItemNullAsync(), serviceCallback);
@@ -3120,7 +3119,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullAsync() {
         return service.getArrayItemNull()
@@ -3159,7 +3158,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayItemEmptyAsync(), serviceCallback);
@@ -3168,7 +3167,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyAsync() {
         return service.getArrayItemEmpty()
@@ -3207,7 +3206,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayValidAsync(), serviceCallback);
@@ -3216,7 +3215,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidAsync() {
         return service.getArrayValid()
@@ -3258,7 +3257,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putArrayValidAsync(arrayBody), serviceCallback);
@@ -3311,7 +3310,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryNullAsync(), serviceCallback);
@@ -3320,7 +3319,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullAsync() {
         return service.getDictionaryNull()
@@ -3359,7 +3358,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryEmptyAsync(), serviceCallback);
@@ -3368,7 +3367,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyAsync() {
         return service.getDictionaryEmpty()
@@ -3407,7 +3406,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryItemNullAsync(), serviceCallback);
@@ -3416,7 +3415,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullAsync() {
         return service.getDictionaryItemNull()
@@ -3455,7 +3454,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryItemEmptyAsync(), serviceCallback);
@@ -3464,7 +3463,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyAsync() {
         return service.getDictionaryItemEmpty()
@@ -3503,7 +3502,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryValidAsync(), serviceCallback);
@@ -3512,7 +3511,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidAsync() {
         return service.getDictionaryValid()
@@ -3554,7 +3553,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDictionaryValidAsync(arrayBody), serviceCallback);

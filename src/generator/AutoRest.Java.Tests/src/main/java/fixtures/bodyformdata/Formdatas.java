@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,6 +49,15 @@ public interface Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileAsync(byte[] fileContent, String fileName);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -63,5 +73,13 @@ public interface Formdatas {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsync(byte[] fileContent);
 
 }

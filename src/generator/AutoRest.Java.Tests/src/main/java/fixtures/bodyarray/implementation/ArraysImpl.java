@@ -31,7 +31,6 @@ import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -343,7 +342,7 @@ public final class ArraysImpl implements Arrays {
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -352,7 +351,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getNullAsync() {
         return service.getNull()
@@ -391,7 +390,7 @@ public final class ArraysImpl implements Arrays {
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -400,7 +399,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getInvalidAsync() {
         return service.getInvalid()
@@ -439,7 +438,7 @@ public final class ArraysImpl implements Arrays {
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -448,7 +447,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getEmptyAsync() {
         return service.getEmpty()
@@ -490,7 +489,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putEmptyAsync(arrayBody), serviceCallback);
@@ -543,7 +542,7 @@ public final class ArraysImpl implements Arrays {
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanTfftAsync(), serviceCallback);
@@ -552,7 +551,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanTfftAsync() {
         return service.getBooleanTfft()
@@ -594,7 +593,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putBooleanTfftAsync(arrayBody), serviceCallback);
@@ -647,7 +646,7 @@ public final class ArraysImpl implements Arrays {
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanInvalidNullAsync(), serviceCallback);
@@ -656,7 +655,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullAsync() {
         return service.getBooleanInvalidNull()
@@ -695,7 +694,7 @@ public final class ArraysImpl implements Arrays {
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         return ServiceCall.create(getBooleanInvalidStringAsync(), serviceCallback);
@@ -704,7 +703,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringAsync() {
         return service.getBooleanInvalidString()
@@ -743,7 +742,7 @@ public final class ArraysImpl implements Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getIntegerValidAsync(), serviceCallback);
@@ -752,7 +751,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntegerValidAsync() {
         return service.getIntegerValid()
@@ -794,7 +793,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putIntegerValidAsync(arrayBody), serviceCallback);
@@ -847,7 +846,7 @@ public final class ArraysImpl implements Arrays {
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getIntInvalidNullAsync(), serviceCallback);
@@ -856,7 +855,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntInvalidNullAsync() {
         return service.getIntInvalidNull()
@@ -895,7 +894,7 @@ public final class ArraysImpl implements Arrays {
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         return ServiceCall.create(getIntInvalidStringAsync(), serviceCallback);
@@ -904,7 +903,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntInvalidStringAsync() {
         return service.getIntInvalidString()
@@ -943,7 +942,7 @@ public final class ArraysImpl implements Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
         return ServiceCall.create(getLongValidAsync(), serviceCallback);
@@ -952,7 +951,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongValidAsync() {
         return service.getLongValid()
@@ -994,7 +993,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLongValidAsync(arrayBody), serviceCallback);
@@ -1047,7 +1046,7 @@ public final class ArraysImpl implements Arrays {
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
         return ServiceCall.create(getLongInvalidNullAsync(), serviceCallback);
@@ -1056,7 +1055,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongInvalidNullAsync() {
         return service.getLongInvalidNull()
@@ -1095,7 +1094,7 @@ public final class ArraysImpl implements Arrays {
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
         return ServiceCall.create(getLongInvalidStringAsync(), serviceCallback);
@@ -1104,7 +1103,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongInvalidStringAsync() {
         return service.getLongInvalidString()
@@ -1143,7 +1142,7 @@ public final class ArraysImpl implements Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getFloatValidAsync(), serviceCallback);
@@ -1152,7 +1151,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatValidAsync() {
         return service.getFloatValid()
@@ -1194,7 +1193,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putFloatValidAsync(arrayBody), serviceCallback);
@@ -1247,7 +1246,7 @@ public final class ArraysImpl implements Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getFloatInvalidNullAsync(), serviceCallback);
@@ -1256,7 +1255,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatInvalidNullAsync() {
         return service.getFloatInvalidNull()
@@ -1295,7 +1294,7 @@ public final class ArraysImpl implements Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getFloatInvalidStringAsync(), serviceCallback);
@@ -1304,7 +1303,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatInvalidStringAsync() {
         return service.getFloatInvalidString()
@@ -1343,7 +1342,7 @@ public final class ArraysImpl implements Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getDoubleValidAsync(), serviceCallback);
@@ -1352,7 +1351,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleValidAsync() {
         return service.getDoubleValid()
@@ -1394,7 +1393,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDoubleValidAsync(arrayBody), serviceCallback);
@@ -1447,7 +1446,7 @@ public final class ArraysImpl implements Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getDoubleInvalidNullAsync(), serviceCallback);
@@ -1456,7 +1455,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullAsync() {
         return service.getDoubleInvalidNull()
@@ -1495,7 +1494,7 @@ public final class ArraysImpl implements Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         return ServiceCall.create(getDoubleInvalidStringAsync(), serviceCallback);
@@ -1504,7 +1503,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringAsync() {
         return service.getDoubleInvalidString()
@@ -1543,7 +1542,7 @@ public final class ArraysImpl implements Arrays {
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
         return ServiceCall.create(getStringValidAsync(), serviceCallback);
@@ -1552,7 +1551,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringValidAsync() {
         return service.getStringValid()
@@ -1594,7 +1593,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putStringValidAsync(arrayBody), serviceCallback);
@@ -1647,7 +1646,7 @@ public final class ArraysImpl implements Arrays {
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
         return ServiceCall.create(getStringWithNullAsync(), serviceCallback);
@@ -1656,7 +1655,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringWithNullAsync() {
         return service.getStringWithNull()
@@ -1695,7 +1694,7 @@ public final class ArraysImpl implements Arrays {
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
         return ServiceCall.create(getStringWithInvalidAsync(), serviceCallback);
@@ -1704,7 +1703,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringWithInvalidAsync() {
         return service.getStringWithInvalid()
@@ -1743,7 +1742,7 @@ public final class ArraysImpl implements Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceCall.create(getUuidValidAsync(), serviceCallback);
@@ -1752,7 +1751,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<ServiceResponse<List<UUID>>> getUuidValidAsync() {
         return service.getUuidValid()
@@ -1794,7 +1793,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putUuidValidAsync(arrayBody), serviceCallback);
@@ -1847,7 +1846,7 @@ public final class ArraysImpl implements Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
         return ServiceCall.create(getUuidInvalidCharsAsync(), serviceCallback);
@@ -1856,7 +1855,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsAsync() {
         return service.getUuidInvalidChars()
@@ -1895,7 +1894,7 @@ public final class ArraysImpl implements Arrays {
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateValidAsync(), serviceCallback);
@@ -1904,7 +1903,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateValidAsync() {
         return service.getDateValid()
@@ -1946,7 +1945,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateValidAsync(arrayBody), serviceCallback);
@@ -1999,7 +1998,7 @@ public final class ArraysImpl implements Arrays {
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateInvalidNullAsync(), serviceCallback);
@@ -2008,7 +2007,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullAsync() {
         return service.getDateInvalidNull()
@@ -2047,7 +2046,7 @@ public final class ArraysImpl implements Arrays {
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         return ServiceCall.create(getDateInvalidCharsAsync(), serviceCallback);
@@ -2056,7 +2055,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsAsync() {
         return service.getDateInvalidChars()
@@ -2095,7 +2094,7 @@ public final class ArraysImpl implements Arrays {
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeValidAsync(), serviceCallback);
@@ -2104,7 +2103,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeValidAsync() {
         return service.getDateTimeValid()
@@ -2146,7 +2145,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeValidAsync(arrayBody), serviceCallback);
@@ -2199,7 +2198,7 @@ public final class ArraysImpl implements Arrays {
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeInvalidNullAsync(), serviceCallback);
@@ -2208,7 +2207,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullAsync() {
         return service.getDateTimeInvalidNull()
@@ -2247,7 +2246,7 @@ public final class ArraysImpl implements Arrays {
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeInvalidCharsAsync(), serviceCallback);
@@ -2256,7 +2255,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsAsync() {
         return service.getDateTimeInvalidChars()
@@ -2295,7 +2294,7 @@ public final class ArraysImpl implements Arrays {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         return ServiceCall.create(getDateTimeRfc1123ValidAsync(), serviceCallback);
@@ -2304,7 +2303,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidAsync() {
         return service.getDateTimeRfc1123Valid()
@@ -2356,7 +2355,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
@@ -2414,7 +2413,7 @@ public final class ArraysImpl implements Arrays {
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
         return ServiceCall.create(getDurationValidAsync(), serviceCallback);
@@ -2423,7 +2422,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
-     * @return the List&lt;Period&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Period&gt; object
      */
     public Observable<ServiceResponse<List<Period>>> getDurationValidAsync() {
         return service.getDurationValid()
@@ -2465,7 +2464,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDurationValidAsync(arrayBody), serviceCallback);
@@ -2518,7 +2517,7 @@ public final class ArraysImpl implements Arrays {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceCall.create(getByteValidAsync(), serviceCallback);
@@ -2527,7 +2526,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getByteValidAsync() {
         return service.getByteValid()
@@ -2569,7 +2568,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putByteValidAsync(arrayBody), serviceCallback);
@@ -2622,7 +2621,7 @@ public final class ArraysImpl implements Arrays {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceCall.create(getByteInvalidNullAsync(), serviceCallback);
@@ -2631,7 +2630,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullAsync() {
         return service.getByteInvalidNull()
@@ -2670,7 +2669,7 @@ public final class ArraysImpl implements Arrays {
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         return ServiceCall.create(getBase64UrlAsync(), serviceCallback);
@@ -2679,7 +2678,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getBase64UrlAsync() {
         return service.getBase64Url()
@@ -2728,7 +2727,7 @@ public final class ArraysImpl implements Arrays {
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         return ServiceCall.create(getComplexNullAsync(), serviceCallback);
@@ -2737,7 +2736,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexNullAsync() {
         return service.getComplexNull()
@@ -2776,7 +2775,7 @@ public final class ArraysImpl implements Arrays {
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         return ServiceCall.create(getComplexEmptyAsync(), serviceCallback);
@@ -2785,7 +2784,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexEmptyAsync() {
         return service.getComplexEmpty()
@@ -2824,7 +2823,7 @@ public final class ArraysImpl implements Arrays {
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         return ServiceCall.create(getComplexItemNullAsync(), serviceCallback);
@@ -2833,7 +2832,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexItemNullAsync() {
         return service.getComplexItemNull()
@@ -2872,7 +2871,7 @@ public final class ArraysImpl implements Arrays {
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         return ServiceCall.create(getComplexItemEmptyAsync(), serviceCallback);
@@ -2881,7 +2880,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexItemEmptyAsync() {
         return service.getComplexItemEmpty()
@@ -2920,7 +2919,7 @@ public final class ArraysImpl implements Arrays {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
         return ServiceCall.create(getComplexValidAsync(), serviceCallback);
@@ -2929,7 +2928,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexValidAsync() {
         return service.getComplexValid()
@@ -2971,7 +2970,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putComplexValidAsync(arrayBody), serviceCallback);
@@ -3024,7 +3023,7 @@ public final class ArraysImpl implements Arrays {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayNullAsync(), serviceCallback);
@@ -3033,7 +3032,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayNullAsync() {
         return service.getArrayNull()
@@ -3072,7 +3071,7 @@ public final class ArraysImpl implements Arrays {
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayEmptyAsync(), serviceCallback);
@@ -3081,7 +3080,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayEmptyAsync() {
         return service.getArrayEmpty()
@@ -3120,7 +3119,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayItemNullAsync(), serviceCallback);
@@ -3129,7 +3128,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayItemNullAsync() {
         return service.getArrayItemNull()
@@ -3168,7 +3167,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayItemEmptyAsync(), serviceCallback);
@@ -3177,7 +3176,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyAsync() {
         return service.getArrayItemEmpty()
@@ -3216,7 +3215,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         return ServiceCall.create(getArrayValidAsync(), serviceCallback);
@@ -3225,7 +3224,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayValidAsync() {
         return service.getArrayValid()
@@ -3267,7 +3266,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putArrayValidAsync(arrayBody), serviceCallback);
@@ -3320,7 +3319,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryNullAsync(), serviceCallback);
@@ -3329,7 +3328,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullAsync() {
         return service.getDictionaryNull()
@@ -3368,7 +3367,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryEmptyAsync(), serviceCallback);
@@ -3377,7 +3376,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyAsync() {
         return service.getDictionaryEmpty()
@@ -3416,7 +3415,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryItemNullAsync(), serviceCallback);
@@ -3425,7 +3424,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullAsync() {
         return service.getDictionaryItemNull()
@@ -3464,7 +3463,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryItemEmptyAsync(), serviceCallback);
@@ -3473,7 +3472,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyAsync() {
         return service.getDictionaryItemEmpty()
@@ -3512,7 +3511,7 @@ public final class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         return ServiceCall.create(getDictionaryValidAsync(), serviceCallback);
@@ -3521,7 +3520,7 @@ public final class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidAsync() {
         return service.getDictionaryValid()
@@ -3563,7 +3562,7 @@ public final class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDictionaryValidAsync(arrayBody), serviceCallback);

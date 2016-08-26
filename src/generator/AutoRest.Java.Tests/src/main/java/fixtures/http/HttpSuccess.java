@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -39,6 +40,13 @@ public interface HttpSuccess {
     ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Return 200 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> head200Async();
+
+    /**
      * Get 200 success.
      *
      * @throws ErrorException exception thrown from REST call
@@ -54,6 +62,13 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get 200 success.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> get200Async();
 
     /**
      * Put boolean value true returning 200 success.
@@ -91,6 +106,14 @@ public interface HttpSuccess {
     ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put boolean value true returning 200 success.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put200Async(Boolean booleanValue);
+
+    /**
      * Patch true Boolean value in request returning 200.
      *
      * @throws ErrorException exception thrown from REST call
@@ -124,6 +147,14 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch200Async(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -161,6 +192,14 @@ public interface HttpSuccess {
     ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post200Async(Boolean booleanValue);
+
+    /**
      * Delete simple boolean value true returns 200.
      *
      * @throws ErrorException exception thrown from REST call
@@ -194,6 +233,14 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete200Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -231,6 +278,14 @@ public interface HttpSuccess {
     ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put201Async(Boolean booleanValue);
+
+    /**
      * Post true Boolean value in request returns 201 (Created).
      *
      * @throws ErrorException exception thrown from REST call
@@ -264,6 +319,14 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post201Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -301,6 +364,14 @@ public interface HttpSuccess {
     ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put202Async(Boolean booleanValue);
+
+    /**
      * Patch true Boolean value in request returns 202.
      *
      * @throws ErrorException exception thrown from REST call
@@ -334,6 +405,14 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch202Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -371,6 +450,14 @@ public interface HttpSuccess {
     ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post202Async(Boolean booleanValue);
+
+    /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @throws ErrorException exception thrown from REST call
@@ -406,6 +493,14 @@ public interface HttpSuccess {
     ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete202Async(Boolean booleanValue);
+
+    /**
      * Return 204 status code if successful.
      *
      * @throws ErrorException exception thrown from REST call
@@ -421,6 +516,13 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> head204Async();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -458,6 +560,14 @@ public interface HttpSuccess {
     ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put204Async(Boolean booleanValue);
+
+    /**
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @throws ErrorException exception thrown from REST call
@@ -491,6 +601,14 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch204Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -528,6 +646,14 @@ public interface HttpSuccess {
     ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post204Async(Boolean booleanValue);
+
+    /**
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @throws ErrorException exception thrown from REST call
@@ -563,6 +689,14 @@ public interface HttpSuccess {
     ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete204Async(Boolean booleanValue);
+
+    /**
      * Return 404 status code.
      *
      * @throws ErrorException exception thrown from REST call
@@ -578,5 +712,12 @@ public interface HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 404 status code.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> head404Async();
 
 }

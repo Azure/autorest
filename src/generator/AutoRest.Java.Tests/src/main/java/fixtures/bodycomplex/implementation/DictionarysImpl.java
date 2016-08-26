@@ -22,7 +22,6 @@ import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -98,7 +97,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get complex types with dictionary property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceCall.create(getValidAsync(), serviceCallback);
@@ -107,7 +106,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DictionaryWrapper object
      */
     public Observable<ServiceResponse<DictionaryWrapper>> getValidAsync() {
         return service.getValid()
@@ -149,7 +148,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
@@ -202,7 +201,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get complex types with dictionary property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceCall.create(getEmptyAsync(), serviceCallback);
@@ -211,7 +210,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DictionaryWrapper object
      */
     public Observable<ServiceResponse<DictionaryWrapper>> getEmptyAsync() {
         return service.getEmpty()
@@ -253,7 +252,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putEmptyAsync(complexBody), serviceCallback);
@@ -306,7 +305,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get complex types with dictionary property which is null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -315,7 +314,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DictionaryWrapper object
      */
     public Observable<ServiceResponse<DictionaryWrapper>> getNullAsync() {
         return service.getNull()
@@ -354,7 +353,7 @@ public final class DictionarysImpl implements Dictionarys {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
         return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
@@ -363,7 +362,7 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DictionaryWrapper object
      */
     public Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedAsync() {
         return service.getNotProvided()

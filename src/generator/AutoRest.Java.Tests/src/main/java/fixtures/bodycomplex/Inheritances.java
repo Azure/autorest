@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Inheritances {
     ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
     /**
+     * Get complex types that extend others.
+     *
+     * @return the observable to the Siamese object
+     */
+    Observable<ServiceResponse<Siamese>> getValidAsync();
+
+    /**
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
@@ -58,5 +66,13 @@ public interface Inheritances {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(Siamese complexBody);
 
 }

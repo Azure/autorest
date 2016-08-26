@@ -21,7 +21,6 @@ import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.LocalDate;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -105,7 +104,7 @@ public final class DatesImpl implements Dates {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -114,7 +113,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get null date value.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getNullAsync() {
         return service.getNull()
@@ -153,7 +152,7 @@ public final class DatesImpl implements Dates {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getInvalidDateAsync(), serviceCallback);
@@ -162,7 +161,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get invalid date value.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getInvalidDateAsync() {
         return service.getInvalidDate()
@@ -201,7 +200,7 @@ public final class DatesImpl implements Dates {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getOverflowDateAsync(), serviceCallback);
@@ -210,7 +209,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get overflow date value.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getOverflowDateAsync() {
         return service.getOverflowDate()
@@ -249,7 +248,7 @@ public final class DatesImpl implements Dates {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getUnderflowDateAsync(), serviceCallback);
@@ -258,7 +257,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get underflow date value.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getUnderflowDateAsync() {
         return service.getUnderflowDate()
@@ -300,7 +299,7 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putMaxDateAsync(dateBody), serviceCallback);
@@ -352,7 +351,7 @@ public final class DatesImpl implements Dates {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getMaxDateAsync(), serviceCallback);
@@ -361,7 +360,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get max date value 9999-12-31.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getMaxDateAsync() {
         return service.getMaxDate()
@@ -403,7 +402,7 @@ public final class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putMinDateAsync(dateBody), serviceCallback);
@@ -455,7 +454,7 @@ public final class DatesImpl implements Dates {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         return ServiceCall.create(getMinDateAsync(), serviceCallback);
@@ -464,7 +463,7 @@ public final class DatesImpl implements Dates {
     /**
      * Get min date value 0000-01-01.
      *
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LocalDate object
      */
     public Observable<ServiceResponse<LocalDate>> getMinDateAsync() {
         return service.getMinDate()

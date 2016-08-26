@@ -1,11 +1,5 @@
 package fixtures.bodydictionary;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-
-import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
-import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -18,6 +12,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
+import fixtures.bodydictionary.models.Widget;
 
 import static org.junit.Assert.fail;
 

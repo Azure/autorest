@@ -21,7 +21,6 @@ import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -107,7 +106,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(getRequiredPathAsync(pathParameter), serviceCallback);
@@ -117,7 +116,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredPathAsync(String pathParameter) {
         if (pathParameter == null) {
@@ -158,7 +157,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalQueryAsync(), serviceCallback);
@@ -202,7 +201,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalQueryAsync(queryParameter), serviceCallback);
@@ -211,6 +210,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @param queryParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalQueryAsync(String queryParameter) {
@@ -250,7 +250,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalHeaderAsync(), serviceCallback);
@@ -294,7 +294,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalHeaderAsync(queryParameter), serviceCallback);
@@ -303,6 +303,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
+     * @param queryParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalHeaderAsync(String queryParameter) {
@@ -342,7 +343,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalBodyAsync(), serviceCallback);
@@ -386,7 +387,7 @@ public final class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putOptionalBodyAsync(bodyParameter), serviceCallback);
@@ -395,6 +396,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
+     * @param bodyParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalBodyAsync(String bodyParameter) {
@@ -435,7 +437,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(getRequiredGlobalPathAsync(), serviceCallback);
@@ -444,7 +446,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredGlobalPathAsync() {
         if (this.client.requiredGlobalPath() == null) {
@@ -486,7 +488,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(getRequiredGlobalQueryAsync(), serviceCallback);
@@ -495,7 +497,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredGlobalQueryAsync() {
         if (this.client.requiredGlobalQuery() == null) {
@@ -536,7 +538,7 @@ public final class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         return ServiceCall.create(getOptionalGlobalQueryAsync(), serviceCallback);
@@ -545,7 +547,7 @@ public final class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getOptionalGlobalQueryAsync() {
         return service.getOptionalGlobalQuery(this.client.optionalGlobalQuery())

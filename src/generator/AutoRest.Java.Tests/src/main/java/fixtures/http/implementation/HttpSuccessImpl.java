@@ -20,7 +20,6 @@ import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -148,7 +147,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head200Async(), serviceCallback);
@@ -196,7 +195,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Get 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceCall.create(get200Async(), serviceCallback);
@@ -205,7 +204,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Get 200 success.
      *
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the boolean object
      */
     public Observable<ServiceResponse<Boolean>> get200Async() {
         return service.get200()
@@ -244,7 +243,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put200Async(), serviceCallback);
@@ -288,7 +287,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put200Async(booleanValue), serviceCallback);
@@ -297,6 +296,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put boolean value true returning 200 success.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put200Async(Boolean booleanValue) {
@@ -336,7 +336,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch200Async(), serviceCallback);
@@ -380,7 +380,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch200Async(booleanValue), serviceCallback);
@@ -389,6 +389,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returning 200.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> patch200Async(Boolean booleanValue) {
@@ -428,7 +429,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post200Async(), serviceCallback);
@@ -472,7 +473,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post200Async(booleanValue), serviceCallback);
@@ -481,6 +482,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post bollean value true in request that returns a 200.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> post200Async(Boolean booleanValue) {
@@ -520,7 +522,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete200Async(), serviceCallback);
@@ -564,7 +566,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete200Async(booleanValue), serviceCallback);
@@ -573,6 +575,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete simple boolean value true returns 200.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> delete200Async(Boolean booleanValue) {
@@ -612,7 +615,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put201Async(), serviceCallback);
@@ -656,7 +659,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put201Async(booleanValue), serviceCallback);
@@ -665,6 +668,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 201.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put201Async(Boolean booleanValue) {
@@ -704,7 +708,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post201Async(), serviceCallback);
@@ -748,7 +752,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post201Async(booleanValue), serviceCallback);
@@ -757,6 +761,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> post201Async(Boolean booleanValue) {
@@ -796,7 +801,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put202Async(), serviceCallback);
@@ -840,7 +845,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put202Async(booleanValue), serviceCallback);
@@ -849,6 +854,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put202Async(Boolean booleanValue) {
@@ -888,7 +894,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch202Async(), serviceCallback);
@@ -932,7 +938,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch202Async(booleanValue), serviceCallback);
@@ -941,6 +947,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 202.
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> patch202Async(Boolean booleanValue) {
@@ -980,7 +987,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post202Async(), serviceCallback);
@@ -1024,7 +1031,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post202Async(booleanValue), serviceCallback);
@@ -1033,6 +1040,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> post202Async(Boolean booleanValue) {
@@ -1072,7 +1080,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete202Async(), serviceCallback);
@@ -1116,7 +1124,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete202Async(booleanValue), serviceCallback);
@@ -1125,6 +1133,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> delete202Async(Boolean booleanValue) {
@@ -1164,7 +1173,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head204Async(), serviceCallback);
@@ -1212,7 +1221,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put204Async(), serviceCallback);
@@ -1256,7 +1265,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(put204Async(booleanValue), serviceCallback);
@@ -1265,6 +1274,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> put204Async(Boolean booleanValue) {
@@ -1304,7 +1314,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch204Async(), serviceCallback);
@@ -1348,7 +1358,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(patch204Async(booleanValue), serviceCallback);
@@ -1357,6 +1367,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> patch204Async(Boolean booleanValue) {
@@ -1396,7 +1407,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post204Async(), serviceCallback);
@@ -1440,7 +1451,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(post204Async(booleanValue), serviceCallback);
@@ -1449,6 +1460,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> post204Async(Boolean booleanValue) {
@@ -1488,7 +1500,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete204Async(), serviceCallback);
@@ -1532,7 +1544,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(delete204Async(booleanValue), serviceCallback);
@@ -1541,6 +1553,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
+     * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> delete204Async(Boolean booleanValue) {
@@ -1580,7 +1593,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Return 404 status code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(head404Async(), serviceCallback);

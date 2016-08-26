@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Arrays {
     ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
+     * Get complex types with array property.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getValidAsync();
+
+    /**
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
@@ -60,6 +68,14 @@ public interface Arrays {
     ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(ArrayWrapper complexBody);
+
+    /**
      * Get complex types with array property which is empty.
      *
      * @throws ErrorException exception thrown from REST call
@@ -75,6 +91,13 @@ public interface Arrays {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getEmptyAsync();
 
     /**
      * Put complex types with array property which is empty.
@@ -97,6 +120,14 @@ public interface Arrays {
     ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyAsync(ArrayWrapper complexBody);
+
+    /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
@@ -112,5 +143,12 @@ public interface Arrays {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getNotProvidedAsync();
 
 }

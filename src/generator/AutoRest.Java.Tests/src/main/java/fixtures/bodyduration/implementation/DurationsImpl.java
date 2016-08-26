@@ -21,7 +21,6 @@ import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.Period;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -89,7 +88,7 @@ public final class DurationsImpl implements Durations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceCall.create(getNullAsync(), serviceCallback);
@@ -98,7 +97,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Period object
      */
     public Observable<ServiceResponse<Period>> getNullAsync() {
         return service.getNull()
@@ -140,7 +139,7 @@ public final class DurationsImpl implements Durations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putPositiveDurationAsync(durationBody), serviceCallback);
@@ -192,7 +191,7 @@ public final class DurationsImpl implements Durations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceCall.create(getPositiveDurationAsync(), serviceCallback);
@@ -201,7 +200,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Period object
      */
     public Observable<ServiceResponse<Period>> getPositiveDurationAsync() {
         return service.getPositiveDuration()
@@ -240,7 +239,7 @@ public final class DurationsImpl implements Durations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         return ServiceCall.create(getInvalidAsync(), serviceCallback);
@@ -249,7 +248,7 @@ public final class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @return the Period object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Period object
      */
     public Observable<ServiceResponse<Period>> getInvalidAsync() {
         return service.getInvalid()

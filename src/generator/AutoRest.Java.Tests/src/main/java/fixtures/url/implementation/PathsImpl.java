@@ -29,7 +29,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
@@ -184,7 +183,7 @@ public final class PathsImpl implements Paths {
      * Get true Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getBooleanTrueAsync(), serviceCallback);
@@ -233,7 +232,7 @@ public final class PathsImpl implements Paths {
      * Get false Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getBooleanFalseAsync(), serviceCallback);
@@ -282,7 +281,7 @@ public final class PathsImpl implements Paths {
      * Get '1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getIntOneMillionAsync(), serviceCallback);
@@ -331,7 +330,7 @@ public final class PathsImpl implements Paths {
      * Get '-1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getIntNegativeOneMillionAsync(), serviceCallback);
@@ -380,7 +379,7 @@ public final class PathsImpl implements Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getTenBillionAsync(), serviceCallback);
@@ -429,7 +428,7 @@ public final class PathsImpl implements Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(getNegativeTenBillionAsync(), serviceCallback);
@@ -478,7 +477,7 @@ public final class PathsImpl implements Paths {
      * Get '1.034E+20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(floatScientificPositiveAsync(), serviceCallback);
@@ -527,7 +526,7 @@ public final class PathsImpl implements Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(floatScientificNegativeAsync(), serviceCallback);
@@ -576,7 +575,7 @@ public final class PathsImpl implements Paths {
      * Get '9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(doubleDecimalPositiveAsync(), serviceCallback);
@@ -625,7 +624,7 @@ public final class PathsImpl implements Paths {
      * Get '-9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(doubleDecimalNegativeAsync(), serviceCallback);
@@ -674,7 +673,7 @@ public final class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(stringUnicodeAsync(), serviceCallback);
@@ -723,7 +722,7 @@ public final class PathsImpl implements Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(stringUrlEncodedAsync(), serviceCallback);
@@ -772,7 +771,7 @@ public final class PathsImpl implements Paths {
      * Get ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(stringEmptyAsync(), serviceCallback);
@@ -824,7 +823,7 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(stringNullAsync(stringPath), serviceCallback);
@@ -879,7 +878,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(enumValidAsync(enumPath), serviceCallback);
@@ -934,7 +933,7 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(enumNullAsync(enumPath), serviceCallback);
@@ -989,7 +988,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(byteMultiByteAsync(bytePath), serviceCallback);
@@ -1042,7 +1041,7 @@ public final class PathsImpl implements Paths {
      * Get '' as byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(byteEmptyAsync(), serviceCallback);
@@ -1095,7 +1094,7 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(byteNullAsync(bytePath), serviceCallback);
@@ -1148,7 +1147,7 @@ public final class PathsImpl implements Paths {
      * Get '2012-01-01' as date.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(dateValidAsync(), serviceCallback);
@@ -1200,7 +1199,7 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(dateNullAsync(datePath), serviceCallback);
@@ -1252,7 +1251,7 @@ public final class PathsImpl implements Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(dateTimeValidAsync(), serviceCallback);
@@ -1304,7 +1303,7 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(dateTimeNullAsync(dateTimePath), serviceCallback);
@@ -1359,7 +1358,7 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(base64UrlAsync(base64UrlPath), serviceCallback);
@@ -1415,7 +1414,7 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(arrayCsvInPathAsync(arrayPath), serviceCallback);
@@ -1471,7 +1470,7 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);

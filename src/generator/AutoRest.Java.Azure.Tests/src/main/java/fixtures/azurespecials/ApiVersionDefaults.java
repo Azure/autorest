@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -42,6 +43,13 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -56,6 +64,13 @@ public interface ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -78,6 +93,13 @@ public interface ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -92,5 +114,12 @@ public interface ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerGlobalValidAsync();
 
 }

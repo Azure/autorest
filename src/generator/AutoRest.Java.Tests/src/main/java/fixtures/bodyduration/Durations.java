@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.Period;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,6 +41,13 @@ public interface Durations {
     ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
+     * Get null duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getNullAsync();
+
+    /**
      * Put a positive duration value.
      *
      * @param durationBody the Period value
@@ -60,6 +68,14 @@ public interface Durations {
     ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody);
+
+    /**
      * Get a positive duration value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -77,6 +93,13 @@ public interface Durations {
     ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
+     * Get a positive duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getPositiveDurationAsync();
+
+    /**
      * Get an invalid duration value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -92,5 +115,12 @@ public interface Durations {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getInvalidAsync();
 
 }

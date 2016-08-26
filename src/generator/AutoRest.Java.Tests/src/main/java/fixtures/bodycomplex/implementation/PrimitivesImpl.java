@@ -32,7 +32,6 @@ import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -172,7 +171,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with integer properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
         return ServiceCall.create(getIntAsync(), serviceCallback);
@@ -181,7 +180,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with integer properties.
      *
-     * @return the IntWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the IntWrapper object
      */
     public Observable<ServiceResponse<IntWrapper>> getIntAsync() {
         return service.getInt()
@@ -223,7 +222,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putIntAsync(complexBody), serviceCallback);
@@ -276,7 +275,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with long properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
         return ServiceCall.create(getLongAsync(), serviceCallback);
@@ -285,7 +284,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with long properties.
      *
-     * @return the LongWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the LongWrapper object
      */
     public Observable<ServiceResponse<LongWrapper>> getLongAsync() {
         return service.getLong()
@@ -327,7 +326,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putLongAsync(complexBody), serviceCallback);
@@ -380,7 +379,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with float properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
         return ServiceCall.create(getFloatAsync(), serviceCallback);
@@ -389,7 +388,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with float properties.
      *
-     * @return the FloatWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the FloatWrapper object
      */
     public Observable<ServiceResponse<FloatWrapper>> getFloatAsync() {
         return service.getFloat()
@@ -431,7 +430,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putFloatAsync(complexBody), serviceCallback);
@@ -484,7 +483,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with double properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
         return ServiceCall.create(getDoubleAsync(), serviceCallback);
@@ -493,7 +492,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with double properties.
      *
-     * @return the DoubleWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DoubleWrapper object
      */
     public Observable<ServiceResponse<DoubleWrapper>> getDoubleAsync() {
         return service.getDouble()
@@ -535,7 +534,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDoubleAsync(complexBody), serviceCallback);
@@ -588,7 +587,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with bool properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
         return ServiceCall.create(getBoolAsync(), serviceCallback);
@@ -597,7 +596,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with bool properties.
      *
-     * @return the BooleanWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the BooleanWrapper object
      */
     public Observable<ServiceResponse<BooleanWrapper>> getBoolAsync() {
         return service.getBool()
@@ -639,7 +638,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putBoolAsync(complexBody), serviceCallback);
@@ -692,7 +691,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with string properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
         return ServiceCall.create(getStringAsync(), serviceCallback);
@@ -701,7 +700,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with string properties.
      *
-     * @return the StringWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the StringWrapper object
      */
     public Observable<ServiceResponse<StringWrapper>> getStringAsync() {
         return service.getString()
@@ -743,7 +742,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putStringAsync(complexBody), serviceCallback);
@@ -796,7 +795,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with date properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
         return ServiceCall.create(getDateAsync(), serviceCallback);
@@ -805,7 +804,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with date properties.
      *
-     * @return the DateWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DateWrapper object
      */
     public Observable<ServiceResponse<DateWrapper>> getDateAsync() {
         return service.getDate()
@@ -847,7 +846,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateAsync(complexBody), serviceCallback);
@@ -900,7 +899,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with datetime properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
         return ServiceCall.create(getDateTimeAsync(), serviceCallback);
@@ -909,7 +908,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetime properties.
      *
-     * @return the DatetimeWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DatetimeWrapper object
      */
     public Observable<ServiceResponse<DatetimeWrapper>> getDateTimeAsync() {
         return service.getDateTime()
@@ -951,7 +950,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeAsync(complexBody), serviceCallback);
@@ -1004,7 +1003,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         return ServiceCall.create(getDateTimeRfc1123Async(), serviceCallback);
@@ -1013,7 +1012,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @return the Datetimerfc1123Wrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the Datetimerfc1123Wrapper object
      */
     public Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123Async() {
         return service.getDateTimeRfc1123()
@@ -1055,7 +1054,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDateTimeRfc1123Async(complexBody), serviceCallback);
@@ -1108,7 +1107,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with duration properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
         return ServiceCall.create(getDurationAsync(), serviceCallback);
@@ -1117,7 +1116,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with duration properties.
      *
-     * @return the DurationWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the DurationWrapper object
      */
     public Observable<ServiceResponse<DurationWrapper>> getDurationAsync() {
         return service.getDuration()
@@ -1159,7 +1158,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putDurationAsync(complexBody), serviceCallback);
@@ -1212,7 +1211,7 @@ public final class PrimitivesImpl implements Primitives {
      * Get complex types with byte properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
         return ServiceCall.create(getByteAsync(), serviceCallback);
@@ -1221,7 +1220,7 @@ public final class PrimitivesImpl implements Primitives {
     /**
      * Get complex types with byte properties.
      *
-     * @return the ByteWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the observable to the ByteWrapper object
      */
     public Observable<ServiceResponse<ByteWrapper>> getByteAsync() {
         return service.getByte()
@@ -1263,7 +1262,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceCall.create(putByteAsync(complexBody), serviceCallback);

@@ -16,8 +16,6 @@ import java.util.concurrent.TimeUnit;
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
 import rx.Observable;
 import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Func1;
 
 import static org.junit.Assert.fail;
 

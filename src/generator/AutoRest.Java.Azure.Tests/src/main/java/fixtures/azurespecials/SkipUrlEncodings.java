@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,6 +46,14 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodPathValidAsync(String unencodedPathParam);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -64,6 +73,14 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathPathValidAsync(String unencodedPathParam);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
@@ -77,6 +94,13 @@ public interface SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerPathValidAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -97,6 +121,14 @@ public interface SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodQueryValidAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -134,6 +166,14 @@ public interface SkipUrlEncodings {
     ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodQueryNullAsync(String q1);
+
+    /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
@@ -156,6 +196,14 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathQueryValidAsync(String q1);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
@@ -169,5 +217,12 @@ public interface SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerQueryValidAsync();
 
 }
