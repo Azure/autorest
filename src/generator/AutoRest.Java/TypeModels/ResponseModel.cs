@@ -136,18 +136,23 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public string WrapResponse(string responseTypeString)
+        {
+            if (Headers == null)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, responseTypeString);
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, responseTypeString, GenericHeaderClientTypeString);
+            }
+        }
+
         public string ClientResponseTypeString
         {
             get
             {
-                if (Headers == null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, GenericBodyClientTypeString);
-                }
-                else
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, GenericBodyClientTypeString, GenericHeaderClientTypeString);
-                }
+                return WrapResponse(GenericBodyClientTypeString);
             }
         }
 
@@ -190,6 +195,14 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public string GenericBodyClientTypeStringWrapped
+        {
+            get
+            {
+                return WrapResponse(GenericBodyClientTypeString);
+            }
+        }
+
         public virtual string ServiceCallGenericParameterString
         {
             get
@@ -203,6 +216,14 @@ namespace AutoRest.Java.TypeModels
             get
             {
                 return ServiceCallGenericParameterString;
+            }
+        }
+
+        public string ServiceResponseGenericParameterStringWrapped
+        {
+            get
+            {
+                return WrapResponse(ServiceResponseGenericParameterString);
             }
         }
 
@@ -222,6 +243,14 @@ namespace AutoRest.Java.TypeModels
             }
         }
 
+        public string GenericBodyWireTypeStringWrapped
+        {
+            get
+            {
+                return WrapResponse(GenericBodyWireTypeString);
+            }
+        }
+
         public virtual string GenericHeaderWireTypeString
         {
             get
@@ -237,6 +266,20 @@ namespace AutoRest.Java.TypeModels
                 SequenceTypeModel sequenceType = (SequenceTypeModel) Body;
                 return sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void";
             }
+        }
+
+        public string ServiceResponseCreation(string serviceResponse, string body, string response)
+        {
+            string format;
+            if (Headers == null)
+            {
+                format = "new {0}({1}, {2}.getResponse())";
+            }
+            else
+            {
+                format = "new {0}({1}, {2}.getHeaders(), {2}.getResponse())";
+            }
+            return string.Format(format, serviceResponse, body, response);
         }
 
         #endregion

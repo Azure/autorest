@@ -148,7 +148,7 @@ public final class PagingsInner {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -227,7 +227,7 @@ public final class PagingsInner {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -305,7 +305,7 @@ public final class PagingsInner {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -349,8 +349,8 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param clientRequestId the String value
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
+    ServiceResponse<PageImpl<ProductInner>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<ProductInner>> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
@@ -399,7 +399,7 @@ public final class PagingsInner {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -477,7 +477,7 @@ public final class PagingsInner {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -521,8 +521,8 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @param clientRequestId the String value
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+    ServiceResponse<PageImpl1<ProductInner>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl1<ProductInner>> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
@@ -576,7 +576,7 @@ public final class PagingsInner {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -671,7 +671,7 @@ public final class PagingsInner {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -721,8 +721,8 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @param clientRequestId the String value
+    ServiceResponse<PageImpl<ProductInner>> * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
+    ServiceResponse<PageImpl<ProductInner>> * @param clientRequestId the String value
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetSinglePageAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
@@ -769,7 +769,7 @@ public final class PagingsInner {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -848,7 +848,7 @@ public final class PagingsInner {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -927,7 +927,7 @@ public final class PagingsInner {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1006,7 +1006,7 @@ public final class PagingsInner {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1085,7 +1085,7 @@ public final class PagingsInner {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1166,7 +1166,7 @@ public final class PagingsInner {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1209,7 +1209,7 @@ public final class PagingsInner {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesNextSinglePageAsync(final String nextPageLink) {
@@ -1254,7 +1254,7 @@ public final class PagingsInner {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1341,7 +1341,7 @@ public final class PagingsInner {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1388,9 +1388,9 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param clientRequestId the String value
-     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<ProductInner>> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
@@ -1444,7 +1444,7 @@ public final class PagingsInner {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1531,7 +1531,7 @@ public final class PagingsInner {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1578,9 +1578,9 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param clientRequestId the String value
-     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+    ServiceResponse<PageImpl1<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl1<ProductInner>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl1<ProductInner>> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getOdataMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
@@ -1634,7 +1634,7 @@ public final class PagingsInner {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1721,7 +1721,7 @@ public final class PagingsInner {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1768,9 +1768,9 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param clientRequestId the String value
-     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param clientRequestId the String value
+    ServiceResponse<PageImpl<ProductInner>> * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesWithOffsetNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions) {
@@ -1824,7 +1824,7 @@ public final class PagingsInner {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1867,7 +1867,7 @@ public final class PagingsInner {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetryFirstNextSinglePageAsync(final String nextPageLink) {
@@ -1912,7 +1912,7 @@ public final class PagingsInner {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -1955,7 +1955,7 @@ public final class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesRetrySecondNextSinglePageAsync(final String nextPageLink) {
@@ -2000,7 +2000,7 @@ public final class PagingsInner {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -2043,7 +2043,7 @@ public final class PagingsInner {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getSinglePagesFailureNextSinglePageAsync(final String nextPageLink) {
@@ -2088,7 +2088,7 @@ public final class PagingsInner {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -2131,7 +2131,7 @@ public final class PagingsInner {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureNextSinglePageAsync(final String nextPageLink) {
@@ -2176,7 +2176,7 @@ public final class PagingsInner {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single().getBody();
             }
         };
-        return new ServiceResponse<>(pagedList, response.getResponse());
+        return new ServiceResponse<PagedList<ProductInner>>(pagedList, response.getResponse());
     }
 
     /**
@@ -2219,7 +2219,7 @@ public final class PagingsInner {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @param nextPageLink The NextLink from the previous successful call to List operation.
+    ServiceResponse<PageImpl<ProductInner>> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @return the List&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFailureUriNextSinglePageAsync(final String nextPageLink) {

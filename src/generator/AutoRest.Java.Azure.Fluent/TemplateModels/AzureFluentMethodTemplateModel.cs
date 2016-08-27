@@ -39,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.TemplateModels
 
         protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
-            if (this.InputParameterTransformation.IsNullOrEmpty())
+            if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
                 return;
             }

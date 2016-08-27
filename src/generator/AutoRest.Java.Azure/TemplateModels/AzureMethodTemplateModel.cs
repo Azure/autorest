@@ -382,7 +382,7 @@ namespace AutoRest.Java.Azure.TemplateModels
             AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
             if (filterRequired)
             {
-                if (this.InputParameterTransformation.IsNullOrEmpty())
+                if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                 {
                     return nextMethod.MethodDefaultParameterInvocation;
                 }
@@ -599,7 +599,7 @@ namespace AutoRest.Java.Azure.TemplateModels
 
         protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
-            if (this.InputParameterTransformation.IsNullOrEmpty())
+            if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
                 return;
             }
@@ -665,6 +665,14 @@ namespace AutoRest.Java.Azure.TemplateModels
                     .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
                     .Outdent().AppendLine("}");
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
+                    ReturnTypeModel.ServiceCallGenericParameterString);
+                return builder.ToString();
+            }
+            else if (this.IsPagingNonPollingOperation)
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.getBody().getItems(), result.getResponse());",
                     ReturnTypeModel.ServiceCallGenericParameterString);
                 return builder.ToString();
             }
