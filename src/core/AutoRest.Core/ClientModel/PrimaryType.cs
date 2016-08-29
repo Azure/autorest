@@ -52,6 +52,34 @@ namespace AutoRest.Core.ClientModel
         public override string ToString()
         {
             return Name;
-        }        
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to this object based on the Type.
+        /// </summary>
+        /// <param name="obj">The object to compare with this object.</param>
+        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            var modelType = obj as PrimaryType;
+
+            if (modelType != null)
+            {
+                return modelType.Type == Type;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Serves as a hash function based on Type.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current object.
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return Type.GetHashCode();
+        }
     }
 }
