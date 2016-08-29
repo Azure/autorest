@@ -6,44 +6,6 @@
   },
   "host": "localhost:8000",
   "schemes": [ "http", "https" ],
-  "consumes": [ "text/plain" ],
-  "produces": [ "text/plain", "text/json" ],
-  "paths": {
-    "/api/Parameters": {
-      "put": {
-        "tag": [ "Parameters" ],
-        "operationId": "Parameters_Put",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "name": "database",
-            "in": "body",
-            "required": true,
-            "type": "object",
-            "schema": { "$ref": "#/definitions/Database" }
-          }
-        ]
-      },
-      "post": {
-        "tag": [ "Parameters" ],
-        "operationId": "Parameters_Post",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "name": "registry",
-            "in": "body",
-            "required": true,
-            "type": "object",
-            "schema": { "$ref": "#/definitions/Database" }
-          }
-        ]
-      }
-    }
-  },
   "definitions": {
     "Database": {
       "required": [ "id" ],
@@ -53,13 +15,13 @@
           "description": "The user generated unique name for the database, a string that\n must not be more than 255 characters."
         },
         "b": {
-          "type": "integer",
+          "type": "string",
           "readOnly": true,
           "description": "This is a system generated property.\nThe resource id (_rid) is a unique identifier that is also hierarchical per the resource stack on the resource model. It is used internally for placement of and navigation to the database resource."
         },
         "c": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "readOnly": true,
           "description": "This is a system generated property.\nIt specifies the last updated timestamp of the resource. The value is a timestamp."
         },
@@ -77,6 +39,20 @@
           "type": "string",
           "readOnly": true,
           "description": "This is a system generated property.\nIt specifies the addressable path of the users resource."
+        }
+      }
+    },
+    "Unreferenced": {
+      "required": [ "id" ],
+      "properties": {
+        "a": {
+          "type": "string",
+          "description": "The user generated unique name for the database, a string that\n must not be more than 255 characters."
+        },
+        "b": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nThe resource id (_rid) is a unique identifier that is also hierarchical per the resource stack on the resource model. It is used internally for placement of and navigation to the database resource."
         }
       }
     }

@@ -84,10 +84,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ProtocolMissing()
         {
-            var messages = CompareSwagger("misc_checks_01.json").ToArray();
+            var messages = CompareSwagger("version_check_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.ProtocolNoLongerSupported.Id);
             Assert.NotEmpty(missing);
-            Assert.Equal(LogEntrySeverity.Error, missing.First().Severity);
+            Assert.Equal(LogEntrySeverity.Warning, missing.First().Severity);
         }
 
         /// <summary>
@@ -127,14 +127,16 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that if you change the type of a schema property, it's caught.
-        /// </summary>
+         /// Verifies that if you change the type of a schema property, it's caught.
+         /// </summary>
         [Fact]
         public void PropertyTypeChanged()
         {
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
-            var error = missing.First();
+            Assert.NotEmpty(missing);
+            var error = missing.Where(err => err.Path.StartsWith("#/definitions/")).FirstOrDefault();
+            Assert.NotNull(error);
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
             Assert.Equal("#/definitions/Database/properties/b", error.Path);
         }
@@ -148,14 +150,38 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("misc_checks_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.TypeFormatChanged.Id);
             Assert.NotEmpty(missing);
-            var error = missing.First();
+            var error = missing.Where(err => err.Path.StartsWith("#/definitions/")).FirstOrDefault();
+            Assert.NotNull(error);
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
             Assert.Equal("#/definitions/Database/properties/c", error.Path);
         }
 
         /// <summary>
+        /// Verifies that if you remove a schema that isn't used, it's not flagged.
+        /// </summary>
+        [Fact]
+        public void UnreferencedDefinitionRemoved()
+        {
+            var messages = CompareSwagger("misc_checks_02.json").ToArray();
+            var missing = messages.Where(m => m.Path.StartsWith("#/definitions/Unreferenced"));
+            Assert.Empty(missing);
+        }
+
+        /// <summary>
+        /// Verifies that if you change the type of a schema property of a schema that isn't referenced, it's not flagged.
+        /// </summary>
+        [Fact]
+        public void UnreferencedTypeChanged()
+        {
+            var messages = CompareSwagger("misc_checks_02.json").ToArray();
+            var missing = messages.Where(m => m.Path.StartsWith("#/definitions/Database"));
+            Assert.Empty(missing);
+        }
+
+        /// <summary>
         /// Verifies that if you remove (or rename) a path, it's caught.
         /// </summary>
+        [Fact]
         public void PathRemoved()
         {
             var messages = CompareSwagger("operation_check_01.json").ToArray();

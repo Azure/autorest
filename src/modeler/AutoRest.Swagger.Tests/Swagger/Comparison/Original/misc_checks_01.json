@@ -8,6 +8,42 @@
   "schemes": [ "http", "https" ],
   "consumes": [ "text/plain", "text/json" ],
   "produces": [ "text/plain" ],
+  "paths": {
+    "/api/Parameters": {
+      "put": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Put",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "database",
+            "in": "body",
+            "required": true,
+            "type": "object",
+            "schema": { "$ref": "#/definitions/DatabaseList" }
+          }
+        ]
+      },
+      "post": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Post",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "registry",
+            "in": "body",
+            "required": true,
+            "type": "object",
+            "schema": { "$ref": "#/definitions/Database" }
+          }
+        ]
+      }
+    }
+  },
   "definitions": {
     "DatabaseList": {
       "properties": {

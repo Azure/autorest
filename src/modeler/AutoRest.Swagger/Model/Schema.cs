@@ -9,6 +9,8 @@ using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 
+using Newtonsoft.Json;
+
 namespace AutoRest.Swagger.Model
 {
     /// <summary>
@@ -64,6 +66,9 @@ namespace AutoRest.Swagger.Model
         /// Defines the set of schemas this shema is composed of
         /// </summary>
         public IList<Schema> AllOf { get; set; }
+
+        [JsonIgnore]
+        internal bool IsReferenced { get; set; }
 
         public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
         {

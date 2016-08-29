@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
@@ -210,6 +211,8 @@ namespace AutoRest.Swagger.Model
             {
                 var p = Regex.Replace(path, @"\{\w*\}", @"{}");
 
+                context.Push(path);
+
                 Dictionary<string, Operation> operations = null;
                 if (!newPaths.TryGetValue(p, out operations))
                 {
@@ -217,8 +220,6 @@ namespace AutoRest.Swagger.Model
                 }
                 else
                 {
-                    context.Push(path);
-
                     Dictionary<string, Operation> previousOperations = previousDefinition.Paths[path];
                     foreach (var previousOperation in previousOperations)
                     {
@@ -239,8 +240,8 @@ namespace AutoRest.Swagger.Model
                             context.Pop();
                         }
                     }
-                    context.Pop();
                 }
+                context.Pop();
             }
             context.Pop();
 
@@ -251,6 +252,8 @@ namespace AutoRest.Swagger.Model
             {
                 var p = Regex.Replace(path, @"\{\w*\}", @"{}");
 
+                context.Push(path);
+
                 Dictionary<string, Operation> operations = null;
                 if (!newPaths.TryGetValue(p, out operations))
                 {
@@ -258,8 +261,6 @@ namespace AutoRest.Swagger.Model
                 }
                 else
                 {
-                    context.Push(path);
-
                     Dictionary<string, Operation> previousOperations = previousDefinition.CustomPaths[path];
                     foreach (var previousOperation in previousOperations)
                     {
@@ -280,20 +281,27 @@ namespace AutoRest.Swagger.Model
                             context.Pop();
                         }
                     }
-                    context.Pop();
                 }
+                context.Pop();
             }
             context.Pop();
+
+            ReferenceTrackSchemas(this);
+            ReferenceTrackSchemas(previousDefinition);
 
             context.Push("definitions");
             foreach (var def in previousDefinition.Definitions.Keys)
             {
                 Schema schema = null;
+                Schema oldSchema = previousDefinition.Definitions[def];
+
                 if (!Definitions.TryGetValue(def, out schema))
                 {
-                    context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
+                    if (oldSchema.IsReferenced)
+                        // It's only an error if the definition is referenced in the old service.
+                        context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
                 }
-                else
+                else if (schema.IsReferenced && oldSchema.IsReferenced)
                 {
                     context.Push(def);
                     schema.Compare(context, previousDefinition.Definitions[def]);
@@ -406,6 +414,88 @@ namespace AutoRest.Swagger.Model
 
                 context.Strict = !versionChanged;
             }
+        }
+
+        private static void ReferenceTrackSchemas(ServiceDefinition service)
+        {
+            foreach (var schema in service.Definitions.Values)
+            {
+                schema.IsReferenced = false;
+            }
+
+            foreach (var path in service.Paths.Values)
+            {
+                foreach (var operation in path.Values)
+                {
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        if (parameter.Schema != null && !string.IsNullOrWhiteSpace(parameter.Schema.Reference))
+                        {
+                            var schema = FindReferencedSchema(parameter.Schema.Reference, service.Definitions);
+                            schema.IsReferenced = true;
+                        }
+                    }
+                }
+            }
+            foreach (var path in service.CustomPaths.Values)
+            {
+                foreach (var operation in path.Values)
+                {
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        if (parameter.Schema != null && !string.IsNullOrWhiteSpace(parameter.Schema.Reference))
+                        {
+                            var schema = FindReferencedSchema(parameter.Schema.Reference, service.Definitions);
+                            schema.IsReferenced = true;
+                        }
+                    }
+                }
+            }
+            foreach (var parameter in service.Parameters.Values)
+            {
+                if (parameter.Schema != null && !string.IsNullOrWhiteSpace(parameter.Schema.Reference))
+                {
+                    var schema = FindReferencedSchema(parameter.Schema.Reference, service.Definitions);
+                    schema.IsReferenced = true;
+                }
+            }
+
+            var changed = true;
+            while (changed)
+            {
+                changed = false;
+
+                foreach (var schema in service.Definitions.Values.Where(d => d.IsReferenced))
+                {
+                    foreach (var property in schema.Properties.Values)
+                    {
+                        if (!string.IsNullOrWhiteSpace(property.Reference))
+                        {
+                            var s = FindReferencedSchema(property.Reference, service.Definitions);
+                            changed = changed || !s.IsReferenced;
+                            s.IsReferenced = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
+        {
+            if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
+            {
+                var parts = reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("definitions"))
+                {
+                    Schema p = null;
+                    if (definitions.TryGetValue(parts[2], out p))
+                    {
+                        return p;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

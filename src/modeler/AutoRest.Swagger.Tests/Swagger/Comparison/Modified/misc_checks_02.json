@@ -6,44 +6,6 @@
   },
   "host": "localhost:8000",
   "schemes": [ "http", "https" ],
-  "consumes": [ "text/plain" ],
-  "produces": [ "text/plain", "text/json" ],
-  "paths": {
-    "/api/Parameters": {
-      "put": {
-        "tag": [ "Parameters" ],
-        "operationId": "Parameters_Put",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "name": "database",
-            "in": "body",
-            "required": true,
-            "type": "object",
-            "schema": { "$ref": "#/definitions/Database" }
-          }
-        ]
-      },
-      "post": {
-        "tag": [ "Parameters" ],
-        "operationId": "Parameters_Post",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "name": "registry",
-            "in": "body",
-            "required": true,
-            "type": "object",
-            "schema": { "$ref": "#/definitions/Database" }
-          }
-        ]
-      }
-    }
-  },
   "definitions": {
     "Database": {
       "required": [ "id" ],
