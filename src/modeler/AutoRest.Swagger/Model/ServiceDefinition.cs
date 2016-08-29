@@ -9,6 +9,7 @@ using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Model
 {
@@ -202,11 +203,15 @@ namespace AutoRest.Swagger.Model
 
             // Check that no paths were removed, and compare the paths that are still there.
 
+            var newPaths = RemovePathVariables(Paths);
+
             context.Push("paths");
             foreach (var path in previousDefinition.Paths.Keys)
             {
+                var p = Regex.Replace(path, @"\{\w*\}", @"{}");
+
                 Dictionary<string, Operation> operations = null;
-                if (!Paths.TryGetValue(path, out operations))
+                if (!newPaths.TryGetValue(p, out operations))
                 {
                     context.LogBreakingChange(ComparisonMessages.RemovedPath, path);
                 }
@@ -239,11 +244,15 @@ namespace AutoRest.Swagger.Model
             }
             context.Pop();
 
+            newPaths = RemovePathVariables(CustomPaths);
+
             context.Push("x-ms-paths");
             foreach (var path in previousDefinition.CustomPaths.Keys)
             {
+                var p = Regex.Replace(path, @"\{\w*\}", @"{}");
+
                 Dictionary<string, Operation> operations = null;
-                if (!Paths.TryGetValue(path, out operations))
+                if (!newPaths.TryGetValue(p, out operations))
                 {
                     context.LogBreakingChange(ComparisonMessages.RemovedPath, path);
                 }
@@ -267,7 +276,7 @@ namespace AutoRest.Swagger.Model
                         if (previousDefinition.CustomPaths[path].TryGetValue(operation.Key, out previousOperation))
                         {
                             context.Push(operation.Key);
-                            operation.Value.Compare(context, previousDefinition.CustomPaths[path][operation.Key]);
+                            operation.Value.Compare(context, previousOperation);
                             context.Pop();
                         }
                     }
@@ -330,6 +339,19 @@ namespace AutoRest.Swagger.Model
             context.Pop();
 
             return context.Messages;
+        }
+
+        private Dictionary<string, Dictionary<string, Operation>> RemovePathVariables(Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            var result = new Dictionary<string, Dictionary<string, Operation>>();
+
+            foreach (var kv in paths)
+            {
+                var p = Regex.Replace(kv.Key, @"\{\w*\}", @"{}");
+                result[p] = kv.Value;
+            }
+
+            return result;
         }
 
         private void CompareVersions(ComparisonContext context, string newVer, string oldVer)

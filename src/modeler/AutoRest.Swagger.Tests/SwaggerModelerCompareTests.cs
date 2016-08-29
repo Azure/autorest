@@ -154,11 +154,24 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// Verifies that if you remove (or rename) a path, it's caught.
+        /// </summary>
+        public void PathRemoved()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedPath.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Paths", error.Path);
+        }
+
+        /// <summary>
         /// Verifies that if you remove an operation, it's caught.
         /// </summary>
         [Fact]
         public void OperationRemoved()
-        {
+        { 
             var messages = CompareSwagger("operation_check_01.json").ToArray();
             var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedOperation.Id);
             Assert.NotEmpty(missing);
@@ -181,6 +194,9 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal("#/paths//api/Operations/post", error.Path);
         }
 
+        /// <summary>
+        /// Verifies that if you remove a required parameter, it's found.
+        /// </summary>
         [Fact]
         public void RequiredParameterRemoved()
         {
@@ -189,9 +205,12 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/a", error.Path);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/a", error.Path);
         }
 
+        /// <summary>
+        /// Verifies that if you add a required parameter, it is flagged
+        /// </summary>
         [Fact]
         public void RequiredParameterAdded()
         {
@@ -200,9 +219,12 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/c", error.Path);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/c", error.Path);
         }
 
+        /// <summary>
+        /// Verifies that if you change where a parameter is passed, it is flagged.
+        /// </summary>
         [Fact]
         public void ParameterMoved()
         {
@@ -211,9 +233,12 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/b", error.Path);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/b", error.Path);
         }
 
+        /// <summary>
+        /// Verifies that if you make a required parameter optional, it's flagged, but not as an error.
+        /// </summary>
         [Fact]
         public void ParameterStatusLess()
         {
@@ -222,9 +247,12 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Info, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/d", error.Path);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/d", error.Path);
         }
 
+        /// <summary>
+        /// Verifieds that if you make an optional parameter required, it's caught.
+        /// </summary>
         [Fact]
         public void ParameterStatusMore()
         {
@@ -233,7 +261,49 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.Skip(1).First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
-            Assert.Equal("#/paths//api/Parameters/get/e", error.Path);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/e", error.Path);
+        }
+
+        /// <summary>
+        /// If a parameter used to be constant (only had one valid value), but is changed to take more than one
+        /// value, then it should be flagged.
+        /// </summary>
+        [Fact]
+        public void ParameterConstantChanged()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.ConstantStatusHasChanged.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/{a}/get/f", error.Path);
+        }
+
+        /// <summary>
+        /// Just changing the name of a parameter schema in the definitions section does not change the wire format for
+        /// the parameter, so it shouldn't result in a separate error for the parameter.
+        /// </summary>
+        [Fact]
+        public void ParameterSchemaNameChanged()
+        {
+            var messages = CompareSwagger("operation_check_02.json").ToArray();
+            var redirected = messages.Where(m => m.Id == ComparisonMessages.ReferenceRedirection.Id);
+            Assert.Empty(redirected);
+        }
+
+        /// <summary>
+        /// Just changing the name of a parameter schema in the definitions section does not change the wire format for
+        /// the parameter, so it shouldn't result in a separate error for the parameter.
+        /// </summary>
+        [Fact]
+        public void ParameterSchemaContentsChanged()
+        {
+            var messages = CompareSwagger("operation_check_02.json").ToArray();
+            var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id);
+            Assert.NotEmpty(changed);
+            var error = changed.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/post/registry/properties/b", error.Path);
         }
     }
 }

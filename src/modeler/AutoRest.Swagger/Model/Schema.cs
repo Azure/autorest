@@ -78,6 +78,21 @@ namespace AutoRest.Swagger.Model
                 throw new ArgumentNullException("context");
             }
 
+            var thisSchema = this;
+
+            if (!string.IsNullOrWhiteSpace(thisSchema.Reference))
+            {
+                thisSchema = FindReferencedSchema(thisSchema.Reference, (context.CurrentRoot as ServiceDefinition).Definitions);
+            }
+            if (!string.IsNullOrWhiteSpace(priorSchema.Reference))
+            {
+                priorSchema = FindReferencedSchema(priorSchema.Reference, (context.PreviousRoot as ServiceDefinition).Definitions);
+            }
+
+            if (thisSchema != this || priorSchema != previous)
+            {
+                return thisSchema.Compare(context, priorSchema);
+            }
 
             base.Compare(context, previous);
 
@@ -175,6 +190,24 @@ namespace AutoRest.Swagger.Model
                     }
                 }
             }
+        }
+
+        private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
+        {
+            if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
+            {
+                var parts = reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("definitions"))
+                {
+                    Schema p = null;
+                    if (definitions.TryGetValue(parts[2], out p))
+                    {
+                        return p;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
