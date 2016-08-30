@@ -106,24 +106,26 @@ class CloudError(ClientException):
         self.status_code = self.response.status_code
         self.request_id = None
 
-        if error:
-            self.message = error
-            self.error = response
+        default_error_message = error
+        try:
+            data = response.json()
+        except ValueError:
+            data = response
         else:
-            try:
-                data = response.json()
-            except ValueError:
-                data = response
-            else:
-                data = data.get('error', data)
-            try:
-                self.error = deserialize(CloudErrorData(), data)
-            except DeserializationError:
-                self.error = None
-            try:
-                self.message = self.error.message
-            except AttributeError:
-                self.message = None
+            data = data.get('error', data)
+        try:
+            self.error = deserialize(CloudErrorData(), data)
+        except DeserializationError:
+            self.error = None
+        try:
+            self.message = self.error.message
+        except AttributeError:
+            self.message = None
+
+        #if can't retrieve specific error, let us go with the one provided by the caller
+        if (not self.error or not self.message) and default_error_message:
+            self.message = default_error_message
+            self.error = response
 
         if not self.error or not self.message:
             try:

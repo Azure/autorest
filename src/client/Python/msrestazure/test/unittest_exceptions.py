@@ -135,6 +135,19 @@ class TestCloudException(unittest.TestCase):
         self.assertEqual(error.status_code, 400)
         self.assertIsInstance(error.error, CloudErrorData)
 
+        #verify we will always surface errors from server end.
+        error = CloudError(response, "Default error message which won't be taken")
+        self.assertEqual(error.message, "Bad Request")
+        self.assertEqual(error.status_code, 400)
+        self.assertIsInstance(error.error, CloudErrorData)
+
+        #verify if server end gives no error message, we will conme out one
+        #(not so sure whether this ever happens)
+        missing_message_field = { 'error': {
+            'code': '500',
+            'values': {'invalid_attribute':'data'}
+            }}
+        response.content = json.dumps(missing_message_field)
         error = CloudError(response, "Request failed with bad status")
         self.assertEqual(error.message, "Request failed with bad status")
         self.assertEqual(error.status_code, 400)
