@@ -21,6 +21,9 @@ import java.util.List;
  */
 public abstract class TaskGroupBase<T, U extends TaskItem<T>>
     implements TaskGroup<T, U> {
+    /**
+     * Stores the tasks in this group and their dependency information.
+     */
     private DAGraph<U, DAGNode<U>> dag;
 
     /**
@@ -67,7 +70,7 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
 
     @Override
     public Observable<T> executeAsync() {
-        return executeReadyTasksAsync();
+        return executeReadyTasksAsync().last();
     }
 
     @Override
@@ -98,6 +101,6 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
                     }));
             nextNode = dag.getNext();
         }
-        return Observable.merge(observables).last();
+        return Observable.merge(observables);
     }
 }

@@ -9,6 +9,7 @@ package com.microsoft.azure;
 
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 
 import java.util.List;
 
@@ -42,6 +43,36 @@ public final class AzureServiceCall<T> extends ServiceCall<T> {
         serviceCall.setSubscription(first
             .single()
             .subscribe(subscriber));
+        return serviceCall;
+    }
+
+    /**
+     * Creates a ServiceCall from a paging operation that returns a header response.
+     *
+     * @param first the observable to the first page
+     * @param next the observable to poll subsequent pages
+     * @param callback the client-side callback
+     * @param <E> the element type
+     * @param <V> the header object type
+     * @return the future based ServiceCall
+     */
+    public static <E, V> ServiceCall<List<E>> createWithHeaders(Observable<ServiceResponseWithHeaders<Page<E>, V>> first, final Func1<String, Observable<ServiceResponseWithHeaders<Page<E>, V>>> next, final ListOperationCallback<E> callback) {
+        final AzureServiceCall<List<E>> serviceCall = new AzureServiceCall<>();
+        final PagingSubscriber<E> subscriber = new PagingSubscriber<>(serviceCall, new Func1<String, Observable<ServiceResponse<Page<E>>>>() {
+            @Override
+            public Observable<ServiceResponse<Page<E>>> call(String s) {
+                return next.call(s)
+                        .map(new Func1<ServiceResponseWithHeaders<Page<E>, V>, ServiceResponse<Page<E>>>() {
+                            @Override
+                            public ServiceResponse<Page<E>> call(ServiceResponseWithHeaders<Page<E>, V> pageVServiceResponseWithHeaders) {
+                                return pageVServiceResponseWithHeaders;
+                            }
+                        });
+            }
+        }, callback);
+        serviceCall.setSubscription(first
+                .single()
+                .subscribe(subscriber));
         return serviceCall;
     }
 

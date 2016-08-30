@@ -30,7 +30,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-jackson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
     compile 'io.reactivex:rxjava:1.1.8'
-    compile 'io.reactivex:rxjava-computation-expressions:0.21.0'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.2'
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
