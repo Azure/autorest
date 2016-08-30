@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.LocalDate;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,10 +36,16 @@ public interface Dates {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get null date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getNullAsync();
 
     /**
      * Get invalid date value.
@@ -53,10 +60,16 @@ public interface Dates {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get invalid date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getInvalidDateAsync();
 
     /**
      * Get overflow date value.
@@ -71,10 +84,16 @@ public interface Dates {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get overflow date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getOverflowDateAsync();
 
     /**
      * Get underflow date value.
@@ -89,10 +108,16 @@ public interface Dates {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get underflow date value.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getUnderflowDateAsync();
 
     /**
      * Put max date value 9999-12-31.
@@ -110,10 +135,17 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMaxDateAsync(LocalDate dateBody);
 
     /**
      * Get max date value 9999-12-31.
@@ -128,10 +160,16 @@ public interface Dates {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get max date value 9999-12-31.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getMaxDateAsync();
 
     /**
      * Put min date value 0000-01-01.
@@ -149,10 +187,17 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody the LocalDate value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMinDateAsync(LocalDate dateBody);
 
     /**
      * Get min date value 0000-01-01.
@@ -167,9 +212,15 @@ public interface Dates {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+
+    /**
+     * Get min date value 0000-01-01.
+     *
+     * @return the observable to the LocalDate object
+     */
+    Observable<ServiceResponse<LocalDate>> getMinDateAsync();
 
 }

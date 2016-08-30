@@ -25,6 +25,7 @@ dependencies {
     compile 'com.microsoft.azure:azure-client-runtime:1.0.0-SNAPSHOT'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'io.reactivex:rxjava:1.1.8'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     testCompile 'commons-io:commons-io:2.4'

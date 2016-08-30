@@ -1,11 +1,5 @@
 package fixtures.bodydictionary;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-
-import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
-import fixtures.bodydictionary.models.Widget;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -18,6 +12,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import fixtures.bodydictionary.implementation.AutoRestSwaggerBATdictionaryServiceImpl;
+import fixtures.bodydictionary.models.Widget;
 
 import static org.junit.Assert.fail;
 
@@ -39,7 +36,7 @@ public class DictionaryTests {
         try {
             client.dictionarys().getInvalid();
             fail();
-        } catch (JsonParseException exception) {
+        } catch (RuntimeException exception) {
             // expected
             Assert.assertTrue(exception.getMessage().contains("Unexpected character (','"));
         }
@@ -67,7 +64,7 @@ public class DictionaryTests {
         try {
             client.dictionarys().getNullKey();
             fail();
-        } catch (JsonParseException exception) {
+        } catch (RuntimeException exception) {
             // expected
             Assert.assertTrue(exception.getMessage().contains("Unexpected character ('n'"));
         }
@@ -110,7 +107,7 @@ public class DictionaryTests {
     public void getBooleanInvalidString() throws Exception {
         try {
             Map<String, Boolean> result = client.dictionarys().getBooleanInvalidString().getBody();
-        } catch (InvalidFormatException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("only \"true\" or \"false\" recognized"));
         }
@@ -148,7 +145,7 @@ public class DictionaryTests {
         try {
             Map<String, Integer> result = client.dictionarys().getIntInvalidString().getBody();
             fail();
-        } catch (InvalidFormatException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Integer value"));
         }
@@ -186,7 +183,7 @@ public class DictionaryTests {
         try {
             Map<String, Long> result = client.dictionarys().getLongInvalidString().getBody();
             fail();
-        } catch (InvalidFormatException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Long value"));
         }
@@ -222,7 +219,7 @@ public class DictionaryTests {
         try {
             Map<String, Double> result = client.dictionarys().getFloatInvalidString().getBody();
             fail();
-        } catch (InvalidFormatException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
@@ -259,7 +256,7 @@ public class DictionaryTests {
         try {
             Map<String, Double> result = client.dictionarys().getDoubleInvalidString().getBody();
             fail();
-        } catch (InvalidFormatException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("not a valid Double value"));
         }
@@ -326,7 +323,7 @@ public class DictionaryTests {
         try {
             Map<String, LocalDate> result = client.dictionarys().getDateInvalidChars().getBody();
             fail();
-        } catch (JsonMappingException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date\""));
         }
@@ -364,7 +361,7 @@ public class DictionaryTests {
         try {
             Map<String, DateTime> result = client.dictionarys().getDateTimeInvalidChars().getBody();
             fail();
-        } catch (JsonMappingException ex) {
+        } catch (RuntimeException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("Invalid format: \"date-time\""));
         }
