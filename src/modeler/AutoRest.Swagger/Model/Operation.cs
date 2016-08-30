@@ -122,25 +122,29 @@ namespace AutoRest.Swagger.Model
                 {
                     var oldResponse = priorOperation.FindResponse(response.Key, priorOperation.Responses);
 
+                    context.Push(response.Key);
+
                     if (oldResponse == null)
                     {
                         context.LogBreakingChange(ComparisonMessages.AddingResponseCode, response.Key);
                     }
                     else
                     {
-                        context.Push(response.Key);
                         response.Value.Compare(context, oldResponse);
-                        context.Pop();
                     }
+
+                    context.Pop();
                 }
 
                 foreach (var response in priorOperation.Responses)
                 {
-                    var newResponse = priorOperation.FindResponse(response.Key, this.Responses);
+                    var newResponse = this.FindResponse(response.Key, this.Responses);
 
                     if (newResponse == null)
                     {
+                        context.Push(response.Key);
                         context.LogBreakingChange(ComparisonMessages.RemovedResponseCode, response.Key);
+                        context.Pop();
                     }
                 }
             }

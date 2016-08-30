@@ -40,9 +40,41 @@
           }
         ]
       }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Error": {
+      "required": [ "message", "id" ],
+      "properties": {
+        "message": { "type": "string" },
+        "id": { "type": "string" }
+      }
+    },
     "Database": {
       "required": [ "id" ],
       "properties": {

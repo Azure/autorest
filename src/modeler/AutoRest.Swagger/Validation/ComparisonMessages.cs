@@ -30,9 +30,9 @@ namespace AutoRest.Swagger.Validation
 
         public static MessageTemplate RemovedResponseCode = new MessageTemplate { Id = 1012, Message = "The new version removes the response code '{0}'" };
 
-        public static MessageTemplate AddingRequiredHeader = new MessageTemplate { Id = 1013, Message = "Adding a required header '{0}'." };
+        public static MessageTemplate AddingHeader = new MessageTemplate { Id = 1013, Message = "Adding a required header '{0}'." };
 
-        public static MessageTemplate RemovingRequiredHeader = new MessageTemplate { Id = 1014, Message = "Removing a required header '{0}'." };
+        public static MessageTemplate RemovingHeader = new MessageTemplate { Id = 1014, Message = "Removing a required header '{0}'." };
 
         public static MessageTemplate ParameterInHasChanged = new MessageTemplate { Id = 1015, Message = "How the parameter is passed has changed -- it used to be '{0}', now it is '{1}'" };
 

@@ -79,6 +79,37 @@
           }
         ]
       }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "id":  { "type":  "integer"}
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -75,9 +75,40 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "enum":  ["theonlyvalue"]
+            "enum": [ "theonlyvalue" ]
           }
         ]
+      }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "id": { "type": "string" }
+              }
+            }
+          }
+        }
       }
     }
   }

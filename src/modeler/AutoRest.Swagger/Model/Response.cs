@@ -57,28 +57,32 @@ namespace AutoRest.Swagger.Model
 
             foreach (var header in headers)
             {
+                context.Push(header.Key);
+
                 Header oldHeader = null;
-                if (!priorHeaders.TryGetValue(header.Key, out oldHeader) && header.Value.IsRequired)
+                if (!priorHeaders.TryGetValue(header.Key, out oldHeader))
                 {
-                    context.LogBreakingChange(ComparisonMessages.AddingRequiredHeader, header.Key);
+                    context.LogMessage(ComparisonMessages.AddingHeader, Core.Logging.LogEntrySeverity.Info, header.Key);
                 }
                 else
                 {
                     header.Value.Compare(context, oldHeader);
                 }
+
+                context.Pop();
             }
 
             foreach (var header in priorHeaders)
             {
+                context.Push(header.Key);
+
                 Header newHeader = null;
-                if (!headers.TryGetValue(header.Key, out newHeader) && header.Value.IsRequired)
+                if (!headers.TryGetValue(header.Key, out newHeader))
                 {
-                    context.LogBreakingChange(ComparisonMessages.RemovingRequiredHeader, header.Key);
+                    context.LogBreakingChange(ComparisonMessages.RemovingHeader, header.Key);
                 }
-                else
-                {
-                    header.Value.Compare(context, newHeader);
-                }
+
+                context.Pop();
             }
 
             context.Direction = DataDirection.None;

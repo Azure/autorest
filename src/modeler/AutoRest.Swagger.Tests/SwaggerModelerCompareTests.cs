@@ -235,6 +235,21 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// Verifies that if you remove a required request header, it's found.
+        /// </summary>
+        [Fact]
+        public void RequiredRequestHeaderRemoved()
+        {
+            var messages = CompareSwagger("operation_check_03.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.RemovedRequiredParameter.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/x-ar", error.Path);
+        }
+
+
+        /// <summary>
         /// Verifies that if you add a required parameter, it is flagged
         /// </summary>
         [Fact]
@@ -246,6 +261,20 @@ namespace AutoRest.Swagger.Tests
             var error = missing.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
             Assert.Equal("#/paths//api/Parameters/{a}/get/c", error.Path);
+        }
+
+        /// <summary>
+        /// Verifies that if you add a required request header, it is flagged
+        /// </summary>
+        [Fact]
+        public void RequiredRequestHeaderAdded()
+        {
+            var messages = CompareSwagger("operation_check_03.json").ToArray();
+            var missing = messages.Where(m => m.Id == ComparisonMessages.AddingRequiredParameter.Id);
+            Assert.NotEmpty(missing);
+            var error = missing.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Parameters/get/x-cr", error.Path);
         }
 
         /// <summary>
@@ -330,6 +359,103 @@ namespace AutoRest.Swagger.Tests
             var error = changed.First();
             Assert.Equal(LogEntrySeverity.Error, error.Severity);
             Assert.Equal("#/paths//api/Parameters/post/registry/properties/b", error.Path);
+        }
+
+        /// <summary>
+        /// Verify that removing a response code is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseRemoved()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.RemovedResponseCode.Id);
+            Assert.NotEmpty(removed);
+            var error = removed.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Responses/get/200", error.Path);
+        }
+
+        /// <summary>
+        /// Verify that adding a response code is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseAdded()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.AddingResponseCode.Id);
+            Assert.NotEmpty(removed);
+            var error = removed.First();
+            Assert.Equal(LogEntrySeverity.Error, error.Severity);
+            Assert.Equal("#/paths//api/Responses/get/202", error.Path);
+        }
+
+        /// <summary>
+        /// Verify that changing the type of a response code is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseTypeChanged()
+        {
+            var messages = CompareSwagger("operation_check_01.json").ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id).ToArray();
+            Assert.Equal(2, removed.Length);
+
+            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
+            Assert.Equal("#/paths//api/Responses/get/201", removed[0].Path);
+
+            Assert.Equal(LogEntrySeverity.Error, removed[1].Severity);
+            Assert.Equal("#/paths//api/Responses/get/400/properties/id", removed[1].Path);
+        }
+
+        /// <summary>
+        /// Verify that changing the $ref-referenced type of a response code is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseSchemaChanged()
+        {
+            var messages = CompareSwagger("operation_check_02.json").ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.Contains("Responses")).ToArray();
+            Assert.Equal(1, removed.Length);
+            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
+            Assert.Equal("#/paths//api/Responses/get/400/properties/id", removed[0].Path);
+        }
+
+        /// <summary>
+        /// Verify that adding headers to a response definition is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseHeaderAdded()
+        {
+            var messages = CompareSwagger("operation_check_03.json").ToArray();
+            var added = messages.Where(m => m.Id == ComparisonMessages.AddingHeader.Id).ToArray();
+            Assert.Equal(1, added.Length);
+            Assert.Equal(LogEntrySeverity.Info, added[0].Severity);
+            Assert.Equal("#/paths//api/Responses/get/200/x-c", added[0].Path);
+        }
+
+        /// <summary>
+        /// Verify that removing headers from a response definition is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseHeaderRemoved()
+        {
+            var messages = CompareSwagger("operation_check_03.json").ToArray();
+            var removed = messages.Where(m => m.Id == ComparisonMessages.RemovingHeader.Id).ToArray();
+            Assert.Equal(1, removed.Length);
+            Assert.Equal(LogEntrySeverity.Error, removed[0].Severity);
+            Assert.Equal("#/paths//api/Responses/get/200/x-a", removed[0].Path);
+        }
+
+        /// <summary>
+        /// Verify that removing headers from a response definition is flagged.
+        /// </summary>
+        [Fact]
+        public void ResponseHeaderTypeChanged()
+        {
+            var messages = CompareSwagger("operation_check_03.json").ToArray();
+            var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.Contains("Responses")).ToArray();
+            Assert.Equal(1, changed.Length);
+            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
+            Assert.Equal("#/paths//api/Responses/get/200/x-b", changed[0].Path);
         }
     }
 }
