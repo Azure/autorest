@@ -9,8 +9,6 @@ package com.microsoft.azure;
 
 import com.microsoft.rest.RestException;
 
-import javax.xml.bind.DataBindingException;
-import javax.xml.ws.WebServiceException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +16,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+
+import javax.xml.bind.DataBindingException;
 
 /**
  * Defines a list response from a paging operation. The pages are
@@ -81,8 +81,6 @@ public abstract class PagedList<E> implements List<E> {
             this.nextPageLink = nextPage.getNextPageLink();
             this.items.addAll(nextPage.getItems());
             this.currentPage = nextPage;
-        } catch (RestException e) {
-            throw new WebServiceException(e.toString(), e);
         } catch (IOException e) {
             throw new DataBindingException(e.getMessage(), e);
         }
