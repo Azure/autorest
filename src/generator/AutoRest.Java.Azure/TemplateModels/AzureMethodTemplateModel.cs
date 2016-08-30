@@ -412,6 +412,16 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
+        public string PagingNextPageLinkParameterName
+        {
+            get
+            {
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                return nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
+            }
+        }
+
         public override string ResponseGeneration(bool filterRequired = false)
         {
             if (this.IsPagingOperation && !this.IsPagingNextOperation)
