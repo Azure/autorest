@@ -6,7 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.ClientModel;
@@ -23,8 +22,6 @@ namespace AutoRest.Python
         private const string ClientRuntimePackage = "msrest version 0.4.0";
 
         private string packageVersion;
-
-        private Regex InvalidNamespace = new Regex(@"(^\d)|(\w*\W\w*)");
 
         public PythonCodeGenerator(Settings settings) : base(settings)
         {
@@ -75,16 +72,6 @@ namespace AutoRest.Python
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + "_models");
-            if (Settings.Namespace != null)
-            {
-                foreach (var section in Settings.Namespace.Split('.'))
-                {
-                    if (InvalidNamespace.Match(section).Success)
-                    {
-                        throw new ArgumentException(string.Format("Invalid Python namespace: {0}", Settings.Namespace));
-                    }
-                }
-            }
         }
 
         private void PopulateAdditionalProperties(ServiceClient serviceClient)
