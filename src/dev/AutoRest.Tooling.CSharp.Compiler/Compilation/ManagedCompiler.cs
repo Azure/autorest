@@ -37,7 +37,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
                 outputName ?? "tmp" + Guid.NewGuid().ToString("N"));
 
             var ms = new MemoryStream();
-            var emitResult = compilation.Emit(ms, cancellationToken: cancellationToken);
+            var emitResult = compilation.Emit(ms,xmlDocumentationStream:ms, cancellationToken: cancellationToken);
 
             var compileResult = new CompilationResult {OutputKind = outputKind};
 
