@@ -43,9 +43,14 @@ namespace AutoRest.Core.Validation
 
         private Stack<string> _path = new Stack<string>();
 
-        public void LogMessage(MessageTemplate template, Logging.LogEntrySeverity severity, params object[] formatArguments)
+        public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, this.Path, severity, formatArguments));
+            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Info, formatArguments));
+        }
+
+        public void LogError(MessageTemplate template, params object[] formatArguments)
+        {
+            _messages.Add(new ComparisonMessage(template, this.Path, Logging.LogEntrySeverity.Error, formatArguments));
         }
 
         public void LogBreakingChange(MessageTemplate template, params object[] formatArguments)

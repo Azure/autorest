@@ -62,7 +62,7 @@ namespace AutoRest.Swagger.Model
                 Header oldHeader = null;
                 if (!priorHeaders.TryGetValue(header.Key, out oldHeader))
                 {
-                    context.LogMessage(ComparisonMessages.AddingHeader, Core.Logging.LogEntrySeverity.Info, header.Key);
+                    context.LogInfo(ComparisonMessages.AddingHeader, header.Key);
                 }
                 else
                 {

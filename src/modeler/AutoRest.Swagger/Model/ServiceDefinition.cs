@@ -163,7 +163,7 @@ namespace AutoRest.Swagger.Model
             if (context.Strict)
             {
                 // There was no version change between the documents. This is not an error, but noteworthy.
-                context.LogMessage(ComparisonMessages.NoVersionChange, LogEntrySeverity.Info);
+                context.LogInfo(ComparisonMessages.NoVersionChange);
             }
 
             // Check that all the HTTP schemes of the old version are supported by the new version.
@@ -384,7 +384,7 @@ namespace AutoRest.Swagger.Model
 
                     if (oldMajor > newMajor)
                     {
-                        context.LogMessage(ComparisonMessages.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                        context.LogError(ComparisonMessages.VersionsReversed, oldVer, newVer);
                     }
                 }
 
@@ -399,7 +399,7 @@ namespace AutoRest.Swagger.Model
 
                         if (oldMinor > newMinor)
                         {
-                            context.LogMessage(ComparisonMessages.VersionsReversed, LogEntrySeverity.Error, oldVer, newVer);
+                            context.LogError(ComparisonMessages.VersionsReversed, oldVer, newVer);
                         }
                     }
                 }

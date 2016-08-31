@@ -47,7 +47,7 @@ namespace AutoRest.Swagger.Validation
         public static MessageTemplate RemovedAdditionalProperties = new MessageTemplate { Id = 1022, Message = "The new version removes the 'additionalProperties' element" };
         public static MessageTemplate TypeFormatChanged = new MessageTemplate { Id = 1023, Message = "The new version has a different format than the previous one" };
 
-        public static MessageTemplate PropertyValueChanged = new MessageTemplate { Id = 1024, Message = "The new version has a different '{0}' value than the previous one" };
+        public static MessageTemplate ConstraintIsStronger = new MessageTemplate { Id = 1024, Message = "The new version has a more constraining '{0}' value than the previous one" };
 
         public static MessageTemplate RequiredStatusChange = new MessageTemplate { Id = 1025, Message = "The 'required' status changed from the old version to the new" };
         public static MessageTemplate TypeChanged = new MessageTemplate { Id = 1026, Message = "The new version has a different type than the previous one" };
@@ -63,6 +63,6 @@ namespace AutoRest.Swagger.Validation
 
         public static MessageTemplate RemovedOperation = new MessageTemplate { Id = 1035, Message = "The new version is misting an operation that was found in the old version. Was '{0}' removed or restructured?" };
 
-
+        public static MessageTemplate ConstraintChanged = new MessageTemplate { Id = 1036, Message = "The new version has a different '{0}' value than the previous one" };
     }
 }
