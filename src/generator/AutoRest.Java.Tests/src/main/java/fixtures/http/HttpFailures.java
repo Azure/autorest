@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,10 +36,16 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getEmptyErrorAsync();
 
     /**
      * Get empty error form server.
@@ -53,10 +60,16 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNoModelErrorAsync();
 
     /**
      * Get empty response from server.
@@ -71,9 +84,15 @@ public interface HttpFailures {
      * Get empty response from server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get empty response from server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNoModelEmptyAsync();
 
 }

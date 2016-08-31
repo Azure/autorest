@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -40,10 +41,18 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileAsync(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -61,9 +70,16 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsync(byte[] fileContent);
 
 }

@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -37,10 +38,17 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodPathValidAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -58,10 +66,17 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathPathValidAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -76,10 +91,16 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded path parameter with value 'path1/path2/path3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerPathValidAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -97,10 +118,17 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodQueryValidAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -115,10 +143,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Get method with unencoded query parameter with value null.
      *
@@ -134,10 +161,17 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value null.
+     *
+     * @param q1 Unencoded query parameter with value null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodQueryNullAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -155,10 +189,17 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathQueryValidAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -173,9 +214,15 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerQueryValidAsync();
 
 }

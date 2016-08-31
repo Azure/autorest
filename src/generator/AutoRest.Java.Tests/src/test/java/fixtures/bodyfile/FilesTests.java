@@ -1,16 +1,21 @@
 package fixtures.bodyfile;
 
+import com.microsoft.rest.ServiceResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import rx.exceptions.Exceptions;
+import rx.functions.Func1;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
@@ -24,9 +29,18 @@ public class FilesTests {
     @Test
     public void getFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream result = client.files().getFile().getBody();
-             InputStream file = classLoader.getResourceAsStream("sample.png")) {
-            byte[] actual = IOUtils.toByteArray(result);
+        try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
+            byte[] actual = client.files().getFileAsync()
+                .map(new Func1<ServiceResponse<InputStream>, byte[]>() {
+                    @Override
+                    public byte[] call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                        try {
+                            return IOUtils.toByteArray(inputStreamServiceResponse.getBody());
+                        } catch (IOException e) {
+                            throw Exceptions.propagate(e);
+                        }
+                    }
+                }).toBlocking().single();
             byte[] expected = IOUtils.toByteArray(file);
             Assert.assertArrayEquals(expected, actual);
         }
@@ -34,11 +48,19 @@ public class FilesTests {
 
     @Test
     public void getLargeFile() throws Exception {
-        try (InputStream result = client.files().getFileLarge().getBody()) {
-            long streamSize = 3000L * 1024L * 1024L;
-            long skipped = result.skip(streamSize);
-            Assert.assertEquals(streamSize, skipped);
-        }
+        final long streamSize = 3000L * 1024L * 1024L;
+        long skipped = client.files().getFileLargeAsync()
+            .map(new Func1<ServiceResponse<InputStream>, Long>() {
+                @Override
+                public Long call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                    try {
+                        return inputStreamServiceResponse.getBody().skip(streamSize);
+                    } catch (IOException e) {
+                        throw Exceptions.propagate(e);
+                    }
+                }
+            }).toBlocking().single();
+        Assert.assertEquals(streamSize, skipped);
     }
 
     @Test

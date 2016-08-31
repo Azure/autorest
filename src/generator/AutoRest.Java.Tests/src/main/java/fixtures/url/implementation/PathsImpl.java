@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -30,11 +29,12 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -64,107 +64,107 @@ public final class PathsImpl implements Paths {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/bool/true/{boolPath}")
-        Call<ResponseBody> getBooleanTrue(@Path("boolPath") boolean boolPath);
+        Observable<Response<ResponseBody>> getBooleanTrue(@Path("boolPath") boolean boolPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/bool/false/{boolPath}")
-        Call<ResponseBody> getBooleanFalse(@Path("boolPath") boolean boolPath);
+        Observable<Response<ResponseBody>> getBooleanFalse(@Path("boolPath") boolean boolPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/int/1000000/{intPath}")
-        Call<ResponseBody> getIntOneMillion(@Path("intPath") int intPath);
+        Observable<Response<ResponseBody>> getIntOneMillion(@Path("intPath") int intPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/int/-1000000/{intPath}")
-        Call<ResponseBody> getIntNegativeOneMillion(@Path("intPath") int intPath);
+        Observable<Response<ResponseBody>> getIntNegativeOneMillion(@Path("intPath") int intPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/long/10000000000/{longPath}")
-        Call<ResponseBody> getTenBillion(@Path("longPath") long longPath);
+        Observable<Response<ResponseBody>> getTenBillion(@Path("longPath") long longPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/long/-10000000000/{longPath}")
-        Call<ResponseBody> getNegativeTenBillion(@Path("longPath") long longPath);
+        Observable<Response<ResponseBody>> getNegativeTenBillion(@Path("longPath") long longPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/float/1.034E+20/{floatPath}")
-        Call<ResponseBody> floatScientificPositive(@Path("floatPath") double floatPath);
+        Observable<Response<ResponseBody>> floatScientificPositive(@Path("floatPath") double floatPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/float/-1.034E-20/{floatPath}")
-        Call<ResponseBody> floatScientificNegative(@Path("floatPath") double floatPath);
+        Observable<Response<ResponseBody>> floatScientificNegative(@Path("floatPath") double floatPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/double/9999999.999/{doublePath}")
-        Call<ResponseBody> doubleDecimalPositive(@Path("doublePath") double doublePath);
+        Observable<Response<ResponseBody>> doubleDecimalPositive(@Path("doublePath") double doublePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/double/-9999999.999/{doublePath}")
-        Call<ResponseBody> doubleDecimalNegative(@Path("doublePath") double doublePath);
+        Observable<Response<ResponseBody>> doubleDecimalNegative(@Path("doublePath") double doublePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/unicode/{stringPath}")
-        Call<ResponseBody> stringUnicode(@Path("stringPath") String stringPath);
+        Observable<Response<ResponseBody>> stringUnicode(@Path("stringPath") String stringPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
-        Call<ResponseBody> stringUrlEncoded(@Path("stringPath") String stringPath);
+        Observable<Response<ResponseBody>> stringUrlEncoded(@Path("stringPath") String stringPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/empty/{stringPath}")
-        Call<ResponseBody> stringEmpty(@Path("stringPath") String stringPath);
+        Observable<Response<ResponseBody>> stringEmpty(@Path("stringPath") String stringPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/null/{stringPath}")
-        Call<ResponseBody> stringNull(@Path("stringPath") String stringPath);
+        Observable<Response<ResponseBody>> stringNull(@Path("stringPath") String stringPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/enum/green%20color/{enumPath}")
-        Call<ResponseBody> enumValid(@Path("enumPath") UriColor enumPath);
+        Observable<Response<ResponseBody>> enumValid(@Path("enumPath") UriColor enumPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/null/{enumPath}")
-        Call<ResponseBody> enumNull(@Path("enumPath") UriColor enumPath);
+        Observable<Response<ResponseBody>> enumNull(@Path("enumPath") UriColor enumPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/byte/multibyte/{bytePath}")
-        Call<ResponseBody> byteMultiByte(@Path("bytePath") String bytePath);
+        Observable<Response<ResponseBody>> byteMultiByte(@Path("bytePath") String bytePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/byte/empty/{bytePath}")
-        Call<ResponseBody> byteEmpty(@Path("bytePath") String bytePath);
+        Observable<Response<ResponseBody>> byteEmpty(@Path("bytePath") String bytePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/byte/null/{bytePath}")
-        Call<ResponseBody> byteNull(@Path("bytePath") String bytePath);
+        Observable<Response<ResponseBody>> byteNull(@Path("bytePath") String bytePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/date/2012-01-01/{datePath}")
-        Call<ResponseBody> dateValid(@Path("datePath") LocalDate datePath);
+        Observable<Response<ResponseBody>> dateValid(@Path("datePath") LocalDate datePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/date/null/{datePath}")
-        Call<ResponseBody> dateNull(@Path("datePath") LocalDate datePath);
+        Observable<Response<ResponseBody>> dateNull(@Path("datePath") LocalDate datePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
-        Call<ResponseBody> dateTimeValid(@Path("dateTimePath") DateTime dateTimePath);
+        Observable<Response<ResponseBody>> dateTimeValid(@Path("dateTimePath") DateTime dateTimePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/datetime/null/{dateTimePath}")
-        Call<ResponseBody> dateTimeNull(@Path("dateTimePath") DateTime dateTimePath);
+        Observable<Response<ResponseBody>> dateTimeNull(@Path("dateTimePath") DateTime dateTimePath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
-        Call<ResponseBody> base64Url(@Path("base64UrlPath") Base64Url base64UrlPath);
+        Observable<Response<ResponseBody>> base64Url(@Path("base64UrlPath") Base64Url base64UrlPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
-        Call<ResponseBody> arrayCsvInPath(@Path("arrayPath") String arrayPath);
+        Observable<Response<ResponseBody>> arrayCsvInPath(@Path("arrayPath") String arrayPath);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paths/int/1460505600/{unixTimeUrlPath}")
-        Call<ResponseBody> unixTimeUrl(@Path("unixTimeUrlPath") long unixTimeUrlPath);
+        Observable<Response<ResponseBody>> unixTimeUrl(@Path("unixTimeUrlPath") long unixTimeUrlPath);
 
     }
 
@@ -176,39 +176,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException {
-        final boolean boolPath = true;
-        Call<ResponseBody> call = service.getBooleanTrue(boolPath);
-        return getBooleanTrueDelegate(call.execute());
+        return getBooleanTrueAsync().toBlocking().single();
     }
 
     /**
      * Get true Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getBooleanTrueAsync(), serviceCallback);
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getBooleanTrueAsync() {
         final boolean boolPath = true;
-        Call<ResponseBody> call = service.getBooleanTrue(boolPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getBooleanTrueDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getBooleanTrue(boolPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getBooleanTrueDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -226,39 +225,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException {
-        final boolean boolPath = false;
-        Call<ResponseBody> call = service.getBooleanFalse(boolPath);
-        return getBooleanFalseDelegate(call.execute());
+        return getBooleanFalseAsync().toBlocking().single();
     }
 
     /**
      * Get false Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getBooleanFalseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getBooleanFalseAsync() {
         final boolean boolPath = false;
-        Call<ResponseBody> call = service.getBooleanFalse(boolPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getBooleanFalseDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getBooleanFalse(boolPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getBooleanFalseDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -276,39 +274,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException {
-        final int intPath = 1000000;
-        Call<ResponseBody> call = service.getIntOneMillion(intPath);
-        return getIntOneMillionDelegate(call.execute());
+        return getIntOneMillionAsync().toBlocking().single();
     }
 
     /**
      * Get '1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getIntOneMillionAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getIntOneMillionAsync() {
         final int intPath = 1000000;
-        Call<ResponseBody> call = service.getIntOneMillion(intPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getIntOneMillionDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getIntOneMillion(intPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getIntOneMillionDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -326,39 +323,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException {
-        final int intPath = -1000000;
-        Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
-        return getIntNegativeOneMillionDelegate(call.execute());
+        return getIntNegativeOneMillionAsync().toBlocking().single();
     }
 
     /**
      * Get '-1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getIntNegativeOneMillionAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getIntNegativeOneMillionAsync() {
         final int intPath = -1000000;
-        Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getIntNegativeOneMillionDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getIntNegativeOneMillion(intPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getIntNegativeOneMillionDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -376,39 +372,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getTenBillion() throws ErrorException, IOException {
-        final long longPath = 10000000000L;
-        Call<ResponseBody> call = service.getTenBillion(longPath);
-        return getTenBillionDelegate(call.execute());
+        return getTenBillionAsync().toBlocking().single();
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getTenBillionAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getTenBillionAsync() {
         final long longPath = 10000000000L;
-        Call<ResponseBody> call = service.getTenBillion(longPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getTenBillionDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getTenBillion(longPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getTenBillionDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -426,39 +421,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException {
-        final long longPath = -10000000000L;
-        Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
-        return getNegativeTenBillionDelegate(call.execute());
+        return getNegativeTenBillionAsync().toBlocking().single();
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getNegativeTenBillionAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getNegativeTenBillionAsync() {
         final long longPath = -10000000000L;
-        Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getNegativeTenBillionDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getNegativeTenBillion(longPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getNegativeTenBillionDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -476,39 +470,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException {
-        final double floatPath = 1.034E+20;
-        Call<ResponseBody> call = service.floatScientificPositive(floatPath);
-        return floatScientificPositiveDelegate(call.execute());
+        return floatScientificPositiveAsync().toBlocking().single();
     }
 
     /**
      * Get '1.034E+20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(floatScientificPositiveAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> floatScientificPositiveAsync() {
         final double floatPath = 1.034E+20;
-        Call<ResponseBody> call = service.floatScientificPositive(floatPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = floatScientificPositiveDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.floatScientificPositive(floatPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = floatScientificPositiveDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -526,39 +519,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException {
-        final double floatPath = -1.034E-20;
-        Call<ResponseBody> call = service.floatScientificNegative(floatPath);
-        return floatScientificNegativeDelegate(call.execute());
+        return floatScientificNegativeAsync().toBlocking().single();
     }
 
     /**
      * Get '-1.034E-20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(floatScientificNegativeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> floatScientificNegativeAsync() {
         final double floatPath = -1.034E-20;
-        Call<ResponseBody> call = service.floatScientificNegative(floatPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = floatScientificNegativeDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.floatScientificNegative(floatPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = floatScientificNegativeDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -576,39 +568,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException {
-        final double doublePath = 9999999.999;
-        Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
-        return doubleDecimalPositiveDelegate(call.execute());
+        return doubleDecimalPositiveAsync().toBlocking().single();
     }
 
     /**
      * Get '9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(doubleDecimalPositiveAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> doubleDecimalPositiveAsync() {
         final double doublePath = 9999999.999;
-        Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = doubleDecimalPositiveDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.doubleDecimalPositive(doublePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = doubleDecimalPositiveDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -626,39 +617,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException {
-        final double doublePath = -9999999.999;
-        Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
-        return doubleDecimalNegativeDelegate(call.execute());
+        return doubleDecimalNegativeAsync().toBlocking().single();
     }
 
     /**
      * Get '-9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(doubleDecimalNegativeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> doubleDecimalNegativeAsync() {
         final double doublePath = -9999999.999;
-        Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = doubleDecimalNegativeDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.doubleDecimalNegative(doublePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = doubleDecimalNegativeDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -676,39 +666,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUnicode() throws ErrorException, IOException {
-        final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
-        Call<ResponseBody> call = service.stringUnicode(stringPath);
-        return stringUnicodeDelegate(call.execute());
+        return stringUnicodeAsync().toBlocking().single();
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(stringUnicodeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringUnicodeAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
-        Call<ResponseBody> call = service.stringUnicode(stringPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = stringUnicodeDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.stringUnicode(stringPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = stringUnicodeDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -726,39 +715,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException {
-        final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
-        Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
-        return stringUrlEncodedDelegate(call.execute());
+        return stringUrlEncodedAsync().toBlocking().single();
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(stringUrlEncodedAsync(), serviceCallback);
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringUrlEncodedAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
-        Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = stringUrlEncodedDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.stringUrlEncoded(stringPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = stringUrlEncodedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -776,39 +764,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringEmpty() throws ErrorException, IOException {
-        final String stringPath = "";
-        Call<ResponseBody> call = service.stringEmpty(stringPath);
-        return stringEmptyDelegate(call.execute());
+        return stringEmptyAsync().toBlocking().single();
     }
 
     /**
      * Get ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(stringEmptyAsync(), serviceCallback);
+    }
+
+    /**
+     * Get ''.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringEmptyAsync() {
         final String stringPath = "";
-        Call<ResponseBody> call = service.stringEmpty(stringPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = stringEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.stringEmpty(stringPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = stringEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -828,11 +815,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringPath == null) {
-            throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.stringNull(stringPath);
-        return stringNullDelegate(call.execute());
+        return stringNullAsync(stringPath).toBlocking().single();
     }
 
     /**
@@ -840,32 +823,34 @@ public final class PathsImpl implements Paths {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(stringNullAsync(stringPath), serviceCallback);
+    }
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringNullAsync(String stringPath) {
         if (stringPath == null) {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.stringNull(stringPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = stringNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.stringNull(stringPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = stringNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -885,11 +870,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (enumPath == null) {
-            throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.enumValid(enumPath);
-        return enumValidDelegate(call.execute());
+        return enumValidAsync(enumPath).toBlocking().single();
     }
 
     /**
@@ -897,32 +878,34 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(enumValidAsync(enumPath), serviceCallback);
+    }
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> enumValidAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumValid(enumPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = enumValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.enumValid(enumPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = enumValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -942,11 +925,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (enumPath == null) {
-            throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.enumNull(enumPath);
-        return enumNullDelegate(call.execute());
+        return enumNullAsync(enumPath).toBlocking().single();
     }
 
     /**
@@ -954,32 +933,34 @@ public final class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(enumNullAsync(enumPath), serviceCallback);
+    }
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> enumNullAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumNull(enumPath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = enumNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.enumNull(enumPath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = enumNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -999,12 +980,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (bytePath == null) {
-            throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
-        }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteMultiByte(bytePathConverted);
-        return byteMultiByteDelegate(call.execute());
+        return byteMultiByteAsync(bytePath).toBlocking().single();
     }
 
     /**
@@ -1012,33 +988,35 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(byteMultiByteAsync(bytePath), serviceCallback);
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteMultiByteAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteMultiByte(bytePathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.byteMultiByte(bytePathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1056,41 +1034,39 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
-        final byte[] bytePath = "".getBytes();
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteEmpty(bytePathConverted);
-        return byteEmptyDelegate(call.execute());
+        return byteEmptyAsync().toBlocking().single();
     }
 
     /**
      * Get '' as byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(byteEmptyAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteEmptyAsync() {
         final byte[] bytePath = "".getBytes();
         String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteEmpty(bytePathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = byteEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.byteEmpty(bytePathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = byteEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1110,12 +1086,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (bytePath == null) {
-            throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
-        }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteNull(bytePathConverted);
-        return byteNullDelegate(call.execute());
+        return byteNullAsync(bytePath).toBlocking().single();
     }
 
     /**
@@ -1123,33 +1094,35 @@ public final class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(byteNullAsync(bytePath), serviceCallback);
+    }
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteNullAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         String bytePathConverted = Base64.encodeBase64String(bytePath);
-        Call<ResponseBody> call = service.byteNull(bytePathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = byteNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.byteNull(bytePathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = byteNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1167,39 +1140,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
-        final LocalDate datePath = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(datePath);
-        return dateValidDelegate(call.execute());
+        return dateValidAsync().toBlocking().single();
     }
 
     /**
      * Get '2012-01-01' as date.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(dateValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateValidAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
-        Call<ResponseBody> call = service.dateValid(datePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = dateValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.dateValid(datePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = dateValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1219,11 +1191,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (datePath == null) {
-            throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.dateNull(datePath);
-        return dateNullDelegate(call.execute());
+        return dateNullAsync(datePath).toBlocking().single();
     }
 
     /**
@@ -1231,32 +1199,34 @@ public final class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(dateNullAsync(datePath), serviceCallback);
+    }
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateNullAsync(LocalDate datePath) {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateNull(datePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = dateNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.dateNull(datePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = dateNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1274,39 +1244,38 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
-        final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(dateTimePath);
-        return dateTimeValidDelegate(call.execute());
+        return dateTimeValidAsync().toBlocking().single();
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(dateTimeValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateTimeValidAsync() {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
-        Call<ResponseBody> call = service.dateTimeValid(dateTimePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = dateTimeValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.dateTimeValid(dateTimePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = dateTimeValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1326,11 +1295,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException {
-        if (dateTimePath == null) {
-            throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.dateTimeNull(dateTimePath);
-        return dateTimeNullDelegate(call.execute());
+        return dateTimeNullAsync(dateTimePath).toBlocking().single();
     }
 
     /**
@@ -1338,32 +1303,34 @@ public final class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(dateTimeNullAsync(dateTimePath), serviceCallback);
+    }
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateTimeNullAsync(DateTime dateTimePath) {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeNull(dateTimePath);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.dateTimeNull(dateTimePath)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1383,12 +1350,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (base64UrlPath == null) {
-            throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
-        }
-        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        Call<ResponseBody> call = service.base64Url(base64UrlPathConverted);
-        return base64UrlDelegate(call.execute());
+        return base64UrlAsync(base64UrlPath).toBlocking().single();
     }
 
     /**
@@ -1396,33 +1358,35 @@ public final class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(base64UrlAsync(base64UrlPath), serviceCallback);
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> base64UrlAsync(byte[] base64UrlPath) {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
         Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
-        Call<ResponseBody> call = service.base64Url(base64UrlPathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = base64UrlDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.base64Url(base64UrlPathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = base64UrlDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> base64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1442,13 +1406,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException {
-        if (arrayPath == null) {
-            throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
-        }
-        Validator.validate(arrayPath);
-        String arrayPathConverted = this.client.mapperAdapter().serializeList(arrayPath, CollectionFormat.CSV);
-        Call<ResponseBody> call = service.arrayCsvInPath(arrayPathConverted);
-        return arrayCsvInPathDelegate(call.execute());
+        return arrayCsvInPathAsync(arrayPath).toBlocking().single();
     }
 
     /**
@@ -1456,34 +1414,36 @@ public final class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(arrayCsvInPathAsync(arrayPath), serviceCallback);
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> arrayCsvInPathAsync(List<String> arrayPath) {
         if (arrayPath == null) {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
         String arrayPathConverted = this.client.mapperAdapter().serializeList(arrayPath, CollectionFormat.CSV);
-        Call<ResponseBody> call = service.arrayCsvInPath(arrayPathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = arrayCsvInPathDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.arrayCsvInPath(arrayPathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = arrayCsvInPathDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> arrayCsvInPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1502,9 +1462,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
-        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPathConverted);
-        return unixTimeUrlDelegate(call.execute());
+        return unixTimeUrlAsync(unixTimeUrlPath).toBlocking().single();
     }
 
     /**
@@ -1512,30 +1470,32 @@ public final class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
         Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
-        Call<ResponseBody> call = service.unixTimeUrl(unixTimeUrlPathConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = unixTimeUrlDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.unixTimeUrl(unixTimeUrlPathConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = unixTimeUrlDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> unixTimeUrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

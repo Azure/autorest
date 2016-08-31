@@ -1,13 +1,14 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
-import fixtures.bodycomplex.models.DictionaryWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.models.DictionaryWrapper;
 
 public class DictionaryTests {
     private static AutoRestComplexTestService client;

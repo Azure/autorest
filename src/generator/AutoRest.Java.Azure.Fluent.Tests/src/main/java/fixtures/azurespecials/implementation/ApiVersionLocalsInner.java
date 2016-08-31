@@ -16,16 +16,16 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -55,19 +55,19 @@ public final class ApiVersionLocalsInner {
     interface ApiVersionLocalsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
-        Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
-        Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
-        Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -79,39 +79,38 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
-        final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return getMethodLocalValidDelegate(call.execute());
+        return getMethodLocalValidAsync().toBlocking().single();
     }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getMethodLocalValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodLocalValidAsync() {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getMethodLocalValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getMethodLocalValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -129,39 +128,38 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
-        final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return getMethodLocalNullDelegate(call.execute());
+        return getMethodLocalNullAsync().toBlocking().single();
     }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getMethodLocalNullAsync(), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodLocalNullAsync() {
         final String apiVersion = null;
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -173,8 +171,7 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return getMethodLocalNullDelegate(call.execute());
+        return getMethodLocalNullAsync(apiVersion).toBlocking().single();
     }
 
     /**
@@ -182,29 +179,31 @@ public final class ApiVersionLocalsInner {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getMethodLocalNullAsync(apiVersion), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodLocalNullAsync(String apiVersion) {
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -222,39 +221,38 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
-        final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return getPathLocalValidDelegate(call.execute());
+        return getPathLocalValidAsync().toBlocking().single();
     }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getPathLocalValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getPathLocalValidAsync() {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getPathLocalValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getPathLocalValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -272,39 +270,38 @@ public final class ApiVersionLocalsInner {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
-        final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        return getSwaggerLocalValidDelegate(call.execute());
+        return getSwaggerLocalValidAsync().toBlocking().single();
     }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getSwaggerLocalValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getSwaggerLocalValidAsync() {
         final String apiVersion = "2.0";
-        Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getSwaggerLocalValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getSwaggerLocalValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
