@@ -43,7 +43,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -100,14 +100,14 @@ class PagingOperations(object):
          the operation
         :type paging_get_multiple_pages_options:
          :class:`PagingGetMultiplePagesOptions
-         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesOptions>`
+         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         maxresults = None
         if paging_get_multiple_pages_options is not None:
@@ -178,14 +178,14 @@ class PagingOperations(object):
          for the operation
         :type paging_get_odata_multiple_pages_options:
          :class:`PagingGetOdataMultiplePagesOptions
-         <fixtures.acceptancetestspaging.models.PagingGetOdataMultiplePagesOptions>`
+         <Fixtures.AcceptanceTestsPaging.models.PagingGetOdataMultiplePagesOptions>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged1
-         <fixtures.acceptancetestspaging.models.ProductPaged1>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged1>`
         """
         maxresults = None
         if paging_get_odata_multiple_pages_options is not None:
@@ -253,7 +253,7 @@ class PagingOperations(object):
          parameters for the operation
         :type paging_get_multiple_pages_with_offset_options:
          :class:`PagingGetMultiplePagesWithOffsetOptions
-         <fixtures.acceptancetestspaging.models.PagingGetMultiplePagesWithOffsetOptions>`
+         <Fixtures.AcceptanceTestsPaging.models.PagingGetMultiplePagesWithOffsetOptions>`
         :param client_request_id:
         :type client_request_id: str
         :param dict custom_headers: headers that will be added to the request
@@ -262,7 +262,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         maxresults = None
         if paging_get_multiple_pages_with_offset_options is not None:
@@ -341,7 +341,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -400,7 +400,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -457,7 +457,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -514,7 +514,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -571,7 +571,7 @@ class PagingOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ProductPaged
-         <fixtures.acceptancetestspaging.models.ProductPaged>`
+         <Fixtures.AcceptanceTestsPaging.models.ProductPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 

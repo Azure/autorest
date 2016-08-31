@@ -41,7 +41,7 @@ class ReadonlypropertyOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ReadonlyObj
-         <fixtures.acceptancetestsbodycomplex.models.ReadonlyObj>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ReadonlyObj>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -81,7 +81,7 @@ class ReadonlypropertyOperations(object):
 
         :param complex_body:
         :type complex_body: :class:`ReadonlyObj
-         <fixtures.acceptancetestsbodycomplex.models.ReadonlyObj>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ReadonlyObj>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

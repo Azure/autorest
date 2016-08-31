@@ -23,7 +23,7 @@ class CheckNameAvailabilityResult(Model):
      used. The Reason element is only returned if NameAvailable is false.
      Possible values include: 'AccountNameInvalid', 'AlreadyExists'
     :type reason: str or :class:`Reason
-     <fixtures.acceptancetestsstoragemanagementclient.models.Reason>`
+     <Fixtures.AcceptanceTestsStorageManagementClient.models.Reason>`
     :param message: Gets an error message explaining the Reason value in more
      detail.
     :type message: str

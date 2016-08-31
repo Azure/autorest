@@ -43,7 +43,7 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <fixtures.acceptancetestsrequiredoptional.models.Error>`
+         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -209,7 +209,7 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <fixtures.acceptancetestsrequiredoptional.models.Error>`
+         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -250,7 +250,7 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <fixtures.acceptancetestsrequiredoptional.models.Error>`
+         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -288,7 +288,7 @@ class ImplicitOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Error
-         <fixtures.acceptancetestsrequiredoptional.models.Error>`
+         <Fixtures.AcceptanceTestsRequiredOptional.models.Error>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

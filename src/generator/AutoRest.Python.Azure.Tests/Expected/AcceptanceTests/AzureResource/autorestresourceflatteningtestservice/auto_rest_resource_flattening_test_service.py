@@ -101,7 +101,7 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param resource_array: External Resource as an Array to put
         :type resource_array: list of :class:`Resource
-         <fixtures.acceptancetestsazureresource.models.Resource>`
+         <Fixtures.AcceptanceTestsAzureResource.models.Resource>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -155,7 +155,7 @@ class AutoRestResourceFlatteningTestService(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`FlattenedProduct
-         <fixtures.acceptancetestsazureresource.models.FlattenedProduct>`
+         <Fixtures.AcceptanceTestsAzureResource.models.FlattenedProduct>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -296,7 +296,7 @@ class AutoRestResourceFlatteningTestService(object):
         :param resource_complex_object: External Resource as a
          ResourceCollection to put
         :type resource_complex_object: :class:`ResourceCollection
-         <fixtures.acceptancetestsazureresource.models.ResourceCollection>`
+         <Fixtures.AcceptanceTestsAzureResource.models.ResourceCollection>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -350,7 +350,7 @@ class AutoRestResourceFlatteningTestService(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ResourceCollection
-         <fixtures.acceptancetestsazureresource.models.ResourceCollection>`
+         <Fixtures.AcceptanceTestsAzureResource.models.ResourceCollection>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

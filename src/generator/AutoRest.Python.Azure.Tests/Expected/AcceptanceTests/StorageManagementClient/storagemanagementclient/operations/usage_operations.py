@@ -44,7 +44,7 @@ class UsageOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`UsageListResult
-         <fixtures.acceptancetestsstoragemanagementclient.models.UsageListResult>`
+         <Fixtures.AcceptanceTestsStorageManagementClient.models.UsageListResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
