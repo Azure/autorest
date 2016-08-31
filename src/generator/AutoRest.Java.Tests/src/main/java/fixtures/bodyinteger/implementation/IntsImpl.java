@@ -17,18 +17,18 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,59 +58,59 @@ public final class IntsImpl implements Ints {
     interface IntsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/null")
-        Call<ResponseBody> getNull();
+        Observable<Response<ResponseBody>> getNull();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/invalid")
-        Call<ResponseBody> getInvalid();
+        Observable<Response<ResponseBody>> getInvalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/overflowint32")
-        Call<ResponseBody> getOverflowInt32();
+        Observable<Response<ResponseBody>> getOverflowInt32();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/underflowint32")
-        Call<ResponseBody> getUnderflowInt32();
+        Observable<Response<ResponseBody>> getUnderflowInt32();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/overflowint64")
-        Call<ResponseBody> getOverflowInt64();
+        Observable<Response<ResponseBody>> getOverflowInt64();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/underflowint64")
-        Call<ResponseBody> getUnderflowInt64();
+        Observable<Response<ResponseBody>> getUnderflowInt64();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("int/max/32")
-        Call<ResponseBody> putMax32(@Body int intBody);
+        Observable<Response<ResponseBody>> putMax32(@Body int intBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("int/max/64")
-        Call<ResponseBody> putMax64(@Body long intBody);
+        Observable<Response<ResponseBody>> putMax64(@Body long intBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("int/min/32")
-        Call<ResponseBody> putMin32(@Body int intBody);
+        Observable<Response<ResponseBody>> putMin32(@Body int intBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("int/min/64")
-        Call<ResponseBody> putMin64(@Body long intBody);
+        Observable<Response<ResponseBody>> putMin64(@Body long intBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/unixtime")
-        Call<ResponseBody> getUnixTime();
+        Observable<Response<ResponseBody>> getUnixTime();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("int/unixtime")
-        Call<ResponseBody> putUnixTimeDate(@Body long intBody);
+        Observable<Response<ResponseBody>> putUnixTimeDate(@Body long intBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/invalidunixtime")
-        Call<ResponseBody> getInvalidUnixTime();
+        Observable<Response<ResponseBody>> getInvalidUnixTime();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("int/nullunixtime")
-        Call<ResponseBody> getNullUnixTime();
+        Observable<Response<ResponseBody>> getNullUnixTime();
 
     }
 
@@ -122,37 +122,37 @@ public final class IntsImpl implements Ints {
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getNull() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute());
+        return getNullAsync().toBlocking().single();
     }
 
     /**
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
-        Call<ResponseBody> call = service.getNull();
-        final ServiceCall<Integer> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Integer>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Integer> clientResponse = getNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getNullAsync(), serviceCallback);
+    }
+
+    /**
+     * Get null Int value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getNullAsync() {
+        return service.getNull()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
+                @Override
+                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Integer> clientResponse = getNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -170,37 +170,37 @@ public final class IntsImpl implements Ints {
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getInvalid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getInvalid();
-        return getInvalidDelegate(call.execute());
+        return getInvalidAsync().toBlocking().single();
     }
 
     /**
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        Call<ResponseBody> call = service.getInvalid();
-        final ServiceCall<Integer> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Integer>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Integer> clientResponse = getInvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get invalid Int value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getInvalidAsync() {
+        return service.getInvalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
+                @Override
+                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Integer> clientResponse = getInvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -218,37 +218,37 @@ public final class IntsImpl implements Ints {
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getOverflowInt32() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getOverflowInt32();
-        return getOverflowInt32Delegate(call.execute());
+        return getOverflowInt32Async().toBlocking().single();
     }
 
     /**
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        Call<ResponseBody> call = service.getOverflowInt32();
-        final ServiceCall<Integer> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Integer>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Integer> clientResponse = getOverflowInt32Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getOverflowInt32Async(), serviceCallback);
+    }
+
+    /**
+     * Get overflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getOverflowInt32Async() {
+        return service.getOverflowInt32()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
+                @Override
+                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Integer> clientResponse = getOverflowInt32Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -266,37 +266,37 @@ public final class IntsImpl implements Ints {
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Integer> getUnderflowInt32() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getUnderflowInt32();
-        return getUnderflowInt32Delegate(call.execute());
+        return getUnderflowInt32Async().toBlocking().single();
     }
 
     /**
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        Call<ResponseBody> call = service.getUnderflowInt32();
-        final ServiceCall<Integer> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Integer>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Integer> clientResponse = getUnderflowInt32Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getUnderflowInt32Async(), serviceCallback);
+    }
+
+    /**
+     * Get underflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getUnderflowInt32Async() {
+        return service.getUnderflowInt32()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
+                @Override
+                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Integer> clientResponse = getUnderflowInt32Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -314,37 +314,37 @@ public final class IntsImpl implements Ints {
      * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Long> getOverflowInt64() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getOverflowInt64();
-        return getOverflowInt64Delegate(call.execute());
+        return getOverflowInt64Async().toBlocking().single();
     }
 
     /**
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        Call<ResponseBody> call = service.getOverflowInt64();
-        final ServiceCall<Long> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Long>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Long> clientResponse = getOverflowInt64Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getOverflowInt64Async(), serviceCallback);
+    }
+
+    /**
+     * Get overflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    public Observable<ServiceResponse<Long>> getOverflowInt64Async() {
+        return service.getOverflowInt64()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
+                @Override
+                public Observable<ServiceResponse<Long>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Long> clientResponse = getOverflowInt64Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -362,37 +362,37 @@ public final class IntsImpl implements Ints {
      * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Long> getUnderflowInt64() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getUnderflowInt64();
-        return getUnderflowInt64Delegate(call.execute());
+        return getUnderflowInt64Async().toBlocking().single();
     }
 
     /**
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        Call<ResponseBody> call = service.getUnderflowInt64();
-        final ServiceCall<Long> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Long>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Long> clientResponse = getUnderflowInt64Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getUnderflowInt64Async(), serviceCallback);
+    }
+
+    /**
+     * Get underflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    public Observable<ServiceResponse<Long>> getUnderflowInt64Async() {
+        return service.getUnderflowInt64()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
+                @Override
+                public Observable<ServiceResponse<Long>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Long> clientResponse = getUnderflowInt64Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -411,8 +411,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putMax32(int intBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putMax32(intBody);
-        return putMax32Delegate(call.execute());
+        return putMax32Async(intBody).toBlocking().single();
     }
 
     /**
@@ -420,29 +419,31 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.putMax32(intBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putMax32Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(putMax32Async(intBody), serviceCallback);
+    }
+
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMax32Async(int intBody) {
+        return service.putMax32(intBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putMax32Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -461,8 +462,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putMax64(long intBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putMax64(intBody);
-        return putMax64Delegate(call.execute());
+        return putMax64Async(intBody).toBlocking().single();
     }
 
     /**
@@ -470,29 +470,31 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.putMax64(intBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putMax64Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(putMax64Async(intBody), serviceCallback);
+    }
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMax64Async(long intBody) {
+        return service.putMax64(intBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putMax64Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -511,8 +513,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putMin32(int intBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putMin32(intBody);
-        return putMin32Delegate(call.execute());
+        return putMin32Async(intBody).toBlocking().single();
     }
 
     /**
@@ -520,29 +521,31 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.putMin32(intBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putMin32Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(putMin32Async(intBody), serviceCallback);
+    }
+
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMin32Async(int intBody) {
+        return service.putMin32(intBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putMin32Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -561,8 +564,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putMin64(long intBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putMin64(intBody);
-        return putMin64Delegate(call.execute());
+        return putMin64Async(intBody).toBlocking().single();
     }
 
     /**
@@ -570,29 +572,31 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.putMin64(intBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putMin64Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(putMin64Async(intBody), serviceCallback);
+    }
+
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMin64Async(long intBody) {
+        return service.putMin64(intBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putMin64Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -610,47 +614,42 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getUnixTime() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getUnixTime();
-        ServiceResponse<Long> response = getUnixTimeDelegate(call.execute());
-        DateTime body = null;
-        if (response.getBody() != null) {
-            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
-        }
-        return new ServiceResponse<DateTime>(body, response.getResponse());
+        return getUnixTimeAsync().toBlocking().single();
     }
 
     /**
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        Call<ResponseBody> call = service.getUnixTime();
-        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Long> result = getUnixTimeDelegate(response);
-                    DateTime body = null;
-                    if (result.getBody() != null) {
-                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+        return ServiceCall.create(getUnixTimeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUnixTimeAsync() {
+        return service.getUnixTime()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
+                @Override
+                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Long> result = getUnixTimeDelegate(response);
+                        DateTime body = null;
+                        if (result.getBody() != null) {
+                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        }
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Long> getUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -669,9 +668,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putUnixTimeDate(DateTime intBody) throws ErrorException, IOException {
-        Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
-        Call<ResponseBody> call = service.putUnixTimeDate(intBodyConverted);
-        return putUnixTimeDateDelegate(call.execute());
+        return putUnixTimeDateAsync(intBody).toBlocking().single();
     }
 
     /**
@@ -679,30 +676,32 @@ public final class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putUnixTimeDateAsync(intBody), serviceCallback);
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUnixTimeDateAsync(DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
-        Call<ResponseBody> call = service.putUnixTimeDate(intBodyConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putUnixTimeDateDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putUnixTimeDate(intBodyConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putUnixTimeDateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -720,47 +719,42 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getInvalidUnixTime() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getInvalidUnixTime();
-        ServiceResponse<Long> response = getInvalidUnixTimeDelegate(call.execute());
-        DateTime body = null;
-        if (response.getBody() != null) {
-            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
-        }
-        return new ServiceResponse<DateTime>(body, response.getResponse());
+        return getInvalidUnixTimeAsync().toBlocking().single();
     }
 
     /**
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        Call<ResponseBody> call = service.getInvalidUnixTime();
-        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Long> result = getInvalidUnixTimeDelegate(response);
-                    DateTime body = null;
-                    if (result.getBody() != null) {
-                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+        return ServiceCall.create(getInvalidUnixTimeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getInvalidUnixTimeAsync() {
+        return service.getInvalidUnixTime()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
+                @Override
+                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Long> result = getInvalidUnixTimeDelegate(response);
+                        DateTime body = null;
+                        if (result.getBody() != null) {
+                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        }
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Long> getInvalidUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -778,47 +772,42 @@ public final class IntsImpl implements Ints {
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<DateTime> getNullUnixTime() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNullUnixTime();
-        ServiceResponse<Long> response = getNullUnixTimeDelegate(call.execute());
-        DateTime body = null;
-        if (response.getBody() != null) {
-            body = new DateTime(response.getBody() * 1000L, DateTimeZone.UTC);
-        }
-        return new ServiceResponse<DateTime>(body, response.getResponse());
+        return getNullUnixTimeAsync().toBlocking().single();
     }
 
     /**
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        Call<ResponseBody> call = service.getNullUnixTime();
-        final ServiceCall<DateTime> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<DateTime>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Long> result = getNullUnixTimeDelegate(response);
-                    DateTime body = null;
-                    if (result.getBody() != null) {
-                        body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+        return ServiceCall.create(getNullUnixTimeAsync(), serviceCallback);
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getNullUnixTimeAsync() {
+        return service.getNullUnixTime()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
+                @Override
+                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Long> result = getNullUnixTimeDelegate(response);
+                        DateTime body = null;
+                        if (result.getBody() != null) {
+                            body = new DateTime(result.getBody() * 1000L, DateTimeZone.UTC);
+                        }
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Long> getNullUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

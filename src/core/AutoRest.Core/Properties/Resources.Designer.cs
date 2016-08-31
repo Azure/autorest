@@ -267,6 +267,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Constraint is not supported for this type and will be ignored..
+        /// </summary>
+        public static string InvalidConstraint {
+            get {
+                return ResourceManager.GetString("InvalidConstraint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to The default value is not one of the values enumerated as valid for this element..
         /// </summary>
         public static string InvalidDefault {

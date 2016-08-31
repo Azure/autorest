@@ -18,16 +18,16 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,55 +57,55 @@ public final class StringsImpl implements Strings {
     interface StringsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/null")
-        Call<ResponseBody> getNull();
+        Observable<Response<ResponseBody>> getNull();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/null")
-        Call<ResponseBody> putNull(@Body String stringBody);
+        Observable<Response<ResponseBody>> putNull(@Body String stringBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/empty")
-        Call<ResponseBody> getEmpty();
+        Observable<Response<ResponseBody>> getEmpty();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/empty")
-        Call<ResponseBody> putEmpty(@Body String stringBody);
+        Observable<Response<ResponseBody>> putEmpty(@Body String stringBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/mbcs")
-        Call<ResponseBody> getMbcs();
+        Observable<Response<ResponseBody>> getMbcs();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/mbcs")
-        Call<ResponseBody> putMbcs(@Body String stringBody);
+        Observable<Response<ResponseBody>> putMbcs(@Body String stringBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/whitespace")
-        Call<ResponseBody> getWhitespace();
+        Observable<Response<ResponseBody>> getWhitespace();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/whitespace")
-        Call<ResponseBody> putWhitespace(@Body String stringBody);
+        Observable<Response<ResponseBody>> putWhitespace(@Body String stringBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/notProvided")
-        Call<ResponseBody> getNotProvided();
+        Observable<Response<ResponseBody>> getNotProvided();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/base64Encoding")
-        Call<ResponseBody> getBase64Encoded();
+        Observable<Response<ResponseBody>> getBase64Encoded();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/base64UrlEncoding")
-        Call<ResponseBody> getBase64UrlEncoded();
+        Observable<Response<ResponseBody>> getBase64UrlEncoded();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/base64UrlEncoding")
-        Call<ResponseBody> putBase64UrlEncoded(@Body Base64Url stringBody);
+        Observable<Response<ResponseBody>> putBase64UrlEncoded(@Body Base64Url stringBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/nullBase64UrlEncoding")
-        Call<ResponseBody> getNullBase64UrlEncoded();
+        Observable<Response<ResponseBody>> getNullBase64UrlEncoded();
 
     }
 
@@ -117,37 +117,37 @@ public final class StringsImpl implements Strings {
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> getNull() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute());
+        return getNullAsync().toBlocking().single();
     }
 
     /**
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
-        Call<ResponseBody> call = service.getNull();
-        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<String> clientResponse = getNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getNullAsync(), serviceCallback);
+    }
+
+    /**
+     * Get null string value value.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getNullAsync() {
+        return service.getNull()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -165,39 +165,38 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putNull() throws ErrorException, IOException {
-        final String stringBody = null;
-        Call<ResponseBody> call = service.putNull(stringBody);
-        return putNullDelegate(call.execute());
+        return putNullAsync().toBlocking().single();
     }
 
     /**
      * Set string value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putNullAsync(), serviceCallback);
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putNullAsync() {
         final String stringBody = null;
-        Call<ResponseBody> call = service.putNull(stringBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putNull(stringBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -209,8 +208,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putNull(String stringBody) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.putNull(stringBody);
-        return putNullDelegate(call.execute());
+        return putNullAsync(stringBody).toBlocking().single();
     }
 
     /**
@@ -218,29 +216,31 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.putNull(stringBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putNullDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(putNullAsync(stringBody), serviceCallback);
+    }
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putNullAsync(String stringBody) {
+        return service.putNull(stringBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putNullDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -258,37 +258,37 @@ public final class StringsImpl implements Strings {
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> getEmpty() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute());
+        return getEmptyAsync().toBlocking().single();
     }
 
     /**
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
-        Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<String> clientResponse = getEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getEmptyAsync(), serviceCallback);
+    }
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getEmptyAsync() {
+        return service.getEmpty()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -308,11 +308,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.putEmpty(stringBody);
-        return putEmptyDelegate(call.execute());
+        return putEmptyAsync(stringBody).toBlocking().single();
     }
 
     /**
@@ -320,32 +316,34 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putEmptyAsync(stringBody), serviceCallback);
+    }
+
+    /**
+     * Set string value empty ''.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putEmptyAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putEmpty(stringBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putEmpty(stringBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -363,37 +361,37 @@ public final class StringsImpl implements Strings {
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> getMbcs() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getMbcs();
-        return getMbcsDelegate(call.execute());
+        return getMbcsAsync().toBlocking().single();
     }
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
-        Call<ResponseBody> call = service.getMbcs();
-        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<String> clientResponse = getMbcsDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getMbcsAsync(), serviceCallback);
+    }
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getMbcsAsync() {
+        return service.getMbcs()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getMbcsDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -413,11 +411,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.putMbcs(stringBody);
-        return putMbcsDelegate(call.execute());
+        return putMbcsAsync(stringBody).toBlocking().single();
     }
 
     /**
@@ -425,32 +419,34 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putMbcsAsync(stringBody), serviceCallback);
+    }
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMbcsAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putMbcs(stringBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putMbcsDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putMbcs(stringBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putMbcsDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -468,37 +464,37 @@ public final class StringsImpl implements Strings {
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> getWhitespace() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getWhitespace();
-        return getWhitespaceDelegate(call.execute());
+        return getWhitespaceAsync().toBlocking().single();
     }
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
-        Call<ResponseBody> call = service.getWhitespace();
-        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<String> clientResponse = getWhitespaceDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getWhitespaceAsync(), serviceCallback);
+    }
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getWhitespaceAsync() {
+        return service.getWhitespace()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getWhitespaceDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -518,11 +514,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.putWhitespace(stringBody);
-        return putWhitespaceDelegate(call.execute());
+        return putWhitespaceAsync(stringBody).toBlocking().single();
     }
 
     /**
@@ -530,32 +522,34 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putWhitespaceAsync(stringBody), serviceCallback);
+    }
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putWhitespaceAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.putWhitespace(stringBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putWhitespaceDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putWhitespace(stringBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putWhitespaceDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -573,37 +567,37 @@ public final class StringsImpl implements Strings {
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<String> getNotProvided() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNotProvided();
-        return getNotProvidedDelegate(call.execute());
+        return getNotProvidedAsync().toBlocking().single();
     }
 
     /**
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
-        Call<ResponseBody> call = service.getNotProvided();
-        final ServiceCall<String> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<String>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<String> clientResponse = getNotProvidedDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
+    }
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @return the observable to the String object
+     */
+    public Observable<ServiceResponse<String>> getNotProvidedAsync() {
+        return service.getNotProvided()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
+                @Override
+                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<String> clientResponse = getNotProvidedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -621,47 +615,42 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<byte[]> getBase64Encoded() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getBase64Encoded();
-        ServiceResponse<Base64Url> response = getBase64EncodedDelegate(call.execute());
-        byte[] body = null;
-        if (response.getBody() != null) {
-            body = response.getBody().getDecodedBytes();
-        }
-        return new ServiceResponse<byte[]>(body, response.getResponse());
+        return getBase64EncodedAsync().toBlocking().single();
     }
 
     /**
      * Get value that is base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        Call<ResponseBody> call = service.getBase64Encoded();
-        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Base64Url> result = getBase64EncodedDelegate(response);
-                    byte[] body = null;
-                    if (result.getBody() != null) {
-                        body = result.getBody().getDecodedBytes();
+        return ServiceCall.create(getBase64EncodedAsync(), serviceCallback);
+    }
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getBase64EncodedAsync() {
+        return service.getBase64Encoded()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
+                @Override
+                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Base64Url> result = getBase64EncodedDelegate(response);
+                        byte[] body = null;
+                        if (result.getBody() != null) {
+                            body = result.getBody().getDecodedBytes();
+                        }
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Base64Url> getBase64EncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -679,47 +668,42 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<byte[]> getBase64UrlEncoded() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getBase64UrlEncoded();
-        ServiceResponse<Base64Url> response = getBase64UrlEncodedDelegate(call.execute());
-        byte[] body = null;
-        if (response.getBody() != null) {
-            body = response.getBody().getDecodedBytes();
-        }
-        return new ServiceResponse<byte[]>(body, response.getResponse());
+        return getBase64UrlEncodedAsync().toBlocking().single();
     }
 
     /**
      * Get value that is base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        Call<ResponseBody> call = service.getBase64UrlEncoded();
-        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Base64Url> result = getBase64UrlEncodedDelegate(response);
-                    byte[] body = null;
-                    if (result.getBody() != null) {
-                        body = result.getBody().getDecodedBytes();
+        return ServiceCall.create(getBase64UrlEncodedAsync(), serviceCallback);
+    }
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getBase64UrlEncodedAsync() {
+        return service.getBase64UrlEncoded()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
+                @Override
+                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Base64Url> result = getBase64UrlEncodedDelegate(response);
+                        byte[] body = null;
+                        if (result.getBody() != null) {
+                            body = result.getBody().getDecodedBytes();
+                        }
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Base64Url> getBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -739,12 +723,7 @@ public final class StringsImpl implements Strings {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
-        Base64Url stringBodyConverted = Base64Url.encode(stringBody);
-        Call<ResponseBody> call = service.putBase64UrlEncoded(stringBodyConverted);
-        return putBase64UrlEncodedDelegate(call.execute());
+        return putBase64UrlEncodedAsync(stringBody).toBlocking().single();
     }
 
     /**
@@ -752,33 +731,35 @@ public final class StringsImpl implements Strings {
      *
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putBase64UrlEncodedAsync(stringBody), serviceCallback);
+    }
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody the Base64Url value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putBase64UrlEncodedAsync(byte[] stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
-        Call<ResponseBody> call = service.putBase64UrlEncoded(stringBodyConverted);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putBase64UrlEncodedDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putBase64UrlEncoded(stringBodyConverted)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putBase64UrlEncodedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -796,47 +777,42 @@ public final class StringsImpl implements Strings {
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<byte[]> getNullBase64UrlEncoded() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNullBase64UrlEncoded();
-        ServiceResponse<Base64Url> response = getNullBase64UrlEncodedDelegate(call.execute());
-        byte[] body = null;
-        if (response.getBody() != null) {
-            body = response.getBody().getDecodedBytes();
-        }
-        return new ServiceResponse<byte[]>(body, response.getResponse());
+        return getNullBase64UrlEncodedAsync().toBlocking().single();
     }
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        Call<ResponseBody> call = service.getNullBase64UrlEncoded();
-        final ServiceCall<byte[]> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<byte[]>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Base64Url> result = getNullBase64UrlEncodedDelegate(response);
-                    byte[] body = null;
-                    if (result.getBody() != null) {
-                        body = result.getBody().getDecodedBytes();
+        return ServiceCall.create(getNullBase64UrlEncodedAsync(), serviceCallback);
+    }
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedAsync() {
+        return service.getNullBase64UrlEncoded()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
+                @Override
+                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Base64Url> result = getNullBase64UrlEncodedDelegate(response);
+                        byte[] body = null;
+                        if (result.getBody() != null) {
+                            body = result.getBody().getDecodedBytes();
+                        }
+                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.getResponse());
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Base64Url> getNullBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

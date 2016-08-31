@@ -469,12 +469,29 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal("10", clientModel.Methods[0].Parameters[1].Constraints[Constraint.MaxLength]);
             Assert.Equal("3", clientModel.Methods[0].Parameters[1].Constraints[Constraint.MinLength]);
             Assert.Equal("[a-zA-Z0-9]+", clientModel.Methods[0].Parameters[1].Constraints[Constraint.Pattern]);
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.MultipleOf));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.ExclusiveMaximum));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.ExclusiveMinimum));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.InclusiveMinimum));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.InclusiveMaximum));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.MinItems));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.MaxItems));
+            Assert.False(clientModel.Methods[0].Parameters[1].Constraints.ContainsKey(Constraint.UniqueItems));
+
 
             Assert.Equal("id", clientModel.Methods[0].Parameters[2].Name);
             Assert.Equal(3, clientModel.Methods[0].Parameters[2].Constraints.Count);
             Assert.Equal("10", clientModel.Methods[0].Parameters[2].Constraints[Constraint.MultipleOf]);
             Assert.Equal("100", clientModel.Methods[0].Parameters[2].Constraints[Constraint.InclusiveMinimum]);
             Assert.Equal("1000", clientModel.Methods[0].Parameters[2].Constraints[Constraint.InclusiveMaximum]);
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.ExclusiveMaximum));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.ExclusiveMinimum));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.MaxLength));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.MinLength));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.Pattern));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.MinItems));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.MaxItems));
+            Assert.False(clientModel.Methods[0].Parameters[2].Constraints.ContainsKey(Constraint.UniqueItems));
 
             Assert.Equal("apiVersion", clientModel.Methods[0].Parameters[3].Name);
             Assert.NotNull(clientModel.Methods[0].Parameters[3].ClientProperty);
@@ -487,6 +504,14 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal("6", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints[Constraint.MaxItems]);
             Assert.Equal("0", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints[Constraint.MinItems]);
             Assert.Equal("true", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints[Constraint.UniqueItems]);
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.ExclusiveMaximum));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.ExclusiveMinimum));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.InclusiveMaximum));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.InclusiveMinimum));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.MultipleOf));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.MinLength));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.MaxLength));
+            Assert.False(clientModel.ModelTypes.First(m => m.Name == "Product").Properties[2].Constraints.ContainsKey(Constraint.Pattern));
 
             Assert.Equal("capacity", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Name);
             Assert.Equal(2, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints.Count);

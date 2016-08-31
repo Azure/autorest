@@ -2,7 +2,6 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.rest.ServiceResponse;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -11,8 +10,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import javax.xml.ws.WebServiceException;
 
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
@@ -75,16 +72,16 @@ public class PagingTests {
             }
 
             @Override
-            public void success(ServiceResponse<List<ProductInner>> result) {
+            public void success() {
                 lock.countDown();
             }
 
             @Override
-            public PagingBahavior progress(List<ProductInner> partial) {
+            public PagingBehavior progress(List<ProductInner> partial) {
                 if (pageCount() == 7) {
-                    return PagingBahavior.STOP;
+                    return PagingBehavior.STOP;
                 } else {
-                    return PagingBahavior.CONTINUE;
+                    return PagingBehavior.CONTINUE;
                 }
             }
         });
@@ -119,8 +116,8 @@ public class PagingTests {
             List<ProductInner> response = client.pagings().getMultiplePagesFailure().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 
@@ -130,8 +127,8 @@ public class PagingTests {
             List<ProductInner> response = client.pagings().getMultiplePagesFailureUri().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 }

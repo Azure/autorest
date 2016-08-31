@@ -249,4 +249,7 @@
   <data name="OperationIdNounInVerb" xml:space="preserve">
     <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>
   </data>
+  <data name="InvalidConstraint" xml:space="preserve">
+    <value>Constraint is not supported for this type and will be ignored.</value>
+  </data>
 </root>

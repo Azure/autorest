@@ -166,6 +166,11 @@ namespace AutoRest.Core.ClientModel
         public Dictionary<string, object> Extensions { get; private set; }
 
         /// <summary>
+        /// Indicates if the method is deprecated.
+        /// </summary>
+        public bool Deprecated { get; set; }
+
+        /// <summary>
         /// Gets 
         /// </summary>
         public IScopeProvider Scope { get; private set; }

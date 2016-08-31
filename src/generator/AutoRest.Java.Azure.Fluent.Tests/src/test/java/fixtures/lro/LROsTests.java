@@ -1,6 +1,7 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 
@@ -16,6 +17,9 @@ import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import fixtures.lro.implementation.SkuInner;
 import fixtures.lro.implementation.SubProductInner;
+import okhttp3.logging.HttpLoggingInterceptor;
+import rx.Observable;
+import rx.Subscriber;
 
 import static org.junit.Assert.fail;
 
@@ -24,7 +28,11 @@ public class LROsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null);
+        RestClient restClient = new RestClient.Builder()
+            .withBaseUrl("http://localhost:3000")
+            .withLogLevel(HttpLoggingInterceptor.Level.NONE)
+            .build();
+        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
         client.getAzureClient().withLongRunningOperationRetryTimeout(0);
     }
 
@@ -35,6 +43,30 @@ public class LROsTests {
         ServiceResponse<ProductInner> response = client.lROs().put200Succeeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+    }
+
+    @Test
+    public void put200SucceededAsync() throws Exception {
+        ProductInner product = new ProductInner();
+        product.withLocation("West US");
+        Observable.from(client.lROs().put200SucceededAsync(product, null))
+                .subscribe(new Subscriber<ServiceResponse<ProductInner>>() {
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("error" + e);
+                    }
+
+                    @Override
+                    public void onNext(ServiceResponse<ProductInner> productInnerServiceResponse) {
+                        System.out.println(productInnerServiceResponse.getBody().provisioningState());
+                    }
+                });
+        System.out.println("Checkpoint");
     }
 
     @Test
@@ -119,7 +151,7 @@ public class LROsTests {
             ServiceResponse<ProductInner> response = client.lROs().put201CreatingFailed200(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Failed", e.getMessage());
         }
     }
 
@@ -131,7 +163,7 @@ public class LROsTests {
             ServiceResponse<ProductInner> response = client.lROs().put200Acceptedcanceled200(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Canceled", e.getMessage());
         }
     }
 
@@ -170,7 +202,7 @@ public class LROsTests {
             ServiceResponse<ProductInner> response = client.lROs().putAsyncRetryFailed(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Failed", e.getMessage());
         }
     }
 
@@ -182,7 +214,7 @@ public class LROsTests {
             ServiceResponse<ProductInner> response = client.lROs().putAsyncNoRetrycanceled(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Canceled", e.getMessage());
         }
     }
 
@@ -296,7 +328,7 @@ public class LROsTests {
             ServiceResponse<Void> response = client.lROs().deleteAsyncRetryFailed();
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Failed", e.getMessage());
         }
     }
 
@@ -306,7 +338,7 @@ public class LROsTests {
             ServiceResponse<Void> response = client.lROs().deleteAsyncRetrycanceled();
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Canceled", e.getMessage());
         }
     }
 
@@ -357,7 +389,7 @@ public class LROsTests {
             ServiceResponse<Void> response = client.lROs().postAsyncRetryFailed(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Failed", e.getMessage());
         }
     }
 
@@ -369,7 +401,7 @@ public class LROsTests {
             ServiceResponse<Void> response = client.lROs().postAsyncRetrycanceled(product);
             fail();
         } catch (CloudException e) {
-            Assert.assertEquals("Async operation failed", e.getMessage());
+            Assert.assertEquals("Async operation failed with provisioning state: Canceled", e.getMessage());
         }
     }
 }
