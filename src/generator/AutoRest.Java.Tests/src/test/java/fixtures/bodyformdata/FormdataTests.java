@@ -1,13 +1,18 @@
 package fixtures.bodyformdata;
 
+import com.microsoft.rest.ServiceResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
+import rx.exceptions.Exceptions;
+import rx.functions.Func1;
 
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
@@ -34,14 +39,22 @@ public class FormdataTests {
     @Test
     public void uploadFileViaBody() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream stream = classLoader.getResourceAsStream("upload.txt");
-        byte[] bytes = IOUtils.toByteArray(stream);
-        stream.close();
-        InputStream result = client.formdatas().uploadFileViaBody(bytes).getBody();
-        try {
-            Assert.assertEquals(new String(bytes), IOUtils.toString(result));
-        } finally {
-            result.close();
+        try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
+            byte[] bytes = IOUtils.toByteArray(stream);
+            stream.close();
+            byte[] actual = client.formdatas().uploadFileViaBodyAsync(bytes)
+                    .map(new Func1<ServiceResponse<InputStream>, byte[]>() {
+                        @Override
+                        public byte[] call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                            try {
+                                return IOUtils.toByteArray(inputStreamServiceResponse.getBody());
+                            } catch (IOException e) {
+                                throw Exceptions.propagate(e);
+                            }
+                        }
+                    }).toBlocking().single();
+            Assert.assertEquals(new String(bytes), IOUtils.toString(actual));
         }
+
     }
 }

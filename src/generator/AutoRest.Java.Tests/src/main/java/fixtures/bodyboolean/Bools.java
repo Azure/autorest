@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -34,10 +35,16 @@ public interface Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get true Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getTrueAsync();
 
     /**
      * Set Boolean value true.
@@ -54,10 +61,17 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set Boolean value true.
+     *
+     * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putTrueAsync(boolean boolBody);
 
     /**
      * Get false Boolean value.
@@ -72,10 +86,16 @@ public interface Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get false Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getFalseAsync();
 
     /**
      * Set Boolean value false.
@@ -92,10 +112,17 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set Boolean value false.
+     *
+     * @param boolBody the boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFalseAsync(boolean boolBody);
 
     /**
      * Get null Boolean value.
@@ -110,10 +137,16 @@ public interface Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get null Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNullAsync();
 
     /**
      * Get invalid Boolean value.
@@ -128,9 +161,15 @@ public interface Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getInvalidAsync();
 
 }

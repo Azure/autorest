@@ -14,6 +14,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
+import rx.Observable;
+import rx.Subscriber;
 
 import static org.junit.Assert.fail;
 
@@ -32,12 +34,33 @@ public class IntOperationsTests {
     }
 
     @Test
+    public void getNullAsync() throws Exception {
+        Observable.from(client.ints().getNullAsync(null)).subscribe(new Subscriber<ServiceResponse<Integer>>() {
+            @Override
+            public void onCompleted() {
+                System.out.println("completed");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                System.out.println("error" + e);
+            }
+
+            @Override
+            public void onNext(ServiceResponse<Integer> integerServiceResponse) {
+                System.out.println(integerServiceResponse.getBody());
+            }
+        });
+        System.out.println("checkpoint");
+    }
+
+    @Test
     public void getInvalid() throws Exception {
         try {
             client.ints().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -47,7 +70,7 @@ public class IntOperationsTests {
             client.ints().getOverflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -57,7 +80,7 @@ public class IntOperationsTests {
             client.ints().getUnderflowInt32();
             Assert.assertTrue(false);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -67,7 +90,7 @@ public class IntOperationsTests {
             long value = client.ints().getOverflowInt64().getBody();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -77,7 +100,7 @@ public class IntOperationsTests {
             long value = client.ints().getUnderflowInt64().getBody();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -161,7 +184,7 @@ public class IntOperationsTests {
         try {
             client.ints().getInvalidUnixTime();
             fail();
-        } catch (JsonParseException e) {
+        } catch (RuntimeException e) {
             Assert.assertTrue(e.getMessage().contains("Unexpected character"));
         }
     }

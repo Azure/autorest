@@ -18,7 +18,6 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.http.models.A;
 import fixtures.http.models.B;
 import fixtures.http.models.C;
@@ -27,10 +26,11 @@ import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -60,139 +60,139 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     interface MultipleResponsesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
-        Call<ResponseBody> get200Model204NoModelDefaultError200Valid();
+        Observable<Response<ResponseBody>> get200Model204NoModelDefaultError200Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
-        Call<ResponseBody> get200Model204NoModelDefaultError204Valid();
+        Observable<Response<ResponseBody>> get200Model204NoModelDefaultError204Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
-        Call<ResponseBody> get200Model204NoModelDefaultError201Invalid();
+        Observable<Response<ResponseBody>> get200Model204NoModelDefaultError201Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
-        Call<ResponseBody> get200Model204NoModelDefaultError202None();
+        Observable<Response<ResponseBody>> get200Model204NoModelDefaultError202None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
-        Call<ResponseBody> get200Model204NoModelDefaultError400Valid();
+        Observable<Response<ResponseBody>> get200Model204NoModelDefaultError400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
-        Call<ResponseBody> get200Model201ModelDefaultError200Valid();
+        Observable<Response<ResponseBody>> get200Model201ModelDefaultError200Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
-        Call<ResponseBody> get200Model201ModelDefaultError201Valid();
+        Observable<Response<ResponseBody>> get200Model201ModelDefaultError201Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
-        Call<ResponseBody> get200Model201ModelDefaultError400Valid();
+        Observable<Response<ResponseBody>> get200Model201ModelDefaultError400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
-        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200Valid();
+        Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
-        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201Valid();
+        Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
-        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404Valid();
+        Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
-        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400Valid();
+        Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
-        Call<ResponseBody> get202None204NoneDefaultError202None();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultError202None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
-        Call<ResponseBody> get202None204NoneDefaultError204None();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultError204None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
-        Call<ResponseBody> get202None204NoneDefaultError400Valid();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultError400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
-        Call<ResponseBody> get202None204NoneDefaultNone202Invalid();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultNone202Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
-        Call<ResponseBody> get202None204NoneDefaultNone204None();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultNone204None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
-        Call<ResponseBody> get202None204NoneDefaultNone400None();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultNone400None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
-        Call<ResponseBody> get202None204NoneDefaultNone400Invalid();
+        Observable<Response<ResponseBody>> get202None204NoneDefaultNone400Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/200/valid")
-        Call<ResponseBody> getDefaultModelA200Valid();
+        Observable<Response<ResponseBody>> getDefaultModelA200Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/200/none")
-        Call<ResponseBody> getDefaultModelA200None();
+        Observable<Response<ResponseBody>> getDefaultModelA200None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/400/valid")
-        Call<ResponseBody> getDefaultModelA400Valid();
+        Observable<Response<ResponseBody>> getDefaultModelA400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/400/none")
-        Call<ResponseBody> getDefaultModelA400None();
+        Observable<Response<ResponseBody>> getDefaultModelA400None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/200/invalid")
-        Call<ResponseBody> getDefaultNone200Invalid();
+        Observable<Response<ResponseBody>> getDefaultNone200Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/200/none")
-        Call<ResponseBody> getDefaultNone200None();
+        Observable<Response<ResponseBody>> getDefaultNone200None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/400/invalid")
-        Call<ResponseBody> getDefaultNone400Invalid();
+        Observable<Response<ResponseBody>> getDefaultNone400Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/400/none")
-        Call<ResponseBody> getDefaultNone400None();
+        Observable<Response<ResponseBody>> getDefaultNone400None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/none")
-        Call<ResponseBody> get200ModelA200None();
+        Observable<Response<ResponseBody>> get200ModelA200None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/valid")
-        Call<ResponseBody> get200ModelA200Valid();
+        Observable<Response<ResponseBody>> get200ModelA200Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/invalid")
-        Call<ResponseBody> get200ModelA200Invalid();
+        Observable<Response<ResponseBody>> get200ModelA200Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/none")
-        Call<ResponseBody> get200ModelA400None();
+        Observable<Response<ResponseBody>> get200ModelA400None();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/valid")
-        Call<ResponseBody> get200ModelA400Valid();
+        Observable<Response<ResponseBody>> get200ModelA400Valid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/invalid")
-        Call<ResponseBody> get200ModelA400Invalid();
+        Observable<Response<ResponseBody>> get200ModelA400Invalid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/202/valid")
-        Call<ResponseBody> get200ModelA202Valid();
+        Observable<Response<ResponseBody>> get200ModelA202Valid();
 
     }
 
@@ -204,37 +204,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
-        return get200Model204NoModelDefaultError200ValidDelegate(call.execute());
+        return get200Model204NoModelDefaultError200ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError200ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model204NoModelDefaultError200ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidAsync() {
+        return service.get200Model204NoModelDefaultError200Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError200ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -253,37 +253,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
-        return get200Model204NoModelDefaultError204ValidDelegate(call.execute());
+        return get200Model204NoModelDefaultError204ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError204ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model204NoModelDefaultError204ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidAsync() {
+        return service.get200Model204NoModelDefaultError204Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError204ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -302,37 +302,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
-        return get200Model204NoModelDefaultError201InvalidDelegate(call.execute());
+        return get200Model204NoModelDefaultError201InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError201InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model204NoModelDefaultError201InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidAsync() {
+        return service.get200Model204NoModelDefaultError201Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError201InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -351,37 +351,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
-        return get200Model204NoModelDefaultError202NoneDelegate(call.execute());
+        return get200Model204NoModelDefaultError202NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 202 response with no payload:.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError202NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model204NoModelDefaultError202NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 202 response with no payload:.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneAsync() {
+        return service.get200Model204NoModelDefaultError202None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError202NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -400,37 +400,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
-        return get200Model204NoModelDefaultError400ValidDelegate(call.execute());
+        return get200Model204NoModelDefaultError400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model204NoModelDefaultError400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidAsync() {
+        return service.get200Model204NoModelDefaultError400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model204NoModelDefaultError400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -449,37 +449,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
-        return get200Model201ModelDefaultError200ValidDelegate(call.execute());
+        return get200Model201ModelDefaultError200ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model201ModelDefaultError200ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model201ModelDefaultError200ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidAsync() {
+        return service.get200Model201ModelDefaultError200Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model201ModelDefaultError200ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -498,37 +498,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
-        return get200Model201ModelDefaultError201ValidDelegate(call.execute());
+        return get200Model201ModelDefaultError201ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model201ModelDefaultError201ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model201ModelDefaultError201ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidAsync() {
+        return service.get200Model201ModelDefaultError201Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model201ModelDefaultError201ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -547,37 +547,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
-        return get200Model201ModelDefaultError400ValidDelegate(call.execute());
+        return get200Model201ModelDefaultError400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200Model201ModelDefaultError400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200Model201ModelDefaultError400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidAsync() {
+        return service.get200Model201ModelDefaultError400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200Model201ModelDefaultError400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -596,37 +596,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
-        return get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(call.execute());
+        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
-        final ServiceCall<Object> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Object>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the Object object
+     */
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
+        return service.get200ModelA201ModelC404ModelDDefaultError200Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+                @Override
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -646,37 +646,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
-        return get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(call.execute());
+        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
-        final ServiceCall<Object> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Object>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpCode': '201'}.
+     *
+     * @return the observable to the Object object
+     */
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
+        return service.get200ModelA201ModelC404ModelDDefaultError201Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+                @Override
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -696,37 +696,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
-        return get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(call.execute());
+        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
-        final ServiceCall<Object> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Object>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
+     *
+     * @return the observable to the Object object
+     */
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
+        return service.get200ModelA201ModelC404ModelDDefaultError404Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+                @Override
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -746,37 +746,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
-        return get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(call.execute());
+        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
-        final ServiceCall<Object> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Object>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the observable to the Object object
+     */
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
+        return service.get200ModelA201ModelC404ModelDDefaultError400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
+                @Override
+                public Observable<ServiceResponse<Object>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Object> clientResponse = get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -796,37 +796,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultError202None() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
-        return get202None204NoneDefaultError202NoneDelegate(call.execute());
+        return get202None204NoneDefaultError202NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 202 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultError202NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultError202NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 202 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError202NoneAsync() {
+        return service.get202None204NoneDefaultError202None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultError202NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -845,37 +845,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultError204None() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
-        return get202None204NoneDefaultError204NoneDelegate(call.execute());
+        return get202None204NoneDefaultError204NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultError204NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultError204NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError204NoneAsync() {
+        return service.get202None204NoneDefaultError204None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultError204NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -894,37 +894,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
-        return get202None204NoneDefaultError400ValidDelegate(call.execute());
+        return get202None204NoneDefaultError400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultError400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultError400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError400ValidAsync() {
+        return service.get202None204NoneDefaultError400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultError400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -943,37 +943,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
-        return get202None204NoneDefaultNone202InvalidDelegate(call.execute());
+        return get202None204NoneDefaultNone202InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone202InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultNone202InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 202 response with an unexpected payload {'property': 'value'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone202InvalidAsync() {
+        return service.get202None204NoneDefaultNone202Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone202InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -991,37 +991,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
-        return get202None204NoneDefaultNone204NoneDelegate(call.execute());
+        return get202None204NoneDefaultNone204NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone204NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultNone204NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 204 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone204NoneAsync() {
+        return service.get202None204NoneDefaultNone204None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone204NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1039,37 +1039,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
-        return get202None204NoneDefaultNone400NoneDelegate(call.execute());
+        return get202None204NoneDefaultNone400NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultNone400NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400NoneAsync() {
+        return service.get202None204NoneDefaultNone400None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1087,37 +1087,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
-        return get202None204NoneDefaultNone400InvalidDelegate(call.execute());
+        return get202None204NoneDefaultNone400InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get202None204NoneDefaultNone400InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with an unexpected payload {'property': 'value'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400InvalidAsync() {
+        return service.get202None204NoneDefaultNone400Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get202None204NoneDefaultNone400InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1135,37 +1135,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> getDefaultModelA200Valid() throws MyException, IOException {
-        Call<ResponseBody> call = service.getDefaultModelA200Valid();
-        return getDefaultModelA200ValidDelegate(call.execute());
+        return getDefaultModelA200ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultModelA200Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = getDefaultModelA200ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultModelA200ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with valid payload: {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> getDefaultModelA200ValidAsync() {
+        return service.getDefaultModelA200Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = getDefaultModelA200ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (MyException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -1182,37 +1182,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> getDefaultModelA200None() throws MyException, IOException {
-        Call<ResponseBody> call = service.getDefaultModelA200None();
-        return getDefaultModelA200NoneDelegate(call.execute());
+        return getDefaultModelA200NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultModelA200None();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = getDefaultModelA200NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultModelA200NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> getDefaultModelA200NoneAsync() {
+        return service.getDefaultModelA200None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = getDefaultModelA200NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (MyException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -1229,37 +1229,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> getDefaultModelA400Valid() throws MyException, IOException {
-        Call<ResponseBody> call = service.getDefaultModelA400Valid();
-        return getDefaultModelA400ValidDelegate(call.execute());
+        return getDefaultModelA400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultModelA400Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = getDefaultModelA400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultModelA400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> getDefaultModelA400ValidAsync() {
+        return service.getDefaultModelA400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = getDefaultModelA400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (MyException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -1276,37 +1276,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> getDefaultModelA400None() throws MyException, IOException {
-        Call<ResponseBody> call = service.getDefaultModelA400None();
-        return getDefaultModelA400NoneDelegate(call.execute());
+        return getDefaultModelA400NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultModelA400None();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = getDefaultModelA400NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultModelA400NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> getDefaultModelA400NoneAsync() {
+        return service.getDefaultModelA400None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = getDefaultModelA400NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (MyException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -1323,37 +1323,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getDefaultNone200Invalid();
-        return getDefaultNone200InvalidDelegate(call.execute());
+        return getDefaultNone200InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultNone200Invalid();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getDefaultNone200InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultNone200InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with invalid payload: {'statusCode': '200'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getDefaultNone200InvalidAsync() {
+        return service.getDefaultNone200Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getDefaultNone200InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1369,37 +1369,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getDefaultNone200None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getDefaultNone200None();
-        return getDefaultNone200NoneDelegate(call.execute());
+        return getDefaultNone200NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultNone200None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getDefaultNone200NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultNone200NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getDefaultNone200NoneAsync() {
+        return service.getDefaultNone200None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getDefaultNone200NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1415,37 +1415,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getDefaultNone400Invalid();
-        return getDefaultNone400InvalidDelegate(call.execute());
+        return getDefaultNone400InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultNone400Invalid();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getDefaultNone400InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultNone400InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with valid payload: {'statusCode': '400'}.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getDefaultNone400InvalidAsync() {
+        return service.getDefaultNone400Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getDefaultNone400InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1461,37 +1461,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getDefaultNone400None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.getDefaultNone400None();
-        return getDefaultNone400NoneDelegate(call.execute());
+        return getDefaultNone400NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getDefaultNone400None();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getDefaultNone400NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getDefaultNone400NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with no payload.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getDefaultNone400NoneAsync() {
+        return service.getDefaultNone400None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getDefaultNone400NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1507,37 +1507,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA200None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA200None();
-        return get200ModelA200NoneDelegate(call.execute());
+        return get200ModelA200NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA200None();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA200NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA200NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA200NoneAsync() {
+        return service.get200ModelA200None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA200NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1554,37 +1554,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA200Valid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA200Valid();
-        return get200ModelA200ValidDelegate(call.execute());
+        return get200ModelA200ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA200Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA200ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA200ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA200ValidAsync() {
+        return service.get200ModelA200Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA200ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1601,37 +1601,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA200Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA200Invalid();
-        return get200ModelA200InvalidDelegate(call.execute());
+        return get200ModelA200InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA200Invalid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA200InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA200InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA200InvalidAsync() {
+        return service.get200ModelA200Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA200InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1648,37 +1648,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA400None() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA400None();
-        return get200ModelA400NoneDelegate(call.execute());
+        return get200ModelA400NoneAsync().toBlocking().single();
     }
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA400None();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA400NoneDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA400NoneAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 400 response with no payload client should treat as an http error with no error model.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA400NoneAsync() {
+        return service.get200ModelA400None()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA400NoneDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1695,37 +1695,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA400Valid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA400Valid();
-        return get200ModelA400ValidDelegate(call.execute());
+        return get200ModelA400ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA400Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA400ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA400ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with payload {'statusCode': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA400ValidAsync() {
+        return service.get200ModelA400Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA400ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1742,37 +1742,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA400Invalid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA400Invalid();
-        return get200ModelA400InvalidDelegate(call.execute());
+        return get200ModelA400InvalidAsync().toBlocking().single();
     }
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA400Invalid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA400InvalidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA400InvalidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA400InvalidAsync() {
+        return service.get200ModelA400Invalid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA400InvalidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1789,37 +1789,37 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<A> get200ModelA202Valid() throws ServiceException, IOException {
-        Call<ResponseBody> call = service.get200ModelA202Valid();
-        return get200ModelA202ValidDelegate(call.execute());
+        return get200ModelA202ValidAsync().toBlocking().single();
     }
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
-        Call<ResponseBody> call = service.get200ModelA202Valid();
-        final ServiceCall<A> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<A>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<A> clientResponse = get200ModelA202ValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get200ModelA202ValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Send a 202 response with payload {'statusCode': '202'}.
+     *
+     * @return the observable to the A object
+     */
+    public Observable<ServiceResponse<A>> get200ModelA202ValidAsync() {
+        return service.get200ModelA202Valid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
+                @Override
+                public Observable<ServiceResponse<A>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<A> clientResponse = get200ModelA202ValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {

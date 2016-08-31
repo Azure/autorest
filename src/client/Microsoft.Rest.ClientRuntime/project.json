@@ -20,8 +20,9 @@
     "keyFile": "../../../Tools/MSSharedLibKey.snk"
   },
 
-  "frameworks": {     
+  "frameworks": {
     "net45": {
+      "buildOptions": { "define": [ "net45" ] },
       "frameworkAssemblies": {
         "mscorlib": "",
         "System": "",
@@ -61,7 +62,7 @@
     },
     "netstandard1.5": {
       "buildOptions": { "define": [ "PORTABLE" ] },
-      "imports": ["dnxcore50"],
+      "imports": [ "dnxcore50" ],
       "dependencies": {
         "Newtonsoft.Json": "[9.0.1,10.0)",
         "Microsoft.NETCore.Platforms": "1.0.1",

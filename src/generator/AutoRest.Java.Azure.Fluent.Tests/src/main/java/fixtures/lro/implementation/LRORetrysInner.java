@@ -17,13 +17,10 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -31,6 +28,8 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -60,59 +59,59 @@ public final class LRORetrysInner {
     interface LRORetrysService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Call<ResponseBody> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Call<ResponseBody> putAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> putAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Call<ResponseBody> beginPutAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginPutAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
-        Call<ResponseBody> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDelete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDelete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
-        Call<ResponseBody> deleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> deleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
-        Call<ResponseBody> beginDeleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginDeleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/post/202/retry/200")
-        Call<ResponseBody> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/post/202/retry/200")
-        Call<ResponseBody> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Call<ResponseBody> postAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> postAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Call<ResponseBody> beginPostAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginPostAsyncRelativeRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -125,9 +124,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
-        final ProductInner product = null;
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
+        return put201CreatingSucceeded200Async().toBlocking().last();
     }
 
     /**
@@ -137,23 +134,18 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200Async() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
     }
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -165,9 +157,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<ProductInner> put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<ProductInner>() { }.getType());
+        return put201CreatingSucceeded200Async(product).toBlocking().last();
     }
 
     /**
@@ -178,23 +168,19 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.create(put201CreatingSucceeded200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<ProductInner>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
     }
 
     /**
@@ -205,39 +191,38 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPut201CreatingSucceeded200Delegate(call.execute());
+        return beginPut201CreatingSucceeded200Async().toBlocking().single();
     }
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.create(beginPut201CreatingSucceeded200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
+                @Override
+                public Observable<ServiceResponse<ProductInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -249,9 +234,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
-        Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPut201CreatingSucceeded200Delegate(call.execute());
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().single();
     }
 
     /**
@@ -259,30 +242,32 @@ public final class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.create(beginPut201CreatingSucceeded200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
+                @Override
+                public Observable<ServiceResponse<ProductInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<ProductInner> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -302,9 +287,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final ProductInner product = null;
-        Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
+        return putAsyncRelativeRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -314,23 +297,18 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededAsync() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
     }
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -342,9 +320,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
+        return putAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -355,23 +331,19 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -382,39 +354,38 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPutAsyncRelativeRetrySucceededDelegate(call.execute());
+        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().single();
     }
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededAsync() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -426,9 +397,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPutAsyncRelativeRetrySucceededDelegate(call.execute());
+        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().single();
     }
 
     /**
@@ -436,30 +405,32 @@ public final class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -478,8 +449,7 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class);
+        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -489,22 +459,17 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        Call<ResponseBody> call = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> deleteProvisioning202Accepted200SucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class);
     }
 
     /**
@@ -515,37 +480,37 @@ public final class LRORetrysInner {
      * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        return beginDeleteProvisioning202Accepted200SucceededDelegate(call.execute());
+        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().single();
     }
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<ProductInner> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ProductInner>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededAsync() {
+        return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -565,8 +530,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> delete202Retry200() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class);
+        return delete202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -576,22 +540,17 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(delete202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> delete202Retry200Async() {
+        Observable<Response<ResponseBody>> observable = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class);
     }
 
     /**
@@ -602,37 +561,37 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> beginDelete202Retry200() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        return beginDelete202Retry200Delegate(call.execute());
+        return beginDelete202Retry200Async().toBlocking().single();
     }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> clientResponse = beginDelete202Retry200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.createWithHeaders(beginDelete202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> beginDelete202Retry200Async() {
+        return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> clientResponse = beginDelete202Retry200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -651,8 +610,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        Response<ResponseBody> result = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class);
+        return deleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -662,22 +620,17 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> deleteAsyncRelativeRetrySucceededAsync() {
+        Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -688,37 +641,37 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        return beginDeleteAsyncRelativeRetrySucceededDelegate(call.execute());
+        return beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().single();
     }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncRelativeRetrySucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> beginDeleteAsyncRelativeRetrySucceededAsync() {
+        return service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginDeleteAsyncRelativeRetrySucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -737,9 +690,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200() throws CloudException, IOException, InterruptedException {
-        final ProductInner product = null;
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
+        return post202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -749,23 +700,18 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200Async() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
     }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -777,9 +723,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
+        return post202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -790,23 +734,19 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(post202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200Async(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
     }
 
     /**
@@ -817,39 +757,38 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200() throws CloudException, IOException {
-        final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPost202Retry200Delegate(call.execute());
+        return beginPost202Retry200Async().toBlocking().single();
     }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPost202Retry200Async(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200Async() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -861,9 +800,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200(ProductInner product) throws CloudException, IOException {
-        Validator.validate(product);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPost202Retry200Delegate(call.execute());
+        return beginPost202Retry200Async(product).toBlocking().single();
     }
 
     /**
@@ -871,30 +808,32 @@ public final class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPost202Retry200Async(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200Async(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -913,9 +852,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        final ProductInner product = null;
-        Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
+        return postAsyncRelativeRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -925,23 +862,18 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededAsync() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
     }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -953,9 +885,7 @@ public final class LRORetrysInner {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        Validator.validate(product);
-        Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
+        return postAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -966,23 +896,19 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class, serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
     }
 
     /**
@@ -993,39 +919,38 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPostAsyncRelativeRetrySucceededDelegate(call.execute());
+        return beginPostAsyncRelativeRetrySucceededAsync().toBlocking().single();
     }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededAsync(), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededAsync() {
         final ProductInner product = null;
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -1037,9 +962,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        return beginPostAsyncRelativeRetrySucceededDelegate(call.execute());
+        return beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().single();
     }
 
     /**
@@ -1047,30 +970,32 @@ public final class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
