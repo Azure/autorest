@@ -1,0 +1,43 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Test generated return type when a method has multiple responses of the same primary type"
+  },
+  "host": "rest.example.com:443",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/string": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "operationId": "Test_GetString",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Found",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  }
+}

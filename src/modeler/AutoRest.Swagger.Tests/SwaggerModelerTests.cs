@@ -761,5 +761,21 @@ namespace AutoRest.Swagger.Tests
             Assert.True(dictionaryProperty.SupportsAdditionalProperties);
 
         }
+
+        [Fact]
+        public void TestReturnTypeOfMultipleStringResponses()
+        {
+            Modeler modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-multiple-string-responses.json")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+            Assert.IsType<PrimaryType>(clientModel.Methods.First().ReturnType.Body);
+            var returnType = (PrimaryType) clientModel.Methods.First().ReturnType.Body;
+            Assert.Equal(KnownPrimaryType.String, returnType.Type);
+        }
     }
 }
