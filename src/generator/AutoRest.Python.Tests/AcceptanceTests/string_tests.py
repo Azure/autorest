@@ -116,7 +116,7 @@ class StringTests(unittest.TestCase):
         client.enum.put_referenced("red color")
         client.enum.put_referenced_constant()
         self.assertEqual(client.enum.get_referenced(), Colors.redcolor)
-        self.assertEqual(client.enum.get_referenced_constant().color_constant, Colors.green_color)
+        self.assertEqual(client.enum.get_referenced_constant().color_constant, Colors.green_color.value)
 
 
 if __name__ == '__main__':
