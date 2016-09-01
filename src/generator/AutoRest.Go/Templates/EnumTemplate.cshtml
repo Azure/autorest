@@ -1,0 +1,23 @@
+﻿@using System.Linq;
+
+@using AutoRest.Go;
+
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.EnumTemplateModel>
+@{
+    var constants = Model.Constants.Keys.OrderBy(v => v);
+    var modelName = GoCodeNamer.CamelCase(Model.Name);
+    var modelPhrase = Model.Name.ToPhrase();
+}
+
+@WrapComment("// ", Model.Documentation)
+type @Model.Name string
+
+@EmptyLine
+const (
+@foreach (var c in constants)
+{
+    @:@WrapComment("// ", string.Format("{0} specifies the {1} state for {2}.", c, c.ToPhrase(), modelPhrase))
+    @:@(c) @(Model.Name) = "@(Model.Constants[c])"
+}
+)
+@EmptyLine

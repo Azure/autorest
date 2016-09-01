@@ -1,14 +1,11 @@
 package fixtures.lro;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceResponse;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.net.MalformedURLException;
 
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
@@ -135,7 +132,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -148,7 +145,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -161,7 +158,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -178,7 +175,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -191,7 +188,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(202, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("No header in response"));
+            Assert.assertTrue(ex.getMessage().contains("Response does not contain an Azure"));
         }
     }
 
@@ -204,7 +201,7 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
-            Assert.assertTrue(ex.getMessage().contains("no body"));
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -215,7 +212,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.lROSADs().put200InvalidJson(product);
             fail();
-        } catch (JsonParseException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
         }
     }
@@ -227,7 +224,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (MalformedURLException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
         }
     }
@@ -239,8 +236,8 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.lROSADs().putAsyncRelativeRetryInvalidJsonPolling(product);
             fail();
-        } catch (JsonParseException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
+        } catch (RuntimeException ex) {
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -249,7 +246,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().delete202RetryInvalidHeader();
             fail();
-        } catch (MalformedURLException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
         }
     }
@@ -259,7 +256,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().deleteAsyncRelativeRetryInvalidHeader();
             fail();
-        } catch (MalformedURLException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
         }
     }
@@ -269,8 +266,8 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().deleteAsyncRelativeRetryInvalidJsonPolling();
             fail();
-        } catch (JsonParseException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
+        } catch (RuntimeException ex) {
+            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
         }
     }
 
@@ -281,7 +278,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().post202RetryInvalidHeader(product);
             fail();
-        } catch (MalformedURLException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
         }
     }
@@ -293,7 +290,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (MalformedURLException ex) {
+        } catch (RuntimeException ex) {
             Assert.assertTrue(ex.getMessage().contains("no protocol: /foo"));
         }
     }
@@ -305,8 +302,8 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.lROSADs().postAsyncRelativeRetryInvalidJsonPolling(product);
             fail();
-        } catch (JsonParseException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Unexpected end-of-input"));
+        } catch (RuntimeException ex) {
+            Assert.assertTrue(ex.getMessage().contains("polling response does not contain a valid body"));
         }
     }
 }

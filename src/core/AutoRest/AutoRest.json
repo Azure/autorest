@@ -35,6 +35,9 @@
     },
     "AzureResourceSchema": {
       "type": "AzureResourceSchemaCodeGenerator, AutoRest.AzureResourceSchema"
+    },
+    "Go": {
+      "type": "GoCodeGenerator, AutoRest.Go"
     }
   },
   "modelers": {

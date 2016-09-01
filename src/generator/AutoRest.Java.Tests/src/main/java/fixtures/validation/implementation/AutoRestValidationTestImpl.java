@@ -20,13 +20,11 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -35,6 +33,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
@@ -146,19 +146,19 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     interface AutoRestValidationTestService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
+        Observable<Response<ResponseBody>> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
+        Observable<Response<ResponseBody>> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("validation/constantsInPath/{constantParam}/value")
-        Call<ResponseBody> getWithConstantInPath(@Path("constantParam") String constantParam);
+        Observable<Response<ResponseBody>> getWithConstantInPath(@Path("constantParam") String constantParam);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("validation/constantsInPath/{constantParam}/value")
-        Call<ResponseBody> postWithConstantInBody(@Path("constantParam") String constantParam, @Body Product body);
+        Observable<Response<ResponseBody>> postWithConstantInBody(@Path("constantParam") String constantParam, @Body Product body);
 
     }
 
@@ -173,17 +173,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
-        return validationOfMethodParametersDelegate(call.execute());
+        return validationOfMethodParametersAsync(resourceGroupName, id).toBlocking().single();
     }
 
     /**
@@ -192,9 +182,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(validationOfMethodParametersAsync(resourceGroupName, id), serviceCallback);
+    }
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> validationOfMethodParametersAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -204,26 +205,18 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (this.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
-        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Product> clientResponse = validationOfMethodParametersDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = validationOfMethodParametersDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -244,18 +237,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
-        }
-        final Product body = null;
-        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        return validationOfBodyDelegate(call.execute());
+        return validationOfBodyAsync(resourceGroupName, id).toBlocking().single();
     }
 
     /**
@@ -264,9 +246,20 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(validationOfBodyAsync(resourceGroupName, id), serviceCallback);
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -277,26 +270,18 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         final Product body = null;
-        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -311,18 +296,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException {
-        if (this.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
-        }
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(body);
-        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        return validationOfBodyDelegate(call.execute());
+        return validationOfBodyAsync(resourceGroupName, id, body).toBlocking().single();
     }
 
     /**
@@ -332,9 +306,21 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(validationOfBodyAsync(resourceGroupName, id, body), serviceCallback);
+    }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body the Product value
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -345,26 +331,18 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         Validator.validate(body);
-        Call<ResponseBody> call = service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
-        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = validationOfBodyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -381,38 +359,36 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithConstantInPath() throws ServiceException, IOException {
-        final String constantParam = "constant";
-        Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
-        return getWithConstantInPathDelegate(call.execute());
+        return getWithConstantInPathAsync().toBlocking().single();
     }
 
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getWithConstantInPathAsync(), serviceCallback);
+    }
+
+    /**
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getWithConstantInPathAsync() {
         final String constantParam = "constant";
-        Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getWithConstantInPathDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getWithConstantInPath(constantParam)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getWithConstantInPathDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -428,40 +404,37 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> postWithConstantInBody() throws ServiceException, IOException {
-        final String constantParam = "constant";
-        final Product body = null;
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        return postWithConstantInBodyDelegate(call.execute());
+        return postWithConstantInBodyAsync().toBlocking().single();
     }
 
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(postWithConstantInBodyAsync(), serviceCallback);
+    }
+
+    /**
+     *
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> postWithConstantInBodyAsync() {
         final String constantParam = "constant";
         final Product body = null;
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.postWithConstantInBody(constantParam, body)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -472,41 +445,39 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Product> postWithConstantInBody(Product body) throws ServiceException, IOException {
-        Validator.validate(body);
-        final String constantParam = "constant";
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        return postWithConstantInBodyDelegate(call.execute());
+        return postWithConstantInBodyAsync(body).toBlocking().single();
     }
 
     /**
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceCall.create(postWithConstantInBodyAsync(body), serviceCallback);
+    }
+
+    /**
+     *
+     * @param body the Product value
+     * @return the observable to the Product object
+     */
+    public Observable<ServiceResponse<Product>> postWithConstantInBodyAsync(Product body) {
         Validator.validate(body);
         final String constantParam = "constant";
-        Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        final ServiceCall<Product> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Product>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.postWithConstantInBody(constantParam, body)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
+                @Override
+                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Product> clientResponse = postWithConstantInBodyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ServiceException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {

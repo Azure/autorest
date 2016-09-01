@@ -56,7 +56,7 @@ namespace AutoRest.Swagger
                 Name = methodName,
                 SerializedName = _operation.OperationId
             };
-
+            
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
             string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(produce))
@@ -74,6 +74,7 @@ namespace AutoRest.Swagger
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;
             method.ExternalDocsUrl = _operation.ExternalDocs?.Url;
+            method.Deprecated = _operation.Deprecated;
 
             // Service parameters
             if (_operation.Parameters != null)

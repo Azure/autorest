@@ -19,8 +19,8 @@
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }
 
 /**
@@ -39,9 +39,9 @@ export interface ErrorModel {
  * 
  */
 export interface Basic {
-    id?: number;
-    name?: string;
-    color?: string;
+  id?: number;
+  name?: string;
+  color?: string;
 }
 
 /**
@@ -54,8 +54,8 @@ export interface Basic {
  * 
  */
 export interface Pet {
-    id?: number;
-    name?: string;
+  id?: number;
+  name?: string;
 }
 
 /**
@@ -68,8 +68,8 @@ export interface Pet {
  * 
  */
 export interface Cat extends Pet {
-    color?: string;
-    hates?: Dog[];
+  color?: string;
+  hates?: Dog[];
 }
 
 /**
@@ -80,7 +80,7 @@ export interface Cat extends Pet {
  * 
  */
 export interface Dog extends Pet {
-    food?: string;
+  food?: string;
 }
 
 /**
@@ -91,7 +91,7 @@ export interface Dog extends Pet {
  * 
  */
 export interface Siamese extends Cat {
-    breed?: string;
+  breed?: string;
 }
 
 /**
@@ -108,10 +108,10 @@ export interface Siamese extends Cat {
  * 
  */
 export interface Fish {
-    species?: string;
-    length: number;
-    siblings?: Fish[];
-    fishtype: string;
+  species?: string;
+  length: number;
+  siblings?: Fish[];
+  fishtype: string;
 }
 
 /**
@@ -124,8 +124,8 @@ export interface Fish {
  * 
  */
 export interface Salmon extends Fish {
-    location?: string;
-    iswild?: boolean;
+  location?: string;
+  iswild?: boolean;
 }
 
 /**
@@ -138,8 +138,8 @@ export interface Salmon extends Fish {
  * 
  */
 export interface Shark extends Fish {
-    age?: number;
-    birthday: Date;
+  age?: number;
+  birthday: Date;
 }
 
 /**
@@ -150,7 +150,7 @@ export interface Shark extends Fish {
  * 
  */
 export interface Sawshark extends Shark {
-    picture?: Buffer;
+  picture?: Buffer;
 }
 
 /**
@@ -161,7 +161,7 @@ export interface Sawshark extends Shark {
  * 
  */
 export interface Goblinshark extends Shark {
-    jawsize?: number;
+  jawsize?: number;
 }
 
 /**
@@ -182,8 +182,8 @@ export interface Cookiecuttershark extends Shark {
  * 
  */
 export interface IntWrapper {
-    field1?: number;
-    field2?: number;
+  field1?: number;
+  field2?: number;
 }
 
 /**
@@ -196,8 +196,8 @@ export interface IntWrapper {
  * 
  */
 export interface LongWrapper {
-    field1?: number;
-    field2?: number;
+  field1?: number;
+  field2?: number;
 }
 
 /**
@@ -210,8 +210,8 @@ export interface LongWrapper {
  * 
  */
 export interface FloatWrapper {
-    field1?: number;
-    field2?: number;
+  field1?: number;
+  field2?: number;
 }
 
 /**
@@ -225,8 +225,8 @@ export interface FloatWrapper {
  * 
  */
 export interface DoubleWrapper {
-    field1?: number;
-    field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: number;
+  field1?: number;
+  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: number;
 }
 
 /**
@@ -239,8 +239,8 @@ export interface DoubleWrapper {
  * 
  */
 export interface BooleanWrapper {
-    fieldTrue?: boolean;
-    fieldFalse?: boolean;
+  fieldTrue?: boolean;
+  fieldFalse?: boolean;
 }
 
 /**
@@ -255,9 +255,9 @@ export interface BooleanWrapper {
  * 
  */
 export interface StringWrapper {
-    field?: string;
-    empty?: string;
-    null?: string;
+  field?: string;
+  empty?: string;
+  null?: string;
 }
 
 /**
@@ -270,8 +270,8 @@ export interface StringWrapper {
  * 
  */
 export interface DateWrapper {
-    field?: Date;
-    leap?: Date;
+  field?: Date;
+  leap?: Date;
 }
 
 /**
@@ -284,8 +284,8 @@ export interface DateWrapper {
  * 
  */
 export interface DatetimeWrapper {
-    field?: Date;
-    now?: Date;
+  field?: Date;
+  now?: Date;
 }
 
 /**
@@ -298,8 +298,8 @@ export interface DatetimeWrapper {
  * 
  */
 export interface Datetimerfc1123Wrapper {
-    field?: Date;
-    now?: Date;
+  field?: Date;
+  now?: Date;
 }
 
 /**
@@ -310,7 +310,7 @@ export interface Datetimerfc1123Wrapper {
  * 
  */
 export interface DurationWrapper {
-    field?: moment.Duration;
+  field?: moment.Duration;
 }
 
 /**
@@ -321,7 +321,7 @@ export interface DurationWrapper {
  * 
  */
 export interface ByteWrapper {
-    field?: Buffer;
+  field?: Buffer;
 }
 
 /**
@@ -332,7 +332,7 @@ export interface ByteWrapper {
  * 
  */
 export interface ArrayWrapper {
-    array?: string[];
+  array?: string[];
 }
 
 /**
@@ -343,7 +343,7 @@ export interface ArrayWrapper {
  * 
  */
 export interface DictionaryWrapper {
-    defaultProgram?: { [propertyName: string]: string };
+  defaultProgram?: { [propertyName: string]: string };
 }
 
 /**
@@ -356,6 +356,6 @@ export interface DictionaryWrapper {
  * 
  */
 export interface ReadonlyObj {
-    id?: string;
-    size?: number;
+  id?: string;
+  size?: number;
 }

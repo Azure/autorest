@@ -1,0 +1,42 @@
+@using System
+@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Core.ClientModel
+@using AutoRest.NodeJS.Azure.TemplateModels
+@inherits AutoRest.Core.Template<PageTemplateModel>
+
+/**
+ * @@class
+ * Initializes a new instance of the @(Model.Name) class.
+ * @@constructor
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+@WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Documentation))
+{
+@WrapComment(" * ", Model.Documentation)@:
+@: *
+}
+@foreach (var property in Model.DocumentationPropertyList)
+{
+    if (property.Name.ToLowerInvariant() != "value")
+    {
+
+    @PageTemplateModel.ConstructPropertyDocumentation(
+                                WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
+                                                                + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+                                                    + " " + property.Documentation));
+    }
+}
+ */
+export interface @(Model.Name) extends Array@(Model.ConstructTSItemTypeName()) {
+@{
+    Property prop = Model.Properties.Where(p => p.Name.ToLowerInvariant().Contains("nextlink")).FirstOrDefault();
+    if (prop != null)
+    {
+  @:@(PageTemplateModel.PropertyTS(prop, true));
+    }
+ }
+}

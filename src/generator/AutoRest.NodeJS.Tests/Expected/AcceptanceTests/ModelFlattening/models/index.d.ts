@@ -21,9 +21,9 @@
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
-    parentError?: ErrorModel;
+  status?: number;
+  message?: string;
+  parentError?: ErrorModel;
 }
 
 /**
@@ -42,11 +42,11 @@ export interface ErrorModel {
  * 
  */
 export interface Resource {
-    id?: string;
-    type?: string;
-    tags?: { [propertyName: string]: string };
-    location?: string;
-    name?: string;
+  id?: string;
+  type?: string;
+  tags?: { [propertyName: string]: string };
+  location?: string;
+  name?: string;
 }
 
 /**
@@ -67,10 +67,10 @@ export interface Resource {
  * 
  */
 export interface FlattenedProduct extends Resource {
-    pname?: string;
-    flattenedProductType?: string;
-    provisioningStateValues?: string;
-    provisioningState?: string;
+  pname?: string;
+  flattenedProductType?: string;
+  provisioningStateValues?: string;
+  provisioningState?: string;
 }
 
 /**
@@ -95,9 +95,9 @@ export interface FlattenedProduct extends Resource {
  * 
  */
 export interface ResourceCollection {
-    productresource?: FlattenedProduct;
-    arrayofresources?: FlattenedProduct[];
-    dictionaryofresources?: { [propertyName: string]: FlattenedProduct };
+  productresource?: FlattenedProduct;
+  arrayofresources?: FlattenedProduct[];
+  dictionaryofresources?: { [propertyName: string]: FlattenedProduct };
 }
 
 /**
@@ -114,8 +114,8 @@ export interface ResourceCollection {
  * 
  */
 export interface BaseProduct {
-    productId: string;
-    description?: string;
+  productId: string;
+  description?: string;
 }
 
 /**
@@ -132,9 +132,9 @@ export interface BaseProduct {
  * 
  */
 export interface SimpleProduct extends BaseProduct {
-    maxProductDisplayName: string;
-    genericValue?: string;
-    odatavalue?: string;
+  maxProductDisplayName: string;
+  genericValue?: string;
+  odatavalue?: string;
 }
 
 /**
@@ -159,12 +159,12 @@ export interface SimpleProduct extends BaseProduct {
  * 
  */
 export interface FlattenParameterGroup {
-    name: string;
-    productId: string;
-    description?: string;
-    maxProductDisplayName: string;
-    genericValue?: string;
-    odatavalue?: string;
+  name: string;
+  productId: string;
+  description?: string;
+  maxProductDisplayName: string;
+  genericValue?: string;
+  odatavalue?: string;
 }
 
 /**
@@ -177,5 +177,5 @@ export interface FlattenParameterGroup {
  * 
  */
 export interface GenericUrl {
-    genericValue?: string;
+  genericValue?: string;
 }

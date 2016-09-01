@@ -237,6 +237,13 @@ Function Get-AndroidHomeFromRegistry
     return $path
 }
 
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+function Unzip
+{
+	param([string]$zipfile, [string]$outpath)
+	[System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
+}
+
 $dotnetInstall = {
     # Check to see if .NET 4.5+ is already installed on the machine
     # From https://msdn.microsoft.com/en-us/library/hh925568: "If the Full subkey is not present, then you do not have the .NET Framework 4.5 or later installed"
@@ -349,6 +356,26 @@ $coreclrInstall = {
     Start-Process -FilePath $destination -ArgumentList $arguments -Wait
 }
 
+$goInstall = {
+    write-host -fore yellow -back black "Installing Go"
+    choco install golang -Confirm:$true
+}
+
+$glideInstall = {
+    write-host -fore yellow -back black "Installing Glide"
+    $url = "https://github.com/Masterminds/glide/releases/download/v0.11.1/glide-v0.11.1-windows-amd64.zip"
+    $webClient = New-Object System.Net.WebClient
+    $destination = "$($env:ProgramFiles)\glide-amd64.zip"
+    $unzipPath = "$($env:ProgramFiles)\glide"
+    $webClient.DownloadFile($url, $destination)
+    # Unzip glide to the final destination
+    Unzip $destination $unzipPath
+    
+    # Add glide to the path
+    $userPath = [Environment]::GetEnvironmentVariables("User").PATH
+    cmd.exe /c setx PATH "$($unzipPath)\windows-amd64\;$userPath"
+}
+
 
 # Install chocolatey
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -369,6 +396,9 @@ find-orAdd "tox.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:Progr
 find-orAdd "msbuild.exe" -installFunction $msbuildInstall
 
 find-orAdd "coreclr.exe" -installFunction $coreclrInstall
+
+find-orAdd "go.exe" -installFunction $goInstall
+find-orAdd "glide.exe" -installFunction $glideInstall
 
 # make sure JAVA_HOME is set
 if( (!$env:JAVA_HOME) -or (!(test-path  -PathType Container $env:JAVA_HOME )) ) {

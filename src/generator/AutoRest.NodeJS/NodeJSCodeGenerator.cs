@@ -17,7 +17,7 @@ namespace AutoRest.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.14.4";
+        private const string ClientRuntimePackage = "ms-rest version 1.15.0";
 
         public NodeJsCodeNamer Namer { get; private set; }
 

@@ -18,13 +18,13 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import java.io.IOException;
-import retrofit2.Call;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,15 +54,15 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     interface HeadExceptionsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/200")
-        Call<Void> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/204")
-        Call<Void> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/404")
-        Call<Void> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -74,37 +74,37 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head200() throws CloudException, IOException {
-        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        return head200Delegate(call.execute());
+        return head200Async().toBlocking().single();
     }
 
     /**
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = head200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(head200Async(), serviceCallback);
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head200Async() {
+        return service.head200(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = head200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
@@ -121,37 +121,37 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head204() throws CloudException, IOException {
-        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        return head204Delegate(call.execute());
+        return head204Async().toBlocking().single();
     }
 
     /**
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = head204Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(head204Async(), serviceCallback);
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head204Async() {
+        return service.head204(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = head204Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
@@ -168,37 +168,37 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head404() throws CloudException, IOException {
-        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        return head404Delegate(call.execute());
+        return head404Async().toBlocking().single();
     }
 
     /**
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = head404Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(head404Async(), serviceCallback);
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head404Async() {
+        return service.head404(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = head404Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {

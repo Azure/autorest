@@ -1,0 +1,38 @@
+{
+  "title": "AutoRest",
+  "copyright": "Copyright (c) Microsoft Corporation",
+  "language": "en",
+  "name": "AutoRest.Go",
+  "version": "1.0.0-0",
+  "authors": [ "Microsoft" ],
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../Tools/MSSharedLibKey.snk"
+  },
+
+  "packOptions": {
+    "summary": "AutoRest Go Generator",
+    "tags": [ "Microsoft AutoRest Go Generator" ],
+    "projectUrl": "https://github.com/Azure/AutoRest",
+    "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE"
+  },
+
+  "frameworks": {
+    "net451": {
+    }
+  },
+
+
+  "dependencies": {
+    "System.Threading.Tasks": "4.0.0",
+    "AutoRest.Extensions.Azure": "0.17.0-*",
+    "AutoRest.Extensions": {
+      "target": "project"
+    },
+    "AutoRest.Core": {
+      "target": "project"
+    }
+  }
+}

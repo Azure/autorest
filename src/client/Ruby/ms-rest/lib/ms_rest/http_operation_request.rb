@@ -68,7 +68,7 @@ module MsRest
     # @return [URI] body the HTTP response body.
     def run_promise(&block)
       Concurrent::Promise.new do
-        @connection ||= Faraday.new(:url => base_uri) do |faraday|
+        @connection ||= Faraday.new(:url => base_uri, :ssl => MsRest.ssl_options) do |faraday|
           middlewares.each{ |args| faraday.use(*args) } unless middlewares.nil?
           faraday.adapter Faraday.default_adapter
           logging = ENV['AZURE_HTTP_LOGGING'] || log

@@ -9,6 +9,7 @@
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 {
     using System.Linq;
+    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
 

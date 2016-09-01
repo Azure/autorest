@@ -40,6 +40,13 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
             }
         }
 
+        public string ConstructTSItemTypeName()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            builder.AppendFormat("<{0}>", ItemType.Name);
+            return builder.ToString();
+        }
+
         public override string ConstructModelMapper()
         {
             var modelMapper = this.ConstructMapper(SerializedName, null, true, true);

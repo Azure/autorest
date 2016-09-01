@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-08-15 Version 0.4.2
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Fix serialization if "object" type contains None (https://github.com/Azure/autorest/issues/1353)
+
 2016-08-08 Version 0.4.1
 ++++++++++++++++++++++++
 

@@ -50,6 +50,8 @@
   
   **Azure.Python** Azure specific Python code generator.
 
+  **Go** Generic Go code generator.
+
 ##Code Generator Specific Settings
 ###CSharp
 

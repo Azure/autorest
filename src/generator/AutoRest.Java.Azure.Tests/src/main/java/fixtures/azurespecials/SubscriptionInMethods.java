@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -37,10 +38,17 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postMethodLocalValidAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
@@ -58,10 +66,17 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postMethodLocalNullAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -79,10 +94,17 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postPathLocalValidAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -100,9 +122,16 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postSwaggerLocalValidAsync(String subscriptionId);
 
 }

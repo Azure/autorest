@@ -24,6 +24,17 @@ and reference it in your code:
 ```Ruby
 require 'ms_rest'
 ```
+---
+If you encounter `Faraday::SSLError` like below 
+```Ruby
+Faraday::SSLError:
+            SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed
+```
+that implies that ruby's OpenSSL was unable to verify the peer certificate while establihsing an SSL connection. You can provide Faraday ssl options or opt-in to use already bundled certificate using
+```Ruby
+MsRest.use_ssl_cert
+```
+---
 
 # Running tests
 

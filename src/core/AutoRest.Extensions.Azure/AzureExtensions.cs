@@ -74,10 +74,11 @@ namespace AutoRest.Extensions.Azure
 
             // This extension from general extensions must be run prior to Azure specific extensions.
             ProcessParameterizedHost(serviceClient, settings);
-
+            
             ProcessClientRequestIdExtension(serviceClient);
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
+            ProcessGlobalParameters(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
             ParameterGroupExtensionHelper.AddParameterGroups(serviceClient);
@@ -428,6 +429,7 @@ namespace AutoRest.Extensions.Azure
                                     //grouping.Key.Name = newGroupingParam.Name;
                                     var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
                                     inputParameter.Name = codeNamer.GetParameterName(newGroupingParam.Name);
+                                    inputParameter.IsRequired = newGroupingParam.IsRequired;
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }
                             });

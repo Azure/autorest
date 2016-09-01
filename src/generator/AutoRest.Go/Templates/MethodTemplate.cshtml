@@ -1,0 +1,183 @@
+﻿@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
+
+@using AutoRest.Core.ClientModel
+@using AutoRest.Go
+@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.MethodTemplateModel>
+
+@{
+    StringBuilder sb = new StringBuilder();
+    foreach (var parameter in Model.LocalParameters)
+    {
+        if (!string.IsNullOrEmpty(parameter.Documentation))
+        {
+            sb.Append(parameter.Name);
+            sb.Append(" is ");
+            sb.Append(parameter.Documentation.ToSentence());
+            sb.Append(" ");
+        }
+        if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+        {
+            sb.Append(parameter.Name);
+            sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
+        }
+    }
+
+    List<string> pd = Model.PrepareDecorators;
+    List<string> rd = Model.RespondDecorators;
+    rd.Insert(0, "resp");
+}
+
+@WrapComment("// ", Model.ScopedName + " " + Model.Description.ToSentence())
+@if (Model.LocalParameters.Count() > 0)
+{
+@://
+@WrapComment("// ", sb.ToString())
+}
+
+func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignature) {
+    @if (Model.ParameterValidations.Length > 0)
+    {
+    @:if err := validation.Validate([]validation.Validation{
+         @:@(Model.ParameterValidations)}); err != nil {
+             @:return result, @(Model.AutorestError("Validation error "))
+    @:}
+    @:@EmptyLine
+    }
+    req, err := client.@(Model.PreparerMethodName)(@(Model.HelperInvocationParameters))
+    if err != nil {
+        return result, @(Model.AutorestError("Failure preparing request"))
+    }
+
+    @EmptyLine
+    resp, err := client.@(Model.SenderMethodName)(req)
+    if err != nil {
+        @(Model.Response)
+        return result, @(Model.AutorestError("Failure sending request", "resp"))
+    }
+
+    @EmptyLine
+    result, err = client.@(Model.ResponderMethodName)(resp)
+    if err != nil {
+        err = @(Model.AutorestError("Failure responding to request", "resp"))
+    }
+
+    @EmptyLine
+    return
+}
+
+@EmptyLine
+// @(Model.PreparerMethodName) prepares the @(Model.ScopedName) request.
+func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@if (Model.PathParameters.Count() > 0)
+{
+    @:@(Model.PathMap)
+    @:@EmptyLine
+}
+@if (Model.QueryParameters.Count() > 0)
+{
+    @:@(Model.QueryMap)
+    foreach (Parameter p in Model.OptionalQueryParameters)
+    {
+    @:if @(p.Type.GetEmptyCheck(p.GetParameterName(),false)) {
+        @:@(p.AddToMap("queryParameters"))
+    @:}
+    }
+    @:@EmptyLine
+}
+
+@if (Model.FormDataParameters.Any())
+{
+    @:@(Model.FormDataMap)
+    @:@EmptyLine
+}
+
+
+    preparer := autorest.CreatePreparer(
+                        @(pd.EmitAsArguments()))
+
+@if (Model.BodyParameter != null && !Model.BodyParameter.IsRequired)
+{
+    @:if @(Model.BodyParameter.Type.GetEmptyCheck(Model.BodyParameter.Name, false)) {
+        @:preparer = autorest.DecoratePreparer(preparer,
+                            @:@(string.Format("autorest.WithJSON({0})", Model.BodyParameter.Name)))
+    @:}
+}
+
+@foreach (Parameter p in Model.OptionalHeaderParameters)
+    {
+    @:if @(p.Type.GetEmptyCheck(p.GetParameterName(),false)) {
+        @:preparer = autorest.DecoratePreparer(preparer,
+                            @:@(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))",
+                            p.SerializedName, p.Name)))
+    @:}
+}
+
+    @(Model.IsLongRunningOperation()
+        ? "return preparer.Prepare(&http.Request{Cancel: cancel})"
+        : "return preparer.Prepare(&http.Request{})")
+}
+
+
+@EmptyLine
+// @(Model.SenderMethodName) sends the @(Model.ScopedName) request. The method will close the
+// http.Response Body if it receives an error.
+func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http.Response, error) {
+    @if (Model.IsLongRunningOperation())
+    {
+        @:return autorest.SendWithSender(client,
+                                                    @:req,
+                                                    @:azure.DoPollForAsynchronous(client.PollingDelay))
+    }
+    else
+    {
+    @:return autorest.SendWithSender(client, req)
+    }
+}
+
+@EmptyLine
+// @(Model.ResponderMethodName) handles the response to the @(Model.ScopedName) request. The method always
+// closes the http.Response Body.
+func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
+    @if (Model.ReturnValue().Body.IsStreamType())
+    {
+    @:result.Value = &resp.Body
+    }
+    err = autorest.Respond(
+            @(rd.EmitAsArguments()))
+
+    @(Model.Response)
+    return
+}
+
+@if (Model.IsPageable())
+{
+@:@EmptyLine
+@:// @(Model.NextMethodName) retrieves the next set of results, if any.
+@:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature) {
+    @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeType).PreparerMethodName())()
+    @:if err != nil {
+        @:return result, @(Model.AutorestError("Failure preparing next results request"))
+    @:}
+    @:if req == nil {
+        @:return
+    @:}
+
+    @:@EmptyLine
+    @:resp, err := client.@(Model.SenderMethodName)(req)
+    @:if err != nil {
+        @:@(Model.Response)
+        @:return result, @(Model.AutorestError("Failure sending next results request", "resp"))
+    @:}
+
+    @:@EmptyLine
+    @:result, err = client.@(Model.ResponderMethodName)(resp)
+    @:if err != nil {
+        @:err = @(Model.AutorestError("Failure responding to next results request", "resp"))
+    @:}
+
+    @EmptyLine
+    @:return
+@:}
+}

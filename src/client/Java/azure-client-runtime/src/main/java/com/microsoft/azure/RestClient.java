@@ -20,6 +20,7 @@ import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 
 import java.lang.reflect.Field;
 import java.net.CookieManager;
@@ -168,6 +169,7 @@ public class RestClient {
             // Set up OkHttp client
             this.httpClientBuilder = httpClientBuilder
                     .cookieJar(new JavaNetCookieJar(cookieManager))
+                    .readTimeout(30, TimeUnit.SECONDS)
                     .addInterceptor(userAgentInterceptor);
             this.retrofitBuilder = retrofitBuilder;
             this.buildable = new Buildable();
@@ -338,6 +340,7 @@ public class RestClient {
                                 .baseUrl(baseUrl)
                                 .client(httpClient)
                                 .addConverterFactory(mapperAdapter.getConverterFactory())
+                                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                                 .build(),
                         credentials,
                         customHeadersInterceptor,

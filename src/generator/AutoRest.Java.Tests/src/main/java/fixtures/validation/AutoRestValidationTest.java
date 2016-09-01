@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -75,10 +76,18 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> validationOfMethodParametersAsync(String resourceGroupName, int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -98,10 +107,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -122,10 +130,19 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body the Product value
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> validationOfBodyAsync(String resourceGroupName, int id, Product body);
 
     /**
      *
@@ -138,10 +155,15 @@ public interface AutoRestValidationTest {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getWithConstantInPathAsync();
 
     /**
      *
@@ -154,10 +176,9 @@ public interface AutoRestValidationTest {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback);
     /**
      *
      * @param body the Product value
@@ -171,9 +192,15 @@ public interface AutoRestValidationTest {
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     *
+     * @param body the Product value
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> postWithConstantInBodyAsync(Product body);
 
 }

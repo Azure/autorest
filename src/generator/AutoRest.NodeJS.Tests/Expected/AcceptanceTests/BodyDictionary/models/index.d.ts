@@ -19,8 +19,8 @@
  * 
  */
 export interface Widget {
-    integer?: number;
-    string?: string;
+  integer?: number;
+  string?: string;
 }
 
 /**
@@ -33,6 +33,6 @@ export interface Widget {
  * 
  */
 export interface ErrorModel {
-    status?: number;
-    message?: string;
+  status?: number;
+  message?: string;
 }

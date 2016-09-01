@@ -17,5 +17,5 @@
  * 
  */
 export interface AvailabilitySetUpdateParameters {
-    tags: { [propertyName: string]: string };
+  tags: { [propertyName: string]: string };
 }

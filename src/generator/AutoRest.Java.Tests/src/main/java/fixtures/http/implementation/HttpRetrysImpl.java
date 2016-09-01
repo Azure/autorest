@@ -17,12 +17,9 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
@@ -32,6 +29,8 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -61,35 +60,35 @@ public final class HttpRetrysImpl implements HttpRetrys {
     interface HttpRetrysService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/retry/408")
-        Call<Void> head408();
+        Observable<Response<Void>> head408();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("http/retry/500")
-        Call<ResponseBody> put500(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> put500(@Body Boolean booleanValue);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("http/retry/500")
-        Call<ResponseBody> patch500(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> patch500(@Body Boolean booleanValue);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/retry/502")
-        Call<ResponseBody> get502();
+        Observable<Response<ResponseBody>> get502();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("http/retry/503")
-        Call<ResponseBody> post503(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> post503(@Body Boolean booleanValue);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "http/retry/503", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete503(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> delete503(@Body Boolean booleanValue);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("http/retry/504")
-        Call<ResponseBody> put504(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> put504(@Body Boolean booleanValue);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("http/retry/504")
-        Call<ResponseBody> patch504(@Body Boolean booleanValue);
+        Observable<Response<ResponseBody>> patch504(@Body Boolean booleanValue);
 
     }
 
@@ -101,37 +100,37 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> head408() throws ErrorException, IOException {
-        Call<Void> call = service.head408();
-        return head408Delegate(call.execute());
+        return head408Async().toBlocking().single();
     }
 
     /**
      * Return 408 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
-        Call<Void> call = service.head408();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = head408Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(head408Async(), serviceCallback);
+    }
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head408Async() {
+        return service.head408()
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = head408Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> head408Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -149,39 +148,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put500() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put500(booleanValue);
-        return put500Delegate(call.execute());
+        return put500Async().toBlocking().single();
     }
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(put500Async(), serviceCallback);
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put500Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put500(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = put500Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.put500(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = put500Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -193,8 +191,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put500(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put500(booleanValue);
-        return put500Delegate(call.execute());
+        return put500Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -202,29 +199,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.put500(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = put500Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(put500Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put500Async(Boolean booleanValue) {
+        return service.put500(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = put500Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> put500Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -242,39 +241,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch500() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch500(booleanValue);
-        return patch500Delegate(call.execute());
+        return patch500Async().toBlocking().single();
     }
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(patch500Async(), serviceCallback);
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch500Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch500(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = patch500Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.patch500(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = patch500Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -286,8 +284,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch500(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch500(booleanValue);
-        return patch500Delegate(call.execute());
+        return patch500Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -295,29 +292,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.patch500(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = patch500Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(patch500Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch500Async(Boolean booleanValue) {
+        return service.patch500(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = patch500Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> patch500Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -335,37 +334,37 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> get502() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.get502();
-        return get502Delegate(call.execute());
+        return get502Async().toBlocking().single();
     }
 
     /**
      * Return 502 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.get502();
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = get502Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(get502Async(), serviceCallback);
+    }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> get502Async() {
+        return service.get502()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = get502Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> get502Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -383,39 +382,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post503() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post503(booleanValue);
-        return post503Delegate(call.execute());
+        return post503Async().toBlocking().single();
     }
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(post503Async(), serviceCallback);
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post503Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.post503(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = post503Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.post503(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = post503Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -427,8 +425,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> post503(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.post503(booleanValue);
-        return post503Delegate(call.execute());
+        return post503Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -436,29 +433,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.post503(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = post503Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(post503Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post503Async(Boolean booleanValue) {
+        return service.post503(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = post503Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> post503Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -476,39 +475,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete503() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete503(booleanValue);
-        return delete503Delegate(call.execute());
+        return delete503Async().toBlocking().single();
     }
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(delete503Async(), serviceCallback);
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete503Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.delete503(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = delete503Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.delete503(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = delete503Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -520,8 +518,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete503(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.delete503(booleanValue);
-        return delete503Delegate(call.execute());
+        return delete503Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -529,29 +526,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.delete503(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = delete503Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(delete503Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete503Async(Boolean booleanValue) {
+        return service.delete503(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = delete503Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> delete503Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -569,39 +568,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put504() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put504(booleanValue);
-        return put504Delegate(call.execute());
+        return put504Async().toBlocking().single();
     }
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(put504Async(), serviceCallback);
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put504Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.put504(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = put504Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.put504(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = put504Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -613,8 +611,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> put504(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.put504(booleanValue);
-        return put504Delegate(call.execute());
+        return put504Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -622,29 +619,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.put504(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = put504Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(put504Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put504Async(Boolean booleanValue) {
+        return service.put504(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = put504Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> put504Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -662,39 +661,38 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch504() throws ErrorException, IOException {
-        final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch504(booleanValue);
-        return patch504Delegate(call.execute());
+        return patch504Async().toBlocking().single();
     }
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(patch504Async(), serviceCallback);
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch504Async() {
         final Boolean booleanValue = null;
-        Call<ResponseBody> call = service.patch504(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = patch504Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.patch504(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = patch504Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -706,8 +704,7 @@ public final class HttpRetrysImpl implements HttpRetrys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> patch504(Boolean booleanValue) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.patch504(booleanValue);
-        return patch504Delegate(call.execute());
+        return patch504Async(booleanValue).toBlocking().single();
     }
 
     /**
@@ -715,29 +712,31 @@ public final class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.patch504(booleanValue);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = patch504Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(patch504Async(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch504Async(Boolean booleanValue) {
+        return service.patch504(booleanValue)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = patch504Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> patch504Delegate(Response<ResponseBody> response) throws ErrorException, IOException {

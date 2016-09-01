@@ -24,14 +24,14 @@
  * 
  */
 export interface User {
-    id?: number;
-    username?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    password?: string;
-    phone?: string;
-    userStatus?: number;
+  id?: number;
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+  userStatus?: number;
 }
 
 /**
@@ -44,8 +44,8 @@ export interface User {
  * 
  */
 export interface Category {
-    id?: number;
-    name?: string;
+  id?: number;
+  name?: string;
 }
 
 /**
@@ -76,12 +76,12 @@ export interface Category {
  * 
  */
 export interface Pet {
-    id?: number;
-    category?: Category;
-    name: string;
-    photoUrls: string[];
-    tags?: Tag[];
-    status?: string;
+  id?: number;
+  category?: Category;
+  name: string;
+  photoUrls: string[];
+  tags?: Tag[];
+  status?: string;
 }
 
 /**
@@ -94,8 +94,8 @@ export interface Pet {
  * 
  */
 export interface Tag {
-    id?: number;
-    name?: string;
+  id?: number;
+  name?: string;
 }
 
 /**
@@ -117,10 +117,10 @@ export interface Tag {
  * 
  */
 export interface Order {
-    id?: number;
-    petId?: number;
-    quantity?: number;
-    shipDate?: Date;
-    status?: string;
-    complete?: boolean;
+  id?: number;
+  petId?: number;
+  quantity?: number;
+  shipDate?: Date;
+  status?: string;
+  complete?: boolean;
 }

@@ -217,35 +217,34 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) throws IllegalArgumentException {
-        if (serviceCallback == null) {
-            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
-        }
+    public ServiceCall<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
         if (resourceGroupName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
         if (accountName == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
         if (this.client.subscriptionId() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         if (parameters == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter parameters is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null."));
+            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Validator.validate(parameters, serviceCallback);
+        Validator.validate(parameters);
         Call<ResponseBody> call = service.create(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
         final ServiceCall<StorageAccount> serviceCall = new ServiceCall<>(call);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                serviceCallback.failure(t);
+                if (serviceCallback != null) {
+                    serviceCallback.failure(t);
+                }
+                serviceCall.failure(t);
             }
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

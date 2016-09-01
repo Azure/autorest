@@ -141,12 +141,12 @@
     <Error Condition=" '$(NuGetKey)' == '' " Text="You must provide the NuGetKey parameter to the build: /p:NuGetKey=YOUR_PUBLISHING_KEY" />
     
     <ItemGroup Condition="'$(Scope)' == 'CodeGenerator'">
-      <NugetPackagesToPublish Include="src\core\AutoRest\**\*.nupkg" Exclude="src\core\AutoRest\**\*.symbols.nupkg"/>
+      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nupkg" Exclude="src\core\AutoRest\**\*.symbols.nupkg"/>
       <SymbolPackagesToPublish Include="src\core\AutoRest\**\*.symbols.nupkg"/>
     </ItemGroup>
     
     <ItemGroup Condition="'$(Scope)' == 'ClientRuntime'">
-      <NugetPackagesToPublish Include="src\client\**\*.nupkg" Exclude="src\client\**\*.symbols.nupkg"/>
+      <NugetPackagesToPublish Include="$(PackageOutputDir)\*.nupkg" Exclude="src\client\**\*.symbols.nupkg"/>
       <SymbolPackagesToPublish Include="src\client\**\*.symbols.nupkg"/>
     </ItemGroup>
 

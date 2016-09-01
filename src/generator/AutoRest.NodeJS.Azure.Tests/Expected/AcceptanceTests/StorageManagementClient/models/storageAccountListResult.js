@@ -17,9 +17,7 @@ var util = require('util');
  * Initializes a new instance of the StorageAccountListResult class.
  * @constructor
  * The list storage accounts operation response.
- * @member {array} [value] Gets the list of storage accounts and their
- * properties.
- * 
+ *
  * @member {string} [nextLink] Gets the link to the next set of results.
  * Currently this will always be empty as the API does not support pagination.
  * 

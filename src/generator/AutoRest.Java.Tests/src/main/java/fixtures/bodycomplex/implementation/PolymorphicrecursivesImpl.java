@@ -17,18 +17,18 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,11 +58,11 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     interface PolymorphicrecursivesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/polymorphicrecursive/valid")
-        Call<ResponseBody> getValid();
+        Observable<Response<ResponseBody>> getValid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/polymorphicrecursive/valid")
-        Call<ResponseBody> putValid(@Body Fish complexBody);
+        Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
 
     }
 
@@ -74,37 +74,37 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the Fish object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Fish> getValid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute());
+        return getValidAsync().toBlocking().single();
     }
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        Call<ResponseBody> call = service.getValid();
-        final ServiceCall<Fish> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Fish>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Fish> clientResponse = getValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @return the observable to the Fish object
+     */
+    public Observable<ServiceResponse<Fish>> getValidAsync() {
+        return service.getValid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Fish>>>() {
+                @Override
+                public Observable<ServiceResponse<Fish>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Fish> clientResponse = getValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -176,12 +176,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute());
+        return putValidAsync(complexBody).toBlocking().single();
     }
 
     /**
@@ -241,33 +236,87 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+     {
+         "fishtype": "salmon",
+         "species": "king",
+         "length": 1,
+         "age": 1,
+         "location": "alaska",
+         "iswild": true,
+         "siblings": [
+             {
+                 "fishtype": "shark",
+                 "species": "predator",
+                 "length": 20,
+                 "age": 6,
+                 "siblings": [
+                     {
+                         "fishtype": "salmon",
+                         "species": "coho",
+                         "length": 2,
+                         "age": 2,
+                         "location": "atlantic",
+                         "iswild": true,
+                         "siblings": [
+                             {
+                                 "fishtype": "shark",
+                                 "species": "predator",
+                                 "length": 20,
+                                 "age": 6
+                             },
+                             {
+                                 "fishtype": "sawshark",
+                                 "species": "dangerous",
+                                 "length": 10,
+                                 "age": 105
+                             }
+                         ]
+                     },
+                     {
+                         "fishtype": "sawshark",
+                         "species": "dangerous",
+                         "length": 10,
+                         "age": 105
+                     }
+                 ]
+             },
+             {
+                 "fishtype": "sawshark",
+                 "species": "dangerous",
+                 "length": 10,
+                 "age": 105
+             }
+         ]
+     }
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidAsync(Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putValid(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

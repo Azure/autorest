@@ -43,6 +43,7 @@ using Fixtures.AcceptanceTestsReport;
 using Fixtures.AcceptanceTestsRequiredOptional;
 using Fixtures.AcceptanceTestsUrl;
 using Fixtures.AcceptanceTestsUrl.Models;
+using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
 using Fixtures.AcceptanceTestsValidation;
 using Fixtures.AcceptanceTestsValidation.Models;
 using Fixtures.InternalCtors;
@@ -55,6 +56,7 @@ using Xunit;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using ErrorException = Fixtures.AcceptanceTestsHttp.Models.ErrorException;
 using SwaggerPetstoreV2Extensions = Fixtures.PetstoreV2AllSync.SwaggerPetstoreV2Extensions;
+using System.Net.Http.Headers;
 
 namespace AutoRest.CSharp.Tests
 {
@@ -1419,8 +1421,13 @@ namespace AutoRest.CSharp.Tests
                 SwaggerPath("header.json"), ExpectedPath("Header"));
             using (var client = new AutoRestSwaggerBATHeaderService(Fixture.Uri))
             {
+                //Set ProductInfoHeaderValue
+                // Now by default, ServiceClient will add additional information to UserAgents for telemetry purpose (e.g. OS Info, FxVersion etc)
+                client.SetUserAgent(this.GetType().FullName);
+
                 // Check the UserAgent ProductInfoHeaderValue
-                Assert.Equal("1.5.0.1", client.UserAgent.Select(c => c.Product.Version.ToString()).FirstOrDefault());
+                ProductInfoHeaderValue defaultProduct = client.UserAgent.Where<ProductInfoHeaderValue>(c => c.Product.Name.Equals(this.GetType().FullName)).FirstOrDefault<ProductInfoHeaderValue>();
+                Assert.Equal("1.5.0.1", defaultProduct.Product.Version);
 
                 // POST param/prim/integer
                 client.Header.ParamInteger("positive", 1);
@@ -1679,6 +1686,19 @@ namespace AutoRest.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void UrlQueryMultiCollectionFormatTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("url-multi-collectionFormat.json"), ExpectedPath("UrlMultiCollectionFormat"));
+            using (var client = new AutoRestUrlMutliCollectionFormatTestService(Fixture.Uri))
+            {
+                client.Queries.ArrayStringMultiEmpty(new List<string>(0));
+                client.Queries.ArrayStringMultiNull();
+                var testArray = new List<string> { "ArrayQuery1", @"begin!*'();:@ &=+$,/?#[]end", null, "" };
+                client.Queries.ArrayStringMultiValid(testArray);
+            }
+        }
         [Fact]
         public void UrlMixedTests()
         {

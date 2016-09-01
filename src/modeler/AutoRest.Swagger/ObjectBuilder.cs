@@ -210,47 +210,65 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("swaggerObject");
             }
 
-            if (!string.IsNullOrEmpty(swaggerObject.Maximum) && !swaggerObject.ExclusiveMaximum)
+            if (!string.IsNullOrEmpty(swaggerObject.Maximum)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.Maximum))
+                && !swaggerObject.ExclusiveMaximum)
+
             {
                 constraints[Constraint.InclusiveMaximum] = swaggerObject.Maximum;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.Maximum) && swaggerObject.ExclusiveMaximum)
+            if (!string.IsNullOrEmpty(swaggerObject.Maximum)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.Maximum))
+                && swaggerObject.ExclusiveMaximum
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.ExclusiveMaximum)))
             {
                 constraints[Constraint.ExclusiveMaximum] = swaggerObject.Maximum;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.Minimum) && !swaggerObject.ExclusiveMinimum)
+            if (!string.IsNullOrEmpty(swaggerObject.Minimum)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.Minimum))
+                && !swaggerObject.ExclusiveMinimum)
             {
                 constraints[Constraint.InclusiveMinimum] = swaggerObject.Minimum;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.Minimum) && swaggerObject.ExclusiveMinimum)
+            if (!string.IsNullOrEmpty(swaggerObject.Minimum)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.Minimum))
+                && swaggerObject.ExclusiveMinimum
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.ExclusiveMinimum)))
             {
                 constraints[Constraint.ExclusiveMinimum] = swaggerObject.Minimum;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.MaxLength))
+            if (!string.IsNullOrEmpty(swaggerObject.MaxLength)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.MaxLength)))
             {
                 constraints[Constraint.MaxLength] = swaggerObject.MaxLength;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.MinLength))
+            if (!string.IsNullOrEmpty(swaggerObject.MinLength)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.MinLength)))
             {
                 constraints[Constraint.MinLength] = swaggerObject.MinLength;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.Pattern))
+            if (!string.IsNullOrEmpty(swaggerObject.Pattern)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.Pattern)))
             {
                 constraints[Constraint.Pattern] = swaggerObject.Pattern;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.MaxItems))
+            if (!string.IsNullOrEmpty(swaggerObject.MaxItems)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.MaxItems)))
             {
                 constraints[Constraint.MaxItems] = swaggerObject.MaxItems;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.MinItems))
+            if (!string.IsNullOrEmpty(swaggerObject.MinItems)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.MinItems)))
             {
                 constraints[Constraint.MinItems] = swaggerObject.MinItems;
             }
-            if (!string.IsNullOrEmpty(swaggerObject.MultipleOf))
+            if (!string.IsNullOrEmpty(swaggerObject.MultipleOf)
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.MultipleOf)))
             {
                 constraints[Constraint.MultipleOf] = swaggerObject.MultipleOf;
             }
-            if (swaggerObject.UniqueItems)
+            if (swaggerObject.UniqueItems
+                && swaggerObject.IsConstraintSupported(nameof(swaggerObject.UniqueItems)))
             {
                 constraints[Constraint.UniqueItems] = "true";
             }

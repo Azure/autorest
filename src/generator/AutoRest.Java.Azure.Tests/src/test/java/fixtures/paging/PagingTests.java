@@ -2,12 +2,7 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.rest.ServiceResponse;
 
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.models.ProductProperties;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +11,10 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.ws.WebServiceException;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
 
 import static org.junit.Assert.fail;
 
@@ -50,7 +48,6 @@ public class PagingTests {
                 break;
             }
         }
-        System.out.println("Asserting...");
         Assert.assertEquals(12, response.size());
         Assert.assertEquals(1, response.indexOf(p1));
         Assert.assertEquals(4, response.indexOf(p4));
@@ -81,16 +78,16 @@ public class PagingTests {
             }
 
             @Override
-            public void success(ServiceResponse<List<Product>> result) {
+            public void success() {
                 lock.countDown();
             }
 
             @Override
-            public PagingBahavior progress(List<Product> partial) {
+            public PagingBehavior progress(List<Product> partial) {
                 if (pageCount() == 7) {
-                    return PagingBahavior.STOP;
+                    return PagingBehavior.STOP;
                 } else {
-                    return PagingBahavior.CONTINUE;
+                    return PagingBehavior.CONTINUE;
                 }
             }
         });
@@ -125,8 +122,8 @@ public class PagingTests {
             List<Product> response = client.pagings().getMultiplePagesFailure().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 
@@ -136,8 +133,8 @@ public class PagingTests {
             List<Product> response = client.pagings().getMultiplePagesFailureUri().getBody();
             response.size();
             fail();
-        } catch (WebServiceException ex) {
-            Assert.assertNotNull(ex.getCause());
+        } catch (CloudException ex) {
+            Assert.assertNotNull(ex.getResponse());
         }
     }
 }

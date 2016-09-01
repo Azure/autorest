@@ -1,7 +1,8 @@
+@using System
 @using System.Linq
 @using System.Collections.Generic
 @using AutoRest.NodeJS.Azure.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.TemplateModels.PageTemplateModel>
+@inherits AutoRest.Core.Template<PageTemplateModel>
 /*
 @Header(" * ")
  */
@@ -14,13 +15,25 @@ var util = require('util');
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
  * @@constructor
-@WrapComment(" * ", Model.Documentation)
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+@WrapComment(" * ", "@summary " + Model.Summary)@:
+@: *
+}
+@if (!String.IsNullOrEmpty(Model.Documentation))
+{
+@WrapComment(" * ", Model.Documentation)@:
+@: *
+}
 @foreach (var property in Model.DocumentationPropertyList)
 {
+    if (property.Name.ToLowerInvariant() != "value")
+    {
     @PageTemplateModel.ConstructPropertyDocumentation(
-                              WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
-                                                             + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
-                                                 + " " + property.Documentation))
+                                WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
+                                                                + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+                                                    + " " + property.Documentation));
+    }
 }
  */
 function @(Model.Name)() {

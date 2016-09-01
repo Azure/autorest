@@ -439,8 +439,25 @@ namespace AutoRest.CSharp.TemplateModels
                         replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
-                    builder.AppendLine(replaceString,
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
+                    if (queryParameter.CollectionFormat == CollectionFormat.Multi)
+                    {
+                        builder.AppendLine("if ({0}.Count == 0)", queryParameter.Name)
+                           .AppendLine("{").Indent()
+                           .AppendLine(replaceString, queryParameter.SerializedName, "string.Empty").Outdent()
+                           .AppendLine("}")
+                           .AppendLine("else")
+                           .AppendLine("{").Indent()
+                           .AppendLine("foreach (var _item in {0})", queryParameter.Name)
+                           .AppendLine("{").Indent()
+                           .AppendLine(replaceString, queryParameter.SerializedName, "_item ?? string.Empty").Outdent()
+                           .AppendLine("}").Outdent()
+                           .AppendLine("}").Outdent();
+                    }
+                    else
+                    {
+                        builder.AppendLine(replaceString,
+                                queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
+                    }
 
                     if (queryParameter.CanBeNull())
                     {

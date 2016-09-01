@@ -45,25 +45,28 @@ namespace AutoRest.Core
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
             ServiceClient serviceClient = null;
 
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
             try
             {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
                 serviceClient = modeler.Build(out messages);
-
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                }
-
-                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
             }
             catch (Exception exception)
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
+            finally
+            {
+                // Make sure to log any validation messages
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
+                {
+                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, Resources.CodeGenerationError);
+                }
+            }
+
             CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
             Logger.WriteOutput(codeGenerator.UsageInstructions);
 

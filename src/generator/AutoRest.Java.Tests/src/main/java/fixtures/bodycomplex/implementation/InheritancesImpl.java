@@ -17,18 +17,18 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,11 +58,11 @@ public final class InheritancesImpl implements Inheritances {
     interface InheritancesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/inheritance/valid")
-        Call<ResponseBody> getValid();
+        Observable<Response<ResponseBody>> getValid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/inheritance/valid")
-        Call<ResponseBody> putValid(@Body Siamese complexBody);
+        Observable<Response<ResponseBody>> putValid(@Body Siamese complexBody);
 
     }
 
@@ -74,37 +74,37 @@ public final class InheritancesImpl implements Inheritances {
      * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<Siamese> getValid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute());
+        return getValidAsync().toBlocking().single();
     }
 
     /**
      * Get complex types that extend others.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
-        Call<ResponseBody> call = service.getValid();
-        final ServiceCall<Siamese> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Siamese>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Siamese> clientResponse = getValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return ServiceCall.create(getValidAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @return the observable to the Siamese object
+     */
+    public Observable<ServiceResponse<Siamese>> getValidAsync() {
+        return service.getValid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Siamese>>>() {
+                @Override
+                public Observable<ServiceResponse<Siamese>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Siamese> clientResponse = getValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Siamese> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -124,12 +124,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute());
+        return putValidAsync(complexBody).toBlocking().single();
     }
 
     /**
@@ -137,33 +132,35 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidAsync(Siamese complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putValid(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
