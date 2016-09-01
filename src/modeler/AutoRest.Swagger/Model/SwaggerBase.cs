@@ -25,10 +25,10 @@ namespace AutoRest.Swagger.Model
         public Dictionary<string, object> Extensions { get; set; }
 
         /// <summary>
-        /// Compare a modified document node (this) to a previous one and look for breaking and non-breaking changes.
+        /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
         /// </summary>
-        /// <param name="original">The original document context.</param>
-        /// <param name="modified">The modified document context.</param>
+        /// <param name="context">The modified document context.</param>
+        /// <param name="previous">The original document model.</param>
         /// <returns>A list of messages from the comparison.</returns>
         public virtual IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
         {

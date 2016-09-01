@@ -14,9 +14,26 @@ using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Tests
 {
+    /// <summary>
+    /// This class contains tests for the logic comparing two swagger specifications, 
+    /// an older version against newer version.
+    /// 
+    /// For all but the tests that verify that version checks are done properly, the 
+    /// old and new specifications have the same version number, which should force
+    /// the comparison logic to produce errors rather than warnings for each breaking
+    /// change.
+    /// 
+    /// Non-breaking changes are always presented as informational messages, regardless
+    /// of whether the version has changed or not.
+    /// </summary>
     [Collection("Comparison Tests")]
     public class SwaggerModelerCompareTests
     {
+        /// <summary>
+        /// Helper method -- load two Swagger documents and invoke the comparison logic.
+        /// </summary>
+        /// <param name="input">The name of the swagger document file. The file name must be the same in both the 'modified' and 'original' folder.</param>
+        /// <returns>A list of messages from the comparison logic.</returns>
         private IEnumerable<ComparisonMessage> CompareSwagger(string input)
         {
             var settings = new Settings
@@ -42,7 +59,7 @@ namespace AutoRest.Swagger.Tests
         public void UpdatedMajorVersionNumberNotStrict()
         {
             var messages = CompareSwagger("version_check_01.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
             Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
         }
 
@@ -50,7 +67,7 @@ namespace AutoRest.Swagger.Tests
         public void UpdatedMinorVersionNumberNotStrict()
         {
             var messages = CompareSwagger("version_check_03.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
             Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
         }
 
@@ -61,7 +78,7 @@ namespace AutoRest.Swagger.Tests
         public void SameMajorVersionNumberStrict()
         {
             var messages = CompareSwagger("version_check_02.json").ToArray();
-            Assert.Empty(messages.Where(m => m.Severity == LogEntrySeverity.Warning));
+            Assert.Empty(messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Warning));
             Assert.NotEmpty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
         }
 
@@ -72,7 +89,7 @@ namespace AutoRest.Swagger.Tests
         public void ReversedVersionNumberChange()
         {
             var messages = CompareSwagger("version_check_04.json").ToArray();
-            Assert.NotEmpty(messages.Where(m => m.Severity >= LogEntrySeverity.Error));
+            Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity >= LogEntrySeverity.Error));
             var reversed = messages.Where(m => m.Id == ComparisonMessages.VersionsReversed.Id);
             Assert.NotEmpty(reversed);
             Assert.Equal(LogEntrySeverity.Error, reversed.First().Severity);
@@ -163,7 +180,7 @@ namespace AutoRest.Swagger.Tests
         public void UnreferencedDefinitionRemoved()
         {
             var messages = CompareSwagger("misc_checks_02.json").ToArray();
-            var missing = messages.Where(m => m.Path.StartsWith("#/definitions/Unreferenced"));
+            var missing = messages.Where(m => m.Id > 0 && m.Path.StartsWith("#/definitions/Unreferenced"));
             Assert.Empty(missing);
         }
 
@@ -174,7 +191,7 @@ namespace AutoRest.Swagger.Tests
         public void UnreferencedTypeChanged()
         {
             var messages = CompareSwagger("misc_checks_02.json").ToArray();
-            var missing = messages.Where(m => m.Path.StartsWith("#/definitions/Database"));
+            var missing = messages.Where(m => m.Id > 0 && m.Path.StartsWith("#/definitions/Database"));
             Assert.Empty(missing);
         }
 
@@ -489,7 +506,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.Contains("Parameters")).ToArray();
             var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
 
             Assert.Equal(11, stricter.Length);
             Assert.Equal(8, breaking.Length);
@@ -524,7 +541,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.Contains("Responses")).ToArray();
             var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
 
             Assert.Equal(13, relaxed.Length);
             Assert.Equal(8, breaking.Length);
@@ -566,7 +583,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("param_check_01.json").Where(m => m.Path.Contains("parameters")).ToArray();
             var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
 
             Assert.Equal(13, stricter.Length);
             Assert.Equal(8, breaking.Length);
@@ -599,7 +616,7 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that, in responses, relaxed constraints are errors while stricter constraints are informational.
+        /// Verifies that, in global responses, relaxed constraints are errors while stricter constraints are informational.
         /// </summary>
         [Fact]
         public void GlobalResponseTypeConstraintsChanged()
@@ -607,7 +624,7 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("response_check_01.json").Where(m => m.Path.Contains("responses")).ToArray();
             var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+            var info = messages.Where(m => m.Id > 0 && m.Severity == LogEntrySeverity.Info).ToArray();
 
             Assert.Equal(15, relaxed.Length);
             Assert.Equal(8, breaking.Length);

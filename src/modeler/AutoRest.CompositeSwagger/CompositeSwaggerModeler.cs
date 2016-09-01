@@ -282,9 +282,13 @@ namespace AutoRest.CompositeSwagger
             return Build();
         }
 
+        /// <summary>
+        /// Copares two versions of the same service specification.
+        /// </summary>
+        /// <returns></returns>
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            throw new NotImplementedException("Version comparison of composite Swagger documents." );
+            throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications" );
         }
     }
 }

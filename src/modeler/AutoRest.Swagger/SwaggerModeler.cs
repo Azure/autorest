@@ -168,11 +168,15 @@ namespace AutoRest.Swagger
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
-            // Look for semantic errors and warnings in the document.
-            //var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var validationMessages = Enumerable.Empty<ValidationMessage>(); // validator.GetValidationExceptions(newDefintion).ToList();
+            // Look for semantic errors and warnings in the new document.
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
 
-            var comparisonMessages = newDefintion.Compare(context, oldDefintion);
+            // Only compare versions if the new version is correct.
+            var comparisonMessages = 
+                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                newDefintion.Compare(context, oldDefintion) : 
+                Enumerable.Empty<ComparisonMessage>();
 
             return validationMessages
                 .Select(msg => 

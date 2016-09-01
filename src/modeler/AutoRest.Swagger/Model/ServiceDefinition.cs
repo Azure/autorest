@@ -134,6 +134,12 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         public IList<string> ExternalReferences { get; set; }
 
+        /// <summary>
+        /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
+        /// </summary>
+        /// <param name="context">The modified document context.</param>
+        /// <param name="previous">The original document model.</param>
+        /// <returns>A list of messages from the comparison.</returns>
         public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
         {
             if (previous == null)
@@ -166,7 +172,7 @@ namespace AutoRest.Swagger.Model
                 context.LogInfo(ComparisonMessages.NoVersionChange);
             }
 
-            // Check that all the HTTP schemes of the old version are supported by the new version.
+            // Check that all the protocols of the old version are supported by the new version.
 
             context.Push("schemes");
             foreach (var scheme in previousDefinition.Schemes)
@@ -349,6 +355,13 @@ namespace AutoRest.Swagger.Model
             return context.Messages;
         }
 
+
+        /// <summary>
+        /// Since renaming a path parameter doesn't logically alter the path, we must remove the parameter names
+        /// before comparing paths using string comparison.
+        /// </summary>
+        /// <param name="paths">A dictionary of paths, potentially with embedded parameter names.</param>
+        /// <returns>A transformed dictionary, where paths do not embed parameter names.</returns>
         private Dictionary<string, Dictionary<string, Operation>> RemovePathVariables(Dictionary<string, Dictionary<string, Operation>> paths)
         {
             var result = new Dictionary<string, Dictionary<string, Operation>>();
@@ -362,10 +375,22 @@ namespace AutoRest.Swagger.Model
             return result;
         }
 
+        /// <summary>
+        /// Since some services may rely on semantic versioning, comparing versions is fairly complex.
+        /// </summary>
+        /// <param name="context">A comparison context.</param>
+        /// <param name="newVer">The new version string.</param>
+        /// <param name="oldVer">The old version string</param>
+        /// <remarks>
+        /// In semantic versioning schemes, only the major and minor version numbers are considered when comparing versions.
+        /// Build numbers are ignored.
+        /// </remarks>
         private void CompareVersions(ComparisonContext context, string newVer, string oldVer)
         {
             var oldVersion = oldVer.Split('.');
             var newVersion = newVer.Split('.');
+
+            // If the version consists only of numbers separated by '.', we'll consider it semantic versioning.
 
             if (!context.Strict && oldVersion.Length > 0 && newVersion.Length > 0)
             {
@@ -416,6 +441,11 @@ namespace AutoRest.Swagger.Model
             }
         }
 
+        /// <summary>
+        /// In order to avoid comparing definitions (schemas) that are not used, we go through all references that are 
+        /// found in operations, global parameters, and global responses. Definitions that are referenced from other
+        /// definitions are included only by transitive closure.
+        /// </summary>
         private static void ReferenceTrackSchemas(ServiceDefinition service)
         {
             foreach (var schema in service.Definitions.Values)
@@ -488,6 +518,12 @@ namespace AutoRest.Swagger.Model
             }
         }
 
+        /// <summary>
+        /// Retrieve a schema from the definitions section.
+        /// </summary>
+        /// <param name="reference">A document-relative reference path -- #/definitions/XXX</param>
+        /// <param name="definitions">The definitions dictionary to use</param>
+        /// <returns></returns>
         private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
