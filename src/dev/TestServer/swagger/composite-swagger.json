@@ -4,7 +4,7 @@
     "description": "Composite Swagger Client that represents merging body boolean and body integer swagger clients"
   },
   "documents": [
-    "src/dev/TestServer/swagger/body-boolean.json",
-    "src/dev/TestServer/swagger/body-integer.json"
+    "./body-boolean.json",
+    "./body-integer.json"
   ]
 }
