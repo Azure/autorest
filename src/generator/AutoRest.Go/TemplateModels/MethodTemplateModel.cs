@@ -50,22 +50,6 @@ namespace AutoRest.Go.TemplateModels
             }
         }
 
-        public Dictionary<string,string> DefaultValueMap
-        {
-            get
-            {
-                var defaultValueMap = new Dictionary<string, string>();
-                foreach(var p in Parameters)
-                {
-                    if (p.IsConstant && p.ClientProperty == null)
-                    {
-                        defaultValueMap.Add(p.Name, p.DefaultValue); 
-                    }
-                }
-                return defaultValueMap;
-            }
-        }
-
         private string _scopedName;
         public string ScopedName
         {
@@ -404,6 +388,11 @@ namespace AutoRest.Go.TemplateModels
                                  ? string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", nil , \"{3}\")", PackageName, Owner, ScopedName, phase)
                                  : string.Format("autorest.NewErrorWithError(err, \"{0}.{1}\", \"{2}\", {3}, \"{4}\")", PackageName, Owner, ScopedName, response, phase);
 
+        }
+
+        public string ValidationError()
+        {
+            return $"validation.NewErrorWithValidationError(err, \"{PackageName}.{Owner}\",\"{ScopedName}\")";
         }
     }
 }
