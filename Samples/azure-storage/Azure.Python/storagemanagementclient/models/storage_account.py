@@ -23,7 +23,7 @@ class StorageAccount(Resource):
     :type tags: dict
     :param properties:
     :type properties: :class:`StorageAccountProperties
-     <petstore.models.StorageAccountProperties>`
+     <Petstore.models.StorageAccountProperties>`
     """ 
 
     _validation = {

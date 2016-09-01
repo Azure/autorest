@@ -105,7 +105,7 @@ class SwaggerPetstore(object):
         your pet is invalid.
 
         :param body: Pet object that needs to be added to the store
-        :type body: :class:`Pet <petstore.models.Pet>`
+        :type body: :class:`Pet <Petstore.models.Pet>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -150,7 +150,7 @@ class SwaggerPetstore(object):
         """Update an existing pet.
 
         :param body: Pet object that needs to be added to the store
-        :type body: :class:`Pet <petstore.models.Pet>`
+        :type body: :class:`Pet <Petstore.models.Pet>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -203,7 +203,7 @@ class SwaggerPetstore(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: list of :class:`Pet <petstore.models.Pet>`
+        :rtype: list of :class:`Pet <Petstore.models.Pet>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -253,7 +253,7 @@ class SwaggerPetstore(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: list of :class:`Pet <petstore.models.Pet>`
+        :rtype: list of :class:`Pet <Petstore.models.Pet>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -355,7 +355,7 @@ class SwaggerPetstore(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Pet <petstore.models.Pet>`
+        :rtype: :class:`Pet <Petstore.models.Pet>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -595,13 +595,13 @@ class SwaggerPetstore(object):
         """Place an order for a pet.
 
         :param body: order placed for purchasing the pet
-        :type body: :class:`Order <petstore.models.Order>`
+        :type body: :class:`Order <Petstore.models.Order>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Order <petstore.models.Order>`
+        :rtype: :class:`Order <Petstore.models.Order>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -656,7 +656,7 @@ class SwaggerPetstore(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`Order <petstore.models.Order>`
+        :rtype: :class:`Order <Petstore.models.Order>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -746,7 +746,7 @@ class SwaggerPetstore(object):
         This can only be done by the logged in user.
 
         :param body: Created user object
-        :type body: :class:`User <petstore.models.User>`
+        :type body: :class:`User <Petstore.models.User>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -791,7 +791,7 @@ class SwaggerPetstore(object):
         """Creates list of users with given input array.
 
         :param body: List of user object
-        :type body: list of :class:`User <petstore.models.User>`
+        :type body: list of :class:`User <Petstore.models.User>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -836,7 +836,7 @@ class SwaggerPetstore(object):
         """Creates list of users with given input array.
 
         :param body: List of user object
-        :type body: list of :class:`User <petstore.models.User>`
+        :type body: list of :class:`User <Petstore.models.User>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -975,7 +975,7 @@ class SwaggerPetstore(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`User <petstore.models.User>`
+        :rtype: :class:`User <Petstore.models.User>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1022,7 +1022,7 @@ class SwaggerPetstore(object):
         :param username: name that need to be deleted
         :type username: str
         :param body: Updated user object
-        :type body: :class:`User <petstore.models.User>`
+        :type body: :class:`User <Petstore.models.User>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
