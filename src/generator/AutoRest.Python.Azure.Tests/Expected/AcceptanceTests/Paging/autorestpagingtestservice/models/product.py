@@ -17,7 +17,7 @@ class Product(Model):
 
     :param properties:
     :type properties: :class:`ProductProperties
-     <fixtures.acceptancetestspaging.models.ProductProperties>`
+     <Fixtures.AcceptanceTestsPaging.models.ProductProperties>`
     """ 
 
     _attribute_map = {

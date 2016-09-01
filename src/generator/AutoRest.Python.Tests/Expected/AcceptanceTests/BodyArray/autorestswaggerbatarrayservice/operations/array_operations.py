@@ -2061,7 +2061,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2105,7 +2105,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2150,7 +2150,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2195,7 +2195,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2240,7 +2240,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -2281,7 +2281,7 @@ class ArrayOperations(object):
 
         :param array_body:
         :type array_body: list of :class:`Product
-         <fixtures.acceptancetestsbodyarray.models.Product>`
+         <Fixtures.AcceptanceTestsBodyArray.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

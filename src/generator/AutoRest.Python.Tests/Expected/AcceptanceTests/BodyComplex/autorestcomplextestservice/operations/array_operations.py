@@ -41,7 +41,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -129,7 +129,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -218,7 +218,7 @@ class ArrayOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ArrayWrapper
-         <fixtures.acceptancetestsbodycomplex.models.ArrayWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ArrayWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

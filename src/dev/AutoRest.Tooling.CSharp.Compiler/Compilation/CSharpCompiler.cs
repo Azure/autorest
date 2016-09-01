@@ -14,7 +14,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
     {
         private static readonly CSharpParseOptions parseOptions = new CSharpParseOptions(
             LanguageVersion.CSharp6,
-            DocumentationMode.None);
+            DocumentationMode.Diagnose);
 
         public CSharpCompiler(IEnumerable<KeyValuePair<string, string>> sources,
             IEnumerable<string> referencesAsFilenames)

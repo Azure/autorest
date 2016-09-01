@@ -40,14 +40,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -126,14 +126,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -212,14 +212,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -299,14 +299,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -600,7 +600,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -680,7 +680,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -761,7 +761,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -842,14 +842,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -930,14 +930,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1023,14 +1023,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1252,7 +1252,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1334,7 +1334,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1415,14 +1415,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1500,14 +1500,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1593,14 +1593,14 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -1899,7 +1899,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -1980,7 +1980,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -2063,7 +2063,7 @@ class LROSADsOperations(object):
 
         :param product: Product to put
         :type product: :class:`Product
-         <fixtures.acceptancetestslro.models.Product>`
+         <Fixtures.AcceptanceTestsLro.models.Product>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
