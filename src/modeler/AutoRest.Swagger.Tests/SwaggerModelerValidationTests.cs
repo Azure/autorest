@@ -39,7 +39,7 @@ namespace AutoRest.Swagger.Tests
     }
 
     [Collection("Validation Tests")]
-    public class SwaggerModelerValidationTests
+    public partial class SwaggerModelerValidationTests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
@@ -55,16 +55,6 @@ namespace AutoRest.Swagger.Tests
             messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
 
             return messages;
-        }
-
-        /// <summary>
-        /// Verifies that a clean Swagger file does not result in any validation errors
-        /// </summary>
-        [Fact]
-        public void CleanFileValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "clean-complex-spec.json"));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
         }
 
         [Fact]
@@ -180,4 +170,31 @@ namespace AutoRest.Swagger.Tests
             messages.Any(m => m.Type == typeof(PageableRequires200Response));
         }
     }
+
+    #region Positive tests
+
+    public partial class SwaggerModelerValidationTests
+    {
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void CleanFileValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "clean-complex-spec.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void RequiredPropertyDefinedAllOf()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "required-property-defined-allof.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+    }
+
+    #endregion
 }

@@ -249,8 +249,11 @@
       "description": "A model with nested properties that uses client flatten",
       "properties": {
         "properties": {
-          "foo": {
-            "description": "Foo property"
+          "type": "object",
+          "properties": {
+            "foo": {
+              "description": "Foo property"
+            }
           },
           "x-ms-client-flatten": true
         }
