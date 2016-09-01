@@ -47,11 +47,6 @@ namespace AutoRest.Swagger.Model
 
             base.Compare(context, previous);
 
-            if (Schema != null && priorResponse.Schema != null)
-            {
-                Schema.Compare(context, priorResponse.Schema);
-            }
-
             var headers = Headers != null ? Headers : new Dictionary<string, Header>();
             var priorHeaders = priorResponse.Headers != null ? priorResponse.Headers : new Dictionary<string, Header>();
 
@@ -83,6 +78,11 @@ namespace AutoRest.Swagger.Model
                 }
 
                 context.Pop();
+            }
+
+            if (Schema != null && priorResponse.Schema != null)
+            {
+                Schema.Compare(context, priorResponse.Schema);
             }
 
             context.Direction = DataDirection.None;

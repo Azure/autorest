@@ -289,27 +289,6 @@ namespace AutoRest.Swagger.Model
             ReferenceTrackSchemas(this);
             ReferenceTrackSchemas(previousDefinition);
 
-            context.Push("definitions");
-            foreach (var def in previousDefinition.Definitions.Keys)
-            {
-                Schema schema = null;
-                Schema oldSchema = previousDefinition.Definitions[def];
-
-                if (!Definitions.TryGetValue(def, out schema))
-                {
-                    if (oldSchema.IsReferenced)
-                        // It's only an error if the definition is referenced in the old service.
-                        context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
-                }
-                else if (schema.IsReferenced && oldSchema.IsReferenced)
-                {
-                    context.Push(def);
-                    schema.Compare(context, previousDefinition.Definitions[def]);
-                    context.Pop();
-                }
-            }
-            context.Pop();
-
             context.Push("parameters");
             foreach (var def in previousDefinition.Parameters.Keys)
             {
@@ -339,6 +318,27 @@ namespace AutoRest.Swagger.Model
                 {
                     context.Push(def);
                     response.Compare(context, previousDefinition.Responses[def]);
+                    context.Pop();
+                }
+            }
+            context.Pop();
+
+            context.Push("definitions");
+            foreach (var def in previousDefinition.Definitions.Keys)
+            {
+                Schema schema = null;
+                Schema oldSchema = previousDefinition.Definitions[def];
+
+                if (!Definitions.TryGetValue(def, out schema))
+                {
+                    if (oldSchema.IsReferenced)
+                        // It's only an error if the definition is referenced in the old service.
+                        context.LogBreakingChange(ComparisonMessages.RemovedDefinition, def);
+                }
+                else if (schema.IsReferenced && oldSchema.IsReferenced)
+                {
+                    context.Push(def);
+                    schema.Compare(context, previousDefinition.Definitions[def]);
                     context.Pop();
                 }
             }
@@ -456,6 +456,14 @@ namespace AutoRest.Swagger.Model
                 if (parameter.Schema != null && !string.IsNullOrWhiteSpace(parameter.Schema.Reference))
                 {
                     var schema = FindReferencedSchema(parameter.Schema.Reference, service.Definitions);
+                    schema.IsReferenced = true;
+                }
+            }
+            foreach (var response in service.Responses.Values)
+            {
+                if (response.Schema != null && !string.IsNullOrWhiteSpace(response.Schema.Reference))
+                {
+                    var schema = FindReferencedSchema(response.Schema.Reference, service.Definitions);
                     schema.IsReferenced = true;
                 }
             }

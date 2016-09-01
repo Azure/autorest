@@ -41,7 +41,7 @@ namespace AutoRest.Swagger.Validation
         public static MessageTemplate ReferenceRedirection = new MessageTemplate { Id = 1017, Message = "The '$ref' property points to different models in the old and new versions" };
 
         public static MessageTemplate RemovedEnumValues = new MessageTemplate { Id = 1018, Message = "The new version does not specify a list of valid values" };
-        public static MessageTemplate RemovedEnumValue = new MessageTemplate { Id = 1019, Message = "The new version does not include '{0}' in its list of valid values" };
+        public static MessageTemplate RemovedEnumValue = new MessageTemplate { Id = 1019, Message = "The new version does not include some of the previous values in its list of valid values" };
         public static MessageTemplate AddedEnumValues = new MessageTemplate { Id = 1020, Message = "The new version places constraints on valid values while the old doesn't" };
         public static MessageTemplate AddedAdditionalProperties = new MessageTemplate { Id = 1021, Message = "The new version adds an 'additionalProperties' element" };
         public static MessageTemplate RemovedAdditionalProperties = new MessageTemplate { Id = 1022, Message = "The new version removes the 'additionalProperties' element" };
@@ -64,5 +64,7 @@ namespace AutoRest.Swagger.Validation
         public static MessageTemplate RemovedOperation = new MessageTemplate { Id = 1035, Message = "The new version is misting an operation that was found in the old version. Was '{0}' removed or restructured?" };
 
         public static MessageTemplate ConstraintChanged = new MessageTemplate { Id = 1036, Message = "The new version has a different '{0}' value than the previous one" };
+
+        public static MessageTemplate ConstraintIsWeaker = new MessageTemplate { Id = 1037, Message = "The new version has a less constraining '{0}' value than the previous one" };
     }
 }

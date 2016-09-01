@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -268,30 +269,43 @@ namespace AutoRest.Swagger.Model
 
         private void CompareEnums(ComparisonContext context, SwaggerObject prior)
         {
-            // Was an enum value removed?
+            if (prior.Enum == null && this.Enum == null) return;
 
-            if (prior.Enum != null)
+            bool relaxes = (prior.Enum != null && this.Enum == null);
+            bool constrains = (prior.Enum == null && this.Enum != null);
+
+            if (!relaxes && !constrains)
             {
-                if (this.Enum == null)
-                {
-                    context.LogBreakingChange(ComparisonMessages.RemovedEnumValues);
-                }
-                else
-                {
-                    foreach (var e in prior.Enum)
-                    {
-                        if (!this.Enum.Contains(e))
-                        {
-                            context.LogBreakingChange(ComparisonMessages.RemovedEnumValue, e);
+                // 1. Look for removed elements (constraining). 
 
-                        }
-                    }
+                constrains = prior.Enum.Any(str => !this.Enum.Contains(str));
+
+                // 2. Look for added elements (relaxing).
+
+                relaxes = this.Enum.Any(str => !prior.Enum.Contains(str));
+            }
+
+            if (context.Direction == DataDirection.Request)
+            {
+                if (constrains)
+                {
+                    context.LogBreakingChange(relaxes ? ComparisonMessages.ConstraintChanged : ComparisonMessages.ConstraintIsStronger, "enum");
+                    return;
                 }
             }
-            else if (this.Enum != null)
+            else if (context.Direction == DataDirection.Response)
             {
-                context.LogBreakingChange(ComparisonMessages.AddedEnumValues);
+                if (relaxes)
+                {
+                    context.LogBreakingChange(constrains ? ComparisonMessages.ConstraintChanged : ComparisonMessages.ConstraintIsWeaker, "enum");
+                    return;
+                }
             }
+
+            if (relaxes && constrains)
+                context.LogInfo(ComparisonMessages.ConstraintChanged, "enum");
+            else if (relaxes || constrains)
+                context.LogInfo(relaxes ? ComparisonMessages.ConstraintIsWeaker : ComparisonMessages.ConstraintIsStronger, "enum");
         }
 
         private void CompareProperties(ComparisonContext context, SwaggerObject prior)
@@ -355,40 +369,62 @@ namespace AutoRest.Swagger.Model
                 prior.ExclusiveMaximum != ExclusiveMaximum)
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (prior.ExclusiveMaximum != ExclusiveMaximum || 
-                    context.Direction == DataDirection.Request ? Narrows(prior.Maximum, Maximum, false) : Widens(prior.Maximum, Maximum, false))
+                if (prior.ExclusiveMaximum != ExclusiveMaximum || context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "maximum");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.Maximum, Maximum, true))
                     context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "maximum");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "maximum");
+                else if (context.Direction == DataDirection.Response && Widens(prior.Maximum, Maximum, true))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "maximum");
+                else if (Narrows(prior.Maximum, Maximum, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "maximum");
+                else if (Widens(prior.Maximum, Maximum, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "maximum");
             }
             if ((prior.Minimum == null && Minimum != null) ||
                 (prior.Minimum != null && !prior.Minimum.Equals(Minimum)) ||
                 prior.ExclusiveMinimum != ExclusiveMinimum)
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (prior.ExclusiveMinimum != ExclusiveMinimum ||
-                    context.Direction == DataDirection.Request ? Narrows(prior.Minimum, Minimum, true) : Widens(prior.Minimum, Minimum, true))
+                if (prior.ExclusiveMinimum != ExclusiveMinimum || context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "minimum");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.Minimum, Minimum, true))
                     context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "minimum");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "minimum");
+                else if (context.Direction == DataDirection.Response && Widens(prior.Minimum, Minimum, true))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "minimum");
+                else if (Narrows(prior.Minimum, Minimum, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "minimum");
+                else if (Widens(prior.Minimum, Minimum, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "minimum");
             }
             if ((prior.MaxLength == null && MaxLength != null) ||
                 (prior.MaxLength != null && !prior.MaxLength.Equals(MaxLength)))
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (context.Direction == DataDirection.Request ? Narrows(prior.MaxLength, MaxLength, false) : Widens(prior.MaxLength, MaxLength, false))
+                if (context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "maxLength");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.MaxLength, MaxLength, false))
                     context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "maxLength");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "maxLength");
+                else if (context.Direction == DataDirection.Response && Widens(prior.MaxLength, MaxLength, false))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "maxLength");
+                else if (Narrows(prior.MaxLength, MaxLength, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "maxLength");
+                else if (Widens(prior.MaxLength, MaxLength, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "maxLength");
             }
             if ((prior.MinLength == null && MinLength != null) ||
                 (prior.MinLength != null && !prior.MinLength.Equals(MinLength)))
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (context.Direction == DataDirection.Request ? Narrows(prior.MaxLength, MaxLength, true) : Widens(prior.MaxLength, MaxLength, true))
-                    context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "minLength");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "minLength");
+                if (context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "minLength");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.MinLength, MinLength, true))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "minimum");
+                else if (context.Direction == DataDirection.Response && Widens(prior.MinLength, MinLength, true))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "minimum");
+                else if (Narrows(prior.MinLength, MinLength, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "minLength");
+                else if (Widens(prior.MinLength, MinLength, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "minLength");
             }
             if ((prior.Pattern == null && Pattern != null) ||
                 (prior.Pattern != null && !prior.Pattern.Equals(Pattern)))
@@ -399,19 +435,31 @@ namespace AutoRest.Swagger.Model
                 (prior.MaxItems != null && !prior.MaxItems.Equals(MaxItems)))
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (context.Direction == DataDirection.Request ? Narrows(prior.MaxItems, MaxItems, false) : Widens(prior.MaxItems, MaxItems, false))
+                if (context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "maxItems");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.MaxItems, MaxItems, false))
                     context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "maxItems");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "maxItems");
+                else if (context.Direction == DataDirection.Response && Widens(prior.MaxItems, MaxItems, false))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "maxItems");
+                else if (Narrows(prior.MaxItems, MaxItems, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "maxItems");
+                else if (Widens(prior.MaxItems, MaxItems, false))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "maxItems");
             }
             if ((prior.MinItems == null && MinItems != null) ||
                 (prior.MinItems != null && !prior.MinItems.Equals(MinItems)))
             {
                 // Flag stricter constraints for requests and relaxed constraints for responses.
-                if (context.Direction == DataDirection.Request ? Narrows(prior.MinItems, MinItems, true) : Widens(prior.MinItems, MinItems, true))
+                if (context.Direction == DataDirection.None)
+                    context.LogBreakingChange(ComparisonMessages.ConstraintChanged, "minItems");
+                else if (context.Direction == DataDirection.Request && Narrows(prior.MinItems, MinItems, true))
                     context.LogBreakingChange(ComparisonMessages.ConstraintIsStronger, "minItems");
-                else
-                    context.LogInfo(ComparisonMessages.ConstraintChanged, "minItems");
+                else if (context.Direction == DataDirection.Response && Widens(prior.MinItems, MinItems, true))
+                    context.LogBreakingChange(ComparisonMessages.ConstraintIsWeaker, "minItems");
+                else if (Narrows(prior.MinItems, MinItems, true))
+                    context.LogInfo(ComparisonMessages.ConstraintIsStronger, "minItems");
+                else if (Widens(prior.MinItems, MinItems, true))
+                    context.LogInfo(ComparisonMessages.ConstraintIsWeaker, "minItems");
             }
             if (prior.UniqueItems != UniqueItems)
             {

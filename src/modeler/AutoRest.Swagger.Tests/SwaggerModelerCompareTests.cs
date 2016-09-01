@@ -467,6 +467,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.Contains("Parameters")).ToArray();
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
+
             Assert.Equal(4, changed.Length);
             Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
             Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
@@ -488,10 +489,11 @@ namespace AutoRest.Swagger.Tests
             var messages = CompareSwagger("operation_check_04.json").Where(m => m.Path.Contains("Parameters")).ToArray();
             var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Info).ToArray();
-            Assert.Equal(12, stricter.Length);
+            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+
+            Assert.Equal(11, stricter.Length);
             Assert.Equal(8, breaking.Length);
-            Assert.Equal(12, info.Length);
+            Assert.Equal(13, info.Length);
         }
 
         /// <summary>
@@ -503,6 +505,7 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.Contains("Responses")).ToArray();
             var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
+
             Assert.Equal(4, changed.Length);
             Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
             Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
@@ -519,12 +522,96 @@ namespace AutoRest.Swagger.Tests
         public void ResponseTypeConstraintsChanged()
         {
             var messages = CompareSwagger("operation_check_05.json").Where(m => m.Path.Contains("Responses")).ToArray();
+            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
+            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+
+            Assert.Equal(13, relaxed.Length);
+            Assert.Equal(8, breaking.Length);
+            Assert.Equal(11, info.Length);
+        }
+
+        /// <summary>
+        /// Verifies that changing the collection format for an array parameter is flagged.
+        /// Direction: requests
+        /// </summary>
+        [Fact]
+        public void GobalParamArrayFormatChanged()
+        {
+            var messages = CompareSwagger("param_check_01.json").ToArray();
+            var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
+
+            Assert.Equal(6, changed.Length);
+            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[4].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[5].Severity);
+            Assert.Equal("#/parameters/a", changed[0].Path);
+            Assert.Equal("#/parameters/b", changed[1].Path);
+            Assert.Equal("#/parameters/e/properties/a", changed[2].Path);
+            Assert.Equal("#/parameters/e/properties/b", changed[3].Path);
+            Assert.Equal("#/definitions/A/properties/a", changed[4].Path);
+            Assert.Equal("#/definitions/A/properties/b", changed[5].Path);
+        }
+
+        /// <summary>
+        /// Verifies that making constraints stricter in requests are flagged as errors and that relaxed constraints
+        /// are just informational.
+        /// </summary>
+        [Fact]
+        public void GobalParamTypeConstraintsChanged()
+        {
+            var messages = CompareSwagger("param_check_01.json").Where(m => m.Path.Contains("parameters")).ToArray();
             var stricter = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsStronger.Id && m.Severity == LogEntrySeverity.Error).ToArray();
             var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
-            var info = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Info).ToArray();
-            Assert.Equal(12, stricter.Length);
+            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+
+            Assert.Equal(13, stricter.Length);
             Assert.Equal(8, breaking.Length);
-            Assert.Equal(12, info.Length);
+            Assert.Equal(15, info.Length);
+        }
+
+        /// <summary>
+        /// Verifies that changing the collection format for an array parameter is flagged.
+        /// Direction: responses
+        /// </summary>
+        [Fact]
+        public void GobalResponseArrayFormatChanged()
+        {
+            var messages = CompareSwagger("response_check_01.json").ToArray();
+            var changed = messages.Where(m => m.Id == ComparisonMessages.ArrayCollectionFormatChanged.Id).ToArray();
+
+            Assert.Equal(6, changed.Length);
+            Assert.Equal(LogEntrySeverity.Error, changed[0].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[1].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[2].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[3].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[4].Severity);
+            Assert.Equal(LogEntrySeverity.Error, changed[5].Severity);
+            Assert.Equal("#/responses/200/properties/a", changed[0].Path);
+            Assert.Equal("#/responses/200/properties/b", changed[1].Path);
+            Assert.Equal("#/responses/201/properties/a", changed[2].Path);
+            Assert.Equal("#/responses/201/properties/b", changed[3].Path);
+            Assert.Equal("#/definitions/A/properties/a", changed[4].Path);
+            Assert.Equal("#/definitions/A/properties/b", changed[5].Path);
+        }
+
+        /// <summary>
+        /// Verifies that, in responses, relaxed constraints are errors while stricter constraints are informational.
+        /// </summary>
+        [Fact]
+        public void GlobalResponseTypeConstraintsChanged()
+        {
+            var messages = CompareSwagger("response_check_01.json").Where(m => m.Path.Contains("responses")).ToArray();
+            var relaxed = messages.Where(m => m.Id == ComparisonMessages.ConstraintIsWeaker.Id && m.Severity == LogEntrySeverity.Error).ToArray();
+            var breaking = messages.Where(m => m.Id == ComparisonMessages.ConstraintChanged.Id && m.Severity == LogEntrySeverity.Error).ToArray();
+            var info = messages.Where(m => m.Severity == LogEntrySeverity.Info).ToArray();
+
+            Assert.Equal(15, relaxed.Length);
+            Assert.Equal(8, breaking.Length);
+            Assert.Equal(13, info.Length);
         }
     }
 }

@@ -70,6 +70,8 @@ namespace AutoRest.Swagger.Model
         [JsonIgnore]
         internal bool IsReferenced { get; set; }
 
+        private DataDirection _compareDirection = DataDirection.None;
+
         public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
         {
             var priorSchema = previous as Schema;
@@ -83,15 +85,32 @@ namespace AutoRest.Swagger.Model
                 throw new ArgumentNullException("context");
             }
 
+            int referenced = 0;
+
             var thisSchema = this;
 
             if (!string.IsNullOrWhiteSpace(thisSchema.Reference))
             {
                 thisSchema = FindReferencedSchema(thisSchema.Reference, (context.CurrentRoot as ServiceDefinition).Definitions);
+                referenced += 1;
             }
             if (!string.IsNullOrWhiteSpace(priorSchema.Reference))
             {
                 priorSchema = FindReferencedSchema(priorSchema.Reference, (context.PreviousRoot as ServiceDefinition).Definitions);
+                referenced += 1;
+            }
+
+            // Avoid doing the comparison repeatedly by marking for which direction it's already been done.
+
+            if (context.Direction != DataDirection.None && referenced == 2)
+            {
+                // Comparing two referenced schemas in the context of a parameter or response -- did we already do this?
+
+                if (thisSchema._compareDirection == context.Direction || thisSchema._compareDirection == DataDirection.Both)
+                {
+                    return new ComparisonMessage[0];
+                }
+                _compareDirection |= context.Direction;
             }
 
             if (thisSchema != this || priorSchema != previous)

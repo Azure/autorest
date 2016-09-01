@@ -97,7 +97,7 @@
         "b": {
           "type": "array",
           "minItems": 15,
-          "maxItems": 4000,
+          "maxItems": 5000,
           "collectionFormat": "pipes",
           "items": {
             "type": "string",

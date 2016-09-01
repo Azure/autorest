@@ -65,8 +65,9 @@ namespace AutoRest.Core.Validation
 
     public enum DataDirection
     {
-        None,
-        Request,
-        Response
+        None = 0,
+        Request = 1,
+        Response = 2,
+        Both = 3
     }
 }
