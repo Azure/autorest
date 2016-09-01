@@ -33,7 +33,7 @@ from requests import RequestException
 _LOGGER = logging.getLogger(__name__)
 
 
-def raise_with_traceback(exception, message="", *args):
+def raise_with_traceback(exception, message="", *args, **kwargs):
     """Raise exception with a specified traceback.
 
     :param Exception exception: Error type to be raised.
@@ -42,7 +42,7 @@ def raise_with_traceback(exception, message="", *args):
     """
     exc_type, exc_value, exc_traceback = sys.exc_info()
     exc_msg = "{}, {}: {}".format(message, exc_type.__name__, exc_value)
-    error = exception(exc_msg, *args)
+    error = exception(exc_msg, *args, **kwargs)
     try:
         raise error.with_traceback(exc_traceback)
     except AttributeError:
@@ -53,10 +53,10 @@ def raise_with_traceback(exception, message="", *args):
 class ClientException(Exception):
     """Base exception for all Client Runtime exceptions."""
 
-    def __init__(self, message, inner_exception=None, *args):
+    def __init__(self, message, inner_exception=None, *args, **kwargs):
         self.inner_exception = inner_exception
         _LOGGER.debug(message)
-        super(ClientException, self).__init__(message, *args)
+        super(ClientException, self).__init__(message, *args, **kwargs)
 
 
 class SerializationError(ClientException):
@@ -92,14 +92,14 @@ class ValidationError(ClientException):
         "required": "can not be None."
         }
 
-    def __init__(self, rule, target, value, *args):
+    def __init__(self, rule, target, value, *args, **kwargs):
         self.rule = rule
         self.target = target
         message = "Parameter {!r} ".format(target)
         reason = self.messages.get(
             rule, "failed to meet validation requirement.")
         message += reason.format(value)
-        super(ValidationError, self).__init__(message, *args)
+        super(ValidationError, self).__init__(message, *args, **kwargs)
 
 
 class ClientRequestError(ClientException):
@@ -126,7 +126,8 @@ class HttpOperationError(ClientException):
     def __str__(self):
         return str(self.message)
 
-    def __init__(self, deserialize, response, resp_type=None, *args):
+    def __init__(self, deserialize, response,
+                 resp_type=None, *args, **kwargs):
         self.error = None
         self.message = None
         self.response = response
@@ -157,4 +158,4 @@ class HttpOperationError(ClientException):
                     self.message = "Unknown error"
 
         super(HttpOperationError, self).__init__(
-            self.message, self.error, *args)
+            self.message, self.error, *args, **kwargs)

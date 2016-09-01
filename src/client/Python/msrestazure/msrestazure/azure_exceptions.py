@@ -98,8 +98,8 @@ class CloudError(ClientException):
     :param str error: Optional error message.
     """
 
-    def __init__(self, response, error=None, *args):
-        deserialize = Deserializer()
+    def __init__(self, response, error=None, *args, **kwargs):
+        self.deserializer = Deserializer()
         self.error = None
         self.message = None
         self.response = response
@@ -110,48 +110,64 @@ class CloudError(ClientException):
             self.message = error
             self.error = response
         else:
-            try:
-                data = response.json()
-            except ValueError:
-                data = response
-            else:
-                data = data.get('error', data)
-            try:
-                self.error = deserialize(CloudErrorData(), data)
-            except DeserializationError:
-                self.error = None
-            try:
-                self.message = self.error.message
-            except AttributeError:
-                self.message = None
+            self._build_error_data(response)
 
         if not self.error or not self.message:
-            try:
-                content = response.json()
-            except ValueError:
-                server_message = "none"
-            else:
-                server_message = content.get('message', "none")
-            try:
-                response.raise_for_status()
-            except RequestException as err:
-                if not self.error:
-                    self.error = err
-                if not self.message:
-                    if server_message == "none":
-                        server_message = str(err)
-                    msg = "Operation failed with status: {!r}. Details: {}"
-                    self.message = msg.format(response.reason, server_message)
-            else:
-                if not self.error:
-                    self.error = response
-                if not self.message:
-                    msg = "Operation failed with status: {!r}. Details: {}"
-                    self.message = msg.format(
-                        response.status_code, server_message)
-
-        super(CloudError, self).__init__(self.message, self.error, *args)
+            self._build_error_message(response)
+ 
+        super(CloudError, self).__init__(
+            self.message, self.error, *args, **kwargs)
 
     def __str__(self):
         """Cloud error message"""
         return str(self.message)
+
+    def _build_error_data(self, response):
+        try:
+            data = response.json()
+        except ValueError:
+            data = response
+        else:
+            data = data.get('error', data)
+        try:
+            self.error = self.deserializer(CloudErrorData(), data)
+        except DeserializationError:
+            self.error = None
+        else:
+            if self.error:
+                if not self.error.error or not self.error.message:
+                    self.error = None
+                else:
+                    self.message = self.error.message
+
+    def _get_state(self, content):
+        state = content.get("status")
+        if not state:
+            resource_content = content.get('properties', content)
+            state = resource_content.get("provisioningState")
+        return "Resource state {}".format(state) if state else "none"
+
+    def _build_error_message(self, response):
+        try:
+            data = response.json()
+        except ValueError:
+            message = "none"
+        else:
+            message = data.get("message", self._get_state(data))
+        try:
+            response.raise_for_status()
+        except RequestException as err:
+            if not self.error:
+                self.error = err
+            if not self.message:
+                if message == "none":
+                    message = str(err)
+                msg = "Operation failed with status: {!r}. Details: {}"
+                self.message = msg.format(response.reason, message)
+        else:
+            if not self.error:
+                self.error = response
+            if not self.message:
+                msg = "Operation failed with status: {!r}. Details: {}"
+                self.message = msg.format(
+                    response.status_code, message)
