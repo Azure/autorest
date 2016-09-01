@@ -12,16 +12,16 @@ class StorageAccountProperties(Model):
      time the operation was called. Possible values include: 'Creating',
      'ResolvingDNS', 'Succeeded'
     :type provisioning_state: str or :class:`ProvisioningState
-     <petstore.models.ProvisioningState>`
+     <Petstore.models.ProvisioningState>`
     :param account_type: Gets the type of the storage account. Possible
      values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
     :type account_type: str or :class:`AccountType
-     <petstore.models.AccountType>`
+     <Petstore.models.AccountType>`
     :param primary_endpoints: Gets the URLs that are used to perform a
      retrieval of a public blob, queue or table object.Note that StandardZRS
      and PremiumLRS accounts only return the blob endpoint.
-    :type primary_endpoints: :class:`Endpoints <petstore.models.Endpoints>`
+    :type primary_endpoints: :class:`Endpoints <Petstore.models.Endpoints>`
     :param primary_location: Gets the location of the primary for the storage
      account.
     :type primary_location: str
@@ -29,7 +29,7 @@ class StorageAccountProperties(Model):
      location of the storage account is available or unavailable. Possible
      values include: 'Available', 'Unavailable'
     :type status_of_primary: str or :class:`AccountStatus
-     <petstore.models.AccountStatus>`
+     <Petstore.models.AccountStatus>`
     :param last_geo_failover_time: Gets the timestamp of the most recent
      instance of a failover to the secondary location. Only the most recent
      timestamp is retained. This element is not returned if there has never
@@ -45,18 +45,18 @@ class StorageAccountProperties(Model):
      Only available if the accountType is StandardGRS or StandardRAGRS.
      Possible values include: 'Available', 'Unavailable'
     :type status_of_secondary: str or :class:`AccountStatus
-     <petstore.models.AccountStatus>`
+     <Petstore.models.AccountStatus>`
     :param creation_time: Gets the creation date and time of the storage
      account in UTC.
     :type creation_time: datetime
     :param custom_domain: Gets the user assigned custom domain assigned to
      this storage account.
-    :type custom_domain: :class:`CustomDomain <petstore.models.CustomDomain>`
+    :type custom_domain: :class:`CustomDomain <Petstore.models.CustomDomain>`
     :param secondary_endpoints: Gets the URLs that are used to perform a
      retrieval of a public blob, queue or table object from the secondary
      location of the storage account. Only available if the accountType is
      StandardRAGRS.
-    :type secondary_endpoints: :class:`Endpoints <petstore.models.Endpoints>`
+    :type secondary_endpoints: :class:`Endpoints <Petstore.models.Endpoints>`
     """ 
 
     _attribute_map = {
