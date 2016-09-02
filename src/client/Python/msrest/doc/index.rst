@@ -62,3 +62,4 @@ Indices and tables
   :glob:
 
   msrest
+  operation_config
