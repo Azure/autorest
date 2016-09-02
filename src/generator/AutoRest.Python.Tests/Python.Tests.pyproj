@@ -155,6 +155,10 @@
     <Folder Include="Expected\AcceptanceTests\RequiredOptional\autorestrequiredoptionaltestservice\" />
     <Folder Include="Expected\AcceptanceTests\RequiredOptional\autorestrequiredoptionaltestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\RequiredOptional\autorestrequiredoptionaltestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\UrlMultiCollectionFormat\" />
+    <Folder Include="Expected\AcceptanceTests\UrlMultiCollectionFormat\autoresturlmutlicollectionformattestservice\" />
+    <Folder Include="Expected\AcceptanceTests\UrlMultiCollectionFormat\autoresturlmutlicollectionformattestservice\models\" />
+    <Folder Include="Expected\AcceptanceTests\UrlMultiCollectionFormat\autoresturlmutlicollectionformattestservice\operations\" />
     <Folder Include="Expected\AcceptanceTests\Url\" />
     <Folder Include="Expected\AcceptanceTests\Url\autoresturltestservice\" />
     <Folder Include="Expected\AcceptanceTests\Url\autoresturltestservice\models\" />

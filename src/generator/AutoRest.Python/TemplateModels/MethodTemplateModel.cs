@@ -561,9 +561,9 @@ namespace AutoRest.Python.TemplateModels
             }
 
             string result = "object";
-            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            var modelNamespace = ServiceClient.Name.ToPythonCase();
             if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                modelNamespace = ServiceClient.Namespace;
 
             var primaryType = type as PrimaryType;
             var listType = type as SequenceType;

@@ -45,7 +45,7 @@ class GroupOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`SampleResourceGroup
-         <fixtures.acceptancetestssubscriptionidapiversion.models.SampleResourceGroup>`
+         <Fixtures.AcceptanceTestsSubscriptionIdApiVersion.models.SampleResourceGroup>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

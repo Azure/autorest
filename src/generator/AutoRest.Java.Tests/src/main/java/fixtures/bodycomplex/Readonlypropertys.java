@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,10 +36,16 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @return the observable to the ReadonlyObj object
+     */
+    Observable<ServiceResponse<ReadonlyObj>> getValidAsync();
 
     /**
      * Put complex types that have readonly properties.
@@ -56,9 +63,16 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody);
 
 }

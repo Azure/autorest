@@ -37,6 +37,7 @@ import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.models.Product;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,10 +58,9 @@ public interface LROSADs {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -77,10 +77,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> putNonRetry400Async(Product product);
 
     /**
      * Long running put request, service returns a 400 to the initial request.
@@ -95,10 +102,9 @@ public interface LROSADs {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -114,10 +120,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 400 to the initial request.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPutNonRetry400Async(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -133,10 +146,9 @@ public interface LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -153,10 +165,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> putNonRetry201Creating400Async(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -171,10 +190,9 @@ public interface LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -190,10 +208,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPutNonRetry201Creating400Async(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -209,10 +234,9 @@ public interface LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -229,10 +253,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> putNonRetry201Creating400InvalidJsonAsync(Product product);
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
@@ -247,10 +278,9 @@ public interface LROSADs {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -266,10 +296,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPutNonRetry201Creating400InvalidJsonAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -285,10 +322,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -305,10 +341,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> putAsyncRelativeRetry400Async(Product product);
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -323,10 +366,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -342,10 +384,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers>> beginPutAsyncRelativeRetry400Async(Product product);
 
     /**
      * Long running delete request, service returns a 400 with an error body.
@@ -361,10 +410,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>> deleteNonRetry400Async();
 
     /**
      * Long running delete request, service returns a 400 with an error body.
@@ -379,10 +434,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 400 with an error body.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers>> beginDeleteNonRetry400Async();
 
     /**
      * Long running delete request, service returns a 202 with a location header.
@@ -398,10 +459,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>> delete202NonRetry400Async();
 
     /**
      * Long running delete request, service returns a 202 with a location header.
@@ -416,10 +483,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 with a location header.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers>> beginDelete202NonRetry400Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -435,10 +508,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>> deleteAsyncRelativeRetry400Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -453,10 +532,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers>> beginDeleteAsyncRelativeRetry400Async();
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -472,10 +557,9 @@ public interface LROSADs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -492,10 +576,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> postNonRetry400Async(Product product);
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -510,10 +601,9 @@ public interface LROSADs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -529,10 +619,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 400 with no error body.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers>> beginPostNonRetry400Async(Product product);
 
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -548,10 +645,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -568,10 +664,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> post202NonRetry400Async(Product product);
 
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -586,10 +689,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -605,10 +707,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 with a location header.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers>> beginPost202NonRetry400Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -624,10 +733,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -644,10 +752,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> postAsyncRelativeRetry400Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -662,10 +777,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -681,10 +795,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers>> beginPostAsyncRelativeRetry400Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -700,10 +821,9 @@ public interface LROSADs {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -720,10 +840,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> putError201NoProvisioningStatePayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
@@ -738,10 +865,9 @@ public interface LROSADs {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -757,10 +883,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 201 to the initial request with no payload.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPutError201NoProvisioningStatePayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -776,10 +909,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -796,10 +928,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> putAsyncRelativeRetryNoStatusAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -814,10 +953,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -833,10 +971,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders>> beginPutAsyncRelativeRetryNoStatusAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -852,10 +997,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -872,10 +1016,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> putAsyncRelativeRetryNoStatusPayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -890,10 +1041,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -909,10 +1059,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product);
 
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
@@ -928,10 +1085,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete204SucceededAsync();
 
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
@@ -946,10 +1109,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 204 to the initial request, indicating success.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> beginDelete204SucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -965,10 +1134,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>> deleteAsyncRelativeRetryNoStatusAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -983,10 +1158,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>> beginDeleteAsyncRelativeRetryNoStatusAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -1002,10 +1183,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -1022,10 +1202,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> post202NoLocationAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -1040,10 +1227,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -1059,10 +1245,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, without a location header.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders>> beginPost202NoLocationAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1078,10 +1271,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1098,10 +1290,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> postAsyncRelativeRetryNoPayloadAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1116,10 +1315,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1135,10 +1333,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders>> beginPostAsyncRelativeRetryNoPayloadAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -1154,10 +1359,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> put200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -1174,10 +1378,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> put200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> put200InvalidJsonAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
@@ -1192,10 +1403,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPut200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -1211,10 +1421,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponse<Product>> beginPut200InvalidJsonAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1230,10 +1447,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -1250,10 +1466,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> putAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1268,10 +1491,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -1287,10 +1509,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1306,10 +1535,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1326,10 +1554,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1344,10 +1579,9 @@ public interface LROSADs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback);
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1363,10 +1597,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback);
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the Product object
+     */
+    Observable<ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
@@ -1382,10 +1623,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>> delete202RetryInvalidHeaderAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
@@ -1400,10 +1647,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders>> beginDelete202RetryInvalidHeaderAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1419,10 +1672,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> deleteAsyncRelativeRetryInvalidHeaderAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1437,10 +1696,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1456,10 +1721,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> deleteAsyncRelativeRetryInvalidJsonPollingAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1474,10 +1745,16 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -1493,10 +1770,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -1513,10 +1789,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> post202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> post202RetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -1531,10 +1814,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -1550,10 +1832,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders>> beginPost202RetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1569,10 +1858,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -1589,10 +1877,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> postAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -1607,10 +1902,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -1626,10 +1920,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1645,10 +1946,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1665,10 +1965,17 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1683,10 +1990,9 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback);
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1702,9 +2008,16 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
 }

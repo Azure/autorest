@@ -4,7 +4,7 @@
     "description": "Composite Swagger Client that represents merging body complex and complex model swagger clients"
   },
   "documents": [
-    "src/dev/TestServer/swagger/complex-model.json",
-    "src/dev/TestServer/swagger/body-complex.json"
+    "./complex-model.json",
+    "./body-complex.json"
   ]
 }

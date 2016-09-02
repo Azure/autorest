@@ -11,7 +11,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
@@ -24,8 +23,6 @@ import petstore.models.StorageAccountCreateParameters;
 import petstore.models.StorageAccountKeys;
 import petstore.models.StorageAccountRegenerateKeyParameters;
 import petstore.models.StorageAccountUpdateParameters;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -37,6 +34,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -66,43 +65,43 @@ public final class StorageAccountsImpl implements StorageAccounts {
     interface StorageAccountsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability")
-        Call<ResponseBody> checkNameAvailability(@Path("subscriptionId") String subscriptionId, @Body StorageAccountCheckNameAvailabilityParameters accountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> checkNameAvailability(@Path("subscriptionId") String subscriptionId, @Body StorageAccountCheckNameAvailabilityParameters accountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
-        Call<ResponseBody> create(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> create(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
-        Call<ResponseBody> beginCreate(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> beginCreate(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
-        Call<ResponseBody> getProperties(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> getProperties(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
-        Call<ResponseBody> update(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountUpdateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountUpdateParameters parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys")
-        Call<ResponseBody> listKeys(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listKeys(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts")
-        Call<ResponseBody> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts")
-        Call<ResponseBody> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey")
-        Call<ResponseBody> regenerateKey(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountRegenerateKeyParameters regenerateKey, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> regenerateKey(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountRegenerateKeyParameters regenerateKey, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -116,18 +115,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the CheckNameAvailabilityResult object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<CheckNameAvailabilityResult> checkNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName) throws CloudException, IOException, IllegalArgumentException {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(accountName);
-        Call<ResponseBody> call = service.checkNameAvailability(this.client.subscriptionId(), accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return checkNameAvailabilityDelegate(call.execute());
+        return checkNameAvailabilityAsync(accountName).toBlocking().single();
     }
 
     /**
@@ -135,9 +123,19 @@ public final class StorageAccountsImpl implements StorageAccounts {
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<CheckNameAvailabilityResult> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, final ServiceCallback<CheckNameAvailabilityResult> serviceCallback) {
+        return ServiceCall.create(checkNameAvailabilityAsync(accountName), serviceCallback);
+    }
+
+    /**
+     * Checks that account name is valid and is not in use.
+     *
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @return the observable to the CheckNameAvailabilityResult object
+     */
+    public Observable<ServiceResponse<CheckNameAvailabilityResult>> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -148,26 +146,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Validator.validate(accountName);
-        Call<ResponseBody> call = service.checkNameAvailability(this.client.subscriptionId(), accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<CheckNameAvailabilityResult> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<CheckNameAvailabilityResult>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<CheckNameAvailabilityResult> clientResponse = checkNameAvailabilityDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.checkNameAvailability(this.client.subscriptionId(), accountName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CheckNameAvailabilityResult>>>() {
+                @Override
+                public Observable<ServiceResponse<CheckNameAvailabilityResult>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<CheckNameAvailabilityResult> clientResponse = checkNameAvailabilityDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<CheckNameAvailabilityResult> checkNameAvailabilityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -190,24 +180,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccount object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<StorageAccount> create(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters) throws CloudException, IOException, IllegalArgumentException, InterruptedException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        Response<ResponseBody> result = service.create(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<StorageAccount>() { }.getType());
+        return createAsync(resourceGroupName, accountName, parameters).toBlocking().last();
     }
 
     /**
@@ -220,6 +193,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceCall.create(createAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    }
+
+    /**
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param parameters The parameters to provide for the created account.
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<StorageAccount>> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -236,22 +221,8 @@ public final class StorageAccountsImpl implements StorageAccounts {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Validator.validate(parameters);
-        Call<ResponseBody> call = service.create(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccount> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                if (serviceCallback != null) {
-                    serviceCallback.failure(t);
-                }
-                serviceCall.failure(t);
-            }
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<StorageAccount>() { }.getType(), serviceCall, serviceCallback);
-            }
-        });
-        return serviceCall;
+        Observable<Response<ResponseBody>> observable = service.create(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<StorageAccount>() { }.getType());
     }
 
     /**
@@ -266,24 +237,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccount object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<StorageAccount> beginCreate(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        Call<ResponseBody> call = service.beginCreate(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return beginCreateDelegate(call.execute());
+        return beginCreateAsync(resourceGroupName, accountName, parameters).toBlocking().single();
     }
 
     /**
@@ -293,9 +247,21 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccount> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceCall.create(beginCreateAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    }
+
+    /**
+     * Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param parameters The parameters to provide for the created account.
+     * @return the observable to the StorageAccount object
+     */
+    public Observable<ServiceResponse<StorageAccount>> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -312,26 +278,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Validator.validate(parameters);
-        Call<ResponseBody> call = service.beginCreate(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccount> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<StorageAccount>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<StorageAccount> clientResponse = beginCreateDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.beginCreate(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccount>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccount>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccount> clientResponse = beginCreateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<StorageAccount> beginCreateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -353,20 +311,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> delete(String resourceGroupName, String accountName) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.delete(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return deleteDelegate(call.execute());
+        return deleteAsync(resourceGroupName, accountName).toBlocking().single();
     }
 
     /**
@@ -375,9 +320,20 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsync(String resourceGroupName, String accountName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(deleteAsync(resourceGroupName, accountName), serviceCallback);
+    }
+
+    /**
+     * Deletes a storage account in Microsoft Azure.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> deleteAsync(String resourceGroupName, String accountName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -390,26 +346,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.delete(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = deleteDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.delete(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = deleteDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -430,20 +378,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccount object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<StorageAccount> getProperties(String resourceGroupName, String accountName) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.getProperties(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return getPropertiesDelegate(call.execute());
+        return getPropertiesAsync(resourceGroupName, accountName).toBlocking().single();
     }
 
     /**
@@ -452,9 +387,20 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccount> getPropertiesAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceCall.create(getPropertiesAsync(resourceGroupName, accountName), serviceCallback);
+    }
+
+    /**
+     * Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @return the observable to the StorageAccount object
+     */
+    public Observable<ServiceResponse<StorageAccount>> getPropertiesAsync(String resourceGroupName, String accountName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -467,26 +413,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getProperties(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccount> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<StorageAccount>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<StorageAccount> clientResponse = getPropertiesDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getProperties(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccount>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccount>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccount> clientResponse = getPropertiesDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<StorageAccount> getPropertiesDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -508,24 +446,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccount object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<StorageAccount> update(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (parameters == null) {
-            throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(parameters);
-        Call<ResponseBody> call = service.update(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return updateDelegate(call.execute());
+        return updateAsync(resourceGroupName, accountName, parameters).toBlocking().single();
     }
 
     /**
@@ -535,9 +456,21 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccount> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceCall.create(updateAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    }
+
+    /**
+     * Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
+     * @return the observable to the StorageAccount object
+     */
+    public Observable<ServiceResponse<StorageAccount>> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -554,26 +487,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Validator.validate(parameters);
-        Call<ResponseBody> call = service.update(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccount> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<StorageAccount>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<StorageAccount> clientResponse = updateDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.update(resourceGroupName, accountName, this.client.subscriptionId(), parameters, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccount>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccount>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccount> clientResponse = updateDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<StorageAccount> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -594,20 +519,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccountKeys object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<StorageAccountKeys> listKeys(String resourceGroupName, String accountName) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.listKeys(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return listKeysDelegate(call.execute());
+        return listKeysAsync(resourceGroupName, accountName).toBlocking().single();
     }
 
     /**
@@ -616,9 +528,20 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback) {
+        return ServiceCall.create(listKeysAsync(resourceGroupName, accountName), serviceCallback);
+    }
+
+    /**
+     * Lists the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param accountName The name of the storage account.
+     * @return the observable to the StorageAccountKeys object
+     */
+    public Observable<ServiceResponse<StorageAccountKeys>> listKeysAsync(String resourceGroupName, String accountName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -631,26 +554,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.listKeys(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccountKeys> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<StorageAccountKeys>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<StorageAccountKeys> clientResponse = listKeysDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.listKeys(resourceGroupName, accountName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccountKeys>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccountKeys>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccountKeys> clientResponse = listKeysDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<StorageAccountKeys> listKeysDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -669,48 +584,44 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the List&lt;StorageAccount&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<StorageAccount>> list() throws CloudException, IOException, IllegalArgumentException {
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        ServiceResponse<PageImpl<StorageAccount>> response = listDelegate(call.execute());
-        List<StorageAccount> result = response.getBody().getItems();
-        return new ServiceResponse<>(result, response.getResponse());
+        return listAsync().toBlocking().single();
     }
 
     /**
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<StorageAccount>> listAsync(final ServiceCallback<List<StorageAccount>> serviceCallback) {
+        return ServiceCall.create(listAsync(), serviceCallback);
+    }
+
+    /**
+     * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+     *
+     * @return the observable to the List&lt;StorageAccount&gt; object
+     */
+    public Observable<ServiceResponse<List<StorageAccount>>> listAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<List<StorageAccount>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<StorageAccount>>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<PageImpl<StorageAccount>> result = listDelegate(response);
-                    serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
+        return service.list(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<StorageAccount>>>>() {
+                @Override
+                public Observable<ServiceResponse<List<StorageAccount>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<StorageAccount>> result = listDelegate(response);
+                        ServiceResponse<List<StorageAccount>> clientResponse = new ServiceResponse<List<StorageAccount>>(result.getBody().getItems(), result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<PageImpl<StorageAccount>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -730,19 +641,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the List&lt;StorageAccount&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<List<StorageAccount>> listByResourceGroup(String resourceGroupName) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Call<ResponseBody> call = service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        ServiceResponse<PageImpl<StorageAccount>> response = listByResourceGroupDelegate(call.execute());
-        List<StorageAccount> result = response.getBody().getItems();
-        return new ServiceResponse<>(result, response.getResponse());
+        return listByResourceGroupAsync(resourceGroupName).toBlocking().single();
     }
 
     /**
@@ -750,9 +649,19 @@ public final class StorageAccountsImpl implements StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<StorageAccount>> listByResourceGroupAsync(String resourceGroupName, final ServiceCallback<List<StorageAccount>> serviceCallback) {
+        return ServiceCall.create(listByResourceGroupAsync(resourceGroupName), serviceCallback);
+    }
+
+    /**
+     * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @return the observable to the List&lt;StorageAccount&gt; object
+     */
+    public Observable<ServiceResponse<List<StorageAccount>>> listByResourceGroupAsync(String resourceGroupName) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -762,23 +671,19 @@ public final class StorageAccountsImpl implements StorageAccounts {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<List<StorageAccount>> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<List<StorageAccount>>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<PageImpl<StorageAccount>> result = listByResourceGroupDelegate(response);
-                    serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
+        return service.listByResourceGroup(resourceGroupName, this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<StorageAccount>>>>() {
+                @Override
+                public Observable<ServiceResponse<List<StorageAccount>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl<StorageAccount>> result = listByResourceGroupDelegate(response);
+                        ServiceResponse<List<StorageAccount>> clientResponse = new ServiceResponse<List<StorageAccount>>(result.getBody().getItems(), result.getResponse());
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<PageImpl<StorageAccount>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
@@ -800,24 +705,7 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @return the StorageAccountKeys object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<StorageAccountKeys> regenerateKey(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey) throws CloudException, IOException, IllegalArgumentException {
-        if (resourceGroupName == null) {
-            throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
-        }
-        if (accountName == null) {
-            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        if (regenerateKey == null) {
-            throw new IllegalArgumentException("Parameter regenerateKey is required and cannot be null.");
-        }
-        if (this.client.apiVersion() == null) {
-            throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
-        }
-        Validator.validate(regenerateKey);
-        Call<ResponseBody> call = service.regenerateKey(resourceGroupName, accountName, this.client.subscriptionId(), regenerateKey, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        return regenerateKeyDelegate(call.execute());
+        return regenerateKeyAsync(resourceGroupName, accountName, regenerateKey).toBlocking().single();
     }
 
     /**
@@ -827,9 +715,21 @@ public final class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountKeys> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey, final ServiceCallback<StorageAccountKeys> serviceCallback) {
+        return ServiceCall.create(regenerateKeyAsync(resourceGroupName, accountName, regenerateKey), serviceCallback);
+    }
+
+    /**
+     * Regenerates the access keys for the specified storage account.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
+     * @return the observable to the StorageAccountKeys object
+     */
+    public Observable<ServiceResponse<StorageAccountKeys>> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -846,26 +746,18 @@ public final class StorageAccountsImpl implements StorageAccounts {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         Validator.validate(regenerateKey);
-        Call<ResponseBody> call = service.regenerateKey(resourceGroupName, accountName, this.client.subscriptionId(), regenerateKey, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<StorageAccountKeys> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<StorageAccountKeys>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<StorageAccountKeys> clientResponse = regenerateKeyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.regenerateKey(resourceGroupName, accountName, this.client.subscriptionId(), regenerateKey, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StorageAccountKeys>>>() {
+                @Override
+                public Observable<ServiceResponse<StorageAccountKeys>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<StorageAccountKeys> clientResponse = regenerateKeyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<StorageAccountKeys> regenerateKeyDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {

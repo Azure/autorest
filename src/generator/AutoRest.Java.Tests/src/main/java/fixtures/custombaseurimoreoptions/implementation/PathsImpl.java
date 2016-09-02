@@ -18,17 +18,17 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,7 +58,7 @@ public final class PathsImpl implements Paths {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri/{subscriptionId}/{keyName}")
-        Call<ResponseBody> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion, @Header("x-ms-parameterized-host") String parameterizedHost);
+        Observable<Response<ResponseBody>> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion, @Header("x-ms-parameterized-host") String parameterizedHost);
 
     }
 
@@ -74,25 +74,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException {
-        if (vault == null) {
-            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
-        }
-        if (secret == null) {
-            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
-        }
-        if (this.client.dnsSuffix() == null) {
-            throw new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null.");
-        }
-        if (keyName == null) {
-            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        final String keyVersion = null;
-        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        return getEmptyDelegate(call.execute());
+        return getEmptyAsync(vault, secret, keyName).toBlocking().single();
     }
 
     /**
@@ -102,9 +84,21 @@ public final class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getEmptyAsync(vault, secret, keyName), serviceCallback);
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -122,26 +116,18 @@ public final class PathsImpl implements Paths {
         }
         final String keyVersion = null;
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     /**
@@ -157,24 +143,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException {
-        if (vault == null) {
-            throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
-        }
-        if (secret == null) {
-            throw new IllegalArgumentException("Parameter secret is required and cannot be null.");
-        }
-        if (this.client.dnsSuffix() == null) {
-            throw new IllegalArgumentException("Parameter this.client.dnsSuffix() is required and cannot be null.");
-        }
-        if (keyName == null) {
-            throw new IllegalArgumentException("Parameter keyName is required and cannot be null.");
-        }
-        if (this.client.subscriptionId() == null) {
-            throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
-        }
-        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        return getEmptyDelegate(call.execute());
+        return getEmptyAsync(vault, secret, keyName, keyVersion).toBlocking().single();
     }
 
     /**
@@ -185,9 +154,22 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -204,26 +186,18 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        Call<ResponseBody> call = service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

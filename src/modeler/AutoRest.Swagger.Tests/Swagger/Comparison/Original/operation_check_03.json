@@ -1,0 +1,58 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_03",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Parameters": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "parameters": [
+          {
+            "name": "x-ao",
+            "in": "header",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "x-ar",
+            "in": "header",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "x-bo",
+            "in": "header",
+            "type": "integer",
+            "required": false
+          },
+          {
+            "name": "x-br",
+            "in": "header",
+            "type": "integer",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "headers": {
+              "x-a": { "type": "integer" },
+              "x-b": { "type": "integer" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

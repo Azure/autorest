@@ -12,7 +12,7 @@ class StorageAccountUpdateParameters(Model):
     :type tags: dict
     :param properties:
     :type properties: :class:`StorageAccountPropertiesUpdateParameters
-     <petstore.models.StorageAccountPropertiesUpdateParameters>`
+     <Petstore.models.StorageAccountPropertiesUpdateParameters>`
     """ 
 
     _attribute_map = {

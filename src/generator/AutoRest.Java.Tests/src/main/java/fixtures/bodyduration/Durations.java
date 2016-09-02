@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.Period;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,10 +36,16 @@ public interface Durations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
+
+    /**
+     * Get null duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getNullAsync();
 
     /**
      * Put a positive duration value.
@@ -56,10 +63,17 @@ public interface Durations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody);
 
     /**
      * Get a positive duration value.
@@ -74,10 +88,16 @@ public interface Durations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+
+    /**
+     * Get a positive duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getPositiveDurationAsync();
 
     /**
      * Get an invalid duration value.
@@ -92,9 +112,15 @@ public interface Durations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @return the observable to the Period object
+     */
+    Observable<ServiceResponse<Period>> getInvalidAsync();
 
 }

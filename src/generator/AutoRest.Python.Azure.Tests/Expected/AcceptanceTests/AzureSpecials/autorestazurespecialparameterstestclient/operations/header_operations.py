@@ -88,7 +88,7 @@ class HeaderOperations(object):
          Additional parameters for the operation
         :type header_custom_named_request_id_param_grouping_parameters:
          :class:`HeaderCustomNamedRequestIdParamGroupingParameters
-         <fixtures.acceptancetestsazurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters>`
+         <Fixtures.AcceptanceTestsAzureSpecials.models.HeaderCustomNamedRequestIdParamGroupingParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
