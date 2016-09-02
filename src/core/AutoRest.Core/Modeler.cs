@@ -21,5 +21,11 @@ namespace AutoRest.Core
         public abstract ServiceClient Build();
 
         public abstract ServiceClient Build(out IEnumerable<ValidationMessage> messages);
+
+        /// <summary>
+        /// Copares two versions of the same service specification.
+        /// </summary>
+        /// <returns></returns>
+        public abstract IEnumerable<ComparisonMessage> Compare();
     }
 }

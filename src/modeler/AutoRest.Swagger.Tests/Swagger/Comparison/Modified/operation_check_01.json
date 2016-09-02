@@ -1,0 +1,115 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_01",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Path": {
+      "get": {
+        "tag": [ "Paths" ],
+        "operationId": "Paths_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/Operations": {
+      "put": {
+        "tag": [ "Operations" ],
+        "operationId": "Operations_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "tag": [ "Operations" ],
+        "operationId": "Operations_Port",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/Parameters/{b}": {
+      "get": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "b",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "c",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "d",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "e",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "enum": [ "theonlyvalue", "andonemore" ]
+          }
+        ]
+      }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "id":  { "type":  "integer"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

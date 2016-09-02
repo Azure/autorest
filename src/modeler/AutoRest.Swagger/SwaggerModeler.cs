@@ -150,6 +150,40 @@ namespace AutoRest.Swagger
             return ServiceClient;
         }
 
+        /// <summary>
+        /// Copares two versions of the same service specification.
+        /// </summary>
+        /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        public override IEnumerable<ComparisonMessage> Compare()
+        {
+            Logger.LogInfo(Resources.ParsingSwagger);
+            if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
+            {
+                throw ErrorManager.CreateError(Resources.InputRequired);
+            }
+
+            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
+            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+
+            var context = new ComparisonContext(oldDefintion, newDefintion);
+
+            // Look for semantic errors and warnings in the new document.
+            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
+
+            // Only compare versions if the new version is correct.
+            var comparisonMessages = 
+                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                newDefintion.Compare(context, oldDefintion) : 
+                Enumerable.Empty<ComparisonMessage>();
+
+            return validationMessages
+                .Select(msg => 
+                    new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
+                .Concat(comparisonMessages);
+        }
+
         private void UpdateSettings()
         {
             if (ServiceDefinition.Info.CodeGenerationSettings != null)

@@ -1,0 +1,122 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_04",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "definitions": {
+    "A": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 4711,
+          "collectionFormat": "csv",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 17,
+            "multipleOf": 5
+          }
+        },
+        "b": {
+          "type": "array",
+          "minItems": 13,
+          "maxItems": 4711,
+          "collectionFormat": "csv",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 17,
+            "pattern": "[a-z][a-z0-9]*"
+          }
+        },
+        "c": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 17,
+          "multipleOf": 5
+        },
+        "d": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 17,
+          "pattern": "[a-z][a-z0-9]*"
+        },
+        "f": {
+          "type": "string",
+          "enum": [ "A", "B" ]
+        },
+        "g": {
+          "type": "string",
+          "enum": [ "A", "B", "C" ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "a": {
+      "name": "a",
+      "in": "header",
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 4711,
+      "collectionFormat": "csv",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 17,
+        "multipleOf": 5
+      }
+    },
+    "b": {
+      "name": "b",
+      "in": "header",
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 4711,
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 17,
+        "pattern": "[a-z][a-z0-9]*"
+      }
+    },
+    "c": {
+      "name": "c",
+      "in": "header",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 17,
+      "multipleOf": 5
+    },
+    "d": {
+      "name": "d",
+      "in": "header",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 17,
+      "pattern": "[a-z][a-z0-9]*"
+    },
+    "e": {
+      "name": "e",
+      "type": "object",
+      "in": "body",
+      "schema": { "$ref": "#/definitions/A" }
+    },
+    "f": {
+      "type": "string",
+      "in": "header",
+      "enum": [ "A", "B" ]
+    },
+    "g": {
+      "type": "string",
+      "in": "header",
+      "enum": [ "A", "B", "C" ]
+    }
+  }
+}
