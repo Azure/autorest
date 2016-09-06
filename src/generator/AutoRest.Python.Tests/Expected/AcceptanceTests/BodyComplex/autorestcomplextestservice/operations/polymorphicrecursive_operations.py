@@ -41,7 +41,7 @@ class PolymorphicrecursiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Fish
-         <fixtures.acceptancetestsbodycomplex.models.Fish>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -133,7 +133,7 @@ class PolymorphicrecursiveOperations(object):
          ]
          }
         :type complex_body: :class:`Fish
-         <fixtures.acceptancetestsbodycomplex.models.Fish>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

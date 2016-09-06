@@ -17,7 +17,7 @@ class UsageListResult(Model):
 
     :param value: Gets or sets the list Storage Resource Usages.
     :type value: list of :class:`Usage
-     <fixtures.acceptancetestsstoragemanagementclient.models.Usage>`
+     <Fixtures.AcceptanceTestsStorageManagementClient.models.Usage>`
     """ 
 
     _attribute_map = {

@@ -224,8 +224,7 @@ namespace AutoRest.Python.TemplateModels
             }
         }
 
-        /// <summary>
-        /// Provides the property documentation string along with default value if any.
+        /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter documentation string along with default value if any 
@@ -274,9 +273,9 @@ namespace AutoRest.Python.TemplateModels
                 throw new ArgumentNullException("type");
             }
 
-            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            var modelNamespace = ServiceClient.Name.ToPythonCase();
             if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                modelNamespace = ServiceClient.Namespace;
 
             string result = "object";
             var primaryType = type as PrimaryType;

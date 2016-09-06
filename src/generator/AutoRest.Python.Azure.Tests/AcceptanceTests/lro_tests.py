@@ -64,7 +64,6 @@ class LroTests(unittest.TestCase):
         return super(LroTests, self).setUp()
 
     def assertRaisesWithMessage(self, msg, func, *args, **kwargs):
-
         try:
             func(*args, **kwargs)
             self.fail("CloudError wasn't raised as expected")
@@ -75,7 +74,6 @@ class LroTests(unittest.TestCase):
             error = err.error
             self.assertIsNotNone(error)
             if isinstance(error, CloudErrorData):
-                self.assertIsNone(error.error)
                 self.assertIsNotNone(error.message)
 
     def test_lro_happy_paths(self):
@@ -85,13 +83,13 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.put201_creating_succeeded200(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
             self.client.lr_os.put201_creating_failed200(product).result)
 
         process = self.client.lr_os.put200_updating_succeeded204(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
             self.client.lr_os.put200_acceptedcanceled200(product).result)
 
         # Testing raw
@@ -143,10 +141,10 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.put_async_no_retry_succeeded(product)
         self.assertEqual("Succeeded", process.result().provisioning_state)
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
             self.client.lr_os.put_async_retry_failed(product).result)
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
             self.client.lr_os.put_async_no_retrycanceled(product).result)
 
         self.assertIsNone(self.client.lr_os.delete204_succeeded().result())
@@ -158,10 +156,10 @@ class LroTests(unittest.TestCase):
 
         self.assertIsNone(self.client.lr_os.delete_async_no_header_in_retry().result())
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
             self.client.lr_os.delete_async_retrycanceled().result)
 
-        self.assertRaisesWithMessage("Long running operation failed",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Failed",
             self.client.lr_os.delete_async_retry_failed().result)
 
         self.assertIsNone(self.client.lr_os.delete_async_retry_succeeded().result())
@@ -177,10 +175,10 @@ class LroTests(unittest.TestCase):
 
         self.assertIsNone(self.client.lr_os.post202_no_retry204(product).result())
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Failed'",
+        self.assertRaisesWithMessage("Internal Server Error",
             self.client.lr_os.post_async_retry_failed().result)
 
-        self.assertRaisesWithMessage("Long running operation failed with status 'Canceled'",
+        self.assertRaisesWithMessage("Operation failed with status: 200. Details: Resource state Canceled",
             self.client.lr_os.post_async_retrycanceled().result)
 
         prod = self.client.lr_os.post_async_retry_succeeded().result()

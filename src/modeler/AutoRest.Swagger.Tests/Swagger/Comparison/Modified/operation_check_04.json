@@ -1,0 +1,124 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_04",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Parameters": {
+      "get": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "a",
+            "in": "header",
+            "type": "array",
+            "minItems": 11,
+            "maxItems": 5000,
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "integer",
+              "minimum": 11,
+              "maximum": 21,
+              "multipleOf": 4
+            }
+          },
+          {
+            "name": "b",
+            "in": "header",
+            "type": "array",
+            "minItems": 15,
+            "maxItems": 4000,
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 15,
+              "pattern": "[a-z][a-z]*"
+            }
+          },
+          {
+            "name": "c",
+            "in": "header",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15,
+            "multipleOf": 4
+          },
+          {
+            "name": "d",
+            "in": "header",
+            "type": "string",
+            "minLength": 11,
+            "maxLength": 21,
+            "pattern": "[a-z][a-z]*"
+          }
+        ]
+      },
+      "put": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "a",
+            "type": "object",
+            "in": "body",
+            "schema": { "$ref": "#/definitions/A" }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "A": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 5000,
+          "collectionFormat": "pipes",
+          "items": {
+            "type": "integer",
+            "minimum": 11,
+            "maximum": 21,
+            "multipleOf": 4
+          }
+        },
+        "b": {
+          "type": "array",
+          "minItems": 15,
+          "maxItems": 5000,
+          "collectionFormat": "pipes",
+          "items": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 15,
+            "pattern": "[a-z][a-z]*"
+          }
+        },
+        "c": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "multipleOf": 4
+        },
+        "d": {
+          "type": "string",
+          "minLength": 11,
+          "maxLength": 21,
+          "pattern": "[a-z][a-z]*"
+        }
+      }
+    }
+  }
+}

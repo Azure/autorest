@@ -25,7 +25,7 @@ class Basic(Model):
     :param color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
     :type color: str or :class:`CMYKColors
-     <fixtures.acceptancetestsbodycomplex.models.CMYKColors>`
+     <Fixtures.AcceptanceTestsBodyComplex.models.CMYKColors>`
     """ 
 
     _attribute_map = {

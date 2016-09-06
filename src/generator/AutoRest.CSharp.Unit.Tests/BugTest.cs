@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Unit.Tests
     public class BugTest
     {
         private ITestOutputHelper _output;
-        internal static string[] SuppressWarnings = {"CS1701"};
-
+        internal static string[] SuppressWarnings = {"CS1701", "CS1591" };
+        //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
         public BugTest(ITestOutputHelper output)
         {
             _output = output;

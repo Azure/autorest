@@ -4,7 +4,7 @@
     "description": "Swagger 1 documentation."
   },
   "documents": [
-    "Swagger/swagger-1.json",
-    "Swagger/swagger-conflict-in-settings.json"
+    "./swagger-1.json",
+    "./swagger-conflict-in-settings.json"
   ]  
 }

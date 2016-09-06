@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-09-01 Version 0.4.3
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Better exception message (https://github.com/Azure/autorest/pull/1300)
+
 2016-08-15 Version 0.4.2
 ++++++++++++++++++++++++
 

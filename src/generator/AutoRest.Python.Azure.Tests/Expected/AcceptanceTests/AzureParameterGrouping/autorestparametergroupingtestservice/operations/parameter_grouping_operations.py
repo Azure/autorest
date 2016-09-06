@@ -40,7 +40,7 @@ class ParameterGroupingOperations(object):
          parameters for the operation
         :type parameter_grouping_post_required_parameters:
          :class:`ParameterGroupingPostRequiredParameters
-         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostRequiredParameters>`
+         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostRequiredParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -110,7 +110,7 @@ class ParameterGroupingOperations(object):
          parameters for the operation
         :type parameter_grouping_post_optional_parameters:
          :class:`ParameterGroupingPostOptionalParameters
-         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostOptionalParameters>`
+         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostOptionalParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -164,12 +164,12 @@ class ParameterGroupingOperations(object):
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup
-         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
+         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.FirstParameterGroup>`
         :param parameter_grouping_post_multi_param_groups_second_param_group:
          Additional parameters for the operation
         :type parameter_grouping_post_multi_param_groups_second_param_group:
          :class:`ParameterGroupingPostMultiParamGroupsSecondParamGroup
-         <fixtures.acceptancetestsazureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup>`
+         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -233,7 +233,7 @@ class ParameterGroupingOperations(object):
 
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: :class:`FirstParameterGroup
-         <fixtures.acceptancetestsazureparametergrouping.models.FirstParameterGroup>`
+         <Fixtures.AcceptanceTestsAzureParameterGrouping.models.FirstParameterGroup>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response

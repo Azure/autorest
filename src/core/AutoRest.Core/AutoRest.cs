@@ -81,5 +81,36 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
             }
         }
+
+        /// <summary>
+        /// Compares two specifications.
+        /// </summary>
+        /// <param name="settings">Code generator settings.</param>
+        public static void Compare(Settings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+            Logger.Entries.Clear();
+            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+
+            try
+            {
+                IEnumerable<ComparisonMessage> messages = modeler.Compare();
+
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+            }
+
+        }
     }
 }

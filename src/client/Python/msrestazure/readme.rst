@@ -15,6 +15,15 @@ To install:
 Release History
 ---------------
 
+2016-09-01 Version 0.4.2
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Better exception message (https://github.com/Azure/autorest/pull/1300)
+
+This version needs msrest >= 0.4.3
+
 2016-06-08 Version 0.4.1
 ++++++++++++++++++++++++
 
