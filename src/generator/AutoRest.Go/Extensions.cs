@@ -538,11 +538,14 @@ namespace AutoRest.Go
 
             // If the type is a paged model type, ensure the nextLink field exists
             // Note: Inject the field into a copy of the property list so as to not pollute the original list
+            // This is duplicating next links on graphrbac
+            // It's duplicating because NextLink and any property already in the model is not exactly the same string
+            // This lines are needed with authorization swagger
             if (    compositeType is ModelTemplateModel
                 &&  !String.IsNullOrEmpty((compositeType as ModelTemplateModel).NextLink))
             {
                 var nextLinkField = (compositeType as ModelTemplateModel).NextLink;
-                if (!properties.Any(p => p.Name == nextLinkField))
+                if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.Ordinal)))
                 {
                     var property = new Property();
                     property.Name = nextLinkField;

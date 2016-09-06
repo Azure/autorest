@@ -1,0 +1,43 @@
+How it should be...
+
+type GetObjectsResult struct {
+    autorest.Response `json:"-"`
+    Value *[]AADObject `json:"value,omitempty"`
+    OdataNextLink *string `json:"odata.nextLink,omitempty"`
+}
+
+======
+
+AS IS
+
+type GetObjectsResult struct {
+    autorest.Response `json:"-"`
+    Value *[]AADObject `json:"value,omitempty"`
+    OdatanextLink *string `json:"odata.nextLink,omitempty"`
+    Odata.nextLink *string `json:",omitempty"`
+}
+
+=====
+
+If I add '.' in PascalCase method...
+
+type GetObjectsResult struct {
+	autorest.Response `json:"-"`
+	Value             *[]AADObject `json:"value,omitempty"`
+	OdatanextLink     *string      `json:"odata.nextLink,omitempty"`
+	OdataNextLink     *string      `json:",omitempty"`
+}
+
+
+
+=====
+
+
+
+If I comment Nextfilend thing in Fields method
+
+type GetObjectsResult struct {
+	autorest.Response `json:"-"`
+	Value             *[]AADObject `json:"value,omitempty"`
+	OdatanextLink     *string      `json:"odata.nextLink,omitempty"`
+}

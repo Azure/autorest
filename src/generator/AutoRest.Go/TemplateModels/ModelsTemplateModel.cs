@@ -93,7 +93,7 @@ namespace AutoRest.Go.TemplateModels
             // Find all methods that returned paged results
             PagedTypes = new Dictionary<IType, string>();
             serviceClient.Methods
-                .Where(m => m.IsPageable())
+                .Where(m => m.IsPageable()) //is m.NextLink not empty nor nil? NextLink is not an attribute, it is a function that returns a string, BTW
                 .ForEach(m =>
                 {
                     if (!PagedTypes.ContainsKey(m.ReturnValue().Body))
@@ -103,6 +103,7 @@ namespace AutoRest.Go.TemplateModels
                 });
 
             // Mark all models returned by one or more methods and note any "next link" fields used with paged data
+            //The duplicating next link problem could be here!
             ModelTemplateModels
                 .Where(mtm =>
                 {
@@ -113,7 +114,8 @@ namespace AutoRest.Go.TemplateModels
                     mtm.IsResponseType = true;
                     if (PagedTypes.ContainsKey(mtm))
                     {
-                        mtm.NextLink = PagedTypes[mtm];
+                        mtm.NextLink = PagedTypes[mtm]; //this next link is an attribute!
+                        // Marking is used for some weird methods in model file
                     }
                 });
 
