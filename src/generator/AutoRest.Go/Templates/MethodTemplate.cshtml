@@ -41,7 +41,7 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
     {
     @:if err := validation.Validate([]validation.Validation{
          @:@(Model.ParameterValidations)}); err != nil {
-             @:return result, @(Model.AutorestError("Validation error "))
+             @:return result, @(Model.ValidationError())
     @:}
     @:@EmptyLine
     }
