@@ -36,7 +36,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getNull() throws ErrorException, IOException;
+    List<Integer> getNull() throws ErrorException, IOException;
 
     /**
      * Get null array value.
@@ -51,7 +51,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getNullAsync();
+    Observable<List<Integer>> getNullAsync();
+
+    /**
+     * Get null array value.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getNullAsyncWithServiceResponse();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -60,7 +67,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getInvalid() throws ErrorException, IOException;
+    List<Integer> getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid array [1, 2, 3.
@@ -75,7 +82,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getInvalidAsync();
+    Observable<List<Integer>> getInvalidAsync();
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getInvalidAsyncWithServiceResponse();
 
     /**
      * Get empty array value [].
@@ -84,7 +98,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getEmpty() throws ErrorException, IOException;
+    List<Integer> getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty array value [].
@@ -99,7 +113,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getEmptyAsync();
+    Observable<List<Integer>> getEmptyAsync();
+
+    /**
+     * Get empty array value [].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getEmptyAsyncWithServiceResponse();
 
     /**
      * Set array value empty [].
@@ -110,7 +131,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [].
@@ -127,7 +148,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putEmptyAsync(List<String> arrayBody);
+    Observable<Void> putEmptyAsync(List<String> arrayBody);
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyAsyncWithServiceResponse(List<String> arrayBody);
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -136,7 +165,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanTfft() throws ErrorException, IOException;
+    List<Boolean> getBooleanTfft() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -151,7 +180,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanTfftAsync();
+    Observable<List<Boolean>> getBooleanTfftAsync();
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanTfftAsyncWithServiceResponse();
 
     /**
      * Set array value empty [true, false, false, true].
@@ -162,7 +198,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [true, false, false, true].
@@ -179,7 +215,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putBooleanTfftAsync(List<Boolean> arrayBody);
+    Observable<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBooleanTfftAsyncWithServiceResponse(List<Boolean> arrayBody);
 
     /**
      * Get boolean array value [true, null, false].
@@ -188,7 +232,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, null, false].
@@ -203,7 +247,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullAsync();
+    Observable<List<Boolean>> getBooleanInvalidNullAsync();
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -212,7 +263,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -227,7 +278,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringAsync();
+    Observable<List<Boolean>> getBooleanInvalidStringAsync();
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -236,7 +294,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getIntegerValid() throws ErrorException, IOException;
+    List<Integer> getIntegerValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -251,7 +309,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getIntegerValidAsync();
+    Observable<List<Integer>> getIntegerValidAsync();
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntegerValidAsyncWithServiceResponse();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -262,7 +327,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -279,7 +344,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Integer&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putIntegerValidAsync(List<Integer> arrayBody);
+    Observable<Void> putIntegerValidAsync(List<Integer> arrayBody);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putIntegerValidAsyncWithServiceResponse(List<Integer> arrayBody);
 
     /**
      * Get integer array value [1, null, 0].
@@ -288,7 +361,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getIntInvalidNull() throws ErrorException, IOException;
+    List<Integer> getIntInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, null, 0].
@@ -303,7 +376,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getIntInvalidNullAsync();
+    Observable<List<Integer>> getIntInvalidNullAsync();
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -312,7 +392,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Integer>> getIntInvalidString() throws ErrorException, IOException;
+    List<Integer> getIntInvalidString() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -327,7 +407,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<ServiceResponse<List<Integer>>> getIntInvalidStringAsync();
+    Observable<List<Integer>> getIntInvalidStringAsync();
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -336,7 +423,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Long>> getLongValid() throws ErrorException, IOException;
+    List<Long> getLongValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -351,7 +438,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<ServiceResponse<List<Long>>> getLongValidAsync();
+    Observable<List<Long>> getLongValidAsync();
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongValidAsyncWithServiceResponse();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -362,7 +456,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -379,7 +473,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Long&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLongValidAsync(List<Long> arrayBody);
+    Observable<Void> putLongValidAsync(List<Long> arrayBody);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLongValidAsyncWithServiceResponse(List<Long> arrayBody);
 
     /**
      * Get long array value [1, null, 0].
@@ -388,7 +490,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Long>> getLongInvalidNull() throws ErrorException, IOException;
+    List<Long> getLongInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get long array value [1, null, 0].
@@ -403,7 +505,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<ServiceResponse<List<Long>>> getLongInvalidNullAsync();
+    Observable<List<Long>> getLongInvalidNullAsync();
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -412,7 +521,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Long>> getLongInvalidString() throws ErrorException, IOException;
+    List<Long> getLongInvalidString() throws ErrorException, IOException;
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -427,7 +536,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<ServiceResponse<List<Long>>> getLongInvalidStringAsync();
+    Observable<List<Long>> getLongInvalidStringAsync();
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -436,7 +552,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getFloatValid() throws ErrorException, IOException;
+    List<Double> getFloatValid() throws ErrorException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -451,7 +567,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getFloatValidAsync();
+    Observable<List<Double>> getFloatValidAsync();
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatValidAsyncWithServiceResponse();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -462,7 +585,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -479,7 +602,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putFloatValidAsync(List<Double> arrayBody);
+    Observable<Void> putFloatValidAsync(List<Double> arrayBody);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFloatValidAsyncWithServiceResponse(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -488,7 +619,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getFloatInvalidNull() throws ErrorException, IOException;
+    List<Double> getFloatInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -503,7 +634,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getFloatInvalidNullAsync();
+    Observable<List<Double>> getFloatInvalidNullAsync();
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -512,7 +650,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getFloatInvalidString() throws ErrorException, IOException;
+    List<Double> getFloatInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -527,7 +665,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getFloatInvalidStringAsync();
+    Observable<List<Double>> getFloatInvalidStringAsync();
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -536,7 +681,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getDoubleValid() throws ErrorException, IOException;
+    List<Double> getDoubleValid() throws ErrorException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -551,7 +696,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getDoubleValidAsync();
+    Observable<List<Double>> getDoubleValidAsync();
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleValidAsyncWithServiceResponse();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -562,7 +714,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -579,7 +731,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDoubleValidAsync(List<Double> arrayBody);
+    Observable<Void> putDoubleValidAsync(List<Double> arrayBody);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDoubleValidAsyncWithServiceResponse(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -588,7 +748,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidNull() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -603,7 +763,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullAsync();
+    Observable<List<Double>> getDoubleInvalidNullAsync();
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -612,7 +779,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidString() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -627,7 +794,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringAsync();
+    Observable<List<Double>> getDoubleInvalidStringAsync();
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -636,7 +810,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<String>> getStringValid() throws ErrorException, IOException;
+    List<String> getStringValid() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -651,7 +825,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<ServiceResponse<List<String>>> getStringValidAsync();
+    Observable<List<String>> getStringValidAsync();
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringValidAsyncWithServiceResponse();
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -662,7 +843,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -679,7 +860,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putStringValidAsync(List<String> arrayBody);
+    Observable<Void> putStringValidAsync(List<String> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putStringValidAsyncWithServiceResponse(List<String> arrayBody);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -688,7 +877,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<String>> getStringWithNull() throws ErrorException, IOException;
+    List<String> getStringWithNull() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -703,7 +892,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<ServiceResponse<List<String>>> getStringWithNullAsync();
+    Observable<List<String>> getStringWithNullAsync();
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringWithNullAsyncWithServiceResponse();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -712,7 +908,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<String>> getStringWithInvalid() throws ErrorException, IOException;
+    List<String> getStringWithInvalid() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -727,7 +923,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<ServiceResponse<List<String>>> getStringWithInvalidAsync();
+    Observable<List<String>> getStringWithInvalidAsync();
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringWithInvalidAsyncWithServiceResponse();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -736,7 +939,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException;
+    List<UUID> getUuidValid() throws ErrorException, IOException;
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -751,7 +954,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;UUID&gt; object
      */
-    Observable<ServiceResponse<List<UUID>>> getUuidValidAsync();
+    Observable<List<UUID>> getUuidValidAsync();
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<ServiceResponse<List<UUID>>> getUuidValidAsyncWithServiceResponse();
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -762,7 +972,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -779,7 +989,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;UUID&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUuidValidAsync(List<UUID> arrayBody);
+    Observable<Void> putUuidValidAsync(List<UUID> arrayBody);
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUuidValidAsyncWithServiceResponse(List<UUID> arrayBody);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -788,7 +1006,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException;
+    List<UUID> getUuidInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -803,7 +1021,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;UUID&gt; object
      */
-    Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsAsync();
+    Observable<List<UUID>> getUuidInvalidCharsAsync();
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsAsyncWithServiceResponse();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -812,7 +1037,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateValid() throws ErrorException, IOException;
+    List<LocalDate> getDateValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -827,7 +1052,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<ServiceResponse<List<LocalDate>>> getDateValidAsync();
+    Observable<List<LocalDate>> getDateValidAsync();
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateValidAsyncWithServiceResponse();
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -838,7 +1070,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -855,7 +1087,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateValidAsync(List<LocalDate> arrayBody);
+    Observable<Void> putDateValidAsync(List<LocalDate> arrayBody);
+
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody the List&lt;LocalDate&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateValidAsyncWithServiceResponse(List<LocalDate> arrayBody);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -864,7 +1104,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -879,7 +1119,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullAsync();
+    Observable<List<LocalDate>> getDateInvalidNullAsync();
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -888,7 +1135,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -903,7 +1150,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsAsync();
+    Observable<List<LocalDate>> getDateInvalidCharsAsync();
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsAsyncWithServiceResponse();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -912,7 +1166,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeValid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -927,7 +1181,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeValidAsync();
+    Observable<List<DateTime>> getDateTimeValidAsync();
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeValidAsyncWithServiceResponse();
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -938,7 +1199,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -955,7 +1216,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeValidAsync(List<DateTime> arrayBody);
+    Observable<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
+
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody the List&lt;DateTime&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeValidAsyncWithServiceResponse(List<DateTime> arrayBody);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -964,7 +1233,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -979,7 +1248,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullAsync();
+    Observable<List<DateTime>> getDateTimeInvalidNullAsync();
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -988,7 +1264,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1003,7 +1279,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsAsync();
+    Observable<List<DateTime>> getDateTimeInvalidCharsAsync();
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsAsyncWithServiceResponse();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1012,7 +1295,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException;
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1027,7 +1310,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidAsync();
+    Observable<List<DateTime>> getDateTimeRfc1123ValidAsync();
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidAsyncWithServiceResponse();
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1038,7 +1328,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1055,7 +1345,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+    Observable<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsyncWithServiceResponse(List<DateTime> arrayBody);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1064,7 +1362,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Period&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Period>> getDurationValid() throws ErrorException, IOException;
+    List<Period> getDurationValid() throws ErrorException, IOException;
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1079,7 +1377,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Period&gt; object
      */
-    Observable<ServiceResponse<List<Period>>> getDurationValidAsync();
+    Observable<List<Period>> getDurationValidAsync();
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @return the observable to the List&lt;Period&gt; object
+     */
+    Observable<ServiceResponse<List<Period>>> getDurationValidAsyncWithServiceResponse();
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1090,7 +1395,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1107,7 +1412,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Period&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDurationValidAsync(List<Period> arrayBody);
+    Observable<Void> putDurationValidAsync(List<Period> arrayBody);
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDurationValidAsyncWithServiceResponse(List<Period> arrayBody);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1116,7 +1429,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<byte[]>> getByteValid() throws ErrorException, IOException;
+    List<byte[]> getByteValid() throws ErrorException, IOException;
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1131,7 +1444,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<ServiceResponse<List<byte[]>>> getByteValidAsync();
+    Observable<List<byte[]>> getByteValidAsync();
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getByteValidAsyncWithServiceResponse();
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1142,7 +1462,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1159,7 +1479,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putByteValidAsync(List<byte[]> arrayBody);
+    Observable<Void> putByteValidAsync(List<byte[]> arrayBody);
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody the List&lt;byte[]&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putByteValidAsyncWithServiceResponse(List<byte[]> arrayBody);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1168,7 +1496,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<byte[]>> getByteInvalidNull() throws ErrorException, IOException;
+    List<byte[]> getByteInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1183,7 +1511,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullAsync();
+    Observable<List<byte[]>> getByteInvalidNullAsync();
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1192,7 +1527,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<byte[]>> getBase64Url() throws ErrorException, IOException;
+    List<byte[]> getBase64Url() throws ErrorException, IOException;
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1207,7 +1542,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<ServiceResponse<List<byte[]>>> getBase64UrlAsync();
+    Observable<List<byte[]>> getBase64UrlAsync();
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getBase64UrlAsyncWithServiceResponse();
 
     /**
      * Get array of complex type null value.
@@ -1216,7 +1558,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Product>> getComplexNull() throws ErrorException, IOException;
+    List<Product> getComplexNull() throws ErrorException, IOException;
 
     /**
      * Get array of complex type null value.
@@ -1231,7 +1573,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<ServiceResponse<List<Product>>> getComplexNullAsync();
+    Observable<List<Product>> getComplexNullAsync();
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexNullAsyncWithServiceResponse();
 
     /**
      * Get empty array of complex type [].
@@ -1240,7 +1589,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Product>> getComplexEmpty() throws ErrorException, IOException;
+    List<Product> getComplexEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty array of complex type [].
@@ -1255,7 +1604,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<ServiceResponse<List<Product>>> getComplexEmptyAsync();
+    Observable<List<Product>> getComplexEmptyAsync();
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexEmptyAsyncWithServiceResponse();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1264,7 +1620,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Product>> getComplexItemNull() throws ErrorException, IOException;
+    List<Product> getComplexItemNull() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1279,7 +1635,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<ServiceResponse<List<Product>>> getComplexItemNullAsync();
+    Observable<List<Product>> getComplexItemNullAsync();
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexItemNullAsyncWithServiceResponse();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1288,7 +1651,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Product>> getComplexItemEmpty() throws ErrorException, IOException;
+    List<Product> getComplexItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1303,7 +1666,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<ServiceResponse<List<Product>>> getComplexItemEmptyAsync();
+    Observable<List<Product>> getComplexItemEmptyAsync();
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1312,7 +1682,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Product>> getComplexValid() throws ErrorException, IOException;
+    List<Product> getComplexValid() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1327,7 +1697,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<ServiceResponse<List<Product>>> getComplexValidAsync();
+    Observable<List<Product>> getComplexValidAsync();
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexValidAsyncWithServiceResponse();
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1338,7 +1715,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1355,7 +1732,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;Product&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putComplexValidAsync(List<Product> arrayBody);
+    Observable<Void> putComplexValidAsync(List<Product> arrayBody);
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putComplexValidAsyncWithServiceResponse(List<Product> arrayBody);
 
     /**
      * Get a null array.
@@ -1364,7 +1749,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayNull() throws ErrorException, IOException;
+    List<List<String>> getArrayNull() throws ErrorException, IOException;
 
     /**
      * Get a null array.
@@ -1379,7 +1764,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<String>>>> getArrayNullAsync();
+    Observable<List<List<String>>> getArrayNullAsync();
+
+    /**
+     * Get a null array.
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayNullAsyncWithServiceResponse();
 
     /**
      * Get an empty array [].
@@ -1388,7 +1780,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayEmpty() throws ErrorException, IOException;
 
     /**
      * Get an empty array [].
@@ -1403,7 +1795,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<String>>>> getArrayEmptyAsync();
+    Observable<List<List<String>>> getArrayEmptyAsync();
+
+    /**
+     * Get an empty array [].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayEmptyAsyncWithServiceResponse();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1412,7 +1811,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayItemNull() throws ErrorException, IOException;
+    List<List<String>> getArrayItemNull() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1427,7 +1826,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<String>>>> getArrayItemNullAsync();
+    Observable<List<List<String>>> getArrayItemNullAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayItemNullAsyncWithServiceResponse();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1436,7 +1842,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1451,7 +1857,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyAsync();
+    Observable<List<List<String>>> getArrayItemEmptyAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1460,7 +1873,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayValid() throws ErrorException, IOException;
+    List<List<String>> getArrayValid() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1475,7 +1888,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<String>>>> getArrayValidAsync();
+    Observable<List<List<String>>> getArrayValidAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayValidAsyncWithServiceResponse();
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1486,7 +1906,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1503,7 +1923,15 @@ public interface Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayValidAsync(List<List<String>> arrayBody);
+    Observable<Void> putArrayValidAsync(List<List<String>> arrayBody);
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayValidAsyncWithServiceResponse(List<List<String>> arrayBody);
 
     /**
      * Get an array of Dictionaries with value null.
@@ -1512,7 +1940,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryNull() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries with value null.
@@ -1527,7 +1955,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullAsync();
+    Observable<List<Map<String, String>>> getDictionaryNullAsync();
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullAsyncWithServiceResponse();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -1536,7 +1971,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -1551,7 +1986,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyAsync();
+    Observable<List<Map<String, String>>> getDictionaryEmptyAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyAsyncWithServiceResponse();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1560,7 +2002,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1575,7 +2017,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullAsync();
+    Observable<List<Map<String, String>>> getDictionaryItemNullAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullAsyncWithServiceResponse();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1584,7 +2033,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1599,7 +2048,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyAsync();
+    Observable<List<Map<String, String>>> getDictionaryItemEmptyAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1608,7 +2064,7 @@ public interface Arrays {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryValid() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1623,7 +2079,14 @@ public interface Arrays {
      *
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidAsync();
+    Observable<List<Map<String, String>>> getDictionaryValidAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidAsyncWithServiceResponse();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1634,7 +2097,7 @@ public interface Arrays {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1651,6 +2114,14 @@ public interface Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+    Observable<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryValidAsyncWithServiceResponse(List<Map<String, String>> arrayBody);
 
 }

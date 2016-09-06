@@ -31,7 +31,7 @@ public interface Paths {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
@@ -48,6 +48,14 @@ public interface Paths {
      * @param accountName Account Name
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getEmptyAsync(String accountName);
+    Observable<Void> getEmptyAsync(String accountName);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyAsyncWithServiceResponse(String accountName);
 
 }

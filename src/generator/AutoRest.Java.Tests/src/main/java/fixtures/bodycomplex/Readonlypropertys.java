@@ -30,7 +30,7 @@ public interface Readonlypropertys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<ReadonlyObj> getValid() throws ErrorException, IOException;
+    ReadonlyObj getValid() throws ErrorException, IOException;
 
     /**
      * Get complex types that have readonly properties.
@@ -45,7 +45,14 @@ public interface Readonlypropertys {
      *
      * @return the observable to the ReadonlyObj object
      */
-    Observable<ServiceResponse<ReadonlyObj>> getValidAsync();
+    Observable<ReadonlyObj> getValidAsync();
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @return the observable to the ReadonlyObj object
+     */
+    Observable<ServiceResponse<ReadonlyObj>> getValidAsyncWithServiceResponse();
 
     /**
      * Put complex types that have readonly properties.
@@ -56,7 +63,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that have readonly properties.
@@ -73,6 +80,14 @@ public interface Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsync(ReadonlyObj complexBody);
+    Observable<Void> putValidAsync(ReadonlyObj complexBody);
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(ReadonlyObj complexBody);
 
 }

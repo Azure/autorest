@@ -82,8 +82,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
-        return getAllWithValuesAsync(localStringPath, pathItemStringPath).toBlocking().single();
+    public void getAllWithValues(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -95,7 +95,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.create(getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -105,7 +105,23 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
+    public Observable<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
+        return getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getAllWithValuesAsyncWithServiceResponse(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -143,8 +159,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
-        return getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single();
+    public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
+        getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -158,7 +174,23 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.create(getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        return getAllWithValuesAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -170,7 +202,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Observable<ServiceResponse<Void>> getAllWithValuesAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -211,8 +243,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
-        return getGlobalQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().single();
+    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -224,7 +256,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.create(getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -234,7 +266,23 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Observable<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+        return getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getGlobalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -272,8 +320,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
-        return getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single();
+    public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
+        getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -287,7 +335,23 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.create(getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        return getGlobalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -299,7 +363,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Observable<ServiceResponse<Void>> getGlobalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -340,8 +404,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
-        return getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().single();
+    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -353,7 +417,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.create(getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -363,7 +427,23 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Observable<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+        return getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -401,8 +481,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
-        return getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single();
+    public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
+        getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -416,7 +496,23 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.create(getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    }
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        return getGlobalAndLocalQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -428,7 +524,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -469,8 +565,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
-        return getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).toBlocking().single();
+    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException {
+        getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -482,7 +578,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.create(getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -492,7 +588,23 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Observable<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
+        return getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }
@@ -530,8 +642,8 @@ public final class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
-        return getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single();
+    public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException {
+        getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -545,7 +657,23 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.create(getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    }
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+        return getLocalPathItemQueryNullAsyncWithServiceResponse(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -557,7 +685,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery should contain value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         if (localStringPath == null) {
             throw new IllegalArgumentException("Parameter localStringPath is required and cannot be null.");
         }

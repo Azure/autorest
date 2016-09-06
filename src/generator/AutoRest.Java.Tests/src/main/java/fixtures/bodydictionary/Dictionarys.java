@@ -35,7 +35,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getNull() throws ErrorException, IOException;
+    Map<String, Integer> getNull() throws ErrorException, IOException;
 
     /**
      * Get null dictionary value.
@@ -50,7 +50,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getNullAsync();
+    Observable<Map<String, Integer>> getNullAsync();
+
+    /**
+     * Get null dictionary value.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getNullAsyncWithServiceResponse();
 
     /**
      * Get empty dictionary value {}.
@@ -59,7 +66,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getEmpty() throws ErrorException, IOException;
+    Map<String, Integer> getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty dictionary value {}.
@@ -74,7 +81,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getEmptyAsync();
+    Observable<Map<String, Integer>> getEmptyAsync();
+
+    /**
+     * Get empty dictionary value {}.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getEmptyAsyncWithServiceResponse();
 
     /**
      * Set dictionary value empty {}.
@@ -85,7 +99,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {}.
@@ -102,7 +116,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putEmptyAsync(Map<String, String> arrayBody);
+    Observable<Void> putEmptyAsync(Map<String, String> arrayBody);
+
+    /**
+     * Set dictionary value empty {}.
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyAsyncWithServiceResponse(Map<String, String> arrayBody);
 
     /**
      * Get Dictionary with null value.
@@ -111,7 +133,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getNullValue() throws ErrorException, IOException;
+    Map<String, String> getNullValue() throws ErrorException, IOException;
 
     /**
      * Get Dictionary with null value.
@@ -126,7 +148,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getNullValueAsync();
+    Observable<Map<String, String>> getNullValueAsync();
+
+    /**
+     * Get Dictionary with null value.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getNullValueAsyncWithServiceResponse();
 
     /**
      * Get Dictionary with null key.
@@ -135,7 +164,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getNullKey() throws ErrorException, IOException;
+    Map<String, String> getNullKey() throws ErrorException, IOException;
 
     /**
      * Get Dictionary with null key.
@@ -150,7 +179,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getNullKeyAsync();
+    Observable<Map<String, String>> getNullKeyAsync();
+
+    /**
+     * Get Dictionary with null key.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getNullKeyAsyncWithServiceResponse();
 
     /**
      * Get Dictionary with key as empty string.
@@ -159,7 +195,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getEmptyStringKey() throws ErrorException, IOException;
+    Map<String, String> getEmptyStringKey() throws ErrorException, IOException;
 
     /**
      * Get Dictionary with key as empty string.
@@ -174,7 +210,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyAsync();
+    Observable<Map<String, String>> getEmptyStringKeyAsync();
+
+    /**
+     * Get Dictionary with key as empty string.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyAsyncWithServiceResponse();
 
     /**
      * Get invalid Dictionary value.
@@ -183,7 +226,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getInvalid() throws ErrorException, IOException;
+    Map<String, String> getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid Dictionary value.
@@ -198,7 +241,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getInvalidAsync();
+    Observable<Map<String, String>> getInvalidAsync();
+
+    /**
+     * Get invalid Dictionary value.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getInvalidAsyncWithServiceResponse();
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -207,7 +257,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanTfft() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanTfft() throws ErrorException, IOException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -222,7 +272,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftAsync();
+    Observable<Map<String, Boolean>> getBooleanTfftAsync();
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @return the observable to the Map&lt;String, Boolean&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftAsyncWithServiceResponse();
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -233,7 +290,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBooleanTfft(Map<String, Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBooleanTfft(Map<String, Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -250,7 +307,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putBooleanTfftAsync(Map<String, Boolean> arrayBody);
+    Observable<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody);
+
+    /**
+     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
+     *
+     * @param arrayBody the Map&lt;String, Boolean&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBooleanTfftAsyncWithServiceResponse(Map<String, Boolean> arrayBody);
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -259,7 +324,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanInvalidNull() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -274,7 +339,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullAsync();
+    Observable<Map<String, Boolean>> getBooleanInvalidNullAsync();
+
+    /**
+     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
+     *
+     * @return the observable to the Map&lt;String, Boolean&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -283,7 +355,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Boolean>> getBooleanInvalidString() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -298,7 +370,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringAsync();
+    Observable<Map<String, Boolean>> getBooleanInvalidStringAsync();
+
+    /**
+     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
+     *
+     * @return the observable to the Map&lt;String, Boolean&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -307,7 +386,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getIntegerValid() throws ErrorException, IOException;
+    Map<String, Integer> getIntegerValid() throws ErrorException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -322,7 +401,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidAsync();
+    Observable<Map<String, Integer>> getIntegerValidAsync();
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -333,7 +419,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putIntegerValid(Map<String, Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putIntegerValid(Map<String, Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -350,7 +436,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putIntegerValidAsync(Map<String, Integer> arrayBody);
+    Observable<Void> putIntegerValidAsync(Map<String, Integer> arrayBody);
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody the Map&lt;String, Integer&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putIntegerValidAsyncWithServiceResponse(Map<String, Integer> arrayBody);
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -359,7 +453,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getIntInvalidNull() throws ErrorException, IOException;
+    Map<String, Integer> getIntInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -374,7 +468,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullAsync();
+    Observable<Map<String, Integer>> getIntInvalidNullAsync();
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -383,7 +484,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getIntInvalidString() throws ErrorException, IOException;
+    Map<String, Integer> getIntInvalidString() throws ErrorException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -398,7 +499,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringAsync();
+    Observable<Map<String, Integer>> getIntInvalidStringAsync();
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -407,7 +515,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Long>> getLongValid() throws ErrorException, IOException;
+    Map<String, Long> getLongValid() throws ErrorException, IOException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -422,7 +530,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    Observable<ServiceResponse<Map<String, Long>>> getLongValidAsync();
+    Observable<Map<String, Long>> getLongValidAsync();
+
+    /**
+     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @return the observable to the Map&lt;String, Long&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Long>>> getLongValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -433,7 +548,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLongValid(Map<String, Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLongValid(Map<String, Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -450,7 +565,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLongValidAsync(Map<String, Long> arrayBody);
+    Observable<Void> putLongValidAsync(Map<String, Long> arrayBody);
+
+    /**
+     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
+     *
+     * @param arrayBody the Map&lt;String, Long&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLongValidAsyncWithServiceResponse(Map<String, Long> arrayBody);
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -459,7 +582,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Long>> getLongInvalidNull() throws ErrorException, IOException;
+    Map<String, Long> getLongInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -474,7 +597,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullAsync();
+    Observable<Map<String, Long>> getLongInvalidNullAsync();
+
+    /**
+     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
+     *
+     * @return the observable to the Map&lt;String, Long&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -483,7 +613,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Long>> getLongInvalidString() throws ErrorException, IOException;
+    Map<String, Long> getLongInvalidString() throws ErrorException, IOException;
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -498,7 +628,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringAsync();
+    Observable<Map<String, Long>> getLongInvalidStringAsync();
+
+    /**
+     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
+     *
+     * @return the observable to the Map&lt;String, Long&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -507,7 +644,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getFloatValid() throws ErrorException, IOException;
+    Map<String, Double> getFloatValid() throws ErrorException, IOException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -522,7 +659,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getFloatValidAsync();
+    Observable<Map<String, Double>> getFloatValidAsync();
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getFloatValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -533,7 +677,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloatValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloatValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -550,7 +694,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putFloatValidAsync(Map<String, Double> arrayBody);
+    Observable<Void> putFloatValidAsync(Map<String, Double> arrayBody);
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFloatValidAsyncWithServiceResponse(Map<String, Double> arrayBody);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -559,7 +711,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getFloatInvalidNull() throws ErrorException, IOException;
+    Map<String, Double> getFloatInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -574,7 +726,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullAsync();
+    Observable<Map<String, Double>> getFloatInvalidNullAsync();
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -583,7 +742,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getFloatInvalidString() throws ErrorException, IOException;
+    Map<String, Double> getFloatInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -598,7 +757,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringAsync();
+    Observable<Map<String, Double>> getFloatInvalidStringAsync();
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -607,7 +773,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getDoubleValid() throws ErrorException, IOException;
+    Map<String, Double> getDoubleValid() throws ErrorException, IOException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -622,7 +788,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getDoubleValidAsync();
+    Observable<Map<String, Double>> getDoubleValidAsync();
+
+    /**
+     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getDoubleValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -633,7 +806,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDoubleValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDoubleValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -650,7 +823,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDoubleValidAsync(Map<String, Double> arrayBody);
+    Observable<Void> putDoubleValidAsync(Map<String, Double> arrayBody);
+
+    /**
+     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     *
+     * @param arrayBody the Map&lt;String, Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDoubleValidAsyncWithServiceResponse(Map<String, Double> arrayBody);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -659,7 +840,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getDoubleInvalidNull() throws ErrorException, IOException;
+    Map<String, Double> getDoubleInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -674,7 +855,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullAsync();
+    Observable<Map<String, Double>> getDoubleInvalidNullAsync();
+
+    /**
+     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -683,7 +871,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Double>> getDoubleInvalidString() throws ErrorException, IOException;
+    Map<String, Double> getDoubleInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -698,7 +886,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringAsync();
+    Observable<Map<String, Double>> getDoubleInvalidStringAsync();
+
+    /**
+     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
+     *
+     * @return the observable to the Map&lt;String, Double&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringAsyncWithServiceResponse();
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -707,7 +902,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getStringValid() throws ErrorException, IOException;
+    Map<String, String> getStringValid() throws ErrorException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -722,7 +917,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getStringValidAsync();
+    Observable<Map<String, String>> getStringValidAsync();
+
+    /**
+     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getStringValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -733,7 +935,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putStringValid(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putStringValid(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -750,7 +952,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putStringValidAsync(Map<String, String> arrayBody);
+    Observable<Void> putStringValidAsync(Map<String, String> arrayBody);
+
+    /**
+     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     *
+     * @param arrayBody the Map&lt;String, String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putStringValidAsyncWithServiceResponse(Map<String, String> arrayBody);
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -759,7 +969,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getStringWithNull() throws ErrorException, IOException;
+    Map<String, String> getStringWithNull() throws ErrorException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -774,7 +984,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getStringWithNullAsync();
+    Observable<Map<String, String>> getStringWithNullAsync();
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getStringWithNullAsyncWithServiceResponse();
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -783,7 +1000,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, String>> getStringWithInvalid() throws ErrorException, IOException;
+    Map<String, String> getStringWithInvalid() throws ErrorException, IOException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -798,7 +1015,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidAsync();
+    Observable<Map<String, String>> getStringWithInvalidAsync();
+
+    /**
+     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
+     *
+     * @return the observable to the Map&lt;String, String&gt; object
+     */
+    Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidAsyncWithServiceResponse();
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -807,7 +1031,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateValid() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateValid() throws ErrorException, IOException;
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -822,7 +1046,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidAsync();
+    Observable<Map<String, LocalDate>> getDateValidAsync();
+
+    /**
+     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
+     */
+    Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -833,7 +1064,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateValid(Map<String, LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateValid(Map<String, LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -850,7 +1081,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateValidAsync(Map<String, LocalDate> arrayBody);
+    Observable<Void> putDateValidAsync(Map<String, LocalDate> arrayBody);
+
+    /**
+     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     *
+     * @param arrayBody the Map&lt;String, LocalDate&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateValidAsyncWithServiceResponse(Map<String, LocalDate> arrayBody);
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -859,7 +1098,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateInvalidNull() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -874,7 +1113,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullAsync();
+    Observable<Map<String, LocalDate>> getDateInvalidNullAsync();
+
+    /**
+     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
+     *
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
+     */
+    Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -883,7 +1129,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, LocalDate>> getDateInvalidChars() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -898,7 +1144,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsAsync();
+    Observable<Map<String, LocalDate>> getDateInvalidCharsAsync();
+
+    /**
+     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
+     *
+     * @return the observable to the Map&lt;String, LocalDate&gt; object
+     */
+    Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsAsyncWithServiceResponse();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -907,7 +1160,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeValid() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -922,7 +1175,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidAsync();
+    Observable<Map<String, DateTime>> getDateTimeValidAsync();
+
+    /**
+     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     *
+     * @return the observable to the Map&lt;String, DateTime&gt; object
+     */
+    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -933,7 +1193,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeValid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeValid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -950,7 +1210,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeValidAsync(Map<String, DateTime> arrayBody);
+    Observable<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody);
+
+    /**
+     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
+     *
+     * @param arrayBody the Map&lt;String, DateTime&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeValidAsyncWithServiceResponse(Map<String, DateTime> arrayBody);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -959,7 +1227,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNull() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -974,7 +1242,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullAsync();
+    Observable<Map<String, DateTime>> getDateTimeInvalidNullAsync();
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
+     *
+     * @return the observable to the Map&lt;String, DateTime&gt; object
+     */
+    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -983,7 +1258,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeInvalidChars() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -998,7 +1273,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsAsync();
+    Observable<Map<String, DateTime>> getDateTimeInvalidCharsAsync();
+
+    /**
+     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
+     *
+     * @return the observable to the Map&lt;String, DateTime&gt; object
+     */
+    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsAsyncWithServiceResponse();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1007,7 +1289,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException;
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1022,7 +1304,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidAsync();
+    Observable<Map<String, DateTime>> getDateTimeRfc1123ValidAsync();
+
+    /**
+     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @return the observable to the Map&lt;String, DateTime&gt; object
+     */
+    Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1033,7 +1322,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1050,7 +1339,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody);
+    Observable<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody);
+
+    /**
+     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     *
+     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsyncWithServiceResponse(Map<String, DateTime> arrayBody);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1059,7 +1356,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Period>> getDurationValid() throws ErrorException, IOException;
+    Map<String, Period> getDurationValid() throws ErrorException, IOException;
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1074,7 +1371,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Period&gt; object
      */
-    Observable<ServiceResponse<Map<String, Period>>> getDurationValidAsync();
+    Observable<Map<String, Period>> getDurationValidAsync();
+
+    /**
+     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @return the observable to the Map&lt;String, Period&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Period>>> getDurationValidAsyncWithServiceResponse();
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1085,7 +1389,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDurationValid(Map<String, Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDurationValid(Map<String, Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1102,7 +1406,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDurationValidAsync(Map<String, Period> arrayBody);
+    Observable<Void> putDurationValidAsync(Map<String, Period> arrayBody);
+
+    /**
+     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     *
+     * @param arrayBody the Map&lt;String, Period&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDurationValidAsyncWithServiceResponse(Map<String, Period> arrayBody);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1111,7 +1423,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, byte[]>> getByteValid() throws ErrorException, IOException;
+    Map<String, byte[]> getByteValid() throws ErrorException, IOException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1126,7 +1438,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    Observable<ServiceResponse<Map<String, byte[]>>> getByteValidAsync();
+    Observable<Map<String, byte[]>> getByteValidAsync();
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
+     *
+     * @return the observable to the Map&lt;String, byte[]&gt; object
+     */
+    Observable<ServiceResponse<Map<String, byte[]>>> getByteValidAsyncWithServiceResponse();
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1137,7 +1456,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByteValid(Map<String, byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByteValid(Map<String, byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1154,7 +1473,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putByteValidAsync(Map<String, byte[]> arrayBody);
+    Observable<Void> putByteValidAsync(Map<String, byte[]> arrayBody);
+
+    /**
+     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
+     *
+     * @param arrayBody the Map&lt;String, byte[]&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putByteValidAsyncWithServiceResponse(Map<String, byte[]> arrayBody);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1163,7 +1490,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, byte[]>> getByteInvalidNull() throws ErrorException, IOException;
+    Map<String, byte[]> getByteInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1178,7 +1505,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullAsync();
+    Observable<Map<String, byte[]>> getByteInvalidNullAsync();
+
+    /**
+     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
+     *
+     * @return the observable to the Map&lt;String, byte[]&gt; object
+     */
+    Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullAsyncWithServiceResponse();
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1187,7 +1521,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, byte[]>> getBase64Url() throws ErrorException, IOException;
+    Map<String, byte[]> getBase64Url() throws ErrorException, IOException;
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1202,7 +1536,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlAsync();
+    Observable<Map<String, byte[]>> getBase64UrlAsync();
+
+    /**
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
+     *
+     * @return the observable to the Map&lt;String, byte[]&gt; object
+     */
+    Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlAsyncWithServiceResponse();
 
     /**
      * Get dictionary of complex type null value.
@@ -1211,7 +1552,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Widget>> getComplexNull() throws ErrorException, IOException;
+    Map<String, Widget> getComplexNull() throws ErrorException, IOException;
 
     /**
      * Get dictionary of complex type null value.
@@ -1226,7 +1567,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    Observable<ServiceResponse<Map<String, Widget>>> getComplexNullAsync();
+    Observable<Map<String, Widget>> getComplexNullAsync();
+
+    /**
+     * Get dictionary of complex type null value.
+     *
+     * @return the observable to the Map&lt;String, Widget&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Widget>>> getComplexNullAsyncWithServiceResponse();
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1235,7 +1583,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Widget>> getComplexEmpty() throws ErrorException, IOException;
+    Map<String, Widget> getComplexEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1250,7 +1598,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyAsync();
+    Observable<Map<String, Widget>> getComplexEmptyAsync();
+
+    /**
+     * Get empty dictionary of complex type {}.
+     *
+     * @return the observable to the Map&lt;String, Widget&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyAsyncWithServiceResponse();
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1259,7 +1614,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Widget>> getComplexItemNull() throws ErrorException, IOException;
+    Map<String, Widget> getComplexItemNull() throws ErrorException, IOException;
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1274,7 +1629,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullAsync();
+    Observable<Map<String, Widget>> getComplexItemNullAsync();
+
+    /**
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @return the observable to the Map&lt;String, Widget&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullAsyncWithServiceResponse();
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1283,7 +1645,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Widget>> getComplexItemEmpty() throws ErrorException, IOException;
+    Map<String, Widget> getComplexItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1298,7 +1660,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyAsync();
+    Observable<Map<String, Widget>> getComplexItemEmptyAsync();
+
+    /**
+     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @return the observable to the Map&lt;String, Widget&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1307,7 +1676,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Widget>> getComplexValid() throws ErrorException, IOException;
+    Map<String, Widget> getComplexValid() throws ErrorException, IOException;
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1322,7 +1691,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    Observable<ServiceResponse<Map<String, Widget>>> getComplexValidAsync();
+    Observable<Map<String, Widget>> getComplexValidAsync();
+
+    /**
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @return the observable to the Map&lt;String, Widget&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Widget>>> getComplexValidAsyncWithServiceResponse();
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1333,7 +1709,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putComplexValid(Map<String, Widget> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putComplexValid(Map<String, Widget> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1350,7 +1726,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putComplexValidAsync(Map<String, Widget> arrayBody);
+    Observable<Void> putComplexValidAsync(Map<String, Widget> arrayBody);
+
+    /**
+     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     *
+     * @param arrayBody the Map&lt;String, Widget&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putComplexValidAsyncWithServiceResponse(Map<String, Widget> arrayBody);
 
     /**
      * Get a null array.
@@ -1359,7 +1743,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayNull() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayNull() throws ErrorException, IOException;
 
     /**
      * Get a null array.
@@ -1374,7 +1758,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullAsync();
+    Observable<Map<String, List<String>>> getArrayNullAsync();
+
+    /**
+     * Get a null array.
+     *
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullAsyncWithServiceResponse();
 
     /**
      * Get an empty dictionary {}.
@@ -1383,7 +1774,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayEmpty() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayEmpty() throws ErrorException, IOException;
 
     /**
      * Get an empty dictionary {}.
@@ -1398,7 +1789,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyAsync();
+    Observable<Map<String, List<String>>> getArrayEmptyAsync();
+
+    /**
+     * Get an empty dictionary {}.
+     *
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyAsyncWithServiceResponse();
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1407,7 +1805,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayItemNull() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayItemNull() throws ErrorException, IOException;
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1422,7 +1820,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullAsync();
+    Observable<Map<String, List<String>>> getArrayItemNullAsync();
+
+    /**
+     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
+     *
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullAsyncWithServiceResponse();
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1431,7 +1836,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayItemEmpty() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1446,7 +1851,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyAsync();
+    Observable<Map<String, List<String>>> getArrayItemEmptyAsync();
+
+    /**
+     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
+     *
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1455,7 +1867,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, List<String>>> getArrayValid() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayValid() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1470,7 +1882,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidAsync();
+    Observable<Map<String, List<String>>> getArrayValidAsync();
+
+    /**
+     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidAsyncWithServiceResponse();
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1481,7 +1900,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArrayValid(Map<String, List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putArrayValid(Map<String, List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1498,7 +1917,15 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayValidAsync(Map<String, List<String>> arrayBody);
+    Observable<Void> putArrayValidAsync(Map<String, List<String>> arrayBody);
+
+    /**
+     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     *
+     * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayValidAsyncWithServiceResponse(Map<String, List<String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -1507,7 +1934,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryNull() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryNull() throws ErrorException, IOException;
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -1522,7 +1949,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullAsync();
+    Observable<Map<String, Map<String, String>>> getDictionaryNullAsync();
+
+    /**
+     * Get an dictionaries of dictionaries with value null.
+     *
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullAsyncWithServiceResponse();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1531,7 +1965,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmpty() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1546,7 +1980,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyAsync();
+    Observable<Map<String, Map<String, String>>> getDictionaryEmptyAsync();
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
+     *
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyAsyncWithServiceResponse();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1555,7 +1996,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNull() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1570,7 +2011,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullAsync();
+    Observable<Map<String, Map<String, String>>> getDictionaryItemNullAsync();
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullAsyncWithServiceResponse();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1579,7 +2027,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmpty() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1594,7 +2042,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyAsync();
+    Observable<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync();
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyAsyncWithServiceResponse();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1603,7 +2058,7 @@ public interface Dictionarys {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Map<String, String>>> getDictionaryValid() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryValid() throws ErrorException, IOException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1618,7 +2073,14 @@ public interface Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidAsync();
+    Observable<Map<String, Map<String, String>>> getDictionaryValidAsync();
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidAsyncWithServiceResponse();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1629,7 +2091,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1646,6 +2108,14 @@ public interface Dictionarys {
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody);
+    Observable<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody);
+
+    /**
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     *
+     * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryValidAsyncWithServiceResponse(Map<String, Map<String, String>> arrayBody);
 
 }

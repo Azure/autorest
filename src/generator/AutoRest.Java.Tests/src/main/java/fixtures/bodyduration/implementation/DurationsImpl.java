@@ -80,8 +80,8 @@ public final class DurationsImpl implements Durations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Period> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public Period getNull() throws ErrorException, IOException {
+        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -91,7 +91,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -99,7 +99,21 @@ public final class DurationsImpl implements Durations {
      *
      * @return the observable to the Period object
      */
-    public Observable<ServiceResponse<Period>> getNullAsync() {
+    public Observable<Period> getNullAsync() {
+        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Period>, Period>() {
+            @Override
+            public Period call(ServiceResponse<Period> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get null duration value.
+     *
+     * @return the observable to the Period object
+     */
+    public Observable<ServiceResponse<Period>> getNullAsyncWithServiceResponse() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Period>>>() {
                 @Override
@@ -130,8 +144,8 @@ public final class DurationsImpl implements Durations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putPositiveDuration(Period durationBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putPositiveDurationAsync(durationBody).toBlocking().single();
+    public void putPositiveDuration(Period durationBody) throws ErrorException, IOException, IllegalArgumentException {
+        putPositiveDurationAsyncWithServiceResponse(durationBody).toBlocking().single().getBody();
     }
 
     /**
@@ -142,7 +156,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putPositiveDurationAsync(durationBody), serviceCallback);
+        return ServiceCall.create(putPositiveDurationAsyncWithServiceResponse(durationBody), serviceCallback);
     }
 
     /**
@@ -151,7 +165,22 @@ public final class DurationsImpl implements Durations {
      * @param durationBody the Period value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putPositiveDurationAsync(Period durationBody) {
+    public Observable<Void> putPositiveDurationAsync(Period durationBody) {
+        return putPositiveDurationAsyncWithServiceResponse(durationBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putPositiveDurationAsyncWithServiceResponse(Period durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
@@ -183,8 +212,8 @@ public final class DurationsImpl implements Durations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Period> getPositiveDuration() throws ErrorException, IOException {
-        return getPositiveDurationAsync().toBlocking().single();
+    public Period getPositiveDuration() throws ErrorException, IOException {
+        return getPositiveDurationAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -194,7 +223,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getPositiveDurationAsync(), serviceCallback);
+        return ServiceCall.create(getPositiveDurationAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -202,7 +231,21 @@ public final class DurationsImpl implements Durations {
      *
      * @return the observable to the Period object
      */
-    public Observable<ServiceResponse<Period>> getPositiveDurationAsync() {
+    public Observable<Period> getPositiveDurationAsync() {
+        return getPositiveDurationAsyncWithServiceResponse().map(new Func1<ServiceResponse<Period>, Period>() {
+            @Override
+            public Period call(ServiceResponse<Period> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get a positive duration value.
+     *
+     * @return the observable to the Period object
+     */
+    public Observable<ServiceResponse<Period>> getPositiveDurationAsyncWithServiceResponse() {
         return service.getPositiveDuration()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Period>>>() {
                 @Override
@@ -231,8 +274,8 @@ public final class DurationsImpl implements Durations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Period> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public Period getInvalid() throws ErrorException, IOException {
+        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -242,7 +285,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -250,7 +293,21 @@ public final class DurationsImpl implements Durations {
      *
      * @return the observable to the Period object
      */
-    public Observable<ServiceResponse<Period>> getInvalidAsync() {
+    public Observable<Period> getInvalidAsync() {
+        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Period>, Period>() {
+            @Override
+            public Period call(ServiceResponse<Period> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @return the observable to the Period object
+     */
+    public Observable<ServiceResponse<Period>> getInvalidAsyncWithServiceResponse() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Period>>>() {
                 @Override

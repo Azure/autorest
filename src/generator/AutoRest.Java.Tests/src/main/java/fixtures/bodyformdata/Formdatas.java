@@ -33,7 +33,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
+    InputStream uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -52,7 +52,16 @@ public interface Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> uploadFileAsync(byte[] fileContent, String fileName);
+    Observable<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileAsyncWithServiceResponse(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -63,7 +72,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
+    InputStream uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -80,6 +89,14 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsync(byte[] fileContent);
+    Observable<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsyncWithServiceResponse(byte[] fileContent);
 
 }

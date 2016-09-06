@@ -30,7 +30,7 @@ public interface HttpFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getEmptyError() throws ErrorException, IOException;
+    boolean getEmptyError() throws ErrorException, IOException;
 
     /**
      * Get empty error form server.
@@ -45,7 +45,14 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getEmptyErrorAsync();
+    Observable<Boolean> getEmptyErrorAsync();
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getEmptyErrorAsyncWithServiceResponse();
 
     /**
      * Get empty error form server.
@@ -54,7 +61,7 @@ public interface HttpFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getNoModelError() throws ServiceException, IOException;
+    boolean getNoModelError() throws ServiceException, IOException;
 
     /**
      * Get empty error form server.
@@ -69,7 +76,14 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getNoModelErrorAsync();
+    Observable<Boolean> getNoModelErrorAsync();
+
+    /**
+     * Get empty error form server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNoModelErrorAsyncWithServiceResponse();
 
     /**
      * Get empty response from server.
@@ -78,7 +92,7 @@ public interface HttpFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Boolean> getNoModelEmpty() throws ServiceException, IOException;
+    boolean getNoModelEmpty() throws ServiceException, IOException;
 
     /**
      * Get empty response from server.
@@ -93,6 +107,13 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getNoModelEmptyAsync();
+    Observable<Boolean> getNoModelEmptyAsync();
+
+    /**
+     * Get empty response from server.
+     *
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponse<Boolean>> getNoModelEmptyAsyncWithServiceResponse();
 
 }

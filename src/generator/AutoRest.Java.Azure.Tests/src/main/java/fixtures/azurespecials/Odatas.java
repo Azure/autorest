@@ -29,7 +29,7 @@ public interface Odatas {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getWithFilter() throws ErrorException, IOException;
+    void getWithFilter() throws ErrorException, IOException;
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -38,6 +38,26 @@ public interface Odatas {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getWithFilterAsync();
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getWithFilterAsyncWithServiceResponse();
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
@@ -48,7 +68,7 @@ public interface Odatas {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException;
+    void getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException;
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -69,6 +89,16 @@ public interface Odatas {
      * @param orderby The orderby parameter with value id.
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getWithFilterAsync(String filter, Integer top, String orderby);
+    Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby);
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getWithFilterAsyncWithServiceResponse(String filter, Integer top, String orderby);
 
 }

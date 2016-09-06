@@ -37,15 +37,18 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object  if successful.
+}
+ */
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
+@if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
+{
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
 }
 else
 {
-@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
 }
- */
-public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString {
-    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().last();
 }
 @EmptyLine
 /**
@@ -66,7 +69,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
-    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)Async(@Model.MethodRequiredParameterInvocation), serviceCallback);
+    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation), serviceCallback);
 }
 @EmptyLine
 /**
@@ -85,7 +88,32 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+public Observable<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeModel.ClientResponseTypeString, @Model.ReturnTypeModel.GenericBodyClientTypeString>() {
+        @@Override
+        public @Model.ReturnTypeModel.GenericBodyClientTypeString call(@Model.ReturnTypeModel.ClientResponseTypeString response) {
+            return response.getBody();
+        }
+    });
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
+}
+ * @@return the observable for the request
+ */
+public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -136,15 +164,18 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in @Model.ReturnTypeModel.ClientResponseType if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
+}
+ */
+public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+@if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
+{
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
 }
 else
 {
-@: * @@return the @Model.ReturnTypeModel.ClientResponseType object if successful.
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
 }
- */
-public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
-    return @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last();
 }
 @EmptyLine
 /**
@@ -165,7 +196,7 @@ public @Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.Meth
  * @@return the {@@link ServiceCall} object
  */
 public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)Async(@Model.MethodParameterInvocation), serviceCallback);
+    return ServiceCall.@(Model.ServiceCallFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation), serviceCallback);
 }
 @EmptyLine
 /**
@@ -184,7 +215,32 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 }
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeModel.ClientResponseTypeString, @Model.ReturnTypeModel.GenericBodyClientTypeString>() {
+        @@Override
+        public @Model.ReturnTypeModel.GenericBodyClientTypeString call(@Model.ReturnTypeModel.ClientResponseTypeString response) {
+            return response.getBody();
+        }
+    });
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment().Trim())
+}
+ * @@return the observable for the request
+ */
+public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {

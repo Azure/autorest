@@ -40,7 +40,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the IntWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<IntWrapper> getInt() throws ErrorException, IOException;
+    IntWrapper getInt() throws ErrorException, IOException;
 
     /**
      * Get complex types with integer properties.
@@ -55,7 +55,14 @@ public interface Primitives {
      *
      * @return the observable to the IntWrapper object
      */
-    Observable<ServiceResponse<IntWrapper>> getIntAsync();
+    Observable<IntWrapper> getIntAsync();
+
+    /**
+     * Get complex types with integer properties.
+     *
+     * @return the observable to the IntWrapper object
+     */
+    Observable<ServiceResponse<IntWrapper>> getIntAsyncWithServiceResponse();
 
     /**
      * Put complex types with integer properties.
@@ -66,7 +73,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putInt(IntWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putInt(IntWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with integer properties.
@@ -83,7 +90,15 @@ public interface Primitives {
      * @param complexBody Please put -1 and 2
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putIntAsync(IntWrapper complexBody);
+    Observable<Void> putIntAsync(IntWrapper complexBody);
+
+    /**
+     * Put complex types with integer properties.
+     *
+     * @param complexBody Please put -1 and 2
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putIntAsyncWithServiceResponse(IntWrapper complexBody);
 
     /**
      * Get complex types with long properties.
@@ -92,7 +107,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the LongWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<LongWrapper> getLong() throws ErrorException, IOException;
+    LongWrapper getLong() throws ErrorException, IOException;
 
     /**
      * Get complex types with long properties.
@@ -107,7 +122,14 @@ public interface Primitives {
      *
      * @return the observable to the LongWrapper object
      */
-    Observable<ServiceResponse<LongWrapper>> getLongAsync();
+    Observable<LongWrapper> getLongAsync();
+
+    /**
+     * Get complex types with long properties.
+     *
+     * @return the observable to the LongWrapper object
+     */
+    Observable<ServiceResponse<LongWrapper>> getLongAsyncWithServiceResponse();
 
     /**
      * Put complex types with long properties.
@@ -118,7 +140,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLong(LongWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLong(LongWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with long properties.
@@ -135,7 +157,15 @@ public interface Primitives {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLongAsync(LongWrapper complexBody);
+    Observable<Void> putLongAsync(LongWrapper complexBody);
+
+    /**
+     * Put complex types with long properties.
+     *
+     * @param complexBody Please put 1099511627775 and -999511627788
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLongAsyncWithServiceResponse(LongWrapper complexBody);
 
     /**
      * Get complex types with float properties.
@@ -144,7 +174,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the FloatWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<FloatWrapper> getFloat() throws ErrorException, IOException;
+    FloatWrapper getFloat() throws ErrorException, IOException;
 
     /**
      * Get complex types with float properties.
@@ -159,7 +189,14 @@ public interface Primitives {
      *
      * @return the observable to the FloatWrapper object
      */
-    Observable<ServiceResponse<FloatWrapper>> getFloatAsync();
+    Observable<FloatWrapper> getFloatAsync();
+
+    /**
+     * Get complex types with float properties.
+     *
+     * @return the observable to the FloatWrapper object
+     */
+    Observable<ServiceResponse<FloatWrapper>> getFloatAsyncWithServiceResponse();
 
     /**
      * Put complex types with float properties.
@@ -170,7 +207,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloat(FloatWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with float properties.
@@ -187,7 +224,15 @@ public interface Primitives {
      * @param complexBody Please put 1.05 and -0.003
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putFloatAsync(FloatWrapper complexBody);
+    Observable<Void> putFloatAsync(FloatWrapper complexBody);
+
+    /**
+     * Put complex types with float properties.
+     *
+     * @param complexBody Please put 1.05 and -0.003
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFloatAsyncWithServiceResponse(FloatWrapper complexBody);
 
     /**
      * Get complex types with double properties.
@@ -196,7 +241,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DoubleWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DoubleWrapper> getDouble() throws ErrorException, IOException;
+    DoubleWrapper getDouble() throws ErrorException, IOException;
 
     /**
      * Get complex types with double properties.
@@ -211,7 +256,14 @@ public interface Primitives {
      *
      * @return the observable to the DoubleWrapper object
      */
-    Observable<ServiceResponse<DoubleWrapper>> getDoubleAsync();
+    Observable<DoubleWrapper> getDoubleAsync();
+
+    /**
+     * Get complex types with double properties.
+     *
+     * @return the observable to the DoubleWrapper object
+     */
+    Observable<ServiceResponse<DoubleWrapper>> getDoubleAsyncWithServiceResponse();
 
     /**
      * Put complex types with double properties.
@@ -222,7 +274,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDouble(DoubleWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with double properties.
@@ -239,7 +291,15 @@ public interface Primitives {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDoubleAsync(DoubleWrapper complexBody);
+    Observable<Void> putDoubleAsync(DoubleWrapper complexBody);
+
+    /**
+     * Put complex types with double properties.
+     *
+     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDoubleAsyncWithServiceResponse(DoubleWrapper complexBody);
 
     /**
      * Get complex types with bool properties.
@@ -248,7 +308,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BooleanWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<BooleanWrapper> getBool() throws ErrorException, IOException;
+    BooleanWrapper getBool() throws ErrorException, IOException;
 
     /**
      * Get complex types with bool properties.
@@ -263,7 +323,14 @@ public interface Primitives {
      *
      * @return the observable to the BooleanWrapper object
      */
-    Observable<ServiceResponse<BooleanWrapper>> getBoolAsync();
+    Observable<BooleanWrapper> getBoolAsync();
+
+    /**
+     * Get complex types with bool properties.
+     *
+     * @return the observable to the BooleanWrapper object
+     */
+    Observable<ServiceResponse<BooleanWrapper>> getBoolAsyncWithServiceResponse();
 
     /**
      * Put complex types with bool properties.
@@ -274,7 +341,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBool(BooleanWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with bool properties.
@@ -291,7 +358,15 @@ public interface Primitives {
      * @param complexBody Please put true and false
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putBoolAsync(BooleanWrapper complexBody);
+    Observable<Void> putBoolAsync(BooleanWrapper complexBody);
+
+    /**
+     * Put complex types with bool properties.
+     *
+     * @param complexBody Please put true and false
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBoolAsyncWithServiceResponse(BooleanWrapper complexBody);
 
     /**
      * Get complex types with string properties.
@@ -300,7 +375,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the StringWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<StringWrapper> getString() throws ErrorException, IOException;
+    StringWrapper getString() throws ErrorException, IOException;
 
     /**
      * Get complex types with string properties.
@@ -315,7 +390,14 @@ public interface Primitives {
      *
      * @return the observable to the StringWrapper object
      */
-    Observable<ServiceResponse<StringWrapper>> getStringAsync();
+    Observable<StringWrapper> getStringAsync();
+
+    /**
+     * Get complex types with string properties.
+     *
+     * @return the observable to the StringWrapper object
+     */
+    Observable<ServiceResponse<StringWrapper>> getStringAsyncWithServiceResponse();
 
     /**
      * Put complex types with string properties.
@@ -326,7 +408,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putString(StringWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putString(StringWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with string properties.
@@ -343,7 +425,15 @@ public interface Primitives {
      * @param complexBody Please put 'goodrequest', '', and null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putStringAsync(StringWrapper complexBody);
+    Observable<Void> putStringAsync(StringWrapper complexBody);
+
+    /**
+     * Put complex types with string properties.
+     *
+     * @param complexBody Please put 'goodrequest', '', and null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putStringAsyncWithServiceResponse(StringWrapper complexBody);
 
     /**
      * Get complex types with date properties.
@@ -352,7 +442,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DateWrapper> getDate() throws ErrorException, IOException;
+    DateWrapper getDate() throws ErrorException, IOException;
 
     /**
      * Get complex types with date properties.
@@ -367,7 +457,14 @@ public interface Primitives {
      *
      * @return the observable to the DateWrapper object
      */
-    Observable<ServiceResponse<DateWrapper>> getDateAsync();
+    Observable<DateWrapper> getDateAsync();
+
+    /**
+     * Get complex types with date properties.
+     *
+     * @return the observable to the DateWrapper object
+     */
+    Observable<ServiceResponse<DateWrapper>> getDateAsyncWithServiceResponse();
 
     /**
      * Put complex types with date properties.
@@ -378,7 +475,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDate(DateWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDate(DateWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with date properties.
@@ -395,7 +492,15 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateAsync(DateWrapper complexBody);
+    Observable<Void> putDateAsync(DateWrapper complexBody);
+
+    /**
+     * Put complex types with date properties.
+     *
+     * @param complexBody Please put '0001-01-01' and '2016-02-29'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateAsyncWithServiceResponse(DateWrapper complexBody);
 
     /**
      * Get complex types with datetime properties.
@@ -404,7 +509,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DatetimeWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DatetimeWrapper> getDateTime() throws ErrorException, IOException;
+    DatetimeWrapper getDateTime() throws ErrorException, IOException;
 
     /**
      * Get complex types with datetime properties.
@@ -419,7 +524,14 @@ public interface Primitives {
      *
      * @return the observable to the DatetimeWrapper object
      */
-    Observable<ServiceResponse<DatetimeWrapper>> getDateTimeAsync();
+    Observable<DatetimeWrapper> getDateTimeAsync();
+
+    /**
+     * Get complex types with datetime properties.
+     *
+     * @return the observable to the DatetimeWrapper object
+     */
+    Observable<ServiceResponse<DatetimeWrapper>> getDateTimeAsyncWithServiceResponse();
 
     /**
      * Put complex types with datetime properties.
@@ -430,7 +542,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTime(DatetimeWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetime properties.
@@ -447,7 +559,15 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeAsync(DatetimeWrapper complexBody);
+    Observable<Void> putDateTimeAsync(DatetimeWrapper complexBody);
+
+    /**
+     * Put complex types with datetime properties.
+     *
+     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeAsyncWithServiceResponse(DatetimeWrapper complexBody);
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -456,7 +576,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Datetimerfc1123Wrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ErrorException, IOException;
+    Datetimerfc1123Wrapper getDateTimeRfc1123() throws ErrorException, IOException;
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -471,7 +591,14 @@ public interface Primitives {
      *
      * @return the observable to the Datetimerfc1123Wrapper object
      */
-    Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123Async();
+    Observable<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+
+    /**
+     * Get complex types with datetimeRfc1123 properties.
+     *
+     * @return the observable to the Datetimerfc1123Wrapper object
+     */
+    Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123AsyncWithServiceResponse();
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -482,7 +609,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -499,7 +626,15 @@ public interface Primitives {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+    Observable<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+
+    /**
+     * Put complex types with datetimeRfc1123 properties.
+     *
+     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeRfc1123AsyncWithServiceResponse(Datetimerfc1123Wrapper complexBody);
 
     /**
      * Get complex types with duration properties.
@@ -508,7 +643,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DurationWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<DurationWrapper> getDuration() throws ErrorException, IOException;
+    DurationWrapper getDuration() throws ErrorException, IOException;
 
     /**
      * Get complex types with duration properties.
@@ -523,7 +658,14 @@ public interface Primitives {
      *
      * @return the observable to the DurationWrapper object
      */
-    Observable<ServiceResponse<DurationWrapper>> getDurationAsync();
+    Observable<DurationWrapper> getDurationAsync();
+
+    /**
+     * Get complex types with duration properties.
+     *
+     * @return the observable to the DurationWrapper object
+     */
+    Observable<ServiceResponse<DurationWrapper>> getDurationAsyncWithServiceResponse();
 
     /**
      * Put complex types with duration properties.
@@ -534,7 +676,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDuration(DurationWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with duration properties.
@@ -551,7 +693,15 @@ public interface Primitives {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDurationAsync(DurationWrapper complexBody);
+    Observable<Void> putDurationAsync(DurationWrapper complexBody);
+
+    /**
+     * Put complex types with duration properties.
+     *
+     * @param complexBody Please put 'P123DT22H14M12.011S'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDurationAsyncWithServiceResponse(DurationWrapper complexBody);
 
     /**
      * Get complex types with byte properties.
@@ -560,7 +710,7 @@ public interface Primitives {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ByteWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<ByteWrapper> getByte() throws ErrorException, IOException;
+    ByteWrapper getByte() throws ErrorException, IOException;
 
     /**
      * Get complex types with byte properties.
@@ -575,7 +725,14 @@ public interface Primitives {
      *
      * @return the observable to the ByteWrapper object
      */
-    Observable<ServiceResponse<ByteWrapper>> getByteAsync();
+    Observable<ByteWrapper> getByteAsync();
+
+    /**
+     * Get complex types with byte properties.
+     *
+     * @return the observable to the ByteWrapper object
+     */
+    Observable<ServiceResponse<ByteWrapper>> getByteAsyncWithServiceResponse();
 
     /**
      * Put complex types with byte properties.
@@ -586,7 +743,7 @@ public interface Primitives {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByte(ByteWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with byte properties.
@@ -603,6 +760,14 @@ public interface Primitives {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putByteAsync(ByteWrapper complexBody);
+    Observable<Void> putByteAsync(ByteWrapper complexBody);
+
+    /**
+     * Put complex types with byte properties.
+     *
+     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putByteAsyncWithServiceResponse(ByteWrapper complexBody);
 
 }

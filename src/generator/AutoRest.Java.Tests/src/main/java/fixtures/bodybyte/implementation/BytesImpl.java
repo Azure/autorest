@@ -83,8 +83,8 @@ public final class BytesImpl implements Bytes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public byte[] getNull() throws ErrorException, IOException {
+        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -94,7 +94,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -102,7 +102,21 @@ public final class BytesImpl implements Bytes {
      *
      * @return the observable to the byte[] object
      */
-    public Observable<ServiceResponse<byte[]>> getNullAsync() {
+    public Observable<byte[]> getNullAsync() {
+        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
+            @Override
+            public byte[] call(ServiceResponse<byte[]> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get null byte value.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getNullAsyncWithServiceResponse() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
                 @Override
@@ -131,8 +145,8 @@ public final class BytesImpl implements Bytes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getEmpty() throws ErrorException, IOException {
-        return getEmptyAsync().toBlocking().single();
+    public byte[] getEmpty() throws ErrorException, IOException {
+        return getEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -142,7 +156,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getEmptyAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -150,7 +164,21 @@ public final class BytesImpl implements Bytes {
      *
      * @return the observable to the byte[] object
      */
-    public Observable<ServiceResponse<byte[]>> getEmptyAsync() {
+    public Observable<byte[]> getEmptyAsync() {
+        return getEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
+            @Override
+            public byte[] call(ServiceResponse<byte[]> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get empty byte value ''.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getEmptyAsyncWithServiceResponse() {
         return service.getEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
                 @Override
@@ -179,8 +207,8 @@ public final class BytesImpl implements Bytes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getNonAscii() throws ErrorException, IOException {
-        return getNonAsciiAsync().toBlocking().single();
+    public byte[] getNonAscii() throws ErrorException, IOException {
+        return getNonAsciiAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -190,7 +218,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNonAsciiAsync(), serviceCallback);
+        return ServiceCall.create(getNonAsciiAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -198,7 +226,21 @@ public final class BytesImpl implements Bytes {
      *
      * @return the observable to the byte[] object
      */
-    public Observable<ServiceResponse<byte[]>> getNonAsciiAsync() {
+    public Observable<byte[]> getNonAsciiAsync() {
+        return getNonAsciiAsyncWithServiceResponse().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
+            @Override
+            public byte[] call(ServiceResponse<byte[]> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getNonAsciiAsyncWithServiceResponse() {
         return service.getNonAscii()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
                 @Override
@@ -229,8 +271,8 @@ public final class BytesImpl implements Bytes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putNonAsciiAsync(byteBody).toBlocking().single();
+    public void putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException {
+        putNonAsciiAsyncWithServiceResponse(byteBody).toBlocking().single().getBody();
     }
 
     /**
@@ -241,7 +283,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNonAsciiAsync(byteBody), serviceCallback);
+        return ServiceCall.create(putNonAsciiAsyncWithServiceResponse(byteBody), serviceCallback);
     }
 
     /**
@@ -250,7 +292,22 @@ public final class BytesImpl implements Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putNonAsciiAsync(byte[] byteBody) {
+    public Observable<Void> putNonAsciiAsync(byte[] byteBody) {
+        return putNonAsciiAsyncWithServiceResponse(byteBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putNonAsciiAsyncWithServiceResponse(byte[] byteBody) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
@@ -282,8 +339,8 @@ public final class BytesImpl implements Bytes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public byte[] getInvalid() throws ErrorException, IOException {
+        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -293,7 +350,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -301,7 +358,21 @@ public final class BytesImpl implements Bytes {
      *
      * @return the observable to the byte[] object
      */
-    public Observable<ServiceResponse<byte[]>> getInvalidAsync() {
+    public Observable<byte[]> getInvalidAsync() {
+        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
+            @Override
+            public byte[] call(ServiceResponse<byte[]> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @return the observable to the byte[] object
+     */
+    public Observable<ServiceResponse<byte[]>> getInvalidAsyncWithServiceResponse() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
                 @Override

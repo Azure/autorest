@@ -96,7 +96,7 @@ public interface AutoRestReportServiceForAzure {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException;
+    Map<String, Integer> getReport() throws ErrorException, IOException;
 
     /**
      * Get test coverage report.
@@ -111,6 +111,13 @@ public interface AutoRestReportServiceForAzure {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<ServiceResponse<Map<String, Integer>>> getReportAsync();
+    Observable<Map<String, Integer>> getReportAsync();
+
+    /**
+     * Get test coverage report.
+     *
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Observable<ServiceResponse<Map<String, Integer>>> getReportAsyncWithServiceResponse();
 
 }

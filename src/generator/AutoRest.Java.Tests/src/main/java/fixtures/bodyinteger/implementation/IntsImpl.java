@@ -121,8 +121,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Integer> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public int getNull() throws ErrorException, IOException {
+        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -132,7 +132,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -140,7 +140,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the int object
      */
-    public Observable<ServiceResponse<Integer>> getNullAsync() {
+    public Observable<Integer> getNullAsync() {
+        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Integer>, Integer>() {
+            @Override
+            public Integer call(ServiceResponse<Integer> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get null Int value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getNullAsyncWithServiceResponse() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
                 @Override
@@ -169,8 +183,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Integer> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public int getInvalid() throws ErrorException, IOException {
+        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -180,7 +194,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -188,7 +202,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the int object
      */
-    public Observable<ServiceResponse<Integer>> getInvalidAsync() {
+    public Observable<Integer> getInvalidAsync() {
+        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Integer>, Integer>() {
+            @Override
+            public Integer call(ServiceResponse<Integer> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get invalid Int value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getInvalidAsyncWithServiceResponse() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
                 @Override
@@ -217,8 +245,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Integer> getOverflowInt32() throws ErrorException, IOException {
-        return getOverflowInt32Async().toBlocking().single();
+    public int getOverflowInt32() throws ErrorException, IOException {
+        return getOverflowInt32AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -228,7 +256,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getOverflowInt32Async(), serviceCallback);
+        return ServiceCall.create(getOverflowInt32AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -236,7 +264,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the int object
      */
-    public Observable<ServiceResponse<Integer>> getOverflowInt32Async() {
+    public Observable<Integer> getOverflowInt32Async() {
+        return getOverflowInt32AsyncWithServiceResponse().map(new Func1<ServiceResponse<Integer>, Integer>() {
+            @Override
+            public Integer call(ServiceResponse<Integer> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get overflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getOverflowInt32AsyncWithServiceResponse() {
         return service.getOverflowInt32()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
                 @Override
@@ -265,8 +307,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the int object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Integer> getUnderflowInt32() throws ErrorException, IOException {
-        return getUnderflowInt32Async().toBlocking().single();
+    public int getUnderflowInt32() throws ErrorException, IOException {
+        return getUnderflowInt32AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -276,7 +318,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.create(getUnderflowInt32Async(), serviceCallback);
+        return ServiceCall.create(getUnderflowInt32AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -284,7 +326,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the int object
      */
-    public Observable<ServiceResponse<Integer>> getUnderflowInt32Async() {
+    public Observable<Integer> getUnderflowInt32Async() {
+        return getUnderflowInt32AsyncWithServiceResponse().map(new Func1<ServiceResponse<Integer>, Integer>() {
+            @Override
+            public Integer call(ServiceResponse<Integer> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get underflow Int32 value.
+     *
+     * @return the observable to the int object
+     */
+    public Observable<ServiceResponse<Integer>> getUnderflowInt32AsyncWithServiceResponse() {
         return service.getUnderflowInt32()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
                 @Override
@@ -313,8 +369,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Long> getOverflowInt64() throws ErrorException, IOException {
-        return getOverflowInt64Async().toBlocking().single();
+    public long getOverflowInt64() throws ErrorException, IOException {
+        return getOverflowInt64AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -324,7 +380,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.create(getOverflowInt64Async(), serviceCallback);
+        return ServiceCall.create(getOverflowInt64AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -332,7 +388,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the long object
      */
-    public Observable<ServiceResponse<Long>> getOverflowInt64Async() {
+    public Observable<Long> getOverflowInt64Async() {
+        return getOverflowInt64AsyncWithServiceResponse().map(new Func1<ServiceResponse<Long>, Long>() {
+            @Override
+            public Long call(ServiceResponse<Long> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get overflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    public Observable<ServiceResponse<Long>> getOverflowInt64AsyncWithServiceResponse() {
         return service.getOverflowInt64()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
                 @Override
@@ -361,8 +431,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the long object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Long> getUnderflowInt64() throws ErrorException, IOException {
-        return getUnderflowInt64Async().toBlocking().single();
+    public long getUnderflowInt64() throws ErrorException, IOException {
+        return getUnderflowInt64AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -372,7 +442,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.create(getUnderflowInt64Async(), serviceCallback);
+        return ServiceCall.create(getUnderflowInt64AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -380,7 +450,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the long object
      */
-    public Observable<ServiceResponse<Long>> getUnderflowInt64Async() {
+    public Observable<Long> getUnderflowInt64Async() {
+        return getUnderflowInt64AsyncWithServiceResponse().map(new Func1<ServiceResponse<Long>, Long>() {
+            @Override
+            public Long call(ServiceResponse<Long> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get underflow Int64 value.
+     *
+     * @return the observable to the long object
+     */
+    public Observable<ServiceResponse<Long>> getUnderflowInt64AsyncWithServiceResponse() {
         return service.getUnderflowInt64()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
                 @Override
@@ -410,8 +494,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putMax32(int intBody) throws ErrorException, IOException {
-        return putMax32Async(intBody).toBlocking().single();
+    public void putMax32(int intBody) throws ErrorException, IOException {
+        putMax32AsyncWithServiceResponse(intBody).toBlocking().single().getBody();
     }
 
     /**
@@ -422,7 +506,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMax32Async(intBody), serviceCallback);
+        return ServiceCall.create(putMax32AsyncWithServiceResponse(intBody), serviceCallback);
     }
 
     /**
@@ -431,7 +515,22 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMax32Async(int intBody) {
+    public Observable<Void> putMax32Async(int intBody) {
+        return putMax32AsyncWithServiceResponse(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMax32AsyncWithServiceResponse(int intBody) {
         return service.putMax32(intBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -461,8 +560,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putMax64(long intBody) throws ErrorException, IOException {
-        return putMax64Async(intBody).toBlocking().single();
+    public void putMax64(long intBody) throws ErrorException, IOException {
+        putMax64AsyncWithServiceResponse(intBody).toBlocking().single().getBody();
     }
 
     /**
@@ -473,7 +572,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMax64Async(intBody), serviceCallback);
+        return ServiceCall.create(putMax64AsyncWithServiceResponse(intBody), serviceCallback);
     }
 
     /**
@@ -482,7 +581,22 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMax64Async(long intBody) {
+    public Observable<Void> putMax64Async(long intBody) {
+        return putMax64AsyncWithServiceResponse(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMax64AsyncWithServiceResponse(long intBody) {
         return service.putMax64(intBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -512,8 +626,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putMin32(int intBody) throws ErrorException, IOException {
-        return putMin32Async(intBody).toBlocking().single();
+    public void putMin32(int intBody) throws ErrorException, IOException {
+        putMin32AsyncWithServiceResponse(intBody).toBlocking().single().getBody();
     }
 
     /**
@@ -524,7 +638,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMin32Async(intBody), serviceCallback);
+        return ServiceCall.create(putMin32AsyncWithServiceResponse(intBody), serviceCallback);
     }
 
     /**
@@ -533,7 +647,22 @@ public final class IntsImpl implements Ints {
      * @param intBody the int value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMin32Async(int intBody) {
+    public Observable<Void> putMin32Async(int intBody) {
+        return putMin32AsyncWithServiceResponse(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody the int value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMin32AsyncWithServiceResponse(int intBody) {
         return service.putMin32(intBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -563,8 +692,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putMin64(long intBody) throws ErrorException, IOException {
-        return putMin64Async(intBody).toBlocking().single();
+    public void putMin64(long intBody) throws ErrorException, IOException {
+        putMin64AsyncWithServiceResponse(intBody).toBlocking().single().getBody();
     }
 
     /**
@@ -575,7 +704,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMin64Async(intBody), serviceCallback);
+        return ServiceCall.create(putMin64AsyncWithServiceResponse(intBody), serviceCallback);
     }
 
     /**
@@ -584,7 +713,22 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMin64Async(long intBody) {
+    public Observable<Void> putMin64Async(long intBody) {
+        return putMin64AsyncWithServiceResponse(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putMin64AsyncWithServiceResponse(long intBody) {
         return service.putMin64(intBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -613,8 +757,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getUnixTime() throws ErrorException, IOException {
-        return getUnixTimeAsync().toBlocking().single();
+    public DateTime getUnixTime() throws ErrorException, IOException {
+        return getUnixTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -624,7 +768,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnixTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUnixTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -632,7 +776,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUnixTimeAsync() {
+    public Observable<DateTime> getUnixTimeAsync() {
+        return getUnixTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUnixTimeAsyncWithServiceResponse() {
         return service.getUnixTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -667,8 +825,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUnixTimeDate(DateTime intBody) throws ErrorException, IOException {
-        return putUnixTimeDateAsync(intBody).toBlocking().single();
+    public void putUnixTimeDate(DateTime intBody) throws ErrorException, IOException {
+        putUnixTimeDateAsyncWithServiceResponse(intBody).toBlocking().single().getBody();
     }
 
     /**
@@ -679,7 +837,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUnixTimeDateAsync(intBody), serviceCallback);
+        return ServiceCall.create(putUnixTimeDateAsyncWithServiceResponse(intBody), serviceCallback);
     }
 
     /**
@@ -688,7 +846,22 @@ public final class IntsImpl implements Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUnixTimeDateAsync(DateTime intBody) {
+    public Observable<Void> putUnixTimeDateAsync(DateTime intBody) {
+        return putUnixTimeDateAsyncWithServiceResponse(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUnixTimeDateAsyncWithServiceResponse(DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.putUnixTimeDate(intBodyConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -718,8 +891,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getInvalidUnixTime() throws ErrorException, IOException {
-        return getInvalidUnixTimeAsync().toBlocking().single();
+    public DateTime getInvalidUnixTime() throws ErrorException, IOException {
+        return getInvalidUnixTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -729,7 +902,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidUnixTimeAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidUnixTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -737,7 +910,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getInvalidUnixTimeAsync() {
+    public Observable<DateTime> getInvalidUnixTimeAsync() {
+        return getInvalidUnixTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get invalid Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getInvalidUnixTimeAsyncWithServiceResponse() {
         return service.getInvalidUnixTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -771,8 +958,8 @@ public final class IntsImpl implements Ints {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getNullUnixTime() throws ErrorException, IOException {
-        return getNullUnixTimeAsync().toBlocking().single();
+    public DateTime getNullUnixTime() throws ErrorException, IOException {
+        return getNullUnixTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -782,7 +969,7 @@ public final class IntsImpl implements Ints {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullUnixTimeAsync(), serviceCallback);
+        return ServiceCall.create(getNullUnixTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -790,7 +977,21 @@ public final class IntsImpl implements Ints {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getNullUnixTimeAsync() {
+    public Observable<DateTime> getNullUnixTimeAsync() {
+        return getNullUnixTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get null Unix time value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getNullUnixTimeAsyncWithServiceResponse() {
         return service.getNullUnixTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override

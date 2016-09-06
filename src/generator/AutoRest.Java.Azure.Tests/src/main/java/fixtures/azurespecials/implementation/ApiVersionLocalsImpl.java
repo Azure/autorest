@@ -77,10 +77,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodLocalValid() throws ErrorException, IOException {
-        return getMethodLocalValidAsync().toBlocking().single();
+    public void getMethodLocalValid() throws ErrorException, IOException {
+        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -90,7 +89,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalValidAsync(), serviceCallback);
+        return ServiceCall.create(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -98,7 +97,21 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodLocalValidAsync() {
+    public Observable<Void> getMethodLocalValidAsync() {
+        return getMethodLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodLocalValidWithServiceResponseAsync() {
         final String apiVersion = "2.0";
         return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -126,10 +139,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodLocalNull() throws ErrorException, IOException {
-        return getMethodLocalNullAsync().toBlocking().single();
+    public void getMethodLocalNull() throws ErrorException, IOException {
+        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -139,7 +151,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullAsync(), serviceCallback);
+        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -147,7 +159,21 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodLocalNullAsync() {
+    public Observable<Void> getMethodLocalNullAsync() {
+        return getMethodLocalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync() {
         final String apiVersion = null;
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -169,10 +195,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
-        return getMethodLocalNullAsync(apiVersion).toBlocking().single();
+    public void getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
+        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -183,7 +208,21 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullAsync(apiVersion), serviceCallback);
+        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getMethodLocalNullAsync(String apiVersion) {
+        return getMethodLocalNullWithServiceResponseAsync(apiVersion).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -192,7 +231,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodLocalNullAsync(String apiVersion) {
+    public Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync(String apiVersion) {
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -219,10 +258,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getPathLocalValid() throws ErrorException, IOException {
-        return getPathLocalValidAsync().toBlocking().single();
+    public void getPathLocalValid() throws ErrorException, IOException {
+        getPathLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -232,7 +270,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathLocalValidAsync(), serviceCallback);
+        return ServiceCall.create(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -240,7 +278,21 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getPathLocalValidAsync() {
+    public Observable<Void> getPathLocalValidAsync() {
+        return getPathLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getPathLocalValidWithServiceResponseAsync() {
         final String apiVersion = "2.0";
         return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -268,10 +320,9 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerLocalValid() throws ErrorException, IOException {
-        return getSwaggerLocalValidAsync().toBlocking().single();
+    public void getSwaggerLocalValid() throws ErrorException, IOException {
+        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -281,7 +332,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerLocalValidAsync(), serviceCallback);
+        return ServiceCall.create(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -289,7 +340,21 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getSwaggerLocalValidAsync() {
+    public Observable<Void> getSwaggerLocalValidAsync() {
+        return getSwaggerLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getSwaggerLocalValidWithServiceResponseAsync() {
         final String apiVersion = "2.0";
         return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {

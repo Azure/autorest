@@ -30,7 +30,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head400() throws ErrorException, IOException;
+    Error head400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -45,7 +45,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> head400Async();
+    Observable<Error> head400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> head400AsyncWithServiceResponse();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -54,7 +61,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get400() throws ErrorException, IOException;
+    Error get400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -69,7 +76,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get400Async();
+    Observable<Error> get400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get400AsyncWithServiceResponse();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -78,7 +92,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put400() throws ErrorException, IOException;
+    Error put400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -87,6 +101,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> put400Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> put400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put400AsyncWithServiceResponse();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -95,7 +125,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put400(Boolean booleanValue) throws ErrorException, IOException;
+    Error put400(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -112,7 +142,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> put400Async(Boolean booleanValue);
+    Observable<Error> put400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put400AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -121,7 +159,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch400() throws ErrorException, IOException;
+    Error patch400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -130,6 +168,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> patch400Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> patch400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch400AsyncWithServiceResponse();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -138,7 +192,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch400(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch400(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -155,7 +209,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> patch400Async(Boolean booleanValue);
+    Observable<Error> patch400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch400AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -164,7 +226,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post400() throws ErrorException, IOException;
+    Error post400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -173,6 +235,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> post400Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> post400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post400AsyncWithServiceResponse();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -181,7 +259,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post400(Boolean booleanValue) throws ErrorException, IOException;
+    Error post400(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -198,7 +276,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> post400Async(Boolean booleanValue);
+    Observable<Error> post400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post400AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -207,7 +293,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete400() throws ErrorException, IOException;
+    Error delete400() throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -216,6 +302,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> delete400Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> delete400Async();
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete400AsyncWithServiceResponse();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -224,7 +326,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete400(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete400(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -241,7 +343,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> delete400Async(Boolean booleanValue);
+    Observable<Error> delete400Async(Boolean booleanValue);
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete400AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -250,7 +360,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head401() throws ErrorException, IOException;
+    Error head401() throws ErrorException, IOException;
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -265,7 +375,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> head401Async();
+    Observable<Error> head401Async();
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> head401AsyncWithServiceResponse();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -274,7 +391,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get402() throws ErrorException, IOException;
+    Error get402() throws ErrorException, IOException;
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -289,7 +406,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get402Async();
+    Observable<Error> get402Async();
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get402AsyncWithServiceResponse();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -298,7 +422,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get403() throws ErrorException, IOException;
+    Error get403() throws ErrorException, IOException;
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -313,7 +437,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get403Async();
+    Observable<Error> get403Async();
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get403AsyncWithServiceResponse();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -322,7 +453,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put404() throws ErrorException, IOException;
+    Error put404() throws ErrorException, IOException;
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -331,6 +462,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> put404Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> put404Async();
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put404AsyncWithServiceResponse();
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
@@ -339,7 +486,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put404(Boolean booleanValue) throws ErrorException, IOException;
+    Error put404(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -356,7 +503,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> put404Async(Boolean booleanValue);
+    Observable<Error> put404Async(Boolean booleanValue);
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put404AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -365,7 +520,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch405() throws ErrorException, IOException;
+    Error patch405() throws ErrorException, IOException;
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -374,6 +529,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> patch405Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> patch405Async();
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch405AsyncWithServiceResponse();
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -382,7 +553,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch405(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch405(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -399,7 +570,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> patch405Async(Boolean booleanValue);
+    Observable<Error> patch405Async(Boolean booleanValue);
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch405AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -408,7 +587,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post406() throws ErrorException, IOException;
+    Error post406() throws ErrorException, IOException;
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -417,6 +596,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> post406Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> post406Async();
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post406AsyncWithServiceResponse();
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
@@ -425,7 +620,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post406(Boolean booleanValue) throws ErrorException, IOException;
+    Error post406(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -442,7 +637,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> post406Async(Boolean booleanValue);
+    Observable<Error> post406Async(Boolean booleanValue);
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post406AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -451,7 +654,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete407() throws ErrorException, IOException;
+    Error delete407() throws ErrorException, IOException;
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -460,6 +663,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> delete407Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> delete407Async();
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete407AsyncWithServiceResponse();
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
@@ -468,7 +687,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete407(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete407(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -485,7 +704,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> delete407Async(Boolean booleanValue);
+    Observable<Error> delete407Async(Boolean booleanValue);
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete407AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -494,7 +721,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put409() throws ErrorException, IOException;
+    Error put409() throws ErrorException, IOException;
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -503,6 +730,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> put409Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> put409Async();
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put409AsyncWithServiceResponse();
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -511,7 +754,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put409(Boolean booleanValue) throws ErrorException, IOException;
+    Error put409(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -528,7 +771,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> put409Async(Boolean booleanValue);
+    Observable<Error> put409Async(Boolean booleanValue);
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put409AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -537,7 +788,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head410() throws ErrorException, IOException;
+    Error head410() throws ErrorException, IOException;
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -552,7 +803,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> head410Async();
+    Observable<Error> head410Async();
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> head410AsyncWithServiceResponse();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -561,7 +819,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get411() throws ErrorException, IOException;
+    Error get411() throws ErrorException, IOException;
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -576,7 +834,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get411Async();
+    Observable<Error> get411Async();
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get411AsyncWithServiceResponse();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -585,7 +850,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get412() throws ErrorException, IOException;
+    Error get412() throws ErrorException, IOException;
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -600,7 +865,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get412Async();
+    Observable<Error> get412Async();
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get412AsyncWithServiceResponse();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -609,7 +881,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put413() throws ErrorException, IOException;
+    Error put413() throws ErrorException, IOException;
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -618,6 +890,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> put413Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> put413Async();
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put413AsyncWithServiceResponse();
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
@@ -626,7 +914,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> put413(Boolean booleanValue) throws ErrorException, IOException;
+    Error put413(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -643,7 +931,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> put413Async(Boolean booleanValue);
+    Observable<Error> put413Async(Boolean booleanValue);
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> put413AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -652,7 +948,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch414() throws ErrorException, IOException;
+    Error patch414() throws ErrorException, IOException;
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -661,6 +957,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> patch414Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> patch414Async();
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch414AsyncWithServiceResponse();
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
@@ -669,7 +981,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> patch414(Boolean booleanValue) throws ErrorException, IOException;
+    Error patch414(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -686,7 +998,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> patch414Async(Boolean booleanValue);
+    Observable<Error> patch414Async(Boolean booleanValue);
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> patch414AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -695,7 +1015,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post415() throws ErrorException, IOException;
+    Error post415() throws ErrorException, IOException;
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -704,6 +1024,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> post415Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> post415Async();
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post415AsyncWithServiceResponse();
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -712,7 +1048,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> post415(Boolean booleanValue) throws ErrorException, IOException;
+    Error post415(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -729,7 +1065,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> post415Async(Boolean booleanValue);
+    Observable<Error> post415Async(Boolean booleanValue);
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> post415AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -738,7 +1082,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> get416() throws ErrorException, IOException;
+    Error get416() throws ErrorException, IOException;
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -753,7 +1097,14 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get416Async();
+    Observable<Error> get416Async();
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> get416AsyncWithServiceResponse();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -762,7 +1113,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete417() throws ErrorException, IOException;
+    Error delete417() throws ErrorException, IOException;
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -771,6 +1122,22 @@ public interface HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Error> delete417Async(final ServiceCallback<Error> serviceCallback);
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<Error> delete417Async();
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete417AsyncWithServiceResponse();
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
@@ -779,7 +1146,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> delete417(Boolean booleanValue) throws ErrorException, IOException;
+    Error delete417(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -796,7 +1163,15 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> delete417Async(Boolean booleanValue);
+    Observable<Error> delete417Async(Boolean booleanValue);
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> delete417AsyncWithServiceResponse(Boolean booleanValue);
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -805,7 +1180,7 @@ public interface HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> head429() throws ErrorException, IOException;
+    Error head429() throws ErrorException, IOException;
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -820,6 +1195,13 @@ public interface HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> head429Async();
+    Observable<Error> head429Async();
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> head429AsyncWithServiceResponse();
 
 }

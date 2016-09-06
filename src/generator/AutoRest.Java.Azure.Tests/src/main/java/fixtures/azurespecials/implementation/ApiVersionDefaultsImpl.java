@@ -78,10 +78,9 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return getMethodGlobalValidAsync().toBlocking().single();
+    public void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -91,7 +90,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -99,7 +98,21 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodGlobalValidAsync() {
+    public Observable<Void> getMethodGlobalValidAsync() {
+        return getMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -130,10 +143,9 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
-        return getMethodGlobalNotProvidedValidAsync().toBlocking().single();
+    public void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException {
+        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -143,7 +155,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
+        return ServiceCall.create(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,7 +163,21 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsync() {
+    public Observable<Void> getMethodGlobalNotProvidedValidAsync() {
+        return getMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -182,10 +208,9 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return getPathGlobalValidAsync().toBlocking().single();
+    public void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -195,7 +220,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -203,7 +228,21 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getPathGlobalValidAsync() {
+    public Observable<Void> getPathGlobalValidAsync() {
+        return getPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
@@ -234,10 +273,9 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
-        return getSwaggerGlobalValidAsync().toBlocking().single();
+    public void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException {
+        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -247,7 +285,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerGlobalValidAsync(), serviceCallback);
+        return ServiceCall.create(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -255,7 +293,21 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getSwaggerGlobalValidAsync() {
+    public Observable<Void> getSwaggerGlobalValidAsync() {
+        return getSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }

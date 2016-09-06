@@ -159,8 +159,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> head400() throws ErrorException, IOException {
-        return head400Async().toBlocking().single();
+    public Error head400() throws ErrorException, IOException {
+        return head400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -170,7 +170,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head400Async(), serviceCallback);
+        return ServiceCall.create(head400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -178,7 +178,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> head400Async() {
+    public Observable<Error> head400Async() {
+        return head400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> head400AsyncWithServiceResponse() {
         return service.head400()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -206,8 +220,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get400() throws ErrorException, IOException {
-        return get400Async().toBlocking().single();
+    public Error get400() throws ErrorException, IOException {
+        return get400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -217,7 +231,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get400Async(), serviceCallback);
+        return ServiceCall.create(get400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -225,7 +239,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get400Async() {
+    public Observable<Error> get400Async() {
+        return get400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get400AsyncWithServiceResponse() {
         return service.get400()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -253,8 +281,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put400() throws ErrorException, IOException {
-        return put400Async().toBlocking().single();
+    public Error put400() throws ErrorException, IOException {
+        return put400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -264,7 +292,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put400Async(), serviceCallback);
+        return ServiceCall.create(put400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -272,7 +300,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put400Async() {
+    public Observable<Error> put400Async() {
+        return put400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> put400AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.put400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -296,8 +338,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put400(Boolean booleanValue) throws ErrorException, IOException {
-        return put400Async(booleanValue).toBlocking().single();
+    public Error put400(Boolean booleanValue) throws ErrorException, IOException {
+        return put400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -308,7 +350,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put400Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put400AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> put400Async(Boolean booleanValue) {
+        return put400AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -317,7 +373,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put400Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> put400AsyncWithServiceResponse(Boolean booleanValue) {
         return service.put400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -345,8 +401,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch400() throws ErrorException, IOException {
-        return patch400Async().toBlocking().single();
+    public Error patch400() throws ErrorException, IOException {
+        return patch400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -356,7 +412,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch400Async(), serviceCallback);
+        return ServiceCall.create(patch400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -364,7 +420,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch400Async() {
+    public Observable<Error> patch400Async() {
+        return patch400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> patch400AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.patch400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -388,8 +458,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch400(Boolean booleanValue) throws ErrorException, IOException {
-        return patch400Async(booleanValue).toBlocking().single();
+    public Error patch400(Boolean booleanValue) throws ErrorException, IOException {
+        return patch400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -400,7 +470,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch400Async(booleanValue), serviceCallback);
+        return ServiceCall.create(patch400AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> patch400Async(Boolean booleanValue) {
+        return patch400AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -409,7 +493,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch400Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> patch400AsyncWithServiceResponse(Boolean booleanValue) {
         return service.patch400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -437,8 +521,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post400() throws ErrorException, IOException {
-        return post400Async().toBlocking().single();
+    public Error post400() throws ErrorException, IOException {
+        return post400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -448,7 +532,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post400Async(), serviceCallback);
+        return ServiceCall.create(post400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -456,7 +540,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post400Async() {
+    public Observable<Error> post400Async() {
+        return post400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> post400AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.post400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -480,8 +578,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post400(Boolean booleanValue) throws ErrorException, IOException {
-        return post400Async(booleanValue).toBlocking().single();
+    public Error post400(Boolean booleanValue) throws ErrorException, IOException {
+        return post400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -492,7 +590,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post400Async(booleanValue), serviceCallback);
+        return ServiceCall.create(post400AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> post400Async(Boolean booleanValue) {
+        return post400AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -501,7 +613,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post400Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> post400AsyncWithServiceResponse(Boolean booleanValue) {
         return service.post400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -529,8 +641,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete400() throws ErrorException, IOException {
-        return delete400Async().toBlocking().single();
+    public Error delete400() throws ErrorException, IOException {
+        return delete400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -540,7 +652,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete400Async(), serviceCallback);
+        return ServiceCall.create(delete400AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -548,7 +660,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete400Async() {
+    public Observable<Error> delete400Async() {
+        return delete400AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> delete400AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.delete400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -572,8 +698,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete400(Boolean booleanValue) throws ErrorException, IOException {
-        return delete400Async(booleanValue).toBlocking().single();
+    public Error delete400(Boolean booleanValue) throws ErrorException, IOException {
+        return delete400AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -584,7 +710,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete400Async(booleanValue), serviceCallback);
+        return ServiceCall.create(delete400AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 400 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> delete400Async(Boolean booleanValue) {
+        return delete400AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -593,7 +733,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete400Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> delete400AsyncWithServiceResponse(Boolean booleanValue) {
         return service.delete400(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -621,8 +761,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> head401() throws ErrorException, IOException {
-        return head401Async().toBlocking().single();
+    public Error head401() throws ErrorException, IOException {
+        return head401AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -632,7 +772,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head401Async(), serviceCallback);
+        return ServiceCall.create(head401AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -640,7 +780,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> head401Async() {
+    public Observable<Error> head401Async() {
+        return head401AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 401 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> head401AsyncWithServiceResponse() {
         return service.head401()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -668,8 +822,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get402() throws ErrorException, IOException {
-        return get402Async().toBlocking().single();
+    public Error get402() throws ErrorException, IOException {
+        return get402AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -679,7 +833,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get402Async(), serviceCallback);
+        return ServiceCall.create(get402AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -687,7 +841,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get402Async() {
+    public Observable<Error> get402Async() {
+        return get402AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 402 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get402AsyncWithServiceResponse() {
         return service.get402()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -715,8 +883,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get403() throws ErrorException, IOException {
-        return get403Async().toBlocking().single();
+    public Error get403() throws ErrorException, IOException {
+        return get403AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -726,7 +894,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get403Async(), serviceCallback);
+        return ServiceCall.create(get403AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -734,7 +902,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get403Async() {
+    public Observable<Error> get403Async() {
+        return get403AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 403 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get403AsyncWithServiceResponse() {
         return service.get403()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -762,8 +944,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put404() throws ErrorException, IOException {
-        return put404Async().toBlocking().single();
+    public Error put404() throws ErrorException, IOException {
+        return put404AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -773,7 +955,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put404Async(), serviceCallback);
+        return ServiceCall.create(put404AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -781,7 +963,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put404Async() {
+    public Observable<Error> put404Async() {
+        return put404AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> put404AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.put404(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -805,8 +1001,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put404(Boolean booleanValue) throws ErrorException, IOException {
-        return put404Async(booleanValue).toBlocking().single();
+    public Error put404(Boolean booleanValue) throws ErrorException, IOException {
+        return put404AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -817,7 +1013,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put404Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put404AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 404 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> put404Async(Boolean booleanValue) {
+        return put404AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -826,7 +1036,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put404Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> put404AsyncWithServiceResponse(Boolean booleanValue) {
         return service.put404(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -854,8 +1064,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch405() throws ErrorException, IOException {
-        return patch405Async().toBlocking().single();
+    public Error patch405() throws ErrorException, IOException {
+        return patch405AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -865,7 +1075,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch405Async(), serviceCallback);
+        return ServiceCall.create(patch405AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -873,7 +1083,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch405Async() {
+    public Observable<Error> patch405Async() {
+        return patch405AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> patch405AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.patch405(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -897,8 +1121,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch405(Boolean booleanValue) throws ErrorException, IOException {
-        return patch405Async(booleanValue).toBlocking().single();
+    public Error patch405(Boolean booleanValue) throws ErrorException, IOException {
+        return patch405AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -909,7 +1133,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch405Async(booleanValue), serviceCallback);
+        return ServiceCall.create(patch405AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 405 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> patch405Async(Boolean booleanValue) {
+        return patch405AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -918,7 +1156,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch405Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> patch405AsyncWithServiceResponse(Boolean booleanValue) {
         return service.patch405(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -946,8 +1184,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post406() throws ErrorException, IOException {
-        return post406Async().toBlocking().single();
+    public Error post406() throws ErrorException, IOException {
+        return post406AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -957,7 +1195,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post406Async(), serviceCallback);
+        return ServiceCall.create(post406AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -965,7 +1203,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post406Async() {
+    public Observable<Error> post406Async() {
+        return post406AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> post406AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.post406(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -989,8 +1241,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post406(Boolean booleanValue) throws ErrorException, IOException {
-        return post406Async(booleanValue).toBlocking().single();
+    public Error post406(Boolean booleanValue) throws ErrorException, IOException {
+        return post406AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1001,7 +1253,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post406Async(booleanValue), serviceCallback);
+        return ServiceCall.create(post406AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 406 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> post406Async(Boolean booleanValue) {
+        return post406AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1010,7 +1276,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post406Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> post406AsyncWithServiceResponse(Boolean booleanValue) {
         return service.post406(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1038,8 +1304,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete407() throws ErrorException, IOException {
-        return delete407Async().toBlocking().single();
+    public Error delete407() throws ErrorException, IOException {
+        return delete407AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1049,7 +1315,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete407Async(), serviceCallback);
+        return ServiceCall.create(delete407AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1057,7 +1323,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete407Async() {
+    public Observable<Error> delete407Async() {
+        return delete407AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> delete407AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.delete407(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1081,8 +1361,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete407(Boolean booleanValue) throws ErrorException, IOException {
-        return delete407Async(booleanValue).toBlocking().single();
+    public Error delete407(Boolean booleanValue) throws ErrorException, IOException {
+        return delete407AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1093,7 +1373,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete407Async(booleanValue), serviceCallback);
+        return ServiceCall.create(delete407AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 407 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> delete407Async(Boolean booleanValue) {
+        return delete407AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1102,7 +1396,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete407Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> delete407AsyncWithServiceResponse(Boolean booleanValue) {
         return service.delete407(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1130,8 +1424,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put409() throws ErrorException, IOException {
-        return put409Async().toBlocking().single();
+    public Error put409() throws ErrorException, IOException {
+        return put409AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1141,7 +1435,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put409Async(), serviceCallback);
+        return ServiceCall.create(put409AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1149,7 +1443,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put409Async() {
+    public Observable<Error> put409Async() {
+        return put409AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> put409AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.put409(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1173,8 +1481,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put409(Boolean booleanValue) throws ErrorException, IOException {
-        return put409Async(booleanValue).toBlocking().single();
+    public Error put409(Boolean booleanValue) throws ErrorException, IOException {
+        return put409AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1185,7 +1493,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put409Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put409AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 409 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> put409Async(Boolean booleanValue) {
+        return put409AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1194,7 +1516,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put409Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> put409AsyncWithServiceResponse(Boolean booleanValue) {
         return service.put409(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1222,8 +1544,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> head410() throws ErrorException, IOException {
-        return head410Async().toBlocking().single();
+    public Error head410() throws ErrorException, IOException {
+        return head410AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1233,7 +1555,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head410Async(), serviceCallback);
+        return ServiceCall.create(head410AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1241,7 +1563,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> head410Async() {
+    public Observable<Error> head410Async() {
+        return head410AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 410 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> head410AsyncWithServiceResponse() {
         return service.head410()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1269,8 +1605,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get411() throws ErrorException, IOException {
-        return get411Async().toBlocking().single();
+    public Error get411() throws ErrorException, IOException {
+        return get411AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1280,7 +1616,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get411Async(), serviceCallback);
+        return ServiceCall.create(get411AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1288,7 +1624,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get411Async() {
+    public Observable<Error> get411Async() {
+        return get411AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 411 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get411AsyncWithServiceResponse() {
         return service.get411()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1316,8 +1666,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get412() throws ErrorException, IOException {
-        return get412Async().toBlocking().single();
+    public Error get412() throws ErrorException, IOException {
+        return get412AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1327,7 +1677,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get412Async(), serviceCallback);
+        return ServiceCall.create(get412AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1335,7 +1685,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get412Async() {
+    public Observable<Error> get412Async() {
+        return get412AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 412 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get412AsyncWithServiceResponse() {
         return service.get412()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1363,8 +1727,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put413() throws ErrorException, IOException {
-        return put413Async().toBlocking().single();
+    public Error put413() throws ErrorException, IOException {
+        return put413AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1374,7 +1738,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put413Async(), serviceCallback);
+        return ServiceCall.create(put413AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1382,7 +1746,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put413Async() {
+    public Observable<Error> put413Async() {
+        return put413AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> put413AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.put413(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1406,8 +1784,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> put413(Boolean booleanValue) throws ErrorException, IOException {
-        return put413Async(booleanValue).toBlocking().single();
+    public Error put413(Boolean booleanValue) throws ErrorException, IOException {
+        return put413AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1418,7 +1796,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(put413Async(booleanValue), serviceCallback);
+        return ServiceCall.create(put413AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 413 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> put413Async(Boolean booleanValue) {
+        return put413AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1427,7 +1819,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> put413Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> put413AsyncWithServiceResponse(Boolean booleanValue) {
         return service.put413(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1455,8 +1847,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch414() throws ErrorException, IOException {
-        return patch414Async().toBlocking().single();
+    public Error patch414() throws ErrorException, IOException {
+        return patch414AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1466,7 +1858,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch414Async(), serviceCallback);
+        return ServiceCall.create(patch414AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1474,7 +1866,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch414Async() {
+    public Observable<Error> patch414Async() {
+        return patch414AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> patch414AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.patch414(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1498,8 +1904,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> patch414(Boolean booleanValue) throws ErrorException, IOException {
-        return patch414Async(booleanValue).toBlocking().single();
+    public Error patch414(Boolean booleanValue) throws ErrorException, IOException {
+        return patch414AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1510,7 +1916,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(patch414Async(booleanValue), serviceCallback);
+        return ServiceCall.create(patch414AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 414 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> patch414Async(Boolean booleanValue) {
+        return patch414AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1519,7 +1939,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> patch414Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> patch414AsyncWithServiceResponse(Boolean booleanValue) {
         return service.patch414(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1547,8 +1967,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post415() throws ErrorException, IOException {
-        return post415Async().toBlocking().single();
+    public Error post415() throws ErrorException, IOException {
+        return post415AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1558,7 +1978,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post415Async(), serviceCallback);
+        return ServiceCall.create(post415AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1566,7 +1986,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post415Async() {
+    public Observable<Error> post415Async() {
+        return post415AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> post415AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.post415(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1590,8 +2024,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> post415(Boolean booleanValue) throws ErrorException, IOException {
-        return post415Async(booleanValue).toBlocking().single();
+    public Error post415(Boolean booleanValue) throws ErrorException, IOException {
+        return post415AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1602,7 +2036,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post415Async(booleanValue), serviceCallback);
+        return ServiceCall.create(post415AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 415 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> post415Async(Boolean booleanValue) {
+        return post415AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1611,7 +2059,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> post415Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> post415AsyncWithServiceResponse(Boolean booleanValue) {
         return service.post415(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1639,8 +2087,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> get416() throws ErrorException, IOException {
-        return get416Async().toBlocking().single();
+    public Error get416() throws ErrorException, IOException {
+        return get416AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1650,7 +2098,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get416Async(), serviceCallback);
+        return ServiceCall.create(get416AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1658,7 +2106,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> get416Async() {
+    public Observable<Error> get416Async() {
+        return get416AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 416 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> get416AsyncWithServiceResponse() {
         return service.get416()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1686,8 +2148,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete417() throws ErrorException, IOException {
-        return delete417Async().toBlocking().single();
+    public Error delete417() throws ErrorException, IOException {
+        return delete417AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1697,7 +2159,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete417Async(), serviceCallback);
+        return ServiceCall.create(delete417AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1705,7 +2167,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete417Async() {
+    public Observable<Error> delete417Async() {
+        return delete417AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> delete417AsyncWithServiceResponse() {
         final Boolean booleanValue = null;
         return service.delete417(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
@@ -1729,8 +2205,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> delete417(Boolean booleanValue) throws ErrorException, IOException {
-        return delete417Async(booleanValue).toBlocking().single();
+    public Error delete417(Boolean booleanValue) throws ErrorException, IOException {
+        return delete417AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1741,7 +2217,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete417Async(booleanValue), serviceCallback);
+        return ServiceCall.create(delete417AsyncWithServiceResponse(booleanValue), serviceCallback);
+    }
+
+    /**
+     * Return 417 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<Error> delete417Async(Boolean booleanValue) {
+        return delete417AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -1750,7 +2240,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> delete417Async(Boolean booleanValue) {
+    public Observable<ServiceResponse<Error>> delete417AsyncWithServiceResponse(Boolean booleanValue) {
         return service.delete417(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -1778,8 +2268,8 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Error> head429() throws ErrorException, IOException {
-        return head429Async().toBlocking().single();
+    public Error head429() throws ErrorException, IOException {
+        return head429AsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1789,7 +2279,7 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head429Async(), serviceCallback);
+        return ServiceCall.create(head429AsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1797,7 +2287,21 @@ public final class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @return the observable to the Error object
      */
-    public Observable<ServiceResponse<Error>> head429Async() {
+    public Observable<Error> head429Async() {
+        return head429AsyncWithServiceResponse().map(new Func1<ServiceResponse<Error>, Error>() {
+            @Override
+            public Error call(ServiceResponse<Error> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Return 429 status code - should be represented in the client as an error.
+     *
+     * @return the observable to the Error object
+     */
+    public Observable<ServiceResponse<Error>> head429AsyncWithServiceResponse() {
         return service.head429()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Error>>>() {
                 @Override

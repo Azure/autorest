@@ -73,8 +73,8 @@ public final class InheritancesImpl implements Inheritances {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Siamese> getValid() throws ErrorException, IOException {
-        return getValidAsync().toBlocking().single();
+    public Siamese getValid() throws ErrorException, IOException {
+        return getValidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -84,7 +84,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
-        return ServiceCall.create(getValidAsync(), serviceCallback);
+        return ServiceCall.create(getValidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -92,7 +92,21 @@ public final class InheritancesImpl implements Inheritances {
      *
      * @return the observable to the Siamese object
      */
-    public Observable<ServiceResponse<Siamese>> getValidAsync() {
+    public Observable<Siamese> getValidAsync() {
+        return getValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Siamese>, Siamese>() {
+            @Override
+            public Siamese call(ServiceResponse<Siamese> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @return the observable to the Siamese object
+     */
+    public Observable<ServiceResponse<Siamese>> getValidAsyncWithServiceResponse() {
         return service.getValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Siamese>>>() {
                 @Override
@@ -123,8 +137,8 @@ public final class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putValidAsync(complexBody).toBlocking().single();
+    public void putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putValidAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -135,7 +149,7 @@ public final class InheritancesImpl implements Inheritances {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+        return ServiceCall.create(putValidAsyncWithServiceResponse(complexBody), serviceCallback);
     }
 
     /**
@@ -144,7 +158,22 @@ public final class InheritancesImpl implements Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidAsync(Siamese complexBody) {
+    public Observable<Void> putValidAsync(Siamese complexBody) {
+        return putValidAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Siamese complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

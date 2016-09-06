@@ -41,7 +41,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ErrorException, IOException;
+    Error postRequiredIntegerParameter(int bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -58,7 +58,15 @@ public interface Explicits {
      * @param bodyParameter the int value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredIntegerParameterAsync(int bodyParameter);
+    Observable<Error> postRequiredIntegerParameterAsync(int bodyParameter);
+
+    /**
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the int value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredIntegerParameterAsyncWithServiceResponse(int bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -67,7 +75,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerParameter() throws ErrorException, IOException;
+    void postOptionalIntegerParameter() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -76,6 +84,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalIntegerParameterAsync();
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerParameterAsyncWithServiceResponse();
     /**
      * Test explicitly optional integer. Please put null.
      *
@@ -84,7 +108,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ErrorException, IOException;
+    void postOptionalIntegerParameter(Integer bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -101,7 +125,15 @@ public interface Explicits {
      * @param bodyParameter the Integer value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalIntegerParameterAsync(Integer bodyParameter);
+    Observable<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
+
+    /**
+     * Test explicitly optional integer. Please put null.
+     *
+     * @param bodyParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerParameterAsyncWithServiceResponse(Integer bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -112,7 +144,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredIntegerProperty(IntWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredIntegerProperty(IntWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -129,7 +161,15 @@ public interface Explicits {
      * @param bodyParameter the IntWrapper value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
+    Observable<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
+
+    /**
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the IntWrapper value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredIntegerPropertyAsyncWithServiceResponse(IntWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -138,7 +178,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerProperty() throws ErrorException, IOException;
+    void postOptionalIntegerProperty() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -147,6 +187,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the IntOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalIntegerPropertyAsync();
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the IntOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerPropertyAsyncWithServiceResponse();
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
@@ -155,7 +211,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -172,7 +228,15 @@ public interface Explicits {
      * @param bodyParameter the IntOptionalWrapper value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
+    Observable<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
+
+    /**
+     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the IntOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerPropertyAsyncWithServiceResponse(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -182,7 +246,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ErrorException, IOException;
+    Error postRequiredIntegerHeader(int headerParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -199,7 +263,15 @@ public interface Explicits {
      * @param headerParameter the int value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredIntegerHeaderAsync(int headerParameter);
+    Observable<Error> postRequiredIntegerHeaderAsync(int headerParameter);
+
+    /**
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     *
+     * @param headerParameter the int value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredIntegerHeaderAsyncWithServiceResponse(int headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -208,7 +280,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerHeader() throws ErrorException, IOException;
+    void postOptionalIntegerHeader() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -217,6 +289,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalIntegerHeaderAsync();
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerHeaderAsyncWithServiceResponse();
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -225,7 +313,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ErrorException, IOException;
+    void postOptionalIntegerHeader(Integer headerParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -242,7 +330,15 @@ public interface Explicits {
      * @param headerParameter the Integer value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalIntegerHeaderAsync(Integer headerParameter);
+    Observable<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the Integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalIntegerHeaderAsyncWithServiceResponse(Integer headerParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -253,7 +349,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredStringParameter(String bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringParameter(String bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -270,7 +366,15 @@ public interface Explicits {
      * @param bodyParameter the String value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredStringParameterAsync(String bodyParameter);
+    Observable<Error> postRequiredStringParameterAsync(String bodyParameter);
+
+    /**
+     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the String value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredStringParameterAsyncWithServiceResponse(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -279,7 +383,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringParameter() throws ErrorException, IOException;
+    void postOptionalStringParameter() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional string. Please put null.
@@ -288,6 +392,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalStringParameterAsync();
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringParameterAsyncWithServiceResponse();
     /**
      * Test explicitly optional string. Please put null.
      *
@@ -296,7 +416,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringParameter(String bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional string. Please put null.
@@ -313,7 +433,15 @@ public interface Explicits {
      * @param bodyParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalStringParameterAsync(String bodyParameter);
+    Observable<Void> postOptionalStringParameterAsync(String bodyParameter);
+
+    /**
+     * Test explicitly optional string. Please put null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringParameterAsyncWithServiceResponse(String bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -324,7 +452,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredStringProperty(StringWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringProperty(StringWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -341,7 +469,15 @@ public interface Explicits {
      * @param bodyParameter the StringWrapper value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
+    Observable<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
+
+    /**
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the StringWrapper value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredStringPropertyAsyncWithServiceResponse(StringWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -350,7 +486,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringProperty() throws ErrorException, IOException;
+    void postOptionalStringProperty() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -359,6 +495,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the StringOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalStringPropertyAsync();
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the StringOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringPropertyAsyncWithServiceResponse();
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
@@ -367,7 +519,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -384,7 +536,15 @@ public interface Explicits {
      * @param bodyParameter the StringOptionalWrapper value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
+    Observable<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
+
+    /**
+     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the StringOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringPropertyAsyncWithServiceResponse(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -395,7 +555,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredStringHeader(String headerParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredStringHeader(String headerParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -412,7 +572,15 @@ public interface Explicits {
      * @param headerParameter the String value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredStringHeaderAsync(String headerParameter);
+    Observable<Error> postRequiredStringHeaderAsync(String headerParameter);
+
+    /**
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     *
+     * @param headerParameter the String value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredStringHeaderAsyncWithServiceResponse(String headerParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -421,7 +589,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringHeader() throws ErrorException, IOException;
+    void postOptionalStringHeader() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -430,6 +598,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalStringHeaderAsync();
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringHeaderAsyncWithServiceResponse();
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
@@ -438,7 +622,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ErrorException, IOException;
+    void postOptionalStringHeader(String bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -455,7 +639,15 @@ public interface Explicits {
      * @param bodyParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalStringHeaderAsync(String bodyParameter);
+    Observable<Void> postOptionalStringHeaderAsync(String bodyParameter);
+
+    /**
+     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalStringHeaderAsyncWithServiceResponse(String bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -466,7 +658,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredClassParameter(Product bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredClassParameter(Product bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -483,7 +675,15 @@ public interface Explicits {
      * @param bodyParameter the Product value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredClassParameterAsync(Product bodyParameter);
+    Observable<Error> postRequiredClassParameterAsync(Product bodyParameter);
+
+    /**
+     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the Product value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredClassParameterAsyncWithServiceResponse(Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -492,7 +692,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalClassParameter() throws ErrorException, IOException;
+    void postOptionalClassParameter() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -501,6 +701,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter the Product value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalClassParameterAsync();
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter the Product value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalClassParameterAsyncWithServiceResponse();
     /**
      * Test explicitly optional complex object. Please put null.
      *
@@ -509,7 +725,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ErrorException, IOException;
+    void postOptionalClassParameter(Product bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -526,7 +742,15 @@ public interface Explicits {
      * @param bodyParameter the Product value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalClassParameterAsync(Product bodyParameter);
+    Observable<Void> postOptionalClassParameterAsync(Product bodyParameter);
+
+    /**
+     * Test explicitly optional complex object. Please put null.
+     *
+     * @param bodyParameter the Product value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalClassParameterAsyncWithServiceResponse(Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -537,7 +761,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredClassProperty(ClassWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredClassProperty(ClassWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -554,7 +778,15 @@ public interface Explicits {
      * @param bodyParameter the ClassWrapper value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
+    Observable<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
+
+    /**
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the ClassWrapper value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredClassPropertyAsyncWithServiceResponse(ClassWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -563,7 +795,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalClassProperty() throws ErrorException, IOException;
+    void postOptionalClassProperty() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -572,6 +804,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ClassOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalClassPropertyAsync();
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ClassOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalClassPropertyAsyncWithServiceResponse();
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
@@ -580,7 +828,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -597,7 +845,15 @@ public interface Explicits {
      * @param bodyParameter the ClassOptionalWrapper value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
+    Observable<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
+
+    /**
+     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ClassOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalClassPropertyAsyncWithServiceResponse(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -608,7 +864,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredArrayParameter(List<String> bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayParameter(List<String> bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -625,7 +881,15 @@ public interface Explicits {
      * @param bodyParameter the List&lt;String&gt; value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredArrayParameterAsync(List<String> bodyParameter);
+    Observable<Error> postRequiredArrayParameterAsync(List<String> bodyParameter);
+
+    /**
+     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredArrayParameterAsyncWithServiceResponse(List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -634,7 +898,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayParameter() throws ErrorException, IOException;
+    void postOptionalArrayParameter() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional array. Please put null.
@@ -643,6 +907,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalArrayParameterAsync();
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayParameterAsyncWithServiceResponse();
     /**
      * Test explicitly optional array. Please put null.
      *
@@ -651,7 +931,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ErrorException, IOException;
+    void postOptionalArrayParameter(List<String> bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional array. Please put null.
@@ -668,7 +948,15 @@ public interface Explicits {
      * @param bodyParameter the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalArrayParameterAsync(List<String> bodyParameter);
+    Observable<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
+
+    /**
+     * Test explicitly optional array. Please put null.
+     *
+     * @param bodyParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayParameterAsyncWithServiceResponse(List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -679,7 +967,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayProperty(ArrayWrapper bodyParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -696,7 +984,15 @@ public interface Explicits {
      * @param bodyParameter the ArrayWrapper value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
+    Observable<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
+
+    /**
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     *
+     * @param bodyParameter the ArrayWrapper value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredArrayPropertyAsyncWithServiceResponse(ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -705,7 +1001,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayProperty() throws ErrorException, IOException;
+    void postOptionalArrayProperty() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -714,6 +1010,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ArrayOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalArrayPropertyAsync();
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ArrayOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayPropertyAsyncWithServiceResponse();
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
@@ -722,7 +1034,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ErrorException, IOException;
+    void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -739,7 +1051,15 @@ public interface Explicits {
      * @param bodyParameter the ArrayOptionalWrapper value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
+    Observable<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
+
+    /**
+     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
+     *
+     * @param bodyParameter the ArrayOptionalWrapper value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayPropertyAsyncWithServiceResponse(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -750,7 +1070,7 @@ public interface Explicits {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Error object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Error> postRequiredArrayHeader(List<String> headerParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error postRequiredArrayHeader(List<String> headerParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -767,7 +1087,15 @@ public interface Explicits {
      * @param headerParameter the List&lt;String&gt; value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> postRequiredArrayHeaderAsync(List<String> headerParameter);
+    Observable<Error> postRequiredArrayHeaderAsync(List<String> headerParameter);
+
+    /**
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> postRequiredArrayHeaderAsyncWithServiceResponse(List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -776,7 +1104,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayHeader() throws ErrorException, IOException;
+    void postOptionalArrayHeader() throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -785,6 +1113,22 @@ public interface Explicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> postOptionalArrayHeaderAsync();
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayHeaderAsyncWithServiceResponse();
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -793,7 +1137,7 @@ public interface Explicits {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException;
+    void postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -810,6 +1154,14 @@ public interface Explicits {
      * @param headerParameter the List&lt;String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalArrayHeaderAsync(List<String> headerParameter);
+    Observable<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
+
+    /**
+     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
+     *
+     * @param headerParameter the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> postOptionalArrayHeaderAsyncWithServiceResponse(List<String> headerParameter);
 
 }

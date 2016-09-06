@@ -30,7 +30,7 @@ public interface Polymorphisms {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Fish> getValid() throws ErrorException, IOException;
+    Fish getValid() throws ErrorException, IOException;
 
     /**
      * Get complex types that are polymorphic.
@@ -45,7 +45,14 @@ public interface Polymorphisms {
      *
      * @return the observable to the Fish object
      */
-    Observable<ServiceResponse<Fish>> getValidAsync();
+    Observable<Fish> getValidAsync();
+
+    /**
+     * Get complex types that are polymorphic.
+     *
+     * @return the observable to the Fish object
+     */
+    Observable<ServiceResponse<Fish>> getValidAsyncWithServiceResponse();
 
     /**
      * Put complex types that are polymorphic.
@@ -88,7 +95,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic.
@@ -169,7 +176,47 @@ public interface Polymorphisms {
            };
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsync(Fish complexBody);
+    Observable<Void> putValidAsync(Fish complexBody);
+
+    /**
+     * Put complex types that are polymorphic.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+     {
+             'fishtype':'Salmon',
+             'location':'alaska',
+             'iswild':true,
+             'species':'king',
+             'length':1.0,
+             'siblings':[
+               {
+                 'fishtype':'Shark',
+                 'age':6,
+                 'birthday': '2012-01-05T01:00:00Z',
+                 'length':20.0,
+                 'species':'predator',
+               },
+               {
+                 'fishtype':'Sawshark',
+                 'age':105,
+                 'birthday': '1900-01-05T01:00:00Z',
+                 'length':10.0,
+                 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                 'species':'dangerous',
+               },
+               {
+                 'fishtype': 'goblin',
+                 'age': 1,
+                 'birthday': '2015-08-08T00:00:00Z',
+                 'length': 30.0,
+                 'species': 'scary',
+                 'jawsize': 5
+               }
+             ]
+           };
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -205,7 +252,7 @@ public interface Polymorphisms {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -272,6 +319,39 @@ public interface Polymorphisms {
      }
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidMissingRequiredAsync(Fish complexBody);
+    Observable<Void> putValidMissingRequiredAsync(Fish complexBody);
+
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     *
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+     {
+         "fishtype": "sawshark",
+         "species": "snaggle toothed",
+         "length": 18.5,
+         "age": 2,
+         "birthday": "2013-06-01T01:00:00Z",
+         "location": "alaska",
+         "picture": base64(FF FF FF FF FE),
+         "siblings": [
+             {
+                 "fishtype": "shark",
+                 "species": "predator",
+                 "birthday": "2012-01-05T01:00:00Z",
+                 "length": 20,
+                 "age": 6
+             },
+             {
+                 "fishtype": "sawshark",
+                 "species": "dangerous",
+                 "picture": base64(FF FF FF FF FE),
+                 "length": 10,
+                 "age": 105
+             }
+         ]
+     }
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidMissingRequiredAsyncWithServiceResponse(Fish complexBody);
 
 }

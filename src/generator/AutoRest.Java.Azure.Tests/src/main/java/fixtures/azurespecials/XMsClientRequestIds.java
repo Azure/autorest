@@ -30,7 +30,7 @@ public interface XMsClientRequestIds {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get() throws CloudException, IOException;
+    void get() throws CloudException, IOException;
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -45,7 +45,14 @@ public interface XMsClientRequestIds {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getAsync();
+    Observable<Void> getAsync();
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getAsyncWithServiceResponse();
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -56,7 +63,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
+    void paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -73,6 +80,14 @@ public interface XMsClientRequestIds {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> paramGetAsync(String xMsClientRequestId);
+    Observable<Void> paramGetAsync(String xMsClientRequestId);
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> paramGetAsyncWithServiceResponse(String xMsClientRequestId);
 
 }

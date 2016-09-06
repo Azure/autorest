@@ -77,8 +77,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Fish> getValid() throws ErrorException, IOException {
-        return getValidAsync().toBlocking().single();
+    public Fish getValid() throws ErrorException, IOException {
+        return getValidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -88,7 +88,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.create(getValidAsync(), serviceCallback);
+        return ServiceCall.create(getValidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -96,7 +96,21 @@ public final class PolymorphismsImpl implements Polymorphisms {
      *
      * @return the observable to the Fish object
      */
-    public Observable<ServiceResponse<Fish>> getValidAsync() {
+    public Observable<Fish> getValidAsync() {
+        return getValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Fish>, Fish>() {
+            @Override
+            public Fish call(ServiceResponse<Fish> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get complex types that are polymorphic.
+     *
+     * @return the observable to the Fish object
+     */
+    public Observable<ServiceResponse<Fish>> getValidAsyncWithServiceResponse() {
         return service.getValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Fish>>>() {
                 @Override
@@ -159,8 +173,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putValidAsync(complexBody).toBlocking().single();
+    public void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putValidAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -203,7 +217,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+        return ServiceCall.create(putValidAsyncWithServiceResponse(complexBody), serviceCallback);
     }
 
     /**
@@ -244,7 +258,54 @@ public final class PolymorphismsImpl implements Polymorphisms {
            };
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidAsync(Fish complexBody) {
+    public Observable<Void> putValidAsync(Fish complexBody) {
+        return putValidAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put complex types that are polymorphic.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+     {
+             'fishtype':'Salmon',
+             'location':'alaska',
+             'iswild':true,
+             'species':'king',
+             'length':1.0,
+             'siblings':[
+               {
+                 'fishtype':'Shark',
+                 'age':6,
+                 'birthday': '2012-01-05T01:00:00Z',
+                 'length':20.0,
+                 'species':'predator',
+               },
+               {
+                 'fishtype':'Sawshark',
+                 'age':105,
+                 'birthday': '1900-01-05T01:00:00Z',
+                 'length':10.0,
+                 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                 'species':'dangerous',
+               },
+               {
+                 'fishtype': 'goblin',
+                 'age': 1,
+                 'birthday': '2015-08-08T00:00:00Z',
+                 'length': 30.0,
+                 'species': 'scary',
+                 'jawsize': 5
+               }
+             ]
+           };
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -304,8 +365,8 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putValidMissingRequiredAsync(complexBody).toBlocking().single();
+    public void putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putValidMissingRequiredAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -341,7 +402,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidMissingRequiredAsync(complexBody), serviceCallback);
+        return ServiceCall.create(putValidMissingRequiredAsyncWithServiceResponse(complexBody), serviceCallback);
     }
 
     /**
@@ -375,7 +436,47 @@ public final class PolymorphismsImpl implements Polymorphisms {
      }
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidMissingRequiredAsync(Fish complexBody) {
+    public Observable<Void> putValidMissingRequiredAsync(Fish complexBody) {
+        return putValidMissingRequiredAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     *
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+     {
+         "fishtype": "sawshark",
+         "species": "snaggle toothed",
+         "length": 18.5,
+         "age": 2,
+         "birthday": "2013-06-01T01:00:00Z",
+         "location": "alaska",
+         "picture": base64(FF FF FF FF FE),
+         "siblings": [
+             {
+                 "fishtype": "shark",
+                 "species": "predator",
+                 "birthday": "2012-01-05T01:00:00Z",
+                 "length": 20,
+                 "age": 6
+             },
+             {
+                 "fishtype": "sawshark",
+                 "species": "dangerous",
+                 "picture": base64(FF FF FF FF FE),
+                 "length": 10,
+                 "age": 105
+             }
+         ]
+     }
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidMissingRequiredAsyncWithServiceResponse(Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

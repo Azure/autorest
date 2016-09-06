@@ -140,8 +140,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public DateTime getNull() throws ErrorException, IOException {
+        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -151,7 +151,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -159,7 +159,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getNullAsync() {
+    public Observable<DateTime> getNullAsync() {
+        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get null datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getNullAsyncWithServiceResponse() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -188,8 +202,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public DateTime getInvalid() throws ErrorException, IOException {
+        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -199,7 +213,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -207,7 +221,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getInvalidAsync() {
+    public Observable<DateTime> getInvalidAsync() {
+        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getInvalidAsyncWithServiceResponse() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -236,8 +264,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException {
-        return getOverflowAsync().toBlocking().single();
+    public DateTime getOverflow() throws ErrorException, IOException {
+        return getOverflowAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -247,7 +275,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getOverflowAsync(), serviceCallback);
+        return ServiceCall.create(getOverflowAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -255,7 +283,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getOverflowAsync() {
+    public Observable<DateTime> getOverflowAsync() {
+        return getOverflowAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getOverflowAsyncWithServiceResponse() {
         return service.getOverflow()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -284,8 +326,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException {
-        return getUnderflowAsync().toBlocking().single();
+    public DateTime getUnderflow() throws ErrorException, IOException {
+        return getUnderflowAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -295,7 +337,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnderflowAsync(), serviceCallback);
+        return ServiceCall.create(getUnderflowAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -303,7 +345,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUnderflowAsync() {
+    public Observable<DateTime> getUnderflowAsync() {
+        return getUnderflowAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUnderflowAsyncWithServiceResponse() {
         return service.getUnderflow()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -334,8 +390,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putUtcMaxDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putUtcMaxDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -346,7 +402,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putUtcMaxDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -355,7 +411,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMaxDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUtcMaxDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -387,8 +458,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
-        return getUtcLowercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
+        return getUtcLowercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -398,7 +469,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcLowercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -406,7 +477,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+        return getUtcLowercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getUtcLowercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -435,8 +520,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
-        return getUtcUppercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
+        return getUtcUppercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -446,7 +531,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcUppercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -454,7 +539,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+        return getUtcUppercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getUtcUppercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -485,8 +584,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putLocalPositiveOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -497,7 +596,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putLocalPositiveOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -506,7 +605,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+        return putLocalPositiveOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putLocalPositiveOffsetMaxDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -538,8 +652,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
+        return getLocalPositiveOffsetLowercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -549,7 +663,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalPositiveOffsetLowercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -557,7 +671,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
+        return getLocalPositiveOffsetLowercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getLocalPositiveOffsetLowercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -586,8 +714,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
+        return getLocalPositiveOffsetUppercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -597,7 +725,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalPositiveOffsetUppercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -605,7 +733,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
+        return getLocalPositiveOffsetUppercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getLocalPositiveOffsetUppercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -636,8 +778,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putLocalNegativeOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -648,7 +790,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putLocalNegativeOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -657,7 +799,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+        return putLocalNegativeOffsetMaxDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putLocalNegativeOffsetMaxDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -689,8 +846,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException {
+        return getLocalNegativeOffsetUppercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -700,7 +857,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetUppercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalNegativeOffsetUppercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -708,7 +865,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
+        return getLocalNegativeOffsetUppercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getLocalNegativeOffsetUppercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -737,8 +908,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException {
+        return getLocalNegativeOffsetLowercaseMaxDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -748,7 +919,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetLowercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalNegativeOffsetLowercaseMaxDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -756,7 +927,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
+        return getLocalNegativeOffsetLowercaseMaxDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeAsyncWithServiceResponse() {
         return service.getLocalNegativeOffsetLowercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -787,8 +972,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putUtcMinDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putUtcMinDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -799,7 +984,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putUtcMinDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -808,7 +993,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMinDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUtcMinDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -840,8 +1040,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException {
-        return getUtcMinDateTimeAsync().toBlocking().single();
+    public DateTime getUtcMinDateTime() throws ErrorException, IOException {
+        return getUtcMinDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -851,7 +1051,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcMinDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcMinDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -859,7 +1059,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync() {
+    public Observable<DateTime> getUtcMinDateTimeAsync() {
+        return getUtcMinDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsyncWithServiceResponse() {
         return service.getUtcMinDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -890,8 +1104,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -902,7 +1116,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -911,7 +1125,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
+        return putLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -943,8 +1172,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException {
-        return getLocalPositiveOffsetMinDateTimeAsync().toBlocking().single();
+    public DateTime getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException {
+        return getLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -954,7 +1183,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetMinDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -962,7 +1191,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeAsync() {
+    public Observable<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
+        return getLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeAsyncWithServiceResponse() {
         return service.getLocalPositiveOffsetMinDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -993,8 +1236,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1005,7 +1248,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMinDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1014,7 +1257,22 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
+        return putLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -1046,8 +1304,8 @@ public final class DatetimesImpl implements Datetimes {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException {
-        return getLocalNegativeOffsetMinDateTimeAsync().toBlocking().single();
+    public DateTime getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException {
+        return getLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
     }
 
     /**
@@ -1057,7 +1315,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetMinDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse(), serviceCallback);
     }
 
     /**
@@ -1065,7 +1323,21 @@ public final class DatetimesImpl implements Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeAsync() {
+    public Observable<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
+        return getLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeAsyncWithServiceResponse() {
         return service.getLocalNegativeOffsetMinDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override

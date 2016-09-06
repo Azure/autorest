@@ -30,7 +30,7 @@ public interface Inheritances {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Siamese> getValid() throws ErrorException, IOException;
+    Siamese getValid() throws ErrorException, IOException;
 
     /**
      * Get complex types that extend others.
@@ -45,7 +45,14 @@ public interface Inheritances {
      *
      * @return the observable to the Siamese object
      */
-    Observable<ServiceResponse<Siamese>> getValidAsync();
+    Observable<Siamese> getValidAsync();
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @return the observable to the Siamese object
+     */
+    Observable<ServiceResponse<Siamese>> getValidAsyncWithServiceResponse();
 
     /**
      * Put complex types that extend others.
@@ -56,7 +63,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types that extend others.
@@ -73,6 +80,14 @@ public interface Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsync(Siamese complexBody);
+    Observable<Void> putValidAsync(Siamese complexBody);
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Siamese complexBody);
 
 }

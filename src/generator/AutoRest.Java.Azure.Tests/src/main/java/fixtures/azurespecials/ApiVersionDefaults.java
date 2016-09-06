@@ -30,7 +30,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -45,7 +45,14 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodGlobalValidAsync();
+    Observable<Void> getMethodGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalValidAsyncWithServiceResponse();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -55,7 +62,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -70,7 +77,14 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsync();
+    Observable<Void> getMethodGlobalNotProvidedValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsyncWithServiceResponse();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -80,7 +94,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -95,7 +109,14 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getPathGlobalValidAsync();
+    Observable<Void> getPathGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathGlobalValidAsyncWithServiceResponse();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -105,7 +126,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
@@ -120,6 +141,13 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getSwaggerGlobalValidAsync();
+    Observable<Void> getSwaggerGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerGlobalValidAsyncWithServiceResponse();
 
 }

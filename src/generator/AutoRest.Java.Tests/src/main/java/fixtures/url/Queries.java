@@ -33,7 +33,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException;
+    void getBooleanTrue() throws ErrorException, IOException;
 
     /**
      * Get true Boolean value on path.
@@ -48,7 +48,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getBooleanTrueAsync();
+    Observable<Void> getBooleanTrueAsync();
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanTrueAsyncWithServiceResponse();
 
     /**
      * Get false Boolean value on path.
@@ -57,7 +64,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException;
+    void getBooleanFalse() throws ErrorException, IOException;
 
     /**
      * Get false Boolean value on path.
@@ -72,7 +79,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getBooleanFalseAsync();
+    Observable<Void> getBooleanFalseAsync();
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanFalseAsyncWithServiceResponse();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -81,7 +95,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanNull() throws ErrorException, IOException;
+    void getBooleanNull() throws ErrorException, IOException;
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -90,6 +104,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getBooleanNullAsync();
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanNullAsyncWithServiceResponse();
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -98,7 +128,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ErrorException, IOException;
+    void getBooleanNull(Boolean boolQuery) throws ErrorException, IOException;
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -115,7 +145,15 @@ public interface Queries {
      * @param boolQuery null boolean value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getBooleanNullAsync(Boolean boolQuery);
+    Observable<Void> getBooleanNullAsync(Boolean boolQuery);
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanNullAsyncWithServiceResponse(Boolean boolQuery);
 
     /**
      * Get '1000000' integer value.
@@ -124,7 +162,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException;
+    void getIntOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '1000000' integer value.
@@ -139,7 +177,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getIntOneMillionAsync();
+    Observable<Void> getIntOneMillionAsync();
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntOneMillionAsyncWithServiceResponse();
 
     /**
      * Get '-1000000' integer value.
@@ -148,7 +193,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException;
+    void getIntNegativeOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '-1000000' integer value.
@@ -163,7 +208,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getIntNegativeOneMillionAsync();
+    Observable<Void> getIntNegativeOneMillionAsync();
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntNegativeOneMillionAsyncWithServiceResponse();
 
     /**
      * Get null integer value (no query parameter).
@@ -172,7 +224,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNull() throws ErrorException, IOException;
+    void getIntNull() throws ErrorException, IOException;
 
     /**
      * Get null integer value (no query parameter).
@@ -181,6 +233,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getIntNullAsync();
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntNullAsyncWithServiceResponse();
     /**
      * Get null integer value (no query parameter).
      *
@@ -189,7 +257,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNull(Integer intQuery) throws ErrorException, IOException;
+    void getIntNull(Integer intQuery) throws ErrorException, IOException;
 
     /**
      * Get null integer value (no query parameter).
@@ -206,7 +274,15 @@ public interface Queries {
      * @param intQuery null integer value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getIntNullAsync(Integer intQuery);
+    Observable<Void> getIntNullAsync(Integer intQuery);
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntNullAsyncWithServiceResponse(Integer intQuery);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -215,7 +291,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getTenBillion() throws ErrorException, IOException;
+    void getTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -230,7 +306,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getTenBillionAsync();
+    Observable<Void> getTenBillionAsync();
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getTenBillionAsyncWithServiceResponse();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -239,7 +322,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException;
+    void getNegativeTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -254,7 +337,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getNegativeTenBillionAsync();
+    Observable<Void> getNegativeTenBillionAsync();
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getNegativeTenBillionAsyncWithServiceResponse();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -263,7 +353,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getLongNull() throws ErrorException, IOException;
+    void getLongNull() throws ErrorException, IOException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -272,6 +362,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getLongNullAsync();
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getLongNullAsyncWithServiceResponse();
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -280,7 +386,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getLongNull(Long longQuery) throws ErrorException, IOException;
+    void getLongNull(Long longQuery) throws ErrorException, IOException;
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -297,7 +403,15 @@ public interface Queries {
      * @param longQuery null 64 bit integer value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getLongNullAsync(Long longQuery);
+    Observable<Void> getLongNullAsync(Long longQuery);
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getLongNullAsyncWithServiceResponse(Long longQuery);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -306,7 +420,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException;
+    void floatScientificPositive() throws ErrorException, IOException;
 
     /**
      * Get '1.034E+20' numeric value.
@@ -321,7 +435,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> floatScientificPositiveAsync();
+    Observable<Void> floatScientificPositiveAsync();
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatScientificPositiveAsyncWithServiceResponse();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -330,7 +451,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException;
+    void floatScientificNegative() throws ErrorException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -345,7 +466,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> floatScientificNegativeAsync();
+    Observable<Void> floatScientificNegativeAsync();
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatScientificNegativeAsyncWithServiceResponse();
 
     /**
      * Get null numeric value (no query parameter).
@@ -354,7 +482,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatNull() throws ErrorException, IOException;
+    void floatNull() throws ErrorException, IOException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -363,6 +491,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> floatNullAsync();
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatNullAsyncWithServiceResponse();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -371,7 +515,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatNull(Double floatQuery) throws ErrorException, IOException;
+    void floatNull(Double floatQuery) throws ErrorException, IOException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -388,7 +532,15 @@ public interface Queries {
      * @param floatQuery null numeric value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> floatNullAsync(Double floatQuery);
+    Observable<Void> floatNullAsync(Double floatQuery);
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatNullAsyncWithServiceResponse(Double floatQuery);
 
     /**
      * Get '9999999.999' numeric value.
@@ -397,7 +549,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException;
+    void doubleDecimalPositive() throws ErrorException, IOException;
 
     /**
      * Get '9999999.999' numeric value.
@@ -412,7 +564,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> doubleDecimalPositiveAsync();
+    Observable<Void> doubleDecimalPositiveAsync();
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleDecimalPositiveAsyncWithServiceResponse();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -421,7 +580,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException;
+    void doubleDecimalNegative() throws ErrorException, IOException;
 
     /**
      * Get '-9999999.999' numeric value.
@@ -436,7 +595,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> doubleDecimalNegativeAsync();
+    Observable<Void> doubleDecimalNegativeAsync();
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleDecimalNegativeAsyncWithServiceResponse();
 
     /**
      * Get null numeric value (no query parameter).
@@ -445,7 +611,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleNull() throws ErrorException, IOException;
+    void doubleNull() throws ErrorException, IOException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -454,6 +620,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> doubleNullAsync();
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleNullAsyncWithServiceResponse();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -462,7 +644,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleNull(Double doubleQuery) throws ErrorException, IOException;
+    void doubleNull(Double doubleQuery) throws ErrorException, IOException;
 
     /**
      * Get null numeric value (no query parameter).
@@ -479,7 +661,15 @@ public interface Queries {
      * @param doubleQuery null numeric value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> doubleNullAsync(Double doubleQuery);
+    Observable<Void> doubleNullAsync(Double doubleQuery);
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleNullAsyncWithServiceResponse(Double doubleQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -488,7 +678,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode() throws ErrorException, IOException;
+    void stringUnicode() throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -503,7 +693,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringUnicodeAsync();
+    Observable<Void> stringUnicodeAsync();
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringUnicodeAsyncWithServiceResponse();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -512,7 +709,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException;
+    void stringUrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -527,7 +724,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringUrlEncodedAsync();
+    Observable<Void> stringUrlEncodedAsync();
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringUrlEncodedAsyncWithServiceResponse();
 
     /**
      * Get ''.
@@ -536,7 +740,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty() throws ErrorException, IOException;
+    void stringEmpty() throws ErrorException, IOException;
 
     /**
      * Get ''.
@@ -551,7 +755,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringEmptyAsync();
+    Observable<Void> stringEmptyAsync();
+
+    /**
+     * Get ''.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringEmptyAsyncWithServiceResponse();
 
     /**
      * Get null (no query parameter in url).
@@ -560,7 +771,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringNull() throws ErrorException, IOException;
+    void stringNull() throws ErrorException, IOException;
 
     /**
      * Get null (no query parameter in url).
@@ -569,6 +780,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> stringNullAsync();
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringNullAsyncWithServiceResponse();
     /**
      * Get null (no query parameter in url).
      *
@@ -577,7 +804,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringNull(String stringQuery) throws ErrorException, IOException;
+    void stringNull(String stringQuery) throws ErrorException, IOException;
 
     /**
      * Get null (no query parameter in url).
@@ -594,7 +821,15 @@ public interface Queries {
      * @param stringQuery null string value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringNullAsync(String stringQuery);
+    Observable<Void> stringNullAsync(String stringQuery);
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringNullAsyncWithServiceResponse(String stringQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -603,7 +838,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumValid() throws ErrorException, IOException;
+    void enumValid() throws ErrorException, IOException;
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -612,6 +847,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> enumValidAsync();
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumValidAsyncWithServiceResponse();
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -620,7 +871,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException;
+    void enumValid(UriColor enumQuery) throws ErrorException, IOException;
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -637,7 +888,15 @@ public interface Queries {
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> enumValidAsync(UriColor enumQuery);
+    Observable<Void> enumValidAsync(UriColor enumQuery);
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumValidAsyncWithServiceResponse(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -646,7 +905,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumNull() throws ErrorException, IOException;
+    void enumNull() throws ErrorException, IOException;
 
     /**
      * Get null (no query parameter in url).
@@ -655,6 +914,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> enumNullAsync();
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumNullAsyncWithServiceResponse();
     /**
      * Get null (no query parameter in url).
      *
@@ -663,7 +938,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException;
+    void enumNull(UriColor enumQuery) throws ErrorException, IOException;
 
     /**
      * Get null (no query parameter in url).
@@ -680,7 +955,15 @@ public interface Queries {
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> enumNullAsync(UriColor enumQuery);
+    Observable<Void> enumNullAsync(UriColor enumQuery);
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumNullAsyncWithServiceResponse(UriColor enumQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -689,7 +972,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteMultiByte() throws ErrorException, IOException;
+    void byteMultiByte() throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -698,6 +981,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> byteMultiByteAsync();
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteMultiByteAsyncWithServiceResponse();
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -706,7 +1005,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ErrorException, IOException;
+    void byteMultiByte(byte[] byteQuery) throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -723,7 +1022,15 @@ public interface Queries {
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteMultiByteAsync(byte[] byteQuery);
+    Observable<Void> byteMultiByteAsync(byte[] byteQuery);
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteMultiByteAsyncWithServiceResponse(byte[] byteQuery);
 
     /**
      * Get '' as byte array.
@@ -732,7 +1039,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty() throws ErrorException, IOException;
+    void byteEmpty() throws ErrorException, IOException;
 
     /**
      * Get '' as byte array.
@@ -747,7 +1054,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteEmptyAsync();
+    Observable<Void> byteEmptyAsync();
+
+    /**
+     * Get '' as byte array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteEmptyAsyncWithServiceResponse();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -756,7 +1070,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteNull() throws ErrorException, IOException;
+    void byteNull() throws ErrorException, IOException;
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -765,6 +1079,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> byteNullAsync();
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteNullAsyncWithServiceResponse();
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -773,7 +1103,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteNull(byte[] byteQuery) throws ErrorException, IOException;
+    void byteNull(byte[] byteQuery) throws ErrorException, IOException;
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -790,7 +1120,15 @@ public interface Queries {
      * @param byteQuery null as byte array (no query parameters in uri)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteNullAsync(byte[] byteQuery);
+    Observable<Void> byteNullAsync(byte[] byteQuery);
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteNullAsyncWithServiceResponse(byte[] byteQuery);
 
     /**
      * Get '2012-01-01' as date.
@@ -799,7 +1137,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid() throws ErrorException, IOException;
+    void dateValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01' as date.
@@ -814,7 +1152,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateValidAsync();
+    Observable<Void> dateValidAsync();
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateValidAsyncWithServiceResponse();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -823,7 +1168,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateNull() throws ErrorException, IOException;
+    void dateNull() throws ErrorException, IOException;
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -832,6 +1177,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> dateNullAsync();
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateNullAsyncWithServiceResponse();
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -840,7 +1201,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException;
+    void dateNull(LocalDate dateQuery) throws ErrorException, IOException;
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -857,7 +1218,15 @@ public interface Queries {
      * @param dateQuery null as date (no query parameters in uri)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateNullAsync(LocalDate dateQuery);
+    Observable<Void> dateNullAsync(LocalDate dateQuery);
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateNullAsyncWithServiceResponse(LocalDate dateQuery);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -866,7 +1235,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException;
+    void dateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -881,7 +1250,14 @@ public interface Queries {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateTimeValidAsync();
+    Observable<Void> dateTimeValidAsync();
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateTimeValidAsyncWithServiceResponse();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -890,7 +1266,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeNull() throws ErrorException, IOException;
+    void dateTimeNull() throws ErrorException, IOException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -899,6 +1275,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> dateTimeNullAsync();
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateTimeNullAsyncWithServiceResponse();
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -907,7 +1299,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException;
+    void dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException;
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -924,7 +1316,15 @@ public interface Queries {
      * @param dateTimeQuery null as date-time (no query parameters)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateTimeNullAsync(DateTime dateTimeQuery);
+    Observable<Void> dateTimeNullAsync(DateTime dateTimeQuery);
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateTimeNullAsyncWithServiceResponse(DateTime dateTimeQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -933,7 +1333,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvValid() throws ErrorException, IOException;
+    void arrayStringCsvValid() throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -942,6 +1342,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringCsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvValidAsyncWithServiceResponse();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -950,7 +1366,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -967,7 +1383,15 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringCsvValidAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvValidAsyncWithServiceResponse(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -976,7 +1400,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvNull() throws ErrorException, IOException;
+    void arrayStringCsvNull() throws ErrorException, IOException;
 
     /**
      * Get a null array of string using the csv-array format.
@@ -985,6 +1409,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringCsvNullAsync();
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvNullAsyncWithServiceResponse();
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -993,7 +1433,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1010,7 +1450,15 @@ public interface Queries {
      * @param arrayQuery a null array of string using the csv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringCsvNullAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvNullAsyncWithServiceResponse(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1019,7 +1467,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvEmpty() throws ErrorException, IOException;
+    void arrayStringCsvEmpty() throws ErrorException, IOException;
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1028,6 +1476,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringCsvEmptyAsync();
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvEmptyAsyncWithServiceResponse();
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -1036,7 +1500,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1053,7 +1517,15 @@ public interface Queries {
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringCsvEmptyAsyncWithServiceResponse(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1062,7 +1534,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringSsvValid() throws ErrorException, IOException;
+    void arrayStringSsvValid() throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1071,6 +1543,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringSsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringSsvValidAsyncWithServiceResponse();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -1079,7 +1567,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1096,7 +1584,15 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringSsvValidAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringSsvValidAsyncWithServiceResponse(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1105,7 +1601,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringTsvValid() throws ErrorException, IOException;
+    void arrayStringTsvValid() throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1114,6 +1610,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringTsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringTsvValidAsyncWithServiceResponse();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -1122,7 +1634,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1139,7 +1651,15 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringTsvValidAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringTsvValidAsyncWithServiceResponse(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1148,7 +1668,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringPipesValid() throws ErrorException, IOException;
+    void arrayStringPipesValid() throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1157,6 +1677,22 @@ public interface Queries {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> arrayStringPipesValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringPipesValidAsyncWithServiceResponse();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -1165,7 +1701,7 @@ public interface Queries {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException;
+    void arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException;
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1182,6 +1718,14 @@ public interface Queries {
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayStringPipesValidAsync(List<String> arrayQuery);
+    Observable<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayStringPipesValidAsyncWithServiceResponse(List<String> arrayQuery);
 
 }

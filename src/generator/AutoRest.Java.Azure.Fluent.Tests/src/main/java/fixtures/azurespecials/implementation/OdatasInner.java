@@ -64,10 +64,9 @@ public final class OdatasInner {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getWithFilter() throws ErrorException, IOException {
-        return getWithFilterAsync().toBlocking().single();
+    public void getWithFilter() throws ErrorException, IOException {
+        getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -77,7 +76,7 @@ public final class OdatasInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterAsync(), serviceCallback);
+        return ServiceCall.create(getWithFilterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -85,7 +84,21 @@ public final class OdatasInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getWithFilterAsync() {
+    public Observable<Void> getWithFilterAsync() {
+        return getWithFilterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
@@ -111,10 +124,9 @@ public final class OdatasInner {
      * @param orderby The orderby parameter with value id.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException {
-        return getWithFilterAsync(filter, top, orderby).toBlocking().single();
+    public void getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException {
+        getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -127,7 +139,21 @@ public final class OdatasInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterAsync(filter, top, orderby), serviceCallback);
+        return ServiceCall.create(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
+    }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+        return getWithFilterWithServiceResponseAsync(filter, top, orderby).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        }); 
     }
 
     /**
@@ -138,7 +164,7 @@ public final class OdatasInner {
      * @param orderby The orderby parameter with value id.
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getWithFilterAsync(String filter, Integer top, String orderby) {
+    public Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
