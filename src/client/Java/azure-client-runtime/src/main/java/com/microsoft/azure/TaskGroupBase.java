@@ -59,30 +59,7 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
     }
 
     @Override
-    public void execute() throws Exception {
-        DAGNode<U> nextNode = dag.getNext();
-        while (nextNode != null) {
-            nextNode.data().execute();
-            this.dag().reportedCompleted(nextNode);
-            nextNode = dag.getNext();
-        }
-    }
-
-    @Override
     public Observable<T> executeAsync() {
-        return executeReadyTasksAsync().last();
-    }
-
-    @Override
-    public T taskResult(String taskId) {
-        return dag.getNodeData(taskId).result();
-    }
-
-    /**
-     * Executes all runnable tasks, a task is runnable when all the tasks its depends
-     * on are finished running.
-     */
-    private Observable<T> executeReadyTasksAsync() {
         DAGNode<U> nextNode = dag.getNext();
         final List<Observable<T>> observables = new ArrayList<>();
         while (nextNode != null) {
@@ -95,12 +72,17 @@ public abstract class TaskGroupBase<T, U extends TaskItem<T>>
                             if (dag().isRootNode(thisNode)) {
                                 return Observable.just(t);
                             } else {
-                                return executeReadyTasksAsync();
+                                return executeAsync();
                             }
                         }
                     }));
             nextNode = dag.getNext();
         }
         return Observable.merge(observables);
+    }
+
+    @Override
+    public T taskResult(String taskId) {
+        return dag.getNodeData(taskId).result();
     }
 }
