@@ -80,10 +80,10 @@ public final class FormdatasImpl implements Formdatas {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException {
-        return uploadFileAsyncWithServiceResponse(fileContent, fileName).toBlocking().single().getBody();
+        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().getBody();
     }
 
     /**
@@ -95,7 +95,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileAsyncWithServiceResponse(fileContent, fileName), serviceCallback);
+        return ServiceCall.create(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
     }
 
     /**
@@ -106,12 +106,12 @@ public final class FormdatasImpl implements Formdatas {
      * @return the observable to the InputStream object
      */
     public Observable<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
-        return uploadFileAsyncWithServiceResponse(fileContent, fileName).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
+        return uploadFileWithServiceResponseAsync(fileContent, fileName).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -121,7 +121,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @return the observable to the InputStream object
      */
-    public Observable<ServiceResponse<InputStream>> uploadFileAsyncWithServiceResponse(byte[] fileContent, String fileName) {
+    public Observable<ServiceResponse<InputStream>> uploadFileWithServiceResponseAsync(byte[] fileContent, String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -157,10 +157,10 @@ public final class FormdatasImpl implements Formdatas {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException {
-        return uploadFileViaBodyAsyncWithServiceResponse(fileContent).toBlocking().single().getBody();
+        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().getBody();
     }
 
     /**
@@ -171,7 +171,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileViaBodyAsyncWithServiceResponse(fileContent), serviceCallback);
+        return ServiceCall.create(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
     }
 
     /**
@@ -181,12 +181,12 @@ public final class FormdatasImpl implements Formdatas {
      * @return the observable to the InputStream object
      */
     public Observable<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
-        return uploadFileViaBodyAsyncWithServiceResponse(fileContent).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
+        return uploadFileViaBodyWithServiceResponseAsync(fileContent).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -195,7 +195,7 @@ public final class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @return the observable to the InputStream object
      */
-    public Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsyncWithServiceResponse(byte[] fileContent) {
+    public Observable<ServiceResponse<InputStream>> uploadFileViaBodyWithServiceResponseAsync(byte[] fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }

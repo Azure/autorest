@@ -28,7 +28,7 @@ public interface Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getNull() throws ErrorException, IOException;
 
@@ -52,14 +52,14 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid date value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getInvalidDate() throws ErrorException, IOException;
 
@@ -83,14 +83,14 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getInvalidDateAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getInvalidDateWithServiceResponseAsync();
 
     /**
      * Get overflow date value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getOverflowDate() throws ErrorException, IOException;
 
@@ -114,14 +114,14 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getOverflowDateAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getOverflowDateWithServiceResponseAsync();
 
     /**
      * Get underflow date value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getUnderflowDate() throws ErrorException, IOException;
 
@@ -145,7 +145,7 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getUnderflowDateAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getUnderflowDateWithServiceResponseAsync();
 
     /**
      * Put max date value 9999-12-31.
@@ -154,7 +154,6 @@ public interface Dates {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMaxDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -181,14 +180,14 @@ public interface Dates {
      * @param dateBody the LocalDate value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMaxDateAsyncWithServiceResponse(LocalDate dateBody);
+    Observable<ServiceResponse<Void>> putMaxDateWithServiceResponseAsync(LocalDate dateBody);
 
     /**
      * Get max date value 9999-12-31.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getMaxDate() throws ErrorException, IOException;
 
@@ -212,7 +211,7 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getMaxDateAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getMaxDateWithServiceResponseAsync();
 
     /**
      * Put min date value 0000-01-01.
@@ -221,7 +220,6 @@ public interface Dates {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMinDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -248,14 +246,14 @@ public interface Dates {
      * @param dateBody the LocalDate value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMinDateAsyncWithServiceResponse(LocalDate dateBody);
+    Observable<ServiceResponse<Void>> putMinDateWithServiceResponseAsync(LocalDate dateBody);
 
     /**
      * Get min date value 0000-01-01.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     LocalDate getMinDate() throws ErrorException, IOException;
 
@@ -279,6 +277,6 @@ public interface Dates {
      *
      * @return the observable to the LocalDate object
      */
-    Observable<ServiceResponse<LocalDate>> getMinDateAsyncWithServiceResponse();
+    Observable<ServiceResponse<LocalDate>> getMinDateWithServiceResponseAsync();
 
 }

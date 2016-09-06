@@ -108,7 +108,7 @@ public final class SubscriptionInCredentialsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -173,7 +173,7 @@ public final class SubscriptionInCredentialsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -238,7 +238,7 @@ public final class SubscriptionInCredentialsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -306,7 +306,7 @@ public final class SubscriptionInCredentialsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -371,7 +371,7 @@ public final class SubscriptionInCredentialsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

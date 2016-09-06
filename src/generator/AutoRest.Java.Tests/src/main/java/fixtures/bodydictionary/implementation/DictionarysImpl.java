@@ -331,10 +331,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getNull() throws ErrorException, IOException {
-        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -344,7 +344,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -353,12 +353,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getNullAsync() {
-        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -366,7 +366,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Integer>>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
@@ -393,10 +393,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getEmpty() throws ErrorException, IOException {
-        return getEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -406,7 +406,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -415,12 +415,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getEmptyAsync() {
-        return getEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -428,7 +428,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Integer>>> getEmptyWithServiceResponseAsync() {
         return service.getEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
@@ -457,10 +457,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putEmpty(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putEmptyAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -471,7 +470,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -481,12 +480,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putEmptyAsync(Map<String, String> arrayBody) {
-        return putEmptyAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -495,7 +494,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putEmptyAsyncWithServiceResponse(Map<String, String> arrayBody) {
+    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -526,10 +525,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullValue() throws ErrorException, IOException {
-        return getNullValueAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullValueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -539,7 +538,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getNullValueAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullValueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -548,12 +547,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getNullValueAsync() {
-        return getNullValueAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getNullValueWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -561,7 +560,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getNullValueAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getNullValueWithServiceResponseAsync() {
         return service.getNullValue()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -588,10 +587,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullKey() throws ErrorException, IOException {
-        return getNullKeyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -601,7 +600,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getNullKeyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -610,12 +609,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getNullKeyAsync() {
-        return getNullKeyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getNullKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -623,7 +622,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getNullKeyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getNullKeyWithServiceResponseAsync() {
         return service.getNullKey()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -650,10 +649,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getEmptyStringKey() throws ErrorException, IOException {
-        return getEmptyStringKeyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getEmptyStringKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -663,7 +662,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getEmptyStringKeyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getEmptyStringKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -672,12 +671,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getEmptyStringKeyAsync() {
-        return getEmptyStringKeyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getEmptyStringKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -685,7 +684,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyWithServiceResponseAsync() {
         return service.getEmptyStringKey()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -712,10 +711,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -725,7 +724,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -734,12 +733,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getInvalidAsync() {
-        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -747,7 +746,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getInvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -774,10 +773,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanTfft() throws ErrorException, IOException {
-        return getBooleanTfftAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -787,7 +786,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanTfftAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -796,12 +795,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<Map<String, Boolean>> getBooleanTfftAsync() {
-        return getBooleanTfftAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
+        return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -809,7 +808,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftWithServiceResponseAsync() {
         return service.getBooleanTfft()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
                 @Override
@@ -838,10 +837,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putBooleanTfftAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -852,7 +850,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBooleanTfftAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -862,12 +860,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
-        return putBooleanTfftAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -876,7 +874,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putBooleanTfftAsyncWithServiceResponse(Map<String, Boolean> arrayBody) {
+    public Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -907,10 +905,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidNull() throws ErrorException, IOException {
-        return getBooleanInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -920,7 +918,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -929,12 +927,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<Map<String, Boolean>> getBooleanInvalidNullAsync() {
-        return getBooleanInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
+        return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -942,7 +940,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullWithServiceResponseAsync() {
         return service.getBooleanInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
                 @Override
@@ -969,10 +967,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidString() throws ErrorException, IOException {
-        return getBooleanInvalidStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -982,7 +980,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -991,12 +989,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
     public Observable<Map<String, Boolean>> getBooleanInvalidStringAsync() {
-        return getBooleanInvalidStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
+        return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1004,7 +1002,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringWithServiceResponseAsync() {
         return service.getBooleanInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
                 @Override
@@ -1031,10 +1029,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntegerValid() throws ErrorException, IOException {
-        return getIntegerValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1044,7 +1042,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntegerValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getIntegerValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1053,12 +1051,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getIntegerValidAsync() {
-        return getIntegerValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+        return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1066,7 +1064,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidWithServiceResponseAsync() {
         return service.getIntegerValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
@@ -1095,10 +1093,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putIntegerValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1109,7 +1106,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntegerValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1119,12 +1116,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
-        return putIntegerValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1133,7 +1130,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putIntegerValidAsyncWithServiceResponse(Map<String, Integer> arrayBody) {
+    public Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1164,10 +1161,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidNull() throws ErrorException, IOException {
-        return getIntInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1177,7 +1174,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1186,12 +1183,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getIntInvalidNullAsync() {
-        return getIntInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+        return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1199,7 +1196,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullWithServiceResponseAsync() {
         return service.getIntInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
@@ -1226,10 +1223,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidString() throws ErrorException, IOException {
-        return getIntInvalidStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1239,7 +1236,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1248,12 +1245,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getIntInvalidStringAsync() {
-        return getIntInvalidStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
+        return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1261,7 +1258,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringWithServiceResponseAsync() {
         return service.getIntInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
                 @Override
@@ -1288,10 +1285,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongValid() throws ErrorException, IOException {
-        return getLongValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1301,7 +1298,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getLongValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1310,12 +1307,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<Map<String, Long>> getLongValidAsync() {
-        return getLongValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
+        return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1323,7 +1320,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Long>>> getLongValidWithServiceResponseAsync() {
         return service.getLongValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
                 @Override
@@ -1352,10 +1349,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putLongValid(Map<String, Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putLongValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1366,7 +1362,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1376,12 +1372,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putLongValidAsync(Map<String, Long> arrayBody) {
-        return putLongValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1390,7 +1386,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLongValidAsyncWithServiceResponse(Map<String, Long> arrayBody) {
+    public Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(Map<String, Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1421,10 +1417,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidNull() throws ErrorException, IOException {
-        return getLongInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1434,7 +1430,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1443,12 +1439,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<Map<String, Long>> getLongInvalidNullAsync() {
-        return getLongInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
+        return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1456,7 +1452,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullWithServiceResponseAsync() {
         return service.getLongInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
                 @Override
@@ -1483,10 +1479,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidString() throws ErrorException, IOException {
-        return getLongInvalidStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1496,7 +1492,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1505,12 +1501,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Long&gt; object
      */
     public Observable<Map<String, Long>> getLongInvalidStringAsync() {
-        return getLongInvalidStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
+        return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1518,7 +1514,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringWithServiceResponseAsync() {
         return service.getLongInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
                 @Override
@@ -1545,10 +1541,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatValid() throws ErrorException, IOException {
-        return getFloatValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1558,7 +1554,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getFloatValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1567,12 +1563,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getFloatValidAsync() {
-        return getFloatValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1580,7 +1576,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getFloatValidWithServiceResponseAsync() {
         return service.getFloatValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -1609,10 +1605,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putFloatValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putFloatValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1623,7 +1618,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1633,12 +1628,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
-        return putFloatValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1647,7 +1642,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putFloatValidAsyncWithServiceResponse(Map<String, Double> arrayBody) {
+    public Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1678,10 +1673,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidNull() throws ErrorException, IOException {
-        return getFloatInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1691,7 +1686,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1700,12 +1695,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getFloatInvalidNullAsync() {
-        return getFloatInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1713,7 +1708,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullWithServiceResponseAsync() {
         return service.getFloatInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -1740,10 +1735,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidString() throws ErrorException, IOException {
-        return getFloatInvalidStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1753,7 +1748,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1762,12 +1757,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getFloatInvalidStringAsync() {
-        return getFloatInvalidStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1775,7 +1770,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringWithServiceResponseAsync() {
         return service.getFloatInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -1802,10 +1797,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleValid() throws ErrorException, IOException {
-        return getDoubleValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1815,7 +1810,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDoubleValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1824,12 +1819,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getDoubleValidAsync() {
-        return getDoubleValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1837,7 +1832,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getDoubleValidWithServiceResponseAsync() {
         return service.getDoubleValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -1866,10 +1861,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDoubleValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDoubleValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1880,7 +1874,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1890,12 +1884,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
-        return putDoubleValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1904,7 +1898,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDoubleValidAsyncWithServiceResponse(Map<String, Double> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -1935,10 +1929,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidNull() throws ErrorException, IOException {
-        return getDoubleInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1948,7 +1942,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1957,12 +1951,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getDoubleInvalidNullAsync() {
-        return getDoubleInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1970,7 +1964,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullWithServiceResponseAsync() {
         return service.getDoubleInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -1997,10 +1991,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidString() throws ErrorException, IOException {
-        return getDoubleInvalidStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2010,7 +2004,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2019,12 +2013,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Double&gt; object
      */
     public Observable<Map<String, Double>> getDoubleInvalidStringAsync() {
-        return getDoubleInvalidStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
+        return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2032,7 +2026,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringWithServiceResponseAsync() {
         return service.getDoubleInvalidString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
                 @Override
@@ -2059,10 +2053,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringValid() throws ErrorException, IOException {
-        return getStringValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2072,7 +2066,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getStringValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2081,12 +2075,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getStringValidAsync() {
-        return getStringValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2094,7 +2088,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getStringValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getStringValidWithServiceResponseAsync() {
         return service.getStringValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -2123,10 +2117,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putStringValid(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putStringValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2137,7 +2130,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2147,12 +2140,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putStringValidAsync(Map<String, String> arrayBody) {
-        return putStringValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2161,7 +2154,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putStringValidAsyncWithServiceResponse(Map<String, String> arrayBody) {
+    public Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2192,10 +2185,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithNull() throws ErrorException, IOException {
-        return getStringWithNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2205,7 +2198,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringWithNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getStringWithNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2214,12 +2207,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getStringWithNullAsync() {
-        return getStringWithNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2227,7 +2220,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getStringWithNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getStringWithNullWithServiceResponseAsync() {
         return service.getStringWithNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -2254,10 +2247,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithInvalid() throws ErrorException, IOException {
-        return getStringWithInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2267,7 +2260,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringWithInvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2276,12 +2269,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, String&gt; object
      */
     public Observable<Map<String, String>> getStringWithInvalidAsync() {
-        return getStringWithInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
+        return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2289,7 +2282,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidWithServiceResponseAsync() {
         return service.getStringWithInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
                 @Override
@@ -2316,10 +2309,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateValid() throws ErrorException, IOException {
-        return getDateValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2329,7 +2322,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2338,12 +2331,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<Map<String, LocalDate>> getDateValidAsync() {
-        return getDateValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
+        return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2351,7 +2344,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidWithServiceResponseAsync() {
         return service.getDateValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
                 @Override
@@ -2380,10 +2373,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2394,7 +2386,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2404,12 +2396,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
-        return putDateValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2418,7 +2410,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateValidAsyncWithServiceResponse(Map<String, LocalDate> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2449,10 +2441,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidNull() throws ErrorException, IOException {
-        return getDateInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2462,7 +2454,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2471,12 +2463,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<Map<String, LocalDate>> getDateInvalidNullAsync() {
-        return getDateInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
+        return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2484,7 +2476,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullWithServiceResponseAsync() {
         return service.getDateInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
                 @Override
@@ -2511,10 +2503,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidChars() throws ErrorException, IOException {
-        return getDateInvalidCharsAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2524,7 +2516,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidCharsAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2533,12 +2525,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
     public Observable<Map<String, LocalDate>> getDateInvalidCharsAsync() {
-        return getDateInvalidCharsAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
+        return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2546,7 +2538,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsWithServiceResponseAsync() {
         return service.getDateInvalidChars()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
                 @Override
@@ -2573,10 +2565,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeValid() throws ErrorException, IOException {
-        return getDateTimeValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2586,7 +2578,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2595,12 +2587,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<Map<String, DateTime>> getDateTimeValidAsync() {
-        return getDateTimeValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
+        return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2608,7 +2600,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidWithServiceResponseAsync() {
         return service.getDateTimeValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
                 @Override
@@ -2637,10 +2629,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateTimeValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2651,7 +2642,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2661,12 +2652,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
-        return putDateTimeValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2675,7 +2666,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeValidAsyncWithServiceResponse(Map<String, DateTime> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2706,10 +2697,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidNull() throws ErrorException, IOException {
-        return getDateTimeInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2719,7 +2710,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2728,12 +2719,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
-        return getDateTimeInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
+        return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2741,7 +2732,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync() {
         return service.getDateTimeInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
                 @Override
@@ -2768,10 +2759,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidChars() throws ErrorException, IOException {
-        return getDateTimeInvalidCharsAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2781,7 +2772,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidCharsAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2790,12 +2781,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
-        return getDateTimeInvalidCharsAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
+        return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2803,7 +2794,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync() {
         return service.getDateTimeInvalidChars()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
                 @Override
@@ -2830,10 +2821,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException {
-        return getDateTimeRfc1123ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2843,7 +2834,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2852,12 +2843,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
     public Observable<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
-        return getDateTimeRfc1123ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2865,7 +2856,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync() {
         return service.getDateTimeRfc1123Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
                 @Override
@@ -2904,10 +2895,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateTimeRfc1123ValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -2918,7 +2908,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123ValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2928,12 +2918,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
-        return putDateTimeRfc1123ValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2942,7 +2932,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidAsyncWithServiceResponse(Map<String, DateTime> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -2978,10 +2968,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Period&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Period&gt; object if successful.
      */
     public Map<String, Period> getDurationValid() throws ErrorException, IOException {
-        return getDurationValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2991,7 +2981,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Period>> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
-        return ServiceCall.create(getDurationValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDurationValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3000,12 +2990,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Period&gt; object
      */
     public Observable<Map<String, Period>> getDurationValidAsync() {
-        return getDurationValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Period>>, Map<String, Period>>() {
+        return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Period>>, Map<String, Period>>() {
             @Override
             public Map<String, Period> call(ServiceResponse<Map<String, Period>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3013,7 +3003,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Period&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Period>>> getDurationValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Period>>> getDurationValidWithServiceResponseAsync() {
         return service.getDurationValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Period>>>>() {
                 @Override
@@ -3042,10 +3032,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDurationValid(Map<String, Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDurationValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -3056,7 +3045,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3066,12 +3055,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
-        return putDurationValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3080,7 +3069,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDurationValidAsyncWithServiceResponse(Map<String, Period> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(Map<String, Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3111,10 +3100,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteValid() throws ErrorException, IOException {
-        return getByteValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3124,7 +3113,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getByteValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3133,12 +3122,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<Map<String, byte[]>> getByteValidAsync() {
-        return getByteValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
+        return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3146,7 +3135,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getByteValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, byte[]>>> getByteValidWithServiceResponseAsync() {
         return service.getByteValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
                 @Override
@@ -3175,10 +3164,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putByteValid(Map<String, byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putByteValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -3189,7 +3177,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3199,12 +3187,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
-        return putByteValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3213,7 +3201,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putByteValidAsyncWithServiceResponse(Map<String, byte[]> arrayBody) {
+    public Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3244,10 +3232,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteInvalidNull() throws ErrorException, IOException {
-        return getByteInvalidNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3257,7 +3245,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteInvalidNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3266,12 +3254,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<Map<String, byte[]>> getByteInvalidNullAsync() {
-        return getByteInvalidNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
+        return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3279,7 +3267,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullWithServiceResponseAsync() {
         return service.getByteInvalidNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
                 @Override
@@ -3306,10 +3294,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getBase64Url() throws ErrorException, IOException {
-        return getBase64UrlAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3319,7 +3307,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getBase64UrlAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getBase64UrlWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3328,12 +3316,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
     public Observable<Map<String, byte[]>> getBase64UrlAsync() {
-        return getBase64UrlAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
+        return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3341,7 +3329,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlWithServiceResponseAsync() {
         return service.getBase64Url()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
                 @Override
@@ -3378,10 +3366,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexNull() throws ErrorException, IOException {
-        return getComplexNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3391,7 +3379,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getComplexNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3400,12 +3388,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<Map<String, Widget>> getComplexNullAsync() {
-        return getComplexNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
+        return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3413,7 +3401,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Widget>>> getComplexNullWithServiceResponseAsync() {
         return service.getComplexNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
                 @Override
@@ -3440,10 +3428,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexEmpty() throws ErrorException, IOException {
-        return getComplexEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3453,7 +3441,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3462,12 +3450,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<Map<String, Widget>> getComplexEmptyAsync() {
-        return getComplexEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
+        return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3475,7 +3463,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyWithServiceResponseAsync() {
         return service.getComplexEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
                 @Override
@@ -3502,10 +3490,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemNull() throws ErrorException, IOException {
-        return getComplexItemNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3515,7 +3503,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexItemNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3524,12 +3512,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<Map<String, Widget>> getComplexItemNullAsync() {
-        return getComplexItemNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
+        return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3537,7 +3525,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullWithServiceResponseAsync() {
         return service.getComplexItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
                 @Override
@@ -3564,10 +3552,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemEmpty() throws ErrorException, IOException {
-        return getComplexItemEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3577,7 +3565,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexItemEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3586,12 +3574,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<Map<String, Widget>> getComplexItemEmptyAsync() {
-        return getComplexItemEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
+        return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3599,7 +3587,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyWithServiceResponseAsync() {
         return service.getComplexItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
                 @Override
@@ -3626,10 +3614,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Widget&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexValid() throws ErrorException, IOException {
-        return getComplexValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3639,7 +3627,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getComplexValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3648,12 +3636,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
     public Observable<Map<String, Widget>> getComplexValidAsync() {
-        return getComplexValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
+        return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3661,7 +3649,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Widget>>> getComplexValidWithServiceResponseAsync() {
         return service.getComplexValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
                 @Override
@@ -3690,10 +3678,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putComplexValid(Map<String, Widget> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putComplexValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -3704,7 +3691,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putComplexValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3714,12 +3701,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
-        return putComplexValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3728,7 +3715,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putComplexValidAsyncWithServiceResponse(Map<String, Widget> arrayBody) {
+    public Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3759,10 +3746,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayNull() throws ErrorException, IOException {
-        return getArrayNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3772,7 +3759,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getArrayNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3781,12 +3768,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<Map<String, List<String>>> getArrayNullAsync() {
-        return getArrayNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
+        return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3794,7 +3781,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullWithServiceResponseAsync() {
         return service.getArrayNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
                 @Override
@@ -3821,10 +3808,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayEmpty() throws ErrorException, IOException {
-        return getArrayEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3834,7 +3821,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3843,12 +3830,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<Map<String, List<String>>> getArrayEmptyAsync() {
-        return getArrayEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
+        return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3856,7 +3843,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyWithServiceResponseAsync() {
         return service.getArrayEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
                 @Override
@@ -3883,10 +3870,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemNull() throws ErrorException, IOException {
-        return getArrayItemNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3896,7 +3883,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3905,12 +3892,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<Map<String, List<String>>> getArrayItemNullAsync() {
-        return getArrayItemNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
+        return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3918,7 +3905,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullWithServiceResponseAsync() {
         return service.getArrayItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
                 @Override
@@ -3945,10 +3932,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemEmpty() throws ErrorException, IOException {
-        return getArrayItemEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -3958,7 +3945,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3967,12 +3954,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<Map<String, List<String>>> getArrayItemEmptyAsync() {
-        return getArrayItemEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
+        return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3980,7 +3967,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyWithServiceResponseAsync() {
         return service.getArrayItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
                 @Override
@@ -4007,10 +3994,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayValid() throws ErrorException, IOException {
-        return getArrayValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4020,7 +4007,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getArrayValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4029,12 +4016,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
     public Observable<Map<String, List<String>>> getArrayValidAsync() {
-        return getArrayValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
+        return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4042,7 +4029,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidWithServiceResponseAsync() {
         return service.getArrayValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
                 @Override
@@ -4071,10 +4058,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putArrayValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -4085,7 +4071,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4095,12 +4081,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
-        return putArrayValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4109,7 +4095,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayValidAsyncWithServiceResponse(Map<String, List<String>> arrayBody) {
+    public Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -4140,10 +4126,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryNull() throws ErrorException, IOException {
-        return getDictionaryNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4153,7 +4139,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4162,12 +4148,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<Map<String, Map<String, String>>> getDictionaryNullAsync() {
-        return getDictionaryNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
+        return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4175,7 +4161,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullWithServiceResponseAsync() {
         return service.getDictionaryNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
                 @Override
@@ -4202,10 +4188,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException {
-        return getDictionaryEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4215,7 +4201,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4224,12 +4210,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
-        return getDictionaryEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
+        return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4237,7 +4223,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync() {
         return service.getDictionaryEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
                 @Override
@@ -4264,10 +4250,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException {
-        return getDictionaryItemNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4277,7 +4263,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4286,12 +4272,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
-        return getDictionaryItemNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
+        return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4299,7 +4285,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync() {
         return service.getDictionaryItemNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
                 @Override
@@ -4326,10 +4312,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException {
-        return getDictionaryItemEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4339,7 +4325,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4348,12 +4334,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
-        return getDictionaryItemEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
+        return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4361,7 +4347,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync() {
         return service.getDictionaryItemEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
                 @Override
@@ -4388,10 +4374,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryValid() throws ErrorException, IOException {
-        return getDictionaryValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -4401,7 +4387,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4410,12 +4396,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
     public Observable<Map<String, Map<String, String>>> getDictionaryValidAsync() {
-        return getDictionaryValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
+        return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4423,7 +4409,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidWithServiceResponseAsync() {
         return service.getDictionaryValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
                 @Override
@@ -4452,10 +4438,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDictionaryValidAsyncWithServiceResponse(arrayBody).toBlocking().single().getBody();
+        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
     }
 
     /**
@@ -4466,7 +4451,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryValidAsyncWithServiceResponse(arrayBody), serviceCallback);
+        return ServiceCall.create(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4476,12 +4461,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
-        return putDictionaryValidAsyncWithServiceResponse(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4490,7 +4475,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryValidAsyncWithServiceResponse(Map<String, Map<String, String>> arrayBody) {
+    public Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }

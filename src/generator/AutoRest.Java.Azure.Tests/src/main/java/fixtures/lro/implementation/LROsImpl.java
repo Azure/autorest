@@ -430,7 +430,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Succeeded(Product product) throws CloudException, IOException, InterruptedException {
-        return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -503,7 +503,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -536,7 +536,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded(Product product) throws CloudException, IOException {
-        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -553,6 +553,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut200SucceededAsync(Product product) {
@@ -561,7 +562,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -650,7 +651,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200SucceededNoState(Product product) throws CloudException, IOException, InterruptedException {
-        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -723,7 +724,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -756,7 +757,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState(Product product) throws CloudException, IOException {
-        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -773,6 +774,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut200SucceededNoStateAsync(Product product) {
@@ -781,7 +783,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -869,7 +871,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put202Retry200(Product product) throws CloudException, IOException, InterruptedException {
-        return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -942,7 +944,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -975,7 +977,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200(Product product) throws CloudException, IOException {
-        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -992,6 +994,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut202Retry200Async(Product product) {
@@ -1000,7 +1003,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1088,7 +1091,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1161,7 +1164,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1194,7 +1197,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1211,6 +1214,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut201CreatingSucceeded200Async(Product product) {
@@ -1219,7 +1223,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1308,7 +1312,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204(Product product) throws CloudException, IOException, InterruptedException {
-        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1381,7 +1385,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1414,7 +1418,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204(Product product) throws CloudException, IOException {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1431,6 +1435,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut200UpdatingSucceeded204Async(Product product) {
@@ -1439,7 +1444,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1527,7 +1532,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingFailed200(Product product) throws CloudException, IOException, InterruptedException {
-        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1600,7 +1605,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1633,7 +1638,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200(Product product) throws CloudException, IOException {
-        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1650,6 +1655,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut201CreatingFailed200Async(Product product) {
@@ -1658,7 +1664,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1747,7 +1753,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200(Product product) throws CloudException, IOException, InterruptedException {
-        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1820,7 +1826,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1853,7 +1859,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200(Product product) throws CloudException, IOException {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1870,6 +1876,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut200Acceptedcanceled200Async(Product product) {
@@ -1878,7 +1885,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1966,7 +1973,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
-        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2039,7 +2046,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2072,7 +2079,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry(Product product) throws CloudException, IOException {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2089,6 +2096,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutNoHeaderInRetryAsync(Product product) {
@@ -2097,7 +2105,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2185,7 +2193,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2258,7 +2266,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2291,7 +2299,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) throws CloudException, IOException {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2308,6 +2316,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRetrySucceededAsync(Product product) {
@@ -2316,7 +2325,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2404,7 +2413,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2477,7 +2486,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2510,7 +2519,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded(Product product) throws CloudException, IOException {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2527,6 +2536,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncNoRetrySucceededAsync(Product product) {
@@ -2535,7 +2545,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2623,7 +2633,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2696,7 +2706,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2729,7 +2739,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed(Product product) throws CloudException, IOException {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2746,6 +2756,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRetryFailedAsync(Product product) {
@@ -2754,7 +2765,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2842,7 +2853,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2915,7 +2926,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2948,7 +2959,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled(Product product) throws CloudException, IOException {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2965,6 +2976,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncNoRetrycanceledAsync(Product product) {
@@ -2973,7 +2985,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3061,7 +3073,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3134,7 +3146,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3167,7 +3179,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry(Product product) throws CloudException, IOException {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3184,6 +3196,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncNoHeaderInRetryAsync(Product product) {
@@ -3192,7 +3205,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3280,7 +3293,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
-        return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
     /**
@@ -3353,7 +3366,7 @@ public final class LROsImpl implements LROs {
             public Sku call(ServiceResponse<Sku> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3386,7 +3399,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource(Sku sku) throws CloudException, IOException {
-        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
     /**
@@ -3403,6 +3416,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
+     * @param sku sku to put
      * @return the observable to the Sku object
      */
     public Observable<Sku> beginPutNonResourceAsync(Sku sku) {
@@ -3411,7 +3425,7 @@ public final class LROsImpl implements LROs {
             public Sku call(ServiceResponse<Sku> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3499,7 +3513,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource(Sku sku) throws CloudException, IOException, InterruptedException {
-        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
     /**
@@ -3572,7 +3586,7 @@ public final class LROsImpl implements LROs {
             public Sku call(ServiceResponse<Sku> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3605,7 +3619,7 @@ public final class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource(Sku sku) throws CloudException, IOException {
-        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
     /**
@@ -3622,6 +3636,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with non resource.
      *
+     * @param sku Sku to put
      * @return the observable to the Sku object
      */
     public Observable<Sku> beginPutAsyncNonResourceAsync(Sku sku) {
@@ -3630,7 +3645,7 @@ public final class LROsImpl implements LROs {
             public Sku call(ServiceResponse<Sku> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3718,7 +3733,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
-        return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3791,7 +3806,7 @@ public final class LROsImpl implements LROs {
             public SubProduct call(ServiceResponse<SubProduct> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3824,7 +3839,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource(SubProduct product) throws CloudException, IOException {
-        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3841,6 +3856,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
      * @return the observable to the SubProduct object
      */
     public Observable<SubProduct> beginPutSubResourceAsync(SubProduct product) {
@@ -3849,7 +3865,7 @@ public final class LROsImpl implements LROs {
             public SubProduct call(ServiceResponse<SubProduct> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3937,7 +3953,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource(SubProduct product) throws CloudException, IOException, InterruptedException {
-        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -4010,7 +4026,7 @@ public final class LROsImpl implements LROs {
             public SubProduct call(ServiceResponse<SubProduct> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4043,7 +4059,7 @@ public final class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource(SubProduct product) throws CloudException, IOException {
-        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -4060,6 +4076,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
      * @return the observable to the SubProduct object
      */
     public Observable<SubProduct> beginPutAsyncSubResourceAsync(SubProduct product) {
@@ -4068,7 +4085,7 @@ public final class LROsImpl implements LROs {
             public SubProduct call(ServiceResponse<SubProduct> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4178,7 +4195,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4287,7 +4304,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4396,7 +4413,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4503,7 +4520,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4611,7 +4628,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4720,7 +4737,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4827,7 +4844,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4934,7 +4951,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5041,7 +5058,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5147,7 +5164,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5253,7 +5270,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5359,7 +5376,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5467,7 +5484,7 @@ public final class LROsImpl implements LROs {
             public Sku call(ServiceResponse<Sku> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5552,7 +5569,7 @@ public final class LROsImpl implements LROs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -5624,7 +5641,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5656,7 +5673,7 @@ public final class LROsImpl implements LROs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPost202Retry200(Product product) throws CloudException, IOException {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -5673,6 +5690,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async(Product product) {
@@ -5681,7 +5699,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5769,7 +5787,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException {
-        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -5842,7 +5860,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5875,7 +5893,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204(Product product) throws CloudException, IOException {
-        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -5892,6 +5910,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPost202NoRetry204Async(Product product) {
@@ -5900,7 +5919,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5988,7 +6007,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6061,7 +6080,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6094,7 +6113,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded(Product product) throws CloudException, IOException {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6111,6 +6130,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPostAsyncRetrySucceededAsync(Product product) {
@@ -6119,7 +6139,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6208,7 +6228,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6281,7 +6301,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6314,7 +6334,7 @@ public final class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded(Product product) throws CloudException, IOException {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6331,6 +6351,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPostAsyncNoRetrySucceededAsync(Product product) {
@@ -6339,7 +6360,7 @@ public final class LROsImpl implements LROs {
             public Product call(ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6426,7 +6447,7 @@ public final class LROsImpl implements LROs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6498,7 +6519,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6530,7 +6551,7 @@ public final class LROsImpl implements LROs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRetryFailed(Product product) throws CloudException, IOException {
-        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6547,6 +6568,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetryFailedAsync(Product product) {
@@ -6555,7 +6577,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6641,7 +6663,7 @@ public final class LROsImpl implements LROs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6713,7 +6735,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6745,7 +6767,7 @@ public final class LROsImpl implements LROs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRetrycanceled(Product product) throws CloudException, IOException {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6762,6 +6784,7 @@ public final class LROsImpl implements LROs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetrycanceledAsync(Product product) {
@@ -6770,7 +6793,7 @@ public final class LROsImpl implements LROs {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

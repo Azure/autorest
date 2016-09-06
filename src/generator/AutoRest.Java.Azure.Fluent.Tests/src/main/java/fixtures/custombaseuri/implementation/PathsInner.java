@@ -94,7 +94,7 @@ public final class PathsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

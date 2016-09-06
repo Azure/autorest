@@ -28,7 +28,7 @@ public interface Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
     ArrayWrapper getValid() throws ErrorException, IOException;
 
@@ -52,7 +52,7 @@ public interface Arrays {
      *
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ServiceResponse<ArrayWrapper>> getValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<ArrayWrapper>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types with array property.
@@ -61,7 +61,6 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,14 +87,14 @@ public interface Arrays {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(ArrayWrapper complexBody);
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property which is empty.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
     ArrayWrapper getEmpty() throws ErrorException, IOException;
 
@@ -119,7 +118,7 @@ public interface Arrays {
      *
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ServiceResponse<ArrayWrapper>> getEmptyAsyncWithServiceResponse();
+    Observable<ServiceResponse<ArrayWrapper>> getEmptyWithServiceResponseAsync();
 
     /**
      * Put complex types with array property which is empty.
@@ -128,7 +127,6 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -155,14 +153,14 @@ public interface Arrays {
      * @param complexBody Please put an empty array
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putEmptyAsyncWithServiceResponse(ArrayWrapper complexBody);
+    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
     ArrayWrapper getNotProvided() throws ErrorException, IOException;
 
@@ -186,6 +184,6 @@ public interface Arrays {
      *
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ServiceResponse<ArrayWrapper>> getNotProvidedAsyncWithServiceResponse();
+    Observable<ServiceResponse<ArrayWrapper>> getNotProvidedWithServiceResponseAsync();
 
 }

@@ -33,7 +33,6 @@ public interface ParameterGroupings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -60,14 +59,13 @@ public interface ParameterGroupings {
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postRequiredAsyncWithServiceResponse(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postOptional() throws ErrorException, IOException;
 
@@ -82,7 +80,6 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalAsync();
@@ -90,17 +87,15 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync();
     /**
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException;
 
@@ -127,14 +122,13 @@ public interface ParameterGroupings {
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postOptionalAsyncWithServiceResponse(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postMultiParamGroups() throws ErrorException, IOException;
 
@@ -149,8 +143,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postMultiParamGroupsAsync();
@@ -158,11 +150,9 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postMultiParamGroupsAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync();
     /**
      * Post parameters from multiple different parameter groups.
      *
@@ -170,7 +160,6 @@ public interface ParameterGroupings {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException;
 
@@ -200,14 +189,13 @@ public interface ParameterGroupings {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postMultiParamGroupsAsyncWithServiceResponse(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters with a shared parameter group object.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postSharedParameterGroupObject() throws ErrorException, IOException;
 
@@ -222,7 +210,6 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postSharedParameterGroupObjectAsync();
@@ -230,17 +217,15 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync();
     /**
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException;
 
@@ -267,6 +252,6 @@ public interface ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectAsyncWithServiceResponse(FirstParameterGroup firstParameterGroup);
+    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroup firstParameterGroup);
 
 }

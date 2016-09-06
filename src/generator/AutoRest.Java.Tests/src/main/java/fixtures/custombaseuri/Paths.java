@@ -29,7 +29,6 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -56,6 +55,6 @@ public interface Paths {
      * @param accountName Account Name
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getEmptyAsyncWithServiceResponse(String accountName);
+    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName);
 
 }

@@ -101,7 +101,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -170,7 +170,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

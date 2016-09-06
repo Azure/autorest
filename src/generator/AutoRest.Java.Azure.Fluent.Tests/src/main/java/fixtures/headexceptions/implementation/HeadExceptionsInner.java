@@ -96,7 +96,7 @@ public final class HeadExceptionsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -156,7 +156,7 @@ public final class HeadExceptionsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -216,7 +216,7 @@ public final class HeadExceptionsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

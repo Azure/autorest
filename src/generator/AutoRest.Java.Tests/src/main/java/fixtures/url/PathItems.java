@@ -30,7 +30,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getAllWithValues(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -49,8 +48,6 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath);
@@ -60,11 +57,9 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getAllWithValuesAsyncWithServiceResponse(String localStringPath, String pathItemStringPath);
+    Observable<ServiceResponse<Void>> getAllWithValuesWithServiceResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
@@ -75,7 +70,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -111,7 +105,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getAllWithValuesAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Observable<ServiceResponse<Void>> getAllWithValuesWithServiceResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
@@ -121,7 +115,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getGlobalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -140,8 +133,6 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath);
@@ -151,11 +142,9 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value 'localStringQuery'
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getGlobalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath);
+    Observable<ServiceResponse<Void>> getGlobalQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
@@ -166,7 +155,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -202,7 +190,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getGlobalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Observable<ServiceResponse<Void>> getGlobalQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
@@ -212,7 +200,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -231,8 +218,6 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath);
@@ -242,11 +227,9 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain null value
-     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath);
+    Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
@@ -257,7 +240,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -293,7 +275,7 @@ public interface PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Observable<ServiceResponse<Void>> getGlobalAndLocalQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
@@ -303,7 +285,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -322,8 +303,6 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath);
@@ -333,11 +312,9 @@ public interface PathItems {
      *
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
-     * @param localStringQuery should contain value null
-     * @param pathItemStringQuery should contain value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath);
+    Observable<ServiceResponse<Void>> getLocalPathItemQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
@@ -348,7 +325,6 @@ public interface PathItems {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -384,6 +360,6 @@ public interface PathItems {
      * @param pathItemStringQuery should contain value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getLocalPathItemQueryNullAsyncWithServiceResponse(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    Observable<ServiceResponse<Void>> getLocalPathItemQueryNullWithServiceResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 }

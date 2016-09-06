@@ -161,10 +161,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the IntWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() throws ErrorException, IOException {
-        return getIntAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getIntWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -174,7 +174,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
-        return ServiceCall.create(getIntAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getIntWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -183,12 +183,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the IntWrapper object
      */
     public Observable<IntWrapper> getIntAsync() {
-        return getIntAsyncWithServiceResponse().map(new Func1<ServiceResponse<IntWrapper>, IntWrapper>() {
+        return getIntWithServiceResponseAsync().map(new Func1<ServiceResponse<IntWrapper>, IntWrapper>() {
             @Override
             public IntWrapper call(ServiceResponse<IntWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -196,7 +196,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the IntWrapper object
      */
-    public Observable<ServiceResponse<IntWrapper>> getIntAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<IntWrapper>> getIntWithServiceResponseAsync() {
         return service.getInt()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<IntWrapper>>>() {
                 @Override
@@ -225,10 +225,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putInt(IntWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putIntAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putIntWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -239,7 +238,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putIntWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -249,12 +248,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putIntAsync(IntWrapper complexBody) {
-        return putIntAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putIntWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -263,7 +262,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put -1 and 2
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putIntAsyncWithServiceResponse(IntWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putIntWithServiceResponseAsync(IntWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -294,10 +293,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LongWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() throws ErrorException, IOException {
-        return getLongAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getLongWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -307,7 +306,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
-        return ServiceCall.create(getLongAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getLongWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -316,12 +315,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the LongWrapper object
      */
     public Observable<LongWrapper> getLongAsync() {
-        return getLongAsyncWithServiceResponse().map(new Func1<ServiceResponse<LongWrapper>, LongWrapper>() {
+        return getLongWithServiceResponseAsync().map(new Func1<ServiceResponse<LongWrapper>, LongWrapper>() {
             @Override
             public LongWrapper call(ServiceResponse<LongWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -329,7 +328,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the LongWrapper object
      */
-    public Observable<ServiceResponse<LongWrapper>> getLongAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LongWrapper>> getLongWithServiceResponseAsync() {
         return service.getLong()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LongWrapper>>>() {
                 @Override
@@ -358,10 +357,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putLong(LongWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putLongAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putLongWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -372,7 +370,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putLongWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -382,12 +380,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putLongAsync(LongWrapper complexBody) {
-        return putLongAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putLongWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -396,7 +394,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putLongAsyncWithServiceResponse(LongWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putLongWithServiceResponseAsync(LongWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -427,10 +425,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the FloatWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() throws ErrorException, IOException {
-        return getFloatAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getFloatWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -440,7 +438,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
-        return ServiceCall.create(getFloatAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getFloatWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -449,12 +447,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the FloatWrapper object
      */
     public Observable<FloatWrapper> getFloatAsync() {
-        return getFloatAsyncWithServiceResponse().map(new Func1<ServiceResponse<FloatWrapper>, FloatWrapper>() {
+        return getFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<FloatWrapper>, FloatWrapper>() {
             @Override
             public FloatWrapper call(ServiceResponse<FloatWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -462,7 +460,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the FloatWrapper object
      */
-    public Observable<ServiceResponse<FloatWrapper>> getFloatAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<FloatWrapper>> getFloatWithServiceResponseAsync() {
         return service.getFloat()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<FloatWrapper>>>() {
                 @Override
@@ -491,10 +489,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putFloat(FloatWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putFloatAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putFloatWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -505,7 +502,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putFloatWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -515,12 +512,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putFloatAsync(FloatWrapper complexBody) {
-        return putFloatAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putFloatWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -529,7 +526,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 1.05 and -0.003
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putFloatAsyncWithServiceResponse(FloatWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putFloatWithServiceResponseAsync(FloatWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -560,10 +557,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DoubleWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() throws ErrorException, IOException {
-        return getDoubleAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDoubleWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -573,7 +570,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
-        return ServiceCall.create(getDoubleAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDoubleWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -582,12 +579,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the DoubleWrapper object
      */
     public Observable<DoubleWrapper> getDoubleAsync() {
-        return getDoubleAsyncWithServiceResponse().map(new Func1<ServiceResponse<DoubleWrapper>, DoubleWrapper>() {
+        return getDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<DoubleWrapper>, DoubleWrapper>() {
             @Override
             public DoubleWrapper call(ServiceResponse<DoubleWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -595,7 +592,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the DoubleWrapper object
      */
-    public Observable<ServiceResponse<DoubleWrapper>> getDoubleAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DoubleWrapper>> getDoubleWithServiceResponseAsync() {
         return service.getDouble()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DoubleWrapper>>>() {
                 @Override
@@ -624,10 +621,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDouble(DoubleWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDoubleAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putDoubleWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -638,7 +634,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putDoubleWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -648,12 +644,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDoubleAsync(DoubleWrapper complexBody) {
-        return putDoubleAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDoubleWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -662,7 +658,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDoubleAsyncWithServiceResponse(DoubleWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putDoubleWithServiceResponseAsync(DoubleWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -693,10 +689,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BooleanWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() throws ErrorException, IOException {
-        return getBoolAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getBoolWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -706,7 +702,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
-        return ServiceCall.create(getBoolAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getBoolWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -715,12 +711,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the BooleanWrapper object
      */
     public Observable<BooleanWrapper> getBoolAsync() {
-        return getBoolAsyncWithServiceResponse().map(new Func1<ServiceResponse<BooleanWrapper>, BooleanWrapper>() {
+        return getBoolWithServiceResponseAsync().map(new Func1<ServiceResponse<BooleanWrapper>, BooleanWrapper>() {
             @Override
             public BooleanWrapper call(ServiceResponse<BooleanWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -728,7 +724,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the BooleanWrapper object
      */
-    public Observable<ServiceResponse<BooleanWrapper>> getBoolAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<BooleanWrapper>> getBoolWithServiceResponseAsync() {
         return service.getBool()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BooleanWrapper>>>() {
                 @Override
@@ -757,10 +753,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putBool(BooleanWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putBoolAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putBoolWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -771,7 +766,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBoolAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putBoolWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -781,12 +776,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putBoolAsync(BooleanWrapper complexBody) {
-        return putBoolAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putBoolWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -795,7 +790,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put true and false
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putBoolAsyncWithServiceResponse(BooleanWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putBoolWithServiceResponseAsync(BooleanWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -826,10 +821,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the StringWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() throws ErrorException, IOException {
-        return getStringAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getStringWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -839,7 +834,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
-        return ServiceCall.create(getStringAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -848,12 +843,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the StringWrapper object
      */
     public Observable<StringWrapper> getStringAsync() {
-        return getStringAsyncWithServiceResponse().map(new Func1<ServiceResponse<StringWrapper>, StringWrapper>() {
+        return getStringWithServiceResponseAsync().map(new Func1<ServiceResponse<StringWrapper>, StringWrapper>() {
             @Override
             public StringWrapper call(ServiceResponse<StringWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -861,7 +856,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the StringWrapper object
      */
-    public Observable<ServiceResponse<StringWrapper>> getStringAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<StringWrapper>> getStringWithServiceResponseAsync() {
         return service.getString()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<StringWrapper>>>() {
                 @Override
@@ -890,10 +885,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putString(StringWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putStringAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putStringWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -904,7 +898,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putStringWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -914,12 +908,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putStringAsync(StringWrapper complexBody) {
-        return putStringAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putStringWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -928,7 +922,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'goodrequest', '', and null
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putStringAsyncWithServiceResponse(StringWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putStringWithServiceResponseAsync(StringWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -959,10 +953,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() throws ErrorException, IOException {
-        return getDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -972,7 +966,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
-        return ServiceCall.create(getDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -981,12 +975,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the DateWrapper object
      */
     public Observable<DateWrapper> getDateAsync() {
-        return getDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<DateWrapper>, DateWrapper>() {
+        return getDateWithServiceResponseAsync().map(new Func1<ServiceResponse<DateWrapper>, DateWrapper>() {
             @Override
             public DateWrapper call(ServiceResponse<DateWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -994,7 +988,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the DateWrapper object
      */
-    public Observable<ServiceResponse<DateWrapper>> getDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DateWrapper>> getDateWithServiceResponseAsync() {
         return service.getDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateWrapper>>>() {
                 @Override
@@ -1023,10 +1017,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDate(DateWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putDateWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1037,7 +1030,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putDateWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1047,12 +1040,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateAsync(DateWrapper complexBody) {
-        return putDateAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1061,7 +1054,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateAsyncWithServiceResponse(DateWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putDateWithServiceResponseAsync(DateWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1092,10 +1085,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DatetimeWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() throws ErrorException, IOException {
-        return getDateTimeAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1105,7 +1098,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
-        return ServiceCall.create(getDateTimeAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1114,12 +1107,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the DatetimeWrapper object
      */
     public Observable<DatetimeWrapper> getDateTimeAsync() {
-        return getDateTimeAsyncWithServiceResponse().map(new Func1<ServiceResponse<DatetimeWrapper>, DatetimeWrapper>() {
+        return getDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DatetimeWrapper>, DatetimeWrapper>() {
             @Override
             public DatetimeWrapper call(ServiceResponse<DatetimeWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1127,7 +1120,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the DatetimeWrapper object
      */
-    public Observable<ServiceResponse<DatetimeWrapper>> getDateTimeAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DatetimeWrapper>> getDateTimeWithServiceResponseAsync() {
         return service.getDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DatetimeWrapper>>>() {
                 @Override
@@ -1156,10 +1149,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDateTime(DatetimeWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateTimeAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putDateTimeWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1170,7 +1162,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putDateTimeWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1180,12 +1172,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
-        return putDateTimeAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateTimeWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1194,7 +1186,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeAsyncWithServiceResponse(DatetimeWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putDateTimeWithServiceResponseAsync(DatetimeWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1225,10 +1217,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Datetimerfc1123Wrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() throws ErrorException, IOException {
-        return getDateTimeRfc1123AsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDateTimeRfc1123WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1238,7 +1230,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDateTimeRfc1123WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1247,12 +1239,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the Datetimerfc1123Wrapper object
      */
     public Observable<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
-        return getDateTimeRfc1123AsyncWithServiceResponse().map(new Func1<ServiceResponse<Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() {
+        return getDateTimeRfc1123WithServiceResponseAsync().map(new Func1<ServiceResponse<Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() {
             @Override
             public Datetimerfc1123Wrapper call(ServiceResponse<Datetimerfc1123Wrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1260,7 +1252,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the Datetimerfc1123Wrapper object
      */
-    public Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithServiceResponseAsync() {
         return service.getDateTimeRfc1123()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Datetimerfc1123Wrapper>>>() {
                 @Override
@@ -1289,10 +1281,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDateTimeRfc1123AsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putDateTimeRfc1123WithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1303,7 +1294,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123AsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putDateTimeRfc1123WithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1313,12 +1304,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
-        return putDateTimeRfc1123AsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDateTimeRfc1123WithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1327,7 +1318,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDateTimeRfc1123AsyncWithServiceResponse(Datetimerfc1123Wrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putDateTimeRfc1123WithServiceResponseAsync(Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1358,10 +1349,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DurationWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() throws ErrorException, IOException {
-        return getDurationAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDurationWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1371,7 +1362,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
-        return ServiceCall.create(getDurationAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDurationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1380,12 +1371,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the DurationWrapper object
      */
     public Observable<DurationWrapper> getDurationAsync() {
-        return getDurationAsyncWithServiceResponse().map(new Func1<ServiceResponse<DurationWrapper>, DurationWrapper>() {
+        return getDurationWithServiceResponseAsync().map(new Func1<ServiceResponse<DurationWrapper>, DurationWrapper>() {
             @Override
             public DurationWrapper call(ServiceResponse<DurationWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1393,7 +1384,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the DurationWrapper object
      */
-    public Observable<ServiceResponse<DurationWrapper>> getDurationAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DurationWrapper>> getDurationWithServiceResponseAsync() {
         return service.getDuration()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DurationWrapper>>>() {
                 @Override
@@ -1422,10 +1413,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putDuration(DurationWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putDurationAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putDurationWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1436,7 +1426,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putDurationWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1446,12 +1436,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDurationAsync(DurationWrapper complexBody) {
-        return putDurationAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putDurationWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1460,7 +1450,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDurationAsyncWithServiceResponse(DurationWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putDurationWithServiceResponseAsync(DurationWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1491,10 +1481,10 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ByteWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() throws ErrorException, IOException {
-        return getByteAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getByteWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1504,7 +1494,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
-        return ServiceCall.create(getByteAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getByteWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1513,12 +1503,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the observable to the ByteWrapper object
      */
     public Observable<ByteWrapper> getByteAsync() {
-        return getByteAsyncWithServiceResponse().map(new Func1<ServiceResponse<ByteWrapper>, ByteWrapper>() {
+        return getByteWithServiceResponseAsync().map(new Func1<ServiceResponse<ByteWrapper>, ByteWrapper>() {
             @Override
             public ByteWrapper call(ServiceResponse<ByteWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1526,7 +1516,7 @@ public final class PrimitivesImpl implements Primitives {
      *
      * @return the observable to the ByteWrapper object
      */
-    public Observable<ServiceResponse<ByteWrapper>> getByteAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<ByteWrapper>> getByteWithServiceResponseAsync() {
         return service.getByte()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ByteWrapper>>>() {
                 @Override
@@ -1555,10 +1545,9 @@ public final class PrimitivesImpl implements Primitives {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putByte(ByteWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putByteAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putByteWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -1569,7 +1558,7 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putByteWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -1579,12 +1568,12 @@ public final class PrimitivesImpl implements Primitives {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putByteAsync(ByteWrapper complexBody) {
-        return putByteAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putByteWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1593,7 +1582,7 @@ public final class PrimitivesImpl implements Primitives {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putByteAsyncWithServiceResponse(ByteWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putByteWithServiceResponseAsync(ByteWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }

@@ -104,7 +104,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -169,7 +169,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -234,7 +234,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -299,7 +299,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

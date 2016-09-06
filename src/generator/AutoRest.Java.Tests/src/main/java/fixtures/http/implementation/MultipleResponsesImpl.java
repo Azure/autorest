@@ -201,10 +201,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() throws ErrorException, IOException {
-        return get200Model204NoModelDefaultError200ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -214,7 +214,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError200ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model204NoModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -223,12 +223,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model204NoModelDefaultError200ValidAsync() {
-        return get200Model204NoModelDefaultError200ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -236,7 +236,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidWithServiceResponseAsync() {
         return service.get200Model204NoModelDefaultError200Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -264,10 +264,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() throws ErrorException, IOException {
-        return get200Model204NoModelDefaultError204ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -277,7 +277,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError204ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model204NoModelDefaultError204ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -286,12 +286,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model204NoModelDefaultError204ValidAsync() {
-        return get200Model204NoModelDefaultError204ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -299,7 +299,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidWithServiceResponseAsync() {
         return service.get200Model204NoModelDefaultError204Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -327,10 +327,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() throws ErrorException, IOException {
-        return get200Model204NoModelDefaultError201InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -340,7 +340,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError201InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -349,12 +349,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model204NoModelDefaultError201InvalidAsync() {
-        return get200Model204NoModelDefaultError201InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -362,7 +362,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync() {
         return service.get200Model204NoModelDefaultError201Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -390,10 +390,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() throws ErrorException, IOException {
-        return get200Model204NoModelDefaultError202NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -403,7 +403,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError202NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model204NoModelDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -412,12 +412,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model204NoModelDefaultError202NoneAsync() {
-        return get200Model204NoModelDefaultError202NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -425,7 +425,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneWithServiceResponseAsync() {
         return service.get200Model204NoModelDefaultError202None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -453,10 +453,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() throws ErrorException, IOException {
-        return get200Model204NoModelDefaultError400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -466,7 +466,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model204NoModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -475,12 +475,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model204NoModelDefaultError400ValidAsync() {
-        return get200Model204NoModelDefaultError400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -488,7 +488,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidWithServiceResponseAsync() {
         return service.get200Model204NoModelDefaultError400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -516,10 +516,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() throws ErrorException, IOException {
-        return get200Model201ModelDefaultError200ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -529,7 +529,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError200ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model201ModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -538,12 +538,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model201ModelDefaultError200ValidAsync() {
-        return get200Model201ModelDefaultError200ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -551,7 +551,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidWithServiceResponseAsync() {
         return service.get200Model201ModelDefaultError200Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -579,10 +579,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() throws ErrorException, IOException {
-        return get200Model201ModelDefaultError201ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -592,7 +592,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError201ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model201ModelDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -601,12 +601,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model201ModelDefaultError201ValidAsync() {
-        return get200Model201ModelDefaultError201ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -614,7 +614,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidWithServiceResponseAsync() {
         return service.get200Model201ModelDefaultError201Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -642,10 +642,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() throws ErrorException, IOException {
-        return get200Model201ModelDefaultError400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -655,7 +655,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200Model201ModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -664,12 +664,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200Model201ModelDefaultError400ValidAsync() {
-        return get200Model201ModelDefaultError400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -677,7 +677,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidWithServiceResponseAsync() {
         return service.get200Model201ModelDefaultError400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -705,10 +705,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() throws ErrorException, IOException {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -718,7 +718,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -727,12 +727,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the Object object
      */
     public Observable<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Object>, Object>() {
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -740,7 +740,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError200Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
@@ -769,10 +769,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() throws ErrorException, IOException {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -782,7 +782,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -791,12 +791,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the Object object
      */
     public Observable<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Object>, Object>() {
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -804,7 +804,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError201Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
@@ -833,10 +833,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() throws ErrorException, IOException {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -846,7 +846,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -855,12 +855,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the Object object
      */
     public Observable<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Object>, Object>() {
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -868,7 +868,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError404Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
@@ -897,10 +897,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Object object wrapped in {@link ServiceResponse} if successful.
+     * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() throws ErrorException, IOException {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -910,7 +910,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -919,12 +919,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the Object object
      */
     public Observable<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Object>, Object>() {
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -932,7 +932,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the Object object
      */
-    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync() {
         return service.get200ModelA201ModelC404ModelDDefaultError400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Object>>>() {
                 @Override
@@ -961,10 +961,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultError202None() throws ErrorException, IOException {
-        get202None204NoneDefaultError202NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -974,7 +973,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError202NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -983,12 +982,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultError202NoneAsync() {
-        return get202None204NoneDefaultError202NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -996,7 +995,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError202NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError202NoneWithServiceResponseAsync() {
         return service.get202None204NoneDefaultError202None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1024,10 +1023,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultError204None() throws ErrorException, IOException {
-        get202None204NoneDefaultError204NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultError204NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1037,7 +1035,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError204NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultError204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1046,12 +1044,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultError204NoneAsync() {
-        return get202None204NoneDefaultError204NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultError204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1059,7 +1057,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError204NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError204NoneWithServiceResponseAsync() {
         return service.get202None204NoneDefaultError204None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1087,10 +1085,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultError400Valid() throws ErrorException, IOException {
-        get202None204NoneDefaultError400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1100,7 +1097,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1109,12 +1106,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultError400ValidAsync() {
-        return get202None204NoneDefaultError400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1122,7 +1119,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultError400ValidWithServiceResponseAsync() {
         return service.get202None204NoneDefaultError400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1150,10 +1147,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultNone202Invalid() throws ServiceException, IOException {
-        get202None204NoneDefaultNone202InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1163,7 +1159,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone202InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultNone202InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1172,12 +1168,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultNone202InvalidAsync() {
-        return get202None204NoneDefaultNone202InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1185,7 +1181,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone202InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone202InvalidWithServiceResponseAsync() {
         return service.get202None204NoneDefaultNone202Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1212,10 +1208,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultNone204None() throws ServiceException, IOException {
-        get202None204NoneDefaultNone204NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultNone204NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1225,7 +1220,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone204NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultNone204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1234,12 +1229,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultNone204NoneAsync() {
-        return get202None204NoneDefaultNone204NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultNone204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1247,7 +1242,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone204NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone204NoneWithServiceResponseAsync() {
         return service.get202None204NoneDefaultNone204None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1274,10 +1269,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultNone400None() throws ServiceException, IOException {
-        get202None204NoneDefaultNone400NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1287,7 +1281,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1296,12 +1290,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultNone400NoneAsync() {
-        return get202None204NoneDefaultNone400NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1309,7 +1303,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400NoneWithServiceResponseAsync() {
         return service.get202None204NoneDefaultNone400None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1336,10 +1330,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void get202None204NoneDefaultNone400Invalid() throws ServiceException, IOException {
-        get202None204NoneDefaultNone400InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1349,7 +1342,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get202None204NoneDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1358,12 +1351,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> get202None204NoneDefaultNone400InvalidAsync() {
-        return get202None204NoneDefaultNone400InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1371,7 +1364,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400InvalidWithServiceResponseAsync() {
         return service.get202None204NoneDefaultNone400Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1398,10 +1391,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws MyException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() throws MyException, IOException {
-        return getDefaultModelA200ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDefaultModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1411,7 +1404,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1420,12 +1413,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> getDefaultModelA200ValidAsync() {
-        return getDefaultModelA200ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return getDefaultModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1433,7 +1426,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> getDefaultModelA200ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> getDefaultModelA200ValidWithServiceResponseAsync() {
         return service.getDefaultModelA200Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -1459,10 +1452,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws MyException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A getDefaultModelA200None() throws MyException, IOException {
-        return getDefaultModelA200NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDefaultModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1472,7 +1465,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1481,12 +1474,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> getDefaultModelA200NoneAsync() {
-        return getDefaultModelA200NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return getDefaultModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1494,7 +1487,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> getDefaultModelA200NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> getDefaultModelA200NoneWithServiceResponseAsync() {
         return service.getDefaultModelA200None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -1520,10 +1513,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws MyException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() throws MyException, IOException {
-        return getDefaultModelA400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDefaultModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1533,7 +1526,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1542,12 +1535,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> getDefaultModelA400ValidAsync() {
-        return getDefaultModelA400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return getDefaultModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1555,7 +1548,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> getDefaultModelA400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> getDefaultModelA400ValidWithServiceResponseAsync() {
         return service.getDefaultModelA400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -1581,10 +1574,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws MyException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A getDefaultModelA400None() throws MyException, IOException {
-        return getDefaultModelA400NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getDefaultModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1594,7 +1587,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1603,12 +1596,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> getDefaultModelA400NoneAsync() {
-        return getDefaultModelA400NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return getDefaultModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1616,7 +1609,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> getDefaultModelA400NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> getDefaultModelA400NoneWithServiceResponseAsync() {
         return service.getDefaultModelA400None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -1642,10 +1635,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getDefaultNone200Invalid() throws ServiceException, IOException {
-        getDefaultNone200InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        getDefaultNone200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1655,7 +1647,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultNone200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1664,12 +1656,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getDefaultNone200InvalidAsync() {
-        return getDefaultNone200InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return getDefaultNone200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1677,7 +1669,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getDefaultNone200InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> getDefaultNone200InvalidWithServiceResponseAsync() {
         return service.getDefaultNone200Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1702,10 +1694,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getDefaultNone200None() throws ServiceException, IOException {
-        getDefaultNone200NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        getDefaultNone200NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1715,7 +1706,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultNone200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1724,12 +1715,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getDefaultNone200NoneAsync() {
-        return getDefaultNone200NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return getDefaultNone200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1737,7 +1728,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getDefaultNone200NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> getDefaultNone200NoneWithServiceResponseAsync() {
         return service.getDefaultNone200None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1762,10 +1753,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getDefaultNone400Invalid() throws ServiceException, IOException {
-        getDefaultNone400InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        getDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1775,7 +1765,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1784,12 +1774,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getDefaultNone400InvalidAsync() {
-        return getDefaultNone400InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return getDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1797,7 +1787,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getDefaultNone400InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> getDefaultNone400InvalidWithServiceResponseAsync() {
         return service.getDefaultNone400Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1822,10 +1812,9 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getDefaultNone400None() throws ServiceException, IOException {
-        getDefaultNone400NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        getDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1835,7 +1824,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1844,12 +1833,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getDefaultNone400NoneAsync() {
-        return getDefaultNone400NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return getDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1857,7 +1846,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getDefaultNone400NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> getDefaultNone400NoneWithServiceResponseAsync() {
         return service.getDefaultNone400None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1882,10 +1871,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA200None() throws ServiceException, IOException {
-        return get200ModelA200NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1895,7 +1884,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1904,12 +1893,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA200NoneAsync() {
-        return get200ModelA200NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1917,7 +1906,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA200NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA200NoneWithServiceResponseAsync() {
         return service.get200ModelA200None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -1943,10 +1932,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA200Valid() throws ServiceException, IOException {
-        return get200ModelA200ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1956,7 +1945,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1965,12 +1954,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA200ValidAsync() {
-        return get200ModelA200ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1978,7 +1967,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA200ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA200ValidWithServiceResponseAsync() {
         return service.get200ModelA200Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -2004,10 +1993,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA200Invalid() throws ServiceException, IOException {
-        return get200ModelA200InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2017,7 +2006,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2026,12 +2015,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA200InvalidAsync() {
-        return get200ModelA200InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2039,7 +2028,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA200InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA200InvalidWithServiceResponseAsync() {
         return service.get200ModelA200Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -2065,10 +2054,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA400None() throws ServiceException, IOException {
-        return get200ModelA400NoneAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2078,7 +2067,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400NoneAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2087,12 +2076,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA400NoneAsync() {
-        return get200ModelA400NoneAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2100,7 +2089,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA400NoneAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA400NoneWithServiceResponseAsync() {
         return service.get200ModelA400None()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -2126,10 +2115,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA400Valid() throws ServiceException, IOException {
-        return get200ModelA400ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2139,7 +2128,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2148,12 +2137,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA400ValidAsync() {
-        return get200ModelA400ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2161,7 +2150,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA400ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA400ValidWithServiceResponseAsync() {
         return service.get200ModelA400Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -2187,10 +2176,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA400Invalid() throws ServiceException, IOException {
-        return get200ModelA400InvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2200,7 +2189,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400InvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2209,12 +2198,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA400InvalidAsync() {
-        return get200ModelA400InvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2222,7 +2211,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA400InvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA400InvalidWithServiceResponseAsync() {
         return service.get200ModelA400Invalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override
@@ -2248,10 +2237,10 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the A object wrapped in {@link ServiceResponse} if successful.
+     * @return the A object if successful.
      */
     public A get200ModelA202Valid() throws ServiceException, IOException {
-        return get200ModelA202ValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200ModelA202ValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2261,7 +2250,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA202ValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200ModelA202ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2270,12 +2259,12 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the observable to the A object
      */
     public Observable<A> get200ModelA202ValidAsync() {
-        return get200ModelA202ValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<A>, A>() {
+        return get200ModelA202ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2283,7 +2272,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      * @return the observable to the A object
      */
-    public Observable<ServiceResponse<A>> get200ModelA202ValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<A>> get200ModelA202ValidWithServiceResponseAsync() {
         return service.get200ModelA202Valid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<A>>>() {
                 @Override

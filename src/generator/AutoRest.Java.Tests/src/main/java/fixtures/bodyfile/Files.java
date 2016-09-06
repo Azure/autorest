@@ -28,7 +28,7 @@ public interface Files {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     InputStream getFile() throws ErrorException, IOException;
 
@@ -52,14 +52,14 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getFileAsyncWithServiceResponse();
+    Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync();
 
     /**
      * Get a large file.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     InputStream getFileLarge() throws ErrorException, IOException;
 
@@ -83,14 +83,14 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getFileLargeAsyncWithServiceResponse();
+    Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync();
 
     /**
      * Get empty file.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     InputStream getEmptyFile() throws ErrorException, IOException;
 
@@ -114,6 +114,6 @@ public interface Files {
      *
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> getEmptyFileAsyncWithServiceResponse();
+    Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync();
 
 }

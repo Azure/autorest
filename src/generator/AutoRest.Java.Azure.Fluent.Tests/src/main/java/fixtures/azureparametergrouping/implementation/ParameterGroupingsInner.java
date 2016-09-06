@@ -109,7 +109,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -179,7 +179,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -213,7 +213,7 @@ public final class ParameterGroupingsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
-        postOptionalWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().getBody();
     }
 
     /**
@@ -230,6 +230,7 @@ public final class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
@@ -238,7 +239,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -309,7 +310,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -347,7 +348,7 @@ public final class ParameterGroupingsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
-        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().getBody();
+        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().getBody();
     }
 
     /**
@@ -365,6 +366,8 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
@@ -373,7 +376,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -454,7 +457,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -488,7 +491,7 @@ public final class ParameterGroupingsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) throws ErrorException, IOException {
-        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().getBody();
+        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().getBody();
     }
 
     /**
@@ -505,6 +508,7 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
@@ -513,7 +517,7 @@ public final class ParameterGroupingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

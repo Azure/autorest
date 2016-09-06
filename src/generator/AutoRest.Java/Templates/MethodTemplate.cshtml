@@ -91,7 +91,7 @@ public Observable<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Na
         public @Model.ReturnTypeModel.GenericBodyClientTypeString call(@Model.ReturnTypeModel.ClientResponseTypeString response) {
             return response.getBody();
         }
-    }); 
+    });
 }
 @EmptyLine
 /**
@@ -189,11 +189,11 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
 public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
 }
 }
 @EmptyLine
@@ -228,7 +228,7 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
 @: * @Model.Description.EscapeXmlComment().Period()
 }
  *
-@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
 @: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
 }
@@ -247,7 +247,7 @@ public Observable<@Model.ReturnTypeModel.GenericBodyClientTypeString> @(Model.Na
         public @Model.ReturnTypeModel.GenericBodyClientTypeString call(@Model.ReturnTypeModel.ClientResponseTypeString response) {
             return response.getBody();
         }
-    }); 
+    });
 }
 @EmptyLine
 /**

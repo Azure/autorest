@@ -97,7 +97,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -157,7 +157,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -217,7 +217,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

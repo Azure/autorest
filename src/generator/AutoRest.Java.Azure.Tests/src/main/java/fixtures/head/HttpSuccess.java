@@ -27,7 +27,7 @@ public interface HttpSuccess {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean head200() throws CloudException, IOException;
 
@@ -51,14 +51,14 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head200AsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean head204() throws CloudException, IOException;
 
@@ -82,14 +82,14 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head204AsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean head404() throws CloudException, IOException;
 
@@ -113,6 +113,6 @@ public interface HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> head404AsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync();
 
 }

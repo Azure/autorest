@@ -28,7 +28,7 @@ public interface Ints {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the int object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object if successful.
      */
     int getNull() throws ErrorException, IOException;
 
@@ -52,14 +52,14 @@ public interface Ints {
      *
      * @return the observable to the int object
      */
-    Observable<ServiceResponse<Integer>> getNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Int value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the int object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object if successful.
      */
     int getInvalid() throws ErrorException, IOException;
 
@@ -83,14 +83,14 @@ public interface Ints {
      *
      * @return the observable to the int object
      */
-    Observable<ServiceResponse<Integer>> getInvalidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get overflow Int32 value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the int object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object if successful.
      */
     int getOverflowInt32() throws ErrorException, IOException;
 
@@ -114,14 +114,14 @@ public interface Ints {
      *
      * @return the observable to the int object
      */
-    Observable<ServiceResponse<Integer>> getOverflowInt32AsyncWithServiceResponse();
+    Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync();
 
     /**
      * Get underflow Int32 value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the int object wrapped in {@link ServiceResponse} if successful.
+     * @return the int object if successful.
      */
     int getUnderflowInt32() throws ErrorException, IOException;
 
@@ -145,14 +145,14 @@ public interface Ints {
      *
      * @return the observable to the int object
      */
-    Observable<ServiceResponse<Integer>> getUnderflowInt32AsyncWithServiceResponse();
+    Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync();
 
     /**
      * Get overflow Int64 value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object if successful.
      */
     long getOverflowInt64() throws ErrorException, IOException;
 
@@ -176,14 +176,14 @@ public interface Ints {
      *
      * @return the observable to the long object
      */
-    Observable<ServiceResponse<Long>> getOverflowInt64AsyncWithServiceResponse();
+    Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync();
 
     /**
      * Get underflow Int64 value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the long object wrapped in {@link ServiceResponse} if successful.
+     * @return the long object if successful.
      */
     long getUnderflowInt64() throws ErrorException, IOException;
 
@@ -207,7 +207,7 @@ public interface Ints {
      *
      * @return the observable to the long object
      */
-    Observable<ServiceResponse<Long>> getUnderflowInt64AsyncWithServiceResponse();
+    Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync();
 
     /**
      * Put max int32 value.
@@ -215,7 +215,6 @@ public interface Ints {
      * @param intBody the int value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMax32(int intBody) throws ErrorException, IOException;
 
@@ -242,7 +241,7 @@ public interface Ints {
      * @param intBody the int value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMax32AsyncWithServiceResponse(int intBody);
+    Observable<ServiceResponse<Void>> putMax32WithServiceResponseAsync(int intBody);
 
     /**
      * Put max int64 value.
@@ -250,7 +249,6 @@ public interface Ints {
      * @param intBody the long value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMax64(long intBody) throws ErrorException, IOException;
 
@@ -277,7 +275,7 @@ public interface Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMax64AsyncWithServiceResponse(long intBody);
+    Observable<ServiceResponse<Void>> putMax64WithServiceResponseAsync(long intBody);
 
     /**
      * Put min int32 value.
@@ -285,7 +283,6 @@ public interface Ints {
      * @param intBody the int value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMin32(int intBody) throws ErrorException, IOException;
 
@@ -312,7 +309,7 @@ public interface Ints {
      * @param intBody the int value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMin32AsyncWithServiceResponse(int intBody);
+    Observable<ServiceResponse<Void>> putMin32WithServiceResponseAsync(int intBody);
 
     /**
      * Put min int64 value.
@@ -320,7 +317,6 @@ public interface Ints {
      * @param intBody the long value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putMin64(long intBody) throws ErrorException, IOException;
 
@@ -347,14 +343,14 @@ public interface Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putMin64AsyncWithServiceResponse(long intBody);
+    Observable<ServiceResponse<Void>> putMin64WithServiceResponseAsync(long intBody);
 
     /**
      * Get datetime encoded as Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
     DateTime getUnixTime() throws ErrorException, IOException;
 
@@ -378,7 +374,7 @@ public interface Ints {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUnixTimeAsyncWithServiceResponse();
+    Observable<ServiceResponse<DateTime>> getUnixTimeWithServiceResponseAsync();
 
     /**
      * Put datetime encoded as Unix time.
@@ -386,7 +382,6 @@ public interface Ints {
      * @param intBody the long value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putUnixTimeDate(DateTime intBody) throws ErrorException, IOException;
 
@@ -413,14 +408,14 @@ public interface Ints {
      * @param intBody the long value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUnixTimeDateAsyncWithServiceResponse(DateTime intBody);
+    Observable<ServiceResponse<Void>> putUnixTimeDateWithServiceResponseAsync(DateTime intBody);
 
     /**
      * Get invalid Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
     DateTime getInvalidUnixTime() throws ErrorException, IOException;
 
@@ -444,14 +439,14 @@ public interface Ints {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getInvalidUnixTimeAsyncWithServiceResponse();
+    Observable<ServiceResponse<DateTime>> getInvalidUnixTimeWithServiceResponseAsync();
 
     /**
      * Get null Unix time value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
     DateTime getNullUnixTime() throws ErrorException, IOException;
 
@@ -475,6 +470,6 @@ public interface Ints {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getNullUnixTimeAsyncWithServiceResponse();
+    Observable<ServiceResponse<DateTime>> getNullUnixTimeWithServiceResponseAsync();
 
 }

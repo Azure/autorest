@@ -137,10 +137,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void head200() throws ErrorException, IOException {
-        head200AsyncWithServiceResponse().toBlocking().single().getBody();
+        head200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -150,7 +149,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,12 +158,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head200Async() {
-        return head200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -172,7 +171,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> head200WithServiceResponseAsync() {
         return service.head200()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -199,10 +198,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean get200() throws ErrorException, IOException {
-        return get200AsyncWithServiceResponse().toBlocking().single().getBody();
+        return get200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -212,7 +211,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(get200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(get200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -221,12 +220,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> get200Async() {
-        return get200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return get200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -234,7 +233,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> get200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> get200WithServiceResponseAsync() {
         return service.get200()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -261,10 +260,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put200() throws ErrorException, IOException {
-        put200AsyncWithServiceResponse().toBlocking().single().getBody();
+        put200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -274,7 +272,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(put200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -283,12 +281,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> put200Async() {
-        return put200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return put200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -296,7 +294,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> put200WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -318,10 +316,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put200(Boolean booleanValue) throws ErrorException, IOException {
-        put200AsyncWithServiceResponse().toBlocking().single().getBody();
+        put200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -332,21 +329,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> put200Async(Boolean booleanValue) {
-        return put200AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(put200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -355,7 +338,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put200AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> put200Async(Boolean booleanValue) {
+        return put200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put boolean value true returning 200 success.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put200WithServiceResponseAsync(Boolean booleanValue) {
         return service.put200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -382,10 +380,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch200() throws ErrorException, IOException {
-        patch200AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -395,7 +392,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(patch200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -404,12 +401,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> patch200Async() {
-        return patch200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return patch200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -417,7 +414,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -439,10 +436,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch200(Boolean booleanValue) throws ErrorException, IOException {
-        patch200AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -453,21 +449,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> patch200Async(Boolean booleanValue) {
-        return patch200AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -476,7 +458,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch200AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> patch200Async(Boolean booleanValue) {
+        return patch200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync(Boolean booleanValue) {
         return service.patch200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -503,10 +500,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post200() throws ErrorException, IOException {
-        post200AsyncWithServiceResponse().toBlocking().single().getBody();
+        post200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -516,7 +512,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(post200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -525,12 +521,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> post200Async() {
-        return post200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return post200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -538,7 +534,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> post200WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -560,10 +556,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post200(Boolean booleanValue) throws ErrorException, IOException {
-        post200AsyncWithServiceResponse().toBlocking().single().getBody();
+        post200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -574,21 +569,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> post200Async(Boolean booleanValue) {
-        return post200AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(post200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -597,7 +578,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post200AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> post200Async(Boolean booleanValue) {
+        return post200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post200WithServiceResponseAsync(Boolean booleanValue) {
         return service.post200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -624,10 +620,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete200() throws ErrorException, IOException {
-        delete200AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -637,7 +632,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(delete200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -646,12 +641,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> delete200Async() {
-        return delete200AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return delete200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -659,7 +654,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete200AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -681,10 +676,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete200(Boolean booleanValue) throws ErrorException, IOException {
-        delete200AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -695,21 +689,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> delete200Async(Boolean booleanValue) {
-        return delete200AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -718,7 +698,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete200AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> delete200Async(Boolean booleanValue) {
+        return delete200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync(Boolean booleanValue) {
         return service.delete200(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -745,10 +740,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put201() throws ErrorException, IOException {
-        put201AsyncWithServiceResponse().toBlocking().single().getBody();
+        put201WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -758,7 +752,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(put201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -767,12 +761,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> put201Async() {
-        return put201AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return put201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -780,7 +774,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put201AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> put201WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put201(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -802,10 +796,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put201(Boolean booleanValue) throws ErrorException, IOException {
-        put201AsyncWithServiceResponse().toBlocking().single().getBody();
+        put201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -816,21 +809,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> put201Async(Boolean booleanValue) {
-        return put201AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(put201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -839,7 +818,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put201AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> put201Async(Boolean booleanValue) {
+        return put201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put201WithServiceResponseAsync(Boolean booleanValue) {
         return service.put201(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -866,10 +860,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post201() throws ErrorException, IOException {
-        post201AsyncWithServiceResponse().toBlocking().single().getBody();
+        post201WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -879,7 +872,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(post201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -888,12 +881,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> post201Async() {
-        return post201AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return post201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -901,7 +894,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post201AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> post201WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post201(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -923,10 +916,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post201(Boolean booleanValue) throws ErrorException, IOException {
-        post201AsyncWithServiceResponse().toBlocking().single().getBody();
+        post201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -937,21 +929,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> post201Async(Boolean booleanValue) {
-        return post201AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(post201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -960,7 +938,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post201AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> post201Async(Boolean booleanValue) {
+        return post201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post201WithServiceResponseAsync(Boolean booleanValue) {
         return service.post201(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -987,10 +980,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put202() throws ErrorException, IOException {
-        put202AsyncWithServiceResponse().toBlocking().single().getBody();
+        put202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1000,7 +992,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(put202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1009,12 +1001,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> put202Async() {
-        return put202AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return put202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1022,7 +1014,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put202AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> put202WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1044,10 +1036,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put202(Boolean booleanValue) throws ErrorException, IOException {
-        put202AsyncWithServiceResponse().toBlocking().single().getBody();
+        put202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1058,21 +1049,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> put202Async(Boolean booleanValue) {
-        return put202AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(put202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1081,7 +1058,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put202AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> put202Async(Boolean booleanValue) {
+        return put202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put202WithServiceResponseAsync(Boolean booleanValue) {
         return service.put202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1108,10 +1100,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch202() throws ErrorException, IOException {
-        patch202AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1121,7 +1112,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(patch202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1130,12 +1121,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> patch202Async() {
-        return patch202AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return patch202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1143,7 +1134,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch202AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1165,10 +1156,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch202(Boolean booleanValue) throws ErrorException, IOException {
-        patch202AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1179,21 +1169,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> patch202Async(Boolean booleanValue) {
-        return patch202AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1202,7 +1178,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch202AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> patch202Async(Boolean booleanValue) {
+        return patch202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync(Boolean booleanValue) {
         return service.patch202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1229,10 +1220,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post202() throws ErrorException, IOException {
-        post202AsyncWithServiceResponse().toBlocking().single().getBody();
+        post202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1242,7 +1232,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(post202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1251,12 +1241,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> post202Async() {
-        return post202AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return post202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1264,7 +1254,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post202AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> post202WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1286,10 +1276,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post202(Boolean booleanValue) throws ErrorException, IOException {
-        post202AsyncWithServiceResponse().toBlocking().single().getBody();
+        post202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1300,21 +1289,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> post202Async(Boolean booleanValue) {
-        return post202AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(post202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1323,7 +1298,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post202AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> post202Async(Boolean booleanValue) {
+        return post202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post202WithServiceResponseAsync(Boolean booleanValue) {
         return service.post202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1350,10 +1340,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete202() throws ErrorException, IOException {
-        delete202AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete202WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1363,7 +1352,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(delete202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1372,12 +1361,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> delete202Async() {
-        return delete202AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return delete202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1385,7 +1374,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete202AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1407,10 +1396,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete202(Boolean booleanValue) throws ErrorException, IOException {
-        delete202AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1421,21 +1409,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> delete202Async(Boolean booleanValue) {
-        return delete202AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1444,7 +1418,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete202AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> delete202Async(Boolean booleanValue) {
+        return delete202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync(Boolean booleanValue) {
         return service.delete202(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1471,10 +1460,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void head204() throws ErrorException, IOException {
-        head204AsyncWithServiceResponse().toBlocking().single().getBody();
+        head204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1484,7 +1472,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1493,12 +1481,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head204Async() {
-        return head204AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1506,7 +1494,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head204AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> head204WithServiceResponseAsync() {
         return service.head204()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1533,10 +1521,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put204() throws ErrorException, IOException {
-        put204AsyncWithServiceResponse().toBlocking().single().getBody();
+        put204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1546,7 +1533,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(put204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1555,12 +1542,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> put204Async() {
-        return put204AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return put204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1568,7 +1555,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put204AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> put204WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.put204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1590,10 +1577,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void put204(Boolean booleanValue) throws ErrorException, IOException {
-        put204AsyncWithServiceResponse().toBlocking().single().getBody();
+        put204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1604,21 +1590,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> put204Async(Boolean booleanValue) {
-        return put204AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(put204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1627,7 +1599,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> put204AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> put204Async(Boolean booleanValue) {
+        return put204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> put204WithServiceResponseAsync(Boolean booleanValue) {
         return service.put204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1654,10 +1641,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch204() throws ErrorException, IOException {
-        patch204AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1667,7 +1653,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(patch204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1676,12 +1662,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> patch204Async() {
-        return patch204AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return patch204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1689,7 +1675,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch204AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1711,10 +1697,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void patch204(Boolean booleanValue) throws ErrorException, IOException {
-        patch204AsyncWithServiceResponse().toBlocking().single().getBody();
+        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1725,21 +1710,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> patch204Async(Boolean booleanValue) {
-        return patch204AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1748,7 +1719,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> patch204AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> patch204Async(Boolean booleanValue) {
+        return patch204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync(Boolean booleanValue) {
         return service.patch204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1775,10 +1761,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post204() throws ErrorException, IOException {
-        post204AsyncWithServiceResponse().toBlocking().single().getBody();
+        post204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1788,7 +1773,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(post204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1797,12 +1782,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> post204Async() {
-        return post204AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return post204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1810,7 +1795,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post204AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> post204WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.post204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1832,10 +1817,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void post204(Boolean booleanValue) throws ErrorException, IOException {
-        post204AsyncWithServiceResponse().toBlocking().single().getBody();
+        post204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1846,21 +1830,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> post204Async(Boolean booleanValue) {
-        return post204AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(post204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1869,7 +1839,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> post204AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> post204Async(Boolean booleanValue) {
+        return post204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> post204WithServiceResponseAsync(Boolean booleanValue) {
         return service.post204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1896,10 +1881,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete204() throws ErrorException, IOException {
-        delete204AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1909,7 +1893,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(delete204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1918,12 +1902,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> delete204Async() {
-        return delete204AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return delete204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1931,7 +1915,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete204AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1953,10 +1937,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void delete204(Boolean booleanValue) throws ErrorException, IOException {
-        delete204AsyncWithServiceResponse().toBlocking().single().getBody();
+        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
     }
 
     /**
@@ -1967,21 +1950,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204AsyncWithServiceResponse(booleanValue), serviceCallback);
-    }
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> delete204Async(Boolean booleanValue) {
-        return delete204AsyncWithServiceResponse(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1990,7 +1959,22 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> delete204AsyncWithServiceResponse(Boolean booleanValue) {
+    public Observable<Void> delete204Async(Boolean booleanValue) {
+        return delete204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync(Boolean booleanValue) {
         return service.delete204(booleanValue)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -2017,10 +2001,9 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void head404() throws ErrorException, IOException {
-        head404AsyncWithServiceResponse().toBlocking().single().getBody();
+        head404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2030,7 +2013,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404AsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2039,12 +2022,12 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head404Async() {
-        return head404AsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2052,7 +2035,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head404AsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> head404WithServiceResponseAsync() {
         return service.head404()
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override

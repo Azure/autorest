@@ -87,10 +87,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() throws ErrorException, IOException {
-        return getValidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -100,7 +100,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getValidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -109,12 +109,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     public Observable<DictionaryWrapper> getValidAsync() {
-        return getValidAsyncWithServiceResponse().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
+        return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -122,7 +122,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    public Observable<ServiceResponse<DictionaryWrapper>> getValidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DictionaryWrapper>> getValidWithServiceResponseAsync() {
         return service.getValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DictionaryWrapper>>>() {
                 @Override
@@ -151,10 +151,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putValid(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putValidAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -165,7 +164,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -175,12 +174,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(DictionaryWrapper complexBody) {
-        return putValidAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -189,7 +188,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(DictionaryWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -220,10 +219,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() throws ErrorException, IOException {
-        return getEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -233,7 +232,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -242,12 +241,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     public Observable<DictionaryWrapper> getEmptyAsync() {
-        return getEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
+        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -255,7 +254,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    public Observable<ServiceResponse<DictionaryWrapper>> getEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DictionaryWrapper>> getEmptyWithServiceResponseAsync() {
         return service.getEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DictionaryWrapper>>>() {
                 @Override
@@ -284,10 +283,9 @@ public final class DictionarysImpl implements Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putEmpty(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        putEmptyAsyncWithServiceResponse(complexBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -298,7 +296,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyAsyncWithServiceResponse(complexBody), serviceCallback);
+        return ServiceCall.create(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -308,12 +306,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putEmptyAsync(DictionaryWrapper complexBody) {
-        return putEmptyAsyncWithServiceResponse(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -322,7 +320,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put an empty dictionary
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putEmptyAsyncWithServiceResponse(DictionaryWrapper complexBody) {
+    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(DictionaryWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -353,10 +351,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() throws ErrorException, IOException {
-        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -366,7 +364,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -375,12 +373,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     public Observable<DictionaryWrapper> getNullAsync() {
-        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -388,7 +386,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    public Observable<ServiceResponse<DictionaryWrapper>> getNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DictionaryWrapper>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DictionaryWrapper>>>() {
                 @Override
@@ -415,10 +413,10 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() throws ErrorException, IOException {
-        return getNotProvidedAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -428,7 +426,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNotProvidedAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -437,12 +435,12 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     public Observable<DictionaryWrapper> getNotProvidedAsync() {
-        return getNotProvidedAsyncWithServiceResponse().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
+        return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -450,7 +448,7 @@ public final class DictionarysImpl implements Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    public Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedWithServiceResponseAsync() {
         return service.getNotProvided()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DictionaryWrapper>>>() {
                 @Override

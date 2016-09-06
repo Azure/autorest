@@ -102,7 +102,7 @@ public final class ApiVersionLocalsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -164,7 +164,7 @@ public final class ApiVersionLocalsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -196,7 +196,7 @@ public final class ApiVersionLocalsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
-        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().getBody();
     }
 
     /**
@@ -213,6 +213,7 @@ public final class ApiVersionLocalsInner {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getMethodLocalNullAsync(String apiVersion) {
@@ -221,7 +222,7 @@ public final class ApiVersionLocalsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -283,7 +284,7 @@ public final class ApiVersionLocalsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -345,7 +346,7 @@ public final class ApiVersionLocalsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

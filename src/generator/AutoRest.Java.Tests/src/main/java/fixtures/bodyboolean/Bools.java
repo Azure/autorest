@@ -27,7 +27,7 @@ public interface Bools {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getTrue() throws ErrorException, IOException;
 
@@ -51,7 +51,7 @@ public interface Bools {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getTrueAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync();
 
     /**
      * Set Boolean value true.
@@ -59,7 +59,6 @@ public interface Bools {
      * @param boolBody the boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putTrue(boolean boolBody) throws ErrorException, IOException;
 
@@ -86,14 +85,14 @@ public interface Bools {
      * @param boolBody the boolean value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putTrueAsyncWithServiceResponse(boolean boolBody);
+    Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody);
 
     /**
      * Get false Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getFalse() throws ErrorException, IOException;
 
@@ -117,7 +116,7 @@ public interface Bools {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getFalseAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync();
 
     /**
      * Set Boolean value false.
@@ -125,7 +124,6 @@ public interface Bools {
      * @param boolBody the boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putFalse(boolean boolBody) throws ErrorException, IOException;
 
@@ -152,14 +150,14 @@ public interface Bools {
      * @param boolBody the boolean value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putFalseAsyncWithServiceResponse(boolean boolBody);
+    Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody);
 
     /**
      * Get null Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getNull() throws ErrorException, IOException;
 
@@ -183,14 +181,14 @@ public interface Bools {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getInvalid() throws ErrorException, IOException;
 
@@ -214,6 +212,6 @@ public interface Bools {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getInvalidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync();
 
 }

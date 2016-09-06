@@ -72,10 +72,10 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getEmptyError() throws ErrorException, IOException {
-        return getEmptyErrorAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -85,7 +85,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getEmptyErrorAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -94,12 +94,12 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getEmptyErrorAsync() {
-        return getEmptyErrorAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getEmptyErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -107,7 +107,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getEmptyErrorAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync() {
         return service.getEmptyError()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -134,10 +134,10 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getNoModelError() throws ServiceException, IOException {
-        return getNoModelErrorAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -147,7 +147,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelErrorAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -156,12 +156,12 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getNoModelErrorAsync() {
-        return getNoModelErrorAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getNoModelErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -169,7 +169,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getNoModelErrorAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync() {
         return service.getNoModelError()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -195,10 +195,10 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() throws ServiceException, IOException {
-        return getNoModelEmptyAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -208,7 +208,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelEmptyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -217,12 +217,12 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getNoModelEmptyAsync() {
-        return getNoModelEmptyAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getNoModelEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -230,7 +230,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getNoModelEmptyAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync() {
         return service.getNoModelEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override

@@ -198,10 +198,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramExistingKey(String userAgent) throws ErrorException, IOException, IllegalArgumentException {
-        paramExistingKeyAsyncWithServiceResponse(userAgent).toBlocking().single().getBody();
+        paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().getBody();
     }
 
     /**
@@ -212,7 +211,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramExistingKeyAsyncWithServiceResponse(userAgent), serviceCallback);
+        return ServiceCall.create(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
     }
 
     /**
@@ -222,12 +221,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramExistingKeyAsync(String userAgent) {
-        return paramExistingKeyAsyncWithServiceResponse(userAgent).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramExistingKeyWithServiceResponseAsync(userAgent).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -236,7 +235,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramExistingKeyAsyncWithServiceResponse(String userAgent) {
+    public Observable<ServiceResponse<Void>> paramExistingKeyWithServiceResponseAsync(String userAgent) {
         if (userAgent == null) {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
@@ -266,10 +265,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseExistingKey() throws ErrorException, IOException {
-        responseExistingKeyAsyncWithServiceResponse().toBlocking().single().getBody();
+        responseExistingKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -279,7 +277,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseExistingKeyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.createWithHeaders(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -288,12 +286,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseExistingKeyAsync() {
-        return responseExistingKeyAsyncWithServiceResponse().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>, Void>() {
+        return responseExistingKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -301,7 +299,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyAsyncWithServiceResponse() {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyWithServiceResponseAsync() {
         return service.responseExistingKey()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>>>() {
                 @Override
@@ -330,10 +328,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramProtectedKey(String contentType) throws ErrorException, IOException, IllegalArgumentException {
-        paramProtectedKeyAsyncWithServiceResponse(contentType).toBlocking().single().getBody();
+        paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().getBody();
     }
 
     /**
@@ -344,7 +341,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramProtectedKeyAsyncWithServiceResponse(contentType), serviceCallback);
+        return ServiceCall.create(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
     }
 
     /**
@@ -354,12 +351,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramProtectedKeyAsync(String contentType) {
-        return paramProtectedKeyAsyncWithServiceResponse(contentType).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramProtectedKeyWithServiceResponseAsync(contentType).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -368,7 +365,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramProtectedKeyAsyncWithServiceResponse(String contentType) {
+    public Observable<ServiceResponse<Void>> paramProtectedKeyWithServiceResponseAsync(String contentType) {
         if (contentType == null) {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
@@ -398,10 +395,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseProtectedKey() throws ErrorException, IOException {
-        responseProtectedKeyAsyncWithServiceResponse().toBlocking().single().getBody();
+        responseProtectedKeyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -411,7 +407,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseProtectedKeyAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.createWithHeaders(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -420,12 +416,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseProtectedKeyAsync() {
-        return responseProtectedKeyAsyncWithServiceResponse().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>, Void>() {
+        return responseProtectedKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -433,7 +429,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyAsyncWithServiceResponse() {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyWithServiceResponseAsync() {
         return service.responseProtectedKey()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>>>() {
                 @Override
@@ -463,10 +459,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramInteger(String scenario, int value) throws ErrorException, IOException, IllegalArgumentException {
-        paramIntegerAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -478,7 +473,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramIntegerAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -489,12 +484,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramIntegerAsync(String scenario, int value) {
-        return paramIntegerAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramIntegerWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -504,7 +499,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 1 or -2
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramIntegerAsyncWithServiceResponse(String scenario, int value) {
+    public Observable<ServiceResponse<Void>> paramIntegerWithServiceResponseAsync(String scenario, int value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -536,10 +531,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseIntegerAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -550,7 +544,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseIntegerAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -560,12 +554,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseIntegerAsync(String scenario) {
-        return responseIntegerAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>, Void>() {
+        return responseIntegerWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -574,7 +568,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -607,10 +601,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramLong(String scenario, long value) throws ErrorException, IOException, IllegalArgumentException {
-        paramLongAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -622,7 +615,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramLongAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -633,12 +626,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramLongAsync(String scenario, long value) {
-        return paramLongAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramLongWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -648,7 +641,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 105 or -2
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramLongAsyncWithServiceResponse(String scenario, long value) {
+    public Observable<ServiceResponse<Void>> paramLongWithServiceResponseAsync(String scenario, long value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -680,10 +673,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseLongAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseLongWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -694,7 +686,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseLongAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseLongWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -704,12 +696,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseLongAsync(String scenario) {
-        return responseLongAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>, Void>() {
+        return responseLongWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -718,7 +710,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -751,10 +743,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramFloat(String scenario, double value) throws ErrorException, IOException, IllegalArgumentException {
-        paramFloatAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -766,7 +757,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramFloatAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -777,12 +768,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramFloatAsync(String scenario, double value) {
-        return paramFloatAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramFloatWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -792,7 +783,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 0.07 or -3.0
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramFloatAsyncWithServiceResponse(String scenario, double value) {
+    public Observable<ServiceResponse<Void>> paramFloatWithServiceResponseAsync(String scenario, double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -824,10 +815,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseFloatAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseFloatWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -838,7 +828,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseFloatAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -848,12 +838,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseFloatAsync(String scenario) {
-        return responseFloatAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>, Void>() {
+        return responseFloatWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -862,7 +852,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -895,10 +885,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDouble(String scenario, double value) throws ErrorException, IOException, IllegalArgumentException {
-        paramDoubleAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -910,7 +899,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDoubleAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -921,12 +910,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDoubleAsync(String scenario, double value) {
-        return paramDoubleAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramDoubleWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -936,7 +925,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 7e120 or -3.0
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDoubleAsyncWithServiceResponse(String scenario, double value) {
+    public Observable<ServiceResponse<Void>> paramDoubleWithServiceResponseAsync(String scenario, double value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -968,10 +957,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseDoubleAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -982,7 +970,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDoubleAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -992,12 +980,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDoubleAsync(String scenario) {
-        return responseDoubleAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>, Void>() {
+        return responseDoubleWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1006,7 +994,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1039,10 +1027,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramBool(String scenario, boolean value) throws ErrorException, IOException, IllegalArgumentException {
-        paramBoolAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1054,7 +1041,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramBoolAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1065,12 +1052,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramBoolAsync(String scenario, boolean value) {
-        return paramBoolAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramBoolWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1080,7 +1067,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values true or false
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramBoolAsyncWithServiceResponse(String scenario, boolean value) {
+    public Observable<ServiceResponse<Void>> paramBoolWithServiceResponseAsync(String scenario, boolean value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1112,10 +1099,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseBoolAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseBoolWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1126,7 +1112,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseBoolAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1136,12 +1122,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseBoolAsync(String scenario) {
-        return responseBoolAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>, Void>() {
+        return responseBoolWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1150,7 +1136,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1182,10 +1168,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        paramStringAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1196,7 +1181,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1206,12 +1191,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramStringAsync(String scenario) {
-        return paramStringAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1220,7 +1205,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramStringAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1247,10 +1232,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramString(String scenario, String value) throws ErrorException, IOException, IllegalArgumentException {
-        paramStringAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1262,22 +1246,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringAsyncWithServiceResponse(scenario, value), serviceCallback);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> paramStringAsync(String scenario, String value) {
-        return paramStringAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1287,7 +1256,23 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramStringAsyncWithServiceResponse(String scenario, String value) {
+    public Observable<Void> paramStringAsync(String scenario, String value) {
+        return paramStringWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario, String value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1319,10 +1304,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseStringAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1333,7 +1317,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseStringAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1343,12 +1327,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseStringAsync(String scenario) {
-        return responseStringAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>, Void>() {
+        return responseStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1357,7 +1341,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1390,10 +1374,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDate(String scenario, LocalDate value) throws ErrorException, IOException, IllegalArgumentException {
-        paramDateAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1405,7 +1388,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDateAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1416,12 +1399,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDateAsync(String scenario, LocalDate value) {
-        return paramDateAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramDateWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1431,7 +1414,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDateAsyncWithServiceResponse(String scenario, LocalDate value) {
+    public Observable<ServiceResponse<Void>> paramDateWithServiceResponseAsync(String scenario, LocalDate value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1466,10 +1449,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseDateAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseDateWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1480,7 +1462,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDateAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseDateWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1490,12 +1472,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDateAsync(String scenario) {
-        return responseDateAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>, Void>() {
+        return responseDateWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1504,7 +1486,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1537,10 +1519,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDatetime(String scenario, DateTime value) throws ErrorException, IOException, IllegalArgumentException {
-        paramDatetimeAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1552,7 +1533,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1563,12 +1544,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDatetimeAsync(String scenario, DateTime value) {
-        return paramDatetimeAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramDatetimeWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1578,7 +1559,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDatetimeAsyncWithServiceResponse(String scenario, DateTime value) {
+    public Observable<ServiceResponse<Void>> paramDatetimeWithServiceResponseAsync(String scenario, DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1613,10 +1594,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseDatetimeAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1627,7 +1607,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1637,12 +1617,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDatetimeAsync(String scenario) {
-        return responseDatetimeAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>, Void>() {
+        return responseDatetimeWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1651,7 +1631,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1683,10 +1663,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        paramDatetimeRfc1123AsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1697,7 +1676,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123AsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1707,12 +1686,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDatetimeRfc1123Async(String scenario) {
-        return paramDatetimeRfc1123AsyncWithServiceResponse(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1721,7 +1700,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDatetimeRfc1123AsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1752,10 +1731,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) throws ErrorException, IOException, IllegalArgumentException {
-        paramDatetimeRfc1123AsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1767,22 +1745,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123AsyncWithServiceResponse(scenario, value), serviceCallback);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "min"
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> paramDatetimeRfc1123Async(String scenario, DateTime value) {
-        return paramDatetimeRfc1123AsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1792,7 +1755,23 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDatetimeRfc1123AsyncWithServiceResponse(String scenario, DateTime value) {
+    public Observable<Void> paramDatetimeRfc1123Async(String scenario, DateTime value) {
+        return paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario, DateTime value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1828,10 +1807,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseDatetimeRfc1123AsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1842,7 +1820,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeRfc1123AsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1852,12 +1830,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDatetimeRfc1123Async(String scenario) {
-        return responseDatetimeRfc1123AsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>, Void>() {
+        return responseDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1866,7 +1844,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123AsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123WithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1899,10 +1877,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramDuration(String scenario, Period value) throws ErrorException, IOException, IllegalArgumentException {
-        paramDurationAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -1914,7 +1891,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDurationAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1925,12 +1902,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDurationAsync(String scenario, Period value) {
-        return paramDurationAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramDurationWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1940,7 +1917,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramDurationAsyncWithServiceResponse(String scenario, Period value) {
+    public Observable<ServiceResponse<Void>> paramDurationWithServiceResponseAsync(String scenario, Period value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1975,10 +1952,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseDurationAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseDurationWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -1989,7 +1965,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDurationAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1999,12 +1975,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDurationAsync(String scenario) {
-        return responseDurationAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>, Void>() {
+        return responseDurationWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2013,7 +1989,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2046,10 +2022,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramByte(String scenario, byte[] value) throws ErrorException, IOException, IllegalArgumentException {
-        paramByteAsyncWithServiceResponse(scenario, value).toBlocking().single().getBody();
+        paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -2061,7 +2036,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramByteAsyncWithServiceResponse(scenario, value), serviceCallback);
+        return ServiceCall.create(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2072,12 +2047,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramByteAsync(String scenario, byte[] value) {
-        return paramByteAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramByteWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2087,7 +2062,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramByteAsyncWithServiceResponse(String scenario, byte[] value) {
+    public Observable<ServiceResponse<Void>> paramByteWithServiceResponseAsync(String scenario, byte[] value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2123,10 +2098,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseByteAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseByteWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -2137,7 +2111,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseByteAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseByteWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2147,12 +2121,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseByteAsync(String scenario) {
-        return responseByteAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>, Void>() {
+        return responseByteWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2161,7 +2135,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2193,10 +2167,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        paramEnumAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -2207,7 +2180,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2217,12 +2190,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramEnumAsync(String scenario) {
-        return paramEnumAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
+        return paramEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2231,7 +2204,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramEnumAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2258,10 +2231,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void paramEnum(String scenario, GreyscaleColors value) throws ErrorException, IOException, IllegalArgumentException {
-        paramEnumAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
     }
 
     /**
@@ -2273,22 +2245,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumAsyncWithServiceResponse(scenario, value), serviceCallback);
-    }
-
-    /**
-     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
-     *
-     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
-        return paramEnumAsyncWithServiceResponse(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2298,7 +2255,23 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramEnumAsyncWithServiceResponse(String scenario, GreyscaleColors value) {
+    public Observable<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
+        return paramEnumWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
+     *
+     * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario, GreyscaleColors value) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2330,10 +2303,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public void responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
-        responseEnumAsyncWithServiceResponse(scenario).toBlocking().single().getBody();
+        responseEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
     }
 
     /**
@@ -2344,7 +2316,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseEnumAsyncWithServiceResponse(scenario), serviceCallback);
+        return ServiceCall.createWithHeaders(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2354,12 +2326,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseEnumAsync(String scenario) {
-        return responseEnumAsyncWithServiceResponse(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>, Void>() {
+        return responseEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2368,7 +2340,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumAsyncWithServiceResponse(String scenario) {
+    public Observable<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumWithServiceResponseAsync(String scenario) {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -2398,10 +2370,9 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void customRequestId() throws ErrorException, IOException {
-        customRequestIdAsyncWithServiceResponse().toBlocking().single().getBody();
+        customRequestIdWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -2411,7 +2382,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(customRequestIdAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(customRequestIdWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2420,12 +2391,12 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> customRequestIdAsync() {
-        return customRequestIdAsyncWithServiceResponse().map(new Func1<ServiceResponse<Void>, Void>() {
+        return customRequestIdWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2433,7 +2404,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> customRequestIdAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Void>> customRequestIdWithServiceResponseAsync() {
         return service.customRequestId()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override

@@ -238,7 +238,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -270,7 +270,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void putArray(List<ResourceInner> resourceArray) throws ErrorException, IOException {
-        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
     }
 
     /**
@@ -287,6 +287,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as an Array.
      *
+     * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putArrayAsync(List<ResourceInner> resourceArray) {
@@ -295,7 +296,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -359,7 +360,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public List<FlattenedProductInner> call(ServiceResponse<List<FlattenedProductInner>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -420,7 +421,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -452,7 +453,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void putDictionary(Map<String, FlattenedProductInner> resourceDictionary) throws ErrorException, IOException {
-        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
     }
 
     /**
@@ -469,6 +470,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a Dictionary.
      *
+     * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
@@ -477,7 +479,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -541,7 +543,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Map<String, FlattenedProductInner> call(ServiceResponse<Map<String, FlattenedProductInner>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -602,7 +604,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -634,7 +636,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void putResourceCollection(ResourceCollectionInner resourceComplexObject) throws ErrorException, IOException {
-        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
     }
 
     /**
@@ -651,6 +653,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
@@ -659,7 +662,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -723,7 +726,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
             public ResourceCollectionInner call(ServiceResponse<ResourceCollectionInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

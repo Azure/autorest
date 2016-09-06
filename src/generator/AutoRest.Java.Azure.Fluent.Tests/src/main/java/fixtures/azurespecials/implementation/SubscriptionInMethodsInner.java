@@ -106,7 +106,7 @@ public final class SubscriptionInMethodsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -175,7 +175,7 @@ public final class SubscriptionInMethodsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -244,7 +244,7 @@ public final class SubscriptionInMethodsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -313,7 +313,7 @@ public final class SubscriptionInMethodsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

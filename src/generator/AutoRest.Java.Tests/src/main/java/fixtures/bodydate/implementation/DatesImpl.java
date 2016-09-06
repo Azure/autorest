@@ -94,10 +94,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getNull() throws ErrorException, IOException {
-        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -107,7 +107,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -116,12 +116,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getNullAsync() {
-        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -129,7 +129,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override
@@ -156,10 +156,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getInvalidDate() throws ErrorException, IOException {
-        return getInvalidDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getInvalidDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -169,7 +169,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getInvalidDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getInvalidDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -178,12 +178,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getInvalidDateAsync() {
-        return getInvalidDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getInvalidDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -191,7 +191,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getInvalidDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getInvalidDateWithServiceResponseAsync() {
         return service.getInvalidDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override
@@ -218,10 +218,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getOverflowDate() throws ErrorException, IOException {
-        return getOverflowDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getOverflowDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -231,7 +231,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getOverflowDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getOverflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -240,12 +240,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getOverflowDateAsync() {
-        return getOverflowDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getOverflowDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -253,7 +253,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getOverflowDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getOverflowDateWithServiceResponseAsync() {
         return service.getOverflowDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override
@@ -280,10 +280,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getUnderflowDate() throws ErrorException, IOException {
-        return getUnderflowDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getUnderflowDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -293,7 +293,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getUnderflowDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getUnderflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -302,12 +302,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getUnderflowDateAsync() {
-        return getUnderflowDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getUnderflowDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -315,7 +315,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getUnderflowDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getUnderflowDateWithServiceResponseAsync() {
         return service.getUnderflowDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override
@@ -344,10 +344,9 @@ public final class DatesImpl implements Dates {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putMaxDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException {
-        putMaxDateAsyncWithServiceResponse(dateBody).toBlocking().single().getBody();
+        putMaxDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
     }
 
     /**
@@ -358,7 +357,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMaxDateAsyncWithServiceResponse(dateBody), serviceCallback);
+        return ServiceCall.create(putMaxDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -368,12 +367,12 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMaxDateAsync(LocalDate dateBody) {
-        return putMaxDateAsyncWithServiceResponse(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putMaxDateWithServiceResponseAsync(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -382,7 +381,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMaxDateAsyncWithServiceResponse(LocalDate dateBody) {
+    public Observable<ServiceResponse<Void>> putMaxDateWithServiceResponseAsync(LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -412,10 +411,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getMaxDate() throws ErrorException, IOException {
-        return getMaxDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getMaxDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -425,7 +424,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getMaxDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getMaxDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -434,12 +433,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getMaxDateAsync() {
-        return getMaxDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getMaxDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -447,7 +446,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getMaxDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getMaxDateWithServiceResponseAsync() {
         return service.getMaxDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override
@@ -476,10 +475,9 @@ public final class DatesImpl implements Dates {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putMinDate(LocalDate dateBody) throws ErrorException, IOException, IllegalArgumentException {
-        putMinDateAsyncWithServiceResponse(dateBody).toBlocking().single().getBody();
+        putMinDateWithServiceResponseAsync(dateBody).toBlocking().single().getBody();
     }
 
     /**
@@ -490,7 +488,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putMinDateAsyncWithServiceResponse(dateBody), serviceCallback);
+        return ServiceCall.create(putMinDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -500,12 +498,12 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMinDateAsync(LocalDate dateBody) {
-        return putMinDateAsyncWithServiceResponse(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putMinDateWithServiceResponseAsync(dateBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -514,7 +512,7 @@ public final class DatesImpl implements Dates {
      * @param dateBody the LocalDate value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMinDateAsyncWithServiceResponse(LocalDate dateBody) {
+    public Observable<ServiceResponse<Void>> putMinDateWithServiceResponseAsync(LocalDate dateBody) {
         if (dateBody == null) {
             throw new IllegalArgumentException("Parameter dateBody is required and cannot be null.");
         }
@@ -544,10 +542,10 @@ public final class DatesImpl implements Dates {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the LocalDate object wrapped in {@link ServiceResponse} if successful.
+     * @return the LocalDate object if successful.
      */
     public LocalDate getMinDate() throws ErrorException, IOException {
-        return getMinDateAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getMinDateWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -557,7 +555,7 @@ public final class DatesImpl implements Dates {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.create(getMinDateAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getMinDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -566,12 +564,12 @@ public final class DatesImpl implements Dates {
      * @return the observable to the LocalDate object
      */
     public Observable<LocalDate> getMinDateAsync() {
-        return getMinDateAsyncWithServiceResponse().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
+        return getMinDateWithServiceResponseAsync().map(new Func1<ServiceResponse<LocalDate>, LocalDate>() {
             @Override
             public LocalDate call(ServiceResponse<LocalDate> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -579,7 +577,7 @@ public final class DatesImpl implements Dates {
      *
      * @return the observable to the LocalDate object
      */
-    public Observable<ServiceResponse<LocalDate>> getMinDateAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<LocalDate>> getMinDateWithServiceResponseAsync() {
         return service.getMinDate()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<LocalDate>>>() {
                 @Override

@@ -28,7 +28,7 @@ public interface Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
     Basic getValid() throws ErrorException, IOException;
 
@@ -52,7 +52,7 @@ public interface Basics {
      *
      * @return the observable to the Basic object
      */
-    Observable<ServiceResponse<Basic>> getValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Basic>> getValidWithServiceResponseAsync();
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -61,7 +61,6 @@ public interface Basics {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,14 +87,14 @@ public interface Basics {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Basic complexBody);
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Basic complexBody);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
     Basic getInvalid() throws ErrorException, IOException;
 
@@ -119,14 +118,14 @@ public interface Basics {
      *
      * @return the observable to the Basic object
      */
-    Observable<ServiceResponse<Basic>> getInvalidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Basic>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get a basic complex type that is empty.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
     Basic getEmpty() throws ErrorException, IOException;
 
@@ -150,14 +149,14 @@ public interface Basics {
      *
      * @return the observable to the Basic object
      */
-    Observable<ServiceResponse<Basic>> getEmptyAsyncWithServiceResponse();
+    Observable<ServiceResponse<Basic>> getEmptyWithServiceResponseAsync();
 
     /**
      * Get a basic complex type whose properties are null.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
     Basic getNull() throws ErrorException, IOException;
 
@@ -181,14 +180,14 @@ public interface Basics {
      *
      * @return the observable to the Basic object
      */
-    Observable<ServiceResponse<Basic>> getNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Basic>> getNullWithServiceResponseAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
     Basic getNotProvided() throws ErrorException, IOException;
 
@@ -212,6 +211,6 @@ public interface Basics {
      *
      * @return the observable to the Basic object
      */
-    Observable<ServiceResponse<Basic>> getNotProvidedAsyncWithServiceResponse();
+    Observable<ServiceResponse<Basic>> getNotProvidedWithServiceResponseAsync();
 
 }

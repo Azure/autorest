@@ -21,6 +21,22 @@ namespace AutoRest.Java.Azure.TypeModels
         {
         }
 
+        public override ITypeModel BodyClientType
+        {
+            get
+            {
+                var bodySequenceType = base.BodyClientType as AzureSequenceTypeModel;
+                if (bodySequenceType != null && (_method.IsPagingOperation || _method.IsPagingNextOperation))
+                {
+                    return new AzureSequenceTypeModel(new SequenceType { NameFormat = "PagedList<{0}>", ElementType = bodySequenceType.ElementType })
+                    {
+                        PageImplType = bodySequenceType.PageImplType
+                    };
+                }
+                return base.BodyClientType;
+            }
+        }
+
         public override string GenericBodyClientTypeString
         {
             get

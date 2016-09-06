@@ -2,7 +2,6 @@ package fixtures.azurespecials;
 
 import com.microsoft.azure.RequestIdHeaderInterceptor;
 import com.microsoft.azure.RestClient;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 
 import org.junit.Assert;
@@ -31,14 +30,13 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInMethods().postMethodLocalValid("1234-5678-9012-3456");
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInMethods().postMethodLocalValid("1234-5678-9012-3456");
     }
 
     @Test
     public void postMethodLocalNull() throws Exception {
         try {
-            ServiceResponse<Void> response = client.subscriptionInMethods().postMethodLocalNull(null);
+            client.subscriptionInMethods().postMethodLocalNull(null);
             fail();
         } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter subscriptionId is required"));
@@ -47,13 +45,11 @@ public class SubscriptionInMethodTests {
 
     @Test
     public void postPathLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInMethods().postPathLocalValid("1234-5678-9012-3456");
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInMethods().postPathLocalValid("1234-5678-9012-3456");
     }
 
     @Test
     public void postSwaggerLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInMethods().postSwaggerLocalValid("1234-5678-9012-3456");
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInMethods().postSwaggerLocalValid("1234-5678-9012-3456");
     }
 }

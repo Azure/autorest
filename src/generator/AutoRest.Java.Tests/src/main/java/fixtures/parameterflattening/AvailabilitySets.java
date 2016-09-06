@@ -32,7 +32,6 @@ public interface AvailabilitySets {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void update(String resourceGroupName, String avset, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException;
 
@@ -65,6 +64,6 @@ public interface AvailabilitySets {
      * @param tags A set of tags. A description about the set of tags.
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> updateAsyncWithServiceResponse(String resourceGroupName, String avset, Map<String, String> tags);
+    Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String resourceGroupName, String avset, Map<String, String> tags);
 
 }

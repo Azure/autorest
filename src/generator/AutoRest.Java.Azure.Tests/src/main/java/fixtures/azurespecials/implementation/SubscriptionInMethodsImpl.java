@@ -107,7 +107,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -176,7 +176,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -245,7 +245,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -314,7 +314,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

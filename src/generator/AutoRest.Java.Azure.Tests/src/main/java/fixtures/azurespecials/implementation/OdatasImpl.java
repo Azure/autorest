@@ -91,7 +91,7 @@ public final class OdatasImpl implements Odatas {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -127,7 +127,7 @@ public final class OdatasImpl implements Odatas {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException {
-        getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().getBody();
     }
 
     /**
@@ -146,6 +146,9 @@ public final class OdatasImpl implements Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
@@ -154,7 +157,7 @@ public final class OdatasImpl implements Odatas {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

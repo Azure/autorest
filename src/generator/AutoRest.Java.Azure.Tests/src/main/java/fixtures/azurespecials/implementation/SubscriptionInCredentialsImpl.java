@@ -109,7 +109,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -174,7 +174,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -239,7 +239,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -307,7 +307,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -372,7 +372,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

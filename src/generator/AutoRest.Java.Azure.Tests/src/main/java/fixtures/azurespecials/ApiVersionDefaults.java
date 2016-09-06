@@ -28,7 +28,6 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -52,7 +51,7 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -60,7 +59,6 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -84,7 +82,7 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -92,7 +90,6 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -116,7 +113,7 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getPathGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -124,7 +121,6 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -148,6 +144,6 @@ public interface ApiVersionDefaults {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getSwaggerGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync();
 
 }

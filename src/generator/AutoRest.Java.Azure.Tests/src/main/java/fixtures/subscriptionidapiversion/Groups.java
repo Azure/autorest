@@ -30,7 +30,7 @@ public interface Groups {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SampleResourceGroup object wrapped in {@link ServiceResponse} if successful.
+     * @return the SampleResourceGroup object if successful.
      */
     SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -57,6 +57,6 @@ public interface Groups {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @return the observable to the SampleResourceGroup object
      */
-    Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupAsyncWithServiceResponse(String resourceGroupName);
+    Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName);
 
 }

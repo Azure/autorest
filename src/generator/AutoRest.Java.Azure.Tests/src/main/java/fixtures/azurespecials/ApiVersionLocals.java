@@ -27,7 +27,6 @@ public interface ApiVersionLocals {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodLocalValid() throws ErrorException, IOException;
 
@@ -51,14 +50,13 @@ public interface ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodLocalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getMethodLocalValidWithServiceResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodLocalNull() throws ErrorException, IOException;
 
@@ -73,7 +71,6 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getMethodLocalNullAsync();
@@ -81,17 +78,15 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodLocalNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync();
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodLocalNull(String apiVersion) throws ErrorException, IOException;
 
@@ -118,14 +113,13 @@ public interface ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodLocalNullAsyncWithServiceResponse(String apiVersion);
+    Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getPathLocalValid() throws ErrorException, IOException;
 
@@ -149,14 +143,13 @@ public interface ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getPathLocalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getPathLocalValidWithServiceResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getSwaggerLocalValid() throws ErrorException, IOException;
 
@@ -180,6 +173,6 @@ public interface ApiVersionLocals {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getSwaggerLocalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getSwaggerLocalValidWithServiceResponseAsync();
 
 }

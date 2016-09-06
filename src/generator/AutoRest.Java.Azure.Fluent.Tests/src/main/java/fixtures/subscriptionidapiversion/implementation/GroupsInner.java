@@ -96,7 +96,7 @@ public final class GroupsInner {
             public SampleResourceGroupInner call(ServiceResponse<SampleResourceGroupInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

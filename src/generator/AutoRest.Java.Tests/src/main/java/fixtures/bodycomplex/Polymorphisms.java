@@ -28,7 +28,7 @@ public interface Polymorphisms {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Fish object wrapped in {@link ServiceResponse} if successful.
+     * @return the Fish object if successful.
      */
     Fish getValid() throws ErrorException, IOException;
 
@@ -52,7 +52,7 @@ public interface Polymorphisms {
      *
      * @return the observable to the Fish object
      */
-    Observable<ServiceResponse<Fish>> getValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Fish>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that are polymorphic.
@@ -93,7 +93,6 @@ public interface Polymorphisms {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -216,7 +215,7 @@ public interface Polymorphisms {
            };
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Fish complexBody);
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -250,7 +249,6 @@ public interface Polymorphisms {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValidMissingRequired(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -352,6 +350,6 @@ public interface Polymorphisms {
      }
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidMissingRequiredAsyncWithServiceResponse(Fish complexBody);
+    Observable<ServiceResponse<Void>> putValidMissingRequiredWithServiceResponseAsync(Fish complexBody);
 
 }

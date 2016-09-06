@@ -85,10 +85,10 @@ public final class BoolsImpl implements Bools {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getTrue() throws ErrorException, IOException {
-        return getTrueAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -98,7 +98,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getTrueAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -107,12 +107,12 @@ public final class BoolsImpl implements Bools {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getTrueAsync() {
-        return getTrueAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -120,7 +120,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getTrueAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync() {
         return service.getTrue()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -148,10 +148,9 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putTrue(boolean boolBody) throws ErrorException, IOException {
-        putTrueAsyncWithServiceResponse(boolBody).toBlocking().single().getBody();
+        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
     }
 
     /**
@@ -162,7 +161,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putTrueAsyncWithServiceResponse(boolBody), serviceCallback);
+        return ServiceCall.create(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -172,12 +171,12 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putTrueAsync(boolean boolBody) {
-        return putTrueAsyncWithServiceResponse(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putTrueWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -186,7 +185,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putTrueAsyncWithServiceResponse(boolean boolBody) {
+    public Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody) {
         return service.putTrue(boolBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -213,10 +212,10 @@ public final class BoolsImpl implements Bools {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getFalse() throws ErrorException, IOException {
-        return getFalseAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -226,7 +225,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getFalseAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -235,12 +234,12 @@ public final class BoolsImpl implements Bools {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getFalseAsync() {
-        return getFalseAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -248,7 +247,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getFalseAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync() {
         return service.getFalse()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -276,10 +275,9 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void putFalse(boolean boolBody) throws ErrorException, IOException {
-        putFalseAsyncWithServiceResponse(boolBody).toBlocking().single().getBody();
+        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
     }
 
     /**
@@ -290,7 +288,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFalseAsyncWithServiceResponse(boolBody), serviceCallback);
+        return ServiceCall.create(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -300,12 +298,12 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putFalseAsync(boolean boolBody) {
-        return putFalseAsyncWithServiceResponse(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
+        return putFalseWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -314,7 +312,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putFalseAsyncWithServiceResponse(boolean boolBody) {
+    public Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody) {
         return service.putFalse(boolBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -341,10 +339,10 @@ public final class BoolsImpl implements Bools {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getNull() throws ErrorException, IOException {
-        return getNullAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -354,7 +352,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNullAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -363,12 +361,12 @@ public final class BoolsImpl implements Bools {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getNullAsync() {
-        return getNullAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -376,7 +374,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getNullAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override
@@ -403,10 +401,10 @@ public final class BoolsImpl implements Bools {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     public boolean getInvalid() throws ErrorException, IOException {
-        return getInvalidAsyncWithServiceResponse().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -416,7 +414,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getInvalidAsyncWithServiceResponse(), serviceCallback);
+        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -425,12 +423,12 @@ public final class BoolsImpl implements Bools {
      * @return the observable to the boolean object
      */
     public Observable<Boolean> getInvalidAsync() {
-        return getInvalidAsyncWithServiceResponse().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
+        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -438,7 +436,7 @@ public final class BoolsImpl implements Bools {
      *
      * @return the observable to the boolean object
      */
-    public Observable<ServiceResponse<Boolean>> getInvalidAsyncWithServiceResponse() {
+    public Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
                 @Override

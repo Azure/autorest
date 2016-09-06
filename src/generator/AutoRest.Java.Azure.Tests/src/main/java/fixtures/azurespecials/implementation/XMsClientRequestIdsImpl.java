@@ -95,7 +95,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -159,7 +159,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

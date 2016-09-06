@@ -146,9 +146,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getSinglePages() throws CloudException, IOException {
+    public PagedList<Product> getSinglePages() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getSinglePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -179,7 +179,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getSinglePagesAsync() {
         return getSinglePagesWithServiceResponseAsync()
@@ -191,15 +191,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getSinglePagesAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesWithServiceResponseAsync() {
         return getSinglePagesSinglePageAsync()
@@ -218,7 +213,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesSinglePageAsync() {
         return service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent())
@@ -247,9 +242,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePages() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePages() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -280,7 +275,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesAsync() {
         return getMultiplePagesWithServiceResponseAsync()
@@ -292,15 +287,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithServiceResponseAsync() {
         return getMultiplePagesSinglePageAsync()
@@ -319,7 +309,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
@@ -347,9 +337,9 @@ public final class PagingsImpl implements Pagings {
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
+    public PagedList<Product> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -384,7 +374,7 @@ public final class PagingsImpl implements Pagings {
      *
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return getMultiplePagesWithServiceResponseAsync(clientRequestId, pagingGetMultiplePagesOptions)
@@ -396,17 +386,12 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesAsyncWithServiceResponse(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithServiceResponseAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions)
@@ -427,7 +412,7 @@ public final class PagingsImpl implements Pagings {
      *
     ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
     ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         Validator.validate(pagingGetMultiplePagesOptions);
@@ -465,9 +450,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getOdataMultiplePages() throws CloudException, IOException {
+    public PagedList<Product> getOdataMultiplePages() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -498,7 +483,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getOdataMultiplePagesAsync() {
         return getOdataMultiplePagesWithServiceResponseAsync()
@@ -510,15 +495,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesWithServiceResponseAsync() {
         return getOdataMultiplePagesSinglePageAsync()
@@ -537,7 +517,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
@@ -565,9 +545,9 @@ public final class PagingsImpl implements Pagings {
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException {
+    public PagedList<Product> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -602,7 +582,7 @@ public final class PagingsImpl implements Pagings {
      *
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesWithServiceResponseAsync(clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -614,17 +594,12 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesAsyncWithServiceResponse(String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesWithServiceResponseAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -645,7 +620,7 @@ public final class PagingsImpl implements Pagings {
      *
     ServiceResponse<PageImpl1<Product>> * @param clientRequestId the String value
     ServiceResponse<PageImpl1<Product>> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         Validator.validate(pagingGetOdataMultiplePagesOptions);
@@ -685,9 +660,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -726,7 +701,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
         return getMultiplePagesWithOffsetWithServiceResponseAsync(pagingGetMultiplePagesWithOffsetOptions)
@@ -738,16 +713,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetAsyncWithServiceResponse(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetWithServiceResponseAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions)
@@ -770,7 +740,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetSinglePageAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
@@ -803,9 +773,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -846,7 +816,7 @@ public final class PagingsImpl implements Pagings {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         return getMultiplePagesWithOffsetWithServiceResponseAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId)
@@ -858,17 +828,12 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetAsyncWithServiceResponse(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, String clientRequestId) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetWithServiceResponseAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId)
@@ -892,7 +857,7 @@ public final class PagingsImpl implements Pagings {
      *
     ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
     ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetSinglePageAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
@@ -928,9 +893,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesRetryFirst() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesRetryFirst() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -961,7 +926,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesRetryFirstAsync() {
         return getMultiplePagesRetryFirstWithServiceResponseAsync()
@@ -973,15 +938,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstWithServiceResponseAsync() {
         return getMultiplePagesRetryFirstSinglePageAsync()
@@ -1000,7 +960,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstSinglePageAsync() {
         return service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent())
@@ -1029,9 +989,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesRetrySecond() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesRetrySecond() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1062,7 +1022,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesRetrySecondAsync() {
         return getMultiplePagesRetrySecondWithServiceResponseAsync()
@@ -1074,15 +1034,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondWithServiceResponseAsync() {
         return getMultiplePagesRetrySecondSinglePageAsync()
@@ -1101,7 +1056,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondSinglePageAsync() {
         return service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent())
@@ -1130,9 +1085,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getSinglePagesFailure() throws CloudException, IOException {
+    public PagedList<Product> getSinglePagesFailure() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1163,7 +1118,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getSinglePagesFailureAsync() {
         return getSinglePagesFailureWithServiceResponseAsync()
@@ -1175,15 +1130,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureWithServiceResponseAsync() {
         return getSinglePagesFailureSinglePageAsync()
@@ -1202,7 +1152,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureSinglePageAsync() {
         return service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent())
@@ -1231,9 +1181,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesFailure() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesFailure() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1264,7 +1214,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesFailureAsync() {
         return getMultiplePagesFailureWithServiceResponseAsync()
@@ -1276,15 +1226,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureWithServiceResponseAsync() {
         return getMultiplePagesFailureSinglePageAsync()
@@ -1303,7 +1248,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureSinglePageAsync() {
         return service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent())
@@ -1332,9 +1277,9 @@ public final class PagingsImpl implements Pagings {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesFailureUri() throws CloudException, IOException {
+    public PagedList<Product> getMultiplePagesFailureUri() throws CloudException, IOException {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriSinglePageAsync().toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1365,7 +1310,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesFailureUriAsync() {
         return getMultiplePagesFailureUriWithServiceResponseAsync()
@@ -1377,15 +1322,10 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriAsyncWithServiceResponse() {
-        return null;
-    }
-
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriWithServiceResponseAsync() {
         return getMultiplePagesFailureUriSinglePageAsync()
@@ -1404,7 +1344,7 @@ public final class PagingsImpl implements Pagings {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriSinglePageAsync() {
         return service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent())
@@ -1435,9 +1375,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getSinglePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getSinglePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getSinglePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1471,7 +1411,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getSinglePagesNextAsync(final String nextPageLink) {
         return getSinglePagesNextWithServiceResponseAsync(nextPageLink)
@@ -1483,16 +1423,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getSinglePagesNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesNextWithServiceResponseAsync(final String nextPageLink) {
         return getSinglePagesNextSinglePageAsync(nextPageLink)
@@ -1512,7 +1447,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that finishes on the first call without a nextlink.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1546,9 +1481,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1582,7 +1517,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink) {
         return getMultiplePagesNextWithServiceResponseAsync(nextPageLink)
@@ -1594,16 +1529,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesNextSinglePageAsync(nextPageLink)
@@ -1623,7 +1553,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1656,9 +1586,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1696,7 +1626,7 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return getMultiplePagesNextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions)
@@ -1708,18 +1638,13 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextAsyncWithServiceResponse(String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextWithServiceResponseAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions)
@@ -1741,7 +1666,7 @@ public final class PagingsImpl implements Pagings {
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
     ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
     ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) {
         if (nextPageLink == null) {
@@ -1784,9 +1709,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getOdataMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1820,7 +1745,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink) {
         return getOdataMultiplePagesNextWithServiceResponseAsync(nextPageLink)
@@ -1832,16 +1757,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextWithServiceResponseAsync(final String nextPageLink) {
         return getOdataMultiplePagesNextSinglePageAsync(nextPageLink)
@@ -1861,7 +1781,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1894,9 +1814,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -1934,7 +1854,7 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesNextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -1946,18 +1866,13 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextAsyncWithServiceResponse(String nextPageLink, String clientRequestId, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextWithServiceResponseAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -1979,7 +1894,7 @@ public final class PagingsImpl implements Pagings {
     ServiceResponse<PageImpl1<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
     ServiceResponse<PageImpl1<Product>> * @param clientRequestId the String value
     ServiceResponse<PageImpl1<Product>> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getOdataMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions) {
         if (nextPageLink == null) {
@@ -2022,9 +1937,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesWithOffsetNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2058,7 +1973,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink) {
         return getMultiplePagesWithOffsetNextWithServiceResponseAsync(nextPageLink)
@@ -2070,16 +1985,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink)
@@ -2099,7 +2009,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -2132,9 +2042,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2172,7 +2082,7 @@ public final class PagingsImpl implements Pagings {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
         return getMultiplePagesWithOffsetNextWithServiceResponseAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions)
@@ -2184,18 +2094,13 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextAsyncWithServiceResponse(String nextPageLink, String clientRequestId, PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextWithServiceResponseAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
         return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions)
@@ -2217,7 +2122,7 @@ public final class PagingsImpl implements Pagings {
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
     ServiceResponse<PageImpl<Product>> * @param clientRequestId the String value
     ServiceResponse<PageImpl<Product>> * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesWithOffsetNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) {
         if (nextPageLink == null) {
@@ -2260,9 +2165,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesRetryFirstNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesRetryFirstNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2296,7 +2201,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink) {
         return getMultiplePagesRetryFirstNextWithServiceResponseAsync(nextPageLink)
@@ -2308,16 +2213,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink)
@@ -2337,7 +2237,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetryFirstNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -2371,9 +2271,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesRetrySecondNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesRetrySecondNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2407,7 +2307,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink) {
         return getMultiplePagesRetrySecondNextWithServiceResponseAsync(nextPageLink)
@@ -2419,16 +2319,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink)
@@ -2448,7 +2343,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesRetrySecondNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -2482,9 +2377,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getSinglePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getSinglePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getSinglePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2518,7 +2413,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getSinglePagesFailureNextAsync(final String nextPageLink) {
         return getSinglePagesFailureNextWithServiceResponseAsync(nextPageLink)
@@ -2530,16 +2425,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureNextWithServiceResponseAsync(final String nextPageLink) {
         return getSinglePagesFailureNextSinglePageAsync(nextPageLink)
@@ -2559,7 +2449,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the first call.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getSinglePagesFailureNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -2593,9 +2483,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2629,7 +2519,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureNextWithServiceResponseAsync(nextPageLink)
@@ -2641,16 +2531,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesFailureNextSinglePageAsync(nextPageLink)
@@ -2670,7 +2555,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives a 400 on the second call.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -2704,9 +2589,9 @@ public final class PagingsImpl implements Pagings {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object if successful.
+     * @return the PagedList&lt;Product&gt; object if successful.
      */
-    public List<Product> getMultiplePagesFailureUriNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public PagedList<Product> getMultiplePagesFailureUriNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         ServiceResponse<Page<Product>> response = getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).toBlocking().single();
         return new PagedList<Product>(response.getBody()) {
             @Override
@@ -2740,7 +2625,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<Page<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureUriNextWithServiceResponseAsync(nextPageLink)
@@ -2752,16 +2637,11 @@ public final class PagingsImpl implements Pagings {
             });
     }
 
-    @Override
-    public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriNextAsyncWithServiceResponse(String nextPageLink) {
-        return null;
-    }
-
     /**
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the observable to the List&lt;Product&gt; object
+     * @return the observable to the PagedList&lt;Product&gt; object
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriNextWithServiceResponseAsync(final String nextPageLink) {
         return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink)
@@ -2781,7 +2661,7 @@ public final class PagingsImpl implements Pagings {
      * A paging operation that receives an invalid nextLink.
      *
     ServiceResponse<PageImpl<Product>> * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     public Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {

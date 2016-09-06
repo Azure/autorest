@@ -72,10 +72,9 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) throws ServiceException, IOException, IllegalArgumentException {
-        updateAsyncWithServiceResponse(resourceGroupName, avset, tags).toBlocking().single().getBody();
+        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().getBody();
     }
 
     /**
@@ -88,7 +87,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(updateAsyncWithServiceResponse(resourceGroupName, avset, tags), serviceCallback);
+        return ServiceCall.create(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**
@@ -100,12 +99,12 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
-        return updateAsyncWithServiceResponse(resourceGroupName, avset, tags).map(new Func1<ServiceResponse<Void>, Void>() {
+        return updateWithServiceResponseAsync(resourceGroupName, avset, tags).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -116,7 +115,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param tags A set of tags. A description about the set of tags.
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> updateAsyncWithServiceResponse(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }

@@ -170,11 +170,11 @@ public Observable<@Model.ReturnTypeModel.ClientResponseTypeString> @(Model.Name)
 public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @if (@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().getBody();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().getBody();
 }
 }
 @EmptyLine

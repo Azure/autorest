@@ -28,7 +28,7 @@ public interface Inheritances {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Siamese object wrapped in {@link ServiceResponse} if successful.
+     * @return the Siamese object if successful.
      */
     Siamese getValid() throws ErrorException, IOException;
 
@@ -52,7 +52,7 @@ public interface Inheritances {
      *
      * @return the observable to the Siamese object
      */
-    Observable<ServiceResponse<Siamese>> getValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Siamese>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that extend others.
@@ -61,7 +61,6 @@ public interface Inheritances {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,6 +87,6 @@ public interface Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(Siamese complexBody);
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Siamese complexBody);
 
 }

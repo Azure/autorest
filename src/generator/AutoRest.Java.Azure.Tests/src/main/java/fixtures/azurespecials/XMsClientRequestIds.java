@@ -28,7 +28,6 @@ public interface XMsClientRequestIds {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void get() throws CloudException, IOException;
 
@@ -52,7 +51,7 @@ public interface XMsClientRequestIds {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getWithServiceResponseAsync();
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -61,7 +60,6 @@ public interface XMsClientRequestIds {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,6 +86,6 @@ public interface XMsClientRequestIds {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> paramGetAsyncWithServiceResponse(String xMsClientRequestId);
+    Observable<ServiceResponse<Void>> paramGetWithServiceResponseAsync(String xMsClientRequestId);
 
 }

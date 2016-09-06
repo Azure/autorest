@@ -98,7 +98,7 @@ public final class GroupsImpl implements Groups {
             public SampleResourceGroup call(ServiceResponse<SampleResourceGroup> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

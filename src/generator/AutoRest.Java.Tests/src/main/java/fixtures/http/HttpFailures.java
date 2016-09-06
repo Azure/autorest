@@ -28,7 +28,7 @@ public interface HttpFailures {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getEmptyError() throws ErrorException, IOException;
 
@@ -52,14 +52,14 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getEmptyErrorAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync();
 
     /**
      * Get empty error form server.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getNoModelError() throws ServiceException, IOException;
 
@@ -83,14 +83,14 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getNoModelErrorAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync();
 
     /**
      * Get empty response from server.
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
     boolean getNoModelEmpty() throws ServiceException, IOException;
 
@@ -114,6 +114,6 @@ public interface HttpFailures {
      *
      * @return the observable to the boolean object
      */
-    Observable<ServiceResponse<Boolean>> getNoModelEmptyAsyncWithServiceResponse();
+    Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync();
 
 }

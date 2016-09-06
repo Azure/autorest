@@ -71,10 +71,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException {
-        getEmptyAsyncWithServiceResponse(vault, secret, keyName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().getBody();
     }
 
     /**
@@ -87,7 +86,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyAsyncWithServiceResponse(vault, secret, keyName), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
     }
 
     /**
@@ -99,12 +98,12 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getEmptyAsync(String vault, String secret, String keyName) {
-        return getEmptyAsyncWithServiceResponse(vault, secret, keyName).map(new Func1<ServiceResponse<Void>, Void>() {
+        return getEmptyWithServiceResponseAsync(vault, secret, keyName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -115,7 +114,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getEmptyAsyncWithServiceResponse(String vault, String secret, String keyName) {
+    public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -157,10 +156,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException {
-        getEmptyAsyncWithServiceResponse(vault, secret, keyName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().getBody();
     }
 
     /**
@@ -174,24 +172,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyAsyncWithServiceResponse(vault, secret, keyName, keyVersion), serviceCallback);
-    }
-
-    /**
-     * Get a 200 to test a valid base uri.
-     *
-     * @param vault The vault name, e.g. https://myvault
-     * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
-        return getEmptyAsyncWithServiceResponse(vault, secret, keyName, keyVersion).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
-            }
-        }); 
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
     /**
@@ -203,7 +184,25 @@ public final class PathsImpl implements Paths {
      * @param keyVersion The key version. Default value 'v1'.
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getEmptyAsyncWithServiceResponse(String vault, String secret, String keyName, String keyVersion) {
+    public Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+        return getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }

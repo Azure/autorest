@@ -28,7 +28,6 @@ public interface SubscriptionInCredentials {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -52,7 +51,7 @@ public interface SubscriptionInCredentials {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postMethodGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postMethodGlobalValidWithServiceResponseAsync();
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
@@ -60,7 +59,6 @@ public interface SubscriptionInCredentials {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postMethodGlobalNull() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -84,7 +82,7 @@ public interface SubscriptionInCredentials {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postMethodGlobalNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postMethodGlobalNullWithServiceResponseAsync();
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -92,7 +90,6 @@ public interface SubscriptionInCredentials {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -116,7 +113,7 @@ public interface SubscriptionInCredentials {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postMethodGlobalNotProvidedValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postMethodGlobalNotProvidedValidWithServiceResponseAsync();
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -124,7 +121,6 @@ public interface SubscriptionInCredentials {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -148,7 +144,7 @@ public interface SubscriptionInCredentials {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postPathGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postPathGlobalValidWithServiceResponseAsync();
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -156,7 +152,6 @@ public interface SubscriptionInCredentials {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void postSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
@@ -180,6 +175,6 @@ public interface SubscriptionInCredentials {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> postSwaggerGlobalValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> postSwaggerGlobalValidWithServiceResponseAsync();
 
 }

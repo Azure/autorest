@@ -1,7 +1,5 @@
 package fixtures.lro;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,52 +21,45 @@ public class LRORetrysTests {
     public void put201CreatingSucceeded200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<ProductInner> response = client.lRORetrys().put201CreatingSucceeded200(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        ProductInner response = client.lRORetrys().put201CreatingSucceeded200(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void putAsyncRelativeRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<ProductInner> response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        ProductInner response = client.lRORetrys().putAsyncRelativeRetrySucceeded(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void deleteProvisioning202Accepted200Succeeded() throws Exception {
-        ServiceResponse<ProductInner> response = client.lRORetrys().deleteProvisioning202Accepted200Succeeded();
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        ProductInner response = client.lRORetrys().deleteProvisioning202Accepted200Succeeded();
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void delete202Retry200() throws Exception {
-        ServiceResponse<Void> response = client.lRORetrys().delete202Retry200();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lRORetrys().delete202Retry200();
     }
 
     @Test
     public void deleteAsyncRelativeRetrySucceeded() throws Exception {
-        ServiceResponse<Void> response = client.lRORetrys().deleteAsyncRelativeRetrySucceeded();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lRORetrys().deleteAsyncRelativeRetrySucceeded();
     }
 
     @Test
     public void post202Retry200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lRORetrys().post202Retry200(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lRORetrys().post202Retry200(product);
     }
 
     @Test
     public void postAsyncRelativeRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lRORetrys().postAsyncRelativeRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lRORetrys().postAsyncRelativeRetrySucceeded(product);
     }
 }

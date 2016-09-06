@@ -119,7 +119,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -188,7 +188,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -253,7 +253,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -319,7 +319,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -384,7 +384,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -416,7 +416,7 @@ public final class SkipUrlEncodingsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void getMethodQueryNull(String q1) throws ErrorException, IOException {
-        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().getBody();
     }
 
     /**
@@ -433,6 +433,7 @@ public final class SkipUrlEncodingsInner {
     /**
      * Get method with unencoded query parameter with value null.
      *
+     * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getMethodQueryNullAsync(String q1) {
@@ -441,7 +442,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -507,7 +508,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -572,7 +573,7 @@ public final class SkipUrlEncodingsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

@@ -95,7 +95,7 @@ public final class PathsImpl implements Paths {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

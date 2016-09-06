@@ -97,7 +97,7 @@ public final class HttpSuccessInner {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -160,7 +160,7 @@ public final class HttpSuccessInner {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -223,7 +223,7 @@ public final class HttpSuccessInner {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

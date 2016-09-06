@@ -27,7 +27,6 @@ public interface HeadExceptions {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void head200() throws CloudException, IOException;
 
@@ -51,14 +50,13 @@ public interface HeadExceptions {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> head200AsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> head200WithServiceResponseAsync();
 
     /**
      * Return 204 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void head204() throws CloudException, IOException;
 
@@ -82,14 +80,13 @@ public interface HeadExceptions {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> head204AsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> head204WithServiceResponseAsync();
 
     /**
      * Return 404 status code if successful.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void head404() throws CloudException, IOException;
 
@@ -113,6 +110,6 @@ public interface HeadExceptions {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> head404AsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> head404WithServiceResponseAsync();
 
 }

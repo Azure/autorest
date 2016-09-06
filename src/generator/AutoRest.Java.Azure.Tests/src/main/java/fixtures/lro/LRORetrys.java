@@ -36,7 +36,7 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException;
 
@@ -51,7 +51,6 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
     Observable<Product> put201CreatingSucceeded200Async();
@@ -59,10 +58,9 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> put201CreatingSucceeded200AsyncWithServiceResponse();
+    Observable<ServiceResponse<Product>> put201CreatingSucceeded200WithServiceResponseAsync();
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -70,7 +68,7 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -97,14 +95,14 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> put201CreatingSucceeded200AsyncWithServiceResponse(Product product);
+    Observable<ServiceResponse<Product>> put201CreatingSucceeded200WithServiceResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product beginPut201CreatingSucceeded200() throws CloudException, IOException;
 
@@ -119,7 +117,6 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
     Observable<Product> beginPut201CreatingSucceeded200Async();
@@ -127,17 +124,16 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200AsyncWithServiceResponse();
+    Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200WithServiceResponseAsync();
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException;
 
@@ -164,7 +160,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200AsyncWithServiceResponse(Product product);
+    Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200WithServiceResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -172,7 +168,7 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -187,7 +183,6 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
     Observable<Product> putAsyncRelativeRetrySucceededAsync();
@@ -195,10 +190,9 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededWithServiceResponseAsync();
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -206,7 +200,7 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -233,14 +227,14 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededAsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException;
 
@@ -255,7 +249,6 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
     Observable<Product> beginPutAsyncRelativeRetrySucceededAsync();
@@ -263,17 +256,16 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync();
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product beginPutAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -300,7 +292,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededAsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product);
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -308,7 +300,7 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException;
 
@@ -332,14 +324,14 @@ public interface LRORetrys {
      *
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync();
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the Product object if successful.
      */
     Product beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException;
 
@@ -363,7 +355,7 @@ public interface LRORetrys {
      *
      * @return the observable to the Product object
      */
-    Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync();
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -371,7 +363,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void delete202Retry200() throws CloudException, IOException, InterruptedException;
 
@@ -395,14 +386,13 @@ public interface LRORetrys {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> delete202Retry200AsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> delete202Retry200WithServiceResponseAsync();
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginDelete202Retry200() throws CloudException, IOException;
 
@@ -426,7 +416,7 @@ public interface LRORetrys {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> beginDelete202Retry200AsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> beginDelete202Retry200WithServiceResponseAsync();
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -434,7 +424,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -458,14 +447,13 @@ public interface LRORetrys {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> deleteAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> deleteAsyncRelativeRetrySucceededWithServiceResponseAsync();
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException;
 
@@ -489,7 +477,7 @@ public interface LRORetrys {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> beginDeleteAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync();
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -497,7 +485,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void post202Retry200() throws CloudException, IOException, InterruptedException;
 
@@ -512,7 +499,6 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> post202Retry200Async();
@@ -520,10 +506,9 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200AsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync();
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -531,7 +516,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void post202Retry200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -558,14 +542,13 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200AsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginPost202Retry200() throws CloudException, IOException;
 
@@ -580,7 +563,6 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> beginPost202Retry200Async();
@@ -588,17 +570,15 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200AsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync();
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginPost202Retry200(Product product) throws CloudException, IOException;
 
@@ -625,7 +605,7 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200AsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -633,7 +613,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -648,7 +627,6 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> postAsyncRelativeRetrySucceededAsync();
@@ -656,10 +634,9 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync();
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -667,7 +644,6 @@ public interface LRORetrys {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -694,14 +670,13 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededAsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException;
 
@@ -716,7 +691,6 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> beginPostAsyncRelativeRetrySucceededAsync();
@@ -724,17 +698,15 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededAsyncWithServiceResponse();
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync();
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     void beginPostAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -761,6 +733,6 @@ public interface LRORetrys {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededAsyncWithServiceResponse(Product product);
+    Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product);
 
 }

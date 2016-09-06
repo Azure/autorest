@@ -66,7 +66,7 @@ public interface AutoRestValidationTest {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -96,7 +96,7 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> validationOfMethodParametersAsyncWithServiceResponse(String resourceGroupName, int id);
+    Observable<ServiceResponse<Product>> validationOfMethodParametersWithServiceResponseAsync(String resourceGroupName, int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -106,7 +106,7 @@ public interface AutoRestValidationTest {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product validationOfBody(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -125,7 +125,6 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @param body the Product value
      * @return the observable to the Product object
      */
     Observable<Product> validationOfBodyAsync(String resourceGroupName, int id);
@@ -135,10 +134,9 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @param body the Product value
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> validationOfBodyAsyncWithServiceResponse(String resourceGroupName, int id);
+    Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id);
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -148,7 +146,7 @@ public interface AutoRestValidationTest {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -181,13 +179,12 @@ public interface AutoRestValidationTest {
      * @param body the Product value
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> validationOfBodyAsyncWithServiceResponse(String resourceGroupName, int id, Product body);
+    Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id, Product body);
 
     /**
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getWithConstantInPath() throws ServiceException, IOException;
 
@@ -208,13 +205,13 @@ public interface AutoRestValidationTest {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getWithConstantInPathAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getWithConstantInPathWithServiceResponseAsync();
 
     /**
      *
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product postWithConstantInBody() throws ServiceException, IOException;
 
@@ -227,23 +224,21 @@ public interface AutoRestValidationTest {
 
     /**
      *
-     * @param body the Product value
      * @return the observable to the Product object
      */
     Observable<Product> postWithConstantInBodyAsync();
 
     /**
      *
-     * @param body the Product value
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> postWithConstantInBodyAsyncWithServiceResponse();
+    Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync();
     /**
      *
      * @param body the Product value
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in {@link ServiceResponse} if successful.
+     * @return the Product object if successful.
      */
     Product postWithConstantInBody(Product body) throws ServiceException, IOException;
 
@@ -267,6 +262,6 @@ public interface AutoRestValidationTest {
      * @param body the Product value
      * @return the observable to the Product object
      */
-    Observable<ServiceResponse<Product>> postWithConstantInBodyAsyncWithServiceResponse(Product body);
+    Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync(Product body);
 
 }

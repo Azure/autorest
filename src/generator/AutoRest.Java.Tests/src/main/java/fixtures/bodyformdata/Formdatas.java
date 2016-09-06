@@ -31,7 +31,7 @@ public interface Formdatas {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     InputStream uploadFile(byte[] fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -61,7 +61,7 @@ public interface Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> uploadFileAsyncWithServiceResponse(byte[] fileContent, String fileName);
+    Observable<ServiceResponse<InputStream>> uploadFileWithServiceResponseAsync(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -70,7 +70,7 @@ public interface Formdatas {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
     InputStream uploadFileViaBody(byte[] fileContent) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -97,6 +97,6 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @return the observable to the InputStream object
      */
-    Observable<ServiceResponse<InputStream>> uploadFileViaBodyAsyncWithServiceResponse(byte[] fileContent);
+    Observable<ServiceResponse<InputStream>> uploadFileViaBodyWithServiceResponseAsync(byte[] fileContent);
 
 }

@@ -28,7 +28,7 @@ public interface Readonlypropertys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ReadonlyObj object wrapped in {@link ServiceResponse} if successful.
+     * @return the ReadonlyObj object if successful.
      */
     ReadonlyObj getValid() throws ErrorException, IOException;
 
@@ -52,7 +52,7 @@ public interface Readonlypropertys {
      *
      * @return the observable to the ReadonlyObj object
      */
-    Observable<ServiceResponse<ReadonlyObj>> getValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that have readonly properties.
@@ -61,7 +61,6 @@ public interface Readonlypropertys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,6 +87,6 @@ public interface Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsyncWithServiceResponse(ReadonlyObj complexBody);
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody);
 
 }

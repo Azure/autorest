@@ -28,7 +28,7 @@ public interface HttpServerFailures {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error head501() throws ErrorException, IOException;
 
@@ -52,14 +52,14 @@ public interface HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> head501AsyncWithServiceResponse();
+    Observable<ServiceResponse<Error>> head501WithServiceResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error get501() throws ErrorException, IOException;
 
@@ -83,14 +83,14 @@ public interface HttpServerFailures {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> get501AsyncWithServiceResponse();
+    Observable<ServiceResponse<Error>> get501WithServiceResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error post505() throws ErrorException, IOException;
 
@@ -105,7 +105,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
     Observable<Error> post505Async();
@@ -113,17 +112,16 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> post505AsyncWithServiceResponse();
+    Observable<ServiceResponse<Error>> post505WithServiceResponseAsync();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error post505(Boolean booleanValue) throws ErrorException, IOException;
 
@@ -150,14 +148,14 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> post505AsyncWithServiceResponse(Boolean booleanValue);
+    Observable<ServiceResponse<Error>> post505WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error delete505() throws ErrorException, IOException;
 
@@ -172,7 +170,6 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
     Observable<Error> delete505Async();
@@ -180,17 +177,16 @@ public interface HttpServerFailures {
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
-     * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> delete505AsyncWithServiceResponse();
+    Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
     Error delete505(Boolean booleanValue) throws ErrorException, IOException;
 
@@ -217,6 +213,6 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> delete505AsyncWithServiceResponse(Boolean booleanValue);
+    Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync(Boolean booleanValue);
 
 }

@@ -1,7 +1,5 @@
 package fixtures.bodyfile;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -31,11 +29,11 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = client.files().getFileAsync()
-                .map(new Func1<ServiceResponse<InputStream>, byte[]>() {
+                .map(new Func1<InputStream, byte[]>() {
                     @Override
-                    public byte[] call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                    public byte[] call(InputStream inputStreamServiceResponse) {
                         try {
-                            return IOUtils.toByteArray(inputStreamServiceResponse.getBody());
+                            return IOUtils.toByteArray(inputStreamServiceResponse);
                         } catch (IOException e) {
                             throw Exceptions.propagate(e);
                         }
@@ -50,11 +48,11 @@ public class FilesTests {
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         long skipped = client.files().getFileLargeAsync()
-            .map(new Func1<ServiceResponse<InputStream>, Long>() {
+            .map(new Func1<InputStream, Long>() {
                 @Override
-                public Long call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                public Long call(InputStream inputStreamServiceResponse) {
                     try {
-                        return inputStreamServiceResponse.getBody().skip(streamSize);
+                        return inputStreamServiceResponse.skip(streamSize);
                     } catch (IOException e) {
                         throw Exceptions.propagate(e);
                     }
@@ -65,7 +63,7 @@ public class FilesTests {
 
     @Test
     public void getEmptyFile() throws Exception {
-        try (InputStream result = client.files().getEmptyFile().getBody()) {
+        try (InputStream result = client.files().getEmptyFile()) {
             byte[] actual = IOUtils.toByteArray(result);
             Assert.assertEquals(0, actual.length);
         }

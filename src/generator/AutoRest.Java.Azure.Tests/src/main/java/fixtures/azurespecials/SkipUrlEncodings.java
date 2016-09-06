@@ -29,7 +29,6 @@ public interface SkipUrlEncodings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -56,7 +55,7 @@ public interface SkipUrlEncodings {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodPathValidAsyncWithServiceResponse(String unencodedPathParam);
+    Observable<ServiceResponse<Void>> getMethodPathValidWithServiceResponseAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -65,7 +64,6 @@ public interface SkipUrlEncodings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getPathPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -92,14 +90,13 @@ public interface SkipUrlEncodings {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getPathPathValidAsyncWithServiceResponse(String unencodedPathParam);
+    Observable<ServiceResponse<Void>> getPathPathValidWithServiceResponseAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getSwaggerPathValid() throws ErrorException, IOException;
 
@@ -123,7 +120,7 @@ public interface SkipUrlEncodings {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getSwaggerPathValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getSwaggerPathValidWithServiceResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -132,7 +129,6 @@ public interface SkipUrlEncodings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -159,14 +155,13 @@ public interface SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodQueryValidAsyncWithServiceResponse(String q1);
+    Observable<ServiceResponse<Void>> getMethodQueryValidWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodQueryNull() throws ErrorException, IOException;
 
@@ -181,7 +176,6 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getMethodQueryNullAsync();
@@ -189,17 +183,15 @@ public interface SkipUrlEncodings {
     /**
      * Get method with unencoded query parameter with value null.
      *
-     * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodQueryNullAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync();
     /**
      * Get method with unencoded query parameter with value null.
      *
      * @param q1 Unencoded query parameter with value null
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getMethodQueryNull(String q1) throws ErrorException, IOException;
 
@@ -226,7 +218,7 @@ public interface SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getMethodQueryNullAsyncWithServiceResponse(String q1);
+    Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -235,7 +227,6 @@ public interface SkipUrlEncodings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getPathQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -262,14 +253,13 @@ public interface SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getPathQueryValidAsyncWithServiceResponse(String q1);
+    Observable<ServiceResponse<Void>> getPathQueryValidWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void getSwaggerQueryValid() throws ErrorException, IOException;
 
@@ -293,6 +283,6 @@ public interface SkipUrlEncodings {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getSwaggerQueryValidAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> getSwaggerQueryValidWithServiceResponseAsync();
 
 }

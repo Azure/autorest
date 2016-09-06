@@ -403,7 +403,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -476,7 +476,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -509,7 +509,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) throws CloudException, IOException {
-        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -526,6 +526,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut200SucceededAsync(ProductInner product) {
@@ -534,7 +535,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -623,7 +624,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -696,7 +697,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -729,7 +730,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) throws CloudException, IOException {
-        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -746,6 +747,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product) {
@@ -754,7 +756,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -842,7 +844,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -915,7 +917,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -948,7 +950,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) throws CloudException, IOException {
-        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -965,6 +967,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut202Retry200Async(ProductInner product) {
@@ -973,7 +976,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1061,7 +1064,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1134,7 +1137,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1167,7 +1170,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1184,6 +1187,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product) {
@@ -1192,7 +1196,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1281,7 +1285,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1354,7 +1358,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1387,7 +1391,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) throws CloudException, IOException {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1404,6 +1408,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product) {
@@ -1412,7 +1417,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1500,7 +1505,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1573,7 +1578,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1606,7 +1611,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) throws CloudException, IOException {
-        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1623,6 +1628,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut201CreatingFailed200Async(ProductInner product) {
@@ -1631,7 +1637,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1720,7 +1726,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1793,7 +1799,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1826,7 +1832,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) throws CloudException, IOException {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1843,6 +1849,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product) {
@@ -1851,7 +1858,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponse<ProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1939,7 +1946,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2012,7 +2019,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2045,7 +2052,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) throws CloudException, IOException {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2062,6 +2069,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product) {
@@ -2070,7 +2078,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2158,7 +2166,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2231,7 +2239,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2264,7 +2272,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2281,6 +2289,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product) {
@@ -2289,7 +2298,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2377,7 +2386,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2450,7 +2459,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2483,7 +2492,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2500,6 +2509,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product) {
@@ -2508,7 +2518,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2596,7 +2606,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2669,7 +2679,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2702,7 +2712,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2719,6 +2729,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product) {
@@ -2727,7 +2738,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2815,7 +2826,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2888,7 +2899,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2921,7 +2932,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2938,6 +2949,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product) {
@@ -2946,7 +2958,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3034,7 +3046,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3107,7 +3119,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3140,7 +3152,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3157,6 +3169,7 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product) {
@@ -3165,7 +3178,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3253,7 +3266,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource(SkuInner sku) throws CloudException, IOException, InterruptedException {
-        return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
     /**
@@ -3326,7 +3339,7 @@ public final class LROsInner {
             public SkuInner call(ServiceResponse<SkuInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3359,7 +3372,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) throws CloudException, IOException {
-        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
     /**
@@ -3376,6 +3389,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
+     * @param sku sku to put
      * @return the observable to the SkuInner object
      */
     public Observable<SkuInner> beginPutNonResourceAsync(SkuInner sku) {
@@ -3384,7 +3398,7 @@ public final class LROsInner {
             public SkuInner call(ServiceResponse<SkuInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3472,7 +3486,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource(SkuInner sku) throws CloudException, IOException, InterruptedException {
-        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
     }
 
     /**
@@ -3545,7 +3559,7 @@ public final class LROsInner {
             public SkuInner call(ServiceResponse<SkuInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3578,7 +3592,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) throws CloudException, IOException {
-        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
     }
 
     /**
@@ -3595,6 +3609,7 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
+     * @param sku Sku to put
      * @return the observable to the SkuInner object
      */
     public Observable<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku) {
@@ -3603,7 +3618,7 @@ public final class LROsInner {
             public SkuInner call(ServiceResponse<SkuInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3691,7 +3706,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource(SubProductInner product) throws CloudException, IOException, InterruptedException {
-        return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3764,7 +3779,7 @@ public final class LROsInner {
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3797,7 +3812,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) throws CloudException, IOException {
-        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3814,6 +3829,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
      * @return the observable to the SubProductInner object
      */
     public Observable<SubProductInner> beginPutSubResourceAsync(SubProductInner product) {
@@ -3822,7 +3838,7 @@ public final class LROsInner {
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3910,7 +3926,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource(SubProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3983,7 +3999,7 @@ public final class LROsInner {
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4016,7 +4032,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) throws CloudException, IOException {
-        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -4033,6 +4049,7 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
+     * @param product Sub Product to put
      * @return the observable to the SubProductInner object
      */
     public Observable<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product) {
@@ -4041,7 +4058,7 @@ public final class LROsInner {
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4151,7 +4168,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4260,7 +4277,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4369,7 +4386,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4476,7 +4493,7 @@ public final class LROsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4584,7 +4601,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4693,7 +4710,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4800,7 +4817,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4907,7 +4924,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5014,7 +5031,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5120,7 +5137,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5226,7 +5243,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5332,7 +5349,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5440,7 +5457,7 @@ public final class LROsInner {
             public SkuInner call(ServiceResponse<SkuInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5525,7 +5542,7 @@ public final class LROsInner {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -5597,7 +5614,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5629,7 +5646,7 @@ public final class LROsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPost202Retry200(ProductInner product) throws CloudException, IOException {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -5646,6 +5663,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async(ProductInner product) {
@@ -5654,7 +5672,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5742,7 +5760,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -5815,7 +5833,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5848,7 +5866,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) throws CloudException, IOException {
-        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -5865,6 +5883,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPost202NoRetry204Async(ProductInner product) {
@@ -5873,7 +5892,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -5961,7 +5980,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6034,7 +6053,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6067,7 +6086,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6084,6 +6103,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product) {
@@ -6092,7 +6112,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6181,7 +6201,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6254,7 +6274,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6287,7 +6307,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6304,6 +6324,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product) {
@@ -6312,7 +6333,7 @@ public final class LROsInner {
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6399,7 +6420,7 @@ public final class LROsInner {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRetryFailed(ProductInner product) throws CloudException, IOException, InterruptedException {
-        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6471,7 +6492,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6503,7 +6524,7 @@ public final class LROsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRetryFailed(ProductInner product) throws CloudException, IOException {
-        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6520,6 +6541,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetryFailedAsync(ProductInner product) {
@@ -6528,7 +6550,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6614,7 +6636,7 @@ public final class LROsInner {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRetrycanceled(ProductInner product) throws CloudException, IOException, InterruptedException {
-        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -6686,7 +6708,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -6718,7 +6740,7 @@ public final class LROsInner {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) throws CloudException, IOException {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -6735,6 +6757,7 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRetrycanceledAsync(ProductInner product) {
@@ -6743,7 +6766,7 @@ public final class LROsInner {
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

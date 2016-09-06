@@ -345,7 +345,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        return putNonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -418,7 +418,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -451,7 +451,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400(Product product) throws CloudException, IOException {
-        return beginPutNonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -468,6 +468,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutNonRetry400Async(Product product) {
@@ -476,7 +477,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -565,7 +566,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400(Product product) throws CloudException, IOException, InterruptedException {
-        return putNonRetry201Creating400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -638,7 +639,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -671,7 +672,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400(Product product) throws CloudException, IOException {
-        return beginPutNonRetry201Creating400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -688,6 +689,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutNonRetry201Creating400Async(Product product) {
@@ -696,7 +698,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -785,7 +787,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson(Product product) throws CloudException, IOException, InterruptedException {
-        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -858,7 +860,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -891,7 +893,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson(Product product) throws CloudException, IOException {
-        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -908,6 +910,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
@@ -916,7 +919,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1005,7 +1008,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1078,7 +1081,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1111,7 +1114,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400(Product product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1128,6 +1131,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRelativeRetry400Async(Product product) {
@@ -1136,7 +1140,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1244,7 +1248,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1350,7 +1354,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1456,7 +1460,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1540,7 +1544,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        postNonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        postNonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1612,7 +1616,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1644,7 +1648,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostNonRetry400(Product product) throws CloudException, IOException {
-        beginPostNonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostNonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1661,6 +1665,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 400 with no error body.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostNonRetry400Async(Product product) {
@@ -1669,7 +1674,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1755,7 +1760,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        post202NonRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        post202NonRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -1827,7 +1832,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1859,7 +1864,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPost202NonRetry400(Product product) throws CloudException, IOException {
-        beginPost202NonRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202NonRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -1876,6 +1881,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 with a location header.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202NonRetry400Async(Product product) {
@@ -1884,7 +1890,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -1970,7 +1976,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2042,7 +2048,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2074,7 +2080,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRelativeRetry400(Product product) throws CloudException, IOException {
-        beginPostAsyncRelativeRetry400WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetry400WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2091,6 +2097,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetry400Async(Product product) {
@@ -2099,7 +2106,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2187,7 +2194,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload(Product product) throws CloudException, IOException, InterruptedException {
-        return putError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return putError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2260,7 +2267,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2293,7 +2300,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) throws CloudException, IOException {
-        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2310,6 +2317,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
@@ -2318,7 +2326,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2407,7 +2415,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2480,7 +2488,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2513,7 +2521,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2530,6 +2538,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
@@ -2538,7 +2547,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2626,7 +2635,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -2699,7 +2708,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2732,7 +2741,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -2749,6 +2758,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
@@ -2757,7 +2767,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2865,7 +2875,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -2971,7 +2981,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3055,7 +3065,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void post202NoLocation(Product product) throws CloudException, IOException, InterruptedException {
-        post202NoLocationWithServiceResponseAsync().toBlocking().last().getBody();
+        post202NoLocationWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3127,7 +3137,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3159,7 +3169,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPost202NoLocation(Product product) throws CloudException, IOException {
-        beginPost202NoLocationWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202NoLocationWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3176,6 +3186,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202NoLocationAsync(Product product) {
@@ -3184,7 +3195,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3270,7 +3281,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3342,7 +3353,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3374,7 +3385,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException {
-        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3391,6 +3402,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
@@ -3399,7 +3411,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3487,7 +3499,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson(Product product) throws CloudException, IOException, InterruptedException {
-        return put200InvalidJsonWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200InvalidJsonWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3560,7 +3572,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3593,7 +3605,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson(Product product) throws CloudException, IOException {
-        return beginPut200InvalidJsonWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200InvalidJsonWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3610,6 +3622,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPut200InvalidJsonAsync(Product product) {
@@ -3618,7 +3631,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponse<Product> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3707,7 +3720,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3780,7 +3793,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3813,7 +3826,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -3830,6 +3843,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
@@ -3838,7 +3852,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -3926,7 +3940,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -3999,7 +4013,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4032,7 +4046,7 @@ public final class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -4049,6 +4063,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the observable to the Product object
      */
     public Observable<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
@@ -4057,7 +4072,7 @@ public final class LROSADsImpl implements LROSADs {
             public Product call(ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4165,7 +4180,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4271,7 +4286,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4377,7 +4392,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4461,7 +4476,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        post202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        post202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -4533,7 +4548,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4565,7 +4580,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPost202RetryInvalidHeader(Product product) throws CloudException, IOException {
-        beginPost202RetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202RetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -4582,6 +4597,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202RetryInvalidHeaderAsync(Product product) {
@@ -4590,7 +4606,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4676,7 +4692,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -4748,7 +4764,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4780,7 +4796,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException {
-        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -4797,6 +4813,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
@@ -4805,7 +4822,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4891,7 +4908,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws InterruptedException exception thrown when long running operation is interrupted
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
-        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -4963,7 +4980,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -4995,7 +5012,7 @@ public final class LROSADsImpl implements LROSADs {
      * @throws IOException exception thrown from serialization/deserialization
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException {
-        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -5012,6 +5029,7 @@ public final class LROSADsImpl implements LROSADs {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
@@ -5020,7 +5038,7 @@ public final class LROSADsImpl implements LROSADs {
             public Void call(ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

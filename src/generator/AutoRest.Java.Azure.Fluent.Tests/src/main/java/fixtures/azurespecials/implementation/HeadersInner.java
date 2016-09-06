@@ -98,7 +98,7 @@ public final class HeadersInner {
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -167,7 +167,7 @@ public final class HeadersInner {
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeadersInner> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

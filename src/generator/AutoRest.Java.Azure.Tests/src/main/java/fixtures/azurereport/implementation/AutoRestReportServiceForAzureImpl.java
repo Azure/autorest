@@ -216,7 +216,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

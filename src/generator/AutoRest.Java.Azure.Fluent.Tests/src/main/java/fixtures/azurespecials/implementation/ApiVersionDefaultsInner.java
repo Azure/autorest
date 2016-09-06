@@ -103,7 +103,7 @@ public final class ApiVersionDefaultsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -168,7 +168,7 @@ public final class ApiVersionDefaultsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -233,7 +233,7 @@ public final class ApiVersionDefaultsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -298,7 +298,7 @@ public final class ApiVersionDefaultsInner {
             public Void call(ServiceResponse<Void> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**

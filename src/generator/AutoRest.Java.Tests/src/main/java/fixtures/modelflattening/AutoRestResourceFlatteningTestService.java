@@ -38,7 +38,6 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putArray() throws ErrorException, IOException;
 
@@ -53,7 +52,6 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putArrayAsync();
@@ -61,17 +59,15 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
-     * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
     /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putArray(List<Resource> resourceArray) throws ErrorException, IOException;
 
@@ -98,14 +94,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putArrayAsyncWithServiceResponse(List<Resource> resourceArray);
+    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     List<FlattenedProduct> getArray() throws ErrorException, IOException;
 
@@ -129,14 +125,13 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayAsyncWithServiceResponse();
+    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putDictionary() throws ErrorException, IOException;
 
@@ -151,7 +146,6 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putDictionaryAsync();
@@ -159,17 +153,15 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
-     * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDictionaryAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync();
     /**
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException;
 
@@ -196,14 +188,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putDictionaryAsyncWithServiceResponse(Map<String, FlattenedProduct> resourceDictionary);
+    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Get External Resource as a Dictionary.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     Map<String, FlattenedProduct> getDictionary() throws ErrorException, IOException;
 
@@ -227,14 +219,13 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryAsyncWithServiceResponse();
+    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putResourceCollection() throws ErrorException, IOException;
 
@@ -249,7 +240,6 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putResourceCollectionAsync();
@@ -257,17 +247,15 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putResourceCollectionAsyncWithServiceResponse();
+    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
     void putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException;
 
@@ -294,14 +282,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putResourceCollectionAsyncWithServiceResponse(ResourceCollection resourceComplexObject);
+    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Get External Resource as a ResourceCollection.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollection object wrapped in {@link ServiceResponse} if successful.
+     * @return the ResourceCollection object if successful.
      */
     ResourceCollection getResourceCollection() throws ErrorException, IOException;
 
@@ -325,14 +313,14 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @return the observable to the ResourceCollection object
      */
-    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionAsyncWithServiceResponse();
+    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync();
 
     /**
      * Put Simple Product with client flattening true on the model.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
     SimpleProduct putSimpleProduct() throws ErrorException, IOException;
 
@@ -347,7 +335,6 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
      * @return the observable to the SimpleProduct object
      */
     Observable<SimpleProduct> putSimpleProductAsync();
@@ -355,17 +342,16 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put Simple Product with client flattening true on the model.
      *
-     * @param simpleBodyProduct Simple body product to put
      * @return the observable to the SimpleProduct object
      */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductAsyncWithServiceResponse();
+    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync();
     /**
      * Put Simple Product with client flattening true on the model.
      *
      * @param simpleBodyProduct Simple body product to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
     SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException;
 
@@ -392,7 +378,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param simpleBodyProduct Simple body product to put
      * @return the observable to the SimpleProduct object
      */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductAsyncWithServiceResponse(SimpleProduct simpleBodyProduct);
+    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync(SimpleProduct simpleBodyProduct);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -402,7 +388,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
     SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -421,9 +407,6 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param description Description of product.
-     * @param genericValue Generic URL value.
-     * @param odatavalue URL value.
      * @return the observable to the SimpleProduct object
      */
     Observable<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName);
@@ -433,12 +416,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
-     * @param description Description of product.
-     * @param genericValue Generic URL value.
-     * @param odatavalue URL value.
      * @return the observable to the SimpleProduct object
      */
-    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductAsyncWithServiceResponse(String productId, String maxProductDisplayName);
+    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName);
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -450,7 +430,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
     SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -489,7 +469,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @param odatavalue URL value.
      * @return the observable to the SimpleProduct object
      */
-    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductAsyncWithServiceResponse(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
+    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -498,7 +478,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
     SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -525,6 +505,6 @@ public interface AutoRestResourceFlatteningTestService {
      * @param flattenParameterGroup Additional parameters for the operation
      * @return the observable to the SimpleProduct object
      */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingAsyncWithServiceResponse(FlattenParameterGroup flattenParameterGroup);
+    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingWithServiceResponseAsync(FlattenParameterGroup flattenParameterGroup);
 
 }

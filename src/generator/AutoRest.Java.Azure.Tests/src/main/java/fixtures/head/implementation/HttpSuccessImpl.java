@@ -98,7 +98,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -161,7 +161,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
@@ -224,7 +224,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public Boolean call(ServiceResponse<Boolean> response) {
                 return response.getBody();
             }
-        }); 
+        });
     }
 
     /**
