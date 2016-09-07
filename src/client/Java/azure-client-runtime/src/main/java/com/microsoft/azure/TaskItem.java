@@ -21,15 +21,6 @@ public interface TaskItem<U> {
     U result();
 
     /**
-     * Executes the task.
-     * <p>
-     * once executed the result will be available through result getter
-     *
-     * @throws Exception exception
-     */
-    void execute() throws Exception;
-
-    /**
      * Executes the task asynchronously.
      * <p>
      * once executed the result will be available through result getter

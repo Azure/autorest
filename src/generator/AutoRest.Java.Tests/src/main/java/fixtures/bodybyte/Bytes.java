@@ -27,9 +27,9 @@ public interface Bytes {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getNull() throws ErrorException, IOException;
+    byte[] getNull() throws ErrorException, IOException;
 
     /**
      * Get null byte value.
@@ -44,16 +44,23 @@ public interface Bytes {
      *
      * @return the observable to the byte[] object
      */
-    Observable<ServiceResponse<byte[]>> getNullAsync();
+    Observable<byte[]> getNullAsync();
+
+    /**
+     * Get null byte value.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNullWithServiceResponseAsync();
 
     /**
      * Get empty byte value ''.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getEmpty() throws ErrorException, IOException;
+    byte[] getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty byte value ''.
@@ -68,16 +75,23 @@ public interface Bytes {
      *
      * @return the observable to the byte[] object
      */
-    Observable<ServiceResponse<byte[]>> getEmptyAsync();
+    Observable<byte[]> getEmptyAsync();
+
+    /**
+     * Get empty byte value ''.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getEmptyWithServiceResponseAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getNonAscii() throws ErrorException, IOException;
+    byte[] getNonAscii() throws ErrorException, IOException;
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -92,7 +106,14 @@ public interface Bytes {
      *
      * @return the observable to the byte[] object
      */
-    Observable<ServiceResponse<byte[]>> getNonAsciiAsync();
+    Observable<byte[]> getNonAsciiAsync();
+
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNonAsciiWithServiceResponseAsync();
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -101,9 +122,8 @@ public interface Bytes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -120,16 +140,24 @@ public interface Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putNonAsciiAsync(byte[] byteBody);
+    Observable<Void> putNonAsciiAsync(byte[] byteBody);
+
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putNonAsciiWithServiceResponseAsync(byte[] byteBody);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getInvalid() throws ErrorException, IOException;
+    byte[] getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -144,6 +172,13 @@ public interface Bytes {
      *
      * @return the observable to the byte[] object
      */
-    Observable<ServiceResponse<byte[]>> getInvalidAsync();
+    Observable<byte[]> getInvalidAsync();
+
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getInvalidWithServiceResponseAsync();
 
 }

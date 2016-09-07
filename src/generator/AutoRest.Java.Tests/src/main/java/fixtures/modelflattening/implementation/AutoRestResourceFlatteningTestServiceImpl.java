@@ -145,10 +145,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArray() throws ErrorException, IOException {
-        return putArrayAsync().toBlocking().single();
+    public void putArray() throws ErrorException, IOException {
+        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -158,7 +157,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayAsync(), serviceCallback);
+        return ServiceCall.create(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -166,7 +165,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayAsync() {
+    public Observable<Void> putArrayAsync() {
+        return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync() {
         final List<Resource> resourceArray = null;
         return service.putArray(resourceArray)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -188,10 +201,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ErrorException, IOException {
-        return putArrayAsync(resourceArray).toBlocking().single();
+    public void putArray(List<Resource> resourceArray) throws ErrorException, IOException {
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
     }
 
     /**
@@ -202,7 +214,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayAsync(resourceArray), serviceCallback);
+        return ServiceCall.create(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -211,7 +223,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putArrayAsync(List<Resource> resourceArray) {
+    public Observable<Void> putArrayAsync(List<Resource> resourceArray) {
+        return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -239,10 +266,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
-    public ServiceResponse<List<FlattenedProduct>> getArray() throws ErrorException, IOException {
-        return getArrayAsync().toBlocking().single();
+    public List<FlattenedProduct> getArray() throws ErrorException, IOException {
+        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -252,7 +279,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getArrayAsync(), serviceCallback);
+        return ServiceCall.create(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -260,7 +287,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    public Observable<ServiceResponse<List<FlattenedProduct>>> getArrayAsync() {
+    public Observable<List<FlattenedProduct>> getArrayAsync() {
+        return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
+            @Override
+            public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    public Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync() {
         return service.getArray()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<FlattenedProduct>>>>() {
                 @Override
@@ -287,10 +328,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionary() throws ErrorException, IOException {
-        return putDictionaryAsync().toBlocking().single();
+    public void putDictionary() throws ErrorException, IOException {
+        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -300,7 +340,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryAsync(), serviceCallback);
+        return ServiceCall.create(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -308,7 +348,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryAsync() {
+    public Observable<Void> putDictionaryAsync() {
+        return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         return service.putDictionary(resourceDictionary)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -330,10 +384,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
-        return putDictionaryAsync(resourceDictionary).toBlocking().single();
+    public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
     }
 
     /**
@@ -344,7 +397,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryAsync(resourceDictionary), serviceCallback);
+        return ServiceCall.create(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -353,7 +406,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceDictionary External Resource as a Dictionary to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Observable<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+        return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -381,10 +449,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, FlattenedProduct&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
-    public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ErrorException, IOException {
-        return getDictionaryAsync().toBlocking().single();
+    public Map<String, FlattenedProduct> getDictionary() throws ErrorException, IOException {
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -394,7 +462,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getDictionaryAsync(), serviceCallback);
+        return ServiceCall.create(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -402,7 +470,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    public Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryAsync() {
+    public Observable<Map<String, FlattenedProduct>> getDictionaryAsync() {
+        return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() {
+            @Override
+            public Map<String, FlattenedProduct> call(ServiceResponse<Map<String, FlattenedProduct>> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    public Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync() {
         return service.getDictionary()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, FlattenedProduct>>>>() {
                 @Override
@@ -429,10 +511,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putResourceCollection() throws ErrorException, IOException {
-        return putResourceCollectionAsync().toBlocking().single();
+    public void putResourceCollection() throws ErrorException, IOException {
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -442,7 +523,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionAsync(), serviceCallback);
+        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -450,7 +531,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putResourceCollectionAsync() {
+    public Observable<Void> putResourceCollectionAsync() {
+        return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -472,10 +567,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
-        return putResourceCollectionAsync(resourceComplexObject).toBlocking().single();
+    public void putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
     }
 
     /**
@@ -486,7 +580,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
+        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -495,7 +589,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+        return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -523,10 +632,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ResourceCollection object wrapped in {@link ServiceResponse} if successful.
+     * @return the ResourceCollection object if successful.
      */
-    public ServiceResponse<ResourceCollection> getResourceCollection() throws ErrorException, IOException {
-        return getResourceCollectionAsync().toBlocking().single();
+    public ResourceCollection getResourceCollection() throws ErrorException, IOException {
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -536,7 +645,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
-        return ServiceCall.create(getResourceCollectionAsync(), serviceCallback);
+        return ServiceCall.create(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -544,7 +653,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the observable to the ResourceCollection object
      */
-    public Observable<ServiceResponse<ResourceCollection>> getResourceCollectionAsync() {
+    public Observable<ResourceCollection> getResourceCollectionAsync() {
+        return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
+            @Override
+            public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @return the observable to the ResourceCollection object
+     */
+    public Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync() {
         return service.getResourceCollection()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResourceCollection>>>() {
                 @Override
@@ -571,10 +694,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
-    public ServiceResponse<SimpleProduct> putSimpleProduct() throws ErrorException, IOException {
-        return putSimpleProductAsync().toBlocking().single();
+    public SimpleProduct putSimpleProduct() throws ErrorException, IOException {
+        return putSimpleProductWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -584,7 +707,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductAsync(), serviceCallback);
+        return ServiceCall.create(putSimpleProductWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -592,7 +715,21 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @return the observable to the SimpleProduct object
      */
-    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductAsync() {
+    public Observable<SimpleProduct> putSimpleProductAsync() {
+        return putSimpleProductWithServiceResponseAsync().map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
+            @Override
+            public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @return the observable to the SimpleProduct object
+     */
+    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync() {
         final SimpleProduct simpleBodyProduct = null;
         return service.putSimpleProduct(simpleBodyProduct)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SimpleProduct>>>() {
@@ -614,10 +751,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param simpleBodyProduct Simple body product to put
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
-    public ServiceResponse<SimpleProduct> putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException {
-        return putSimpleProductAsync(simpleBodyProduct).toBlocking().single();
+    public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException {
+        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).toBlocking().single().getBody();
     }
 
     /**
@@ -628,7 +765,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductAsync(simpleBodyProduct), serviceCallback);
+        return ServiceCall.create(putSimpleProductWithServiceResponseAsync(simpleBodyProduct), serviceCallback);
     }
 
     /**
@@ -637,7 +774,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param simpleBodyProduct Simple body product to put
      * @return the observable to the SimpleProduct object
      */
-    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
+    public Observable<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
+        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
+            @Override
+            public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @return the observable to the SimpleProduct object
+     */
+    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
         return service.putSimpleProduct(simpleBodyProduct)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SimpleProduct>>>() {
@@ -668,10 +820,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
-    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName) throws ErrorException, IOException, IllegalArgumentException {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName).toBlocking().single();
+    public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) throws ErrorException, IOException, IllegalArgumentException {
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).toBlocking().single().getBody();
     }
 
     /**
@@ -683,7 +835,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(postFlattenedSimpleProductAsync(productId, maxProductDisplayName), serviceCallback);
+        return ServiceCall.create(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName), serviceCallback);
     }
 
     /**
@@ -693,7 +845,23 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param maxProductDisplayName Display name of product.
      * @return the observable to the SimpleProduct object
      */
-    public Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
+    public Observable<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
+            @Override
+            public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @return the observable to the SimpleProduct object
+     */
+    public Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -734,10 +902,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
-    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single();
+    public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single().getBody();
     }
 
     /**
@@ -752,7 +920,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
+        return ServiceCall.create(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
     }
 
     /**
@@ -765,7 +933,26 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param odatavalue URL value.
      * @return the observable to the SimpleProduct object
      */
-    public Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+    public Observable<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
+            @Override
+            public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param description Description of product.
+     * @param genericValue Generic URL value.
+     * @param odatavalue URL value.
+     * @return the observable to the SimpleProduct object
+     */
+    public Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -809,10 +996,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     * @return the SimpleProduct object if successful.
      */
-    public ServiceResponse<SimpleProduct> putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException {
-        return putSimpleProductWithGroupingAsync(flattenParameterGroup).toBlocking().single();
+    public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException {
+        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).toBlocking().single().getBody();
     }
 
     /**
@@ -823,7 +1010,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductWithGroupingAsync(flattenParameterGroup), serviceCallback);
+        return ServiceCall.create(putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup), serviceCallback);
     }
 
     /**
@@ -832,7 +1019,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param flattenParameterGroup Additional parameters for the operation
      * @return the observable to the SimpleProduct object
      */
-    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+    public Observable<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
+            @Override
+            public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @return the observable to the SimpleProduct object
+     */
+    public Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingWithServiceResponseAsync(FlattenParameterGroup flattenParameterGroup) {
         if (flattenParameterGroup == null) {
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }

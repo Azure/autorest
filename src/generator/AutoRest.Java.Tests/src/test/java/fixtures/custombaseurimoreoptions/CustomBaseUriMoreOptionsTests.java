@@ -1,6 +1,5 @@
 package fixtures.custombaseurimoreoptions;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,6 +23,6 @@ public class CustomBaseUriMoreOptionsTests {
     @Test
     public void getEmpty() throws Exception {
         client.withDnsSuffix("host:3000");
-        Assert.assertTrue(client.paths().getEmpty("http://lo", "cal", "key1", "v1").getResponse().isSuccessful());
+        client.paths().getEmpty("http://lo", "cal", "key1", "v1");
     }
 }

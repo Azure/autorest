@@ -765,17 +765,17 @@ namespace AutoRest.Go
                     var composite = prop.Type as CompositeType;
 
                     if (primary != null || sequence != null || map != null)
-                        x.AddRange(prop.ValidateType(prop.Name, method, true));
+                        x.AddRange(prop.ValidateType($"{name}.{prop.Name}", method, true));
                     else if (composite != null)
                     {
                         if (ancestors.Contains(composite.Name))
                         {
-                            x.AddNullValidation(name, p.IsRequired);
+                            x.AddNullValidation($"{name}.{prop.Name}", p.IsRequired);
                         }
                         else
                         {
                             ancestors.Add(composite.Name);
-                            x.AddRange(prop.ValidateCompositeType(prop.Name, method, ancestors, true));
+                            x.AddRange(prop.ValidateCompositeType($"{name}.{prop.Name}", method, ancestors, true));
                             ancestors.Remove(composite.Name);
                         }  
                     }   
@@ -904,9 +904,9 @@ namespace AutoRest.Go
         /// <returns></returns>
         public static string GetConstraint(string name, string constraintName, string constraintValue, bool chain = false)
         {
-            var value = constraintName == Constraint.Pattern.ToString()
-                                             ? string.Format("\"{0}\"", constraintValue.Replace("\\", "\\\\"))
-                                             : constraintValue;
+            var value = constraintName == Constraint.Pattern.ToString()  
+                                          ? $"`{constraintValue}`"
+                                          : constraintValue;
             return string.Format(chain
                                      ? "\t{{\"{0}\", validation.{1}, {2} "
                                      : "\t{{\"{0}\", validation.{1}, {2}, nil }}",

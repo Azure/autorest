@@ -25,14 +25,10 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
-}
-else
-{
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-@Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString;
+@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) throws @Model.ExceptionString;
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -52,6 +48,56 @@ else
  * @@return the {@@link ServiceCall} object
  */
 ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+}
+ */
+Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+}
+ */
+Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration);
 </text>
 }
 /**
@@ -74,14 +120,10 @@ ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Na
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
-}
-else
-{
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
 }
  */
-@Model.ReturnTypeModel.ClientResponseTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString;
+@Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString;
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -125,4 +167,29 @@ else
 @: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
 }
  */
-Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)Async(@Model.MethodParameterDeclaration);
+Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+}
+ */
+Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration);

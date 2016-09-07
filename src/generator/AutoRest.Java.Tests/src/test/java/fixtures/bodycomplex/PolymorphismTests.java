@@ -25,7 +25,7 @@ public class PolymorphismTests {
 
     @Test
     public void getValid() throws Exception {
-        Fish result = client.polymorphisms().getValid().getBody();
+        Fish result = client.polymorphisms().getValid();
         Assert.assertEquals(Salmon.class, result.getClass());
         Salmon salmon = (Salmon) result;
         Assert.assertEquals("alaska", salmon.location());

@@ -22,7 +22,7 @@ public class AzureCustomBaseUriTests {
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
         client.withHost("host:3000");
-        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccessful());
+        client.paths().getEmpty("local");
     }
 
     @Test

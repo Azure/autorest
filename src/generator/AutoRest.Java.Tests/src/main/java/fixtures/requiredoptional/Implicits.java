@@ -30,9 +30,9 @@ public interface Implicits {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    ServiceResponse<Error> getRequiredPath(String pathParameter) throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredPath(String pathParameter) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter.
@@ -49,16 +49,23 @@ public interface Implicits {
      * @param pathParameter the String value
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> getRequiredPathAsync(String pathParameter);
+    Observable<Error> getRequiredPathAsync(String pathParameter);
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @param pathParameter the String value
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredPathWithServiceResponseAsync(String pathParameter);
 
     /**
      * Test implicitly optional query parameter.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalQuery() throws ErrorException, IOException;
+    void putOptionalQuery() throws ErrorException, IOException;
 
     /**
      * Test implicitly optional query parameter.
@@ -67,15 +74,28 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putOptionalQueryAsync();
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalQueryWithServiceResponseAsync();
     /**
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ErrorException, IOException;
+    void putOptionalQuery(String queryParameter) throws ErrorException, IOException;
 
     /**
      * Test implicitly optional query parameter.
@@ -92,16 +112,23 @@ public interface Implicits {
      * @param queryParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putOptionalQueryAsync(String queryParameter);
+    Observable<Void> putOptionalQueryAsync(String queryParameter);
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalQueryWithServiceResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalHeader() throws ErrorException, IOException;
+    void putOptionalHeader() throws ErrorException, IOException;
 
     /**
      * Test implicitly optional header parameter.
@@ -110,15 +137,28 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putOptionalHeaderAsync();
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalHeaderWithServiceResponseAsync();
     /**
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ErrorException, IOException;
+    void putOptionalHeader(String queryParameter) throws ErrorException, IOException;
 
     /**
      * Test implicitly optional header parameter.
@@ -135,16 +175,23 @@ public interface Implicits {
      * @param queryParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putOptionalHeaderAsync(String queryParameter);
+    Observable<Void> putOptionalHeaderAsync(String queryParameter);
+
+    /**
+     * Test implicitly optional header parameter.
+     *
+     * @param queryParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalHeaderWithServiceResponseAsync(String queryParameter);
 
     /**
      * Test implicitly optional body parameter.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalBody() throws ErrorException, IOException;
+    void putOptionalBody() throws ErrorException, IOException;
 
     /**
      * Test implicitly optional body parameter.
@@ -153,15 +200,28 @@ public interface Implicits {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putOptionalBodyAsync();
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalBodyWithServiceResponseAsync();
     /**
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ErrorException, IOException;
+    void putOptionalBody(String bodyParameter) throws ErrorException, IOException;
 
     /**
      * Test implicitly optional body parameter.
@@ -178,7 +238,15 @@ public interface Implicits {
      * @param bodyParameter the String value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putOptionalBodyAsync(String bodyParameter);
+    Observable<Void> putOptionalBodyAsync(String bodyParameter);
+
+    /**
+     * Test implicitly optional body parameter.
+     *
+     * @param bodyParameter the String value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putOptionalBodyWithServiceResponseAsync(String bodyParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -186,9 +254,9 @@ public interface Implicits {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    ServiceResponse<Error> getRequiredGlobalPath() throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredGlobalPath() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required path parameter.
@@ -203,7 +271,14 @@ public interface Implicits {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> getRequiredGlobalPathAsync();
+    Observable<Error> getRequiredGlobalPathAsync();
+
+    /**
+     * Test implicitly required path parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredGlobalPathWithServiceResponseAsync();
 
     /**
      * Test implicitly required query parameter.
@@ -211,9 +286,9 @@ public interface Implicits {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    ServiceResponse<Error> getRequiredGlobalQuery() throws ErrorException, IOException, IllegalArgumentException;
+    Error getRequiredGlobalQuery() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Test implicitly required query parameter.
@@ -228,16 +303,23 @@ public interface Implicits {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> getRequiredGlobalQueryAsync();
+    Observable<Error> getRequiredGlobalQueryAsync();
+
+    /**
+     * Test implicitly required query parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getRequiredGlobalQueryWithServiceResponseAsync();
 
     /**
      * Test implicitly optional query parameter.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Error object wrapped in {@link ServiceResponse} if successful.
+     * @return the Error object if successful.
      */
-    ServiceResponse<Error> getOptionalGlobalQuery() throws ErrorException, IOException;
+    Error getOptionalGlobalQuery() throws ErrorException, IOException;
 
     /**
      * Test implicitly optional query parameter.
@@ -252,6 +334,13 @@ public interface Implicits {
      *
      * @return the observable to the Error object
      */
-    Observable<ServiceResponse<Error>> getOptionalGlobalQueryAsync();
+    Observable<Error> getOptionalGlobalQueryAsync();
+
+    /**
+     * Test implicitly optional query parameter.
+     *
+     * @return the observable to the Error object
+     */
+    Observable<ServiceResponse<Error>> getOptionalGlobalQueryWithServiceResponseAsync();
 
 }

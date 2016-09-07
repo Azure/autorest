@@ -20,7 +20,7 @@ public class DictionaryTests {
 
     @Test
     public void getValid() throws Exception {
-        DictionaryWrapper result = client.dictionarys().getValid().getBody();
+        DictionaryWrapper result = client.dictionarys().getValid();
         Assert.assertEquals(5, result.defaultProgram().size());
         Assert.assertEquals("", result.defaultProgram().get("exe"));
         Assert.assertEquals(null, result.defaultProgram().get(""));
@@ -41,7 +41,7 @@ public class DictionaryTests {
 
     @Test
     public void getEmpty() throws Exception {
-        DictionaryWrapper result = client.dictionarys().getEmpty().getBody();
+        DictionaryWrapper result = client.dictionarys().getEmpty();
         Assert.assertEquals(0, result.defaultProgram().size());
     }
 
@@ -54,13 +54,13 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        DictionaryWrapper result = client.dictionarys().getNull().getBody();
+        DictionaryWrapper result = client.dictionarys().getNull();
         Assert.assertNull(result.defaultProgram());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        DictionaryWrapper result = client.dictionarys().getNotProvided().getBody();
+        DictionaryWrapper result = client.dictionarys().getNotProvided();
         Assert.assertNull(result.defaultProgram());
     }
 }

@@ -88,10 +88,10 @@ public final class BasicsImpl implements Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
-    public ServiceResponse<Basic> getValid() throws ErrorException, IOException {
-        return getValidAsync().toBlocking().single();
+    public Basic getValid() throws ErrorException, IOException {
+        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -101,7 +101,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getValidAsync(), serviceCallback);
+        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -109,7 +109,21 @@ public final class BasicsImpl implements Basics {
      *
      * @return the observable to the Basic object
      */
-    public Observable<ServiceResponse<Basic>> getValidAsync() {
+    public Observable<Basic> getValidAsync() {
+        return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
+            @Override
+            public Basic call(ServiceResponse<Basic> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
+     *
+     * @return the observable to the Basic object
+     */
+    public Observable<ServiceResponse<Basic>> getValidWithServiceResponseAsync() {
         return service.getValid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Basic>>>() {
                 @Override
@@ -138,10 +152,9 @@ public final class BasicsImpl implements Basics {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putValidAsync(complexBody).toBlocking().single();
+    public void putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -152,7 +165,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidAsync(complexBody), serviceCallback);
+        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -161,7 +174,22 @@ public final class BasicsImpl implements Basics {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putValidAsync(Basic complexBody) {
+    public Observable<Void> putValidAsync(Basic complexBody) {
+        return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Basic complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -192,10 +220,10 @@ public final class BasicsImpl implements Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
-    public ServiceResponse<Basic> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public Basic getInvalid() throws ErrorException, IOException {
+        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -205,7 +233,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -213,7 +241,21 @@ public final class BasicsImpl implements Basics {
      *
      * @return the observable to the Basic object
      */
-    public Observable<ServiceResponse<Basic>> getInvalidAsync() {
+    public Observable<Basic> getInvalidAsync() {
+        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
+            @Override
+            public Basic call(ServiceResponse<Basic> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a basic complex type that is invalid for the local strong type.
+     *
+     * @return the observable to the Basic object
+     */
+    public Observable<ServiceResponse<Basic>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Basic>>>() {
                 @Override
@@ -240,10 +282,10 @@ public final class BasicsImpl implements Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
-    public ServiceResponse<Basic> getEmpty() throws ErrorException, IOException {
-        return getEmptyAsync().toBlocking().single();
+    public Basic getEmpty() throws ErrorException, IOException {
+        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -253,7 +295,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getEmptyAsync(), serviceCallback);
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -261,7 +303,21 @@ public final class BasicsImpl implements Basics {
      *
      * @return the observable to the Basic object
      */
-    public Observable<ServiceResponse<Basic>> getEmptyAsync() {
+    public Observable<Basic> getEmptyAsync() {
+        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
+            @Override
+            public Basic call(ServiceResponse<Basic> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a basic complex type that is empty.
+     *
+     * @return the observable to the Basic object
+     */
+    public Observable<ServiceResponse<Basic>> getEmptyWithServiceResponseAsync() {
         return service.getEmpty()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Basic>>>() {
                 @Override
@@ -288,10 +344,10 @@ public final class BasicsImpl implements Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
-    public ServiceResponse<Basic> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public Basic getNull() throws ErrorException, IOException {
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -301,7 +357,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -309,7 +365,21 @@ public final class BasicsImpl implements Basics {
      *
      * @return the observable to the Basic object
      */
-    public Observable<ServiceResponse<Basic>> getNullAsync() {
+    public Observable<Basic> getNullAsync() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
+            @Override
+            public Basic call(ServiceResponse<Basic> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a basic complex type whose properties are null.
+     *
+     * @return the observable to the Basic object
+     */
+    public Observable<ServiceResponse<Basic>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Basic>>>() {
                 @Override
@@ -336,10 +406,10 @@ public final class BasicsImpl implements Basics {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Basic object wrapped in {@link ServiceResponse} if successful.
+     * @return the Basic object if successful.
      */
-    public ServiceResponse<Basic> getNotProvided() throws ErrorException, IOException {
-        return getNotProvidedAsync().toBlocking().single();
+    public Basic getNotProvided() throws ErrorException, IOException {
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -349,7 +419,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNotProvidedAsync(), serviceCallback);
+        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -357,7 +427,21 @@ public final class BasicsImpl implements Basics {
      *
      * @return the observable to the Basic object
      */
-    public Observable<ServiceResponse<Basic>> getNotProvidedAsync() {
+    public Observable<Basic> getNotProvidedAsync() {
+        return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
+            @Override
+            public Basic call(ServiceResponse<Basic> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * @return the observable to the Basic object
+     */
+    public Observable<ServiceResponse<Basic>> getNotProvidedWithServiceResponseAsync() {
         return service.getNotProvided()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Basic>>>() {
                 @Override

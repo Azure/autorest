@@ -24,8 +24,8 @@ import (
 @EmptyLine
 
 const (
-    major = "3"
-    minor = "1"
+    major = "4"
+    minor = "0"
     patch = "0"
     // Always begin a "tag" with a dash (as per http://semver.org)
     tag   = "-beta"
@@ -36,12 +36,12 @@ const (
 
 @EmptyLine
 // UserAgent returns the UserAgent string to use when sending http.Requests.
-func @(Model.UpdateNameIfDuplicate("UserAgent", Model.PackageName))() string {
-    return fmt.Sprintf(userAgentFormat, @(Model.UpdateNameIfDuplicate("Version", Model.PackageName))(), "@(Model.PackageName)", "@(Model.ApiVersion)")
+func UserAgent() string {
+    return fmt.Sprintf(userAgentFormat, Version(), "@(Model.PackageName)", "@(Model.ApiVersion)")
 }
 
 @EmptyLine
 // Version returns the semantic version (see http://semver.org) of the client.
-func @(Model.UpdateNameIfDuplicate("Version", Model.PackageName))() string {
+func Version() string {
     return fmt.Sprintf(semVerFormat, major, minor, patch, tag)
 }

@@ -31,9 +31,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String vault, String secret, String keyName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
@@ -45,6 +44,26 @@ public interface Paths {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getEmptyAsync(String vault, String secret, String keyName);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName);
     /**
      * Get a 200 to test a valid base uri.
      *
@@ -55,9 +74,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String vault, String secret, String keyName, String keyVersion) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
@@ -80,6 +98,17 @@ public interface Paths {
      * @param keyVersion The key version. Default value 'v1'.
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+    Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName, String keyVersion);
 
 }
