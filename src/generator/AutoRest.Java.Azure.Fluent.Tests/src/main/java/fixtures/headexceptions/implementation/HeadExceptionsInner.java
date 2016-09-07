@@ -70,10 +70,9 @@ public final class HeadExceptionsInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head200() throws CloudException, IOException {
-        return head200Async().toBlocking().single();
+    public void head200() throws CloudException, IOException {
+        head200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -83,7 +82,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200Async(), serviceCallback);
+        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -91,7 +90,21 @@ public final class HeadExceptionsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head200Async() {
+    public Observable<Void> head200Async() {
+        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head200WithServiceResponseAsync() {
         return service.head200(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -117,10 +130,9 @@ public final class HeadExceptionsInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head204() throws CloudException, IOException {
-        return head204Async().toBlocking().single();
+    public void head204() throws CloudException, IOException {
+        head204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -130,7 +142,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204Async(), serviceCallback);
+        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -138,7 +150,21 @@ public final class HeadExceptionsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head204Async() {
+    public Observable<Void> head204Async() {
+        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head204WithServiceResponseAsync() {
         return service.head204(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -164,10 +190,9 @@ public final class HeadExceptionsInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head404() throws CloudException, IOException {
-        return head404Async().toBlocking().single();
+    public void head404() throws CloudException, IOException {
+        head404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -177,7 +202,7 @@ public final class HeadExceptionsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404Async(), serviceCallback);
+        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -185,7 +210,21 @@ public final class HeadExceptionsInner {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> head404Async() {
+    public Observable<Void> head404Async() {
+        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> head404WithServiceResponseAsync() {
         return service.head404(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
                 @Override

@@ -28,7 +28,7 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
         client.withHost("host:3000");
-        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccessful());
+        client.paths().getEmpty("local");
     }
 
     @Test
@@ -102,7 +102,7 @@ public class CustomBaseUriTests {
             @Override
             public void run() {
                 try {
-                    Assert.assertTrue(client1.paths().getEmpty("local").getResponse().isSuccessful());
+                    client1.paths().getEmpty("local");
                     latch.countDown();
                 } catch (Exception ex) {
                     fail();

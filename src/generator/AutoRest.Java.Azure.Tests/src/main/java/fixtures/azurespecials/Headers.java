@@ -32,9 +32,8 @@ public interface Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
+    void customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -51,7 +50,15 @@ public interface Headers {
      * @param fooClientRequestId The fooRequestId
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdAsync(String fooClientRequestId);
+    Observable<Void> customNamedRequestIdAsync(String fooClientRequestId);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -60,9 +67,8 @@ public interface Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) throws ErrorException, IOException, IllegalArgumentException;
+    void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -79,6 +85,14 @@ public interface Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
 }

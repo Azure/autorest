@@ -2,7 +2,6 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
-import com.microsoft.rest.ServiceResponse;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -24,7 +23,7 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.strings().getNull().getBody());
+        Assert.assertNull(client.strings().getNull());
     }
 
     @Test
@@ -39,7 +38,7 @@ public class StringOperationsTests {
 
     @Test
     public void getEmpty() throws Exception {
-        String result = client.strings().getEmpty().getBody();
+        String result = client.strings().getEmpty();
         Assert.assertEquals("", result);
     }
 
@@ -51,8 +50,7 @@ public class StringOperationsTests {
             }
 
             @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+            public void success(Void response) {
                 lock.countDown();
             }
         });
@@ -61,7 +59,7 @@ public class StringOperationsTests {
 
     @Test
     public void getMbcs() throws Exception {
-        String result = client.strings().getMbcs().getBody();
+        String result = client.strings().getMbcs();
         String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
         Assert.assertEquals(expected, result);
     }
@@ -74,7 +72,7 @@ public class StringOperationsTests {
 
     @Test
     public void getWhitespace() throws Exception {
-        String result = client.strings().getWhitespace().getBody();
+        String result = client.strings().getWhitespace();
         Assert.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
     }
 
@@ -95,19 +93,19 @@ public class StringOperationsTests {
 
     @Test
     public void getBase64Encoded() throws Exception {
-        byte[] result = client.strings().getBase64Encoded().getBody();
+        byte[] result = client.strings().getBase64Encoded();
         Assert.assertEquals("a string that gets encoded with base64", new String(result));
     }
 
     @Test
     public void getBase64UrlEncoded() throws Exception {
-        byte[] result = client.strings().getBase64UrlEncoded().getBody();
+        byte[] result = client.strings().getBase64UrlEncoded();
         Assert.assertEquals("a string that gets encoded with base64url", new String(result));
     }
 
     @Test
     public void getNullBase64UrlEncoded() throws Exception {
-        byte[] result = client.strings().getNullBase64UrlEncoded().getBody();
+        byte[] result = client.strings().getNullBase64UrlEncoded();
         Assert.assertNull(result);
     }
 

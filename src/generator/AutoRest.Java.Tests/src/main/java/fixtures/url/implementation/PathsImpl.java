@@ -173,10 +173,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException {
-        return getBooleanTrueAsync().toBlocking().single();
+    public void getBooleanTrue() throws ErrorException, IOException {
+        getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -186,7 +185,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanTrueAsync(), serviceCallback);
+        return ServiceCall.create(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -194,7 +193,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getBooleanTrueAsync() {
+    public Observable<Void> getBooleanTrueAsync() {
+        return getBooleanTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync() {
         final boolean boolPath = true;
         return service.getBooleanTrue(boolPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -222,10 +235,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException {
-        return getBooleanFalseAsync().toBlocking().single();
+    public void getBooleanFalse() throws ErrorException, IOException {
+        getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -235,7 +247,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanFalseAsync(), serviceCallback);
+        return ServiceCall.create(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -243,7 +255,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getBooleanFalseAsync() {
+    public Observable<Void> getBooleanFalseAsync() {
+        return getBooleanFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync() {
         final boolean boolPath = false;
         return service.getBooleanFalse(boolPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -271,10 +297,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException {
-        return getIntOneMillionAsync().toBlocking().single();
+    public void getIntOneMillion() throws ErrorException, IOException {
+        getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -284,7 +309,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntOneMillionAsync(), serviceCallback);
+        return ServiceCall.create(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -292,7 +317,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getIntOneMillionAsync() {
+    public Observable<Void> getIntOneMillionAsync() {
+        return getIntOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync() {
         final int intPath = 1000000;
         return service.getIntOneMillion(intPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -320,10 +359,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException {
-        return getIntNegativeOneMillionAsync().toBlocking().single();
+    public void getIntNegativeOneMillion() throws ErrorException, IOException {
+        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -333,7 +371,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNegativeOneMillionAsync(), serviceCallback);
+        return ServiceCall.create(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -341,7 +379,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getIntNegativeOneMillionAsync() {
+    public Observable<Void> getIntNegativeOneMillionAsync() {
+        return getIntNegativeOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync() {
         final int intPath = -1000000;
         return service.getIntNegativeOneMillion(intPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -369,10 +421,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getTenBillion() throws ErrorException, IOException {
-        return getTenBillionAsync().toBlocking().single();
+    public void getTenBillion() throws ErrorException, IOException {
+        getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -382,7 +433,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getTenBillionAsync(), serviceCallback);
+        return ServiceCall.create(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -390,7 +441,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getTenBillionAsync() {
+    public Observable<Void> getTenBillionAsync() {
+        return getTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync() {
         final long longPath = 10000000000L;
         return service.getTenBillion(longPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -418,10 +483,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException {
-        return getNegativeTenBillionAsync().toBlocking().single();
+    public void getNegativeTenBillion() throws ErrorException, IOException {
+        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -431,7 +495,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getNegativeTenBillionAsync(), serviceCallback);
+        return ServiceCall.create(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -439,7 +503,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getNegativeTenBillionAsync() {
+    public Observable<Void> getNegativeTenBillionAsync() {
+        return getNegativeTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync() {
         final long longPath = -10000000000L;
         return service.getNegativeTenBillion(longPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -467,10 +545,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException {
-        return floatScientificPositiveAsync().toBlocking().single();
+    public void floatScientificPositive() throws ErrorException, IOException {
+        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -480,7 +557,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificPositiveAsync(), serviceCallback);
+        return ServiceCall.create(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -488,7 +565,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> floatScientificPositiveAsync() {
+    public Observable<Void> floatScientificPositiveAsync() {
+        return floatScientificPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync() {
         final double floatPath = 1.034E+20;
         return service.floatScientificPositive(floatPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -516,10 +607,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException {
-        return floatScientificNegativeAsync().toBlocking().single();
+    public void floatScientificNegative() throws ErrorException, IOException {
+        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -529,7 +619,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificNegativeAsync(), serviceCallback);
+        return ServiceCall.create(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -537,7 +627,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> floatScientificNegativeAsync() {
+    public Observable<Void> floatScientificNegativeAsync() {
+        return floatScientificNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync() {
         final double floatPath = -1.034E-20;
         return service.floatScientificNegative(floatPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -565,10 +669,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException {
-        return doubleDecimalPositiveAsync().toBlocking().single();
+    public void doubleDecimalPositive() throws ErrorException, IOException {
+        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -578,7 +681,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalPositiveAsync(), serviceCallback);
+        return ServiceCall.create(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -586,7 +689,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> doubleDecimalPositiveAsync() {
+    public Observable<Void> doubleDecimalPositiveAsync() {
+        return doubleDecimalPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync() {
         final double doublePath = 9999999.999;
         return service.doubleDecimalPositive(doublePath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -614,10 +731,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException {
-        return doubleDecimalNegativeAsync().toBlocking().single();
+    public void doubleDecimalNegative() throws ErrorException, IOException {
+        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -627,7 +743,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalNegativeAsync(), serviceCallback);
+        return ServiceCall.create(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -635,7 +751,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> doubleDecimalNegativeAsync() {
+    public Observable<Void> doubleDecimalNegativeAsync() {
+        return doubleDecimalNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync() {
         final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(doublePath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -663,10 +793,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUnicode() throws ErrorException, IOException {
-        return stringUnicodeAsync().toBlocking().single();
+    public void stringUnicode() throws ErrorException, IOException {
+        stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -676,7 +805,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUnicodeAsync(), serviceCallback);
+        return ServiceCall.create(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -684,7 +813,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> stringUnicodeAsync() {
+    public Observable<Void> stringUnicodeAsync() {
+        return stringUnicodeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -712,10 +855,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException {
-        return stringUrlEncodedAsync().toBlocking().single();
+    public void stringUrlEncoded() throws ErrorException, IOException {
+        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -725,7 +867,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUrlEncodedAsync(), serviceCallback);
+        return ServiceCall.create(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -733,7 +875,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> stringUrlEncodedAsync() {
+    public Observable<Void> stringUrlEncodedAsync() {
+        return stringUrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -761,10 +917,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringEmpty() throws ErrorException, IOException {
-        return stringEmptyAsync().toBlocking().single();
+    public void stringEmpty() throws ErrorException, IOException {
+        stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -774,7 +929,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringEmptyAsync(), serviceCallback);
+        return ServiceCall.create(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -782,7 +937,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> stringEmptyAsync() {
+    public Observable<Void> stringEmptyAsync() {
+        return stringEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get ''.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync() {
         final String stringPath = "";
         return service.stringEmpty(stringPath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -812,10 +981,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
-        return stringNullAsync(stringPath).toBlocking().single();
+    public void stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException {
+        stringNullWithServiceResponseAsync(stringPath).toBlocking().single().getBody();
     }
 
     /**
@@ -826,7 +994,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringNullAsync(stringPath), serviceCallback);
+        return ServiceCall.create(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
     }
 
     /**
@@ -835,7 +1003,22 @@ public final class PathsImpl implements Paths {
      * @param stringPath null string value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> stringNullAsync(String stringPath) {
+    public Observable<Void> stringNullAsync(String stringPath) {
+        return stringNullWithServiceResponseAsync(stringPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringPath) {
         if (stringPath == null) {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
@@ -867,10 +1050,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
-        return enumValidAsync(enumPath).toBlocking().single();
+    public void enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
+        enumValidWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
     }
 
     /**
@@ -881,7 +1063,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumValidAsync(enumPath), serviceCallback);
+        return ServiceCall.create(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -890,7 +1072,22 @@ public final class PathsImpl implements Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> enumValidAsync(UriColor enumPath) {
+    public Observable<Void> enumValidAsync(UriColor enumPath) {
+        return enumValidWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
@@ -922,10 +1119,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
-        return enumNullAsync(enumPath).toBlocking().single();
+    public void enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException {
+        enumNullWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
     }
 
     /**
@@ -936,7 +1132,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumNullAsync(enumPath), serviceCallback);
+        return ServiceCall.create(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -945,7 +1141,22 @@ public final class PathsImpl implements Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> enumNullAsync(UriColor enumPath) {
+    public Observable<Void> enumNullAsync(UriColor enumPath) {
+        return enumNullWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
@@ -977,10 +1188,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
-        return byteMultiByteAsync(bytePath).toBlocking().single();
+    public void byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
+        byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
     }
 
     /**
@@ -991,7 +1201,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteMultiByteAsync(bytePath), serviceCallback);
+        return ServiceCall.create(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1000,7 +1210,22 @@ public final class PathsImpl implements Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> byteMultiByteAsync(byte[] bytePath) {
+    public Observable<Void> byteMultiByteAsync(byte[] bytePath) {
+        return byteMultiByteWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
@@ -1031,10 +1256,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteEmpty() throws ErrorException, IOException {
-        return byteEmptyAsync().toBlocking().single();
+    public void byteEmpty() throws ErrorException, IOException {
+        byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1044,7 +1268,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteEmptyAsync(), serviceCallback);
+        return ServiceCall.create(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1052,7 +1276,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> byteEmptyAsync() {
+    public Observable<Void> byteEmptyAsync() {
+        return byteEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync() {
         final byte[] bytePath = "".getBytes();
         String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteEmpty(bytePathConverted)
@@ -1083,10 +1321,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
-        return byteNullAsync(bytePath).toBlocking().single();
+    public void byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException {
+        byteNullWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
     }
 
     /**
@@ -1097,7 +1334,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteNullAsync(bytePath), serviceCallback);
+        return ServiceCall.create(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1106,7 +1343,22 @@ public final class PathsImpl implements Paths {
      * @param bytePath null as byte array (should throw)
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> byteNullAsync(byte[] bytePath) {
+    public Observable<Void> byteNullAsync(byte[] bytePath) {
+        return byteNullWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
@@ -1137,10 +1389,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateValid() throws ErrorException, IOException {
-        return dateValidAsync().toBlocking().single();
+    public void dateValid() throws ErrorException, IOException {
+        dateValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1150,7 +1401,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateValidAsync(), serviceCallback);
+        return ServiceCall.create(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1158,7 +1409,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> dateValidAsync() {
+    public Observable<Void> dateValidAsync() {
+        return dateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         return service.dateValid(datePath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1188,10 +1453,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException {
-        return dateNullAsync(datePath).toBlocking().single();
+    public void dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException {
+        dateNullWithServiceResponseAsync(datePath).toBlocking().single().getBody();
     }
 
     /**
@@ -1202,7 +1466,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateNullAsync(datePath), serviceCallback);
+        return ServiceCall.create(dateNullWithServiceResponseAsync(datePath), serviceCallback);
     }
 
     /**
@@ -1211,7 +1475,22 @@ public final class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> dateNullAsync(LocalDate datePath) {
+    public Observable<Void> dateNullAsync(LocalDate datePath) {
+        return dateNullWithServiceResponseAsync(datePath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate datePath) {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
@@ -1241,10 +1520,9 @@ public final class PathsImpl implements Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException {
-        return dateTimeValidAsync().toBlocking().single();
+    public void dateTimeValid() throws ErrorException, IOException {
+        dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -1254,7 +1532,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeValidAsync(), serviceCallback);
+        return ServiceCall.create(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1262,7 +1540,21 @@ public final class PathsImpl implements Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> dateTimeValidAsync() {
+    public Observable<Void> dateTimeValidAsync() {
+        return dateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync() {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimePath)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -1292,10 +1584,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException {
-        return dateTimeNullAsync(dateTimePath).toBlocking().single();
+    public void dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException {
+        dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().getBody();
     }
 
     /**
@@ -1306,7 +1597,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeNullAsync(dateTimePath), serviceCallback);
+        return ServiceCall.create(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
     }
 
     /**
@@ -1315,7 +1606,22 @@ public final class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> dateTimeNullAsync(DateTime dateTimePath) {
+    public Observable<Void> dateTimeNullAsync(DateTime dateTimePath) {
+        return dateTimeNullWithServiceResponseAsync(dateTimePath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimePath) {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
@@ -1347,10 +1653,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
-        return base64UrlAsync(base64UrlPath).toBlocking().single();
+    public void base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException {
+        base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().getBody();
     }
 
     /**
@@ -1361,7 +1666,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(base64UrlAsync(base64UrlPath), serviceCallback);
+        return ServiceCall.create(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
     }
 
     /**
@@ -1370,7 +1675,22 @@ public final class PathsImpl implements Paths {
      * @param base64UrlPath base64url encoded value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> base64UrlAsync(byte[] base64UrlPath) {
+    public Observable<Void> base64UrlAsync(byte[] base64UrlPath) {
+        return base64UrlWithServiceResponseAsync(base64UrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> base64UrlWithServiceResponseAsync(byte[] base64UrlPath) {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
@@ -1403,10 +1723,9 @@ public final class PathsImpl implements Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException {
-        return arrayCsvInPathAsync(arrayPath).toBlocking().single();
+    public void arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException {
+        arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().getBody();
     }
 
     /**
@@ -1417,7 +1736,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayCsvInPathAsync(arrayPath), serviceCallback);
+        return ServiceCall.create(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
     }
 
     /**
@@ -1426,7 +1745,22 @@ public final class PathsImpl implements Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> arrayCsvInPathAsync(List<String> arrayPath) {
+    public Observable<Void> arrayCsvInPathAsync(List<String> arrayPath) {
+        return arrayCsvInPathWithServiceResponseAsync(arrayPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> arrayCsvInPathWithServiceResponseAsync(List<String> arrayPath) {
         if (arrayPath == null) {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
@@ -1459,10 +1793,9 @@ public final class PathsImpl implements Paths {
      * @param unixTimeUrlPath Unix time encoded value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException {
-        return unixTimeUrlAsync(unixTimeUrlPath).toBlocking().single();
+    public void unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException {
+        unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().getBody();
     }
 
     /**
@@ -1473,7 +1806,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);
+        return ServiceCall.create(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
     }
 
     /**
@@ -1482,7 +1815,22 @@ public final class PathsImpl implements Paths {
      * @param unixTimeUrlPath Unix time encoded value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
+    public Observable<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
+        return unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> unixTimeUrlWithServiceResponseAsync(DateTime unixTimeUrlPath) {
         Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.unixTimeUrl(unixTimeUrlPathConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {

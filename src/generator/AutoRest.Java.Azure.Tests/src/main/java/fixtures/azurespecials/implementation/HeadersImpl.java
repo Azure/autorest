@@ -73,10 +73,9 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
-        return customNamedRequestIdAsync(fooClientRequestId).toBlocking().single();
+    public void customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().getBody();
     }
 
     /**
@@ -87,7 +86,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
+        return ServiceCall.createWithHeaders(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -96,7 +95,22 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdAsync(String fooClientRequestId) {
+    public Observable<Void> customNamedRequestIdAsync(String fooClientRequestId) {
+        return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -128,10 +142,9 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) throws ErrorException, IOException, IllegalArgumentException {
-        return customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single();
+    public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) throws ErrorException, IOException, IllegalArgumentException {
+        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().getBody();
     }
 
     /**
@@ -142,7 +155,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+        return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**
@@ -151,7 +164,22 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+        return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }

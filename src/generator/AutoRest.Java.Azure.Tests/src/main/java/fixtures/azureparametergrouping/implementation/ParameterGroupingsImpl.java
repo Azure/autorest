@@ -86,10 +86,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException {
-        return postRequiredAsync(parameterGroupingPostRequiredParameters).toBlocking().single();
+    public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException {
+        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().getBody();
     }
 
     /**
@@ -100,7 +99,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
+        return ServiceCall.create(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
     /**
@@ -109,7 +108,22 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+    public Observable<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+        return postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post a bunch of required parameters grouped.
+     *
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -144,10 +158,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postOptional() throws ErrorException, IOException {
-        return postOptionalAsync().toBlocking().single();
+    public void postOptional() throws ErrorException, IOException {
+        postOptionalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -157,7 +170,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalAsync(), serviceCallback);
+        return ServiceCall.create(postOptionalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -165,7 +178,21 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postOptionalAsync() {
+    public Observable<Void> postOptionalAsync() {
+        return postOptionalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
@@ -189,10 +216,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
-        return postOptionalAsync(parameterGroupingPostOptionalParameters).toBlocking().single();
+    public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
+        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().getBody();
     }
 
     /**
@@ -203,7 +229,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
+        return ServiceCall.create(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
     /**
@@ -212,7 +238,22 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
+    public Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
+        return postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -248,10 +289,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMultiParamGroups() throws ErrorException, IOException {
-        return postMultiParamGroupsAsync().toBlocking().single();
+    public void postMultiParamGroups() throws ErrorException, IOException {
+        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -261,7 +301,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsAsync(), serviceCallback);
+        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -269,7 +309,21 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMultiParamGroupsAsync() {
+    public Observable<Void> postMultiParamGroupsAsync() {
+        return postMultiParamGroupsWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync() {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
@@ -297,10 +351,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
-        return postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single();
+    public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
+        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().getBody();
     }
 
     /**
@@ -312,7 +365,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
+        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
     /**
@@ -322,7 +375,23 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Observable<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+        return postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -367,10 +436,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postSharedParameterGroupObject() throws ErrorException, IOException {
-        return postSharedParameterGroupObjectAsync().toBlocking().single();
+    public void postSharedParameterGroupObject() throws ErrorException, IOException {
+        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -380,7 +448,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectAsync(), serviceCallback);
+        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -388,7 +456,21 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectAsync() {
+    public Observable<Void> postSharedParameterGroupObjectAsync() {
+        return postSharedParameterGroupObjectWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync() {
         final FirstParameterGroup firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
@@ -412,10 +494,9 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException {
-        return postSharedParameterGroupObjectAsync(firstParameterGroup).toBlocking().single();
+    public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException {
+        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().getBody();
     }
 
     /**
@@ -426,7 +507,7 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
+        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
     }
 
     /**
@@ -435,7 +516,22 @@ public final class ParameterGroupingsImpl implements ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
+    public Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
+        return postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroup firstParameterGroup) {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {

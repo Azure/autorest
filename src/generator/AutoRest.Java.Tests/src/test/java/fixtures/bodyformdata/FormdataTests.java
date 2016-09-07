@@ -1,7 +1,5 @@
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -28,7 +26,7 @@ public class FormdataTests {
         InputStream stream = classLoader.getResourceAsStream("upload.txt");
         byte[] bytes = IOUtils.toByteArray(stream);
         stream.close();
-        InputStream result = client.formdatas().uploadFile(bytes, "sample.png").getBody();
+        InputStream result = client.formdatas().uploadFile(bytes, "sample.png");
         try {
             Assert.assertEquals(new String(bytes), IOUtils.toString(result));
         } finally {
@@ -43,11 +41,11 @@ public class FormdataTests {
             byte[] bytes = IOUtils.toByteArray(stream);
             stream.close();
             byte[] actual = client.formdatas().uploadFileViaBodyAsync(bytes)
-                    .map(new Func1<ServiceResponse<InputStream>, byte[]>() {
+                    .map(new Func1<InputStream, byte[]>() {
                         @Override
-                        public byte[] call(ServiceResponse<InputStream> inputStreamServiceResponse) {
+                        public byte[] call(InputStream inputStreamServiceResponse) {
                             try {
-                                return IOUtils.toByteArray(inputStreamServiceResponse.getBody());
+                                return IOUtils.toByteArray(inputStreamServiceResponse);
                             } catch (IOException e) {
                                 throw Exceptions.propagate(e);
                             }

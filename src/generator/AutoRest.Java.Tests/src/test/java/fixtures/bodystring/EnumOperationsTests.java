@@ -19,7 +19,7 @@ public class EnumOperationsTests {
 
     @Test
     public void getNotExpandable() throws Exception {
-        Colors result = client.enums().getNotExpandable().getBody();
+        Colors result = client.enums().getNotExpandable();
         Assert.assertEquals(Colors.RED_COLOR, result);
     }
 

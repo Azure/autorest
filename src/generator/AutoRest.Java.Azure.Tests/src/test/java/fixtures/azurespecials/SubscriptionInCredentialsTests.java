@@ -2,10 +2,8 @@ package fixtures.azurespecials;
 
 import com.microsoft.azure.RequestIdHeaderInterceptor;
 import com.microsoft.azure.RestClient;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,25 +27,21 @@ public class SubscriptionInCredentialsTests {
 
     @Test
     public void postMethodGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInCredentials().postMethodGlobalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInCredentials().postMethodGlobalValid();
     }
 
     @Test
     public void postMethodGlobalNotProvidedValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInCredentials().postMethodGlobalNotProvidedValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInCredentials().postMethodGlobalNotProvidedValid();
     }
 
     @Test
     public void postPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInCredentials().postPathGlobalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInCredentials().postPathGlobalValid();
     }
 
     @Test
     public void postSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.subscriptionInCredentials().postSwaggerGlobalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.subscriptionInCredentials().postSwaggerGlobalValid();
     }
 }

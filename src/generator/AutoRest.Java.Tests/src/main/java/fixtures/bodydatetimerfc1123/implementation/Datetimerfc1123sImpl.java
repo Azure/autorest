@@ -99,10 +99,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getNull() throws ErrorException, IOException {
-        return getNullAsync().toBlocking().single();
+    public DateTime getNull() throws ErrorException, IOException {
+        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -112,7 +112,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullAsync(), serviceCallback);
+        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -120,7 +120,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getNullAsync() {
+    public Observable<DateTime> getNullAsync() {
+        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get null datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getNullWithServiceResponseAsync() {
         return service.getNull()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -152,10 +166,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException {
-        return getInvalidAsync().toBlocking().single();
+    public DateTime getInvalid() throws ErrorException, IOException {
+        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -165,7 +179,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidAsync(), serviceCallback);
+        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -173,7 +187,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getInvalidAsync() {
+    public Observable<DateTime> getInvalidAsync() {
+        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getInvalidWithServiceResponseAsync() {
         return service.getInvalid()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -205,10 +233,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException {
-        return getOverflowAsync().toBlocking().single();
+    public DateTime getOverflow() throws ErrorException, IOException {
+        return getOverflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -218,7 +246,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getOverflowAsync(), serviceCallback);
+        return ServiceCall.create(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -226,7 +254,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getOverflowAsync() {
+    public Observable<DateTime> getOverflowAsync() {
+        return getOverflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getOverflowWithServiceResponseAsync() {
         return service.getOverflow()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -258,10 +300,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException {
-        return getUnderflowAsync().toBlocking().single();
+    public DateTime getUnderflow() throws ErrorException, IOException {
+        return getUnderflowWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -271,7 +313,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnderflowAsync(), serviceCallback);
+        return ServiceCall.create(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -279,7 +321,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUnderflowAsync() {
+    public Observable<DateTime> getUnderflowAsync() {
+        return getUnderflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUnderflowWithServiceResponseAsync() {
         return service.getUnderflow()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -313,10 +369,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putUtcMaxDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -327,7 +382,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -336,7 +391,22 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUtcMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -367,10 +437,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
-        return getUtcLowercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException {
+        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -380,7 +450,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -388,7 +458,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeWithServiceResponseAsync() {
         return service.getUtcLowercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -420,10 +504,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
-        return getUtcUppercaseMaxDateTimeAsync().toBlocking().single();
+    public DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException {
+        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -433,7 +517,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -441,7 +525,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync() {
+    public Observable<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeWithServiceResponseAsync() {
         return service.getUtcUppercaseMaxDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
@@ -475,10 +573,9 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
-        return putUtcMinDateTimeAsync(datetimeBody).toBlocking().single();
+    public void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException {
+        putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
     }
 
     /**
@@ -489,7 +586,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
+        return ServiceCall.create(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -498,7 +595,22 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+    public Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putUtcMinDateTimeWithServiceResponseAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
@@ -529,10 +641,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    public ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException {
-        return getUtcMinDateTimeAsync().toBlocking().single();
+    public DateTime getUtcMinDateTime() throws ErrorException, IOException {
+        return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -542,7 +654,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcMinDateTimeAsync(), serviceCallback);
+        return ServiceCall.create(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -550,7 +662,21 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync() {
+    public Observable<DateTime> getUtcMinDateTimeAsync() {
+        return getUtcMinDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
+            @Override
+            public DateTime call(ServiceResponse<DateTime> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @return the observable to the DateTime object
+     */
+    public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeWithServiceResponseAsync() {
         return service.getUtcMinDateTime()
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
                 @Override
