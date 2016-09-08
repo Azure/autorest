@@ -8,7 +8,6 @@
 package com.microsoft.azure;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceResponse;
 
 import java.util.List;
 
@@ -71,7 +70,7 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
     }
 
     @Override
-    public void success(ServiceResponse<List<E>> result) {
+    public void success(List<E> result) {
         success();
     }
 

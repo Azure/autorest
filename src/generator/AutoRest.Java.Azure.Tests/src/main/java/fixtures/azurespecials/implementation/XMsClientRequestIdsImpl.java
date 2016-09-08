@@ -69,10 +69,9 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> get() throws CloudException, IOException {
-        return getAsync().toBlocking().single();
+    public void get() throws CloudException, IOException {
+        getWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -82,7 +81,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAsync(), serviceCallback);
+        return ServiceCall.create(getWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -90,7 +89,21 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> getAsync() {
+    public Observable<Void> getAsync() {
+        return getWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> getWithServiceResponseAsync() {
         return service.get(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -118,10 +131,9 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
-        return paramGetAsync(xMsClientRequestId).toBlocking().single();
+    public void paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
+        paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().getBody();
     }
 
     /**
@@ -132,7 +144,7 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramGetAsync(xMsClientRequestId), serviceCallback);
+        return ServiceCall.create(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
     }
 
     /**
@@ -141,7 +153,22 @@ public final class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> paramGetAsync(String xMsClientRequestId) {
+    public Observable<Void> paramGetAsync(String xMsClientRequestId) {
+        return paramGetWithServiceResponseAsync(xMsClientRequestId).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> paramGetWithServiceResponseAsync(String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }

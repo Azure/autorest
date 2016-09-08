@@ -28,9 +28,9 @@ public interface Dictionarys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
-    ServiceResponse<DictionaryWrapper> getValid() throws ErrorException, IOException;
+    DictionaryWrapper getValid() throws ErrorException, IOException;
 
     /**
      * Get complex types with dictionary property.
@@ -45,7 +45,14 @@ public interface Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<ServiceResponse<DictionaryWrapper>> getValidAsync();
+    Observable<DictionaryWrapper> getValidAsync();
+
+    /**
+     * Get complex types with dictionary property.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types with dictionary property.
@@ -54,9 +61,8 @@ public interface Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property.
@@ -73,16 +79,24 @@ public interface Dictionarys {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putValidAsync(DictionaryWrapper complexBody);
+    Observable<Void> putValidAsync(DictionaryWrapper complexBody);
+
+    /**
+     * Put complex types with dictionary property.
+     *
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is empty.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
-    ServiceResponse<DictionaryWrapper> getEmpty() throws ErrorException, IOException;
+    DictionaryWrapper getEmpty() throws ErrorException, IOException;
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -97,7 +111,14 @@ public interface Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<ServiceResponse<DictionaryWrapper>> getEmptyAsync();
+    Observable<DictionaryWrapper> getEmptyAsync();
+
+    /**
+     * Get complex types with dictionary property which is empty.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getEmptyWithServiceResponseAsync();
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -106,9 +127,8 @@ public interface Dictionarys {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -125,16 +145,24 @@ public interface Dictionarys {
      * @param complexBody Please put an empty dictionary
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putEmptyAsync(DictionaryWrapper complexBody);
+    Observable<Void> putEmptyAsync(DictionaryWrapper complexBody);
+
+    /**
+     * Put complex types with dictionary property which is empty.
+     *
+     * @param complexBody Please put an empty dictionary
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is null.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
-    ServiceResponse<DictionaryWrapper> getNull() throws ErrorException, IOException;
+    DictionaryWrapper getNull() throws ErrorException, IOException;
 
     /**
      * Get complex types with dictionary property which is null.
@@ -149,16 +177,23 @@ public interface Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<ServiceResponse<DictionaryWrapper>> getNullAsync();
+    Observable<DictionaryWrapper> getNullAsync();
+
+    /**
+     * Get complex types with dictionary property which is null.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getNullWithServiceResponseAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DictionaryWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the DictionaryWrapper object if successful.
      */
-    ServiceResponse<DictionaryWrapper> getNotProvided() throws ErrorException, IOException;
+    DictionaryWrapper getNotProvided() throws ErrorException, IOException;
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -173,6 +208,13 @@ public interface Dictionarys {
      *
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedAsync();
+    Observable<DictionaryWrapper> getNotProvidedAsync();
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a response payload.
+     *
+     * @return the observable to the DictionaryWrapper object
+     */
+    Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedWithServiceResponseAsync();
 
 }

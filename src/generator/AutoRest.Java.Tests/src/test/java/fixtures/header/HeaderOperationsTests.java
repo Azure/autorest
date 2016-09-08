@@ -1,7 +1,6 @@
 package fixtures.header;
 
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -20,7 +19,22 @@ import java.util.concurrent.TimeUnit;
 import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseBoolHeaders;
+import fixtures.header.models.HeaderResponseByteHeaders;
+import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDatetimeHeaders;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
+import fixtures.header.models.HeaderResponseDoubleHeaders;
+import fixtures.header.models.HeaderResponseDurationHeaders;
+import fixtures.header.models.HeaderResponseEnumHeaders;
+import fixtures.header.models.HeaderResponseExistingKeyHeaders;
+import fixtures.header.models.HeaderResponseFloatHeaders;
+import fixtures.header.models.HeaderResponseIntegerHeaders;
+import fixtures.header.models.HeaderResponseLongHeaders;
+import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
+import fixtures.header.models.HeaderResponseStringHeaders;
 import okhttp3.Headers;
+import rx.functions.Action1;
 
 import static org.junit.Assert.fail;
 
@@ -41,21 +55,22 @@ public class HeaderOperationsTests {
     @Test
     public void responseExistingKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseExistingKeyAsync(new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("User-Agent") != null) {
-                    Assert.assertEquals("overwrite", headers.get("User-Agent"));
-                    lock.countDown();
+        client.headers().responseExistingKeyWithServiceResponseAsync()
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("User-Agent") != null) {
+                        Assert.assertEquals("overwrite", headers.get("User-Agent"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -71,21 +86,22 @@ public class HeaderOperationsTests {
     @Test
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseProtectedKeyAsync(new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("Content-Type") != null) {
-                    Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
-                    lock.countDown();
+        client.headers().responseProtectedKeyWithServiceResponseAsync()
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("Content-Type") != null) {
+                        Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -98,38 +114,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseInteger() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseIntegerAsync("positive", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("1", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseIntegerWithServiceResponseAsync("positive")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("1", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseIntegerAsync("negative", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("-2", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseIntegerWithServiceResponseAsync("negative")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("-2", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -142,38 +160,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseLong() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseLongAsync("positive", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("105", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseLongWithServiceResponseAsync("positive")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("105", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseLongAsync("negative", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("-2", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseLongWithServiceResponseAsync("negative")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("-2", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -186,38 +206,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseFloat() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseFloatAsync("positive", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("0.07", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseFloatWithServiceResponseAsync("positive")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("0.07", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseFloatAsync("negative", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("-3", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseFloatWithServiceResponseAsync("negative")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("-3", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -230,38 +252,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseDouble() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDoubleAsync("positive", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("7e+120", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDoubleWithServiceResponseAsync("positive")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("7e+120", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDoubleAsync("negative", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("-3", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDoubleWithServiceResponseAsync("negative")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("-3", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -274,38 +298,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseBool() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseBoolAsync("true", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("true", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseBoolWithServiceResponseAsync("true")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("true", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseBoolAsync("false", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("false", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseBoolWithServiceResponseAsync("false")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("false", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -319,55 +345,58 @@ public class HeaderOperationsTests {
     @Test
     public void responseString() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseStringAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseStringWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseStringAsync("null", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("null", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseStringWithServiceResponseAsync("null")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("null", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseStringAsync("empty", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseStringWithServiceResponseAsync("empty")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -380,38 +409,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseDate() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDateAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("2010-01-01", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDateWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("2010-01-01", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDateAsync("min", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("0001-01-01", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDateWithServiceResponseAsync("min")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("0001-01-01", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -423,21 +454,22 @@ public class HeaderOperationsTests {
     @Test
     public void responseDuration() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDurationAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDurationWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -450,40 +482,41 @@ public class HeaderOperationsTests {
     @Test
     public void responseDatetimeRfc1123() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDatetimeRfc1123Async("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDatetimeRfc1123WithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(100000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDatetimeRfc1123Async("min", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
+        client.headers().responseDatetimeRfc1123WithServiceResponseAsync("min")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
+                        lock.countDown();
 
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
-                    lock.countDown();
-
+                    }
                 }
-
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -496,38 +529,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseDatetime() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseDatetimeAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDatetimeWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseDatetimeAsync("min", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseDatetimeWithServiceResponseAsync("min")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -539,23 +574,24 @@ public class HeaderOperationsTests {
     @Test
     public void responseByte() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseByteAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    byte[] value = Base64.decodeBase64(headers.get("value"));
-                    String actual = new String(value, Charset.forName("UTF-8"));
-                    Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
-                    lock.countDown();
+        client.headers().responseByteWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        byte[] value = Base64.decodeBase64(headers.get("value"));
+                        String actual = new String(value, Charset.forName("UTF-8"));
+                        Assert.assertEquals("啊齄丂狛狜隣郎隣兀﨩", actual);
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
@@ -568,38 +604,40 @@ public class HeaderOperationsTests {
     @Test
     public void responseEnum() throws Exception {
         lock = new CountDownLatch(1);
-        client.headers().responseEnumAsync("valid", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("GREY", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseEnumWithServiceResponseAsync("valid")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("GREY", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
-        client.headers().responseEnumAsync("null", new ServiceCallback<Void>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
-
-            @Override
-            public void success(ServiceResponse<Void> response) {
-                Headers headers = response.getResponse().headers();
-                if (headers.get("value") != null) {
-                    Assert.assertEquals("", headers.get("value"));
-                    lock.countDown();
+        client.headers().responseEnumWithServiceResponseAsync("null")
+            .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>>() {
+                @Override
+                public void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
+                    Headers headers = response.getResponse().headers();
+                    if (headers.get("value") != null) {
+                        Assert.assertEquals("", headers.get("value"));
+                        lock.countDown();
+                    }
                 }
-            }
-        });
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(Throwable throwable) {
+                    fail();
+                }
+            });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 

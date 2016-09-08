@@ -19,7 +19,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.datetimes().getNull().getBody());
+        Assert.assertNull(client.datetimes().getNull());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getOverflowDate() throws Exception {
-        DateTime result = client.datetimes().getOverflow().getBody();
+        DateTime result = client.datetimes().getOverflow();
         // 9999-12-31T23:59:59.999-14:000
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14));
         expected = expected.toDateTime(DateTimeZone.UTC);
@@ -61,14 +61,14 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getUtcLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcLowercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getUtcLowercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getUtcUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcUppercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getUtcUppercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -81,14 +81,14 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getLocalPositiveOffsetLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetLowercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getLocalPositiveOffsetLowercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getLocalPositiveOffsetUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetUppercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getLocalPositiveOffsetUppercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -101,14 +101,14 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getLocalNegativeOffsetLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetLowercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getLocalNegativeOffsetLowercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getLocalNegativeOffsetUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetUppercaseMaxDateTime().getBody();
+        DateTime result = client.datetimes().getLocalNegativeOffsetUppercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 999, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -121,7 +121,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getUtcMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getUtcMinDateTime().getBody();
+        DateTime result = client.datetimes().getUtcMinDateTime();
         DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -134,7 +134,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getLocalPositiveOffsetMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalPositiveOffsetMinDateTime().getBody();
+        DateTime result = client.datetimes().getLocalPositiveOffsetMinDateTime();
         DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -147,7 +147,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getLocalNegativeOffsetMinDateTime() throws Exception {
-        DateTime result = client.datetimes().getLocalNegativeOffsetMinDateTime().getBody();
+        DateTime result = client.datetimes().getLocalNegativeOffsetMinDateTime();
         DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.forOffsetHours(-14)).toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }

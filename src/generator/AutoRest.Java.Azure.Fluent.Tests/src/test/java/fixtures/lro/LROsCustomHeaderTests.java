@@ -1,7 +1,5 @@
 package fixtures.lro;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -29,33 +27,29 @@ public class LROsCustomHeaderTests {
     public void putAsyncRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<ProductInner> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        ProductInner response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Ignore("Pending headermap")
     public void put201CreatingSucceeded200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<ProductInner> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        ProductInner response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Ignore("Pending headermap")
     public void post202Retry200() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeaders().post202Retry200(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lROsCustomHeaders().post202Retry200(product);
     }
 
     @Ignore("Pending headermap")
     public void postAsyncRetrySucceeded() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
     }
 }

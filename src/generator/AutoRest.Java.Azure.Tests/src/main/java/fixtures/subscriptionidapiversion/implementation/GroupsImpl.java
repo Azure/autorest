@@ -69,10 +69,10 @@ public final class GroupsImpl implements Groups {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SampleResourceGroup object wrapped in {@link ServiceResponse} if successful.
+     * @return the SampleResourceGroup object if successful.
      */
-    public ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
-        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().single();
+    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException {
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
     }
 
     /**
@@ -83,7 +83,7 @@ public final class GroupsImpl implements Groups {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
-        return ServiceCall.create(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
+        return ServiceCall.create(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**
@@ -92,7 +92,22 @@ public final class GroupsImpl implements Groups {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @return the observable to the SampleResourceGroup object
      */
-    public Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Observable<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroup>, SampleResourceGroup>() {
+            @Override
+            public SampleResourceGroup call(ServiceResponse<SampleResourceGroup> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     *
+     * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @return the observable to the SampleResourceGroup object
+     */
+    public Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }

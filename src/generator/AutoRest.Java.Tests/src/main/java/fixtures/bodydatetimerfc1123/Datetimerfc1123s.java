@@ -28,9 +28,9 @@ public interface Datetimerfc1123s {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getNull() throws ErrorException, IOException;
+    DateTime getNull() throws ErrorException, IOException;
 
     /**
      * Get null datetime value.
@@ -45,16 +45,23 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getNullAsync();
+    Observable<DateTime> getNullAsync();
+
+    /**
+     * Get null datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException;
+    DateTime getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid datetime value.
@@ -69,16 +76,23 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getInvalidAsync();
+    Observable<DateTime> getInvalidAsync();
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException;
+    DateTime getOverflow() throws ErrorException, IOException;
 
     /**
      * Get overflow datetime value.
@@ -93,16 +107,23 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getOverflowAsync();
+    Observable<DateTime> getOverflowAsync();
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getOverflowWithServiceResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException;
+    DateTime getUnderflow() throws ErrorException, IOException;
 
     /**
      * Get underflow datetime value.
@@ -117,7 +138,14 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUnderflowAsync();
+    Observable<DateTime> getUnderflowAsync();
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUnderflowWithServiceResponseAsync();
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -126,9 +154,8 @@ public interface Datetimerfc1123s {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -145,16 +172,24 @@ public interface Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUtcMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -169,16 +204,23 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync();
+    Observable<DateTime> getUtcLowercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -193,7 +235,14 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync();
+    Observable<DateTime> getUtcUppercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -202,9 +251,8 @@ public interface Datetimerfc1123s {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -221,16 +269,24 @@ public interface Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUtcMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException;
+    DateTime getUtcMinDateTime() throws ErrorException, IOException;
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -245,6 +301,13 @@ public interface Datetimerfc1123s {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync();
+    Observable<DateTime> getUtcMinDateTimeAsync();
+
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcMinDateTimeWithServiceResponseAsync();
 
 }

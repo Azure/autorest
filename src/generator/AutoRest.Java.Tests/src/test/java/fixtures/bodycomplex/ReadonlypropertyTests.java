@@ -1,9 +1,10 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
-import fixtures.bodycomplex.models.ReadonlyObj;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
+import fixtures.bodycomplex.models.ReadonlyObj;
 
 public class ReadonlypropertyTests {
     private static AutoRestComplexTestService client;
@@ -15,7 +16,7 @@ public class ReadonlypropertyTests {
 
     @Test
     public void putReadOnlyPropertyValid() throws Exception {
-        ReadonlyObj o = client.readonlypropertys().getValid().getBody();
-        client.readonlypropertys().putValid(o).getResponse().code();
+        ReadonlyObj o = client.readonlypropertys().getValid();
+        client.readonlypropertys().putValid(o);
     }
 }
