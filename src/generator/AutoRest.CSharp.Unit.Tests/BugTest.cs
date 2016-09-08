@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(each => !each.IsDynamic)
+                        .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location))
                         .Select(each => each.Location)
                         .Concat(new[]
                         {

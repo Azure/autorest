@@ -1,0 +1,36 @@
+﻿swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  /operation:
+    get:
+      operationId: operation_get
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/HttpOperationResponse'
+    put:
+      operationId: operation_put
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Action'
+
+
+
+definitions:
+  HttpOperationResponse:
+    properties:
+      foo:
+        type: string
+        description: 'The foo property'
+
+  Action:
+    properties:
+      bar:
+        type: string
+        description: 'The bar property'
+
