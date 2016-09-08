@@ -250,6 +250,7 @@
       "properties": {
         "properties": {
           "type": "object",
+          "description": "Properties on foo",
           "properties": {
             "foo": {
               "description": "Foo property"

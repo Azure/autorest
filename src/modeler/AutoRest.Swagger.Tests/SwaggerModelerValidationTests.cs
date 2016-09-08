@@ -194,6 +194,16 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "required-property-defined-allof.json"));
             Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
         }
+
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void PageableNextLinkDefinedAllOf()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
     }
 
     #endregion

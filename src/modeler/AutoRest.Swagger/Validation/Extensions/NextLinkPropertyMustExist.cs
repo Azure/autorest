@@ -25,11 +25,10 @@ namespace AutoRest.Swagger.Validation
             var nextLinkPropertyName = (pageable as JContainer)?[ExtensionNextLinkPropertyName]?.ToString();
             if (!string.IsNullOrEmpty(nextLinkPropertyName))
             {
-                // Get the list of properties defined for the 200 response schema
-                var schemaProperties = Get200ResponseSchema(context)?.Properties;
-
-                // Fail the rule if there's no property that has the name specified by nextLinkName
-                if (schemaProperties == null || !schemaProperties.ContainsKey(nextLinkPropertyName))
+                var schema = Get200ResponseSchema(context);
+                var serviceDefinition = context.GetServiceDefinition();
+                // Try to find the property in this schema or its ancestors
+                if (schema.FindPropertyInChain(serviceDefinition, nextLinkPropertyName) == null)
                 {
                     formatParameters = new string[] { nextLinkPropertyName };
                     return false;

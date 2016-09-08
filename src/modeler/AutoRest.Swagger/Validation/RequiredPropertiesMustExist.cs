@@ -19,9 +19,9 @@ namespace AutoRest.Swagger.Validation
         {
             // Get the schema that this required property constraint belongs to
             var schema = context.GetFirstAncestor<Schema>();
-            var resolver = new SchemaResolver(context.GetServiceDefinition());
+            var serviceDefinition = context.GetServiceDefinition();
             // Try to find the property in this schema or its ancestors
-            if (resolver.FindProperty(schema, propertyName) == null)
+            if (schema.FindPropertyInChain(serviceDefinition, propertyName) == null)
             {
                 formatParameters = new string[] { propertyName };
                 return false;
