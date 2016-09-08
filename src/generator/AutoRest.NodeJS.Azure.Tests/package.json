@@ -28,7 +28,7 @@
     "underscore": "*",
     "adal-node": "0.1.16"
   },
-  "homepage": "https://github.com/Azure/AutoRest",
+  "homepage": "https://github.com/Azure/AutoRest/src/generator/AutoRest.NodeJS.Azure.Tests",
   "repository": {
     "type": "git",
     "url": "git@github.com:Azure/AutoRest.git"
