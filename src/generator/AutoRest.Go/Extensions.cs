@@ -540,11 +540,13 @@ namespace AutoRest.Go
             // Note: Inject the field into a copy of the property list so as to not pollute the original list
             // This is duplicating next links on graphrbac
             // It's duplicating because NextLink and any property already in the model is not exactly the same string
-            // This lines are needed with authorization swagger
+            // This lines are needed with authorization and intune swagger
+            // It is needed when the swagger has incomplete models that should have a nextLink
             if (    compositeType is ModelTemplateModel
                 &&  !String.IsNullOrEmpty((compositeType as ModelTemplateModel).NextLink))
             {
                 var nextLinkField = (compositeType as ModelTemplateModel).NextLink;
+                properties.Where(p => p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)).Select(p => p.Name = nextLinkField);
                 if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.Ordinal)))
                 {
                     var property = new Property();
@@ -1007,12 +1009,27 @@ namespace AutoRest.Go
                     var nextLinkName = (string)pageableExtension["nextLinkName"];
                     if (!string.IsNullOrEmpty(nextLinkName))
                     {
-                        nextLink = GoCodeNamer.PascalCase(nextLinkName);
+                        nextLink = GoCodeNamer.PascalCase(NormalizeWithChar(nextLinkName));
                     }
                 }
             }
 
             return nextLink;
+        }
+
+        public static string NormalizeWithChar(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split('.')
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
         }
 
        /// <summary>
