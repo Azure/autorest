@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
+using System.Data.Entity.Design.PluralizationServices;
 
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
@@ -87,6 +89,19 @@ namespace AutoRest.Go
         public static string[] ToWords(this string value)
         {
             return SplitPattern.Split(value).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+        }
+
+        /// <summary>
+        /// This method checks if MethodGroupName is plural of package name.
+        /// Example, group EventHubs in package EventHub.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="packageName"></param>
+        /// <returns></returns>
+        public static bool IsNamePlural(this string value, string packageName)
+        {
+            PluralizationService ps = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"));
+            return (ps.IsPlural(value) && ps.Singularize(value).ToLower() == packageName.ToLower());
         }
 
         /// <summary>
@@ -704,7 +719,7 @@ namespace AutoRest.Go
                     x.AddRange(p.ValidateType(name, method));
 
                 if (x.Count != 0)
-                    v.Add($"{{{name},\n[]validation.Constraint{{{string.Join(",\n", x)}}}}}");
+                    v.Add($"{{ TargetValue: {name},\n Constraints: []validation.Constraint{{{string.Join(",\n", x)}}}}}");
             }
             return string.Join(",\n", v);
         }
@@ -784,7 +799,7 @@ namespace AutoRest.Go
 
             x.AddRange(from prop in ((CompositeType)p.Type).Properties
                        where prop.IsReadOnly
-                       select GetConstraint(prop.Name, ReadOnlyConstraint, "true"));
+                       select GetConstraint($"{name}.{prop.Name}", ReadOnlyConstraint, "true"));
 
             List<string> y = new List<string>();
             if (x.Count > 0)
@@ -826,7 +841,7 @@ namespace AutoRest.Go
             List<string> a = new List<string>
             {
                 GetConstraint(name, constraint, $"{isRequired}".ToLower(), true),
-                $"[]validation.Constraint{{{x[0]}"
+                $"Chain: []validation.Constraint{{{x[0]}"
             };
             a.AddRange(x.GetRange(1, x.Count - 1));
             a.Add("}}");
@@ -908,9 +923,9 @@ namespace AutoRest.Go
                                           ? $"`{constraintValue}`"
                                           : constraintValue;
             return string.Format(chain
-                                     ? "\t{{\"{0}\", validation.{1}, {2} "
-                                     : "\t{{\"{0}\", validation.{1}, {2}, nil }}",
-                                     name, constraintName, value);
+                                    ? "\t{{Target: \"{0}\", Name: validation.{1}, Rule: {2} "
+                                    : "\t{{Target: \"{0}\", Name: validation.{1}, Rule: {2}, Chain: nil }}",
+                                    name, constraintName, value);
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -928,8 +943,8 @@ namespace AutoRest.Go
         public static bool BelongsToGroup(this Method method, string groupName, string packageName)
         {
             return string.IsNullOrEmpty(groupName)
-                    ? string.IsNullOrEmpty(method.Group) || string.Equals(method.Group, packageName, System.StringComparison.InvariantCultureIgnoreCase)
-                    : string.Equals(method.Group, groupName);
+                     ? string.IsNullOrEmpty(method.Group)
+                     : string.Equals(method.Group, groupName);
         }
 
         /// <summary>
