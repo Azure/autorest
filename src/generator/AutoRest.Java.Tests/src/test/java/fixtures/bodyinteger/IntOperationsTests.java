@@ -2,7 +2,6 @@ package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceResponse;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -30,12 +29,17 @@ public class IntOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.ints().getNull().getBody());
+        try {
+            client.ints().getNull();
+            fail();
+        } catch (NullPointerException e) {
+            // expected
+        }
     }
 
     @Test
     public void getNullAsync() throws Exception {
-        Observable.from(client.ints().getNullAsync(null)).subscribe(new Subscriber<ServiceResponse<Integer>>() {
+        Observable.from(client.ints().getNullAsync(null)).subscribe(new Subscriber<Integer>() {
             @Override
             public void onCompleted() {
                 System.out.println("completed");
@@ -47,8 +51,8 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void onNext(ServiceResponse<Integer> integerServiceResponse) {
-                System.out.println(integerServiceResponse.getBody());
+            public void onNext(Integer integerServiceResponse) {
+                System.out.println(integerServiceResponse);
             }
         });
         System.out.println("checkpoint");
@@ -87,7 +91,7 @@ public class IntOperationsTests {
     @Test
     public void getOverflowInt64() throws Exception {
         try {
-            long value = client.ints().getOverflowInt64().getBody();
+            long value = client.ints().getOverflowInt64();
             Assert.assertEquals(Long.MAX_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
@@ -97,7 +101,7 @@ public class IntOperationsTests {
     @Test
     public void getUnderflowInt64() throws Exception {
         try {
-            long value = client.ints().getUnderflowInt64().getBody();
+            long value = client.ints().getUnderflowInt64();
             Assert.assertEquals(Long.MIN_VALUE, value);
         } catch (Exception exception) {
             Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
@@ -112,8 +116,7 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+            public void success(Void response) {
                 lock.countDown();
             }
         });
@@ -128,8 +131,7 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+            public void success(Void response) {
                 lock.countDown();
             }
         });
@@ -144,8 +146,7 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+            public void success(Void response) {
                 lock.countDown();
             }
         });
@@ -160,8 +161,7 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+            public void success(Void response) {
                 lock.countDown();
             }
         });
@@ -170,7 +170,7 @@ public class IntOperationsTests {
 
     @Test
     public void getUnixTime() throws Exception {
-        DateTime result = client.ints().getUnixTime().getBody();
+        DateTime result = client.ints().getUnixTime();
         Assert.assertEquals(new DateTime(2016, 4, 13, 0, 0, 0, DateTimeZone.UTC), result);
     }
 
@@ -191,7 +191,7 @@ public class IntOperationsTests {
 
     @Test
     public void getNullUnixTime() throws Exception {
-        DateTime result = client.ints().getNullUnixTime().getBody();
+        DateTime result = client.ints().getNullUnixTime();
         Assert.assertNull(result);
     }
 }

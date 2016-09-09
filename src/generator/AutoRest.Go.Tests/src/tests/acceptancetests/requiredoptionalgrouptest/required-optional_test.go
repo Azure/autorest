@@ -1,14 +1,13 @@
 package requiredoptionalgrouptest
 
 import (
+	"fmt"
 	"net/http"
 	"testing"
 
 	"tests/acceptancetests/utils"
 	. "tests/generated/required-optional"
 
-	"github.com/Azure/go-autorest/autorest"
-	"github.com/Azure/go-autorest/autorest/validation"
 	chk "gopkg.in/check.v1"
 )
 
@@ -38,61 +37,55 @@ func getRequiredImplicitTestClient() ImplicitClient {
 func (s *RequiredOptionalSuite) TestPostRequiredArrayHeader(c *chk.C) {
 	_, err := explicitClient.PostRequiredArrayHeader(nil)
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "headerParameter",
-		TargetValue: []string(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"headerParameter", "Null", []string(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredArrayHeader: Invalid input: %v", expected))
 }
 
 func (s *RequiredOptionalSuite) TestPostRequiredArrayParameter(c *chk.C) {
 	_, err := explicitClient.PostRequiredArrayParameter(nil)
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "bodyParameter",
-		TargetValue: []string(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"bodyParameter", "Null", []string(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredArrayParameter: Invalid input: %v", expected))
 }
 
 func (s *RequiredOptionalSuite) TestPostRequiredArrayProperty(c *chk.C) {
 	_, err := explicitClient.PostRequiredArrayProperty(ArrayWrapper{})
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "Value",
-		TargetValue: (*[]string)(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"bodyParameter.Value", "Null", (*[]string)(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredArrayProperty: Invalid input: %v", expected))
 }
 
 func (s *RequiredOptionalSuite) TestPostRequiredClassParameter(c *chk.C) {
 	_, err := explicitClient.PostRequiredClassParameter(Product{})
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "ID",
-		TargetValue: (*int32)(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"bodyParameter.ID", "Null", (*int32)(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredClassParameter: Invalid input: %v", expected))
 }
 
 func (s *RequiredOptionalSuite) TestPostRequiredClassProperty(c *chk.C) {
 	_, err := explicitClient.PostRequiredClassProperty(ClassWrapper{})
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "Value",
-		TargetValue: (*Product)(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"bodyParameter.Value", "Null", (*Product)(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredClassProperty: Invalid input: %v", expected))
 }
 
 func (s *RequiredOptionalSuite) TestPostRequiredIntegerProperty(c *chk.C) {
 	_, err := explicitClient.PostRequiredIntegerProperty(IntWrapper{})
 	c.Assert(err, chk.NotNil)
-	c.Assert(validation.Error{Constraint: "Null",
-		Target:      "Value",
-		TargetValue: (*int32)(nil),
-		Details:     "value can not be null; required parameter",
-	}, chk.DeepEquals, err.(autorest.DetailedError).Original.(validation.Error))
+	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
+		"bodyParameter.Value", "Null", (*int32)(nil), "value can not be null; required parameter")
+	c.Assert(err.Error(), chk.Equals,
+		fmt.Sprintf("optionalgroup.ExplicitClient#PostRequiredIntegerProperty: Invalid input: %v", expected))
 }
 
 // Integer can't be null

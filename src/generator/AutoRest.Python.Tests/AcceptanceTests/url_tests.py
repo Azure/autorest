@@ -40,10 +40,12 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Url"))
+sys.path.append(join(tests, "UrlMultiCollectionFormat"))
 
 from msrest.exceptions import DeserializationError, ValidationError
 
 from autoresturltestservice import AutoRestUrlTestService
+from autoresturlmutlicollectionformattestservice import AutoRestUrlMutliCollectionFormatTestService
 from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
 
 
@@ -52,6 +54,7 @@ class UrlTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = AutoRestUrlTestService('', base_url="http://localhost:3000")
+        cls.multi_client = AutoRestUrlMutliCollectionFormatTestService("http://localhost:3000")
         return super(UrlTests, cls).setUpClass()
 
     def test_url_path(self):
@@ -142,6 +145,10 @@ class UrlTests(unittest.TestCase):
         self.client.queries.array_string_pipes_valid(test_array)
         self.client.queries.array_string_ssv_valid(test_array)
         self.client.queries.array_string_tsv_valid(test_array)
+
+        self.multi_client.queries.array_string_multi_empty([])
+        self.multi_client.queries.array_string_multi_null()
+        self.multi_client.queries.array_string_multi_valid(test_array)
 
     def test_url_mixed(self):
 

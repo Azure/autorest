@@ -31,9 +31,8 @@ public interface Paths {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanTrue() throws ErrorException, IOException;
+    void getBooleanTrue() throws ErrorException, IOException;
 
     /**
      * Get true Boolean value on path.
@@ -48,16 +47,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getBooleanTrueAsync();
+    Observable<Void> getBooleanTrueAsync();
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync();
 
     /**
      * Get false Boolean value on path.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanFalse() throws ErrorException, IOException;
+    void getBooleanFalse() throws ErrorException, IOException;
 
     /**
      * Get false Boolean value on path.
@@ -72,16 +77,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getBooleanFalseAsync();
+    Observable<Void> getBooleanFalseAsync();
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync();
 
     /**
      * Get '1000000' integer value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntOneMillion() throws ErrorException, IOException;
+    void getIntOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '1000000' integer value.
@@ -96,16 +107,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getIntOneMillionAsync();
+    Observable<Void> getIntOneMillionAsync();
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync();
 
     /**
      * Get '-1000000' integer value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion() throws ErrorException, IOException;
+    void getIntNegativeOneMillion() throws ErrorException, IOException;
 
     /**
      * Get '-1000000' integer value.
@@ -120,16 +137,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getIntNegativeOneMillionAsync();
+    Observable<Void> getIntNegativeOneMillionAsync();
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getTenBillion() throws ErrorException, IOException;
+    void getTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -144,16 +167,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getTenBillionAsync();
+    Observable<Void> getTenBillionAsync();
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getNegativeTenBillion() throws ErrorException, IOException;
+    void getNegativeTenBillion() throws ErrorException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -168,16 +197,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> getNegativeTenBillionAsync();
+    Observable<Void> getNegativeTenBillionAsync();
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificPositive() throws ErrorException, IOException;
+    void floatScientificPositive() throws ErrorException, IOException;
 
     /**
      * Get '1.034E+20' numeric value.
@@ -192,16 +227,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> floatScientificPositiveAsync();
+    Observable<Void> floatScientificPositiveAsync();
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificNegative() throws ErrorException, IOException;
+    void floatScientificNegative() throws ErrorException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -216,16 +257,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> floatScientificNegativeAsync();
+    Observable<Void> floatScientificNegativeAsync();
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalPositive() throws ErrorException, IOException;
+    void doubleDecimalPositive() throws ErrorException, IOException;
 
     /**
      * Get '9999999.999' numeric value.
@@ -240,16 +287,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> doubleDecimalPositiveAsync();
+    Observable<Void> doubleDecimalPositiveAsync();
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalNegative() throws ErrorException, IOException;
+    void doubleDecimalNegative() throws ErrorException, IOException;
 
     /**
      * Get '-9999999.999' numeric value.
@@ -264,16 +317,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> doubleDecimalNegativeAsync();
+    Observable<Void> doubleDecimalNegativeAsync();
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode() throws ErrorException, IOException;
+    void stringUnicode() throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -288,16 +347,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringUnicodeAsync();
+    Observable<Void> stringUnicodeAsync();
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded() throws ErrorException, IOException;
+    void stringUrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -312,16 +377,22 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringUrlEncodedAsync();
+    Observable<Void> stringUrlEncodedAsync();
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync();
 
     /**
      * Get ''.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty() throws ErrorException, IOException;
+    void stringEmpty() throws ErrorException, IOException;
 
     /**
      * Get ''.
@@ -336,7 +407,14 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringEmptyAsync();
+    Observable<Void> stringEmptyAsync();
+
+    /**
+     * Get ''.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync();
 
     /**
      * Get null (should throw).
@@ -345,9 +423,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
+    void stringNull(String stringPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get null (should throw).
@@ -364,7 +441,15 @@ public interface Paths {
      * @param stringPath null string value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> stringNullAsync(String stringPath);
+    Observable<Void> stringNullAsync(String stringPath);
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -373,9 +458,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
+    void enumValid(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -392,7 +476,15 @@ public interface Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> enumValidAsync(UriColor enumPath);
+    Observable<Void> enumValidAsync(UriColor enumPath);
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -401,9 +493,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
+    void enumNull(UriColor enumPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -420,7 +511,15 @@ public interface Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> enumNullAsync(UriColor enumPath);
+    Observable<Void> enumNullAsync(UriColor enumPath);
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumPath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -429,9 +528,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
+    void byteMultiByte(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -448,16 +546,23 @@ public interface Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteMultiByteAsync(byte[] bytePath);
+    Observable<Void> byteMultiByteAsync(byte[] bytePath);
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] bytePath);
 
     /**
      * Get '' as byte array.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty() throws ErrorException, IOException;
+    void byteEmpty() throws ErrorException, IOException;
 
     /**
      * Get '' as byte array.
@@ -472,7 +577,14 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteEmptyAsync();
+    Observable<Void> byteEmptyAsync();
+
+    /**
+     * Get '' as byte array.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync();
 
     /**
      * Get null as byte array (should throw).
@@ -481,9 +593,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
+    void byteNull(byte[] bytePath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get null as byte array (should throw).
@@ -500,16 +611,23 @@ public interface Paths {
      * @param bytePath null as byte array (should throw)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> byteNullAsync(byte[] bytePath);
+    Observable<Void> byteNullAsync(byte[] bytePath);
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] bytePath);
 
     /**
      * Get '2012-01-01' as date.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid() throws ErrorException, IOException;
+    void dateValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01' as date.
@@ -524,7 +642,14 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateValidAsync();
+    Observable<Void> dateValidAsync();
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync();
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -533,9 +658,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException;
+    void dateNull(LocalDate datePath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -552,16 +676,23 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateNullAsync(LocalDate datePath);
+    Observable<Void> dateNullAsync(LocalDate datePath);
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw)
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate datePath);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid() throws ErrorException, IOException;
+    void dateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -576,7 +707,14 @@ public interface Paths {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateTimeValidAsync();
+    Observable<Void> dateTimeValidAsync();
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync();
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -585,9 +723,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException;
+    void dateTimeNull(DateTime dateTimePath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -604,7 +741,15 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> dateTimeNullAsync(DateTime dateTimePath);
+    Observable<Void> dateTimeNullAsync(DateTime dateTimePath);
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimePath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -613,9 +758,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException;
+    void base64Url(byte[] base64UrlPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -632,7 +776,15 @@ public interface Paths {
      * @param base64UrlPath base64url encoded value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> base64UrlAsync(byte[] base64UrlPath);
+    Observable<Void> base64UrlAsync(byte[] base64UrlPath);
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> base64UrlWithServiceResponseAsync(byte[] base64UrlPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -641,9 +793,8 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException;
+    void arrayCsvInPath(List<String> arrayPath) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -660,7 +811,15 @@ public interface Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> arrayCsvInPathAsync(List<String> arrayPath);
+    Observable<Void> arrayCsvInPathAsync(List<String> arrayPath);
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> arrayCsvInPathWithServiceResponseAsync(List<String> arrayPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -668,9 +827,8 @@ public interface Paths {
      * @param unixTimeUrlPath Unix time encoded value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException;
+    void unixTimeUrl(DateTime unixTimeUrlPath) throws ErrorException, IOException;
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -687,6 +845,14 @@ public interface Paths {
      * @param unixTimeUrlPath Unix time encoded value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+    Observable<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> unixTimeUrlWithServiceResponseAsync(DateTime unixTimeUrlPath);
 
 }

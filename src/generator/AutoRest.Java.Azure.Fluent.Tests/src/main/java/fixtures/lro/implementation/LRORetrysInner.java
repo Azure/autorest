@@ -121,10 +121,10 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductInner object wrapped in ServiceResponse if successful.
+     * @return the ProductInner object  if successful.
      */
-    public ServiceResponse<ProductInner> put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
-        return put201CreatingSucceeded200Async().toBlocking().last();
+    public ProductInner put201CreatingSucceeded200() throws CloudException, IOException, InterruptedException {
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -134,7 +134,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200Async(), serviceCallback);
+        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,7 +142,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200Async() {
+    public Observable<ProductInner> put201CreatingSucceeded200Async() {
+        return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponse<ProductInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
@@ -154,10 +168,10 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductInner object wrapped in ServiceResponse if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponse<ProductInner> put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return put201CreatingSucceeded200Async(product).toBlocking().last();
+    public ProductInner put201CreatingSucceeded200(ProductInner product) throws CloudException, IOException, InterruptedException {
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -168,7 +182,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200Async(product), serviceCallback);
+        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -177,7 +191,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200Async(ProductInner product) {
+    public Observable<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponse<ProductInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
@@ -188,10 +217,10 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200() throws CloudException, IOException {
-        return beginPut201CreatingSucceeded200Async().toBlocking().single();
+    public ProductInner beginPut201CreatingSucceeded200() throws CloudException, IOException {
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -201,7 +230,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200Async(), serviceCallback);
+        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -209,7 +238,21 @@ public final class LRORetrysInner {
      *
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async() {
+    public Observable<ProductInner> beginPut201CreatingSucceeded200Async() {
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponse<ProductInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
@@ -231,10 +274,10 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductInner object wrapped in {@link ServiceResponse} if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponse<ProductInner> beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().single();
+    public ProductInner beginPut201CreatingSucceeded200(ProductInner product) throws CloudException, IOException {
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -245,7 +288,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200Async(product), serviceCallback);
+        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -254,7 +297,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
+    public Observable<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product) {
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponse<ProductInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
@@ -284,10 +342,10 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object  if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetrySucceededAsync().toBlocking().last();
+    public ProductInner putAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -297,7 +355,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -305,7 +363,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededAsync() {
+    public Observable<ProductInner> putAsyncRelativeRetrySucceededAsync() {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
@@ -317,10 +389,10 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> putAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return putAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
+    public ProductInner putAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -331,7 +403,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -340,7 +412,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Observable<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeadersInner.class);
@@ -351,10 +438,10 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().single();
+    public ProductInner beginPutAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -364,7 +451,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -372,7 +459,21 @@ public final class LRORetrysInner {
      *
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededAsync() {
+    public Observable<ProductInner> beginPutAsyncRelativeRetrySucceededAsync() {
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>>>() {
@@ -394,10 +495,10 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> beginPutAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().single();
+    public ProductInner beginPutAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -408,7 +509,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -417,7 +518,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Observable<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product) {
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>>>() {
@@ -446,10 +562,10 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ProductInner object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
-        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().last();
+    public ProductInner deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -459,7 +575,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -467,7 +583,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> deleteProvisioning202Accepted200SucceededAsync() {
+    public Observable<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner.class);
     }
@@ -477,10 +607,10 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ProductInner object wrapped in {@link ServiceResponseWithHeaders} if successful.
+     * @return the ProductInner object if successful.
      */
-    public ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().single();
+    public ProductInner beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException {
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -490,7 +620,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -498,7 +628,21 @@ public final class LRORetrysInner {
      *
      * @return the observable to the ProductInner object
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededAsync() {
+    public Observable<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync() {
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
+            @Override
+            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable to the ProductInner object
+     */
+    public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
         return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>>>() {
                 @Override
@@ -527,10 +671,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> delete202Retry200() throws CloudException, IOException, InterruptedException {
-        return delete202Retry200Async().toBlocking().last();
+    public void delete202Retry200() throws CloudException, IOException, InterruptedException {
+        delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -540,7 +683,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202Retry200Async(), serviceCallback);
+        return ServiceCall.createWithHeaders(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -548,7 +691,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> delete202Retry200Async() {
+    public Observable<Void> delete202Retry200Async() {
+        return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> delete202Retry200WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200HeadersInner.class);
     }
@@ -558,10 +715,9 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> beginDelete202Retry200() throws CloudException, IOException {
-        return beginDelete202Retry200Async().toBlocking().single();
+    public void beginDelete202Retry200() throws CloudException, IOException {
+        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -571,7 +727,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202Retry200Async(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -579,7 +735,21 @@ public final class LRORetrysInner {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> beginDelete202Retry200Async() {
+    public Observable<Void> beginDelete202Retry200Async() {
+        return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> beginDelete202Retry200WithServiceResponseAsync() {
         return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>>>() {
                 @Override
@@ -607,10 +777,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        return deleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
+    public void deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -620,7 +789,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -628,7 +797,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> deleteAsyncRelativeRetrySucceededAsync() {
+    public Observable<Void> deleteAsyncRelativeRetrySucceededAsync() {
+        return deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> deleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner.class);
     }
@@ -638,10 +821,9 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        return beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().single();
+    public void beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -651,7 +833,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -659,7 +841,21 @@ public final class LRORetrysInner {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> beginDeleteAsyncRelativeRetrySucceededAsync() {
+    public Observable<Void> beginDeleteAsyncRelativeRetrySucceededAsync() {
+        return beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         return service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>>>() {
                 @Override
@@ -687,10 +883,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200() throws CloudException, IOException, InterruptedException {
-        return post202Retry200Async().toBlocking().last();
+    public void post202Retry200() throws CloudException, IOException, InterruptedException {
+        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -700,7 +895,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200Async(), serviceCallback);
+        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -708,7 +903,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200Async() {
+    public Observable<Void> post202Retry200Async() {
+        return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
@@ -720,10 +929,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return post202Retry200Async(product).toBlocking().last();
+    public void post202Retry200(ProductInner product) throws CloudException, IOException, InterruptedException {
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -734,7 +942,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200Async(product), serviceCallback);
+        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -743,7 +951,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200Async(ProductInner product) {
+    public Observable<Void> post202Retry200Async(ProductInner product) {
+        return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200HeadersInner.class);
@@ -754,10 +977,9 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200() throws CloudException, IOException {
-        return beginPost202Retry200Async().toBlocking().single();
+    public void beginPost202Retry200() throws CloudException, IOException {
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -767,7 +989,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200Async(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -775,7 +997,21 @@ public final class LRORetrysInner {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200Async() {
+    public Observable<Void> beginPost202Retry200Async() {
+        return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>>>() {
@@ -797,10 +1033,9 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> beginPost202Retry200(ProductInner product) throws CloudException, IOException {
-        return beginPost202Retry200Async(product).toBlocking().single();
+    public void beginPost202Retry200(ProductInner product) throws CloudException, IOException {
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -811,7 +1046,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200Async(product), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -820,7 +1055,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200Async(ProductInner product) {
+    public Observable<Void> beginPost202Retry200Async(ProductInner product) {
+        return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>>>() {
@@ -849,10 +1099,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
-        return postAsyncRelativeRetrySucceededAsync().toBlocking().last();
+    public void postAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
     }
 
     /**
@@ -862,7 +1111,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -870,7 +1119,21 @@ public final class LRORetrysInner {
      *
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededAsync() {
+    public Observable<Void> postAsyncRelativeRetrySucceededAsync() {
+        return postAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
@@ -882,10 +1145,9 @@ public final class LRORetrysInner {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> postAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
-        return postAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
+    public void postAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException, InterruptedException {
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
     }
 
     /**
@@ -896,7 +1158,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -905,7 +1167,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Observable<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product) {
+        return postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the observable for the request
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeadersInner.class);
@@ -916,10 +1193,9 @@ public final class LRORetrysInner {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
-        return beginPostAsyncRelativeRetrySucceededAsync().toBlocking().single();
+    public void beginPostAsyncRelativeRetrySucceeded() throws CloudException, IOException {
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
@@ -929,7 +1205,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededAsync(), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -937,7 +1213,21 @@ public final class LRORetrysInner {
      *
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededAsync() {
+    public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync() {
+        return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         final ProductInner product = null;
         return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>>>() {
@@ -959,10 +1249,9 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> beginPostAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
-        return beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().single();
+    public void beginPostAsyncRelativeRetrySucceeded(ProductInner product) throws CloudException, IOException {
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
     }
 
     /**
@@ -973,7 +1262,7 @@ public final class LRORetrysInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededAsync(product), serviceCallback);
+        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -982,7 +1271,22 @@ public final class LRORetrysInner {
      * @param product Product to put
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product) {
+        return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>, Void>() {
+            @Override
+            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     */
+    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>>>() {

@@ -1,0 +1,56 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "PageableNo200Response",
+    "description": "The 200 response code is not modeled for a pageable operation",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-pageable": {
+          "nextLinkName": "bar"
+        },
+        "responses": {
+          "200": {
+            "description": "A pageable response",
+            "schema": {
+              "$ref": "#/definitions/Pageable"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pageable": {
+      "type": "object",
+      "description": "Pageable object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "foo": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

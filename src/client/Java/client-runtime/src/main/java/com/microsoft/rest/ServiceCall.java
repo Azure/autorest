@@ -20,7 +20,7 @@ import rx.functions.Action1;
  *
  * @param <T> the type of the returning object
  */
-public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
+public class ServiceCall<T> extends AbstractFuture<T> {
     /**
      * The Retrofit method invocation.
      */
@@ -43,7 +43,7 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
             .subscribe(new Action1<ServiceResponse<T>>() {
                 @Override
                 public void call(ServiceResponse<T> t) {
-                    serviceCall.set(t);
+                    serviceCall.set(t.getBody());
                 }
             }, new Action1<Throwable>() {
                 @Override
@@ -70,9 +70,9 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
                 @Override
                 public void call(ServiceResponse<T> t) {
                     if (callback != null) {
-                        callback.success(t);
+                        callback.success(t.getBody());
                     }
-                    serviceCall.set(t);
+                    serviceCall.set(t.getBody());
                 }
             }, new Action1<Throwable>() {
                 @Override
@@ -103,9 +103,9 @@ public class ServiceCall<T> extends AbstractFuture<ServiceResponse<T>> {
                 @Override
                 public void call(ServiceResponse<T> t) {
                     if (callback != null) {
-                        callback.success(t);
+                        callback.success(t.getBody());
                     }
-                    serviceCall.set(t);
+                    serviceCall.set(t.getBody());
                 }
             }, new Action1<Throwable>() {
                 @Override
