@@ -120,6 +120,9 @@
   <data name="InvalidLongRunningOperationForCreateOrUpdate" xml:space="preserve">
     <value>Long running operations for CreateOrUpdate require a GET operation under the same path and same operation group.</value>
   </data>
+  <data name="PageModelDoesnotHaveAnArrayProperty" xml:space="preserve">
+    <value>The Pageable model {0} does not contain a single property that is an Array.</value>
+  </data>
   <data name="UsageInformation" xml:space="preserve">
     <value>The {0} or higher npm package is required to execute the generated code.</value>
   </data>
