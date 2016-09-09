@@ -54,8 +54,16 @@ namespace AutoRest.CompositeSwagger
             }
 
             //Ensure all the docs are absolute paths
-            var basePath = Directory.GetParent(Settings.Input).FullName;
-            var isBasePathUri = Uri.IsWellFormedUriString(basePath, UriKind.Absolute);
+            string basePath;
+            var isBasePathUri = Uri.IsWellFormedUriString(Settings.Input, UriKind.Absolute);
+            if (isBasePathUri)
+            {
+                basePath = new Uri(new Uri(Settings.Input), ".").ToString();
+            }
+            else
+            {
+                basePath = Directory.GetParent(Settings.Input).FullName;
+            }
             for (var i = 0; i < compositeSwaggerModel.Documents.Count; i++)
             {
                 if (!(Path.IsPathRooted(compositeSwaggerModel.Documents[i]) ||
