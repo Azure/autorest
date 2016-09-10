@@ -79,11 +79,75 @@ module @Settings.Namespace
     end
 
     @EmptyLine
+    #
+    # Makes a request and returns the body of the response
+    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete   
+    # @@param url [String] url to use for the request
+    # @@param options [Hash{String=>String}] specifying any request options like :body
+    # @@return [Hash{String=>String}] containing the body of the response
+    #
+    def make_request(method, url, options = {})
+      result = make_request_async(method, url, options).value!
+      response.body.to_s.emtpy? ? nil : JSON.load(result.response.body)
+    end
+@EmptyLine
+
+    #
+    # Makes a request asynchronously
+    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete
+    # @@param url [String] url to use for the request
+    # @@param options [Hash{String=>String}] specifying any request options like :body
+    # @@return [Concurrent::Promise] Promise object which holds the HTTP response.
+    #
+    def make_request_async(method, url, options = {})
+      fail ArgumentError, 'method is nil' if method.nil?
+      fail ArgumentError, 'url is nil' if url.nil?
+
+      @EmptyLine
+      request_headers={}
+      request_headers['x-ms-client-request-id']= SecureRandom.uuid
+      request_headers['accept-language']= @@accept_language unless @@accept_language.nil?
+      request_headers['Content-Type']= 'application/json;charset=utf-8'
+
+      @EmptyLine
+      request_url= options[:api_endpoint] || @@base_url
+      
+      @EmptyLine
+      options=options.merge({
+        api_endpoint: request_url,
+        headers: request_headers.merge(options[:headers] || {})
+      })
+
+      @EmptyLine
+      options.merge!({credentials: @@credentials}) unless @@credentials.nil?
+
+      @EmptyLine
+      middlewares = {middlewares:[[MsRest::RetryPolicyMiddleware,times:3,retry:0.02],[:cookie_jar]]}
+      options = middlewares.merge(options)
+
+      @EmptyLine
+      @(Model.Connection).request(method, url, options)
+    end
+
+    @EmptyLine
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine
     @:
     }
+  end
+
+    #
+    # Makes a request asynchronously
+    # @@param method [Symbol] with any of the following values :get, :put, :post, :patch, :delete
+    # @@param url [String] url to use for the request
+    # @@param options [Hash{String=>String}] specifying any request options like :body
+    # @@return [@(Model.OperationResponseString)] Operation response containing the request, response and status 
+    #
+  def make_request_with_http_info(method, url, options = {})
+    result = make_request_async(method, url, options).value!
+    result.body = result.response.body.to_s.empty? ? nil : JSON.load(result.response.body)
+    result
   end
 end
