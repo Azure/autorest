@@ -72,5 +72,27 @@ namespace AutoRest.Ruby.TemplateModels
                 return "include MsRest::Serialization";
             }
         }
+
+        ///// <summary>
+        ///// Gets the connection type to instantiate.
+        ///// </summary>
+        public virtual string Connection
+        {
+            get
+            {
+                return "MsRest::Connection";
+            }
+        }
+
+        ///// <summary>
+        ///// Gets the operation response type to instantiate.
+        ///// </summary>
+        public virtual string OperationResponseString
+        {
+            get
+            {
+                return "MsRest::HttpOperationResponse";
+            }
+        }
     }
 }

@@ -61,5 +61,27 @@ namespace AutoRest.Ruby.Azure.TemplateModels
                 return "include MsRestAzure::Serialization";
             }
         }
+
+        ///// <summary>
+        ///// Gets the connection type to instantiate.
+        ///// </summary>
+        public override string Connection
+        {
+            get
+            {
+                return "MsRestAzure::Connection";
+            }
+        }
+
+        ///// <summary>
+        ///// Gets the operation response type to instantiate.
+        ///// </summary>
+        public override string OperationResponseString
+        {
+            get
+            {
+                return "MsRestAzure::AzureOperationResponse";
+            }
+        }
     }
 }
