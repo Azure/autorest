@@ -29,6 +29,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
@@ -94,6 +95,14 @@ public final class PagingsInner {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("paging/multiple/failureuri")
         Observable<Response<ResponseBody>> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paging/multiple/fragment/{tenant}")
+        Observable<Response<ResponseBody>> getMultiplePagesFragmentNextLink(@Path("tenant") String tenant, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paging/multiple/fragment/{tenant}/{nextLink}")
+        Observable<Response<ResponseBody>> nextFragment(@Path("tenant") String tenant, @Path(value = "nextLink", encoded = true) String nextLink, @Query("api_version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("{nextLink}")
@@ -1356,6 +1365,241 @@ public final class PagingsInner {
     private ServiceResponse<PageImpl<ProductInner>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<PageImpl<ProductInner>, CloudException>(this.client.mapperAdapter())
                 .register(200, new TypeToken<PageImpl<ProductInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the PagedList&lt;ProductInner&gt; object if successful.
+     */
+    public PagedList<ProductInner> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) throws CloudException, IOException, IllegalArgumentException {
+        ServiceResponse<Page<ProductInner>> response = getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion).toBlocking().single();
+        return new PagedList<ProductInner>(response.getBody()) {
+            @Override
+            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
+                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
+            }
+        };
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<List<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceCall.create(
+            getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion),
+            new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextLink) {
+                    return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<Page<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion) {
+        return getMultiplePagesFragmentNextLinkWithServiceResponseAsync(tenant, apiVersion)
+            .map(new Func1<ServiceResponse<Page<ProductInner>>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(ServiceResponse<Page<ProductInner>> response) {
+                    return response.getBody();
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFragmentNextLinkWithServiceResponseAsync(final String tenant, final String apiVersion) {
+        return getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion)
+            .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
+                    String nextLink = page.getBody().getNextPageLink();
+                    if (nextLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(nextFragmentWithServiceResponseAsync(tenant, nextLink, apiVersion));
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+    ServiceResponse<PageImpl1<ProductInner>> * @param tenant Sets the tenant to use.
+    ServiceResponse<PageImpl1<ProductInner>> * @param apiVersion Sets the api version to use.
+     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> getMultiplePagesFragmentNextLinkSinglePageAsync(final String tenant, final String apiVersion) {
+        if (tenant == null) {
+            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+        }
+        if (apiVersion == null) {
+            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+        }
+        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<ProductInner>> result = getMultiplePagesFragmentNextLinkDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<ProductInner>> getMultiplePagesFragmentNextLinkDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl1<ProductInner>, CloudException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<PageImpl1<ProductInner>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the PagedList&lt;ProductInner&gt; object if successful.
+     */
+    public PagedList<ProductInner> nextFragment(final String tenant, final String nextLink, final String apiVersion) throws CloudException, IOException, IllegalArgumentException {
+        ServiceResponse<Page<ProductInner>> response = nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single();
+        return new PagedList<ProductInner>(response.getBody()) {
+            @Override
+            public Page<ProductInner> nextPage(String nextLink) throws RestException, IOException {
+                return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).toBlocking().single().getBody();
+            }
+        };
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<List<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceCall.create(
+            nextFragmentSinglePageAsync(tenant, nextLink, apiVersion),
+            new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(String nextLink) {
+                    return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion);
+                }
+            },
+            serviceCallback);
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<Page<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion) {
+        return nextFragmentWithServiceResponseAsync(tenant, nextLink, apiVersion)
+            .map(new Func1<ServiceResponse<Page<ProductInner>>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(ServiceResponse<Page<ProductInner>> response) {
+                    return response.getBody();
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> nextFragmentWithServiceResponseAsync(final String tenant, final String nextLink, final String apiVersion) {
+        return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion)
+            .concatMap(new Func1<ServiceResponse<Page<ProductInner>>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(ServiceResponse<Page<ProductInner>> page) {
+                    String nextLink = page.getBody().getNextPageLink();
+                    if (nextLink == null) {
+                        return Observable.just(page);
+                    }
+                    return Observable.just(page).concatWith(nextFragmentWithServiceResponseAsync(tenant, nextLink, apiVersion));
+                }
+            });
+    }
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+    ServiceResponse<PageImpl1<ProductInner>> * @param tenant Sets the tenant to use.
+    ServiceResponse<PageImpl1<ProductInner>> * @param nextLink Next link for list operation.
+    ServiceResponse<PageImpl1<ProductInner>> * @param apiVersion Sets the api version to use.
+     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public Observable<ServiceResponse<Page<ProductInner>>> nextFragmentSinglePageAsync(final String tenant, final String nextLink, final String apiVersion) {
+        if (tenant == null) {
+            throw new IllegalArgumentException("Parameter tenant is required and cannot be null.");
+        }
+        if (nextLink == null) {
+            throw new IllegalArgumentException("Parameter nextLink is required and cannot be null.");
+        }
+        if (apiVersion == null) {
+            throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
+        }
+        return service.nextFragment(tenant, nextLink, apiVersion, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Page<ProductInner>>>>() {
+                @Override
+                public Observable<ServiceResponse<Page<ProductInner>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<PageImpl1<ProductInner>> result = nextFragmentDelegate(response);
+                        return Observable.just(new ServiceResponse<Page<ProductInner>>(result.getBody(), result.getResponse()));
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<PageImpl1<ProductInner>> nextFragmentDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl1<ProductInner>, CloudException>(this.client.mapperAdapter())
+                .register(200, new TypeToken<PageImpl1<ProductInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }

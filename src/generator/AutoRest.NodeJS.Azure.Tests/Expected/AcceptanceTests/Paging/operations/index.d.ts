@@ -190,6 +190,44 @@ export interface Paging {
     getMultiplePagesFailureUri(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment
+     *
+     * @param {string} apiVersion Sets the api version to use.
+     * 
+     * @param {string} tenant Sets the tenant to use.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getMultiplePagesFragmentNextLink(apiVersion: string, tenant: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    getMultiplePagesFragmentNextLink(apiVersion: string, tenant: string, callback: ServiceCallback<models.OdataProductResult>): void;
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment
+     *
+     * @param {string} apiVersion Sets the api version to use.
+     * 
+     * @param {string} tenant Sets the tenant to use.
+     * 
+     * @param {string} nextLink Next link for list operation.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    nextFragment(apiVersion: string, tenant: string, nextLink: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.OdataProductResult>): void;
+    nextFragment(apiVersion: string, tenant: string, nextLink: string, callback: ServiceCallback<models.OdataProductResult>): void;
+
+    /**
      * A paging operation that finishes on the first call without a nextlink
      *
      * @param {string} nextPageLink The NextLink from the previous successful call

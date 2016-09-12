@@ -430,6 +430,91 @@ public interface Pagings {
     Observable<ServiceResponse<Page<Product>>> getMultiplePagesFailureUriWithServiceResponseAsync();
 
     /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) throws CloudException, IOException, IllegalArgumentException;
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<List<Product>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion, final ListOperationCallback<Product> serviceCallback);
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    Observable<Page<Product>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion);
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<Page<Product>>> getMultiplePagesFragmentNextLinkWithServiceResponseAsync(final String tenant, final String apiVersion);
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the PagedList&lt;Product&gt; object if successful.
+     */
+    PagedList<Product> nextFragment(final String tenant, final String nextLink, final String apiVersion) throws CloudException, IOException, IllegalArgumentException;
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<List<Product>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion, final ServiceCall<List<Product>> serviceCall, final ListOperationCallback<Product> serviceCallback);
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    Observable<Page<Product>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion);
+
+    /**
+     * A paging operation that doesn't return a full URL, just a fragment.
+     *
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
+     * @return the observable to the PagedList&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<Page<Product>>> nextFragmentWithServiceResponseAsync(final String tenant, final String nextLink, final String apiVersion);
+
+    /**
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
