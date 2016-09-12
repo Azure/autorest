@@ -1,0 +1,74 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "RequiredPropertyDefinedAllOf",
+    "description": "A spec file with required properties that are defined in ancestors",
+    "version": "2016-08-32"
+  },
+  "host": "contoso.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",  
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaseError": {
+      "description": "Base error",
+      "properties": {
+        "foo": {
+          "type": "string",
+          "description": "foo property"
+        }
+      }
+    },
+    "ParentError": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseError"
+        }
+      ],
+      "description": "Parent error",
+      "properties": {
+        "bar": {
+          "type": "string",
+          "description": "bar property"
+        }
+      }
+    },
+    "Error": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParentError"
+        }
+      ],
+      "description": "Default error",
+      "required": [
+        "foo",
+        "bar",
+        "baz"
+      ],
+      "properties": { 
+        "baz": {
+          "description": "baz property",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
