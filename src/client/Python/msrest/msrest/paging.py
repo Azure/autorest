@@ -25,10 +25,6 @@
 # --------------------------------------------------------------------------
 
 import collections
-try:
-    from urlparse import urlparse
-except ImportError:
-    from urllib.parse import urlparse
 
 from .serialization import Deserializer
 from .pipeline import ClientRawResponse
