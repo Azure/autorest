@@ -9,7 +9,7 @@ var duplexer = require('duplexer');
 var _ = require('underscore');
 var Constants = require('./constants');
 
-var HttpVerbs = Constants.HttpVerbs;
+var HttpVerbs = Constants.HttpConstants.HttpVerbs;
 
 //
 // Request pipelines are functions that allow you to
