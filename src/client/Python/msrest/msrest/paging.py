@@ -76,13 +76,6 @@ class Paged(collections.Iterable):
             raw.add_headers(self._raw_headers)
         return raw
 
-    def _validate_url(self):
-        """Validate next page URL."""
-        if self.next_link:
-            parsed = urlparse(self.next_link)
-            if not parsed.scheme or not parsed.netloc:
-                raise ValueError("Invalid URL: " + self.next_link)
-
     def get(self, url):
         """Get arbitrary page.
 
@@ -100,7 +93,6 @@ class Paged(collections.Iterable):
         """Get next page."""
         if self.next_link is None:
             raise GeneratorExit("End of paging")
-        self._validate_url()
         self._response = self._get_next(self.next_link)
         self._derserializer(self, self._response)
         return self.current_page

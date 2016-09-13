@@ -145,7 +145,7 @@ class PagingTests(unittest.TestCase):
 
         pages = self.client.paging.get_multiple_pages_failure_uri()
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CloudError):
             items = [i for i in pages]
 
         pages = self.client.paging.get_single_pages_failure(raw=True)
@@ -160,8 +160,18 @@ class PagingTests(unittest.TestCase):
 
         pages = self.client.paging.get_multiple_pages_failure_uri(raw=True)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CloudError):
             items = [i for i in pages]
+
+    def test_paging_fragment_path(self):
+
+        pages = self.client.paging.get_multiple_pages_fragment_next_link("1.6", "test_user")
+        items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
+        self.assertEqual(len(items), 10)
+
+        with self.assertRaises(AttributeError):
+            self.client.paging.get_multiple_pages_fragment_next_link_next()
 
 
 if __name__ == '__main__':
