@@ -26,7 +26,7 @@ public class BasicOperationsTests {
 
     @Test
     public void getValid() throws Exception {
-        Basic result = client.basics().getValid().getBody();
+        Basic result = client.basics().getValid();
         Assert.assertEquals(2, result.id().intValue());
         Assert.assertEquals("abc", result.name());
         Assert.assertEquals(CMYKColors.YELLOW, result.color());
@@ -48,24 +48,24 @@ public class BasicOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(InvalidFormatException.class, exception.getClass());
+            Assert.assertEquals(InvalidFormatException.class, exception.getCause().getClass());
         }
     }
 
     @Test
     public void getEmpty() throws Exception {
-        Basic result = client.basics().getEmpty().getBody();
+        Basic result = client.basics().getEmpty();
         Assert.assertNull(result.name());
     }
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.basics().getNull().getBody();
+        Basic result = client.basics().getNull();
         Assert.assertNull(result.name());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.basics().getNotProvided().getBody());
+        Assert.assertNull(client.basics().getNotProvided());
     }
 }

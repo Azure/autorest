@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import fixtures.bodyboolean.implementation.AutoRestBoolTestServiceImpl;
 
+import static org.junit.Assert.fail;
+
 public class BoolTests {
     private static AutoRestBoolTestService client;
 
@@ -18,7 +20,12 @@ public class BoolTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.bools().getNull().getBody());
+        try {
+            client.bools().getNull();
+            fail();
+        } catch (NullPointerException e) {
+            // expected
+        }
     }
 
     @Test
@@ -28,19 +35,19 @@ public class BoolTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
     @Test
     public void getTrue() throws Exception {
-        boolean result = client.bools().getTrue().getBody();
+        boolean result = client.bools().getTrue();
         Assert.assertTrue(result);
     }
 
     @Test
     public void getFalse() throws Exception {
-        boolean result = client.bools().getFalse().getBody();
+        boolean result = client.bools().getFalse();
         Assert.assertFalse(result);
     }
 

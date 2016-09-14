@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import fixtures.bodynumber.implementation.AutoRestNumberTestServiceImpl;
 
+import static org.junit.Assert.fail;
+
 public class NumberTests {
     private static AutoRestNumberTestService client;
 
@@ -17,7 +19,12 @@ public class NumberTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.numbers().getNull().getBody());
+        try {
+            client.numbers().getNull();
+            fail();
+        } catch (NullPointerException e) {
+            // expected
+        }
     }
 
     @Test
@@ -27,7 +34,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -38,7 +45,7 @@ public class NumberTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 
@@ -54,13 +61,13 @@ public class NumberTests {
 
     @Test
     public void getBigFloat() throws Exception {
-        double result = client.numbers().getBigFloat().getBody();
+        double result = client.numbers().getBigFloat();
         Assert.assertEquals(3.402823e+20, result, 0.0f);
     }
 
     @Test
     public void getBigDouble() throws Exception {
-        double result = client.numbers().getBigDouble().getBody();
+        double result = client.numbers().getBigDouble();
         Assert.assertEquals(2.5976931e+101, result, 0.0f);
     }
 
@@ -71,7 +78,7 @@ public class NumberTests {
 
     @Test
     public void getBigDoublePositiveDecimal() throws Exception {
-        double result = client.numbers().getBigDoublePositiveDecimal().getBody();
+        double result = client.numbers().getBigDoublePositiveDecimal();
         Assert.assertEquals(99999999.99, result, 0.0f);
     }
 
@@ -82,7 +89,7 @@ public class NumberTests {
 
     @Test
     public void getBigDoubleNegativeDecimal() throws Exception {
-        double result = client.numbers().getBigDoubleNegativeDecimal().getBody();
+        double result = client.numbers().getBigDoubleNegativeDecimal();
         Assert.assertEquals(-99999999.99, result, 0.0f);
     }
 
@@ -93,7 +100,7 @@ public class NumberTests {
 
     @Test
     public void getSmallFloat() throws Exception {
-        double result = client.numbers().getSmallFloat().getBody();
+        double result = client.numbers().getSmallFloat();
         Assert.assertEquals(3.402823e-20, result, 0.0f);
     }
 
@@ -104,7 +111,7 @@ public class NumberTests {
 
     @Test
     public void getSmallDouble() throws Exception {
-        double result = client.numbers().getSmallDouble().getBody();
+        double result = client.numbers().getSmallDouble();
         Assert.assertEquals(2.5976931e-101, result, 0.0f);
     }
 }

@@ -25,12 +25,18 @@
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "Resource Group ID.",
+            "description": "Resource Group Name.",
             "required": true,
             "type": "string",
             "maxLength": 10,
             "minLength": 3,
-            "pattern": "[a-zA-Z0-9]+"
+            "pattern": "[a-zA-Z0-9]+",
+            "multipleOf": 10,
+            "maximum": 1000,
+            "minimum": 100,
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true
           },
           {
             "name": "id",
@@ -40,7 +46,13 @@
             "type": "integer",
             "multipleOf": 10,
             "maximum": 1000,
-            "minimum": 100
+            "minimum": 100,
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "minLength": 1,
+            "maxLength": 1,
+            "pattern": "[0-9]+"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -103,7 +115,13 @@
           "description": "Display names of product.",
           "maxItems": 6,
           "uniqueItems": true,
-          "minItems": 0
+          "minItems": 0,
+          "multipleOf": 10,
+          "maximum": 1000,
+          "minimum": 100,
+          "minLength": 1,
+          "maxLength": 1,
+          "pattern": "[0-9]+"
         },
         "capacity": {
           "type": "integer",

@@ -36,7 +36,7 @@ class UsageOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`UsagePaged <petstore.models.UsagePaged>`
+        :rtype: :class:`UsagePaged <Petstore.models.UsagePaged>`
         """
         def internal_paging(next_link=None, raw=False):
 

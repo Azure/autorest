@@ -19,6 +19,8 @@ namespace AutoRest.Python
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        private Regex InvalidNamespace = new Regex(@"(^\d)|(\w*\W\w*)");
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -173,7 +175,7 @@ namespace AutoRest.Python
             {
                 throw new ArgumentNullException("client");
             }
-
+            var originalNamespace = client.Namespace;
             base.NormalizeClientModel(client);
             var globalParams = new List<Parameter>();
             foreach (var method in client.Methods)
@@ -194,6 +196,17 @@ namespace AutoRest.Python
             foreach (var parameter in globalParams.Distinct())
             {
                 QuoteParameter(parameter);
+            }
+            if (originalNamespace != null)
+            {
+                foreach (var section in originalNamespace.Split('.'))
+                {
+                    if (InvalidNamespace.Match(section).Success)
+                    {
+                        throw new ArgumentException(string.Format("Invalid Python namespace: {0}", originalNamespace));
+                    }
+                }
+                client.Namespace = originalNamespace;
             }
         }
 

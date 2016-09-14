@@ -55,6 +55,34 @@ namespace AutoRest.Swagger
         }
 
         /// <summary>
+        /// Determines if a constraint is supported for the SwaggerObject Type
+        /// </summary>
+        /// <param name="constraintName"></param>
+        /// <returns></returns>
+        public static bool IsConstraintSupported(this SwaggerObject swaggerObject, string constraintName)
+        {
+            switch (swaggerObject.Type)
+            {
+                case DataType.Array:
+                    return (constraintName == Constraint.MinItems.ToString() ||
+                            constraintName == Constraint.MaxItems.ToString() ||
+                            constraintName == Constraint.UniqueItems.ToString());
+                case DataType.Integer:
+                case DataType.Number:
+                    return constraintName == Constraint.ExclusiveMaximum.ToString() ||
+                           constraintName == Constraint.ExclusiveMinimum.ToString() ||
+                           constraintName == Constraint.MultipleOf.ToString() ||
+                           constraintName == "Minimum" || constraintName == "Maximum";
+                case DataType.String:
+                    return (constraintName == Constraint.MinLength.ToString() ||
+                            constraintName == Constraint.MaxLength.ToString() ||
+                            constraintName == Constraint.Pattern.ToString());
+                 default:
+                    return false;
+            }
+        }
+
+        /// <summary>
         /// A schema represents a CompositeType if it's not a primitive type and it's not a simple primary type
         /// </summary>
         /// <param name="schema"></param>

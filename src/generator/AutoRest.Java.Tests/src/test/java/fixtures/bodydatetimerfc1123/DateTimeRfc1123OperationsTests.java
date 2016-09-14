@@ -20,7 +20,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.datetimerfc1123s().getNull().getBody());
+        Assert.assertNull(client.datetimerfc1123s().getNull());
     }
 
     @Test
@@ -30,13 +30,13 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 
     @Test
     public void getOverflowDate() throws Exception {
-        DateTime result = client.datetimerfc1123s().getOverflow().getBody();
+        DateTime result = client.datetimerfc1123s().getOverflow();
         DateTime expected = new DateTime(10000, 1, 1, 00, 00, 00, 0, DateTimeZone.UTC);
         expected = expected.toDateTime(DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
@@ -49,7 +49,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonMappingException.class, exception.getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 
@@ -61,14 +61,14 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getUtcLowercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcLowercaseMaxDateTime().getBody();
+        DateTime result = client.datetimerfc1123s().getUtcLowercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void getUtcUppercaseMaxDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcUppercaseMaxDateTime().getBody();
+        DateTime result = client.datetimerfc1123s().getUtcUppercaseMaxDateTime();
         DateTime expected = new DateTime(9999, 12, 31, 23, 59, 59, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }
@@ -81,7 +81,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getUtcMinDateTime() throws Exception {
-        DateTime result = client.datetimerfc1123s().getUtcMinDateTime().getBody();
+        DateTime result = client.datetimerfc1123s().getUtcMinDateTime();
         DateTime expected = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeZone.UTC);
         Assert.assertEquals(expected, result);
     }

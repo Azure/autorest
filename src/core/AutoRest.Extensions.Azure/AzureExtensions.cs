@@ -429,6 +429,7 @@ namespace AutoRest.Extensions.Azure
                                     //grouping.Key.Name = newGroupingParam.Name;
                                     var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
                                     inputParameter.Name = codeNamer.GetParameterName(newGroupingParam.Name);
+                                    inputParameter.IsRequired = newGroupingParam.IsRequired;
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }
                             });

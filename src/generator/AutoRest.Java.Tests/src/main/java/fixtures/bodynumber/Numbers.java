@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -27,72 +28,124 @@ public interface Numbers {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getNull() throws ErrorException, IOException;
+    double getNull() throws ErrorException, IOException;
 
     /**
      * Get null Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getNullAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getNullAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get null Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getNullAsync();
+
+    /**
+     * Get null Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid float Number value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getInvalidFloat() throws ErrorException, IOException;
+    double getInvalidFloat() throws ErrorException, IOException;
 
     /**
      * Get invalid float Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get invalid float Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getInvalidFloatAsync();
+
+    /**
+     * Get invalid float Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync();
 
     /**
      * Get invalid double Number value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getInvalidDouble() throws ErrorException, IOException;
+    double getInvalidDouble() throws ErrorException, IOException;
 
     /**
      * Get invalid double Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get invalid double Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getInvalidDoubleAsync();
+
+    /**
+     * Get invalid double Number value.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync();
 
     /**
      * Get invalid decimal Number value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
+     * @return the BigDecimal object if successful.
      */
-    ServiceResponse<BigDecimal> getInvalidDecimal() throws ErrorException, IOException;
+    BigDecimal getInvalidDecimal() throws ErrorException, IOException;
 
     /**
      * Get invalid decimal Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+
+    /**
+     * Get invalid decimal Number value.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<BigDecimal> getInvalidDecimalAsync();
+
+    /**
+     * Get invalid decimal Number value.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<ServiceResponse<BigDecimal>> getInvalidDecimalWithServiceResponseAsync();
 
     /**
      * Put big float value 3.402823e+20.
@@ -100,37 +153,64 @@ public interface Numbers {
      * @param numberBody the double value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigFloat(double numberBody) throws ErrorException, IOException;
+    void putBigFloat(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigFloatAsync(double numberBody);
+
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigFloatWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big float value 3.402823e+20.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getBigFloat() throws ErrorException, IOException;
+    double getBigFloat() throws ErrorException, IOException;
 
     /**
      * Get big float value 3.402823e+20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big float value 3.402823e+20.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getBigFloatAsync();
+
+    /**
+     * Get big float value 3.402823e+20.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync();
 
     /**
      * Put big double value 2.5976931e+101.
@@ -138,37 +218,64 @@ public interface Numbers {
      * @param numberBody the double value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDouble(double numberBody) throws ErrorException, IOException;
+    void putBigDouble(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigDoubleAsync(double numberBody);
+
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDoubleWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 2.5976931e+101.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getBigDouble() throws ErrorException, IOException;
+    double getBigDouble() throws ErrorException, IOException;
 
     /**
      * Get big double value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big double value 2.5976931e+101.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getBigDoubleAsync();
+
+    /**
+     * Get big double value 2.5976931e+101.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync();
 
     /**
      * Put big double value 99999999.99.
@@ -176,75 +283,129 @@ public interface Numbers {
      * @param numberBody the double value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException;
+    void putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get big double value 99999999.99.
-     *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
-     */
-    ServiceResponse<Double> getBigDoublePositiveDecimal() throws ErrorException, IOException;
-
-    /**
-     * Get big double value 99999999.99.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
-     * @return the {@link ServiceCall} object
-     */
-    ServiceCall<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
-
-    /**
-     * Put big double value -99999999.99.
+     * Put big double value 99999999.99.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException;
+    Observable<Void> putBigDoublePositiveDecimalAsync(double numberBody);
+
+    /**
+     * Put big double value 99999999.99.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync(double numberBody);
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the double object if successful.
+     */
+    double getBigDoublePositiveDecimal() throws ErrorException, IOException;
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getBigDoublePositiveDecimalAsync();
+
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync();
+
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @param numberBody the double value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     */
+    void putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
+
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value -99999999.99.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ErrorException, IOException;
+    double getBigDoubleNegativeDecimal() throws ErrorException, IOException;
 
     /**
      * Get big double value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big double value -99999999.99.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getBigDoubleNegativeDecimalAsync();
+
+    /**
+     * Get big double value -99999999.99.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -253,37 +414,64 @@ public interface Numbers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigDecimalAsync(BigDecimal numberBody);
+
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value 2.5976931e+101.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
+     * @return the BigDecimal object if successful.
      */
-    ServiceResponse<BigDecimal> getBigDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimal() throws ErrorException, IOException;
 
     /**
      * Get big decimal value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<BigDecimal> getBigDecimalAsync();
+
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<ServiceResponse<BigDecimal>> getBigDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value 99999999.99.
@@ -292,37 +480,64 @@ public interface Numbers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big decimal value 99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
+
+    /**
+     * Put big decimal value 99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDecimalPositiveDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value 99999999.99.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
+     * @return the BigDecimal object if successful.
      */
-    ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimalPositiveDecimal() throws ErrorException, IOException;
 
     /**
      * Get big decimal value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+
+    /**
+     * Get big decimal value 99999999.99.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<BigDecimal> getBigDecimalPositiveDecimalAsync();
+
+    /**
+     * Get big decimal value 99999999.99.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<ServiceResponse<BigDecimal>> getBigDecimalPositiveDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value -99999999.99.
@@ -331,37 +546,64 @@ public interface Numbers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put big decimal value -99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
+
+    /**
+     * Put big decimal value -99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBigDecimalNegativeDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value -99999999.99.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
+     * @return the BigDecimal object if successful.
      */
-    ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ErrorException, IOException;
+    BigDecimal getBigDecimalNegativeDecimal() throws ErrorException, IOException;
 
     /**
      * Get big decimal value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+
+    /**
+     * Get big decimal value -99999999.99.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<BigDecimal> getBigDecimalNegativeDecimalAsync();
+
+    /**
+     * Get big decimal value -99999999.99.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<ServiceResponse<BigDecimal>> getBigDecimalNegativeDecimalWithServiceResponseAsync();
 
     /**
      * Put small float value 3.402823e-20.
@@ -369,75 +611,129 @@ public interface Numbers {
      * @param numberBody the double value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putSmallFloat(double numberBody) throws ErrorException, IOException;
+    void putSmallFloat(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Get big double value 3.402823e-20.
-     *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
-     */
-    ServiceResponse<Double> getSmallFloat() throws ErrorException, IOException;
-
-    /**
-     * Get big double value 3.402823e-20.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
-     * @return the {@link ServiceCall} object
-     */
-    ServiceCall<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
-
-    /**
-     * Put small double value 2.5976931e-101.
+     * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putSmallDouble(double numberBody) throws ErrorException, IOException;
+    Observable<Void> putSmallFloatAsync(double numberBody);
+
+    /**
+     * Put small float value 3.402823e-20.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putSmallFloatWithServiceResponseAsync(double numberBody);
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the double object if successful.
+     */
+    double getSmallFloat() throws ErrorException, IOException;
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getSmallFloatAsync();
+
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync();
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody the double value
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     */
+    void putSmallDouble(double numberBody) throws ErrorException, IOException;
 
     /**
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putSmallDoubleAsync(double numberBody);
+
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody the double value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putSmallDoubleWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 2.5976931e-101.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the double object wrapped in {@link ServiceResponse} if successful.
+     * @return the double object if successful.
      */
-    ServiceResponse<Double> getSmallDouble() throws ErrorException, IOException;
+    double getSmallDouble() throws ErrorException, IOException;
 
     /**
      * Get big double value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback);
+
+    /**
+     * Get big double value 2.5976931e-101.
+     *
+     * @return the observable to the double object
+     */
+    Observable<Double> getSmallDoubleAsync();
+
+    /**
+     * Get big double value 2.5976931e-101.
+     *
+     * @return the observable to the double object
+     */
+    Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync();
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -446,36 +742,63 @@ public interface Numbers {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putSmallDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putSmallDecimalAsync(BigDecimal numberBody);
+
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody the BigDecimal value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putSmallDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get small decimal value 2.5976931e-101.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
+     * @return the BigDecimal object if successful.
      */
-    ServiceResponse<BigDecimal> getSmallDecimal() throws ErrorException, IOException;
+    BigDecimal getSmallDecimal() throws ErrorException, IOException;
 
     /**
      * Get small decimal value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<BigDecimal> getSmallDecimalAsync();
+
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
+     * @return the observable to the BigDecimal object
+     */
+    Observable<ServiceResponse<BigDecimal>> getSmallDecimalWithServiceResponseAsync();
 
 }

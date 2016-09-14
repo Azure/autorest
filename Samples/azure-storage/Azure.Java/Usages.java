@@ -10,6 +10,7 @@ import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import java.util.List;
 import petstore.models.Usage;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -30,9 +31,15 @@ public interface Usages {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback);
+
+    /**
+     * Gets the current usage count and the limit for the resources under the subscription.
+     *
+     * @return the observable to the List&lt;Usage&gt; object
+     */
+    Observable<ServiceResponse<List<Usage>>> listAsync();
 
 }

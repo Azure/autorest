@@ -1,7 +1,5 @@
 package fixtures.modelflattening;
 
-import com.microsoft.rest.ServiceResponse;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,7 +26,7 @@ public class ModelFlatteningTests {
 
     @Test
     public void getArray() throws Exception {
-        List<FlattenedProduct> result = client.getArray().getBody();
+        List<FlattenedProduct> result = client.getArray();
         Assert.assertEquals(3, result.size());
         // Resource 1
         Assert.assertEquals("1", result.get(0).id());
@@ -62,13 +60,12 @@ public class ModelFlatteningTests {
         FlattenedProduct product1 = new FlattenedProduct();
         product1.withLocation("Building 44");
         body.add(product1);
-        ServiceResponse<Void> response = client.putArray(body);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.putArray(body);
     }
 
     @Test
     public void getDictionary() throws Exception {
-        Map<String, FlattenedProduct> result = client.getDictionary().getBody();
+        Map<String, FlattenedProduct> result = client.getDictionary();
         Assert.assertEquals(3, result.size());
         // Resource 1
         Assert.assertEquals("1", result.get("Product1").id());
@@ -106,13 +103,12 @@ public class ModelFlatteningTests {
         product1.withPname("Product2");
         product1.withFlattenedProductType("Flat");
         body.put("Resource2", product1);
-        ServiceResponse<Void> response = client.putDictionary(body);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.putDictionary(body);
     }
 
     @Test
     public void getResourceCollection() throws Exception {
-        ResourceCollection resultResource = client.getResourceCollection().getBody();
+        ResourceCollection resultResource = client.getResourceCollection();
         //Dictionaryofresources
         Assert.assertEquals(3, resultResource.dictionaryofresources().size());
         // Resource 1
@@ -191,8 +187,7 @@ public class ModelFlatteningTests {
         pr.withFlattenedProductType("Flat");
         complexObj.withProductresource(pr);
 
-        ServiceResponse<Void> response = client.putResourceCollection(complexObj);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.putResourceCollection(complexObj);
     }
 
     @Test
@@ -205,7 +200,7 @@ public class ModelFlatteningTests {
         simpleProduct.withOdatavalue("http://foo");
         simpleProduct.withGenericValue("https://generic");
 
-        SimpleProduct product = client.putSimpleProduct(simpleProduct).getBody();
+        SimpleProduct product = client.putSimpleProduct(simpleProduct);
         assertSimpleProductEquals(simpleProduct, product);
     }
 
@@ -236,7 +231,7 @@ public class ModelFlatteningTests {
         flattenParameterGroup.withOdatavalue("http://foo");
         flattenParameterGroup.withName("groupproduct");
 
-        SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup).getBody();
+        SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup);
         assertSimpleProductEquals(simpleProduct, product);
     }
 

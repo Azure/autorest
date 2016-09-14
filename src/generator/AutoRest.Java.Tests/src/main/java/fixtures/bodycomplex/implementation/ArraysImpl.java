@@ -17,18 +17,18 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.PUT;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,23 +58,23 @@ public final class ArraysImpl implements Arrays {
     interface ArraysService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/array/valid")
-        Call<ResponseBody> getValid();
+        Observable<Response<ResponseBody>> getValid();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/array/valid")
-        Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
+        Observable<Response<ResponseBody>> putValid(@Body ArrayWrapper complexBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/array/empty")
-        Call<ResponseBody> getEmpty();
+        Observable<Response<ResponseBody>> getEmpty();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/array/empty")
-        Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
+        Observable<Response<ResponseBody>> putEmpty(@Body ArrayWrapper complexBody);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/array/notprovided")
-        Call<ResponseBody> getNotProvided();
+        Observable<Response<ResponseBody>> getNotProvided();
 
     }
 
@@ -83,40 +83,54 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    public ServiceResponse<ArrayWrapper> getValid() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute());
+    public ArrayWrapper getValid() throws ErrorException, IOException {
+        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        Call<ResponseBody> call = service.getValid();
-        final ServiceCall<ArrayWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types with array property.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ArrayWrapper> getValidAsync() {
+        return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ArrayWrapper> clientResponse = getValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get complex types with array property.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ServiceResponse<ArrayWrapper>> getValidWithServiceResponseAsync() {
+        return service.getValid()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ArrayWrapper>>>() {
+                @Override
+                public Observable<ServiceResponse<ArrayWrapper>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ArrayWrapper> clientResponse = getValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -133,15 +147,9 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute());
+    public void putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -149,33 +157,50 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> putValidAsync(ArrayWrapper complexBody) {
+        return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putValid(complexBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putValidDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putValid(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putValidDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -190,40 +215,54 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    public ServiceResponse<ArrayWrapper> getEmpty() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute());
+    public ArrayWrapper getEmpty() throws ErrorException, IOException {
+        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        Call<ResponseBody> call = service.getEmpty();
-        final ServiceCall<ArrayWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ArrayWrapper> getEmptyAsync() {
+        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ArrayWrapper> clientResponse = getEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ServiceResponse<ArrayWrapper>> getEmptyWithServiceResponseAsync() {
+        return service.getEmpty()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ArrayWrapper>>>() {
+                @Override
+                public Observable<ServiceResponse<ArrayWrapper>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ArrayWrapper> clientResponse = getEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -240,15 +279,9 @@ public final class ArraysImpl implements Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putEmpty(complexBody);
-        return putEmptyDelegate(call.execute());
+    public void putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
     /**
@@ -256,33 +289,50 @@ public final class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.create(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
+    }
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> putEmptyAsync(ArrayWrapper complexBody) {
+        return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.getBody();
+            }
+        });
+    }
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        Call<ResponseBody> call = service.putEmpty(complexBody);
-        final ServiceCall<Void> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCall, serviceCallback) {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
+        return service.putEmpty(complexBody)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
                     }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
                 }
-            }
-        });
-        return serviceCall;
+            });
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -297,40 +347,54 @@ public final class ArraysImpl implements Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    public ServiceResponse<ArrayWrapper> getNotProvided() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getNotProvided();
-        return getNotProvidedDelegate(call.execute());
+    public ArrayWrapper getNotProvided() throws ErrorException, IOException {
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        Call<ResponseBody> call = service.getNotProvided();
-        final ServiceCall<ArrayWrapper> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ArrayWrapper> getNotProvidedAsync() {
+        return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<ArrayWrapper> clientResponse = getNotProvidedDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    public Observable<ServiceResponse<ArrayWrapper>> getNotProvidedWithServiceResponseAsync() {
+        return service.getNotProvided()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ArrayWrapper>>>() {
+                @Override
+                public Observable<ServiceResponse<ArrayWrapper>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<ArrayWrapper> clientResponse = getNotProvidedDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

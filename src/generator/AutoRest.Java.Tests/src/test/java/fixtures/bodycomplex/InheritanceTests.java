@@ -19,7 +19,7 @@ public class InheritanceTests {
 
     @Test
     public void getValid() throws Exception {
-        Siamese result = client.inheritances().getValid().getBody();
+        Siamese result = client.inheritances().getValid();
         Assert.assertEquals("persian", result.breed());
         Assert.assertEquals("green", result.color());
         Assert.assertEquals(2, result.id().intValue());

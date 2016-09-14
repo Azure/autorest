@@ -18,13 +18,13 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseEmptyCallback;
 import java.io.IOException;
-import retrofit2.Call;
 import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,15 +54,15 @@ public final class HttpSuccessImpl implements HttpSuccess {
     interface HttpSuccessService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/200")
-        Call<Void> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/204")
-        Call<Void> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/success/404")
-        Call<Void> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -71,40 +71,54 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    public ServiceResponse<Boolean> head200() throws CloudException, IOException {
-        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        return head200Delegate(call.execute());
+    public boolean head200() throws CloudException, IOException {
+        return head200WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
-        Call<Void> call = service.head200(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
+        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<Boolean> head200Async() {
+        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = head200Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public Boolean call(ServiceResponse<Boolean> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync() {
+        return service.head200(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = head200Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
@@ -120,40 +134,54 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    public ServiceResponse<Boolean> head204() throws CloudException, IOException {
-        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        return head204Delegate(call.execute());
+    public boolean head204() throws CloudException, IOException {
+        return head204WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        Call<Void> call = service.head204(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
+        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<Boolean> head204Async() {
+        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = head204Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public Boolean call(ServiceResponse<Boolean> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync() {
+        return service.head204(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = head204Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
@@ -169,40 +197,54 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the boolean object wrapped in {@link ServiceResponse} if successful.
+     * @return the boolean object if successful.
      */
-    public ServiceResponse<Boolean> head404() throws CloudException, IOException {
-        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        return head404Delegate(call.execute());
+    public boolean head404() throws CloudException, IOException {
+        return head404WithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        Call<Void> call = service.head404(this.client.acceptLanguage(), this.client.userAgent());
-        final ServiceCall<Boolean> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCall, serviceCallback) {
+        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<Boolean> head404Async() {
+        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                try {
-                    ServiceResponse<Boolean> clientResponse = head404Delegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (CloudException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public Boolean call(ServiceResponse<Boolean> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @return the observable to the boolean object
+     */
+    public Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync() {
+        return service.head404(this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
+                @Override
+                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
+                    try {
+                        ServiceResponse<Boolean> clientResponse = head404Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {

@@ -20,7 +20,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestId() throws Exception {
-        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response = client.headers().customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeadersInner> response = client.headers().customNamedRequestIdWithServiceResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().last();
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("123", response.getHeaders().fooRequestId());
     }

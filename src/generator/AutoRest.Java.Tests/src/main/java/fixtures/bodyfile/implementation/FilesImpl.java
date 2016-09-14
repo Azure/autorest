@@ -17,16 +17,16 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
-import com.microsoft.rest.ServiceResponseCallback;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Streaming;
 import retrofit2.Response;
+import rx.functions.Func1;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,17 +57,17 @@ public final class FilesImpl implements Files {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/nonempty")
         @Streaming
-        Call<ResponseBody> getFile();
+        Observable<Response<ResponseBody>> getFile();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/verylarge")
         @Streaming
-        Call<ResponseBody> getFileLarge();
+        Observable<Response<ResponseBody>> getFileLarge();
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("files/stream/empty")
         @Streaming
-        Call<ResponseBody> getEmptyFile();
+        Observable<Response<ResponseBody>> getEmptyFile();
 
     }
 
@@ -76,40 +76,54 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    public ServiceResponse<InputStream> getFile() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getFile();
-        return getFileDelegate(call.execute());
+    public InputStream getFile() throws ErrorException, IOException {
+        return getFileWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        Call<ResponseBody> call = service.getFile();
-        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getFileWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<InputStream> getFileAsync() {
+        return getFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<InputStream> clientResponse = getFileDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public InputStream call(ServiceResponse<InputStream> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync() {
+        return service.getFile()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
+                @Override
+                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<InputStream> clientResponse = getFileDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -124,40 +138,54 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    public ServiceResponse<InputStream> getFileLarge() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getFileLarge();
-        return getFileLargeDelegate(call.execute());
+    public InputStream getFileLarge() throws ErrorException, IOException {
+        return getFileLargeWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
-        Call<ResponseBody> call = service.getFileLarge();
-        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getFileLargeWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<InputStream> getFileLargeAsync() {
+        return getFileLargeWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<InputStream> clientResponse = getFileLargeDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public InputStream call(ServiceResponse<InputStream> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync() {
+        return service.getFileLarge()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
+                @Override
+                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<InputStream> clientResponse = getFileLargeDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -172,40 +200,54 @@ public final class FilesImpl implements Files {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    public ServiceResponse<InputStream> getEmptyFile() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getEmptyFile();
-        return getEmptyFileDelegate(call.execute());
+    public InputStream getEmptyFile() throws ErrorException, IOException {
+        return getEmptyFileWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
     /**
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        Call<ResponseBody> call = service.getEmptyFile();
-        final ServiceCall<InputStream> serviceCall = new ServiceCall<>(call);
-        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCall, serviceCallback) {
+        return ServiceCall.create(getEmptyFileWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<InputStream> getEmptyFileAsync() {
+        return getEmptyFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    ServiceResponse<InputStream> clientResponse = getEmptyFileDelegate(response);
-                    if (serviceCallback != null) {
-                        serviceCallback.success(clientResponse);
-                    }
-                    serviceCall.success(clientResponse);
-                } catch (ErrorException | IOException exception) {
-                    if (serviceCallback != null) {
-                        serviceCallback.failure(exception);
-                    }
-                    serviceCall.failure(exception);
-                }
+            public InputStream call(ServiceResponse<InputStream> response) {
+                return response.getBody();
             }
         });
-        return serviceCall;
+    }
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    public Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync() {
+        return service.getEmptyFile()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
+                @Override
+                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<InputStream> clientResponse = getEmptyFileDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

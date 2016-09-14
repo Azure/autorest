@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -27,18 +28,31 @@ public interface Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    ServiceResponse<ArrayWrapper> getValid() throws ErrorException, IOException;
+    ArrayWrapper getValid() throws ErrorException, IOException;
 
     /**
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+
+    /**
+     * Get complex types with array property.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ArrayWrapper> getValidAsync();
+
+    /**
+     * Get complex types with array property.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types with array property.
@@ -47,37 +61,64 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putValidAsync(ArrayWrapper complexBody);
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property which is empty.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    ServiceResponse<ArrayWrapper> getEmpty() throws ErrorException, IOException;
+    ArrayWrapper getEmpty() throws ErrorException, IOException;
 
     /**
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ArrayWrapper> getEmptyAsync();
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getEmptyWithServiceResponseAsync();
 
     /**
      * Put complex types with array property which is empty.
@@ -86,36 +127,63 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putEmptyAsync(ArrayWrapper complexBody);
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
+     * @return the ArrayWrapper object if successful.
      */
-    ServiceResponse<ArrayWrapper> getNotProvided() throws ErrorException, IOException;
+    ArrayWrapper getNotProvided() throws ErrorException, IOException;
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ArrayWrapper> getNotProvidedAsync();
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @return the observable to the ArrayWrapper object
+     */
+    Observable<ServiceResponse<ArrayWrapper>> getNotProvidedWithServiceResponseAsync();
 
 }

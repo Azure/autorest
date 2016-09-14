@@ -8,7 +8,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using Microsoft.Rest.TransientFaultHandling;
-
+#if net45
+using Microsoft.Win32;
+#endif
 namespace Microsoft.Rest
 {
     /// <summary>
@@ -19,9 +21,169 @@ namespace Microsoft.Rest
         where T : ServiceClient<T>
     {
         /// <summary>
+        /// ProductName string to be used to set Framework Version in UserAgent
+        /// </summary>
+        private const string FXVERSION = "FxVersion";
+        private const string OSNAME = "OSName";
+        private const string OSVERSION = "OSVersion";
+
+        /// <summary>
         /// Indicates whether the ServiceClient has been disposed. 
         /// </summary>
         private bool _disposed;
+
+        /// <summary>
+        /// Field used for ClientVersion property
+        /// </summary>
+        private string _clientVersion;
+        
+        /// <summary>
+        /// Field used for Framework Version property
+        /// </summary>
+        private string _fxVersion;
+
+#if net45
+        /// <summary>
+        /// Indicates OS Name
+        /// </summary>
+        private string _osName;
+
+        /// <summary>
+        /// Indicates OS Version
+        /// </summary>
+        private string _osVersion;
+
+        /// <summary>
+        /// Gets Os Information, OSName - OS Major.Minor.Build version
+        /// e.g. Windows 10 Enterprise - 6.3.14393
+        /// </summary>
+        private string OsName
+        {
+            get
+            {  
+                if(string.IsNullOrEmpty(_osName))
+                {
+                    _osName = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName");
+                }
+
+                // If you want to log OsName in userAgent, it has to be without spaces
+                if (!string.IsNullOrEmpty(_osName))
+                {
+                    _osName = _osName.Replace(" ", "_");
+                }
+
+                return _osName;
+            }
+        }
+        
+        /// <summary>
+        /// Gets Os Major.Minor.Build version
+        /// e.g. 6.3.14393
+        /// </summary>
+        private string OsVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_osVersion))
+                {   
+                    string osMajorMinorVersion = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentVersion");
+                    string osBuildNumber = ReadHKLMRegistry(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion", "CurrentBuild");
+                    _osVersion = string.Format("{0}.{1}", osMajorMinorVersion, osBuildNumber);
+                }
+
+                return _osVersion;
+            }
+        }
+
+        /// <summary>
+        /// Reads HKLM registry key from the provided path/key combination
+        /// </summary>
+        /// <param name="path">Path to HKLM key</param>
+        /// <param name="key">HKLM key name</param>
+        /// <returns>Value for provided HKLM key</returns>
+        private string ReadHKLMRegistry(string path, string key)
+        {
+            try
+            {
+                using (RegistryKey rk = Registry.LocalMachine.OpenSubKey(path))
+                {
+                    if (rk == null) return "";
+                    return (string)rk.GetValue(key);
+                }
+            }
+            catch { return ""; }
+        }
+#endif
+
+        /// <summary>
+        /// Gets the AssemblyInformationalVersion if available
+        /// if not it gets the AssemblyFileVerion
+        /// if neither are available it will default to the Assembly Version of a service client.
+        /// </summary>
+        private string ClientVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_clientVersion))
+                {
+                    Type type = this.GetType();
+                    Assembly assembly = type.GetTypeInfo().Assembly;
+
+                    try
+                    {
+                        // try to get AssemblyInformationalVersion first
+                        AssemblyInformationalVersionAttribute aivAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
+                        _clientVersion = aivAttribute?.InformationalVersion;
+
+                        // if not available try to get AssemblyFileVersion
+                        if (String.IsNullOrEmpty(_clientVersion))
+                        {
+                            AssemblyFileVersionAttribute fvAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+                            _clientVersion = fvAttribute?.Version;
+                        }
+                    }
+                    catch (AmbiguousMatchException)
+                    {
+                        // in case there are more then one attribute of the type
+                    }
+
+                    // no usable version attribute found so default to Assembly Version
+                    if (String.IsNullOrEmpty(_clientVersion))
+                    {
+                        _clientVersion =
+                            assembly
+                                .FullName
+                                .Split(',')
+                                .Select(c => c.Trim())
+                                .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
+                                .Substring("Version=".Length);
+                    }
+
+                }
+                return _clientVersion;
+            }
+        }
+
+        /// <summary>
+        /// Get file version for System.dll
+        /// </summary>
+        private string FrameworkVersion
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_fxVersion))
+                {
+                    Assembly assembly = typeof(Object).GetTypeInfo().Assembly;                    
+                    AssemblyFileVersionAttribute fvAttribute =
+                                assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+                    _fxVersion = fvAttribute?.Version;
+                }
+        
+                return _fxVersion;
+            }
+        }
 
         /// <summary>
         /// Reference to the first HTTP handler (which is the start of send HTTP
@@ -207,28 +369,16 @@ namespace Microsoft.Rest
             FirstMessageHandler = currentHandler;
             HttpClient = newClient;
             Type type = this.GetType();
-            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(type.FullName,
-                GetClientVersion()));
+            SetUserAgent(type.FullName, ClientVersion);
         }
-
+        
         /// <summary>
         /// Sets the product name to be used in the user agent header when making requests
         /// </summary>
         /// <param name="productName">Name of the product to be used in the user agent</param>
         public bool SetUserAgent(string productName)
         {
-            if (!_disposed && HttpClient != null)
-            {
-                // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
-                HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, GetClientVersion()));
-
-                // Returns true if the user agent was set 
-                return true;
-            }
-
-            // Returns false if the HttpClient was disposed before invoking the method
-            return false;
+            return SetUserAgent(productName, ClientVersion);
         }
 
         /// <summary>
@@ -240,11 +390,8 @@ namespace Microsoft.Rest
         {
             if (!_disposed && HttpClient != null)
             {
-                // Clear the old user agent
-                HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+                SetDefaultUserAgentInfo();
                 HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(productName, version));
-
-                // Returns true if the user agent was set
                 return true;
             }
 
@@ -253,50 +400,17 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// Gets the AssemblyInformationalVersion if available
-        /// if not it gets the AssemblyFileVerion
-        /// if neither are available it will default to the Assembly Version of a service client.
+        /// Set Default information in User Agent
         /// </summary>
-        /// <returns>The version of the client.</returns>
-        private string GetClientVersion()
+        /// <returns></returns>
+        private void SetDefaultUserAgentInfo()
         {
-
-            string version = String.Empty;
-            Type type = this.GetType();
-            Assembly assembly = type.GetTypeInfo().Assembly;
-
-            try
-            {
-                // try to get AssemblyInformationalVersion first
-                AssemblyInformationalVersionAttribute aivAttribute =
-                        assembly.GetCustomAttribute(typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute;
-                version = aivAttribute?.InformationalVersion;
-
-                // if not available try to get AssemblyFileVersion
-                if (String.IsNullOrEmpty(version))
-                {
-                    AssemblyFileVersionAttribute fvAttribute =
-                        assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
-                    version = fvAttribute?.Version;
-                }
-            }
-            catch (AmbiguousMatchException)
-            {
-                // in case there are more then one attribute of the type
-            }
-
-            // no usable version attribute found so default to Assembly Version
-            if (String.IsNullOrEmpty(version))
-            {
-                version =
-                    assembly
-                        .FullName
-                        .Split(',')
-                        .Select(c => c.Trim())
-                        .First(c => c.StartsWith("Version=", StringComparison.OrdinalIgnoreCase))
-                        .Substring("Version=".Length);
-            }
-            return version;
+            HttpClient.DefaultRequestHeaders.UserAgent.Clear();
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(FXVERSION, FrameworkVersion));
+#if net45
+            // If you want to log ProductName in userAgent, it has to be without spaces
+            HttpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(OsName, OsVersion));
+#endif
         }
     }
 }

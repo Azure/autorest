@@ -5,7 +5,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +28,7 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
         client.withHost("host:3000");
-        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccessful());
+        client.paths().getEmpty("local");
     }
 
     @Test
@@ -38,7 +37,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
     }
@@ -50,7 +49,7 @@ public class CustomBaseUriTests {
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
         finally {
@@ -92,7 +91,7 @@ public class CustomBaseUriTests {
                 try {
                     client1.paths().getEmpty("badlocal");
                     fail();
-                } catch (UnknownHostException e) {
+                } catch (RuntimeException e) {
                     latch.countDown();
                 } catch (Exception e) {
                     fail();
@@ -103,7 +102,7 @@ public class CustomBaseUriTests {
             @Override
             public void run() {
                 try {
-                    Assert.assertTrue(client1.paths().getEmpty("local").getResponse().isSuccessful());
+                    client1.paths().getEmpty("local");
                     latch.countDown();
                 } catch (Exception ex) {
                     fail();

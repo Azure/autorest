@@ -7,8 +7,7 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.rest.ServiceCall;
-import com.microsoft.rest.ServiceCallback;
+import rx.Observable;
 
 /**
  * Represents a group of related tasks.
@@ -49,21 +48,11 @@ public interface TaskGroup<T, U extends TaskItem<T>> {
     void prepare();
 
     /**
-     * Executes the tasks in the group.
-     * <p>
-     * the order of execution of tasks ensure that a task gets selected for execution only after
-     * the execution of all the tasks it depends on
-     * @throws Exception the exception
-     */
-    void execute() throws Exception;
-
-    /**
      * Executes the tasks in the group asynchronously.
      *
-     * @param callback the callback to call on failure or success
      * @return the handle to the REST call
      */
-    ServiceCall executeAsync(ServiceCallback<T> callback);
+    Observable<T> executeAsync();
 
     /**
      * Gets the result of execution of a task in the group.

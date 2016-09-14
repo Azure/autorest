@@ -36,16 +36,14 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
 
     /**
      * Override this method to handle progressive results.
-     * The user is responsible for returning a {@link PagingBahavior} Enum to indicate
+     * The user is responsible for returning a {@link PagingBehavior} Enum to indicate
      * whether the client should continue loading or stop.
      *
      * @param partial the list of resources from the current request.
      * @return CONTINUE if you want to go on loading, STOP otherwise.
      *
      */
-    public PagingBahavior progress(List<E> partial) {
-        return PagingBahavior.CONTINUE;
-    }
+    public abstract PagingBehavior progress(List<E> partial);
 
     /**
      * Get the list result that stores the accumulated resources loaded from server.
@@ -71,6 +69,16 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
         }
     }
 
+    @Override
+    public void success(List<E> result) {
+        success();
+    }
+
+    /**
+     * Override this method to handle successful REST call results.
+     */
+    public abstract void success();
+
     /**
      * Get the number of loaded pages.
      *
@@ -83,7 +91,7 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
     /**
      * An enum to indicate whether the client should continue loading or stop.
      */
-    public enum PagingBahavior {
+    public enum PagingBehavior {
         /**
          * Indicates that the client should continue loading.
          */

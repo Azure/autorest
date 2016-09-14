@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -27,18 +28,30 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getMethodGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -46,18 +59,30 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getMethodGlobalNotProvidedValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getMethodGlobalNotProvidedValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -65,18 +90,30 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getPathGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getPathGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -84,17 +121,29 @@ public interface ApiVersionDefaults {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
+    void getSwaggerGlobalValid() throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getSwaggerGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync();
 
 }

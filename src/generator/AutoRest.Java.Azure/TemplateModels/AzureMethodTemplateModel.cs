@@ -364,6 +364,64 @@ namespace AutoRest.Java.Azure.TemplateModels
             }
         }
 
+        public string PagingGroupedParameterTransformation(bool filterRequired = false)
+        {
+            var builder = new IndentedStringBuilder();
+            if (IsPagingOperation)
+            {
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
+            }
+            return builder.ToString();
+        }
+
+        public string NextMethodParameterInvocation(bool filterRequired = false)
+        {
+            string invocation;
+            AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+            if (filterRequired)
+            {
+                if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                {
+                    return nextMethod.MethodDefaultParameterInvocation;
+                }
+                var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                List<string> invocations = new List<string>();
+                foreach (var parameter in nextMethod.LocalParameters)
+                {
+                    if (parameter.IsRequired)
+                    {
+                        invocations.Add(parameter.Name);
+                    }
+                    else if (parameter.Name == nextGroupType.Name && groupedType.IsRequired)
+                    {
+                        invocations.Add(parameter.Name);
+                    }
+                    else
+                    {
+                        invocations.Add("null");
+                    }
+                }
+                return string.Join(", ", invocations);
+            }
+            else
+            {
+                return nextMethod.MethodParameterInvocation;
+            }
+        }
+
+        public string PagingNextPageLinkParameterName
+        {
+            get
+            {
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
+                return nextMethod.ParameterModels.First(p => p.Name.StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
+            }
+        }
+
         public override string ResponseGeneration(bool filterRequired = false)
         {
             if (this.IsPagingOperation && !this.IsPagingNextOperation)
@@ -373,7 +431,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                     ReturnTypeModel.WireResponseTypeString, this.Name);
                     
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation);
 
                 builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
@@ -384,7 +442,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
                         builder.AppendLine("return {0}({1}).getBody();", 
-                            invocation, filterRequired ? nextMethod.MethodRequiredParameterInvocation : nextMethod.MethodParameterInvocation)
+                            invocation, filterRequired ? nextMethod.MethodDefaultParameterInvocation : nextMethod.MethodParameterInvocation)
                     .Outdent().AppendLine("}")
                 .Outdent().AppendLine("};");
                 return builder.ToString();
@@ -440,7 +498,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                 builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
                     .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                 string invocation;
-                AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation, true);
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethodWithInvocation(out invocation, true);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
                 var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
                     invocation,
@@ -512,8 +570,18 @@ namespace AutoRest.Java.Azure.TemplateModels
             return base.SuccessCallback();
         }
 
-        private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
+        private AzureMethodTemplateModel GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
         {
+            String methodSuffixString = "WithServiceResponse";
+            if (singlePage)
+            {
+                methodSuffixString = "SinglePage";
+            }
+            if (IsPagingNextOperation)
+            {
+                invocation = Name + methodSuffixString + (async ? "Async" : "");
+                return this;
+            }
             string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
             string group = _namer.GetMethodGroupName((string)this.Extensions["nextMethodGroup"]);
             var methodModel = new AzureMethodTemplateModel(
@@ -521,6 +589,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
+            name = name + methodSuffixString;
             if (async)
             {
                 name = name + "Async";
@@ -536,9 +605,16 @@ namespace AutoRest.Java.Azure.TemplateModels
             return methodModel;
         }
 
+        public string GetPagingNextMethodInvocation(bool async = false, bool singlePage = true)
+        {
+            string invocation;
+            GetPagingNextMethodWithInvocation(out invocation, async, singlePage);
+            return invocation;
+        }
+
         protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod, bool filterRequired = false)
         {
-            if (this.InputParameterTransformation.IsNullOrEmpty())
+            if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
                 return;
             }
@@ -549,7 +625,7 @@ namespace AutoRest.Java.Azure.TemplateModels
                 return;
             }
             var nextGroupTypeName = _namer.GetTypeName(nextGroupType.Name);
-            if (filterRequired && !nextGroupType.IsRequired)
+            if (filterRequired && !groupedType.IsRequired)
             {
                 return;
             }
@@ -586,10 +662,38 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     SequenceTypeModel sequenceType = (SequenceTypeModel)ReturnType.Body;
                     return string.Format(CultureInfo.InvariantCulture,
-                        "final ServiceCall<List<{0}>> serviceCall = new ServiceCall<>(call);",
+                        "final ServiceCall<List<{0}>> serviceCall = ServiceCall.create(call);",
                         sequenceType != null ? sequenceType.ElementTypeModel.InstanceType().Name : "Void");
                 }
                 return base.ServiceCallConstruction;
+            }
+        }
+
+        public override string ClientResponse(bool filterRequired = false)
+        {
+            if (this.IsPagingOperation || this.IsPagingNextOperation)
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("{0} body = null;", ReturnTypeModel.ServiceCallGenericParameterString)
+                    .AppendLine("if (result.getBody() != null) {")
+                    .Indent().AppendLine("{0}", ReturnTypeModel.ConvertBodyToClientType("result.getBody()", "body"))
+                    .Outdent().AppendLine("}");
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
+                    ReturnTypeModel.ServiceCallGenericParameterString);
+                return builder.ToString();
+            }
+            else if (this.IsPagingNonPollingOperation)
+            {
+                IndentedStringBuilder builder = new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeModel.GenericBodyWireTypeString, this.Name);
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.getBody().getItems(), result.getResponse());",
+                    ReturnTypeModel.ServiceCallGenericParameterString);
+                return builder.ToString();
+            }
+            else
+            {
+                return base.ClientResponse(filterRequired);
             }
         }
 
@@ -624,8 +728,8 @@ namespace AutoRest.Java.Azure.TemplateModels
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
+                    imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = pageClassName }.ImportSafe());
                 }
                 return imports;
             }
@@ -641,7 +745,6 @@ namespace AutoRest.Java.Azure.TemplateModels
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportSafe().Contains(i)))
@@ -651,10 +754,13 @@ namespace AutoRest.Java.Azure.TemplateModels
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
+                    imports.Remove("java.util.ArrayList");
                     imports.Remove("com.microsoft.rest.ServiceCallback");
+                    imports.Add("com.microsoft.rest.RestException");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
+                    imports.Add("com.microsoft.azure.AzureServiceCall");
                     imports.AddRange(new CompositeTypeModel(ServiceClient.Namespace) { Name = ((AzureSequenceTypeModel)ReturnTypeModel.BodyClientType).PageImplType }.ImportSafe());
                 }
                 if (this.IsPagingNonPollingOperation)

@@ -204,7 +204,15 @@ if (Model.MethodTemplateModels.Any())
 <text>
 @foreach (var method in Model.MethodTemplateModels)
 {
-    @:@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+    var methodModel = (AzureMethodTemplateModel)method;
+    if (methodModel.IsPagingOperation || methodModel.IsPagingNextOperation)
+    {
+    @:@(Include(new PagingMethodTemplate(), methodModel))
+    }
+    else
+    {
+    @:@(Include(new AzureMethodTemplate(), methodModel))
+    }
     @EmptyLine
 }
 </text>

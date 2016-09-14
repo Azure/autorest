@@ -1,7 +1,5 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceResponse;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,25 +15,21 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getMethodLocalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocals().getMethodLocalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.apiVersionLocals().getMethodLocalValid();
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocals().getMethodLocalNull(null);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.apiVersionLocals().getMethodLocalNull(null);
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocals().getPathLocalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.apiVersionLocals().getPathLocalValid();
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        ServiceResponse<Void> response = client.apiVersionLocals().getSwaggerLocalValid();
-        Assert.assertEquals(200, response.getResponse().code());
+        client.apiVersionLocals().getSwaggerLocalValid();
     }
 }

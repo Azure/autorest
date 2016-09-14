@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -26,73 +27,125 @@ public interface Strings {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the String object if successful.
      */
-    ServiceResponse<String> getNull() throws ErrorException, IOException;
+    String getNull() throws ErrorException, IOException;
 
     /**
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get null string value value.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getNullAsync();
+
+    /**
+     * Get null string value value.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getNullWithServiceResponseAsync();
 
     /**
      * Set string value null.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNull() throws ErrorException, IOException;
+    void putNull() throws ErrorException, IOException;
 
     /**
      * Set string value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set string value null.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putNullAsync();
+
+    /**
+     * Set string value null.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync();
     /**
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNull(String stringBody) throws ErrorException, IOException;
+    void putNull(String stringBody) throws ErrorException, IOException;
 
     /**
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putNullAsync(String stringBody);
+
+    /**
+     * Set string value null.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync(String stringBody);
 
     /**
      * Get empty string value value ''.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the String object if successful.
      */
-    ServiceResponse<String> getEmpty() throws ErrorException, IOException;
+    String getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getEmptyAsync();
+
+    /**
+     * Get empty string value value ''.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getEmptyWithServiceResponseAsync();
 
     /**
      * Set string value empty ''.
@@ -101,37 +154,64 @@ public interface Strings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set string value empty ''.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putEmptyAsync(String stringBody);
+
+    /**
+     * Set string value empty ''.
+     *
+     * @param stringBody Possible values include: ''
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(String stringBody);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the String object if successful.
      */
-    ServiceResponse<String> getMbcs() throws ErrorException, IOException;
+    String getMbcs() throws ErrorException, IOException;
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getMbcsAsync();
+
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getMbcsWithServiceResponseAsync();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -140,37 +220,64 @@ public interface Strings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putMbcsAsync(String stringBody);
+
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync(String stringBody);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the String object if successful.
      */
-    ServiceResponse<String> getWhitespace() throws ErrorException, IOException;
+    String getWhitespace() throws ErrorException, IOException;
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getWhitespaceAsync();
+
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getWhitespaceWithServiceResponseAsync();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -179,73 +286,126 @@ public interface Strings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putWhitespaceAsync(String stringBody);
+
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody);
 
     /**
      * Get String value when no string value is sent in response payload.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the String object wrapped in {@link ServiceResponse} if successful.
+     * @return the String object if successful.
      */
-    ServiceResponse<String> getNotProvided() throws ErrorException, IOException;
+    String getNotProvided() throws ErrorException, IOException;
 
     /**
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @return the observable to the String object
+     */
+    Observable<String> getNotProvidedAsync();
+
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @return the observable to the String object
+     */
+    Observable<ServiceResponse<String>> getNotProvidedWithServiceResponseAsync();
 
     /**
      * Get value that is base64 encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getBase64Encoded() throws ErrorException, IOException;
+    byte[] getBase64Encoded() throws ErrorException, IOException;
 
     /**
      * Get value that is base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<byte[]> getBase64EncodedAsync();
+
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getBase64EncodedWithServiceResponseAsync();
 
     /**
      * Get value that is base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getBase64UrlEncoded() throws ErrorException, IOException;
+    byte[] getBase64UrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get value that is base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<byte[]> getBase64UrlEncodedAsync();
+
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getBase64UrlEncodedWithServiceResponseAsync();
 
     /**
      * Put value that is base64url encoded.
@@ -254,36 +414,63 @@ public interface Strings {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBase64UrlEncoded(byte[] stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody the Base64Url value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBase64UrlEncodedAsync(byte[] stringBody);
+
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody the Base64Url value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBase64UrlEncodedWithServiceResponseAsync(byte[] stringBody);
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
+     * @return the byte[] object if successful.
      */
-    ServiceResponse<byte[]> getNullBase64UrlEncoded() throws ErrorException, IOException;
+    byte[] getNullBase64UrlEncoded() throws ErrorException, IOException;
 
     /**
      * Get null value that is expected to be base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<byte[]> getNullBase64UrlEncodedAsync();
+
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @return the observable to the byte[] object
+     */
+    Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedWithServiceResponseAsync();
 
 }

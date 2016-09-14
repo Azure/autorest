@@ -41,7 +41,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`IntWrapper
-         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.IntWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -81,7 +81,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put -1 and 2
         :type complex_body: :class:`IntWrapper
-         <fixtures.acceptancetestsbodycomplex.models.IntWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.IntWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -128,7 +128,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`LongWrapper
-         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.LongWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -168,7 +168,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 1099511627775 and -999511627788
         :type complex_body: :class:`LongWrapper
-         <fixtures.acceptancetestsbodycomplex.models.LongWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.LongWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -215,7 +215,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`FloatWrapper
-         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.FloatWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -255,7 +255,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 1.05 and -0.003
         :type complex_body: :class:`FloatWrapper
-         <fixtures.acceptancetestsbodycomplex.models.FloatWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.FloatWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -302,7 +302,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DoubleWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DoubleWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -343,7 +343,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put 3e-100 and
          -0.000000000000000000000000000000000000000000000000000000005
         :type complex_body: :class:`DoubleWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DoubleWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DoubleWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -390,7 +390,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`BooleanWrapper
-         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.BooleanWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -430,7 +430,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put true and false
         :type complex_body: :class:`BooleanWrapper
-         <fixtures.acceptancetestsbodycomplex.models.BooleanWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.BooleanWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -477,7 +477,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StringWrapper
-         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.StringWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -517,7 +517,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put 'goodrequest', '', and null
         :type complex_body: :class:`StringWrapper
-         <fixtures.acceptancetestsbodycomplex.models.StringWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.StringWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -564,7 +564,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DateWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DateWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -604,7 +604,7 @@ class PrimitiveOperations(object):
 
         :param complex_body: Please put '0001-01-01' and '2016-02-29'
         :type complex_body: :class:`DateWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DateWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DateWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -651,7 +651,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DatetimeWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DatetimeWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -692,7 +692,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put '0001-01-01T12:00:00-04:00' and
          '2015-05-18T11:38:00-08:00'
         :type complex_body: :class:`DatetimeWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DatetimeWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DatetimeWrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -739,7 +739,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Datetimerfc1123Wrapper
-         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.Datetimerfc1123Wrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -780,7 +780,7 @@ class PrimitiveOperations(object):
         :param complex_body: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
          'Mon, 18 May 2015 11:38:00 GMT'
         :type complex_body: :class:`Datetimerfc1123Wrapper
-         <fixtures.acceptancetestsbodycomplex.models.Datetimerfc1123Wrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.Datetimerfc1123Wrapper>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -827,7 +827,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DurationWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DurationWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DurationWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -915,7 +915,7 @@ class PrimitiveOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`ByteWrapper
-         <fixtures.acceptancetestsbodycomplex.models.ByteWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.ByteWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

@@ -45,25 +45,28 @@ namespace AutoRest.Core
             Modeler modeler = ExtensionsLoader.GetModeler(settings);
             ServiceClient serviceClient = null;
 
+            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
             try
             {
-                IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
                 serviceClient = modeler.Build(out messages);
-
-                foreach (var message in messages)
-                {
-                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
-                }
-
-                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
-                {
-                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, "Errors found during Swagger validation");
-                }
             }
             catch (Exception exception)
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
+            finally
+            {
+                // Make sure to log any validation messages
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+                if (messages.Any(entry => entry.Severity >= settings.ValidationLevel))
+                {
+                    throw ErrorManager.CreateError(null, Resources.ErrorGeneratingClientModel, Resources.CodeGenerationError);
+                }
+            }
+
             CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
             Logger.WriteOutput(codeGenerator.UsageInstructions);
 
@@ -77,6 +80,37 @@ namespace AutoRest.Core
             {
                 throw ErrorManager.CreateError(exception, Resources.ErrorSavingGeneratedCode, exception.Message);
             }
+        }
+
+        /// <summary>
+        /// Compares two specifications.
+        /// </summary>
+        /// <param name="settings">Code generator settings.</param>
+        public static void Compare(Settings settings)
+        {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+            Logger.Entries.Clear();
+            Logger.LogInfo(Resources.AutoRestCore, Version);
+            Modeler modeler = ExtensionsLoader.GetModeler(settings);
+
+            try
+            {
+                IEnumerable<ComparisonMessage> messages = modeler.Compare();
+
+                foreach (var message in messages)
+                {
+                    Logger.Entries.Add(new LogEntry(message.Severity, message.ToString()));
+                }
+
+            }
+            catch (Exception exception)
+            {
+                throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
+            }
+
         }
     }
 }

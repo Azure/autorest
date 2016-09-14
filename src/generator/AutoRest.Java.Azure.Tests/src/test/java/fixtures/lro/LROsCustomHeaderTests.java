@@ -1,7 +1,6 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CustomHeaderInterceptor;
-import com.microsoft.rest.ServiceResponse;
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -34,33 +33,29 @@ public class LROsCustomHeaderTests {
     public void putAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        ServiceResponse<Product> response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        Product response = client.lROsCustomHeaders().putAsyncRetrySucceeded(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void put201CreatingSucceeded200() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        ServiceResponse<Product> response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
-        Assert.assertEquals(200, response.getResponse().code());
-        Assert.assertEquals("Succeeded", response.getBody().provisioningState());
+        Product response = client.lROsCustomHeaders().put201CreatingSucceeded200(product);
+        Assert.assertEquals("Succeeded", response.provisioningState());
     }
 
     @Test
     public void post202Retry200() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeaders().post202Retry200(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lROsCustomHeaders().post202Retry200(product);
     }
 
     @Test
     public void postAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        ServiceResponse<Void> response = client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
-        Assert.assertEquals(200, response.getResponse().code());
+        client.lROsCustomHeaders().postAsyncRetrySucceeded(product);
     }
 }

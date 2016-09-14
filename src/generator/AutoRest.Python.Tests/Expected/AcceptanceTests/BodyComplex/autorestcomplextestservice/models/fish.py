@@ -21,7 +21,7 @@ class Fish(Model):
     :type length: float
     :param siblings:
     :type siblings: list of :class:`Fish
-     <fixtures.acceptancetestsbodycomplex.models.Fish>`
+     <Fixtures.AcceptanceTestsBodyComplex.models.Fish>`
     :param fishtype: Polymorphic Discriminator
     :type fishtype: str
     """ 

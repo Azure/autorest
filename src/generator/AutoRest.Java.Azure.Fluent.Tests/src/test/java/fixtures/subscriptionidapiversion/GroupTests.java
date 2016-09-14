@@ -20,7 +20,7 @@ public class GroupTests {
     @Test
     public void getSampleResourceGroup() throws Exception {
         client.withSubscriptionId(UUID.randomUUID().toString());
-        SampleResourceGroupInner group = client.groups().getSampleResourceGroup("testgroup101").getBody();
+        SampleResourceGroupInner group = client.groups().getSampleResourceGroup("testgroup101");
         Assert.assertEquals("testgroup101", group.name());
         Assert.assertEquals("West US", group.location());
     }

@@ -5,6 +5,9 @@ using System.Linq;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.NodeJS.TemplateModels;
+using AutoRest.NodeJS.Azure.Properties;
+using System.Globalization;
+using System;
 
 namespace AutoRest.NodeJS.Azure.TemplateModels
 {
@@ -21,7 +24,7 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
 
         public string ItemName { get; private set; }
 
-        public CompositeType ItemType { 
+        public IType ItemType { 
             get 
             {
                 if (Properties == null)
@@ -31,11 +34,11 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
                 var property = Properties.FirstOrDefault(p => p.Type is SequenceType);
                 if (property != null)
                 {
-                    return ((SequenceType)property.Type).ElementType as CompositeType;
+                    return ((SequenceType)property.Type).ElementType;
                 }
                 else
                 {
-                    return null;
+                    throw new Exception(string.Format(Resources.PageModelDoesnotHaveAnArrayProperty, Name));
                 }
             }
         }
@@ -43,7 +46,7 @@ namespace AutoRest.NodeJS.Azure.TemplateModels
         public string ConstructTSItemTypeName()
         {
             var builder = new IndentedStringBuilder("  ");
-            builder.AppendFormat("<{0}>", ItemType.Name);
+            builder.AppendFormat("<{0}>", ClientModelExtensions.TSType(ItemType, true));
             return builder.ToString();
         }
 

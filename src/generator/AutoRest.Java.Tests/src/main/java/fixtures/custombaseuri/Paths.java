@@ -15,6 +15,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -28,18 +29,32 @@ public interface Paths {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
+    void getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> getEmptyAsync(String accountName);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName);
 
 }

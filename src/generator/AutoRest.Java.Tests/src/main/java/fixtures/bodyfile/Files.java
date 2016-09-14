@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -27,53 +28,92 @@ public interface Files {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getFile() throws ErrorException, IOException;
+    InputStream getFile() throws ErrorException, IOException;
 
     /**
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<InputStream> getFileAsync();
+
+    /**
+     * Get file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync();
 
     /**
      * Get a large file.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getFileLarge() throws ErrorException, IOException;
+    InputStream getFileLarge() throws ErrorException, IOException;
 
     /**
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<InputStream> getFileLargeAsync();
+
+    /**
+     * Get a large file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync();
 
     /**
      * Get empty file.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object if successful.
      */
-    ServiceResponse<InputStream> getEmptyFile() throws ErrorException, IOException;
+    InputStream getEmptyFile() throws ErrorException, IOException;
 
     /**
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<InputStream> getEmptyFileAsync();
+
+    /**
+     * Get empty file.
+     *
+     * @return the observable to the InputStream object
+     */
+    Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync();
 
 }

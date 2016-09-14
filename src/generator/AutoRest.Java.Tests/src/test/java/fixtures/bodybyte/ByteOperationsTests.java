@@ -17,18 +17,18 @@ public class ByteOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.bytes().getNull().getBody());
+        Assert.assertNull(client.bytes().getNull());
     }
 
     @Test
     public void getEmpty() throws Exception {
-        byte[] result = client.bytes().getEmpty().getBody();
+        byte[] result = client.bytes().getEmpty();
         Assert.assertEquals(0, result.length);
     }
 
     @Test
     public void getNonAscii() throws Exception {
-        byte[] result = client.bytes().getNonAscii().getBody();
+        byte[] result = client.bytes().getNonAscii();
         byte[] expected = new byte[] {
                 (byte) 0xff, (byte) 0xfe, (byte) 0xfd, (byte) 0xfc, (byte) 0xfb,
                 (byte) 0xfa, (byte) 0xf9, (byte) 0xf8, (byte) 0xf7, (byte) 0xf6
@@ -52,7 +52,7 @@ public class ByteOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(JsonParseException.class, exception.getClass());
+            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Serialization
                 throw new ArgumentNullException("baseType");
             }
             foreach (TypeInfo type in baseType.GetTypeInfo().Assembly.DefinedTypes
-                .Where(t => t.Namespace == baseType.Namespace && t != baseType.GetTypeInfo()))
+                .Where(t => t.Namespace == baseType.Namespace && t != baseType.GetTypeInfo() && t.IsSubclassOf(baseType)))
             {
                 string typeName = type.Name;
                 if (type.GetCustomAttributes<JsonObjectAttribute>().Any())

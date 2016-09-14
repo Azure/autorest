@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.UnknownHostException;
 import java.util.UUID;
 
 import fixtures.custombaseuri.implementation.AutoRestParameterizedHostTestClientImpl;
@@ -23,7 +22,7 @@ public class AzureCustomBaseUriTests {
     @Test
     public void getEmptyWithValidCustomUri() throws Exception {
         client.withHost("host:3000");
-        Assert.assertTrue(client.paths().getEmpty("local").getResponse().isSuccessful());
+        client.paths().getEmpty("local");
     }
 
     @Test
@@ -32,7 +31,7 @@ public class AzureCustomBaseUriTests {
             client.paths().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
     }
@@ -44,7 +43,7 @@ public class AzureCustomBaseUriTests {
             client.paths().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (UnknownHostException e) {
+        catch (RuntimeException e) {
             Assert.assertTrue(true);
         }
         finally {

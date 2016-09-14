@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
+import rx.Observable;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -33,54 +34,93 @@ public interface Arrays {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getNull() throws ErrorException, IOException;
+    List<Integer> getNull() throws ErrorException, IOException;
 
     /**
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get null array value.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getNullAsync();
+
+    /**
+     * Get null array value.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid array [1, 2, 3.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getInvalid() throws ErrorException, IOException;
+    List<Integer> getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getInvalidAsync();
+
+    /**
+     * Get invalid array [1, 2, 3.
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get empty array value [].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getEmpty() throws ErrorException, IOException;
+    List<Integer> getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get empty array value [].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getEmptyAsync();
+
+    /**
+     * Get empty array value [].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getEmptyWithServiceResponseAsync();
 
     /**
      * Set array value empty [].
@@ -89,37 +129,64 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putEmptyAsync(List<String> arrayBody);
+
+    /**
+     * Set array value empty [].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(List<String> arrayBody);
 
     /**
      * Get boolean array value [true, false, false, true].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanTfft() throws ErrorException, IOException;
+    List<Boolean> getBooleanTfft() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<List<Boolean>> getBooleanTfftAsync();
+
+    /**
+     * Get boolean array value [true, false, false, true].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanTfftWithServiceResponseAsync();
 
     /**
      * Set array value empty [true, false, false, true].
@@ -128,73 +195,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBooleanTfft(List<Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
+
+    /**
+     * Set array value empty [true, false, false, true].
+     *
+     * @param arrayBody the List&lt;Boolean&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(List<Boolean> arrayBody);
 
     /**
      * Get boolean array value [true, null, false].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidNull() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<List<Boolean>> getBooleanInvalidNullAsync();
+
+    /**
+     * Get boolean array value [true, null, false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Boolean&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Boolean&gt; object if successful.
      */
-    ServiceResponse<List<Boolean>> getBooleanInvalidString() throws ErrorException, IOException;
+    List<Boolean> getBooleanInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<List<Boolean>> getBooleanInvalidStringAsync();
+
+    /**
+     * Get boolean array value [true, 'boolean', false].
+     *
+     * @return the observable to the List&lt;Boolean&gt; object
+     */
+    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getIntegerValid() throws ErrorException, IOException;
+    List<Integer> getIntegerValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getIntegerValidAsync();
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntegerValidWithServiceResponseAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -203,73 +323,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putIntegerValid(List<Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putIntegerValidAsync(List<Integer> arrayBody);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Integer&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(List<Integer> arrayBody);
 
     /**
      * Get integer array value [1, null, 0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getIntInvalidNull() throws ErrorException, IOException;
+    List<Integer> getIntInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getIntInvalidNullAsync();
+
+    /**
+     * Get integer array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntInvalidNullWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Integer&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Integer&gt; object if successful.
      */
-    ServiceResponse<List<Integer>> getIntInvalidString() throws ErrorException, IOException;
+    List<Integer> getIntInvalidString() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<List<Integer>> getIntInvalidStringAsync();
+
+    /**
+     * Get integer array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Integer&gt; object
+     */
+    Observable<ServiceResponse<List<Integer>>> getIntInvalidStringWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    ServiceResponse<List<Long>> getLongValid() throws ErrorException, IOException;
+    List<Long> getLongValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<List<Long>> getLongValidAsync();
+
+    /**
+     * Get integer array value [1, -1, 3, 300].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongValidWithServiceResponseAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -278,73 +451,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLongValid(List<Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putLongValidAsync(List<Long> arrayBody);
+
+    /**
+     * Set array value empty [1, -1, 3, 300].
+     *
+     * @param arrayBody the List&lt;Long&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(List<Long> arrayBody);
 
     /**
      * Get long array value [1, null, 0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    ServiceResponse<List<Long>> getLongInvalidNull() throws ErrorException, IOException;
+    List<Long> getLongInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<List<Long>> getLongInvalidNullAsync();
+
+    /**
+     * Get long array value [1, null, 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongInvalidNullWithServiceResponseAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Long&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Long&gt; object if successful.
      */
-    ServiceResponse<List<Long>> getLongInvalidString() throws ErrorException, IOException;
+    List<Long> getLongInvalidString() throws ErrorException, IOException;
 
     /**
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<List<Long>> getLongInvalidStringAsync();
+
+    /**
+     * Get long array value [1, 'integer', 0].
+     *
+     * @return the observable to the List&lt;Long&gt; object
+     */
+    Observable<ServiceResponse<List<Long>>> getLongInvalidStringWithServiceResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getFloatValid() throws ErrorException, IOException;
+    List<Double> getFloatValid() throws ErrorException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getFloatValidAsync();
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatValidWithServiceResponseAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -353,73 +579,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloatValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putFloatValidAsync(List<Double> arrayBody);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getFloatInvalidNull() throws ErrorException, IOException;
+    List<Double> getFloatInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getFloatInvalidNullAsync();
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getFloatInvalidString() throws ErrorException, IOException;
+    List<Double> getFloatInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getFloatInvalidStringAsync();
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getFloatInvalidStringWithServiceResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getDoubleValid() throws ErrorException, IOException;
+    List<Double> getDoubleValid() throws ErrorException, IOException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getDoubleValidAsync();
+
+    /**
+     * Get float array value [0, -0.01, 1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleValidWithServiceResponseAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -428,73 +707,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDoubleValid(List<Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDoubleValidAsync(List<Double> arrayBody);
+
+    /**
+     * Set array value [0, -0.01, 1.2e20].
+     *
+     * @param arrayBody the List&lt;Double&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidNull() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getDoubleInvalidNullAsync();
+
+    /**
+     * Get float array value [0.0, null, -1.2e20].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Double&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Double&gt; object if successful.
      */
-    ServiceResponse<List<Double>> getDoubleInvalidString() throws ErrorException, IOException;
+    List<Double> getDoubleInvalidString() throws ErrorException, IOException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<List<Double>> getDoubleInvalidStringAsync();
+
+    /**
+     * Get boolean array value [1.0, 'number', 0.0].
+     *
+     * @return the observable to the List&lt;Double&gt; object
+     */
+    Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringWithServiceResponseAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    ServiceResponse<List<String>> getStringValid() throws ErrorException, IOException;
+    List<String> getStringValid() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<List<String>> getStringValidAsync();
+
+    /**
+     * Get string array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringValidWithServiceResponseAsync();
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -503,73 +835,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putStringValid(List<String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putStringValidAsync(List<String> arrayBody);
+
+    /**
+     * Set array value ['foo1', 'foo2', 'foo3'].
+     *
+     * @param arrayBody the List&lt;String&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(List<String> arrayBody);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    ServiceResponse<List<String>> getStringWithNull() throws ErrorException, IOException;
+    List<String> getStringWithNull() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<List<String>> getStringWithNullAsync();
+
+    /**
+     * Get string array value ['foo', null, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringWithNullWithServiceResponseAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;String&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;String&gt; object if successful.
      */
-    ServiceResponse<List<String>> getStringWithInvalid() throws ErrorException, IOException;
+    List<String> getStringWithInvalid() throws ErrorException, IOException;
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<List<String>> getStringWithInvalidAsync();
+
+    /**
+     * Get string array value ['foo', 123, 'foo2'].
+     *
+     * @return the observable to the List&lt;String&gt; object
+     */
+    Observable<ServiceResponse<List<String>>> getStringWithInvalidWithServiceResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object if successful.
      */
-    ServiceResponse<List<UUID>> getUuidValid() throws ErrorException, IOException;
+    List<UUID> getUuidValid() throws ErrorException, IOException;
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback);
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<List<UUID>> getUuidValidAsync();
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<ServiceResponse<List<UUID>>> getUuidValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -578,55 +963,95 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUuidValid(List<UUID> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putUuidValidAsync(List<UUID> arrayBody);
+
+    /**
+     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
+     *
+     * @param arrayBody the List&lt;UUID&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUuidValidWithServiceResponseAsync(List<UUID> arrayBody);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;UUID&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;UUID&gt; object if successful.
      */
-    ServiceResponse<List<UUID>> getUuidInvalidChars() throws ErrorException, IOException;
+    List<UUID> getUuidInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback);
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<List<UUID>> getUuidInvalidCharsAsync();
+
+    /**
+     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
+     *
+     * @return the observable to the List&lt;UUID&gt; object
+     */
+    Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateValid() throws ErrorException, IOException;
+    List<LocalDate> getDateValid() throws ErrorException, IOException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<List<LocalDate>> getDateValidAsync();
+
+    /**
+     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -635,73 +1060,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateValid(List<LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody the List&lt;LocalDate&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDateValidAsync(List<LocalDate> arrayBody);
+
+    /**
+     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
+     *
+     * @param arrayBody the List&lt;LocalDate&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(List<LocalDate> arrayBody);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidNull() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<List<LocalDate>> getDateInvalidNullAsync();
+
+    /**
+     * Get date array value ['2012-01-01', null, '1776-07-04'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullWithServiceResponseAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;LocalDate&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;LocalDate&gt; object if successful.
      */
-    ServiceResponse<List<LocalDate>> getDateInvalidChars() throws ErrorException, IOException;
+    List<LocalDate> getDateInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<List<LocalDate>> getDateInvalidCharsAsync();
+
+    /**
+     * Get date array value ['2011-03-22', 'date'].
+     *
+     * @return the observable to the List&lt;LocalDate&gt; object
+     */
+    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeValid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeValid() throws ErrorException, IOException;
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<List<DateTime>> getDateTimeValidAsync();
+
+    /**
+     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -710,73 +1188,126 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeValid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody the List&lt;DateTime&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
+
+    /**
+     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
+     *
+     * @param arrayBody the List&lt;DateTime&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(List<DateTime> arrayBody);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidNull() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<List<DateTime>> getDateTimeInvalidNullAsync();
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', null].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeInvalidChars() throws ErrorException, IOException;
+    List<DateTime> getDateTimeInvalidChars() throws ErrorException, IOException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<List<DateTime>> getDateTimeInvalidCharsAsync();
+
+    /**
+     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;DateTime&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;DateTime&gt; object if successful.
      */
-    ServiceResponse<List<DateTime>> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    List<DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException;
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<List<DateTime>> getDateTimeRfc1123ValidAsync();
+
+    /**
+     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @return the observable to the List&lt;DateTime&gt; object
+     */
+    Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -785,37 +1316,64 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123Valid(List<DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+
+    /**
+     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
+     *
+     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(List<DateTime> arrayBody);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Period&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Period&gt; object if successful.
      */
-    ServiceResponse<List<Period>> getDurationValid() throws ErrorException, IOException;
+    List<Period> getDurationValid() throws ErrorException, IOException;
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback);
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @return the observable to the List&lt;Period&gt; object
+     */
+    Observable<List<Period>> getDurationValidAsync();
+
+    /**
+     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @return the observable to the List&lt;Period&gt; object
+     */
+    Observable<ServiceResponse<List<Period>>> getDurationValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -824,37 +1382,64 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDurationValid(List<Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDurationValidAsync(List<Period> arrayBody);
+
+    /**
+     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
+     *
+     * @param arrayBody the List&lt;Period&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(List<Period> arrayBody);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    ServiceResponse<List<byte[]>> getByteValid() throws ErrorException, IOException;
+    List<byte[]> getByteValid() throws ErrorException, IOException;
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<List<byte[]>> getByteValidAsync();
+
+    /**
+     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getByteValidWithServiceResponseAsync();
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -863,145 +1448,250 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByteValid(List<byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody the List&lt;byte[]&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putByteValidAsync(List<byte[]> arrayBody);
+
+    /**
+     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
+     *
+     * @param arrayBody the List&lt;byte[]&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(List<byte[]> arrayBody);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    ServiceResponse<List<byte[]>> getByteInvalidNull() throws ErrorException, IOException;
+    List<byte[]> getByteInvalidNull() throws ErrorException, IOException;
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<List<byte[]>> getByteInvalidNullAsync();
+
+    /**
+     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullWithServiceResponseAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;byte[]&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;byte[]&gt; object if successful.
      */
-    ServiceResponse<List<byte[]>> getBase64Url() throws ErrorException, IOException;
+    List<byte[]> getBase64Url() throws ErrorException, IOException;
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<List<byte[]>> getBase64UrlAsync();
+
+    /**
+     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
+     *
+     * @return the observable to the List&lt;byte[]&gt; object
+     */
+    Observable<ServiceResponse<List<byte[]>>> getBase64UrlWithServiceResponseAsync();
 
     /**
      * Get array of complex type null value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    ServiceResponse<List<Product>> getComplexNull() throws ErrorException, IOException;
+    List<Product> getComplexNull() throws ErrorException, IOException;
 
     /**
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<List<Product>> getComplexNullAsync();
+
+    /**
+     * Get array of complex type null value.
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexNullWithServiceResponseAsync();
 
     /**
      * Get empty array of complex type [].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    ServiceResponse<List<Product>> getComplexEmpty() throws ErrorException, IOException;
+    List<Product> getComplexEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<List<Product>> getComplexEmptyAsync();
+
+    /**
+     * Get empty array of complex type [].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexEmptyWithServiceResponseAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    ServiceResponse<List<Product>> getComplexItemNull() throws ErrorException, IOException;
+    List<Product> getComplexItemNull() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<List<Product>> getComplexItemNullAsync();
+
+    /**
+     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexItemNullWithServiceResponseAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    ServiceResponse<List<Product>> getComplexItemEmpty() throws ErrorException, IOException;
+    List<Product> getComplexItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<List<Product>> getComplexItemEmptyAsync();
+
+    /**
+     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexItemEmptyWithServiceResponseAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object if successful.
      */
-    ServiceResponse<List<Product>> getComplexValid() throws ErrorException, IOException;
+    List<Product> getComplexValid() throws ErrorException, IOException;
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<List<Product>> getComplexValidAsync();
+
+    /**
+     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @return the observable to the List&lt;Product&gt; object
+     */
+    Observable<ServiceResponse<List<Product>>> getComplexValidWithServiceResponseAsync();
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1010,109 +1700,188 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putComplexValid(List<Product> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putComplexValidAsync(List<Product> arrayBody);
+
+    /**
+     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
+     *
+     * @param arrayBody the List&lt;Product&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(List<Product> arrayBody);
 
     /**
      * Get a null array.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayNull() throws ErrorException, IOException;
+    List<List<String>> getArrayNull() throws ErrorException, IOException;
 
     /**
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+
+    /**
+     * Get a null array.
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<List<List<String>>> getArrayNullAsync();
+
+    /**
+     * Get a null array.
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayNullWithServiceResponseAsync();
 
     /**
      * Get an empty array [].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayEmpty() throws ErrorException, IOException;
 
     /**
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+
+    /**
+     * Get an empty array [].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<List<List<String>>> getArrayEmptyAsync();
+
+    /**
+     * Get an empty array [].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayItemNull() throws ErrorException, IOException;
+    List<List<String>> getArrayItemNull() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<List<List<String>>> getArrayItemNullAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayItemNullWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayItemEmpty() throws ErrorException, IOException;
+    List<List<String>> getArrayItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<List<List<String>>> getArrayItemEmptyAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;List&lt;String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<List<String>>> getArrayValid() throws ErrorException, IOException;
+    List<List<String>> getArrayValid() throws ErrorException, IOException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<List<List<String>>> getArrayValidAsync();
+
+    /**
+     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<List<String>>>> getArrayValidWithServiceResponseAsync();
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1121,109 +1890,188 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putArrayValid(List<List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putArrayValidAsync(List<List<String>> arrayBody);
+
+    /**
+     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
+     *
+     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(List<List<String>> arrayBody);
 
     /**
      * Get an array of Dictionaries with value null.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryNull() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<List<Map<String, String>>> getDictionaryNullAsync();
+
+    /**
+     * Get an array of Dictionaries with value null.
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<List<Map<String, String>>> getDictionaryEmptyAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemNull() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<List<Map<String, String>>> getDictionaryItemNullAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryItemEmpty() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<List<Map<String, String>>> getDictionaryItemEmptyAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Map&lt;String, String&gt;&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
-    ServiceResponse<List<Map<String, String>>> getDictionaryValid() throws ErrorException, IOException;
+    List<Map<String, String>> getDictionaryValid() throws ErrorException, IOException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<List<Map<String, String>>> getDictionaryValidAsync();
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
+     */
+    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1232,18 +2080,32 @@ public interface Arrays {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDictionaryValid(List<Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
+    ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+
+    /**
+     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
+     *
+     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(List<Map<String, String>> arrayBody);
 
 }
