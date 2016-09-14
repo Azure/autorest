@@ -15,6 +15,17 @@ To install:
 Release History
 ---------------
 
+2016-09-14 Version 0.4.4
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Remove paging URL validation, part of fix https://github.com/Azure/autorest/pull/1420
+
+**Disclaimer**
+
+In order to get paging fixes for impacted clients, you need this package and Autorest > 0.17.0 Nightly 20160913
+
 2016-09-01 Version 0.4.3
 ++++++++++++++++++++++++
 

@@ -15,6 +15,13 @@ To install:
 Release History
 ---------------
 
+2016-09-14 Version 0.4.3
+++++++++++++++++++++++++
+
+**Bugfixes**
+
+- Make AzureOperationPoller thread as daemon (do not block anymore a Ctrl+C) (https://github.com/Azure/autorest/pull/1379)
+
 2016-09-01 Version 0.4.2
 ++++++++++++++++++++++++
 
