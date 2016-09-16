@@ -395,6 +395,7 @@ class AzureOperationPoller(object):
         self._done = threading.Event()
         self._thread = threading.Thread(
             target=self._start, args=(send_cmd, update_cmd, output_cmd))
+        self._thread.daemon = True
         self._thread.start()
 
     def _start(self, send_cmd, update_cmd, output_cmd):
@@ -422,9 +423,7 @@ class AzureOperationPoller(object):
             self._exception = CloudError(self._response, str(err))
 
         except OperationFailed:
-            error = "Long running operation failed with status {!r}".format(
-                str(self._operation.status))
-            self._exception = CloudError(self._response, error)
+            self._exception = CloudError(self._response)
 
         except OperationFinished:
             pass

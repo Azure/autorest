@@ -37,14 +37,14 @@ class StorageAccountsOperations(object):
          only.
         :type account_name:
          :class:`StorageAccountCheckNameAvailabilityParameters
-         <petstore.models.StorageAccountCheckNameAvailabilityParameters>`
+         <Petstore.models.StorageAccountCheckNameAvailabilityParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`CheckNameAvailabilityResult
-         <petstore.models.CheckNameAvailabilityResult>`
+         <Petstore.models.CheckNameAvailabilityResult>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -111,14 +111,14 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: :class:`StorageAccountCreateParameters
-         <petstore.models.StorageAccountCreateParameters>`
+         <Petstore.models.StorageAccountCreateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :rtype:
          :class:`AzureOperationPoller<msrestazure.azure_operation.AzureOperationPoller>`
          instance that returns :class:`StorageAccount
-         <petstore.models.StorageAccount>`
+         <Petstore.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -268,7 +268,7 @@ class StorageAccountsOperations(object):
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`StorageAccount <petstore.models.StorageAccount>`
+        :rtype: :class:`StorageAccount <Petstore.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -342,13 +342,13 @@ class StorageAccountsOperations(object):
         :param parameters: The parameters to update on the account. Note that
          only one property can be changed at a time using this API.
         :type parameters: :class:`StorageAccountUpdateParameters
-         <petstore.models.StorageAccountUpdateParameters>`
+         <Petstore.models.StorageAccountUpdateParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
-        :rtype: :class:`StorageAccount <petstore.models.StorageAccount>`
+        :rtype: :class:`StorageAccount <Petstore.models.StorageAccount>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -413,7 +413,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <petstore.models.StorageAccountKeys>`
+         <Petstore.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -472,7 +472,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <petstore.models.StorageAccountPaged>`
+         <Petstore.models.StorageAccountPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -539,7 +539,7 @@ class StorageAccountsOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountPaged
-         <petstore.models.StorageAccountPaged>`
+         <Petstore.models.StorageAccountPaged>`
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -607,14 +607,14 @@ class StorageAccountsOperations(object):
         :param regenerate_key: Specifies name of the key which should be
          regenerated. key1 or key2 for the default keys
         :type regenerate_key: :class:`StorageAccountRegenerateKeyParameters
-         <petstore.models.StorageAccountRegenerateKeyParameters>`
+         <Petstore.models.StorageAccountRegenerateKeyParameters>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`StorageAccountKeys
-         <petstore.models.StorageAccountKeys>`
+         <Petstore.models.StorageAccountKeys>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

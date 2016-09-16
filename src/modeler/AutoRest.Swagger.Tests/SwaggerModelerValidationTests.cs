@@ -28,7 +28,7 @@ namespace AutoRest.Swagger.Tests
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType)
         {
             // checks that the collection has one item, and that it is the correct message type.
-            Assert.Collection(messages , message => Assert.Equal(validationType, message.Type));
+            Assert.Collection(messages, message => Assert.Equal(validationType, message.Type));
         }
 
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
@@ -39,7 +39,7 @@ namespace AutoRest.Swagger.Tests
     }
 
     [Collection("Validation Tests")]
-    public class SwaggerModelerValidationTests
+    public partial class SwaggerModelerValidationTests
     {
         private IEnumerable<ValidationMessage> ValidateSwagger(string input)
         {
@@ -55,16 +55,6 @@ namespace AutoRest.Swagger.Tests
             messages = messages.Where(each => each.Severity > LogEntrySeverity.Debug);
 
             return messages;
-        }
-
-        /// <summary>
-        /// Verifies that a clean Swagger file does not result in any validation errors
-        /// </summary>
-        [Fact]
-        public void CleanFileValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "clean-complex-spec.json"));
-            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
         }
 
         [Fact]
@@ -135,7 +125,7 @@ namespace AutoRest.Swagger.Tests
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "swagger-validation.json"));
-            messages.AssertOnlyValidationWarning(typeof(InvalidConstraint),18);
+            messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
         }
 
         [Fact]
@@ -165,5 +155,56 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "parameter-missing-description.json"));
             messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired));
         }
+
+        [Fact]
+        public void PageableNextLinkNotModeledValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "pageable-nextlink-not-modeled.json"));
+            messages.AssertOnlyValidationMessage(typeof(NextLinkPropertyMustExist));
+        }
+
+        [Fact]
+        public void Pageable200ResponseNotModeledValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "pageable-no-200-response.json"));
+            messages.Any(m => m.Type == typeof(PageableRequires200Response));
+        }
     }
+
+    #region Positive tests
+
+    public partial class SwaggerModelerValidationTests
+    {
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void CleanFileValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "clean-complex-spec.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void RequiredPropertyDefinedAllOf()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "required-property-defined-allof.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+
+        /// <summary>
+        /// Verifies that a clean Swagger file does not result in any validation errors
+        /// </summary>
+        [Fact]
+        public void PageableNextLinkDefinedAllOf()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= LogEntrySeverity.Warning));
+        }
+    }
+
+    #endregion
 }

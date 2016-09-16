@@ -1,0 +1,112 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_05",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "a": {
+                  "type": "array",
+                  "minItems": 11,
+                  "maxItems": 5000,
+                  "collectionFormat": "pipes",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 11,
+                    "maximum": 21,
+                    "multipleOf": 4
+                  }
+                },
+                "b": {
+                  "type": "array",
+                  "minItems": 15,
+                  "maxItems": 4000,
+                  "collectionFormat": "pipes",
+                  "items": {
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 15,
+                    "pattern": "[a-z][a-z]*"
+                  }
+                },
+                "c": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 15,
+                  "multipleOf": 4
+                },
+                "d": {
+                  "type": "string",
+                  "minLength": 11,
+                  "maxLength": 21,
+                  "pattern": "[a-z][a-z]*"
+                }
+              }
+            }
+          },
+          "201": {
+            "schema": { "$ref": "#/definitions/A" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "A": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "array",
+          "minItems": 11,
+          "maxItems": 5000,
+          "collectionFormat": "pipes",
+          "items": {
+            "type": "integer",
+            "minimum": 11,
+            "maximum": 21,
+            "multipleOf": 4
+          }
+        },
+        "b": {
+          "type": "array",
+          "minItems": 15,
+          "maxItems": 5000,
+          "collectionFormat": "pipes",
+          "items": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 15,
+            "pattern": "[a-z][a-z]*"
+          }
+        },
+        "c": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "multipleOf": 4
+        },
+        "d": {
+          "type": "string",
+          "minLength": 11,
+          "maxLength": 21,
+          "pattern": "[a-z][a-z]*"
+        }
+      }
+    }
+  }
+}

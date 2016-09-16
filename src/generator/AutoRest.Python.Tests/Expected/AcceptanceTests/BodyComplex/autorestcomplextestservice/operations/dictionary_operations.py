@@ -41,7 +41,7 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -129,7 +129,7 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -217,7 +217,7 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -262,7 +262,7 @@ class DictionaryOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`DictionaryWrapper
-         <fixtures.acceptancetestsbodycomplex.models.DictionaryWrapper>`
+         <Fixtures.AcceptanceTestsBodyComplex.models.DictionaryWrapper>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

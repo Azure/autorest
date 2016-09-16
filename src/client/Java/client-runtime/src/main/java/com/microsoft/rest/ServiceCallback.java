@@ -23,7 +23,7 @@ public abstract class ServiceCallback<T> {
     /**
      * Override this method to handle successful REST call results.
      *
-     * @param result the ServiceResponse holding the response.
+     * @param result the result object.
      */
-    public abstract void success(ServiceResponse<T> result);
+    public abstract void success(T result);
 }

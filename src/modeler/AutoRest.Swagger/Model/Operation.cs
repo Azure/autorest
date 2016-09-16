@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
-
+using System;
+using System.Linq;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
@@ -93,5 +94,159 @@ namespace AutoRest.Swagger.Model
         /// top-level security declaration, an empty array can be used.
         /// </summary>
         public IList<Dictionary<string, List<string>>> Security { get; set; }
+
+        /// <summary>
+        /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
+        /// </summary>
+        /// <param name="context">The modified document context.</param>
+        /// <param name="previous">The original document model.</param>
+        /// <returns>A list of messages from the comparison.</returns>
+        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        {
+            var priorOperation = previous as Operation;
+
+            var currentRoot = (context.CurrentRoot as ServiceDefinition);
+            var previousRoot = (context.PreviousRoot as ServiceDefinition);
+
+            if (priorOperation == null)
+            {
+                throw new ArgumentException("previous");
+            }
+
+            base.Compare(context, previous);
+
+            if (!OperationId.Equals(priorOperation.OperationId))
+            {
+                context.LogBreakingChange(ComparisonMessages.ModifiedOperationId);
+            }
+
+            CheckParameters(context, priorOperation);
+
+            if (Responses != null && priorOperation.Responses != null)
+            {
+                foreach (var response in Responses)
+                {
+                    var oldResponse = priorOperation.FindResponse(response.Key, priorOperation.Responses);
+
+                    context.Push(response.Key);
+
+                    if (oldResponse == null)
+                    {
+                        context.LogBreakingChange(ComparisonMessages.AddingResponseCode, response.Key);
+                    }
+                    else
+                    {
+                        response.Value.Compare(context, oldResponse);
+                    }
+
+                    context.Pop();
+                }
+
+                foreach (var response in priorOperation.Responses)
+                {
+                    var newResponse = this.FindResponse(response.Key, this.Responses);
+
+                    if (newResponse == null)
+                    {
+                        context.Push(response.Key);
+                        context.LogBreakingChange(ComparisonMessages.RemovedResponseCode, response.Key);
+                        context.Pop();
+                    }
+                }
+            }
+
+            return context.Messages;
+        }
+
+        private void CheckParameters(ComparisonContext context, Operation priorOperation)
+        {
+            // Check that no parameters were removed or reordered, and compare them if it's not the case.
+
+            var currentRoot = (context.CurrentRoot as ServiceDefinition);
+            var previousRoot = (context.PreviousRoot as ServiceDefinition);
+
+            foreach (var oldParam in priorOperation.Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, previousRoot.Parameters)))
+            {
+                SwaggerParameter newParam = FindParameter(oldParam.Name, Parameters, currentRoot.Parameters);
+
+                context.Push(oldParam.Name);
+
+                if (newParam != null)
+                {
+                    newParam.Compare(context, oldParam);
+                }
+                else if (oldParam.IsRequired)
+                {
+                    context.LogBreakingChange(ComparisonMessages.RemovedRequiredParameter, oldParam.Name);
+                }
+
+                context.Pop();
+            }
+
+            // Check that no required parameters were added.
+
+            foreach (var newParam in Parameters
+                .Select(p => string.IsNullOrEmpty(p.Reference) ? p : FindReferencedParameter(p.Reference, currentRoot.Parameters))
+                .Where(p => p != null && p.IsRequired))
+            {
+                if (newParam == null) continue;
+
+                SwaggerParameter oldParam = FindParameter(newParam.Name, priorOperation.Parameters, previousRoot.Parameters);
+
+                if (oldParam == null)
+                {
+                    context.Push(newParam.Name);
+                    context.LogBreakingChange(ComparisonMessages.AddingRequiredParameter, newParam.Name);
+                    context.Pop();
+                }
+            }
+        }
+
+        private SwaggerParameter FindParameter(string name, IEnumerable<SwaggerParameter> operationParameters, IDictionary<string, SwaggerParameter> clientParameters)
+        {
+            if (Parameters != null)
+            {
+                foreach (var param in operationParameters)
+                {
+                    if (name.Equals(param.Name))
+                        return param;
+
+                    var pRef = FindReferencedParameter(param.Reference, clientParameters);
+
+                    if (pRef != null && name.Equals(pRef.Name))
+                    {
+                        return pRef;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private OperationResponse FindResponse(string name, IDictionary<string, OperationResponse> responses)
+        {
+            OperationResponse response = null;
+            this.Responses.TryGetValue(name, out response);
+            return response;
+        }
+
+
+        private static SwaggerParameter FindReferencedParameter(string reference, IDictionary<string, SwaggerParameter> parameters)
+        {
+            if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
+            {
+                var parts = reference.Split('/');
+                if (parts.Length == 3 && parts[1].Equals("parameters"))
+                {
+                    SwaggerParameter p = null;
+                    if (parameters.TryGetValue(parts[2], out p))
+                    {
+                        return p;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -28,7 +28,7 @@ from setuptools import setup
 
 setup(
     name='msrestazure',
-    version='0.4.1',
+    version='0.4.3',
     author='Microsoft Corporation',
     packages=['msrestazure'],
     url=('https://github.com/xingwu1/autorest/tree/python/'
@@ -49,5 +49,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development'],
     install_requires=[
-        "msrest>=0.4.0"],
+        "msrest>=0.4.4"],
 )

@@ -1,0 +1,65 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "PageableNextLinkModeledAllOf",
+    "description": "The properties needed for pageable are modeled in a parent definition",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-pageable": {
+          "nextLinkName": "bar"
+        },
+        "responses": {
+          "200": {
+            "description": "A pageable response",
+            "schema": {
+              "$ref": "#/definitions/PageableFoo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pageable": {
+      "type": "object",
+      "description": "Pageable object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bar": {
+          "type": "string"
+        }
+      }
+    },
+    "PageableFoo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pageable"
+        }
+      ],
+      "type": "object",
+      "description": "Foo object that inherits from pageable and doesn't define the pageable properties"
+    }
+  }
+}

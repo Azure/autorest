@@ -70,6 +70,8 @@ namespace AutoRest.Python
                     return " ";
                 case CollectionFormat.Tsv:
                     return "\t";
+                case CollectionFormat.Multi:
+                    return ",";
                 default:
                     throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                         "Collection format {0} is not supported.", format));

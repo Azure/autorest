@@ -31,7 +31,7 @@ public class PrimitiveTests {
 
     @Test
     public void getInt() throws Exception {
-        IntWrapper result = client.primitives().getInt().getBody();
+        IntWrapper result = client.primitives().getInt();
         Assert.assertEquals(Integer.valueOf(-1), result.field1());
         Assert.assertEquals(Integer.valueOf(2), result.field2());
     }
@@ -46,7 +46,7 @@ public class PrimitiveTests {
 
     @Test
     public void getLong() throws Exception {
-        LongWrapper result = client.primitives().getLong().getBody();
+        LongWrapper result = client.primitives().getLong();
         Assert.assertEquals(Long.valueOf(1099511627775L), result.field1());
         Assert.assertEquals(Long.valueOf(-999511627788L), result.field2());
     }
@@ -61,7 +61,7 @@ public class PrimitiveTests {
 
     @Test
     public void getFloat() throws Exception {
-        FloatWrapper result = client.primitives().getFloat().getBody();
+        FloatWrapper result = client.primitives().getFloat();
         Assert.assertEquals(1.05, result.field1(), 0f);
         Assert.assertEquals(-0.003, result.field2(), 0f);
     }
@@ -76,7 +76,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDouble() throws Exception {
-        DoubleWrapper result = client.primitives().getDouble().getBody();
+        DoubleWrapper result = client.primitives().getDouble();
         Assert.assertEquals(3e-100, result.field1(), 0f);
         Assert.assertEquals(-0.000000000000000000000000000000000000000000000000000000005,
                 result.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(),
@@ -93,7 +93,7 @@ public class PrimitiveTests {
 
     @Test
     public void getBool() throws Exception {
-        BooleanWrapper result = client.primitives().getBool().getBody();
+        BooleanWrapper result = client.primitives().getBool();
         Assert.assertEquals(true, result.fieldTrue());
         Assert.assertEquals(false, result.fieldFalse());
     }
@@ -108,7 +108,7 @@ public class PrimitiveTests {
 
     @Test
     public void getString() throws Exception {
-        StringWrapper result = client.primitives().getString().getBody();
+        StringWrapper result = client.primitives().getString();
         Assert.assertEquals("goodrequest", result.field());
         Assert.assertEquals("", result.empty());
         Assert.assertEquals(null, result.nullProperty());
@@ -124,7 +124,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDate() throws Exception {
-        DateWrapper result = client.primitives().getDate().getBody();
+        DateWrapper result = client.primitives().getDate();
         Assert.assertEquals(new LocalDate(1, 1, 1), result.field());
         Assert.assertEquals(new LocalDate(2016, 2, 29), result.leap());
     }
@@ -139,7 +139,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDateTime() throws Exception {
-        DatetimeWrapper result = client.primitives().getDateTime().getBody();
+        DatetimeWrapper result = client.primitives().getDateTime();
         Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.field());
         Assert.assertEquals(new DateTime(2015, 5, 18, 18, 38, 0, DateTimeZone.UTC), result.now());
     }
@@ -154,7 +154,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDateTimeRfc1123() throws Exception {
-        Datetimerfc1123Wrapper result = client.primitives().getDateTimeRfc1123().getBody();
+        Datetimerfc1123Wrapper result = client.primitives().getDateTimeRfc1123();
         Assert.assertEquals(new DateTime(1, 1, 1, 0, 0, 0, DateTimeZone.UTC), result.field());
         Assert.assertEquals(new DateTime(2015, 5, 18, 11, 38, 0, DateTimeZone.UTC), result.now());
     }
@@ -169,7 +169,7 @@ public class PrimitiveTests {
 
     @Test
     public void getDuration() throws Exception {
-        DurationWrapper result = client.primitives().getDuration().getBody();
+        DurationWrapper result = client.primitives().getDuration();
         Assert.assertEquals(new Period(0, 0, 0, 123, 22, 14, 12, 11), result.field());
     }
 
@@ -182,7 +182,7 @@ public class PrimitiveTests {
 
     @Test
     public void getByte() throws Exception {
-        ByteWrapper result = client.primitives().getByte().getBody();
+        ByteWrapper result = client.primitives().getByte();
         byte[] expected = new byte[] {
                 (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 0,
                 (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246

@@ -4,7 +4,7 @@
     "description": "Swagger 1 documentation."
   },
   "documents": [
-    "Swagger/swagger-1.json",
-    "Swagger/swagger-conflict-in-global-param.json"
+    "./swagger-1.json",
+    "./swagger-conflict-in-global-param.json"
   ]  
 }

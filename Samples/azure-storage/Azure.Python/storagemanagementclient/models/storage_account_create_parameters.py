@@ -14,7 +14,7 @@ class StorageAccountCreateParameters(Model):
     :type tags: dict
     :param properties:
     :type properties: :class:`StorageAccountPropertiesCreateParameters
-     <petstore.models.StorageAccountPropertiesCreateParameters>`
+     <Petstore.models.StorageAccountPropertiesCreateParameters>`
     """ 
 
     _validation = {

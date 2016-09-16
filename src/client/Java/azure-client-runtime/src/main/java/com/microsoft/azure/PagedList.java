@@ -47,7 +47,10 @@ public abstract class PagedList<E> implements List<E> {
      */
     public PagedList(Page<E> page) {
         this();
-        items.addAll(page.getItems());
+        List<E> retrievedItems = page.getItems();
+        if (retrievedItems != null && retrievedItems.size() != 0) {
+            items.addAll(retrievedItems);
+        }
         nextPageLink = page.getNextPageLink();
         currentPage = page;
     }
@@ -138,14 +141,17 @@ public abstract class PagedList<E> implements List<E> {
         public E next() {
             if (!itemsListItr.hasNext()) {
                 if (!hasNextPage()) {
-                    throw new NoSuchElementException();
+                    throw new NoSuchElementException();                        
                 } else {
                     int size = items.size();
                     loadNextPage();
                     itemsListItr = items.listIterator(size);
                 }
             }
-            return itemsListItr.next();
+            if (itemsListItr.hasNext()) {
+                return itemsListItr.next();
+            }
+            return null;
         }
 
         @Override

@@ -453,6 +453,16 @@ namespace AutoRest.CSharp.Azure.Tests
                     count++;
                 }
                 Assert.Equal(10, count);
+
+                result = client.Paging.GetMultiplePagesFragmentNextLink("1.6", "test_user");
+                Assert.NotNull(result.NextPageLink);
+                count = 1;
+                while (result.NextPageLink != null)
+                {
+                    result = client.Paging.NextFragment("1.6", "test_user", result.NextPageLink);
+                    count++;
+                }
+                Assert.Equal(10, count);
             }
         }
 

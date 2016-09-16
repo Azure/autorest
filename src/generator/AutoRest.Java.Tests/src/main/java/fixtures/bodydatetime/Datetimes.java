@@ -28,9 +28,9 @@ public interface Datetimes {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getNull() throws ErrorException, IOException;
+    DateTime getNull() throws ErrorException, IOException;
 
     /**
      * Get null datetime value.
@@ -45,16 +45,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getNullAsync();
+    Observable<DateTime> getNullAsync();
+
+    /**
+     * Get null datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getInvalid() throws ErrorException, IOException;
+    DateTime getInvalid() throws ErrorException, IOException;
 
     /**
      * Get invalid datetime value.
@@ -69,16 +76,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getInvalidAsync();
+    Observable<DateTime> getInvalidAsync();
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get overflow datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getOverflow() throws ErrorException, IOException;
+    DateTime getOverflow() throws ErrorException, IOException;
 
     /**
      * Get overflow datetime value.
@@ -93,16 +107,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getOverflowAsync();
+    Observable<DateTime> getOverflowAsync();
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getOverflowWithServiceResponseAsync();
 
     /**
      * Get underflow datetime value.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUnderflow() throws ErrorException, IOException;
+    DateTime getUnderflow() throws ErrorException, IOException;
 
     /**
      * Get underflow datetime value.
@@ -117,7 +138,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUnderflowAsync();
+    Observable<DateTime> getUnderflowAsync();
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUnderflowWithServiceResponseAsync();
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -126,9 +154,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -145,16 +172,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put max datetime value 9999-12-31T23:59:59.9999999Z.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUtcMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcLowercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -169,16 +204,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeAsync();
+    Observable<DateTime> getUtcLowercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value 9999-12-31t23:59:59.9999999z.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getUtcUppercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -193,7 +235,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeAsync();
+    Observable<DateTime> getUtcUppercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value 9999-12-31T23:59:59.9999999Z.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -202,9 +251,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -221,16 +269,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -245,16 +301,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+    Observable<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -269,7 +332,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+    Observable<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -278,9 +348,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -297,16 +366,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetUppercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -321,16 +398,23 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
+    Observable<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetLowercaseMaxDateTime() throws ErrorException, IOException;
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -345,7 +429,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
+    Observable<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
+
+    /**
+     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -354,9 +445,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putUtcMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -373,16 +463,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putUtcMinDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putUtcMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getUtcMinDateTime() throws ErrorException, IOException;
+    DateTime getUtcMinDateTime() throws ErrorException, IOException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -397,7 +495,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getUtcMinDateTimeAsync();
+    Observable<DateTime> getUtcMinDateTimeAsync();
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00Z.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getUtcMinDateTimeWithServiceResponseAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -406,9 +511,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -425,16 +529,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException;
+    DateTime getLocalPositiveOffsetMinDateTime() throws ErrorException, IOException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -449,7 +561,14 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeAsync();
+    Observable<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00+14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync();
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -458,9 +577,8 @@ public interface Datetimes {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -477,16 +595,24 @@ public interface Datetimes {
      * @param datetimeBody the DateTime value
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Observable<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
+
+    /**
+     * Put min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @param datetimeBody the DateTime value
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the DateTime object wrapped in {@link ServiceResponse} if successful.
+     * @return the DateTime object if successful.
      */
-    ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException;
+    DateTime getLocalNegativeOffsetMinDateTime() throws ErrorException, IOException;
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -501,6 +627,13 @@ public interface Datetimes {
      *
      * @return the observable to the DateTime object
      */
-    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeAsync();
+    Observable<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
+
+    /**
+     * Get min datetime value 0001-01-01T00:00:00-14:00.
+     *
+     * @return the observable to the DateTime object
+     */
+    Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync();
 
 }

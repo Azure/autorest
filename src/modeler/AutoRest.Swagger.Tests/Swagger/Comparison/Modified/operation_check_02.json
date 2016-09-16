@@ -1,0 +1,149 @@
+﻿{
+  "swagger": 2.0,
+  "info": {
+    "title": "operation_check_01",
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "schemes": [ "http", "https" ],
+  "paths": {
+    "/api/Parameters": {
+      "put": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Put",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "database",
+            "in": "body",
+            "required": true,
+            "type": "object",
+            "schema": { "$ref": "#/definitions/DatabaseRenamed" }
+          }
+        ]
+      },
+      "post": {
+        "tag": [ "Parameters" ],
+        "operationId": "Parameters_Post",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "registry",
+            "in": "body",
+            "required": true,
+            "type": "object",
+            "schema": { "$ref": "#/definitions/Register" }
+          }
+        ]
+      }
+    },
+    "/api/Responses": {
+      "get": {
+        "tag": [ "Responses" ],
+        "operationId": "Responses_Get",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "201": {
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "400": {
+            "schema": { "$ref": "#/definitions/Error" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "required": [ "message", "id" ],
+      "properties": {
+        "message": { "type": "string" },
+        "id": { "type": "integer" }
+      }
+    },
+    "DatabaseRenamed": {
+      "required": [ "id" ],
+      "properties": {
+        "a": {
+          "type": "string",
+          "description": "The user generated unique name for the database, a string that\n must not be more than 255 characters."
+        },
+        "b": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nThe resource id (_rid) is a unique identifier that is also hierarchical per the resource stack on the resource model. It is used internally for placement of and navigation to the database resource."
+        },
+        "c": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the last updated timestamp of the resource. The value is a timestamp."
+        },
+        "d": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt represents the resource etag required for optimistic concurrency control."
+        },
+        "e": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the addressable path of the collections resource."
+        },
+        "f": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the addressable path of the users resource."
+        }
+      }
+    },
+    "Register": {
+      "required": [ "id" ],
+      "properties": {
+        "a": {
+          "type": "string",
+          "description": "The user generated unique name for the database, a string that\n must not be more than 255 characters."
+        },
+        "b": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "This is a system generated property.\nThe resource id (_rid) is a unique identifier that is also hierarchical per the resource stack on the resource model. It is used internally for placement of and navigation to the database resource."
+        },
+        "c": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the last updated timestamp of the resource. The value is a timestamp."
+        },
+        "d": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt represents the resource etag required for optimistic concurrency control."
+        },
+        "e": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the addressable path of the collections resource."
+        },
+        "f": {
+          "type": "string",
+          "readOnly": true,
+          "description": "This is a system generated property.\nIt specifies the addressable path of the users resource."
+        }
+      }
+    }
+  }
+}

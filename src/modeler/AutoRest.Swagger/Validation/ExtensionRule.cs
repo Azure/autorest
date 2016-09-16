@@ -3,15 +3,12 @@
 
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
     /// <summary>
-    /// A rule that validates objects of type <typeparamref name="T"/>
+    /// A rule that validates extensions (e.g. x-ms-pageable)
     /// </summary>
-    /// <typeparam name="T">The type of the object to validate</typeparam>
     public abstract class ExtensionRule : Rule
     {
         protected abstract string ExtensionName { get; }
@@ -24,6 +21,7 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(object entity, RuleContext context)
         {
             object[] formatParams;
+            // Only try to validate an object with this extension rule if the extension name matches the key
             if (context.Key == ExtensionName && !IsValid(entity, context, out formatParams))
             {
                 yield return new ValidationMessage(this, formatParams);

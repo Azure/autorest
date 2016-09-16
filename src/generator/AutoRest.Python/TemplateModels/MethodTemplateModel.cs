@@ -273,25 +273,28 @@ namespace AutoRest.Python.TemplateModels
         /// Generate code to build the URL from a url expression and method parameters
         /// </summary>
         /// <param name="variableName">The variable to store the url in.</param>
+        /// <param name="pathParameters">The list of parameters for url construction.</param>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "AutoRest.Core.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "pathformatarguments"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings")]
-        public virtual string BuildUrlPath(string variableName)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "pathformatarguments"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings")]
+        public virtual string BuildUrlPath(string variableName, IEnumerable<Parameter> pathParameters)
         {
             var builder = new IndentedStringBuilder("    ");
+            if (pathParameters == null)
+                return builder.ToString();
 
-            var pathParameterList = this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path).ToList();
+            var pathParameterList = pathParameters.Where(p => p.Location == ParameterLocation.Path).ToList();
             if (pathParameterList.Any())
             {
                 builder.AppendLine("path_format_arguments = {").Indent();
 
-                for (int i = 0; i < pathParameterList.Count; i ++)
+                for (int i = 0; i < pathParameterList.Count; i++)
                 {
                     builder.AppendLine("'{0}': {1}{2}{3}",
                         pathParameterList[i].SerializedName,
                         BuildSerializeDataCall(pathParameterList[i], "url"),
                         pathParameterList[i].IsRequired ? string.Empty :
                             string.Format(CultureInfo.InvariantCulture, "if {0} else ''", pathParameterList[i].Name),
-                        i == pathParameterList.Count-1 ? "" : ",");
+                        i == pathParameterList.Count - 1 ? "" : ",");
                 }
 
                 builder.Outdent().AppendLine("}");
@@ -305,13 +308,16 @@ namespace AutoRest.Python.TemplateModels
         /// Generate code to build the query of URL from method parameters
         /// </summary>
         /// <param name="variableName">The variable to store the query in.</param>
+        /// <param name="queryParameters">The list of parameters for url construction.</param>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings")]
-        public virtual string BuildUrlQuery(string variableName)
+        public virtual string BuildUrlQuery(string variableName, IEnumerable<Parameter> queryParameters)
         {
             var builder = new IndentedStringBuilder("    ");
+            if (queryParameters == null)
+                return builder.ToString();
 
-            foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
+            foreach (var queryParameter in queryParameters.Where(p => p.Location == ParameterLocation.Query))
             {
                 if (queryParameter.IsRequired)
                 {
@@ -561,9 +567,9 @@ namespace AutoRest.Python.TemplateModels
             }
 
             string result = "object";
-            var modelNamespace = ServiceClient.Name.ToPythonCase().Replace("_", "");
+            var modelNamespace = ServiceClient.Name.ToPythonCase();
             if (!ServiceClient.Namespace.IsNullOrEmpty())
-                modelNamespace = ServiceClient.Namespace.ToPythonCase().Replace("_", "");
+                modelNamespace = ServiceClient.Namespace;
 
             var primaryType = type as PrimaryType;
             var listType = type as SequenceType;

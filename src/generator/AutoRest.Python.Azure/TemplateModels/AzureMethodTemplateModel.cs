@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Collections.Generic;
 using AutoRest.Core.ClientModel;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions.Azure;
@@ -30,6 +31,30 @@ namespace AutoRest.Python.Azure.TemplateModels
             get
             {
                 return this.Extensions.ContainsKey(AzureExtensions.PageableExtension);
+            }
+        }
+
+        public string PagingURL
+        {
+            get
+            {
+                if (this.Extensions.ContainsKey("nextLinkURL"))
+                {
+                    return this.Extensions["nextLinkURL"] as string;
+                }
+                return null;
+            }
+        }
+
+        public IEnumerable<Parameter> PagingParameters
+        {
+            get
+            {
+                if (this.Extensions.ContainsKey("nextLinkParameters"))
+                {
+                    return this.Extensions["nextLinkParameters"] as IEnumerable<Parameter>;
+                }
+                return null;
             }
         }
 

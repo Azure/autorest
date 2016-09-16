@@ -142,18 +142,17 @@ class TestCloudException(unittest.TestCase):
 
         response.content = "{"
         error = CloudError(response)
-        self.assertEqual(error.message, "Operation failed with status: 400. Details: none")
+        self.assertTrue("none" in error.message)
 
         response.content = json.dumps({'message':'server error'})
         error = CloudError(response)
-        self.assertEqual(error.message, "server error")
+        self.assertTrue("server error" in error.message)
         self.assertEqual(error.status_code, 400)
 
         response.content = "{"
         response.raise_for_status.side_effect = RequestException("FAILED!")
         error = CloudError(response)
-        self.assertEqual(error.message,
-                         "Operation failed with status: 'BadRequest'. Details: FAILED!")
+        self.assertTrue("FAILED!" in error.message)
         self.assertIsInstance(error.error, RequestException)
 
         response.content = '{\r\n  "odata.metadata":"https://account.region.batch.azure.com/$metadata#Microsoft.Azure.Batch.Protocol.Entities.Container.errors/@Element","code":"InvalidHeaderValue","message":{\r\n    "lang":"en-US","value":"The value for one of the HTTP headers is not in the correct format.\\nRequestId:5f4c1f05-603a-4495-8e80-01f776310bbd\\nTime:2016-01-04T22:12:33.9245931Z"\r\n  },"values":[\r\n    {\r\n      "key":"HeaderName","value":"Content-Type"\r\n    },{\r\n      "key":"HeaderValue","value":"application/json; odata=minimalmetadata; charset=utf-8"\r\n    }\r\n  ]\r\n}'

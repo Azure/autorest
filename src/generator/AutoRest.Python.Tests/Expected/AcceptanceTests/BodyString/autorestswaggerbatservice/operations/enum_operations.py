@@ -42,7 +42,7 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Colors
-         <fixtures.acceptancetestsbodystring.models.Colors>`
+         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -84,7 +84,7 @@ class EnumOperations(object):
         :param string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
         :type string_body: str or :class:`Colors
-         <fixtures.acceptancetestsbodystring.models.Colors>`
+         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -132,7 +132,7 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`Colors
-         <fixtures.acceptancetestsbodystring.models.Colors>`
+         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """
@@ -174,7 +174,7 @@ class EnumOperations(object):
         :param enum_string_body: Possible values include: 'red color',
          'green-color', 'blue_color'
         :type enum_string_body: str or :class:`Colors
-         <fixtures.acceptancetestsbodystring.models.Colors>`
+         <Fixtures.AcceptanceTestsBodyString.models.Colors>`
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -221,7 +221,7 @@ class EnumOperations(object):
         :param operation_config: :ref:`Operation configuration
          overrides<msrest:optionsforoperations>`.
         :rtype: :class:`RefColorConstant
-         <fixtures.acceptancetestsbodystring.models.RefColorConstant>`
+         <Fixtures.AcceptanceTestsBodyString.models.RefColorConstant>`
         :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
          if raw=true
         """

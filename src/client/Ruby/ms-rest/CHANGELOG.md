@@ -1,3 +1,6 @@
+##2016.09.15 ms_rest version 0.5.0
+* Bundling default ca-cert and exposing method for providing ssl options
+
 ##2016.08.10 ms_rest version 0.4.0
 * Modulerizing serialization class from ms_rest to be inherited by azure serializer module
 

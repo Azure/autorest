@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Azure.TemplateModels
 
             builder.AppendLine("if (_queryParameters.Count > 0)")
                 .AppendLine("{").Indent()
-                .AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName).Outdent()
+                .AppendLine("{0} += ({0}.Contains(\"?\") ? \"&\" : \"?\") + string.Join(\"&\", _queryParameters);", variableName).Outdent()
                 .AppendLine("}");
         }
 

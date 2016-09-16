@@ -27,9 +27,8 @@ public interface HttpRetrys {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> head408() throws ErrorException, IOException;
+    void head408() throws ErrorException, IOException;
 
     /**
      * Return 408 status code, then 200 after retry.
@@ -44,16 +43,22 @@ public interface HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> head408Async();
+    Observable<Void> head408Async();
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> head408WithServiceResponseAsync();
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put500() throws ErrorException, IOException;
+    void put500() throws ErrorException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -62,15 +67,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> put500Async();
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put500WithServiceResponseAsync();
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put500(Boolean booleanValue) throws ErrorException, IOException;
+    void put500(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -87,16 +105,23 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> put500Async(Boolean booleanValue);
+    Observable<Void> put500Async(Boolean booleanValue);
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put500WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch500() throws ErrorException, IOException;
+    void patch500() throws ErrorException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -105,15 +130,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> patch500Async();
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync();
     /**
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch500(Boolean booleanValue) throws ErrorException, IOException;
+    void patch500(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -130,16 +168,23 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> patch500Async(Boolean booleanValue);
+    Observable<Void> patch500Async(Boolean booleanValue);
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 502 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> get502() throws ErrorException, IOException;
+    void get502() throws ErrorException, IOException;
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -154,16 +199,22 @@ public interface HttpRetrys {
      *
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> get502Async();
+    Observable<Void> get502Async();
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> get502WithServiceResponseAsync();
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post503() throws ErrorException, IOException;
+    void post503() throws ErrorException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -172,15 +223,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> post503Async();
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post503WithServiceResponseAsync();
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> post503(Boolean booleanValue) throws ErrorException, IOException;
+    void post503(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -197,16 +261,23 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> post503Async(Boolean booleanValue);
+    Observable<Void> post503Async(Boolean booleanValue);
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> post503WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete503() throws ErrorException, IOException;
+    void delete503() throws ErrorException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -215,15 +286,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> delete503Async();
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync();
     /**
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> delete503(Boolean booleanValue) throws ErrorException, IOException;
+    void delete503(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -240,16 +324,23 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> delete503Async(Boolean booleanValue);
+    Observable<Void> delete503Async(Boolean booleanValue);
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put504() throws ErrorException, IOException;
+    void put504() throws ErrorException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -258,15 +349,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> put504Async();
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put504WithServiceResponseAsync();
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> put504(Boolean booleanValue) throws ErrorException, IOException;
+    void put504(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -283,16 +387,23 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> put504Async(Boolean booleanValue);
+    Observable<Void> put504Async(Boolean booleanValue);
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> put504WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch504() throws ErrorException, IOException;
+    void patch504() throws ErrorException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -301,15 +412,28 @@ public interface HttpRetrys {
      * @return the {@link ServiceCall} object
      */
     ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback);
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<Void> patch504Async();
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync();
     /**
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> patch504(Boolean booleanValue) throws ErrorException, IOException;
+    void patch504(Boolean booleanValue) throws ErrorException, IOException;
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -326,6 +450,14 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> patch504Async(Boolean booleanValue);
+    Observable<Void> patch504Async(Boolean booleanValue);
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync(Boolean booleanValue);
 
 }
