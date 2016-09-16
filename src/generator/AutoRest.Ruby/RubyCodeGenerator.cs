@@ -108,7 +108,7 @@ namespace AutoRest.Ruby
         /// </summary>
         public override string UsageInstructions
         {
-            get { return "The \"gem 'ms_rest' ~> 0.4\" is required for working with generated code."; }
+            get { return "The \"gem 'ms_rest' ~> 0.5\" is required for working with generated code."; }
         }
 
         /// <summary>
