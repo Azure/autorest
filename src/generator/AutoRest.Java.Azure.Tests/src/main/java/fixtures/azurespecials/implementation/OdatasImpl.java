@@ -63,10 +63,8 @@ public final class OdatasImpl implements Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getWithFilter() throws ErrorException, IOException {
+    public void getWithFilter() {
         getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -123,10 +121,8 @@ public final class OdatasImpl implements Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void getWithFilter(String filter, Integer top, String orderby) throws ErrorException, IOException {
+    public void getWithFilter(String filter, Integer top, String orderby) {
         getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().getBody();
     }
 

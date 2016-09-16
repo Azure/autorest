@@ -85,11 +85,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    public DictionaryWrapper getValid() throws ErrorException, IOException {
+    public DictionaryWrapper getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -148,11 +146,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(DictionaryWrapper complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -217,11 +212,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    public DictionaryWrapper getEmpty() throws ErrorException, IOException {
+    public DictionaryWrapper getEmpty() {
         return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -280,11 +273,8 @@ public final class DictionarysImpl implements Dictionarys {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putEmpty(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putEmpty(DictionaryWrapper complexBody) {
         putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 
@@ -349,11 +339,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    public DictionaryWrapper getNull() throws ErrorException, IOException {
+    public DictionaryWrapper getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -411,11 +399,9 @@ public final class DictionarysImpl implements Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    public DictionaryWrapper getNotProvided() throws ErrorException, IOException {
+    public DictionaryWrapper getNotProvided() {
         return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

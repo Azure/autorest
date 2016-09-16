@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
-import fixtures.bodycomplex.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    DictionaryWrapper getValid() throws ErrorException, IOException;
+    DictionaryWrapper getValid();
 
     /**
      * Get complex types with dictionary property.
@@ -58,11 +54,8 @@ public interface Dictionarys {
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
@@ -92,11 +85,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    DictionaryWrapper getEmpty() throws ErrorException, IOException;
+    DictionaryWrapper getEmpty();
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -124,11 +115,8 @@ public interface Dictionarys {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putEmpty(DictionaryWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -158,11 +146,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    DictionaryWrapper getNull() throws ErrorException, IOException;
+    DictionaryWrapper getNull();
 
     /**
      * Get complex types with dictionary property which is null.
@@ -189,11 +175,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the DictionaryWrapper object if successful.
      */
-    DictionaryWrapper getNotProvided() throws ErrorException, IOException;
+    DictionaryWrapper getNotProvided();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.

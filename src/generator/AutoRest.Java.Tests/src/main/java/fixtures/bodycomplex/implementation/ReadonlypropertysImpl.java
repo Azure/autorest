@@ -69,11 +69,9 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ReadonlyObj object if successful.
      */
-    public ReadonlyObj getValid() throws ErrorException, IOException {
+    public ReadonlyObj getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -132,11 +130,8 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(ReadonlyObj complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(ReadonlyObj complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 

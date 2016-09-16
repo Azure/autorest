@@ -13,9 +13,7 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Inheritances {
     /**
      * Get complex types that extend others.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Siamese object if successful.
      */
-    Siamese getValid() throws ErrorException, IOException;
+    Siamese getValid();
 
     /**
      * Get complex types that extend others.
@@ -58,11 +54,8 @@ public interface Inheritances {
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(Siamese complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(Siamese complexBody);
 
     /**
      * Put complex types that extend others.

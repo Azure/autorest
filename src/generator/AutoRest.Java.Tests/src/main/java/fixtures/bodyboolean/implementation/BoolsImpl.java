@@ -83,11 +83,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get true Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getTrue() throws ErrorException, IOException {
+    public boolean getTrue() {
         return getTrueWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -146,10 +144,8 @@ public final class BoolsImpl implements Bools {
      * Set Boolean value true.
      *
      * @param boolBody the boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putTrue(boolean boolBody) throws ErrorException, IOException {
+    public void putTrue(boolean boolBody) {
         putTrueWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
     }
 
@@ -210,11 +206,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get false Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getFalse() throws ErrorException, IOException {
+    public boolean getFalse() {
         return getFalseWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -273,10 +267,8 @@ public final class BoolsImpl implements Bools {
      * Set Boolean value false.
      *
      * @param boolBody the boolean value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void putFalse(boolean boolBody) throws ErrorException, IOException {
+    public void putFalse(boolean boolBody) {
         putFalseWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
     }
 
@@ -337,11 +329,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get null Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getNull() throws ErrorException, IOException {
+    public boolean getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -399,11 +389,9 @@ public final class BoolsImpl implements Bools {
     /**
      * Get invalid Boolean value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the boolean object if successful.
      */
-    public boolean getInvalid() throws ErrorException, IOException {
+    public boolean getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

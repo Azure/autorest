@@ -13,8 +13,6 @@ package fixtures.bodybyte;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodybyte.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -25,11 +23,9 @@ public interface Bytes {
     /**
      * Get null byte value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getNull() throws ErrorException, IOException;
+    byte[] getNull();
 
     /**
      * Get null byte value.
@@ -56,11 +52,9 @@ public interface Bytes {
     /**
      * Get empty byte value ''.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getEmpty() throws ErrorException, IOException;
+    byte[] getEmpty();
 
     /**
      * Get empty byte value ''.
@@ -87,11 +81,9 @@ public interface Bytes {
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getNonAscii() throws ErrorException, IOException;
+    byte[] getNonAscii();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -119,11 +111,8 @@ public interface Bytes {
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putNonAscii(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -153,11 +142,9 @@ public interface Bytes {
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object if successful.
      */
-    byte[] getInvalid() throws ErrorException, IOException;
+    byte[] getInvalid();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

@@ -13,9 +13,7 @@ package fixtures.bodydictionary;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.joda.time.DateTime;
@@ -31,11 +29,9 @@ public interface Dictionarys {
     /**
      * Get null dictionary value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getNull() throws ErrorException, IOException;
+    Map<String, Integer> getNull();
 
     /**
      * Get null dictionary value.
@@ -62,11 +58,9 @@ public interface Dictionarys {
     /**
      * Get empty dictionary value {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getEmpty() throws ErrorException, IOException;
+    Map<String, Integer> getEmpty();
 
     /**
      * Get empty dictionary value {}.
@@ -94,11 +88,8 @@ public interface Dictionarys {
      * Set dictionary value empty {}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putEmpty(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(Map<String, String> arrayBody);
 
     /**
      * Set dictionary value empty {}.
@@ -128,11 +119,9 @@ public interface Dictionarys {
     /**
      * Get Dictionary with null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getNullValue() throws ErrorException, IOException;
+    Map<String, String> getNullValue();
 
     /**
      * Get Dictionary with null value.
@@ -159,11 +148,9 @@ public interface Dictionarys {
     /**
      * Get Dictionary with null key.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getNullKey() throws ErrorException, IOException;
+    Map<String, String> getNullKey();
 
     /**
      * Get Dictionary with null key.
@@ -190,11 +177,9 @@ public interface Dictionarys {
     /**
      * Get Dictionary with key as empty string.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getEmptyStringKey() throws ErrorException, IOException;
+    Map<String, String> getEmptyStringKey();
 
     /**
      * Get Dictionary with key as empty string.
@@ -221,11 +206,9 @@ public interface Dictionarys {
     /**
      * Get invalid Dictionary value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getInvalid() throws ErrorException, IOException;
+    Map<String, String> getInvalid();
 
     /**
      * Get invalid Dictionary value.
@@ -252,11 +235,9 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    Map<String, Boolean> getBooleanTfft() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanTfft();
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -284,11 +265,8 @@ public interface Dictionarys {
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putBooleanTfft(Map<String, Boolean> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putBooleanTfft(Map<String, Boolean> arrayBody);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -318,11 +296,9 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    Map<String, Boolean> getBooleanInvalidNull() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanInvalidNull();
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -349,11 +325,9 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
-    Map<String, Boolean> getBooleanInvalidString() throws ErrorException, IOException;
+    Map<String, Boolean> getBooleanInvalidString();
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -380,11 +354,9 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getIntegerValid() throws ErrorException, IOException;
+    Map<String, Integer> getIntegerValid();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -412,11 +384,8 @@ public interface Dictionarys {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putIntegerValid(Map<String, Integer> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putIntegerValid(Map<String, Integer> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -446,11 +415,9 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getIntInvalidNull() throws ErrorException, IOException;
+    Map<String, Integer> getIntInvalidNull();
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -477,11 +444,9 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
-    Map<String, Integer> getIntInvalidString() throws ErrorException, IOException;
+    Map<String, Integer> getIntInvalidString();
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -508,11 +473,9 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    Map<String, Long> getLongValid() throws ErrorException, IOException;
+    Map<String, Long> getLongValid();
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -540,11 +503,8 @@ public interface Dictionarys {
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putLongValid(Map<String, Long> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putLongValid(Map<String, Long> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -574,11 +534,9 @@ public interface Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    Map<String, Long> getLongInvalidNull() throws ErrorException, IOException;
+    Map<String, Long> getLongInvalidNull();
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -605,11 +563,9 @@ public interface Dictionarys {
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Long&gt; object if successful.
      */
-    Map<String, Long> getLongInvalidString() throws ErrorException, IOException;
+    Map<String, Long> getLongInvalidString();
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -636,11 +592,9 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getFloatValid() throws ErrorException, IOException;
+    Map<String, Double> getFloatValid();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -668,11 +622,8 @@ public interface Dictionarys {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putFloatValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putFloatValid(Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -702,11 +653,9 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getFloatInvalidNull() throws ErrorException, IOException;
+    Map<String, Double> getFloatInvalidNull();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -733,11 +682,9 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getFloatInvalidString() throws ErrorException, IOException;
+    Map<String, Double> getFloatInvalidString();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -764,11 +711,9 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getDoubleValid() throws ErrorException, IOException;
+    Map<String, Double> getDoubleValid();
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -796,11 +741,8 @@ public interface Dictionarys {
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDoubleValid(Map<String, Double> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDoubleValid(Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -830,11 +772,9 @@ public interface Dictionarys {
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getDoubleInvalidNull() throws ErrorException, IOException;
+    Map<String, Double> getDoubleInvalidNull();
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -861,11 +801,9 @@ public interface Dictionarys {
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Double&gt; object if successful.
      */
-    Map<String, Double> getDoubleInvalidString() throws ErrorException, IOException;
+    Map<String, Double> getDoubleInvalidString();
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -892,11 +830,9 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getStringValid() throws ErrorException, IOException;
+    Map<String, String> getStringValid();
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -924,11 +860,8 @@ public interface Dictionarys {
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putStringValid(Map<String, String> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putStringValid(Map<String, String> arrayBody);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -958,11 +891,9 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getStringWithNull() throws ErrorException, IOException;
+    Map<String, String> getStringWithNull();
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -989,11 +920,9 @@ public interface Dictionarys {
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, String&gt; object if successful.
      */
-    Map<String, String> getStringWithInvalid() throws ErrorException, IOException;
+    Map<String, String> getStringWithInvalid();
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -1020,11 +949,9 @@ public interface Dictionarys {
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    Map<String, LocalDate> getDateValid() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateValid();
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1052,11 +979,8 @@ public interface Dictionarys {
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateValid(Map<String, LocalDate> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateValid(Map<String, LocalDate> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1086,11 +1010,9 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    Map<String, LocalDate> getDateInvalidNull() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateInvalidNull();
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -1117,11 +1039,9 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
-    Map<String, LocalDate> getDateInvalidChars() throws ErrorException, IOException;
+    Map<String, LocalDate> getDateInvalidChars();
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -1148,11 +1068,9 @@ public interface Dictionarys {
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeValid() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeValid();
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1180,11 +1098,8 @@ public interface Dictionarys {
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateTimeValid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeValid(Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1214,11 +1129,9 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeInvalidNull() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeInvalidNull();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -1245,11 +1158,9 @@ public interface Dictionarys {
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeInvalidChars() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeInvalidChars();
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -1276,11 +1187,9 @@ public interface Dictionarys {
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
-    Map<String, DateTime> getDateTimeRfc1123Valid() throws ErrorException, IOException;
+    Map<String, DateTime> getDateTimeRfc1123Valid();
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1308,11 +1217,8 @@ public interface Dictionarys {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1342,11 +1248,9 @@ public interface Dictionarys {
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Period&gt; object if successful.
      */
-    Map<String, Period> getDurationValid() throws ErrorException, IOException;
+    Map<String, Period> getDurationValid();
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1374,11 +1278,8 @@ public interface Dictionarys {
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDurationValid(Map<String, Period> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDurationValid(Map<String, Period> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1408,11 +1309,9 @@ public interface Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    Map<String, byte[]> getByteValid() throws ErrorException, IOException;
+    Map<String, byte[]> getByteValid();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -1440,11 +1339,8 @@ public interface Dictionarys {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putByteValid(Map<String, byte[]> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putByteValid(Map<String, byte[]> arrayBody);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1474,11 +1370,9 @@ public interface Dictionarys {
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    Map<String, byte[]> getByteInvalidNull() throws ErrorException, IOException;
+    Map<String, byte[]> getByteInvalidNull();
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -1505,11 +1399,9 @@ public interface Dictionarys {
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
-    Map<String, byte[]> getBase64Url() throws ErrorException, IOException;
+    Map<String, byte[]> getBase64Url();
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -1536,11 +1428,9 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type null value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    Map<String, Widget> getComplexNull() throws ErrorException, IOException;
+    Map<String, Widget> getComplexNull();
 
     /**
      * Get dictionary of complex type null value.
@@ -1567,11 +1457,9 @@ public interface Dictionarys {
     /**
      * Get empty dictionary of complex type {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    Map<String, Widget> getComplexEmpty() throws ErrorException, IOException;
+    Map<String, Widget> getComplexEmpty();
 
     /**
      * Get empty dictionary of complex type {}.
@@ -1598,11 +1486,9 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    Map<String, Widget> getComplexItemNull() throws ErrorException, IOException;
+    Map<String, Widget> getComplexItemNull();
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -1629,11 +1515,9 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    Map<String, Widget> getComplexItemEmpty() throws ErrorException, IOException;
+    Map<String, Widget> getComplexItemEmpty();
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -1660,11 +1544,9 @@ public interface Dictionarys {
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
-    Map<String, Widget> getComplexValid() throws ErrorException, IOException;
+    Map<String, Widget> getComplexValid();
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1692,11 +1574,8 @@ public interface Dictionarys {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putComplexValid(Map<String, Widget> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putComplexValid(Map<String, Widget> arrayBody);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -1726,11 +1605,9 @@ public interface Dictionarys {
     /**
      * Get a null array.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    Map<String, List<String>> getArrayNull() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayNull();
 
     /**
      * Get a null array.
@@ -1757,11 +1634,9 @@ public interface Dictionarys {
     /**
      * Get an empty dictionary {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    Map<String, List<String>> getArrayEmpty() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayEmpty();
 
     /**
      * Get an empty dictionary {}.
@@ -1788,11 +1663,9 @@ public interface Dictionarys {
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    Map<String, List<String>> getArrayItemNull() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayItemNull();
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -1819,11 +1692,9 @@ public interface Dictionarys {
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    Map<String, List<String>> getArrayItemEmpty() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayItemEmpty();
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1850,11 +1721,9 @@ public interface Dictionarys {
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
-    Map<String, List<String>> getArrayValid() throws ErrorException, IOException;
+    Map<String, List<String>> getArrayValid();
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1882,11 +1751,8 @@ public interface Dictionarys {
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putArrayValid(Map<String, List<String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putArrayValid(Map<String, List<String>> arrayBody);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1916,11 +1782,9 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries with value null.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    Map<String, Map<String, String>> getDictionaryNull() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryNull();
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -1947,11 +1811,9 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    Map<String, Map<String, String>> getDictionaryEmpty() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryEmpty();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1978,11 +1840,9 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    Map<String, Map<String, String>> getDictionaryItemNull() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryItemNull();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2009,11 +1869,9 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    Map<String, Map<String, String>> getDictionaryItemEmpty() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryItemEmpty();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2040,11 +1898,9 @@ public interface Dictionarys {
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
-    Map<String, Map<String, String>> getDictionaryValid() throws ErrorException, IOException;
+    Map<String, Map<String, String>> getDictionaryValid();
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -2072,11 +1928,8 @@ public interface Dictionarys {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putDictionaryValid(Map<String, Map<String, String>> arrayBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putDictionaryValid(Map<String, Map<String, String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.

@@ -14,8 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
-import fixtures.bodycomplex.models.ErrorException;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,11 +24,9 @@ public interface Arrays {
     /**
      * Get complex types with array property.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    ArrayWrapper getValid() throws ErrorException, IOException;
+    ArrayWrapper getValid();
 
     /**
      * Get complex types with array property.
@@ -58,11 +54,8 @@ public interface Arrays {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putValid(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -92,11 +85,9 @@ public interface Arrays {
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    ArrayWrapper getEmpty() throws ErrorException, IOException;
+    ArrayWrapper getEmpty();
 
     /**
      * Get complex types with array property which is empty.
@@ -124,11 +115,8 @@ public interface Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    void putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException;
+    void putEmpty(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
@@ -158,11 +146,9 @@ public interface Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object if successful.
      */
-    ArrayWrapper getNotProvided() throws ErrorException, IOException;
+    ArrayWrapper getNotProvided();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

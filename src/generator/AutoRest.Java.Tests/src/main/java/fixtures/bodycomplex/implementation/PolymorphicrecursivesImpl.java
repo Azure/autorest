@@ -69,11 +69,9 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Fish object if successful.
      */
-    public Fish getValid() throws ErrorException, IOException {
+    public Fish getValid() {
         return getValidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -184,11 +182,8 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
              }
          ]
      }
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putValid(Fish complexBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putValid(Fish complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
     }
 

@@ -76,11 +76,9 @@ public final class DurationsImpl implements Durations {
     /**
      * Get null duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    public Period getNull() throws ErrorException, IOException {
+    public Period getNull() {
         return getNullWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -139,11 +137,8 @@ public final class DurationsImpl implements Durations {
      * Put a positive duration value.
      *
      * @param durationBody the Period value
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void putPositiveDuration(Period durationBody) throws ErrorException, IOException, IllegalArgumentException {
+    public void putPositiveDuration(Period durationBody) {
         putPositiveDurationWithServiceResponseAsync(durationBody).toBlocking().single().getBody();
     }
 
@@ -207,11 +202,9 @@ public final class DurationsImpl implements Durations {
     /**
      * Get a positive duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    public Period getPositiveDuration() throws ErrorException, IOException {
+    public Period getPositiveDuration() {
         return getPositiveDurationWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -269,11 +262,9 @@ public final class DurationsImpl implements Durations {
     /**
      * Get an invalid duration value.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      * @return the Period object if successful.
      */
-    public Period getInvalid() throws ErrorException, IOException {
+    public Period getInvalid() {
         return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
     }
 

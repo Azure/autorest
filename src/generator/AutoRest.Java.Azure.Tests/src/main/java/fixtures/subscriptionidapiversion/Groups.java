@@ -13,9 +13,7 @@ package fixtures.subscriptionidapiversion;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
-import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -27,12 +25,9 @@ public interface Groups {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SampleResourceGroup object if successful.
      */
-    SampleResourceGroup getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException;
+    SampleResourceGroup getSampleResourceGroup(String resourceGroupName);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

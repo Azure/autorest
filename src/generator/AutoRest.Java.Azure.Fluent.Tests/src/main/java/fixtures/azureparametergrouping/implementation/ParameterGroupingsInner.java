@@ -78,11 +78,8 @@ public final class ParameterGroupingsInner {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      */
-    public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) throws ErrorException, IOException, IllegalArgumentException {
+    public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().getBody();
     }
 
@@ -151,10 +148,8 @@ public final class ParameterGroupingsInner {
     /**
      * Post a bunch of optional parameters grouped.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptional() throws ErrorException, IOException {
+    public void postOptional() {
         postOptionalWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -209,10 +204,8 @@ public final class ParameterGroupingsInner {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
+    public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().getBody();
     }
 
@@ -282,10 +275,8 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters from multiple different parameter groups.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postMultiParamGroups() throws ErrorException, IOException {
+    public void postMultiParamGroups() {
         postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -344,10 +335,8 @@ public final class ParameterGroupingsInner {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
+    public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().getBody();
     }
 
@@ -429,10 +418,8 @@ public final class ParameterGroupingsInner {
     /**
      * Post parameters with a shared parameter group object.
      *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postSharedParameterGroupObject() throws ErrorException, IOException {
+    public void postSharedParameterGroupObject() {
         postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().getBody();
     }
 
@@ -487,10 +474,8 @@ public final class ParameterGroupingsInner {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
      */
-    public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) throws ErrorException, IOException {
+    public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
         postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().getBody();
     }
 
