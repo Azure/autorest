@@ -976,6 +976,22 @@ namespace AutoRest.Go
         }
 
         /// <summary>
+        /// Checks if method for next page of results on paged methods is already present in the method list.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="methods"></param>
+        /// <returns></returns>
+        public static bool NextMethodExists(this Method method, List<Method> methods) {
+            string next = "next";
+            if (method.Name.Length > next.Length) {
+                if (method.Name.Substring(method.Name.Length - next.Length).Equals(next, StringComparison.OrdinalIgnoreCase)) { 
+                    return true;
+                }
+            }
+            return methods.Any(m => m.Name.Equals(method.Name + next, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <summary>
         /// Check if method has long running extension (x-ms-long-running-operation) enabled. 
         /// </summary>
         /// <param name="method"></param>

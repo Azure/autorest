@@ -22,14 +22,16 @@ namespace AutoRest.Go.TemplateModels
         private readonly string lroDescription = " This method may poll for completion. Polling can be canceled by passing the cancel channel argument. " +
                                                  "The channel will be used to cancel polling and any outstanding HTTP requests.";
 
+        public readonly bool NextAlreadyDefined;
 
-        public MethodTemplateModel(Method source, string owner, string packageName, MethodScopeProvider methodScope)
+        public MethodTemplateModel(Method source, string owner, string packageName, MethodScopeProvider methodScope, bool next)        
         {
             this.LoadFrom(source);
 
             MethodScope = methodScope;
             Owner = owner;
             PackageName = packageName;
+            NextAlreadyDefined = next;
 
             var parameter = Parameters.Find(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)
                                                 && !(p.Location == ParameterLocation.Body || p.Location == ParameterLocation.FormData));
