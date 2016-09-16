@@ -558,7 +558,7 @@ An example:
 ```json
 "definitions": {
   "Resource": {
-    "description": "The Resource Model definition."
+    "description": "The Resource Model definition.",
     "properties": {
       "id": {
         "readOnly": true,
@@ -595,7 +595,7 @@ An example:
     "x-ms-azure-resource": true
   }
 }
-
+```
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
