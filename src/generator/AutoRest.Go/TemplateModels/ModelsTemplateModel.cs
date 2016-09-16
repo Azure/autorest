@@ -114,7 +114,7 @@ namespace AutoRest.Go.TemplateModels
                     mtm.IsResponseType = true;
                     if (PagedTypes.ContainsKey(mtm))
                     {
-                        mtm.NextLink = PagedTypes[mtm]; //this next link is an attribute!
+                        mtm.NextLink = GoCodeNamer.NormalizeWithChar(PagedTypes[mtm]); //this next link is an attribute!
                         // Marking is used for some weird methods in model file
                     }
                 });

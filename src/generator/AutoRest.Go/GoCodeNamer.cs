@@ -520,6 +520,21 @@ namespace AutoRest.Go
             return new MapType(NormalizeTypeReference(dictionaryType.ValueType));
         }
 
+        public static string NormalizeWithChar(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return name;
+            }
+
+            return
+                name.Split('.')
+                    .Where(s => !string.IsNullOrEmpty(s))
+                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+                    .DefaultIfEmpty("")
+                    .Aggregate(string.Concat);
+        }
+
         public override string GetEnumMemberName(string name)
         {
             return EnsureNameCase(base.GetEnumMemberName(name));

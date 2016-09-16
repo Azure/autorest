@@ -546,7 +546,12 @@ namespace AutoRest.Go
                 &&  !String.IsNullOrEmpty((compositeType as ModelTemplateModel).NextLink))
             {
                 var nextLinkField = (compositeType as ModelTemplateModel).NextLink;
-                properties.Where(p => p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)).Select(p => p.Name = nextLinkField);
+                foreach (Property p in properties) {
+                    p.Name = GoCodeNamer.NormalizeWithChar(p.Name);
+                    if (p.Name.Equals(nextLinkField, StringComparison.OrdinalIgnoreCase)) {
+                        p.Name = nextLinkField;
+                    }
+                }
                 if (!properties.Any(p => p.Name.Equals(nextLinkField, StringComparison.Ordinal)))
                 {
                     var property = new Property();
@@ -1009,27 +1014,12 @@ namespace AutoRest.Go
                     var nextLinkName = (string)pageableExtension["nextLinkName"];
                     if (!string.IsNullOrEmpty(nextLinkName))
                     {
-                        nextLink = GoCodeNamer.PascalCase(NormalizeWithChar(nextLinkName));
+                        nextLink = GoCodeNamer.NormalizeWithChar(nextLinkName);
                     }
                 }
             }
 
             return nextLink;
-        }
-
-        public static string NormalizeWithChar(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return name;
-            }
-
-            return
-                name.Split('.')
-                    .Where(s => !string.IsNullOrEmpty(s))
-                    .Select(s => char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
-                    .DefaultIfEmpty("")
-                    .Aggregate(string.Concat);
         }
 
        /// <summary>
