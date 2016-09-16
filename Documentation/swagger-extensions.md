@@ -15,6 +15,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 * [x-ms-client-flatten](#x-ms-client-flatten) - flattens client model property or parameter.
 * [x-ms-parameterized-host](#x-ms-parameterized-host) - replaces the Swagger host with a host template that can be replaced with variable parameters.
+* [x-ms-mutability](#x-ms-mutability) - provides insight to Autorest on how to generate code. It doesn't alter the modeling of what is actually sent on the wire.
 
 ## Microsoft Azure Extensions
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -530,6 +531,71 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
     ]
   }
 ```
+
+##x-ms-mutability
+This extension offers insight to Autorest on how to generate code (mutability of the property of the model classes being generated). It doesn't alter the modeling of the actual payload that is sent on the wire.
+
+It is an array of strings with three possible values. The array cannot have repeatable values. Valid values are: **"create", "read", "update"**.
+
+Field Name | Description
+---|:---
+**create** | Indicates that the value of the property can be set while creating/initializing/constructing the object
+**read** | Indicates that the value of the property can be read
+**update** | Indicates that value of the property can be updated anytime(even after the object is created)
+
+###Rules:
+- When the extension is applied with all the three values; `"x-ms-mutability": ["create", "read", "update"]` (order of the values is not important) **OR** when this extension is not applied on a model property; it has the same effect in both the cases. Thus applying this extension with all the three values on all the settable properties is not required. This will ensure the spec is visibly cleaner.
+- When a property is modeled as `"readonly": true` then,
+  - if the x-ms-mutability extension is applied then it can **only have "read" value in the array**. 
+  - applying the extension as `"x-ms-mutability": ["read"]` or not applying it will have the same effect.
+- When the property is modeled as **`"readonly": false`** then,
+  - applying the extension as `"x-ms-mutability": ["read"]` is not allowed.
+  - applying the extension as `"x-ms-mutability": ["create", read", "update"]` or not applying it will have the same effect.
+  - applying the extension with anyother **permissible valid combination** should be fine.
+- When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutabiility of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.
+
+An example:
+```json
+"definitions": {
+  "Resource": {
+    "description": "The Resource Model definition."
+    "properties": {
+      "id": {
+        "readOnly": true,
+        "type": "string",
+        "description": "Resource Id",
+        "x-ms-mutability": ["read"]
+      },
+      "name": {
+        "type": "string",
+        "description": "Resource name"
+      },
+      "type": {
+        "type": "string",
+        "description": "Resource type",
+        "x-ms-mutability": ["read"]
+      },
+      "location": {
+        "type": "string",
+        "description": "Resource location",
+        "x-ms-mutability": ["create", "read"]
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Resource tags",
+        "x-ms-mutability": ["create", "read", "update"]
+      }
+    },
+    "required": [
+      "location"
+    ],
+    "x-ms-azure-resource": true
+  }
+}
+
 
 ##x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
