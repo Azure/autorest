@@ -1,0 +1,50 @@
+﻿@using System.Linq
+@inherits AutoRest.Core.Template<AutoRest.CSharp.TemplateModels.ProjectJsonModel>
+{
+  "version": "@Model.Version",
+  "description": "@Model.Description",
+  "authors": [ "Microsoft" ],
+
+  "packOptions": {
+    "summary": "@Model.Description",
+    "tags": [],
+    "requireLicenseAcceptance": true
+  },
+
+  "buildOptions": {
+    "delaySign": true,
+    "publicSign": false,
+    "keyFile": "../../../../tools/MSSharedLibKey.snk"
+  },
+
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net45": {
+      "dependencies": {
+        "Microsoft.Rest.ClientRuntime": "[@Model.ClientRuntimeVersion,4.0.0)" 
+      }
+    },
+    "netstandard1.5": {
+      "imports": ["dnxcore50"],
+      "buildOptions": { "define": [ "PORTABLE" ] },
+      "dependencies": {
+        "Microsoft.NETCore.Platforms": "1.0.1",
+        "System.Diagnostics.Tools": "4.0.1",
+        "System.Net.Http": "4.1.0",
+        "System.Runtime.Serialization.Primitives": "4.1.1",
+        "System.Threading.Tasks": "4.0.11",
+        "Microsoft.Rest.ClientRuntime": "[@Model.ClientRuntimeVersion,4.0.0)"
+      }
+    },
+    "netstandard1.1": {
+      "imports": [ "dnxcore50" ],
+      "buildOptions": { "define": [ "PORTABLE" ] },
+      "dependencies": {
+        "System.Runtime.Serialization.Primitives": "4.1.1",
+        "Microsoft.Rest.ClientRuntime": "[@Model.ClientRuntimeVersion,4.0.0)"
+      }
+    }
+  }
+}

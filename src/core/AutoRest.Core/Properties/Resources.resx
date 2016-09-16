@@ -252,4 +252,7 @@
   <data name="InvalidConstraint" xml:space="preserve">
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
+  <data name="PackageInfoRequiredForProject" xml:space="preserve">
+    <value>-{0} is required to use the -Project flag</value>
+  </data>
 </root>
