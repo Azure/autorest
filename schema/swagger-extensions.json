@@ -1586,7 +1586,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["create, read", "update"]
+        "enum": ["create", "read", "update"]
       },
       "uniqueItems": true
     }
